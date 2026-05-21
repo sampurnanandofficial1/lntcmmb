@@ -456,22 +456,56 @@ function effectiveLeadScore(contract) {
   return 'Archive';                                                          // ARCHIVE
 }
 
-function formatDate(dateStr) {
-  if (!dateStr || dateStr === 'null') return '—';
+function formatDate(v) {
+  // Accept string, null, undefined, "null" — always return a useful string
+  if (!v || v === 'null' || v === 'undefined') return null;
+  v = String(v).trim();
+  if (!v) return null;
   try {
-    // Parse YYYY-MM-DD safely (avoid UTC timezone shift)
-    if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-      const [y,m,d] = dateStr.split('-').map(Number);
-      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      return `${d} ${months[m-1]} ${y}`;
+    // YYYY-MM-DD (most common — parse without timezone shift)
+    const iso = v.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (iso) {
+      const [,y,m,d] = iso;
+      const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${parseInt(d)} ${MONTHS[parseInt(m)-1]} ${y}`;
     }
-    const d = new Date(dateStr);
-    if (isNaN(d)) return dateStr; // return as-is if unparseable
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-  } catch(e) { return dateStr || '—'; }
+    // DD-MM-YYYY
+    const dmy = v.match(/^(\d{2})-(\d{2})-(\d{4})/);
+    if (dmy) {
+      const [,d,m,y] = dmy;
+      const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${parseInt(d)} ${MONTHS[parseInt(m)-1]} ${y}`;
+    }
+    // Already readable (e.g. "15 Mar 2026")
+    if (/\d+\s+[A-Za-z]+\s+\d{4}/.test(v)) return v;
+    // Fallback: parse with Date object
+    const d = new Date(v);
+    if (isNaN(d.getTime())) return v; // return as-is if unparseable
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  } catch(e) { return v; }
 }
 
+// Returns date display value — NEVER returns empty/null/dash
+// Shows formatted date if available, or meaningful status if not
+function dateDisplay(dateVal, fallbackForNull, color) {
+  const formatted = formatDate(dateVal);
+  if (formatted) return `<span style="font-weight:600;color:${color||'var(--t1)'}">${formatted}</span>`;
+  return `<span style="font-weight:500;color:var(--mu);font-style:italic">${fallbackForNull}</span>`;
+}
+
+// Estimate expected award date: bidDate + 75 days
+function estimateAwardDate(bidDate) {
+  if (!bidDate || bidDate === 'null') return null;
+  try {
+    const iso = String(bidDate).match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!iso) return null;
+    const d = new Date(iso[1], parseInt(iso[2])-1, parseInt(iso[3]));
+    d.setDate(d.getDate() + 75);
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  } catch(e) { return null; }
+}
 function daysOldLabel(publishedDate) {
   const d = daysOld(publishedDate);
   if (d === 0) return 'Today';
@@ -902,7 +936,7 @@ function renderCards(){
         <span class="stb ${stClass(c.stage)}">${c.stage}</span>
       </div>
       <div style="font-size:10.5px;color:var(--mu);margin-bottom:5px">
-        📅 Published: <strong style="color:var(--t1)">${formatDate(c.publishedDate)}</strong>
+        📅 Published: <strong style="color:var(--t1)">${formatDate(c.publishedDate)||'—'}</strong>  &nbsp;·&nbsp;  Bid Closes: <strong style="color:var(--b)">${formatDate(c.bidDate)||formatDate(c.bd)||'See portal'}</strong>
         ${isArchive?' <span style="color:#DC2626;font-weight:600">⚠️ Likely already procured</span>':''}
       </div>
       <div class="cft">
@@ -971,10 +1005,22 @@ function openMod(id){
     </div>
     <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:12px;margin-bottom:10px">
       <div style="font-size:10px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">📅 Date Intelligence</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px">
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Published Date</div><div style="font-weight:600;color:var(--t1)">${formatDate(c.publishedDate)}</div><div style="font-size:10px;color:${rec.color};font-weight:600">${rec.emoji} ${daysOldLabel(c.publishedDate)}</div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Bid / Due Date</div><div style="font-weight:600;color:var(--t1)">${c.bidDate?formatDate(c.bidDate):c.bd?c.bd:'Not announced'}</div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Award Date</div><div style="font-weight:600;color:${(c.awardDate||c.ad)?'#059669':'var(--mu)'}">${c.awardDate?formatDate(c.awardDate):c.ad?c.ad:'Pending'}</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:12px">
+        <div style="background:#fff;border-radius:6px;padding:8px;border:1px solid #DBEAFE">
+          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600">📌 Published Date</div>
+          <div style="font-weight:700;color:var(--b);font-size:13px">${formatDate(c.publishedDate)||'—'}</div>
+          <div style="font-size:10px;color:${rec.color};font-weight:600;margin-top:2px">${rec.emoji} ${daysOldLabel(c.publishedDate)}</div>
+        </div>
+        <div style="background:#fff;border-radius:6px;padding:8px;border:1px solid #DBEAFE">
+          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600">📋 Bid / Due Date</div>
+          <div style="font-weight:700;color:var(--t1);font-size:13px">${(()=>{const d=formatDate(c.bidDate||c.bd);return d||'<span style=\"font-weight:500;color:#D97706;font-style:italic\">Check portal</span>';})()}</div>
+          <div style="font-size:10px;color:var(--mu);margin-top:2px">${c.stage==='Awarded'?'Bid closed':'Bid submission deadline'}</div>
+        </div>
+        <div style="background:#fff;border-radius:6px;padding:8px;border:1px solid ${(c.awardDate&&c.awardDate!=='null')||c.ad?'#A7F3D0':'#DBEAFE'}">
+          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600">🏆 Award Date</div>
+          <div style="font-weight:700;font-size:13px;color:${(c.awardDate&&c.awardDate!=='null')||c.ad?'#059669':'var(--mu)'}">${(()=>{const d=formatDate(c.awardDate||c.ad);if(d)return d;if(c.stage==='Awarded')return'<span style=\"color:#D97706\">Date not recorded</span>';const est=estimateAwardDate(c.bidDate||c.bd);return est?'<span style=\"font-weight:500;color:var(--mu)\">Est. ~'+est+'</span>':'<span style=\"font-weight:500;font-style:italic;color:var(--mu)\">Pending award</span>';})()}</div>
+          <div style="font-size:10px;color:var(--mu);margin-top:2px">${c.stage==='Awarded'?'✅ Contract awarded':c.stage==='Tender Live'?'⏳ Bid evaluation pending':c.stage==='Under Execution'?'🔨 In execution':'📌 Pre-award stage'}</div>
+        </div>
       </div>
     </div>
     <div class="dgrid" style="margin-top:0">
