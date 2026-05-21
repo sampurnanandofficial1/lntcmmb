@@ -347,15 +347,29 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   <div style="color:rgba(255,255,255,.5);font-size:12px;font-family:Inter,sans-serif">L&T CMMB · Contract Intelligence Dashboard</div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 <script>
+// ===================== FIREBASE INIT =====================
+const firebaseConfig = {
+  apiKey: ["AIzaSyCrcS1AubRG9OAk","Ow859JRS-Xe6hcHaFjQ"].join(""),
+  authDomain: "lntcmmb-intelligence1.firebaseapp.com",
+  projectId: "lntcmmb-intelligence1",
+  storageBucket: "lntcmmb-intelligence1.firebasestorage.app",
+  messagingSenderId: "545865404172",
+  appId: "1:545865404172:web:dea2bd3d7b76d92cd4c329"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 // ===================== STATE =====================
-let CD = [];   // contracts (loaded from embedded data)
-let CONTR = []; // contractors
-let FC = [];   // filtered contracts
+let CD = [];
+let CONTR = [];
+let FC = [];
 let map, mgrp, hlayer, cgrp, view = 'cards';
 let AF = {state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:''};
 let chartsInitialized = false;
@@ -365,26 +379,84 @@ document.addEventListener('DOMContentLoaded', () => {
   initTicker();
   startClock();
   initMap();
-  bootDashboard();
+  loadAllData();
   setTimeout(randAlert, 12000);
   setInterval(randAlert, 35000);
 });
 
-function bootDashboard() {
-  CD = FALLBACK_CD;
-  CONTR = FALLBACK_CONTR;
+// ===================== LOADING =====================
+function showLoading(on) {
+  const el = document.getElementById('loading-overlay');
+  if (el) el.style.display = on ? 'flex' : 'none';
+}
+
+async function loadAllData() {
+  showLoading(true);
+  try {
+    const [cSnap, ctSnap] = await Promise.all([
+      db.collection('contracts').get(),
+      db.collection('contractors').get()
+    ]);
+    CD    = cSnap.empty  ? FALLBACK_CD    : cSnap.docs.map(d  => ({...d.data(),  id: d.id}));
+    CONTR = ctSnap.empty ? FALLBACK_CONTR : ctSnap.docs.map(d => ({...d.data(), id: d.id}));
+    const src = cSnap.empty ? 'embedded cache' : 'Firestore';
+    bootUI();
+    toast('✅', 'Data Loaded', `${CD.length} contracts · ${CONTR.length} contractors — ${src}`);
+  } catch(err) {
+    console.warn('Firestore error, using embedded data:', err.message);
+    CD    = FALLBACK_CD;
+    CONTR = FALLBACK_CONTR;
+    bootUI();
+    toast('⚡', 'Loaded from Cache', `${CD.length} contracts · ${CONTR.length} contractors`);
+  }
+}
+
+function bootUI() {
   FC = [...CD];
-  document.querySelectorAll('.ftype:checked').forEach(c => AF.types.push(c.value));
+  document.querySelectorAll('.ftype:checked').forEach(c  => AF.types.push(c.value));
   document.querySelectorAll('.fstage:checked').forEach(c => AF.stages.push(c.value));
-  document.querySelectorAll('.flead:checked').forEach(c => AF.leads.push(c.value));
-  document.getElementById('loading-overlay').style.display = 'none';
+  document.querySelectorAll('.flead:checked').forEach(c  => AF.leads.push(c.value));
+  showLoading(false);
   renderCards();
   renderMarkers();
   renderContractors();
   document.getElementById('ccount').textContent = FC.length;
   setTimeout(() => { if (!chartsInitialized) initCharts(); }, 300);
-  setTimeout(() => toast('🚀', 'Dashboard Ready', CD.length + ' contracts · ' + CONTR.length + ' contractors loaded'), 800);
 }
+
+async function fetchNews() {
+  const el = document.getElementById('newslist');
+  el.innerHTML = '<div class="loading"><div class="spin"></div> Fetching live intelligence...</div>';
+  // Try Firestore news collection first
+  try {
+    const snap = await db.collection('news').orderBy('fetchedAt','desc').limit(20).get();
+    if (!snap.empty) {
+      renderNews(snap.docs.map(d => d.data()));
+      toast('📰', 'Live Intelligence', snap.docs.length + ' items from database');
+      return;
+    }
+  } catch(e) { /* fall through to RSS */ }
+  // Fall back to live RSS
+  try {
+    const qs = [
+      'india+NHAI+highway+tender+awarded+2025',
+      'india+coal+mining+contract+excavator+2025',
+      'india+infrastructure+construction+contract'
+    ];
+    const all = [];
+    for (const q of qs) {
+      const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://news.google.com/rss/search?q='+q+'&hl=en-IN&gl=IN&ceid=IN:en')}&count=5`;
+      const r = await fetch(url); const d = await r.json();
+      if (d.items) d.items.forEach(i => {
+        const h = Math.round((Date.now()-new Date(i.pubDate))/3600000);
+        all.push({title:i.title, desc:(i.description||'').replace(/<[^>]*>/g,'').substring(0,160)+'...', src:i.author||'Google News', time:h<1?'Just now':h+'h ago', link:i.link, type:q.includes('coal')?'mining':'highways'});
+      });
+    }
+    if (all.length > 0) { renderNews(all.slice(0,12)); toast('📰','Live Feed',all.length+' items loaded'); }
+    else { renderNews(FALLBACK_NEWS); }
+  } catch(e) { renderNews(FALLBACK_NEWS); }
+}
+
 
 async function fetchNewsFromRSS() {
   const el = document.getElementById('newslist');
