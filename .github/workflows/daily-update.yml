@@ -2,32 +2,37 @@ name: Daily Intelligence Feed Update
 
 on:
   schedule:
-    - cron: '30 1 * * *'   # 07:00 AM IST
-  workflow_dispatch:
+    - cron: '30 1 * * *'   # 07:00 AM IST daily
+  workflow_dispatch:        # Manual trigger
 
 jobs:
   update-intelligence:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Install dependencies
         run: pip install requests feedparser firebase-admin
-      - name: Run intelligence fetcher
+
+      - name: Run comprehensive intelligence fetch (10 sources)
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          NEWSDATA_API_KEY:          ${{ secrets.NEWSDATA_API_KEY }}
-          CURRENTS_API_KEY:          ${{ secrets.CURRENTS_API_KEY }}
-          DATAGOV_API_KEY:           ${{ secrets.DATAGOV_API_KEY }}
+          DATA_GOV_KEY: ${{ secrets.DATA_GOV_KEY }}
+          CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY }}
+          NEWSDATA_KEY: ${{ secrets.NEWSDATA_KEY }}
         run: python scripts/fetch_news.py
-      - name: Commit data cache
+
+      - name: Commit data cache to repo
         run: |
-          git config user.name  "L&T CMMB Intelligence Bot"
+          git config user.name "L&T CMMB Intelligence Bot"
           git config user.email "cmmb-bot@lntcmmb.in"
-          git add data/ || true
-          git diff --staged --quiet || git commit -m "🔄 Daily intelligence update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git add data/
+          git diff --staged --quiet || git commit -m "🔄 Auto: $(date -u '+%Y-%m-%d %H:%M') — news+weather+datagov update"
           git push || true
