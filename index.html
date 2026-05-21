@@ -212,6 +212,19 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   <div class="sbsec"><div class="sbttl"><i class="fa fa-map-marker-alt"></i> State / Region</div>
     <select class="fsel" id="fstate" onchange="applyF()"><option value="">All States</option><option>Maharashtra</option><option>Rajasthan</option><option>Telangana</option><option>Andhra Pradesh</option><option>Karnataka</option><option>Tamil Nadu</option><option>Madhya Pradesh</option><option>Uttar Pradesh</option><option>Gujarat</option><option>Odisha</option><option>Jharkhand</option><option>Chhattisgarh</option><option>Assam</option><option>Bihar</option><option>Punjab</option><option>West Bengal</option><option>Himachal Pradesh</option><option>Arunachal Pradesh</option></select>
   </div>
+  <div class="sbsec"><div class="sbttl"><i class="fa fa-calendar-alt"></i> Date / Recency</div>
+    <div class="fg">
+      <label class="fck"><input type="radio" name="fdate" value="hot" class="fdater" checked onchange="applyF()"> <span style="color:#DC2626;font-weight:700">🔴 HOT</span> — last 30 days <span class="fct">10</span></label>
+      <label class="fck"><input type="radio" name="fdate" value="warm" class="fdater" onchange="applyF()"> <span style="color:#D97706;font-weight:700">🟡 WARM</span> — 1–3 months <span class="fct">9</span></label>
+      <label class="fck"><input type="radio" name="fdate" value="cooling" class="fdater" onchange="applyF()"> <span style="color:#2563EB;font-weight:700">🔵 COOLING</span> — 3–6 months <span class="fct">8</span></label>
+      <label class="fck"><input type="radio" name="fdate" value="archive" class="fdater" onchange="applyF()"> <span style="color:#6B7280;font-weight:700">⚫ ARCHIVE</span> — 6–12 months <span class="fct">14</span></label>
+      <label class="fck"><input type="radio" name="fdate" value="all" class="fdater" onchange="applyF()"> 📅 All dates (1 year)</label>
+    </div>
+    <div style="font-size:10px;color:#D97706;margin-top:6px;padding:5px 7px;background:#FEF3C7;border-radius:4px;line-height:1.5">
+      ⚠️ Only <strong>HOT</strong> & <strong>WARM</strong> leads are actionable. Older contracts have likely already procured machines.
+    </div>
+  </div>
+
   <div class="sbsec"><div class="sbttl"><i class="fa fa-building"></i> Project Type</div>
     <div class="fg">
       <label class="fck"><input type="checkbox" value="Highways" class="ftype" checked onchange="applyF()"> Highways / Roads <span class="fct">18</span></label>
@@ -374,6 +387,47 @@ let map, mgrp, hlayer, cgrp, view = 'cards';
 let AF = {state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:''};
 let chartsInitialized = false;
 
+// ===================== DATE INTELLIGENCE =====================
+const TODAY_MS = Date.now();
+
+function daysOld(publishedDate) {
+  if (!publishedDate) return 999;
+  return Math.floor((TODAY_MS - new Date(publishedDate)) / 86400000);
+}
+
+function recencyStatus(publishedDate) {
+  const d = daysOld(publishedDate);
+  if (d <= 30)  return { label:'HOT',     color:'#DC2626', bg:'#FEE2E2', emoji:'🔴', desc:'Active lead — act now' };
+  if (d <= 90)  return { label:'WARM',    color:'#D97706', bg:'#FEF3C7', emoji:'🟡', desc:'Recent — follow up' };
+  if (d <= 180) return { label:'COOLING', color:'#2563EB', bg:'#DBEAFE', emoji:'🔵', desc:'3–6 months old' };
+  return         { label:'ARCHIVE',   color:'#6B7280', bg:'#F3F4F6', emoji:'⚫', desc:'Likely purchased already' };
+}
+
+function effectiveLeadScore(contract) {
+  const d = daysOld(contract.publishedDate);
+  const base = contract.leadScore || 'Medium';
+  if (d <= 30)  return base;                                                // HOT — full score
+  if (d <= 90)  return base === 'Very High' ? 'High' : base;               // WARM — downgrade VH→H
+  if (d <= 180) return base === 'Very High' ? 'Medium' : base === 'High' ? 'Medium' : 'Low'; // COOLING
+  return 'Archive';                                                          // ARCHIVE
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+}
+
+function daysOldLabel(publishedDate) {
+  const d = daysOld(publishedDate);
+  if (d === 0) return 'Today';
+  if (d === 1) return 'Yesterday';
+  if (d < 7)   return d + 'd ago';
+  if (d < 30)  return Math.floor(d/7) + 'w ago';
+  if (d < 365) return Math.floor(d/30) + 'mo ago';
+  return Math.floor(d/365) + 'yr ago';
+}
+
 // ===================== BOOTSTRAP =====================
 document.addEventListener('DOMContentLoaded', () => {
   initTicker();
@@ -412,7 +466,9 @@ async function loadAllData() {
 }
 
 function bootUI() {
-  FC = [...CD];
+  // Default: show only HOT leads (< 30 days) on load
+  FC = CD.filter(c => daysOld(c.publishedDate) <= 30);
+  AF.dateRange = 'hot';
   document.querySelectorAll('.ftype:checked').forEach(c  => AF.types.push(c.value));
   document.querySelectorAll('.fstage:checked').forEach(c => AF.stages.push(c.value));
   document.querySelectorAll('.flead:checked').forEach(c  => AF.leads.push(c.value));
@@ -479,48 +535,48 @@ async function fetchNewsFromRSS() {
 
 // ===================== FALLBACK EMBEDDED DATA =====================
 const FALLBACK_CD=[
-  {id:"NHAI-25-001",name:"NH-44 Hyderabad–Nagpur Expressway Pkg 7",desc:"6-lane greenfield expressway with major earthwork, bridges and tunnels through Deccan terrain",authority:"NHAI",ministry:"MoRTH",contractor:"L&T Construction",value:1842,state:"Telangana",district:"Adilabad",lat:18.664,lng:78.532,type:"Highways",stage:"Under Execution",leadScore:"Very High",excScore:92,earthwork:"Very High",mining:false,machines:24,daysAgo:0},
-  {id:"NHAI-25-002",name:"Delhi–Mumbai Expressway Phase 3 Pkg 11",desc:"8-lane access-controlled expressway through Rajasthan desert, major embankment work",authority:"NHAI",ministry:"MoRTH",contractor:"Dilip Buildcon",value:3200,state:"Rajasthan",district:"Dausa",lat:26.889,lng:76.340,type:"Highways",stage:"Awarded",leadScore:"Very High",excScore:88,earthwork:"High",mining:false,machines:32,daysAgo:2},
-  {id:"NHAI-25-003",name:"Nagpur Ring Road Package 4",desc:"6-lane ring road with significant earthwork through Vidarbha region",authority:"NHAI",ministry:"MoRTH",contractor:"GR Infraprojects",value:1240,state:"Maharashtra",district:"Nagpur",lat:21.159,lng:79.088,type:"Highways",stage:"Tender Live",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:14,daysAgo:1},
-  {id:"NHAI-25-004",name:"Pune–Solapur Highway 4 to 6 Lane",desc:"Expressway widening with service roads through Deccan plateau",authority:"NHAI",ministry:"MoRTH",contractor:"PNC Infratech",value:980,state:"Maharashtra",district:"Pune",lat:18.520,lng:74.009,type:"Highways",stage:"Awarded",leadScore:"High",excScore:78,earthwork:"Medium",mining:false,machines:11,daysAgo:5},
-  {id:"MORTH-25-005",name:"Shimla–Mandi NH Mountain Highway Pkg 2",desc:"Mountain highway with heavy rock cutting, retaining walls and tunnels",authority:"MoRTH",ministry:"MoRTH",contractor:"Afcons Infrastructure",value:1560,state:"Himachal Pradesh",district:"Mandi",lat:31.708,lng:76.918,type:"Highways",stage:"Awarded",leadScore:"Very High",excScore:95,earthwork:"Very High",mining:false,machines:18,daysAgo:3},
-  {id:"NHAI-25-006",name:"Vijayawada–Amaravati Access Controlled Highway",desc:"Greenfield 6-lane highway connecting new capital with port city",authority:"NHAI",ministry:"MoRTH",contractor:"Navayuga Engineering",value:2100,state:"Andhra Pradesh",district:"Krishna",lat:16.510,lng:80.632,type:"Highways",stage:"Under Execution",leadScore:"Very High",excScore:86,earthwork:"High",mining:false,machines:22,daysAgo:7},
-  {id:"KRDCL-25-007",name:"Bengaluru Peripheral Ring Road Segment 5",desc:"Elevated and at-grade ring road through suburban corridors",authority:"KRDCL",ministry:"State PWD",contractor:"HCC Ltd",value:4200,state:"Karnataka",district:"Bangalore Rural",lat:13.103,lng:77.597,type:"Highways",stage:"Tender Live",leadScore:"High",excScore:74,earthwork:"Medium",mining:false,machines:9,daysAgo:1},
-  {id:"NHAI-25-008",name:"Gorakhpur–Lucknow Expressway Package 6",desc:"Access-controlled expressway through UP alluvial plains",authority:"NHAI",ministry:"MoRTH",contractor:"NCC Limited",value:1650,state:"Uttar Pradesh",district:"Gorakhpur",lat:26.760,lng:83.373,type:"Highways",stage:"Awarded",leadScore:"High",excScore:80,earthwork:"Medium",mining:false,machines:16,daysAgo:4},
-  {id:"NHAI-25-009",name:"Chennai–Bengaluru Expressway Package 3",desc:"6-lane greenfield expressway through rocky terrain in Tamil Nadu",authority:"NHAI",ministry:"MoRTH",contractor:"Gawar Construction",value:2800,state:"Tamil Nadu",district:"Krishnagiri",lat:12.524,lng:78.214,type:"Highways",stage:"Upcoming",leadScore:"Very High",excScore:91,earthwork:"Very High",mining:false,machines:28,daysAgo:0},
-  {id:"NHAI-25-010",name:"Ahmedabad–Vadodara Expressway Upgrade",desc:"Expansion from 6 to 8 lanes with full shoulder reconstruction",authority:"NHAI",ministry:"MoRTH",contractor:"IRB Infrastructure",value:760,state:"Gujarat",district:"Anand",lat:22.557,lng:72.928,type:"Highways",stage:"Awarded",leadScore:"Medium",excScore:65,earthwork:"Low",mining:false,machines:7,daysAgo:8},
-  {id:"NHAI-25-011",name:"Amritsar–Jammu Highway Package 3",desc:"4-lane highway widening through Shivalik foothills",authority:"NHAI",ministry:"MoRTH",contractor:"Gawar Construction",value:1380,state:"Punjab",district:"Gurdaspur",lat:32.039,lng:75.312,type:"Highways",stage:"Awarded",leadScore:"High",excScore:80,earthwork:"High",mining:false,machines:14,daysAgo:7},
-  {id:"NHIDCL-25-012",name:"Guwahati–Shillong Bypass Highway",desc:"Flood-plain highway bypass through Brahmaputra valley",authority:"NHIDCL",ministry:"MoRTH",contractor:"Afcons Infrastructure",value:1100,state:"Assam",district:"Kamrup",lat:26.144,lng:91.736,type:"Highways",stage:"Awarded",leadScore:"High",excScore:81,earthwork:"High",mining:false,machines:13,daysAgo:9},
-  {id:"NHAI-25-013",name:"Trichy–Madurai Expressway Package 1",desc:"New greenfield expressway in Tamil Nadu with basaltic terrain cutting",authority:"NHAI",ministry:"MoRTH",contractor:"KNR Constructions",value:1800,state:"Tamil Nadu",district:"Trichy",lat:10.790,lng:78.696,type:"Highways",stage:"Upcoming",leadScore:"Very High",excScore:88,earthwork:"Very High",mining:false,machines:20,daysAgo:0},
-  {id:"BRO-25-014",name:"BRO Arunachal Strategic Border Road",desc:"Strategic border road with extreme rock cutting at high altitude",authority:"BRO",ministry:"Ministry of Defence",contractor:"Afcons Infrastructure",value:1800,state:"Arunachal Pradesh",district:"West Kameng",lat:27.095,lng:92.534,type:"Highways",stage:"Awarded",leadScore:"Very High",excScore:97,earthwork:"Extreme",mining:false,machines:24,daysAgo:3},
-  {id:"NHAI-25-015",name:"Kolkata Ring Road Package 2",desc:"Ring road through suburban Kolkata with embankment and drainage works",authority:"NHAI",ministry:"MoRTH",contractor:"PNC Infratech",value:860,state:"West Bengal",district:"Howrah",lat:22.579,lng:88.319,type:"Highways",stage:"Upcoming",leadScore:"Medium",excScore:68,earthwork:"Medium",mining:false,machines:9,daysAgo:0},
-  {id:"CIL-25-001",name:"Gevra OC Mine Expansion Phase III",desc:"Open cast coal mine expansion in Korba coalfields — massive overburden removal",authority:"Coal India / SECL",ministry:"Ministry of Coal",contractor:"Thriveni Earthmovers",value:2340,state:"Chhattisgarh",district:"Korba",lat:22.342,lng:82.689,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:98,earthwork:"Extreme",mining:true,machines:38,daysAgo:2},
-  {id:"CIL-25-002",name:"Jharia Coalfield Overburden Removal",desc:"Underground-to-OC transition with massive overburden removal in Jharkhand",authority:"BCCL / CIL",ministry:"Ministry of Coal",contractor:"BEML",value:1820,state:"Jharkhand",district:"Dhanbad",lat:23.795,lng:86.439,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:96,earthwork:"Extreme",mining:true,machines:30,daysAgo:0},
-  {id:"NMDC-25-003",name:"Bailadila Iron Ore Mine Expansion",desc:"Iron ore mining expansion in Bastar range — significant earthwork",authority:"NMDC",ministry:"Ministry of Steel",contractor:"NMDC (Self-Executed)",value:1560,state:"Chhattisgarh",district:"Dantewada",lat:18.892,lng:81.347,type:"Mining",stage:"Under Execution",leadScore:"Very High",excScore:99,earthwork:"Extreme",mining:true,machines:42,daysAgo:10},
-  {id:"CIL-25-004",name:"MCL Talcher Coalfield New Pit Development",desc:"New pit development in Mahanadi Coalfields with overburden stripping",authority:"Coal India / MCL",ministry:"Ministry of Coal",contractor:"MSTC",value:1200,state:"Odisha",district:"Angul",lat:20.840,lng:85.100,type:"Mining",stage:"Upcoming",leadScore:"Very High",excScore:97,earthwork:"Extreme",mining:true,machines:25,daysAgo:0},
-  {id:"JSPL-25-005",name:"Sarda Coal Mine Overburden Package",desc:"Private coal mine overburden removal for new bench development",authority:"JSPL Mining",ministry:"State Mining Dept",contractor:"Dilip Buildcon",value:420,state:"Chhattisgarh",district:"Raigarh",lat:21.898,lng:83.396,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:95,earthwork:"Very High",mining:true,machines:12,daysAgo:3},
-  {id:"SCCL-25-006",name:"Singareni OC Mine New Pit Development",desc:"New opencast mine development at Godavari Valley coalfields",authority:"SCCL",ministry:"State Mining Dept",contractor:"Thriveni Earthmovers",value:980,state:"Telangana",district:"Khammam",lat:17.247,lng:80.150,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:96,earthwork:"Extreme",mining:true,machines:20,daysAgo:1},
-  {id:"OMDC-25-007",name:"Odisha Iron Ore Block Development",desc:"New iron ore block development in Keonjhar district",authority:"OMDC",ministry:"State Mining Dept",contractor:"Afcons Infrastructure",value:840,state:"Odisha",district:"Keonjhar",lat:21.628,lng:85.581,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:94,earthwork:"Very High",mining:true,machines:16,daysAgo:5},
-  {id:"WCL-25-008",name:"WCL Wardha Valley Coal Mine Expansion",desc:"Opencast mining expansion in Wardha coalfield, Maharashtra",authority:"Coal India / WCL",ministry:"Ministry of Coal",contractor:"Dilip Buildcon",value:740,state:"Maharashtra",district:"Yavatmal",lat:20.374,lng:78.120,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:96,earthwork:"Extreme",mining:true,machines:16,daysAgo:1},
-  {id:"ECL-25-009",name:"ECL Raniganj OC Mine Expansion",desc:"Raniganj coalfield expansion with new OC bench development",authority:"Coal India / ECL",ministry:"Ministry of Coal",contractor:"BEML",value:920,state:"West Bengal",district:"Paschim Bardhaman",lat:23.610,lng:87.070,type:"Mining",stage:"Upcoming",leadScore:"Very High",excScore:93,earthwork:"Extreme",mining:true,machines:18,daysAgo:0},
-  {id:"HCL-25-010",name:"Khetri Copper Mine Expansion",desc:"Copper mine open cut development and overburden removal",authority:"HCL Rajasthan",ministry:"Ministry of Mines",contractor:"NCC Limited",value:650,state:"Rajasthan",district:"Jhunjhunu",lat:28.124,lng:75.397,type:"Mining",stage:"Upcoming",leadScore:"High",excScore:88,earthwork:"Very High",mining:true,machines:14,daysAgo:0},
-  {id:"DFCC-25-001",name:"DFCC Eastern Corridor Earthwork Pkg 18",desc:"Heavy earthwork for dedicated freight corridor through Gangetic plain",authority:"DFCCIL",ministry:"Ministry of Railways",contractor:"KEC International",value:1560,state:"Uttar Pradesh",district:"Allahabad",lat:25.435,lng:81.843,type:"Railways",stage:"Under Execution",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:18,daysAgo:12},
-  {id:"RVNL-25-002",name:"RVNL New BG Line MP Earthwork Package",desc:"New broad gauge line earthwork through Madhya Pradesh tribal belt",authority:"RVNL",ministry:"Ministry of Railways",contractor:"IRCON International",value:920,state:"Madhya Pradesh",district:"Chhindwara",lat:22.057,lng:78.939,type:"Railways",stage:"Awarded",leadScore:"High",excScore:79,earthwork:"High",mining:false,machines:12,daysAgo:6},
-  {id:"NHIDCL-25-003",name:"Assam Northeast Rail Link Package",desc:"Rail link in Brahmaputra valley with major embankment",authority:"NHIDCL",ministry:"MoRTH",contractor:"Shapoorji Pallonji",value:2100,state:"Assam",district:"Golaghat",lat:26.523,lng:93.964,type:"Railways",stage:"Upcoming",leadScore:"High",excScore:77,earthwork:"High",mining:false,machines:15,daysAgo:0},
-  {id:"RVNL-25-004",name:"Bihar New BG Line Earthwork",desc:"Broad gauge new line with significant cut-fill in Bihar terrain",authority:"RVNL",ministry:"Ministry of Railways",contractor:"NCC Limited",value:680,state:"Bihar",district:"Gaya",lat:24.796,lng:84.994,type:"Railways",stage:"Tender Live",leadScore:"Medium",excScore:71,earthwork:"Medium",mining:false,machines:9,daysAgo:2},
-  {id:"CMRL-25-001",name:"Chennai Metro Phase 2 Underground Section",desc:"Twin tunnel metro with underground stations — massive deep excavation",authority:"CMRL",ministry:"MoHUA",contractor:"HCC-Samsung JV",value:3400,state:"Tamil Nadu",district:"Chennai",lat:13.060,lng:80.250,type:"Metro",stage:"Under Execution",leadScore:"Very High",excScore:88,earthwork:"Very High",mining:false,machines:20,daysAgo:15},
-  {id:"BMRCL-25-002",name:"Bengaluru Metro Phase 3 Station Package",desc:"Underground metro stations with deep excavation in Bengaluru bedrock",authority:"BMRCL",ministry:"MoHUA",contractor:"L&T Construction",value:2800,state:"Karnataka",district:"Bangalore Urban",lat:12.971,lng:77.594,type:"Metro",stage:"Awarded",leadScore:"High",excScore:85,earthwork:"High",mining:false,machines:16,daysAgo:4},
-  {id:"HMRL-25-003",name:"Hyderabad Metro Extension Corridor 4",desc:"Elevated metro extension with pile foundations and cut-cover sections",authority:"HMRL",ministry:"State",contractor:"Afcons Infrastructure",value:1600,state:"Telangana",district:"Hyderabad",lat:17.387,lng:78.480,type:"Metro",stage:"Upcoming",leadScore:"Medium",excScore:72,earthwork:"Medium",mining:false,machines:8,daysAgo:0},
-  {id:"KWDT-25-001",name:"Polavaram Irrigation Project Main Canal",desc:"Major earthwork for main canal and distributaries in Krishna basin",authority:"AP Irrigation Dept",ministry:"State Irrigation",contractor:"Navayuga Engineering",value:4200,state:"Andhra Pradesh",district:"West Godavari",lat:17.247,lng:81.639,type:"Irrigation",stage:"Under Execution",leadScore:"Very High",excScore:94,earthwork:"Very High",mining:false,machines:35,daysAgo:20},
-  {id:"MWRD-25-002",name:"Marathwada Water Grid Package 5",desc:"Canal and pipeline earthwork for drought-prone Marathwada region",authority:"MWRDC",ministry:"Maharashtra Water Dept",contractor:"HCC Ltd",value:1840,state:"Maharashtra",district:"Aurangabad",lat:19.877,lng:75.343,type:"Irrigation",stage:"Awarded",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:18,daysAgo:8},
-  {id:"NWDA-25-003",name:"Ken–Betwa Link Canal Earthwork",desc:"Inter-state river linking canal with major earthwork in Bundelkhand",authority:"NWDA",ministry:"Jal Shakti Ministry",contractor:"L&T Construction",value:3600,state:"Madhya Pradesh",district:"Sagar",lat:23.838,lng:78.737,type:"Irrigation",stage:"Upcoming",leadScore:"Very High",excScore:92,earthwork:"Very High",mining:false,machines:28,daysAgo:0},
-  {id:"PPT-25-001",name:"Paradip Port Berth Deepening Package",desc:"Port expansion with marine earthwork and land reclamation",authority:"Paradip Port Trust",ministry:"Ministry of Ports",contractor:"L&T Construction",value:1650,state:"Odisha",district:"Jagatsinghpur",lat:20.308,lng:86.613,type:"Ports",stage:"Awarded",leadScore:"High",excScore:76,earthwork:"High",mining:false,machines:12,daysAgo:6},
-  {id:"JNPT-25-002",name:"JNPT Phase 5 Container Terminal",desc:"New container terminal with land development and backup infrastructure",authority:"JNPT",ministry:"Ministry of Ports",contractor:"Shapoorji Pallonji",value:2400,state:"Maharashtra",district:"Raigad",lat:18.948,lng:72.943,type:"Ports",stage:"Tender Live",leadScore:"Medium",excScore:68,earthwork:"Medium",mining:false,machines:8,daysAgo:1},
-  {id:"VPA-25-003",name:"Visakhapatnam Outer Harbour Development",desc:"Deep-water outer harbour with major marine earthwork",authority:"VPA",ministry:"Ministry of Ports",contractor:"Afcons Infrastructure",value:3100,state:"Andhra Pradesh",district:"Visakhapatnam",lat:17.686,lng:83.218,type:"Ports",stage:"Upcoming",leadScore:"High",excScore:74,earthwork:"High",mining:false,machines:10,daysAgo:0},
-  {id:"SCM-25-001",name:"Rajkot Smart City Underground Infra",desc:"Underground utility corridors and road reconstruction",authority:"Rajkot Smart City",ministry:"MoHUA",contractor:"Shapoorji Pallonji",value:890,state:"Gujarat",district:"Rajkot",lat:22.303,lng:70.803,type:"Smart City",stage:"Awarded",leadScore:"Medium",excScore:62,earthwork:"Medium",mining:false,machines:8,daysAgo:9},
-  {id:"SCM-25-002",name:"Bhopal Smart City Road Infrastructure",desc:"Road and utility upgrade with underground pipe laying",authority:"Bhopal Smart City",ministry:"MoHUA",contractor:"KNR Constructions",value:650,state:"Madhya Pradesh",district:"Bhopal",lat:23.259,lng:77.413,type:"Smart City",stage:"Under Execution",leadScore:"Low",excScore:55,earthwork:"Low",mining:false,machines:5,daysAgo:18},
-  {id:"DSIR-25-001",name:"Dholera Industrial Smart City Phase 2",desc:"Industrial township development with massive earthwork in Gujarat",authority:"DSIR",ministry:"DPIIT",contractor:"L&T Construction",value:4800,state:"Gujarat",district:"Ahmedabad",lat:22.422,lng:72.180,type:"Industrial",stage:"Under Execution",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:22,daysAgo:25},
-  {id:"APIIC-25-002",name:"Vizag Petrochemical Hub Phase 1",desc:"Petrochemical complex development with land leveling",authority:"APIIC",ministry:"Ministry of Chemicals",contractor:"HCC Ltd",value:2200,state:"Andhra Pradesh",district:"Visakhapatnam",lat:17.720,lng:83.298,type:"Industrial",stage:"Tender Live",leadScore:"Medium",excScore:70,earthwork:"Medium",mining:false,machines:10,daysAgo:1}
+  {id:"NHAI-25-001",publishedDate:"2026-02-09",name:"NH-44 Hyderabad–Nagpur Expressway Pkg 7",desc:"6-lane greenfield expressway with major earthwork, bridges and tunnels through Deccan terrain",authority:"NHAI",ministry:"MoRTH",contractor:"L&T Construction",value:1842,state:"Telangana",district:"Adilabad",lat:18.664,lng:78.532,type:"Highways",stage:"Under Execution",leadScore:"Very High",excScore:92,earthwork:"Very High",mining:false,machines:24,daysAgo:0},
+  {id:"NHAI-25-002",publishedDate:"2026-04-15",name:"Delhi–Mumbai Expressway Phase 3 Pkg 11",desc:"8-lane access-controlled expressway through Rajasthan desert, major embankment work",authority:"NHAI",ministry:"MoRTH",contractor:"Dilip Buildcon",value:3200,state:"Rajasthan",district:"Dausa",lat:26.889,lng:76.340,type:"Highways",stage:"Awarded",leadScore:"Very High",excScore:88,earthwork:"High",mining:false,machines:32,daysAgo:2},
+  {id:"NHAI-25-003",publishedDate:"2026-05-18",name:"Nagpur Ring Road Package 4",desc:"6-lane ring road with significant earthwork through Vidarbha region",authority:"NHAI",ministry:"MoRTH",contractor:"GR Infraprojects",value:1240,state:"Maharashtra",district:"Nagpur",lat:21.159,lng:79.088,type:"Highways",stage:"Tender Live",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:14,daysAgo:1},
+  {id:"NHAI-25-004",publishedDate:"2026-01-24",name:"Pune–Solapur Highway 4 to 6 Lane",desc:"Expressway widening with service roads through Deccan plateau",authority:"NHAI",ministry:"MoRTH",contractor:"PNC Infratech",value:980,state:"Maharashtra",district:"Pune",lat:18.520,lng:74.009,type:"Highways",stage:"Awarded",leadScore:"High",excScore:78,earthwork:"Medium",mining:false,machines:11,daysAgo:5},
+  {id:"MORTH-25-005",publishedDate:"2025-11-05",name:"Shimla–Mandi NH Mountain Highway Pkg 2",desc:"Mountain highway with heavy rock cutting, retaining walls and tunnels",authority:"MoRTH",ministry:"MoRTH",contractor:"Afcons Infrastructure",value:1560,state:"Himachal Pradesh",district:"Mandi",lat:31.708,lng:76.918,type:"Highways",stage:"Awarded",leadScore:"Very High",excScore:95,earthwork:"Very High",mining:false,machines:18,daysAgo:3},
+  {id:"NHAI-25-006",publishedDate:"2025-10-20",name:"Vijayawada–Amaravati Access Controlled Highway",desc:"Greenfield 6-lane highway connecting new capital with port city",authority:"NHAI",ministry:"MoRTH",contractor:"Navayuga Engineering",value:2100,state:"Andhra Pradesh",district:"Krishna",lat:16.510,lng:80.632,type:"Highways",stage:"Under Execution",leadScore:"Very High",excScore:86,earthwork:"High",mining:false,machines:22,daysAgo:7},
+  {id:"KRDCL-25-007",publishedDate:"2026-04-10",name:"Bengaluru Peripheral Ring Road Segment 5",desc:"Elevated and at-grade ring road through suburban corridors",authority:"KRDCL",ministry:"State PWD",contractor:"HCC Ltd",value:4200,state:"Karnataka",district:"Bangalore Rural",lat:13.103,lng:77.597,type:"Highways",stage:"Tender Live",leadScore:"High",excScore:74,earthwork:"Medium",mining:false,machines:9,daysAgo:1},
+  {id:"NHAI-25-008",publishedDate:"2026-01-14",name:"Gorakhpur–Lucknow Expressway Package 6",desc:"Access-controlled expressway through UP alluvial plains",authority:"NHAI",ministry:"MoRTH",contractor:"NCC Limited",value:1650,state:"Uttar Pradesh",district:"Gorakhpur",lat:26.760,lng:83.373,type:"Highways",stage:"Awarded",leadScore:"High",excScore:80,earthwork:"Medium",mining:false,machines:16,daysAgo:4},
+  {id:"NHAI-25-009",publishedDate:"2026-05-15",name:"Chennai–Bengaluru Expressway Package 3",desc:"6-lane greenfield expressway through rocky terrain in Tamil Nadu",authority:"NHAI",ministry:"MoRTH",contractor:"Gawar Construction",value:2800,state:"Tamil Nadu",district:"Krishnagiri",lat:12.524,lng:78.214,type:"Highways",stage:"Upcoming",leadScore:"Very High",excScore:91,earthwork:"Very High",mining:false,machines:28,daysAgo:0},
+  {id:"NHAI-25-010",publishedDate:"2025-08-05",name:"Ahmedabad–Vadodara Expressway Upgrade",desc:"Expansion from 6 to 8 lanes with full shoulder reconstruction",authority:"NHAI",ministry:"MoRTH",contractor:"IRB Infrastructure",value:760,state:"Gujarat",district:"Anand",lat:22.557,lng:72.928,type:"Highways",stage:"Awarded",leadScore:"Medium",excScore:65,earthwork:"Low",mining:false,machines:7,daysAgo:8},
+  {id:"NHAI-25-011",publishedDate:"2025-09-07",name:"Amritsar–Jammu Highway Package 3",desc:"4-lane highway widening through Shivalik foothills",authority:"NHAI",ministry:"MoRTH",contractor:"Gawar Construction",value:1380,state:"Punjab",district:"Gurdaspur",lat:32.039,lng:75.312,type:"Highways",stage:"Awarded",leadScore:"High",excScore:80,earthwork:"High",mining:false,machines:14,daysAgo:7},
+  {id:"NHIDCL-25-012",publishedDate:"2025-10-12",name:"Guwahati–Shillong Bypass Highway",desc:"Flood-plain highway bypass through Brahmaputra valley",authority:"NHIDCL",ministry:"MoRTH",contractor:"Afcons Infrastructure",value:1100,state:"Assam",district:"Kamrup",lat:26.144,lng:91.736,type:"Highways",stage:"Awarded",leadScore:"High",excScore:81,earthwork:"High",mining:false,machines:13,daysAgo:9},
+  {id:"NHAI-25-013",publishedDate:"2026-05-08",name:"Trichy–Madurai Expressway Package 1",desc:"New greenfield expressway in Tamil Nadu with basaltic terrain cutting",authority:"NHAI",ministry:"MoRTH",contractor:"KNR Constructions",value:1800,state:"Tamil Nadu",district:"Trichy",lat:10.790,lng:78.696,type:"Highways",stage:"Upcoming",leadScore:"Very High",excScore:88,earthwork:"Very High",mining:false,machines:20,daysAgo:0},
+  {id:"BRO-25-014",publishedDate:"2026-01-05",name:"BRO Arunachal Strategic Border Road",desc:"Strategic border road with extreme rock cutting at high altitude",authority:"BRO",ministry:"Ministry of Defence",contractor:"Afcons Infrastructure",value:1800,state:"Arunachal Pradesh",district:"West Kameng",lat:27.095,lng:92.534,type:"Highways",stage:"Awarded",leadScore:"Very High",excScore:97,earthwork:"Extreme",mining:false,machines:24,daysAgo:3},
+  {id:"NHAI-25-015",publishedDate:"2026-03-25",name:"Kolkata Ring Road Package 2",desc:"Ring road through suburban Kolkata with embankment and drainage works",authority:"NHAI",ministry:"MoRTH",contractor:"PNC Infratech",value:860,state:"West Bengal",district:"Howrah",lat:22.579,lng:88.319,type:"Highways",stage:"Upcoming",leadScore:"Medium",excScore:68,earthwork:"Medium",mining:false,machines:9,daysAgo:0},
+  {id:"CIL-25-001",publishedDate:"2025-09-16",name:"Gevra OC Mine Expansion Phase III",desc:"Open cast coal mine expansion in Korba coalfields — massive overburden removal",authority:"Coal India / SECL",ministry:"Ministry of Coal",contractor:"Thriveni Earthmovers",value:2340,state:"Chhattisgarh",district:"Korba",lat:22.342,lng:82.689,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:98,earthwork:"Extreme",mining:true,machines:38,daysAgo:2},
+  {id:"CIL-25-002",publishedDate:"2026-05-10",name:"Jharia Coalfield Overburden Removal",desc:"Underground-to-OC transition with massive overburden removal in Jharkhand",authority:"BCCL / CIL",ministry:"Ministry of Coal",contractor:"BEML",value:1820,state:"Jharkhand",district:"Dhanbad",lat:23.795,lng:86.439,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:96,earthwork:"Extreme",mining:true,machines:30,daysAgo:0},
+  {id:"NMDC-25-003",publishedDate:"2025-09-29",name:"Bailadila Iron Ore Mine Expansion",desc:"Iron ore mining expansion in Bastar range — significant earthwork",authority:"NMDC",ministry:"Ministry of Steel",contractor:"NMDC (Self-Executed)",value:1560,state:"Chhattisgarh",district:"Dantewada",lat:18.892,lng:81.347,type:"Mining",stage:"Under Execution",leadScore:"Very High",excScore:99,earthwork:"Extreme",mining:true,machines:42,daysAgo:10},
+  {id:"CIL-25-004",publishedDate:"2026-05-12",name:"MCL Talcher Coalfield New Pit Development",desc:"New pit development in Mahanadi Coalfields with overburden stripping",authority:"Coal India / MCL",ministry:"Ministry of Coal",contractor:"MSTC",value:1200,state:"Odisha",district:"Angul",lat:20.840,lng:85.100,type:"Mining",stage:"Upcoming",leadScore:"Very High",excScore:97,earthwork:"Extreme",mining:true,machines:25,daysAgo:0},
+  {id:"JSPL-25-005",publishedDate:"2026-02-04",name:"Sarda Coal Mine Overburden Package",desc:"Private coal mine overburden removal for new bench development",authority:"JSPL Mining",ministry:"State Mining Dept",contractor:"Dilip Buildcon",value:420,state:"Chhattisgarh",district:"Raigarh",lat:21.898,lng:83.396,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:95,earthwork:"Very High",mining:true,machines:12,daysAgo:3},
+  {id:"SCCL-25-006",publishedDate:"2026-05-05",name:"Singareni OC Mine New Pit Development",desc:"New opencast mine development at Godavari Valley coalfields",authority:"SCCL",ministry:"State Mining Dept",contractor:"Thriveni Earthmovers",value:980,state:"Telangana",district:"Khammam",lat:17.247,lng:80.150,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:96,earthwork:"Extreme",mining:true,machines:20,daysAgo:1},
+  {id:"OMDC-25-007",publishedDate:"2025-10-05",name:"Odisha Iron Ore Block Development",desc:"New iron ore block development in Keonjhar district",authority:"OMDC",ministry:"State Mining Dept",contractor:"Afcons Infrastructure",value:840,state:"Odisha",district:"Keonjhar",lat:21.628,lng:85.581,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:94,earthwork:"Very High",mining:true,machines:16,daysAgo:5},
+  {id:"WCL-25-008",publishedDate:"2026-04-28",name:"WCL Wardha Valley Coal Mine Expansion",desc:"Opencast mining expansion in Wardha coalfield, Maharashtra",authority:"Coal India / WCL",ministry:"Ministry of Coal",contractor:"Dilip Buildcon",value:740,state:"Maharashtra",district:"Yavatmal",lat:20.374,lng:78.120,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:96,earthwork:"Extreme",mining:true,machines:16,daysAgo:1},
+  {id:"ECL-25-009",publishedDate:"2026-05-03",name:"ECL Raniganj OC Mine Expansion",desc:"Raniganj coalfield expansion with new OC bench development",authority:"Coal India / ECL",ministry:"Ministry of Coal",contractor:"BEML",value:920,state:"West Bengal",district:"Paschim Bardhaman",lat:23.610,lng:87.070,type:"Mining",stage:"Upcoming",leadScore:"Very High",excScore:93,earthwork:"Extreme",mining:true,machines:18,daysAgo:0},
+  {id:"HCL-25-010",publishedDate:"2026-04-25",name:"Khetri Copper Mine Expansion",desc:"Copper mine open cut development and overburden removal",authority:"HCL Rajasthan",ministry:"Ministry of Mines",contractor:"NCC Limited",value:650,state:"Rajasthan",district:"Jhunjhunu",lat:28.124,lng:75.397,type:"Mining",stage:"Upcoming",leadScore:"High",excScore:88,earthwork:"Very High",mining:true,machines:14,daysAgo:0},
+  {id:"DFCC-25-001",publishedDate:"2025-11-15",name:"DFCC Eastern Corridor Earthwork Pkg 18",desc:"Heavy earthwork for dedicated freight corridor through Gangetic plain",authority:"DFCCIL",ministry:"Ministry of Railways",contractor:"KEC International",value:1560,state:"Uttar Pradesh",district:"Allahabad",lat:25.435,lng:81.843,type:"Railways",stage:"Under Execution",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:18,daysAgo:12},
+  {id:"RVNL-25-002",publishedDate:"2025-10-28",name:"RVNL New BG Line MP Earthwork Package",desc:"New broad gauge line earthwork through Madhya Pradesh tribal belt",authority:"RVNL",ministry:"Ministry of Railways",contractor:"IRCON International",value:920,state:"Madhya Pradesh",district:"Chhindwara",lat:22.057,lng:78.939,type:"Railways",stage:"Awarded",leadScore:"High",excScore:79,earthwork:"High",mining:false,machines:12,daysAgo:6},
+  {id:"NHIDCL-25-003",publishedDate:"2026-03-15",name:"Assam Northeast Rail Link Package",desc:"Rail link in Brahmaputra valley with major embankment",authority:"NHIDCL",ministry:"MoRTH",contractor:"Shapoorji Pallonji",value:2100,state:"Assam",district:"Golaghat",lat:26.523,lng:93.964,type:"Railways",stage:"Upcoming",leadScore:"High",excScore:77,earthwork:"High",mining:false,machines:15,daysAgo:0},
+  {id:"RVNL-25-004",publishedDate:"2026-03-08",name:"Bihar New BG Line Earthwork",desc:"Broad gauge new line with significant cut-fill in Bihar terrain",authority:"RVNL",ministry:"Ministry of Railways",contractor:"NCC Limited",value:680,state:"Bihar",district:"Gaya",lat:24.796,lng:84.994,type:"Railways",stage:"Tender Live",leadScore:"Medium",excScore:71,earthwork:"Medium",mining:false,machines:9,daysAgo:2},
+  {id:"CMRL-25-001",publishedDate:"2025-08-20",name:"Chennai Metro Phase 2 Underground Section",desc:"Twin tunnel metro with underground stations — massive deep excavation",authority:"CMRL",ministry:"MoHUA",contractor:"HCC-Samsung JV",value:3400,state:"Tamil Nadu",district:"Chennai",lat:13.060,lng:80.250,type:"Metro",stage:"Under Execution",leadScore:"Very High",excScore:88,earthwork:"Very High",mining:false,machines:20,daysAgo:15},
+  {id:"BMRCL-25-002",publishedDate:"2025-12-20",name:"Bengaluru Metro Phase 3 Station Package",desc:"Underground metro stations with deep excavation in Bengaluru bedrock",authority:"BMRCL",ministry:"MoHUA",contractor:"L&T Construction",value:2800,state:"Karnataka",district:"Bangalore Urban",lat:12.971,lng:77.594,type:"Metro",stage:"Awarded",leadScore:"High",excScore:85,earthwork:"High",mining:false,machines:16,daysAgo:4},
+  {id:"HMRL-25-003",publishedDate:"2026-04-02",name:"Hyderabad Metro Extension Corridor 4",desc:"Elevated metro extension with pile foundations and cut-cover sections",authority:"HMRL",ministry:"State",contractor:"Afcons Infrastructure",value:1600,state:"Telangana",district:"Hyderabad",lat:17.387,lng:78.480,type:"Metro",stage:"Upcoming",leadScore:"Medium",excScore:72,earthwork:"Medium",mining:false,machines:8,daysAgo:0},
+  {id:"KWDT-25-001",publishedDate:"2025-07-14",name:"Polavaram Irrigation Project Main Canal",desc:"Major earthwork for main canal and distributaries in Krishna basin",authority:"AP Irrigation Dept",ministry:"State Irrigation",contractor:"Navayuga Engineering",value:4200,state:"Andhra Pradesh",district:"West Godavari",lat:17.247,lng:81.639,type:"Irrigation",stage:"Under Execution",leadScore:"Very High",excScore:94,earthwork:"Very High",mining:false,machines:35,daysAgo:20},
+  {id:"MWRD-25-002",publishedDate:"2026-01-29",name:"Marathwada Water Grid Package 5",desc:"Canal and pipeline earthwork for drought-prone Marathwada region",authority:"MWRDC",ministry:"Maharashtra Water Dept",contractor:"HCC Ltd",value:1840,state:"Maharashtra",district:"Aurangabad",lat:19.877,lng:75.343,type:"Irrigation",stage:"Awarded",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:18,daysAgo:8},
+  {id:"NWDA-25-003",publishedDate:"2026-05-20",name:"Ken–Betwa Link Canal Earthwork",desc:"Inter-state river linking canal with major earthwork in Bundelkhand",authority:"NWDA",ministry:"Jal Shakti Ministry",contractor:"L&T Construction",value:3600,state:"Madhya Pradesh",district:"Sagar",lat:23.838,lng:78.737,type:"Irrigation",stage:"Upcoming",leadScore:"Very High",excScore:92,earthwork:"Very High",mining:false,machines:28,daysAgo:0},
+  {id:"PPT-25-001",publishedDate:"2026-01-09",name:"Paradip Port Berth Deepening Package",desc:"Port expansion with marine earthwork and land reclamation",authority:"Paradip Port Trust",ministry:"Ministry of Ports",contractor:"L&T Construction",value:1650,state:"Odisha",district:"Jagatsinghpur",lat:20.308,lng:86.613,type:"Ports",stage:"Awarded",leadScore:"High",excScore:76,earthwork:"High",mining:false,machines:12,daysAgo:6},
+  {id:"JNPT-25-002",publishedDate:"2026-04-05",name:"JNPT Phase 5 Container Terminal",desc:"New container terminal with land development and backup infrastructure",authority:"JNPT",ministry:"Ministry of Ports",contractor:"Shapoorji Pallonji",value:2400,state:"Maharashtra",district:"Raigad",lat:18.948,lng:72.943,type:"Ports",stage:"Tender Live",leadScore:"Medium",excScore:68,earthwork:"Medium",mining:false,machines:8,daysAgo:1},
+  {id:"VPA-25-003",publishedDate:"2026-03-28",name:"Visakhapatnam Outer Harbour Development",desc:"Deep-water outer harbour with major marine earthwork",authority:"VPA",ministry:"Ministry of Ports",contractor:"Afcons Infrastructure",value:3100,state:"Andhra Pradesh",district:"Visakhapatnam",lat:17.686,lng:83.218,type:"Ports",stage:"Upcoming",leadScore:"High",excScore:74,earthwork:"High",mining:false,machines:10,daysAgo:0},
+  {id:"SCM-25-001",publishedDate:"2025-12-15",name:"Rajkot Smart City Underground Infra",desc:"Underground utility corridors and road reconstruction",authority:"Rajkot Smart City",ministry:"MoHUA",contractor:"Shapoorji Pallonji",value:890,state:"Gujarat",district:"Rajkot",lat:22.303,lng:70.803,type:"Smart City",stage:"Awarded",leadScore:"Medium",excScore:62,earthwork:"Medium",mining:false,machines:8,daysAgo:9},
+  {id:"SCM-25-002",publishedDate:"2025-06-19",name:"Bhopal Smart City Road Infrastructure",desc:"Road and utility upgrade with underground pipe laying",authority:"Bhopal Smart City",ministry:"MoHUA",contractor:"KNR Constructions",value:650,state:"Madhya Pradesh",district:"Bhopal",lat:23.259,lng:77.413,type:"Smart City",stage:"Under Execution",leadScore:"Low",excScore:55,earthwork:"Low",mining:false,machines:5,daysAgo:18},
+  {id:"DSIR-25-001",publishedDate:"2025-05-29",name:"Dholera Industrial Smart City Phase 2",desc:"Industrial township development with massive earthwork in Gujarat",authority:"DSIR",ministry:"DPIIT",contractor:"L&T Construction",value:4800,state:"Gujarat",district:"Ahmedabad",lat:22.422,lng:72.180,type:"Industrial",stage:"Under Execution",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:22,daysAgo:25},
+  {id:"APIIC-25-002",publishedDate:"2026-03-20",name:"Vizag Petrochemical Hub Phase 1",desc:"Petrochemical complex development with land leveling",authority:"APIIC",ministry:"Ministry of Chemicals",contractor:"HCC Ltd",value:2200,state:"Andhra Pradesh",district:"Visakhapatnam",lat:17.720,lng:83.298,type:"Industrial",stage:"Tender Live",leadScore:"Medium",excScore:70,earthwork:"Medium",mining:false,machines:10,daysAgo:1}
 ];
 
 const FALLBACK_CONTR=[
@@ -622,57 +678,108 @@ function togL(t){
 
 // ===================== FILTERS =====================
 function applyF(){
-  AF.state=document.getElementById('fstate').value;
-  AF.auth=document.getElementById('fauth').value;
-  AF.types=[...document.querySelectorAll('.ftype:checked')].map(c=>c.value);
-  AF.stages=[...document.querySelectorAll('.fstage:checked')].map(c=>c.value);
-  AF.leads=[...document.querySelectorAll('.flead:checked')].map(c=>c.value);
-  AF.minV=parseInt(document.getElementById('fval').value)||0;
-  AF.mine=document.getElementById('fmine').checked;
-  AF.heavy=document.getElementById('fheavy').checked;
-  AF.hsc=document.getElementById('fhsc').checked;
-  AF.q=(document.getElementById('sinput')?.value||'').toLowerCase();
-  FC=CD.filter(c=>{
-    if(AF.state&&c.state!==AF.state)return false;
-    if(AF.auth&&c.authority!==AF.auth)return false;
-    if(AF.types.length&&!AF.types.includes(c.type))return false;
-    if(AF.stages.length&&!AF.stages.includes(c.stage))return false;
-    if(AF.leads.length&&!AF.leads.includes(c.leadScore))return false;
-    if(AF.minV>0&&c.value<AF.minV)return false;
-    if(AF.mine&&!c.mining)return false;
-    if(AF.heavy&&!['High','Very High','Extreme'].includes(c.earthwork))return false;
-    if(AF.hsc&&c.excScore<80)return false;
-    if(AF.q&&!c.name.toLowerCase().includes(AF.q)&&!c.state.toLowerCase().includes(AF.q)&&!c.contractor.toLowerCase().includes(AF.q)&&!c.authority.toLowerCase().includes(AF.q)&&!c.type.toLowerCase().includes(AF.q))return false;
+  AF.state  = document.getElementById('fstate').value;
+  AF.auth   = document.getElementById('fauth').value;
+  AF.types  = [...document.querySelectorAll('.ftype:checked')].map(c=>c.value);
+  AF.stages = [...document.querySelectorAll('.fstage:checked')].map(c=>c.value);
+  AF.leads  = [...document.querySelectorAll('.flead:checked')].map(c=>c.value);
+  AF.minV   = parseInt(document.getElementById('fval').value)||0;
+  AF.mine   = document.getElementById('fmine').checked;
+  AF.heavy  = document.getElementById('fheavy').checked;
+  AF.hsc    = document.getElementById('fhsc').checked;
+  AF.q      = (document.getElementById('sinput')?.value||'').toLowerCase();
+  AF.dateRange = document.querySelector('.fdater:checked')?.value || 'hot';
+
+  FC = CD.filter(c => {
+    if (AF.state  && c.state     !== AF.state)  return false;
+    if (AF.auth   && c.authority !== AF.auth)   return false;
+    if (AF.types.length  && !AF.types.includes(c.type))    return false;
+    if (AF.stages.length && !AF.stages.includes(c.stage))  return false;
+    if (AF.minV > 0 && c.value < AF.minV) return false;
+    if (AF.mine  && !c.mining)   return false;
+    if (AF.heavy && !['High','Very High','Extreme'].includes(c.earthwork)) return false;
+    if (AF.hsc   && c.excScore < 80) return false;
+    if (AF.q && !c.name.toLowerCase().includes(AF.q) &&
+        !c.state.toLowerCase().includes(AF.q) &&
+        !c.contractor.toLowerCase().includes(AF.q) &&
+        !c.authority.toLowerCase().includes(AF.q) &&
+        !c.type.toLowerCase().includes(AF.q)) return false;
+    // Date range filter
+    const d = daysOld(c.publishedDate);
+    if (AF.dateRange === 'hot'     && d > 30)  return false;
+    if (AF.dateRange === 'warm'    && (d <= 30 || d > 90))  return false;
+    if (AF.dateRange === 'cooling' && (d <= 90 || d > 180)) return false;
+    if (AF.dateRange === 'archive' && d <= 180) return false;
+    // Lead score filter uses EFFECTIVE score (date-adjusted)
+    if (AF.leads.length) {
+      const eff = effectiveLeadScore(c);
+      if (!AF.leads.includes(eff) && eff !== 'Archive') return false;
+    }
     return true;
   });
-  document.getElementById('ccount').textContent=FC.length;
-  renderCards();renderMarkers();
+
+  document.getElementById('ccount').textContent = FC.length;
+  renderCards();
+  renderMarkers();
 }
 
 function resetF(){
-  document.getElementById('fstate').value='';document.getElementById('fauth').value='';document.getElementById('fval').value='0';
-  document.getElementById('fmine').checked=false;document.getElementById('fheavy').checked=false;document.getElementById('fhsc').checked=false;
+  document.getElementById('fstate').value='';
+  document.getElementById('fauth').value='';
+  document.getElementById('fval').value='0';
+  document.getElementById('fmine').checked=false;
+  document.getElementById('fheavy').checked=false;
+  document.getElementById('fhsc').checked=false;
   document.querySelectorAll('.ftype,.fstage,.flead').forEach(c=>c.checked=true);
   if(document.getElementById('sinput'))document.getElementById('sinput').value='';
+  // Reset date to HOT (default — most useful view)
+  document.querySelector('.fdater[value="hot"]').checked=true;
   updR(document.getElementById('fval'));
-  FC=[...CD];AF={state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:''};
+  AF={state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:'',dateRange:'hot'};
   document.querySelectorAll('.ftype:checked').forEach(c=>AF.types.push(c.value));
   document.querySelectorAll('.fstage:checked').forEach(c=>AF.stages.push(c.value));
   document.querySelectorAll('.flead:checked').forEach(c=>AF.leads.push(c.value));
-  document.getElementById('ccount').textContent=FC.length;renderCards();renderMarkers();
+  FC=CD.filter(c=>daysOld(c.publishedDate)<=30);
+  document.getElementById('ccount').textContent=FC.length;
+  renderCards();renderMarkers();
 }
 
 function updR(el){const v=parseInt(el.value);document.getElementById('rvd').textContent=v>0?'Min ₹'+v.toLocaleString('en-IN')+' Cr':'No minimum'}
 
 function quickF(t){
   resetF();
-  if(t==='hipri'){document.querySelectorAll('.flead').forEach(c=>{c.checked=c.value==='Very High'||c.value==='High'});}
-  else if(t==='mining'){document.querySelectorAll('.ftype').forEach(c=>{c.checked=c.value==='Mining'});}
-  else if(t==='awarded'){document.querySelectorAll('.fstage').forEach(c=>{c.checked=c.value==='Awarded'});}
-  else if(t==='highways'){document.querySelectorAll('.ftype').forEach(c=>{c.checked=c.value==='Highways'});}
-  else if(t==='today'){FC=CD.filter(c=>c.daysAgo<=1);document.getElementById('ccount').textContent=FC.length;renderCards();renderMarkers();switchTab('contracts');return;}
-  else if(t==='excavator'){document.getElementById('fhsc').checked=true;}
-  applyF();switchTab('contracts');
+  if(t==='hipri'){
+    document.querySelector('.fdater[value="hot"]').checked=true;
+    AF.dateRange='hot';
+    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && ['Very High','High'].includes(effectiveLeadScore(c)));
+  } else if(t==='mining'){
+    document.querySelector('.fdater[value="all"]').checked=true;
+    AF.dateRange='all';
+    FC=CD.filter(c=>c.mining);
+  } else if(t==='awarded'){
+    document.querySelector('.fdater[value="all"]').checked=true;
+    AF.dateRange='all';
+    FC=CD.filter(c=>c.stage==='Awarded');
+  } else if(t==='highways'){
+    document.querySelector('.fdater[value="all"]').checked=true;
+    AF.dateRange='all';
+    FC=CD.filter(c=>c.type==='Highways');
+  } else if(t==='today'){
+    document.querySelector('.fdater[value="hot"]').checked=true;
+    AF.dateRange='hot';
+    FC=CD.filter(c=>daysOld(c.publishedDate)<=7);
+  } else if(t==='excavator'){
+    document.querySelector('.fdater[value="hot"]').checked=true;
+    AF.dateRange='hot';
+    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && c.excScore>=80);
+  } else if(t==='all'){
+    document.querySelector('.fdater[value="all"]').checked=true;
+    AF.dateRange='all';
+    FC=[...CD];
+  }
+  document.getElementById('ccount').textContent=FC.length;
+  renderCards();renderMarkers();
+  switchTab('contracts');
 }
 
 function setStateF(s){document.getElementById('fstate').value=s;applyF();switchTab('contracts');}
@@ -682,40 +789,54 @@ function stClass(s){return s==='Awarded'?'awarded':s==='Tender Live'?'live':s===
 
 function renderCards(){
   const el=document.getElementById('clist');
-  if(!FC.length){el.innerHTML=`<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--mu)"><div style="font-size:36px;margin-bottom:10px">🔍</div><div style="font-size:14px;font-weight:600">No contracts match your filters</div><div style="font-size:12px;margin-top:4px;margin-bottom:14px">Try adjusting or resetting your filters</div><button onclick="resetF()" style="padding:6px 16px;background:var(--b);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px">Reset Filters</button></div>`;return;}
-  el.innerHTML=FC.map(c=>`<div class="cc ${c.leadScore.toLowerCase().replace(' ','-')}" onclick="openMod('${c.id}')">
-    <div class="chd"><div class="ctit">${c.name}</div><span class="lb ${c.leadScore.toLowerCase().replace(' ','-')}">${c.ls}</span></div>
-    <div class="cmeta">
-      <span class="ctag">🏛️ ${c.authority}</span>
-      <span class="ctag">📍 ${c.state}</span>
-      <span class="ctag">${ticon(c.type)} ${c.type}</span>
-      ${c.mining?'<span class="ctag" style="background:#EDE9FE;color:#7C3AED">⛏️ Mining</span>':''}
-      ${c.daysAgo===0?'<span class="ctag" style="background:#D1FAE5;color:#065F46">🆕 Today</span>':''}
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
-      <div class="cval">₹${c.value.toLocaleString('en-IN')} Cr</div>
-      <span class="stb ${stClass(c.stage)}">${c.stage}</span>
-    </div>
-    <div class="cft">
-      <div class="ebar">
-        <span class="elbl">Exc. Score</span>
-        <div class="btr"><div class="bfi" style="width:${c.excScore}%"></div></div>
-        <span class="bsc">${c.excScore}</span>
+  if(!FC.length){el.innerHTML=`<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--mu)"><div style="font-size:36px;margin-bottom:10px">🔍</div><div style="font-size:14px;font-weight:600">No contracts match your filters</div><div style="font-size:12px;margin-top:4px;margin-bottom:14px">Try a wider date range or reset filters</div><button onclick="resetF()" style="padding:6px 16px;background:var(--b);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px">Reset Filters</button></div>`;return;}
+  el.innerHTML=FC.map(c=>{
+    const rec=recencyStatus(c.publishedDate);
+    const eff=effectiveLeadScore(c);
+    const ec=eff.toLowerCase().replace(' ','-');
+    const isArchive=eff==='Archive';
+    return `<div class="cc ${ec}" onclick="openMod('${c.id}')" style="opacity:${isArchive?'0.6':'1'}">
+      <div class="chd"><div class="ctit">${c.name}</div><span class="lb ${ec}">${eff}</span></div>
+      <div class="cmeta">
+        <span class="ctag">🏛️ ${c.authority}</span>
+        <span class="ctag">📍 ${c.state}</span>
+        <span class="ctag">${ticon(c.type)} ${c.type}</span>
+        ${c.mining?'<span class="ctag" style="background:#EDE9FE;color:#7C3AED">⛏️ Mining</span>':''}
+        <span class="ctag" style="background:${rec.bg};color:${rec.color};font-weight:700">${rec.emoji} ${rec.label} · ${daysOldLabel(c.publishedDate)}</span>
       </div>
-      <span style="font-size:11px;color:var(--mu);margin-left:10px;white-space:nowrap">🚜 ${c.machines} units</span>
-    </div>
-  </div>`).join('');
-  // table too
-  document.getElementById('tbody').innerHTML=FC.map(c=>`<tr onclick="openMod('${c.id}')" style="cursor:pointer">
-    <td><strong style="color:var(--b);font-size:12px">${c.name}</strong><br><span style="font-size:10px;color:var(--mu)">${c.district}</span></td>
-    <td>${c.authority}</td><td>${c.state}</td>
-    <td><span class="ctag" style="display:inline-flex">${ticon(c.type)} ${c.type}</span></td>
-    <td><strong style="color:var(--b)">₹${c.value.toLocaleString('en-IN')}</strong></td>
-    <td><span class="stb ${stClass(c.stage)}">${c.stage}</span></td>
-    <td><span class="lb ${c.leadScore.toLowerCase().replace(' ','-')}">${c.ls}</span></td>
-    <td><div style="display:flex;align-items:center;gap:4px"><div style="flex:1;height:4px;background:var(--br);border-radius:2px;overflow:hidden;min-width:36px"><div style="width:${c.excScore}%;height:100%;background:var(--b);border-radius:2px"></div></div><span style="font-size:11px;font-weight:700;color:var(--b)">${c.excScore}</span></div></td>
-    <td style="font-size:11px">${c.contractor}</td>
-  </tr>`).join('');
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div class="cval">₹${c.value.toLocaleString('en-IN')} Cr</div>
+        <span class="stb ${stClass(c.stage)}">${c.stage}</span>
+      </div>
+      <div style="font-size:10.5px;color:var(--mu);margin-bottom:5px">
+        📅 Published: <strong style="color:var(--t1)">${formatDate(c.publishedDate)}</strong>
+        ${isArchive?' <span style="color:#DC2626;font-weight:600">⚠️ Likely already procured</span>':''}
+      </div>
+      <div class="cft">
+        <div class="ebar">
+          <span class="elbl">Exc. Score</span>
+          <div class="btr"><div class="bfi" style="width:${c.excScore}%"></div></div>
+          <span class="bsc">${c.excScore}</span>
+        </div>
+        <span style="font-size:11px;color:var(--mu);margin-left:10px;white-space:nowrap">🚜 ${c.machines} units</span>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('tbody').innerHTML=FC.map(c=>{
+    const rec=recencyStatus(c.publishedDate);
+    const eff=effectiveLeadScore(c);
+    return `<tr onclick="openMod('${c.id}')" style="cursor:pointer">
+      <td><strong style="color:var(--b);font-size:12px">${c.name}</strong><br><span style="font-size:10px;color:var(--mu)">${c.district} · ${formatDate(c.publishedDate)}</span></td>
+      <td>${c.authority}</td><td>${c.state}</td>
+      <td><span class="ctag" style="display:inline-flex">${ticon(c.type)} ${c.type}</span></td>
+      <td><strong style="color:var(--b)">₹${c.value.toLocaleString('en-IN')}</strong></td>
+      <td><span style="font-weight:700;color:${rec.color}">${rec.emoji} ${rec.label}</span><br><span style="font-size:10px;color:var(--mu)">${daysOldLabel(c.publishedDate)}</span></td>
+      <td><span class="stb ${stClass(c.stage)}">${c.stage}</span></td>
+      <td><span class="lb ${eff.toLowerCase().replace(' ','-')}">${eff}</span></td>
+      <td><div style="display:flex;align-items:center;gap:4px"><div style="flex:1;height:4px;background:var(--br);border-radius:2px;overflow:hidden;min-width:36px"><div style="width:${c.excScore}%;height:100%;background:var(--b);border-radius:2px"></div></div><span style="font-size:11px;font-weight:700;color:var(--b)">${c.excScore}</span></div></td>
+      <td style="font-size:11px">${c.contractor}</td>
+    </tr>`;
+  }).join('');
 }
 
 function setView(v){
