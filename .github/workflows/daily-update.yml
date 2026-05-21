@@ -3,19 +3,35 @@ name: Daily Intelligence Feed Update
 on:
   schedule:
     - cron: '30 1 * * *'   # 07:00 AM IST daily
-  workflow_dispatch:
+  workflow_dispatch:        # Manual trigger anytime
 
 jobs:
   update-intelligence:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Install dependencies
         run: pip install requests feedparser firebase-admin
-      - name: Fetch & push news to Firestore
+
+      - name: Fetch live tender & infrastructure intelligence
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: python scripts/fetch_news.py
+
+      - name: Commit updated data cache
+        run: |
+          git config user.name "L&T CMMB Intelligence Bot"
+          git config user.email "cmmb-bot@lntcmmb.in"
+          git add data/ || true
+          git diff --staged --quiet || git commit -m "🔄 Auto: daily intelligence update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push || true
