@@ -435,8 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
   startClock();
   initMap();
   loadAllData();
-  setTimeout(randAlert, 12000);
-  setInterval(randAlert, 35000);
+  setTimeout(() => initNotifs(), 2000); // Init dynamic notifications
 });
 
 // ===================== LOADING =====================
@@ -479,6 +478,7 @@ function bootUI() {
   renderContractors();
   document.getElementById('ccount').textContent = FC.length;
   setTimeout(() => { if (!chartsInitialized) initCharts(); }, 300);
+  setTimeout(initNotifs, 1500);
 }
 
 async function fetchNews() {
@@ -577,7 +577,43 @@ const FALLBACK_CD=[
   {id:"SCM-25-001",publishedDate:"2025-12-15",bidDate:"2025-10-01",awardDate:"2025-12-15",name:"Rajkot Smart City Underground Infra",desc:"Underground utility corridors and road reconstruction",authority:"Rajkot Smart City",ministry:"MoHUA",contractor:"Shapoorji Pallonji",value:890,state:"Gujarat",district:"Rajkot",lat:22.303,lng:70.803,type:"Smart City",stage:"Awarded",leadScore:"Medium",excScore:62,earthwork:"Medium",mining:false,machines:8,daysAgo:9},
   {id:"SCM-25-002",publishedDate:"2025-06-19",bidDate:"2025-04-15",awardDate:"2025-06-19",name:"Bhopal Smart City Road Infrastructure",desc:"Road and utility upgrade with underground pipe laying",authority:"Bhopal Smart City",ministry:"MoHUA",contractor:"KNR Constructions",value:650,state:"Madhya Pradesh",district:"Bhopal",lat:23.259,lng:77.413,type:"Smart City",stage:"Under Execution",leadScore:"Low",excScore:55,earthwork:"Low",mining:false,machines:5,daysAgo:18},
   {id:"DSIR-25-001",publishedDate:"2025-05-29",bidDate:"2025-03-01",awardDate:"2025-05-29",name:"Dholera Industrial Smart City Phase 2",desc:"Industrial township development with massive earthwork in Gujarat",authority:"DSIR",ministry:"DPIIT",contractor:"L&T Construction",value:4800,state:"Gujarat",district:"Ahmedabad",lat:22.422,lng:72.180,type:"Industrial",stage:"Under Execution",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:22,daysAgo:25},
-  {id:"APIIC-25-002",publishedDate:"2026-03-20",bidDate:"2026-03-20",awardDate:null,name:"Vizag Petrochemical Hub Phase 1",desc:"Petrochemical complex development with land leveling",authority:"APIIC",ministry:"Ministry of Chemicals",contractor:"HCC Ltd",value:2200,state:"Andhra Pradesh",district:"Visakhapatnam",lat:17.720,lng:83.298,type:"Industrial",stage:"Tender Live",leadScore:"Medium",excScore:70,earthwork:"Medium",mining:false,machines:10,daysAgo:1}
+  {id:"APIIC-25-002",publishedDate:"2026-03-20",bidDate:"2026-03-20",awardDate:null,name:"Vizag Petrochemical Hub Phase 1",desc:"Petrochemical complex development with land leveling",authority:"APIIC",ministry:"Ministry of Chemicals",contractor:"HCC Ltd",value:2200,state:"Andhra Pradesh",district:"Visakhapatnam",lat:17.720,lng:83.298,type:"Industrial",stage:"Tender Live",leadScore:"Medium",excScore:70,earthwork:"Medium",mining:false,machines:10,daysAgo:1},
+  // ── APRIL–MAY 2026 BATCH (HOT LEADS) ──────────────────────────────────
+  {id:"NHAI-26-001",publishedDate:"2026-05-19",bidDate:"2026-05-19",awardDate:null,name:"NH-48 Bengaluru–Chennai 8-Lane Expressway Pkg 2",desc:"8-lane access controlled expressway with rock cutting through Eastern Ghats foothills",authority:"NHAI",ministry:"MoRTH",contractor:"",value:3850,state:"Tamil Nadu",district:"Vellore",lat:12.916,lng:79.133,type:"Highways",stage:"Tender Live",leadScore:"Very High",excScore:91,earthwork:"Very High",mining:false,machines:36,daysAgo:2,source:"NHAI Portal",tenderLink:"https://nhai.gov.in"},
+  {id:"NHAI-26-002",publishedDate:"2026-05-17",bidDate:"2026-05-17",awardDate:null,name:"Delhi–Amritsar–Katra Expressway Package 5",desc:"Access controlled expressway through Punjab agricultural terrain with heavy embankment",authority:"NHAI",ministry:"MoRTH",contractor:"",value:2960,state:"Punjab",district:"Kapurthala",lat:31.381,lng:75.379,type:"Highways",stage:"Tender Live",leadScore:"Very High",excScore:88,earthwork:"High",mining:false,machines:28,daysAgo:4,source:"NHAI Portal",tenderLink:"https://nhai.gov.in"},
+  {id:"NHAI-26-003",publishedDate:"2026-05-14",bidDate:"2026-05-14",awardDate:null,name:"Varanasi Ring Road Package 3",desc:"Ring road with embankment and earthwork through UP plains near Ganga floodplain",authority:"NHAI",ministry:"MoRTH",contractor:"",value:1480,state:"Uttar Pradesh",district:"Varanasi",lat:25.317,lng:82.973,type:"Highways",stage:"Tender Live",leadScore:"High",excScore:79,earthwork:"Medium",mining:false,machines:13,daysAgo:7,source:"NHAI Portal",tenderLink:"https://nhai.gov.in"},
+  {id:"NHAI-26-004",publishedDate:"2026-05-10",bidDate:"2026-05-10",awardDate:null,name:"Raipur–Visakhapatnam Economic Corridor Pkg 4",desc:"Economic corridor expressway with cutting through Eastern Ghats — significant earthwork",authority:"NHAI",ministry:"MoRTH",contractor:"",value:2250,state:"Odisha",district:"Koraput",lat:18.813,lng:82.718,type:"Highways",stage:"Tender Live",leadScore:"Very High",excScore:93,earthwork:"Very High",mining:false,machines:26,daysAgo:11,source:"NHAI Portal",tenderLink:"https://nhai.gov.in"},
+  {id:"NHAI-26-005",publishedDate:"2026-05-08",bidDate:"2026-04-05",awardDate:"2026-05-08",name:"Pune–Nashik Expressway Package 2",desc:"New expressway through Western Ghats with major rock cutting and tunneling",authority:"NHAI",ministry:"MoRTH",contractor:"Gawar Construction",value:3100,state:"Maharashtra",district:"Nashik",lat:20.011,lng:73.790,type:"Highways",stage:"Awarded",leadScore:"Very High",excScore:94,earthwork:"Very High",mining:false,machines:32,daysAgo:13,source:"NHAI Portal",tenderLink:"https://nhai.gov.in"},
+  {id:"NHAI-26-006",publishedDate:"2026-05-05",bidDate:"2026-03-20",awardDate:"2026-05-05",name:"Lucknow–Agra Expressway Widening Package 1",desc:"Widening from 6 to 8 lanes with median and shoulder reconstruction",authority:"NHAI",ministry:"MoRTH",contractor:"NCC Limited",value:890,state:"Uttar Pradesh",district:"Unnao",lat:26.547,lng:80.497,type:"Highways",stage:"Awarded",leadScore:"High",excScore:72,earthwork:"Medium",mining:false,machines:9,daysAgo:16,source:"NHAI Portal",tenderLink:"https://nhai.gov.in"},
+  {id:"NHIDCL-26-001",publishedDate:"2026-05-03",bidDate:"2026-05-03",awardDate:null,name:"Manipur Ring Road Package 1 — Imphal Bypass",desc:"Ring road through hilly Manipur terrain with heavy cutting and retaining structures",authority:"NHIDCL",ministry:"MoRTH",contractor:"",value:1720,state:"Manipur",district:"Imphal West",lat:24.817,lng:93.942,type:"Highways",stage:"Tender Live",leadScore:"Very High",excScore:95,earthwork:"Extreme",mining:false,machines:22,daysAgo:18,source:"NHIDCL",tenderLink:"https://nhidcl.com"},
+  {id:"NHAI-26-007",publishedDate:"2026-04-30",bidDate:"2026-03-15",awardDate:"2026-04-30",name:"Mumbai–Nagpur Samruddhi Expressway Maintenance Pkg",desc:"Maintenance and additional earthwork for shoulder improvement across 701 km corridor",authority:"NHAI",ministry:"MoRTH",contractor:"IRB Infrastructure",value:1100,state:"Maharashtra",district:"Aurangabad",lat:19.877,lng:75.343,type:"Highways",stage:"Awarded",leadScore:"Medium",excScore:68,earthwork:"Medium",mining:false,machines:10,daysAgo:21,source:"NHAI Portal",tenderLink:"https://nhai.gov.in"},
+  {id:"BRO-26-001",publishedDate:"2026-04-28",bidDate:"2026-04-28",awardDate:null,name:"BRO Zojila Tunnel Approach Road Package",desc:"Approach road to Zojila tunnel with extreme rock cutting at 11,500 ft altitude",authority:"BRO",ministry:"Ministry of Defence",contractor:"",value:2400,state:"Jammu & Kashmir",district:"Kargil",lat:34.294,lng:75.468,type:"Highways",stage:"Tender Live",leadScore:"Very High",excScore:98,earthwork:"Extreme",mining:false,machines:28,daysAgo:23,source:"BRO",tenderLink:"https://bro.gov.in"},
+  {id:"NHAI-26-008",publishedDate:"2026-04-25",bidDate:"2026-04-25",awardDate:null,name:"Srinagar Ring Road Phase 2",desc:"Ring road around Srinagar with valley earthwork and embankment near Dal Lake corridor",authority:"NHAI",ministry:"MoRTH",contractor:"",value:1340,state:"Jammu & Kashmir",district:"Srinagar",lat:34.083,lng:74.797,type:"Highways",stage:"Tender Live",leadScore:"High",excScore:83,earthwork:"High",mining:false,machines:15,daysAgo:26,source:"NHAI Portal",tenderLink:"https://nhai.gov.in"},
+  // Mining April-May 2026
+  {id:"CIL-26-001",publishedDate:"2026-05-16",bidDate:"2026-05-16",awardDate:null,name:"CCL North Karanpura Opencast Mine New Pit",desc:"New OC pit development in Central Coalfields — overburden stripping and bench formation",authority:"Coal India / CCL",ministry:"Ministry of Coal",contractor:"",value:1640,state:"Jharkhand",district:"Chatra",lat:23.850,lng:85.231,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:97,earthwork:"Extreme",mining:true,machines:28,daysAgo:5,source:"Coal India",tenderLink:"https://coalindia.in"},
+  {id:"CIL-26-002",publishedDate:"2026-05-13",bidDate:"2026-05-13",awardDate:null,name:"SECL Mand-Raigarh Coalfield OB Removal Phase II",desc:"Phase II overburden removal for Mand-Raigarh OC expansion in Chhattisgarh",authority:"Coal India / SECL",ministry:"Ministry of Coal",contractor:"",value:1980,state:"Chhattisgarh",district:"Raigarh",lat:21.898,lng:83.396,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:98,earthwork:"Extreme",mining:true,machines:34,daysAgo:8,source:"Coal India",tenderLink:"https://coalindia.in"},
+  {id:"NMDC-26-001",publishedDate:"2026-05-07",bidDate:"2026-03-20",awardDate:"2026-05-07",name:"NMDC Donimalai Iron Ore Mine Expansion",desc:"Iron ore mine expansion in Karnataka — bench development and overburden removal",authority:"NMDC",ministry:"Ministry of Steel",contractor:"Thriveni Earthmovers",value:1120,state:"Karnataka",district:"Ballari",lat:15.143,lng:76.538,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:96,earthwork:"Very High",mining:true,machines:22,daysAgo:14,source:"NMDC",tenderLink:"https://nmdc.co.in"},
+  {id:"MCL-26-001",publishedDate:"2026-05-02",bidDate:"2026-05-02",awardDate:null,name:"MCL Hingula OC Mine Area Development",desc:"Hingula opencast mine new pit and overburden removal in Odisha coalfields",authority:"Coal India / MCL",ministry:"Ministry of Coal",contractor:"",value:860,state:"Odisha",district:"Sambalpur",lat:21.466,lng:83.970,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:95,earthwork:"Extreme",mining:true,machines:18,daysAgo:19,source:"MCL",tenderLink:"https://mcl.gov.in"},
+  {id:"COAL-26-001",publishedDate:"2026-04-29",bidDate:"2026-02-10",awardDate:"2026-04-29",name:"BCCL Moonidih Area OC Development",desc:"New OC development in Moonidih area, Jharia coalfield — major overburden contract",authority:"BCCL / CIL",ministry:"Ministry of Coal",contractor:"BEML",value:1450,state:"Jharkhand",district:"Dhanbad",lat:23.795,lng:86.439,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:96,earthwork:"Extreme",mining:true,machines:26,daysAgo:22,source:"BCCL",tenderLink:"https://bcclweb.in"},
+  {id:"SCCL-26-001",publishedDate:"2026-04-26",bidDate:"2026-04-26",awardDate:null,name:"SCCL Koyagudem OC Mine New Bench",desc:"New bench development at Koyagudem opencast mine in Telangana",authority:"SCCL",ministry:"State Mining Dept",contractor:"",value:720,state:"Telangana",district:"Bhadradri",lat:17.505,lng:80.618,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:94,earthwork:"Extreme",mining:true,machines:15,daysAgo:25,source:"SCCL",tenderLink:"https://scclmines.com"},
+  // Railways April-May 2026
+  {id:"RVNL-26-001",publishedDate:"2026-05-11",bidDate:"2026-05-11",awardDate:null,name:"RVNL Rajasthan New BG Line Earthwork Pkg 3",desc:"New broad gauge line through Thar desert with embankment and earthwork",authority:"RVNL",ministry:"Ministry of Railways",contractor:"",value:1180,state:"Rajasthan",district:"Barmer",lat:25.745,lng:71.388,type:"Railways",stage:"Tender Live",leadScore:"High",excScore:81,earthwork:"High",mining:false,machines:14,daysAgo:10,source:"RVNL",tenderLink:"https://rvnl.org"},
+  {id:"DFCC-26-001",publishedDate:"2026-05-04",bidDate:"2026-03-01",awardDate:"2026-05-04",name:"DFCC Western Corridor Phase 3 Earthwork",desc:"Dedicated freight corridor earthwork — Rewari to Vadodara section",authority:"DFCCIL",ministry:"Ministry of Railways",contractor:"KEC International",value:2100,state:"Gujarat",district:"Vadodara",lat:22.307,lng:73.181,type:"Railways",stage:"Awarded",leadScore:"High",excScore:83,earthwork:"High",mining:false,machines:20,daysAgo:17,source:"DFCCIL",tenderLink:"https://dfccil.com"},
+  {id:"RVNL-26-002",publishedDate:"2026-04-27",bidDate:"2026-04-27",awardDate:null,name:"Northeast Frontier Railway New Line Package",desc:"New railway line through Assam valley — embankment and earthwork in flood plains",authority:"RVNL",ministry:"Ministry of Railways",contractor:"",value:1560,state:"Assam",district:"Dibrugarh",lat:27.483,lng:94.912,type:"Railways",stage:"Tender Live",leadScore:"High",excScore:78,earthwork:"High",mining:false,machines:17,daysAgo:24,source:"RVNL",tenderLink:"https://rvnl.org"},
+  // Metro April-May 2026
+  {id:"NMRC-26-001",publishedDate:"2026-05-09",bidDate:"2026-05-09",awardDate:null,name:"Noida Metro Phase 2 Underground Extension",desc:"Twin tunnel underground metro extension with deep station excavation in Noida",authority:"NMRC",ministry:"MoHUA",contractor:"",value:2680,state:"Uttar Pradesh",district:"Gautam Buddha Nagar",lat:28.535,lng:77.391,type:"Metro",stage:"Tender Live",leadScore:"High",excScore:86,earthwork:"High",mining:false,machines:18,daysAgo:12,source:"NMRC",tenderLink:"https://nmrcnoida.com"},
+  {id:"PMRDA-26-001",publishedDate:"2026-05-01",bidDate:"2026-03-10",awardDate:"2026-05-01",name:"Pune Metro Phase 2 — Hinjewadi Corridor",desc:"Elevated metro with pile foundation work through Pune IT corridor",authority:"PMRDA",ministry:"MoHUA",contractor:"Afcons Infrastructure",value:3200,state:"Maharashtra",district:"Pune",lat:18.563,lng:73.741,type:"Metro",stage:"Awarded",leadScore:"High",excScore:82,earthwork:"High",mining:false,machines:14,daysAgo:20,source:"PMRDA",tenderLink:"https://punemetrorail.org"},
+  // Irrigation April-May 2026
+  {id:"AP-26-001",publishedDate:"2026-05-15",bidDate:"2026-05-15",awardDate:null,name:"AP Polavaram Right Main Canal Pkg 7",desc:"Right main canal earthwork for Polavaram Irrigation Project — major excavation",authority:"AP Irrigation Dept",ministry:"State Irrigation",contractor:"",value:1840,state:"Andhra Pradesh",district:"Eluru",lat:16.707,lng:81.095,type:"Irrigation",stage:"Tender Live",leadScore:"Very High",excScore:93,earthwork:"Very High",mining:false,machines:22,daysAgo:6,source:"AP Irrigation",tenderLink:"https://apirl.org"},
+  {id:"NWDA-26-001",publishedDate:"2026-04-28",bidDate:"2026-04-28",awardDate:null,name:"Parbati-Kalisindh-Chambal Link Canal Phase 1",desc:"Inter-basin transfer canal with major earthwork through Rajasthan",authority:"NWDA",ministry:"Jal Shakti Ministry",contractor:"",value:4200,state:"Rajasthan",district:"Kota",lat:25.178,lng:75.839,type:"Irrigation",stage:"Upcoming",leadScore:"Very High",excScore:92,earthwork:"Very High",mining:false,machines:35,daysAgo:23,source:"NWDA",tenderLink:"https://nwda.gov.in"},
+  // Industrial April-May 2026
+  {id:"NICDP-26-001",publishedDate:"2026-05-12",bidDate:"2026-05-12",awardDate:null,name:"Rajpura-Patiala Industrial Corridor Phase 1",desc:"Industrial township development with land leveling and infrastructure in Punjab",authority:"NICDP",ministry:"DPIIT",contractor:"",value:2800,state:"Punjab",district:"Patiala",lat:30.332,lng:76.398,type:"Industrial",stage:"Tender Live",leadScore:"High",excScore:80,earthwork:"High",mining:false,machines:20,daysAgo:9,source:"NICDP",tenderLink:"https://nicdp.gov.in"},
+  {id:"APIIC-26-001",publishedDate:"2026-05-06",bidDate:"2026-03-25",awardDate:"2026-05-06",name:"Orvakal Industrial Node Phase 2",desc:"Industrial node development in AP with extensive earthwork and grading",authority:"APIIC",ministry:"State Govt",contractor:"NCC Limited",value:1560,state:"Andhra Pradesh",district:"Kurnool",lat:15.828,lng:78.040,type:"Industrial",stage:"Awarded",leadScore:"High",excScore:78,earthwork:"High",mining:false,machines:16,daysAgo:15,source:"APIIC",tenderLink:"https://apiic.in"},
+  // Smart City April-May 2026
+  {id:"SMART-26-001",publishedDate:"2026-05-16",bidDate:"2026-05-16",awardDate:null,name:"Agra Smart City Underground Infrastructure Pkg 2",desc:"Underground utility corridor and road reconstruction near Taj Trapezium Zone",authority:"Agra Smart City",ministry:"MoHUA",contractor:"",value:780,state:"Uttar Pradesh",district:"Agra",lat:27.177,lng:78.008,type:"Smart City",stage:"Tender Live",leadScore:"Medium",excScore:61,earthwork:"Medium",mining:false,machines:7,daysAgo:5,source:"Smart Cities Mission",tenderLink:"https://smartcities.gov.in"},
+  // Ports April-May 2026
+  {id:"MbPT-26-001",publishedDate:"2026-04-30",bidDate:"2026-02-20",awardDate:"2026-04-30",name:"Mumbai Port Trust Land Reclamation Phase 3",desc:"Marine reclamation and land development for port expansion — heavy earthmoving",authority:"Mumbai Port Trust",ministry:"Ministry of Ports",contractor:"Afcons Infrastructure",value:2900,state:"Maharashtra",district:"Mumbai",lat:18.933,lng:72.844,type:"Ports",stage:"Awarded",leadScore:"High",excScore:77,earthwork:"High",mining:false,machines:14,daysAgo:21,source:"Mumbai Port",tenderLink:"https://mumbaiport.gov.in"},
+  {id:"KOPT-26-001",publishedDate:"2026-04-24",bidDate:"2026-04-24",awardDate:null,name:"Kolkata Port Haldia Dock Expansion",desc:"Dock expansion with land reclamation and quay construction at Haldia",authority:"Kolkata Port Trust",ministry:"Ministry of Ports",contractor:"",value:1680,state:"West Bengal",district:"Purba Medinipur",lat:22.062,lng:88.096,type:"Ports",stage:"Tender Live",leadScore:"High",excScore:73,earthwork:"High",mining:false,machines:11,daysAgo:27,source:"KOPT",tenderLink:"https://kolkataporttrust.gov.in"}
 ];
 
 const FALLBACK_CONTR=[
@@ -607,27 +643,27 @@ const FALLBACK_NEWS=[
 ];
 
 
-const TICKERS=[
-  {t:"new",m:"NEW AWARD: NHAI awards ₹3,200 Cr Delhi–Mumbai Expressway Pkg 11 to Dilip Buildcon — Rajasthan"},
-  {t:"alert",m:"URGENT: Gevra OC Mine ₹2,340 Cr — 38 Komatsu excavators required — Award Complete — CIL/SECL"},
-  {t:"aw",m:"AWARDED: L&T Construction wins ₹2,800 Cr Bengaluru Metro Phase 3 — 16 excavators needed"},
-  {t:"new",m:"NEW TENDER: NHAI floats ₹2,800 Cr Chennai–Bengaluru Expressway Pkg 3 — Bid Date Aug 15, 2025"},
-  {t:"mine",m:"MINING: SCCL Singareni OC Mine New Pit ₹980 Cr — Tender Live — 20 Komatsu units required"},
-  {t:"alert",m:"HIGH PRIORITY: Bailadila Iron Ore Mine NMDC ₹1,560 Cr — 42 excavators active — Under Execution"},
-  {t:"new",m:"NEW: Ken–Betwa Link Canal ₹3,600 Cr by NWDA — Upcoming — 28 machines estimated — MP"},
-  {t:"aw",m:"AWARDED: Afcons wins Shimla–Mandi NH Package ₹1,560 Cr — 18 excavators needed — HP"},
-  {t:"mine",m:"MINING ALERT: Jharia Coalfield OB Removal ₹1,820 Cr — Tender closes Jun 30 — 30 units"},
-  {t:"new",m:"NEW: BRO Strategic Arunachal Road ₹1,800 Cr Awarded — 24 excavators — Extreme earthwork"},
-  {t:"alert",m:"INTEL: WCL Wardha Valley Mining ₹740 Cr — Tender Live — Score 96 — Very High priority"},
-  {t:"mine",m:"MINING: ECL Raniganj OC Expansion ₹920 Cr — Upcoming — 18 Komatsu units — WB"},
-  {t:"new",m:"NEW: Polavaram Irrigation ₹4,200 Cr Under Execution — 35 excavators active — AP"}
-];
+
 
 
 function initTicker(){
   const el=document.getElementById('tcon2');
-  const all=[...TICKERS,...TICKERS];
-  el.innerHTML=all.map(a=>`<span class="titem"><span class="tbadge ${a.t==='new'?'tnew':a.t==='aw'?'taw':a.t==='mine'?'tmi':'tal'}">${a.t==='aw'?'AWARDED':a.t==='mine'?'MINING':a.t==='new'?'NEW':'ALERT'}</span>${a.m}<span style="color:rgba(255,255,255,.25);margin:0 4px">|</span></span>`).join('');
+  if(!el)return;
+  // Build ticker from HOT contracts (last 30 days) — always current
+  function buildTicker(){
+    if(!CD||CD.length===0) return;
+    const hot=CD.filter(c=>daysOld(c.publishedDate)<=30);
+    const items=hot.map(c=>{
+      const cat=c.stage==='Awarded'?'taw':c.mining?'tmi':c.stage==='Tender Live'?'tnew':'tal';
+      const label=c.stage==='Awarded'?'AWARDED':c.mining?'MINING':c.stage==='Tender Live'?'TENDER LIVE':'UPCOMING';
+      return `<span class="titem"><span class="tbadge ${cat}">${label}</span>${c.name} — ₹${c.value.toLocaleString('en-IN')} Cr — ${c.state} — ~${c.machines} excavators<span style="color:rgba(255,255,255,.25);margin:0 4px">|</span></span>`;
+    });
+    const all=[...items,...items]; // duplicate for seamless loop
+    el.innerHTML=all.join('');
+  }
+  // Build immediately if data is available, else wait
+  if(CD&&CD.length>0) buildTicker();
+  else setTimeout(buildTicker,3000);
 }
 
 function startClock(){
@@ -1064,90 +1100,632 @@ function toast(icon,title,body,dur=4500){
 }
 
 // ===================== NOTIFICATIONS =====================
-const NOTIFS=[
-  {id:1,cat:"urgent",icon:"🔴",title:"High Priority: Gevra OC Mine Awarded",msg:"CIL/SECL awards ₹2,340 Cr contract to Thriveni Earthmovers. 38 Komatsu excavators required. Mobilisation begins in 30 days. Contact procurement NOW.",time:"2 min ago",read:false,state:"Chhattisgarh",value:"₹2,340 Cr"},
-  {id:2,cat:"mining",icon:"⛏️",title:"Mining: Singareni OC Mine Tender Live",msg:"SCCL New Pit Development ₹980 Cr — Tender open, bid closes Jul 15, 2025. 20 units estimated. Contact Thriveni Earthmovers for JV opportunity.",time:"1 hr ago",read:false,state:"Telangana",value:"₹980 Cr"},
-  {id:3,cat:"award",icon:"✅",title:"Awarded: Delhi–Mumbai Expressway Pkg 11",msg:"Dilip Buildcon wins ₹3,200 Cr NHAI package in Rajasthan. 32 excavators needed. Equipment procurement phase starting. Call +91-755-4290-000.",time:"3 hrs ago",read:false,state:"Rajasthan",value:"₹3,200 Cr"},
-  {id:4,cat:"urgent",icon:"🔴",title:"Urgent: Bailadila Mine 42 Excavators Active",msg:"NMDC Bailadila Iron Ore Expansion ₹1,560 Cr under execution. 42 Komatsu units deployed. Service opportunities available. Contact site manager.",time:"4 hrs ago",read:false,state:"Chhattisgarh",value:"₹1,560 Cr"},
-  {id:5,cat:"award",icon:"✅",title:"Awarded: L&T wins Bengaluru Metro Phase 3",msg:"BMRCL awards ₹2,800 Cr contract to L&T Construction. 16 excavators for deep underground station work. Internal team coordination required.",time:"5 hrs ago",read:false,state:"Karnataka",value:"₹2,800 Cr"},
-  {id:6,cat:"mining",icon:"⛏️",title:"Mining: Jharia Coalfield OB Tender — Urgent",msg:"BCCL/CIL floats ₹1,820 Cr overburden removal tender. Bid closes Jun 30. 30 excavator units. Key contractors: BEML, Thriveni. Contact immediately.",time:"6 hrs ago",read:true,state:"Jharkhand",value:"₹1,820 Cr"},
-  {id:7,cat:"urgent",icon:"🔴",title:"New High-Value: Ken–Betwa Link Canal",msg:"NWDA floats ₹3,600 Cr canal earthwork in MP. 28 excavators estimated. Upcoming tender — engage L&T Construction early to influence equipment specs.",time:"8 hrs ago",read:true,state:"Madhya Pradesh",value:"₹3,600 Cr"},
-  {id:8,cat:"award",icon:"✅",title:"Awarded: BRO Strategic Road Arunachal",msg:"BRO awards ₹1,800 Cr border road to Afcons. 24 excavators for extreme rock cutting. High-altitude deployment. Call Afcons Procurement: +91-22-6665-2626.",time:"1 day ago",read:true,state:"Arunachal Pradesh",value:"₹1,800 Cr"},
-  {id:9,cat:"mining",icon:"⛏️",title:"Mining Alert: ECL Raniganj OC Upcoming",msg:"ECL/CIL to float ₹920 Cr Raniganj coalfield expansion. 18 excavators. Bid expected Aug 1. Pre-qualify BEML and Thriveni. Reach out now.",time:"1 day ago",read:true,state:"West Bengal",value:"₹920 Cr"},
-  {id:10,cat:"urgent",icon:"🔴",title:"Territory Alert: Maharashtra 3 New Packages",msg:"NHAI floats 3 new highway packages in Nagpur region this week — Pkg 4 ₹1,240 Cr, Pune-Solapur ₹980 Cr in execution. Schedule territory visit.",time:"2 days ago",read:true,state:"Maharashtra",value:"₹2,220 Cr"},
-  {id:11,cat:"award",icon:"✅",title:"Awarded: Marathwada Water Grid Pkg 5",msg:"HCC Ltd wins ₹1,840 Cr irrigation contract in Maharashtra. 18 excavators for canal earthwork. Contact HCC Procurement: +91-22-2577-3200.",time:"2 days ago",read:true,state:"Maharashtra",value:"₹1,840 Cr"},
-  {id:12,cat:"mining",icon:"⛏️",title:"Mining: WCL Wardha Valley Tender Live",msg:"WCL/CIL floats ₹740 Cr opencast mine expansion. Tender live — 16 Komatsu units. Target Dilip Buildcon (likely bidder). Call +91-755-4290-000.",time:"3 days ago",read:true,state:"Maharashtra",value:"₹740 Cr"}
-];
 
-let notifOpen=false;
-let notifCat='all';
-let notifRead=new Set(NOTIFS.filter(n=>n.read).map(n=>n.id));
+// ===================== NOTIFICATION SYSTEM =====================
+// Dynamic — built from live contract data, stored in localStorage
+// Only shows notifications for contracts awarded/published in last 30 days
+// Each notification fires only ONCE per session (tracked in localStorage)
 
-function toggleNotif(){
-  notifOpen=!notifOpen;
-  const panel=document.getElementById('notif-panel');
-  const overlay=document.getElementById('notif-overlay');
-  panel.style.transform=notifOpen?'translateX(0)':'translateX(100%)';
-  overlay.style.display=notifOpen?'block':'none';
-  if(notifOpen) renderNotifs();
+const NOTIF_LS_KEY = 'lntcmmb_shown_notifs_v2';
+
+function getShownNotifs() {
+  try { return new Set(JSON.parse(localStorage.getItem(NOTIF_LS_KEY) || '[]')); }
+  catch(e) { return new Set(); }
 }
 
-function renderNotifs(){
-  const list=document.getElementById('notif-list');
-  const filtered=NOTIFS.filter(n=>notifCat==='all'||n.cat===notifCat);
-  const unread=NOTIFS.filter(n=>!notifRead.has(n.id)).length;
-  document.getElementById('notif-subtitle').textContent=unread+' unread — updated live';
-  document.getElementById('nbadge').textContent=unread;
-  document.getElementById('nbadge').style.display=unread>0?'':'none';
-  list.innerHTML=filtered.map(n=>{
-    const isRead=notifRead.has(n.id);
-    const catColor=n.cat==='urgent'?'#DC2626':n.cat==='mining'?'#7C3AED':'#059669';
-    return `<div onclick="markRead(${n.id})" style="padding:13px 16px;border-bottom:1px solid var(--br);cursor:pointer;background:${isRead?'#fff':'#F0F9FF'};transition:background .2s;display:flex;gap:10px;align-items:flex-start" onmouseover="this.style.background='#EFF6FF'" onmouseout="this.style.background='${isRead?'#fff':'#F0F9FF'}'">
-      <div style="width:36px;height:36px;border-radius:8px;background:${isRead?'#F3F4F6':'#EFF6FF'};display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${n.icon}</div>
+function markNotifShown(id) {
+  const shown = getShownNotifs();
+  shown.add(id);
+  try { localStorage.setItem(NOTIF_LS_KEY, JSON.stringify([...shown])); } catch(e) {}
+}
+
+function buildNotifs() {
+  if (!CD || CD.length === 0) return [];
+  const shown = getShownNotifs();
+  const notifs = [];
+  CD.forEach(c => {
+    const d = daysOld(c.publishedDate);
+    if (d > 30) return; // Only last 30 days
+    const nid = `${c.id}_${c.stage}`;
+    // Award notification — only for Awarded stage
+    if (c.stage === 'Awarded' && c.awardDate) {
+      const awardDays = daysOld(c.awardDate);
+      if (awardDays <= 30) {
+        const cat = c.mining ? 'mining' : c.type === 'Highways' ? 'award' : 'award';
+        notifs.push({
+          id: nid,
+          cat,
+          icon: c.mining ? '⛏️' : '✅',
+          title: `Awarded: ${c.name.length > 55 ? c.name.substring(0,52)+'...' : c.name}`,
+          msg: `${c.authority} awards ₹${c.value.toLocaleString('en-IN')} Cr to ${c.contractor||'(Contractor TBD)'}. ~${c.machines} Komatsu excavators required. ${c.state} territory — contact procurement immediately.`,
+          time: daysOldLabel(c.awardDate),
+          state: c.state,
+          value: `₹${c.value.toLocaleString('en-IN')} Cr`,
+          read: shown.has(nid),
+          contractId: c.id
+        });
+      }
+    }
+    // Hot tender — Tender Live in last 30 days
+    if (c.stage === 'Tender Live') {
+      notifs.push({
+        id: nid + '_live',
+        cat: c.mining ? 'mining' : 'urgent',
+        icon: c.mining ? '⛏️' : '🔴',
+        title: `Tender Live: ${c.name.length > 50 ? c.name.substring(0,47)+'...' : c.name}`,
+        msg: `${c.authority}: ₹${c.value.toLocaleString('en-IN')} Cr — ${c.state}. Bid date: ${c.bidDate ? formatDate(c.bidDate) : 'See portal'}. ~${c.machines} excavators needed.`,
+        time: daysOldLabel(c.publishedDate),
+        state: c.state,
+        value: `₹${c.value.toLocaleString('en-IN')} Cr`,
+        read: shown.has(nid + '_live'),
+        contractId: c.id
+      });
+    }
+  });
+  // Sort: unread first, then by value descending
+  notifs.sort((a,b) => {
+    if (a.read !== b.read) return a.read ? 1 : -1;
+    return 0;
+  });
+  return notifs.slice(0, 20);
+}
+
+let NOTIFS = [];
+let notifOpen = false;
+let notifCat = 'all';
+
+function initNotifs() {
+  NOTIFS = buildNotifs();
+  const unread = NOTIFS.filter(n => !n.read).length;
+  const badge = document.getElementById('nbadge');
+  if (badge) {
+    badge.textContent = unread;
+    badge.style.display = unread > 0 ? '' : 'none';
+  }
+  const sub = document.getElementById('notif-subtitle');
+  if (sub) sub.textContent = `${unread} unread — last 30 days only`;
+  // Show toast ONCE for each new notification (not on every page load)
+  const shown = getShownNotifs();
+  let newCount = 0;
+  NOTIFS.forEach(n => {
+    if (!n.read && !shown.has(n.id)) {
+      newCount++;
+    }
+  });
+  if (newCount > 0) {
+    setTimeout(() => {
+      toast('🔔', `${newCount} New Alert${newCount>1?'s':''}`,
+        `${newCount} new contract${newCount>1?'s':''} awarded or live in last 30 days`);
+    }, 3000);
+  }
+}
+
+function toggleNotif() {
+  notifOpen = !notifOpen;
+  const panel = document.getElementById('notif-panel');
+  const overlay = document.getElementById('notif-overlay');
+  panel.style.transform = notifOpen ? 'translateX(0)' : 'translateX(100%)';
+  overlay.style.display = notifOpen ? 'block' : 'none';
+  if (notifOpen) { NOTIFS = buildNotifs(); renderNotifs(); }
+}
+
+function renderNotifs() {
+  const list = document.getElementById('notif-list');
+  if (!list) return;
+  const filtered = NOTIFS.filter(n => notifCat === 'all' || n.cat === notifCat);
+  const unread = NOTIFS.filter(n => !n.read).length;
+  document.getElementById('notif-subtitle').textContent = `${unread} unread — last 30 days only`;
+  document.getElementById('nbadge').textContent = unread;
+  document.getElementById('nbadge').style.display = unread > 0 ? '' : 'none';
+  if (!filtered.length) {
+    list.innerHTML = `<div style="padding:28px;text-align:center;color:var(--mu);font-size:13px">
+      <div style="font-size:28px;margin-bottom:8px">✅</div>
+      <div style="font-weight:600">No ${notifCat !== 'all' ? notifCat : ''} alerts</div>
+      <div style="font-size:12px;margin-top:4px">All notifications are from contracts in the last 30 days</div>
+    </div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(n => {
+    const catColor = n.cat==='urgent'?'#DC2626' : n.cat==='mining'?'#7C3AED' : '#059669';
+    return `<div onclick="markRead('${n.id}')" style="padding:13px 16px;border-bottom:1px solid var(--br);cursor:pointer;background:${n.read?'#fff':'#F0F9FF'};transition:background .2s;display:flex;gap:10px;align-items:flex-start">
+      <div style="width:36px;height:36px;border-radius:8px;background:${n.read?'#F3F4F6':'#EFF6FF'};display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${n.icon}</div>
       <div style="flex:1;min-width:0">
-        <div style="font-size:12.5px;font-weight:${isRead?'500':'700'};color:${isRead?'var(--t2)':'var(--t1)'};margin-bottom:3px;line-height:1.3">${n.title}</div>
+        <div style="font-size:12.5px;font-weight:${n.read?'500':'700'};color:${n.read?'var(--t2)':'var(--t1)'};margin-bottom:3px;line-height:1.3">${n.title}</div>
         <div style="font-size:11px;color:var(--mu);line-height:1.5;margin-bottom:5px">${n.msg}</div>
-        <div style="display:flex;align-items:center;gap:8px">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <span style="font-size:10px;background:${catColor}22;color:${catColor};padding:1px 6px;border-radius:3px;font-weight:600">${n.state}</span>
           <span style="font-size:10px;font-weight:700;color:var(--b)">${n.value}</span>
           <span style="font-size:10px;color:var(--mu);margin-left:auto">${n.time}</span>
-          ${!isRead?'<span style="width:7px;height:7px;background:#2563EB;border-radius:50%;flex-shrink:0"></span>':''}
+          ${!n.read?'<span style="width:7px;height:7px;background:#2563EB;border-radius:50%;flex-shrink:0"></span>':''}
         </div>
+        ${n.contractId?`<button onclick="event.stopPropagation();closeMod&&openMod('${n.contractId}')" style="margin-top:5px;padding:3px 8px;background:var(--b);color:#fff;border:none;border-radius:4px;font-size:10.5px;cursor:pointer">View Contract →</button>`:''}
       </div>
     </div>`;
   }).join('');
-  if(!filtered.length) list.innerHTML='<div style="padding:30px;text-align:center;color:var(--mu);font-size:13px">No alerts in this category</div>';
 }
 
-function markRead(id){notifRead.add(id);renderNotifs();}
-
-function markAllRead(){
-  NOTIFS.forEach(n=>notifRead.add(n.id));
+function markRead(id) {
+  markNotifShown(id);
+  const n = NOTIFS.find(x => x.id === id);
+  if (n) n.read = true;
   renderNotifs();
-  toast('✅','All read','All intelligence alerts marked as read');
 }
 
-function filterNotifs(cat){
-  notifCat=cat;
-  document.querySelectorAll('.ntab').forEach(t=>{
-    const active=t.dataset.ncat===cat;
-    t.style.fontWeight=active?'700':'500';
-    t.style.color=active?'var(--b)':'var(--mu)';
-    t.style.borderBottom=active?'2px solid var(--b)':'2px solid transparent';
+function markAllRead() {
+  NOTIFS.forEach(n => { n.read = true; markNotifShown(n.id); });
+  renderNotifs();
+  toast('✅', 'All read', 'All intelligence alerts marked as read');
+}
+
+function filterNotifs(cat) {
+  notifCat = cat;
+  document.querySelectorAll('.ntab').forEach(t => {
+    const active = t.dataset.ncat === cat;
+    t.style.fontWeight = active ? '700' : '500';
+    t.style.color = active ? 'var(--b)' : 'var(--mu)';
+    t.style.borderBottom = active ? '2px solid var(--b)' : '2px solid transparent';
   });
   renderNotifs();
 }
 
-const ALERTS=[
-  ['🔴','High Priority','Gevra OC Mine ₹2,340 Cr — 38 excavators needed — Stage: Awarded'],
-  ['🛣️','New Highway Tender','NHAI: ₹2,800 Cr Chennai–Bengaluru Expressway — Bid Aug 15'],
-  ['⛏️','Mining Intelligence','Singareni OC Mine ₹980 Cr — Tender Live — 20 Komatsu units'],
-  ['✅','Contract Awarded','L&T wins ₹2,800 Cr Bengaluru Metro Phase 3 — 16 excavators'],
-  ['📍','Territory Alert','Maharashtra: 3 new highway packages in Nagpur region this week'],
-  ['🏗️','Contractor Activity','Dilip Buildcon: 2 new packages ₹3,940 Cr — Rajasthan & CG']
-];
-let alertIdx=0;
-function randAlert(){const[i,t,b]=ALERTS[alertIdx%ALERTS.length];toast(i,t,b);alertIdx++;}
+
+
+
+
+function initTicker(){
+  const el=document.getElementById('tcon2');
+  if(!el)return;
+  // Build ticker from HOT contracts (last 30 days) — always current
+  function buildTicker(){
+    if(!CD||CD.length===0) return;
+    const hot=CD.filter(c=>daysOld(c.publishedDate)<=30);
+    const items=hot.map(c=>{
+      const cat=c.stage==='Awarded'?'taw':c.mining?'tmi':c.stage==='Tender Live'?'tnew':'tal';
+      const label=c.stage==='Awarded'?'AWARDED':c.mining?'MINING':c.stage==='Tender Live'?'TENDER LIVE':'UPCOMING';
+      return `<span class="titem"><span class="tbadge ${cat}">${label}</span>${c.name} — ₹${c.value.toLocaleString('en-IN')} Cr — ${c.state} — ~${c.machines} excavators<span style="color:rgba(255,255,255,.25);margin:0 4px">|</span></span>`;
+    });
+    const all=[...items,...items]; // duplicate for seamless loop
+    el.innerHTML=all.join('');
+  }
+  // Build immediately if data is available, else wait
+  if(CD&&CD.length>0) buildTicker();
+  else setTimeout(buildTicker,3000);
+}
+
+function startClock(){
+  const u=()=>{const n=new Date();const s=Math.floor(n.getTime()/1000);const ist=new Date((s+19800)*1000);document.getElementById('nclock').textContent=ist.toUTCString().split(' ')[4]+' IST'};
+  u();setInterval(u,1000);
+}
+
+// ===================== MAP =====================
+function initMap(){
+  map=L.map('india-map',{center:[22,82],zoom:5,zoomControl:true});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap © CARTO | L&T CMMB',subdomains:'abcd',maxZoom:19}).addTo(map);
+  mgrp=L.layerGroup().addTo(map);
+  cgrp=L.markerClusterGroup({maxClusterRadius:60,iconCreateFunction:cl=>{
+    const n=cl.getChildCount();
+    return L.divIcon({html:`<div style="background:var(--b);color:#fff;border-radius:50%;border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.3);width:38px;height:38px">${n}</div>`,className:'',iconSize:[38,38]});
+  }});
+  renderMarkers();
+  // Legend
+  const leg=L.control({position:'bottomright'});
+  leg.onAdd=()=>{const d=L.DomUtil.create('div');d.innerHTML=`<div style="background:#fff;padding:10px;border-radius:8px;box-shadow:var(--sh);font-family:Inter,sans-serif;font-size:11px"><div style="font-weight:700;color:var(--b);margin-bottom:6px;font-size:10px;text-transform:uppercase">Lead Score</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><div style="width:11px;height:11px;background:#DC2626;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>Very High</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><div style="width:11px;height:11px;background:#D97706;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>High</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><div style="width:11px;height:11px;background:#2563EB;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>Medium</div><div style="display:flex;align-items:center;gap:6px"><div style="width:11px;height:11px;background:#6B7280;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>Low</div></div>`;return d;};
+  leg.addTo(map);
+}
+
+function mcolor(ls){return ls==='Very High'?'#DC2626':ls==='High'?'#D97706':ls==='Medium'?'#2563EB':'#6B7280'}
+function ticon(t){const m={Highways:'🛣️',Mining:'⛏️',Railways:'🚂',Metro:'🚇',Irrigation:'💧',Ports:'⚓','Smart City':'🏙️',Industrial:'🏭'};return m[t]||'📋'}
+
+function renderMarkers(){
+  mgrp.clearLayers();cgrp.clearLayers();
+  const pts=[];
+  FC.forEach(c=>{
+    const col=mcolor(c.leadScore);
+    const ico=L.divIcon({html:`<div style="background:${col};width:13px;height:13px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.4)"></div>`,className:'',iconSize:[13,13],iconAnchor:[6.5,6.5]});
+    const pop=L.popup({maxWidth:270}).setContent(`<div style="font-family:Inter,sans-serif"><div class="ppt">${ticon(c.type)} ${c.name}</div><div class="ppr"><span>Authority</span><span class="ppv">${c.authority}</span></div><div class="ppr"><span>Value</span><span class="ppv" style="color:#003F72;font-size:14px">₹${c.value.toLocaleString('en-IN')} Cr</span></div><div class="ppr"><span>Stage</span><span class="ppv">${c.stage}</span></div><div class="ppr"><span>Excavators</span><span class="ppv" style="color:#DC2626">${c.machines} units</span></div><div class="ppr"><span>Lead Score</span><span class="ppv" style="color:${col}">${c.ls}</span></div><div style="margin-top:8px;padding-top:8px;border-top:1px solid #eee;font-size:10px;color:#718096">${c.district}, ${c.state}</div><button onclick="openMod('${c.id}')" style="margin-top:7px;width:100%;padding:5px;background:#003F72;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600">View Full Intelligence →</button></div>`);
+    const m=L.marker([c.lat,c.lng],{icon:ico}).bindPopup(pop);
+    mgrp.addLayer(m);
+    cgrp.addLayer(L.marker([c.lat,c.lng],{icon:ico}).bindPopup(pop));
+    pts.push([c.lat,c.lng,c.es/100]);
+  });
+  if(hlayer)map.removeLayer(hlayer);
+  hlayer=L.heatLayer(pts,{radius:30,blur:20,maxZoom:8,gradient:{0.2:'#003F72',0.5:'#F59E0B',1.0:'#DC2626'}});
+  document.getElementById('mcount').textContent=FC.length+' projects';
+}
+
+function togL(t){
+  if(t==='markers'){map.hasLayer(mgrp)?map.removeLayer(mgrp):map.addLayer(mgrp);document.getElementById('bmark').classList.toggle('active');}
+  else if(t==='heat'){map.hasLayer(hlayer)?map.removeLayer(hlayer):map.addLayer(hlayer);document.getElementById('bheat').classList.toggle('active');}
+  else if(t==='clusters'){map.hasLayer(cgrp)?map.removeLayer(cgrp):map.addLayer(cgrp);document.getElementById('bclust').classList.toggle('active');}
+}
+
+// ===================== FILTERS =====================
+function applyF(){
+  AF.state  = document.getElementById('fstate').value;
+  AF.auth   = document.getElementById('fauth').value;
+  AF.types  = [...document.querySelectorAll('.ftype:checked')].map(c=>c.value);
+  AF.stages = [...document.querySelectorAll('.fstage:checked')].map(c=>c.value);
+  AF.leads  = [...document.querySelectorAll('.flead:checked')].map(c=>c.value);
+  AF.minV   = parseInt(document.getElementById('fval').value)||0;
+  AF.mine   = document.getElementById('fmine').checked;
+  AF.heavy  = document.getElementById('fheavy').checked;
+  AF.hsc    = document.getElementById('fhsc').checked;
+  AF.q      = (document.getElementById('sinput')?.value||'').toLowerCase();
+  AF.dateRange = document.querySelector('.fdater:checked')?.value || 'hot';
+
+  FC = CD.filter(c => {
+    if (AF.state  && c.state     !== AF.state)  return false;
+    if (AF.auth   && c.authority !== AF.auth)   return false;
+    if (AF.types.length  && !AF.types.includes(c.type))    return false;
+    if (AF.stages.length && !AF.stages.includes(c.stage))  return false;
+    if (AF.minV > 0 && c.value < AF.minV) return false;
+    if (AF.mine  && !c.mining)   return false;
+    if (AF.heavy && !['High','Very High','Extreme'].includes(c.earthwork)) return false;
+    if (AF.hsc   && c.excScore < 80) return false;
+    if (AF.q && !c.name.toLowerCase().includes(AF.q) &&
+        !c.state.toLowerCase().includes(AF.q) &&
+        !c.contractor.toLowerCase().includes(AF.q) &&
+        !c.authority.toLowerCase().includes(AF.q) &&
+        !c.type.toLowerCase().includes(AF.q)) return false;
+    // Date range filter
+    const d = daysOld(c.publishedDate);
+    if (AF.dateRange === 'hot'     && d > 30)  return false;
+    if (AF.dateRange === 'warm'    && (d <= 30 || d > 90))  return false;
+    if (AF.dateRange === 'cooling' && (d <= 90 || d > 180)) return false;
+    if (AF.dateRange === 'archive' && d <= 180) return false;
+    // Lead score filter uses EFFECTIVE score (date-adjusted)
+    if (AF.leads.length) {
+      const eff = effectiveLeadScore(c);
+      if (!AF.leads.includes(eff) && eff !== 'Archive') return false;
+    }
+    return true;
+  });
+
+  document.getElementById('ccount').textContent = FC.length;
+  renderCards();
+  renderMarkers();
+  // Auto-switch to contracts tab so user sees results immediately
+  switchTab('contracts');
+}
+
+function resetF(){
+  document.getElementById('fstate').value='';
+  document.getElementById('fauth').value='';
+  document.getElementById('fval').value='0';
+  document.getElementById('fmine').checked=false;
+  document.getElementById('fheavy').checked=false;
+  document.getElementById('fhsc').checked=false;
+  document.querySelectorAll('.ftype,.fstage,.flead').forEach(c=>c.checked=true);
+  if(document.getElementById('sinput'))document.getElementById('sinput').value='';
+  // Reset date to HOT (default — most useful view)
+  document.querySelector('.fdater[value="hot"]').checked=true;
+  updR(document.getElementById('fval'));
+  AF={state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:'',dateRange:'hot'};
+  document.querySelectorAll('.ftype:checked').forEach(c=>AF.types.push(c.value));
+  document.querySelectorAll('.fstage:checked').forEach(c=>AF.stages.push(c.value));
+  document.querySelectorAll('.flead:checked').forEach(c=>AF.leads.push(c.value));
+  FC=CD.filter(c=>daysOld(c.publishedDate)<=30);
+  document.getElementById('ccount').textContent=FC.length;
+  renderCards();renderMarkers();
+}
+
+function updR(el){const v=parseInt(el.value);document.getElementById('rvd').textContent=v>0?'Min ₹'+v.toLocaleString('en-IN')+' Cr':'No minimum'}
+
+function quickF(t){
+  resetF();
+  if(t==='hipri'){
+    document.querySelector('.fdater[value="hot"]').checked=true;
+    AF.dateRange='hot';
+    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && ['Very High','High'].includes(effectiveLeadScore(c)));
+  } else if(t==='mining'){
+    document.querySelector('.fdater[value="all"]').checked=true;
+    AF.dateRange='all';
+    FC=CD.filter(c=>c.mining);
+  } else if(t==='awarded'){
+    document.querySelector('.fdater[value="all"]').checked=true;
+    AF.dateRange='all';
+    FC=CD.filter(c=>c.stage==='Awarded');
+  } else if(t==='highways'){
+    document.querySelector('.fdater[value="all"]').checked=true;
+    AF.dateRange='all';
+    FC=CD.filter(c=>c.type==='Highways');
+  } else if(t==='today'){
+    document.querySelector('.fdater[value="hot"]').checked=true;
+    AF.dateRange='hot';
+    FC=CD.filter(c=>daysOld(c.publishedDate)<=7);
+  } else if(t==='excavator'){
+    document.querySelector('.fdater[value="hot"]').checked=true;
+    AF.dateRange='hot';
+    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && c.excScore>=80);
+  } else if(t==='all'){
+    document.querySelector('.fdater[value="all"]').checked=true;
+    AF.dateRange='all';
+    FC=[...CD];
+  }
+  document.getElementById('ccount').textContent=FC.length;
+  renderCards();renderMarkers();
+  switchTab('contracts');
+}
+
+function setStateF(s){document.getElementById('fstate').value=s;applyF();switchTab('contracts');}
+
+// ===================== RENDER CARDS =====================
+function stClass(s){return s==='Awarded'?'awarded':s==='Tender Live'?'live':s==='Under Execution'?'exec':'upcoming'}
+
+function renderCards(){
+  const el=document.getElementById('clist');
+  if(!FC.length){el.innerHTML=`<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--mu)"><div style="font-size:36px;margin-bottom:10px">🔍</div><div style="font-size:14px;font-weight:600">No contracts match your filters</div><div style="font-size:12px;margin-top:4px;margin-bottom:14px">Try a wider date range or reset filters</div><button onclick="resetF()" style="padding:6px 16px;background:var(--b);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px">Reset Filters</button></div>`;return;}
+  el.innerHTML=FC.map(c=>{
+    const rec=recencyStatus(c.publishedDate);
+    const eff=effectiveLeadScore(c);
+    const ec=eff.toLowerCase().replace(' ','-');
+    const isArchive=eff==='Archive';
+    return `<div class="cc ${ec}" onclick="openMod('${c.id}')" style="opacity:${isArchive?'0.6':'1'}">
+      <div class="chd"><div class="ctit">${c.name}</div><span class="lb ${ec}">${eff}</span></div>
+      <div class="cmeta">
+        <span class="ctag">🏛️ ${c.authority}</span>
+        <span class="ctag">📍 ${c.state}</span>
+        <span class="ctag">${ticon(c.type)} ${c.type}</span>
+        ${c.mining?'<span class="ctag" style="background:#EDE9FE;color:#7C3AED">⛏️ Mining</span>':''}
+        <span class="ctag" style="background:${rec.bg};color:${rec.color};font-weight:700">${rec.emoji} ${rec.label} · ${daysOldLabel(c.publishedDate)}</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div class="cval">₹${c.value.toLocaleString('en-IN')} Cr</div>
+        <span class="stb ${stClass(c.stage)}">${c.stage}</span>
+      </div>
+      <div style="font-size:10.5px;color:var(--mu);margin-bottom:5px">
+        📅 Published: <strong style="color:var(--t1)">${formatDate(c.publishedDate)}</strong>
+        ${isArchive?' <span style="color:#DC2626;font-weight:600">⚠️ Likely already procured</span>':''}
+      </div>
+      <div class="cft">
+        <div class="ebar">
+          <span class="elbl">Exc. Score</span>
+          <div class="btr"><div class="bfi" style="width:${c.excScore}%"></div></div>
+          <span class="bsc">${c.excScore}</span>
+        </div>
+        <span style="font-size:11px;color:var(--mu);margin-left:10px;white-space:nowrap">🚜 ${c.machines} units</span>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('tbody').innerHTML=FC.map(c=>{
+    const rec=recencyStatus(c.publishedDate);
+    const eff=effectiveLeadScore(c);
+    return `<tr onclick="openMod('${c.id}')" style="cursor:pointer">
+      <td><strong style="color:var(--b);font-size:12px">${c.name}</strong><br><span style="font-size:10px;color:var(--mu)">${c.district} · ${formatDate(c.publishedDate)}</span></td>
+      <td>${c.authority}</td><td>${c.state}</td>
+      <td><span class="ctag" style="display:inline-flex">${ticon(c.type)} ${c.type}</span></td>
+      <td><strong style="color:var(--b)">₹${c.value.toLocaleString('en-IN')}</strong></td>
+      <td><span style="font-weight:700;color:${rec.color}">${rec.emoji} ${rec.label}</span><br><span style="font-size:10px;color:var(--mu)">${daysOldLabel(c.publishedDate)}</span></td>
+      <td><span class="stb ${stClass(c.stage)}">${c.stage}</span></td>
+      <td><span class="lb ${eff.toLowerCase().replace(' ','-')}">${eff}</span></td>
+      <td><div style="display:flex;align-items:center;gap:4px"><div style="flex:1;height:4px;background:var(--br);border-radius:2px;overflow:hidden;min-width:36px"><div style="width:${c.excScore}%;height:100%;background:var(--b);border-radius:2px"></div></div><span style="font-size:11px;font-weight:700;color:var(--b)">${c.excScore}</span></div></td>
+      <td style="font-size:11px">${c.contractor}</td>
+    </tr>`;
+  }).join('');
+}
+
+function setView(v){
+  view=v;
+  document.getElementById('vcards').classList.toggle('active',v==='cards');
+  document.getElementById('vtable').classList.toggle('active',v==='table');
+  document.getElementById('clist').style.display=v==='cards'?'grid':'none';
+  document.getElementById('tblwrap').style.display=v==='table'?'block':'none';
+}
+
+// ===================== MODAL =====================
+function openMod(id){
+  const c=CD.find(x=>x.id===id);if(!c)return;
+  const rec=recencyStatus(c.publishedDate);
+  const eff=effectiveLeadScore(c);
+  document.getElementById('mtit').textContent=ticon(c.type)+' Contract Intelligence Report';
+  document.getElementById('mbody').innerHTML=`
+    <div style="background:linear-gradient(135deg,#003F72,#005B9A);color:#fff;padding:14px;border-radius:8px;margin-bottom:14px">
+      <div style="font-size:15px;font-weight:700;margin-bottom:4px">${c.name}</div>
+      <div style="font-size:11.5px;opacity:.8">${c.district}, ${c.state}</div>
+      <div style="margin-top:6px;display:flex;gap:8px;align-items:center">
+        <span style="background:${rec.bg};color:${rec.color};padding:2px 9px;border-radius:4px;font-size:11px;font-weight:700">${rec.emoji} ${rec.label} — ${daysOldLabel(c.publishedDate)}</span>
+        ${eff==='Archive'?'<span style="background:#FEE2E2;color:#DC2626;padding:2px 9px;border-radius:4px;font-size:11px;font-weight:700">⚠️ Likely already procured</span>':''}
+      </div>
+    </div>
+    <div class="dgrid">
+      <div class="di"><div class="dlbl">Contract Value</div><div class="dval" style="color:var(--b);font-size:22px">₹${(c.value||0).toLocaleString('en-IN')} Cr</div></div>
+      <div class="di"><div class="dlbl">Excavator Score</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="flex:1;height:8px;background:#E5E7EB;border-radius:4px;overflow:hidden"><div style="width:${c.excScore||0}%;height:100%;background:linear-gradient(90deg,#003F72,#0A6EBD);border-radius:4px"></div></div><span style="font-size:18px;font-weight:800;color:var(--b)">${c.excScore||0}/100</span></div></div>
+      <div class="di"><div class="dlbl">Effective Lead Score</div><div class="dval"><span class="lb ${eff.toLowerCase().replace(' ','-')}" style="font-size:12px;padding:4px 10px">${eff}</span></div></div>
+      <div class="di"><div class="dlbl">Base Lead Score</div><div class="dval"><span class="lb ${(c.leadScore||'medium').toLowerCase().replace(' ','-')}" style="font-size:12px;padding:4px 10px">${c.leadScore||'—'}</span></div></div>
+      <div class="di"><div class="dlbl">Project Stage</div><div class="dval"><span class="stb ${stClass(c.stage)}" style="font-size:12px;padding:4px 10px">${c.stage}</span></div></div>
+      <div class="di"><div class="dlbl">Earthwork Intensity</div><div class="dval">${c.earthwork||c.ew||'—'}</div></div>
+      <div class="di"><div class="dlbl">Awarding Authority</div><div class="dval">${c.authority}</div></div>
+      <div class="di"><div class="dlbl">Ministry</div><div class="dval">${c.ministry||'—'}</div></div>
+      <div class="di"><div class="dlbl">Primary Contractor</div><div class="dval">${c.contractor}</div></div>
+      <div class="di"><div class="dlbl">Est. Komatsu Excavators</div><div class="dval" style="color:#DC2626">🚜 ${c.machines||c.mach||'—'} units (20-ton class)</div></div>
+      <div class="di"><div class="dlbl">Project Type</div><div class="dval">${ticon(c.type)} ${c.type}</div></div>
+      <div class="di"><div class="dlbl">Source Portal</div><div class="dval">${c.source||'Government Portal'}</div></div>
+    </div>
+    <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:12px;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">📅 Date Intelligence</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px">
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Published Date</div><div style="font-weight:600;color:var(--t1)">${formatDate(c.publishedDate)}</div><div style="font-size:10px;color:${rec.color};font-weight:600">${rec.emoji} ${daysOldLabel(c.publishedDate)}</div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Bid / Due Date</div><div style="font-weight:600;color:var(--t1)">${c.bidDate?formatDate(c.bidDate):c.bd?c.bd:'Not announced'}</div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Award Date</div><div style="font-weight:600;color:${(c.awardDate||c.ad)?'#059669':'var(--mu)'}">${c.awardDate?formatDate(c.awardDate):c.ad?c.ad:'Pending'}</div></div>
+      </div>
+    </div>
+    <div class="dgrid" style="margin-top:0">
+      <div class="di full"><div class="dlbl">Project Description</div><div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:4px">${c.desc}</div></div>
+    </div>
+    <div style="background:#F8FAFF;border:1px solid var(--br);border-radius:8px;padding:13px;margin-top:6px">
+      <div style="font-size:11px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px">🎯 Sales Intelligence — L&T CMMB Action Plan</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.8">
+        <strong>Opportunity:</strong> This ${c.type} project in <strong>${c.state}</strong> requires approximately <strong>${c.machines||c.mach||'—'} Komatsu PC200/PC210 crawler excavators</strong>.<br>
+        <strong>Recency:</strong> ${rec.emoji} <strong>${rec.label}</strong> — ${rec.desc}. ${eff==='Archive'?'<span style="color:#DC2626">Machines likely already procured. Use for relationship tracking only.</span>':''}<br>
+        <strong>Stage Action:</strong> ${c.stage==='Awarded'?'Awarded — mobilization active. <strong>Call '+c.contractor+' procurement today.</strong>':c.stage==='Tender Live'?'Tender live — sourcing discussions underway. <strong>Contact before bid closing date.</strong>':c.stage==='Under Execution'?'Execution phase — discuss replacement units and fleet additions.':'Pre-award — build relationship with '+c.contractor+' for preferred equipment position.'}<br>
+        <strong>Territory:</strong> ${c.state} Regional Office · Service Center: ${c.district}
+      </div>
+    </div>
+    ${(()=>{const ct=CONTR.find(x=>x.name===c.contractor);return ct?`
+    <div style="background:#F0FDF4;border:1px solid #A7F3D0;border-radius:8px;padding:13px;margin-top:8px">
+      <div style="font-size:11px;font-weight:700;color:#065F46;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">📞 Contractor Contact Intelligence — ${ct.name}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--t2)">
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Head Office</div><div style="font-size:11px">${ct.hq}</div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Key Contact</div><div style="font-weight:600;color:var(--t1)">${ct.keyContact||ct.contact||'—'}</div><div style="font-size:11px;color:var(--mu)">${ct.procContact}</div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Corp Phone</div><div><a href="tel:${ct.phone}" style="color:var(--b);font-weight:600;text-decoration:none;font-size:13px">${ct.phone}</a></div><div><a href="tel:${ct.altPhone}" style="color:var(--t2);text-decoration:none;font-size:11px">${ct.altPhone}</a></div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Procurement Phone</div><div><a href="tel:${ct.procPhone}" style="color:#065F46;font-weight:700;text-decoration:none;font-size:13px">${ct.procPhone}</a></div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">General Email</div><div><a href="mailto:${ct.email}" style="color:var(--b);text-decoration:none">${ct.email}</a></div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Procurement Email</div><div><a href="mailto:${ct.procEmail}" style="color:#065F46;font-weight:600;text-decoration:none">${ct.procEmail}</a></div></div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px">
+        <a href="tel:${ct.procPhone}" style="flex:1;padding:7px;background:#065F46;color:#fff;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">📱 Call Procurement</a>
+        <a href="mailto:${ct.procEmail}?subject=Komatsu PC210 Equipment — ${c.name}" style="flex:1;padding:7px;background:var(--b);color:#fff;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">📧 Email Procurement</a>
+        <a href="https://${ct.website}" target="_blank" style="flex:1;padding:7px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">🌐 Website</a>
+      </div>
+    </div>`:''})()}
+    <div style="display:flex;gap:7px;margin-top:12px">
+      <button onclick="closeMod()" style="flex:1;padding:8px;background:var(--bg);border:1px solid var(--br);border-radius:6px;cursor:pointer;font-size:12px">Close</button>
+      <button onclick="toast('📋','Watchlist','Contract added to territory watchlist')" style="flex:1;padding:8px;background:var(--b);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add to Watchlist</button>
+      <button onclick="toast('📤','Alert Sent','Territory sales team notified')" style="flex:1;padding:8px;background:transparent;border:1px solid var(--b);color:var(--b);border-radius:6px;cursor:pointer;font-size:12px">Alert Team</button>
+    </div>`;
+  document.getElementById('mover').classList.add('open');
+}
+function closeMod(e){if(!e||e.target===document.getElementById('mover'))document.getElementById('mover').classList.remove('open');}
+// ===================== CONTRACTORS =====================
+function renderContractors(){
+  const q=(document.getElementById('csearch')?.value||'').toLowerCase();
+  const el=document.getElementById('contlist');
+  const list=CONTR.filter(c=>!q||c.name.toLowerCase().includes(q)||c.specialty.toLowerCase().includes(q)||c.hq.toLowerCase().includes(q));
+  el.innerHTML=list.map(c=>`<div class="ccard" style="cursor:default">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+      <div>
+        <div class="cname">${c.name}</div>
+        <div style="font-size:11px;color:var(--mu)">${c.type}</div>
+      </div>
+      <span style="padding:3px 8px;background:#D1FAE5;color:#065F46;border-radius:4px;font-size:11px;font-weight:700">${c.growth}</span>
+    </div>
+    <div class="csts">
+      <div class="sbox"><div class="sv">${c.projects}</div><div class="sl">Projects</div></div>
+      <div class="sbox"><div class="sv" style="font-size:12px">₹${(c.totalValue/1000).toFixed(0)}K Cr</div><div class="sl">Value</div></div>
+      <div class="sbox"><div class="sv">${c.machines}</div><div class="sl">Machines</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:var(--t2)"><strong>Specialty:</strong> ${c.specialty}</div>
+    <div class="ctags" style="margin-top:6px">${c.states.map(s=>`<span class="chip">📍 ${s}</span>`).join('')}</div>
+    <!-- CONTACT SECTION -->
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--br)">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--b);margin-bottom:7px">📞 Contact Intelligence</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:flex-start;gap:6px">
+          <span style="color:var(--b);font-size:11px;flex-shrink:0">🏢</span>
+          <span>${c.hq}</span>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--b);flex-shrink:0">📱</span>
+          <a href="tel:${c.phone}" style="color:var(--b);font-weight:600;text-decoration:none">${c.phone}</a>
+          <span style="color:var(--br)">|</span>
+          <a href="tel:${c.altPhone}" style="color:var(--t2);text-decoration:none">${c.altPhone}</a>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--b);flex-shrink:0">📧</span>
+          <a href="mailto:${c.email}" style="color:var(--b);text-decoration:none">${c.email}</a>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--ok);flex-shrink:0">🎯</span>
+          <span><strong>Proc. Contact:</strong> <a href="mailto:${c.procEmail}" style="color:var(--ok);font-weight:600;text-decoration:none">${c.procEmail}</a></span>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--mu);flex-shrink:0">👤</span>
+          <span>${c.contact}</span>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--mu);flex-shrink:0">🔧</span>
+          <span>${c.procContact}</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <a href="tel:${c.phone}" style="flex:1;padding:6px;background:var(--b);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i class="fa fa-phone" style="font-size:10px"></i> Call
+        </a>
+        <a href="mailto:${c.procEmail}" style="flex:1;padding:6px;background:var(--ok);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i class="fa fa-envelope" style="font-size:10px"></i> Email
+        </a>
+        <a href="https://${c.website}" target="_blank" style="flex:1;padding:6px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i class="fa fa-external-link-alt" style="font-size:10px"></i> Web
+        </a>
+      </div>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:var(--mu)">Order Book: <strong style="color:var(--b)">₹${c.orderBook.toLocaleString('en-IN')} Cr</strong></div>
+  </div>`).join('');
+}
+
+// ===================== CHARTS =====================
+function initCharts(){
+  Chart.defaults.font.family="'Inter',sans-serif";Chart.defaults.color='#4A5568';
+  const blues=['#003F72','#005B9A','#0A6EBD','#1E88E5','#42A5F5','#64B5F6','#90CAF9','#BBDEFB'];
+  const tcols={Highways:'#003F72',Mining:'#7C3AED',Railways:'#0D9488',Metro:'#1D4ED8',Irrigation:'#0284C7',Ports:'#0F766E','Smart City':'#D97706',Industrial:'#B45309'};
+  const stD={};CD.forEach(c=>{stD[c.state]=(stD[c.state]||0)+1});
+  const sts=Object.entries(stD).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  new Chart(document.getElementById('ch-st'),{type:'bar',data:{labels:sts.map(s=>s[0]),datasets:[{label:'Projects',data:sts.map(s=>s[1]),backgroundColor:blues,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+  const tyD={};CD.forEach(c=>{tyD[c.type]=(tyD[c.type]||0)+1});
+  new Chart(document.getElementById('ch-ty'),{type:'doughnut',data:{labels:Object.keys(tyD),datasets:[{data:Object.values(tyD),backgroundColor:Object.keys(tyD).map(t=>tcols[t]||'#6B7280'),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}}}}});
+  const vR={'<₹500Cr':0,'₹500–1000Cr':0,'₹1000–2000Cr':0,'₹2000–3500Cr':0,'>₹3500Cr':0};
+  CD.forEach(c=>{if(c.value<500)vR['<₹500Cr']++;else if(c.value<1000)vR['₹500–1000Cr']++;else if(c.value<2000)vR['₹1000–2000Cr']++;else if(c.value<3500)vR['₹2000–3500Cr']++;else vR['>₹3500Cr']++});
+  new Chart(document.getElementById('ch-vl'),{type:'bar',data:{labels:Object.keys(vR),datasets:[{label:'Contracts',data:Object.values(vR),backgroundColor:'#005B9A',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false}}}}});
+  const lD={'Very High':0,'High':0,'Medium':0,'Low':0};CD.forEach(c=>{lD[c.ls]++});
+  new Chart(document.getElementById('ch-ld'),{type:'doughnut',data:{labels:Object.keys(lD),datasets:[{data:Object.values(lD),backgroundColor:['#DC2626','#D97706','#2563EB','#6B7280'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}}}}});
+  new Chart(document.getElementById('ch-tr'),{type:'line',data:{labels:['Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26'],datasets:[{label:'Contracts Awarded',data:[28,34,41,38,52,47,63,58,71,69,84,92],borderColor:'#003F72',backgroundColor:'rgba(0,63,114,.1)',tension:.4,fill:true,pointBackgroundColor:'#003F72',pointRadius:4},{label:'Value (₹100 Cr)',data:[84,102,123,114,156,141,189,174,213,207,252,276],borderColor:'#D97706',backgroundColor:'rgba(217,119,6,.08)',tension:.4,fill:false,pointBackgroundColor:'#D97706',pointRadius:4,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'},title:{display:true,text:'Contracts'}},y2:{position:'right',beginAtZero:true,grid:{display:false},title:{display:true,text:'₹ Cr (×100)'}},x:{grid:{display:false}}}}});
+  const top=CONTR.sort((a,b)=>b.val-a.val).slice(0,10);
+  new Chart(document.getElementById('ch-cn'),{type:'bar',data:{labels:top.map(c=>c.name.replace(' Infrastructure','').replace(' Construction','')),datasets:[{label:'Total Value (₹ Cr)',data:top.map(c=>c.totalValue),backgroundColor:blues.map((c,i)=>blues[i%blues.length]),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+}
+
+// ===================== NEWS =====================
+
+function renderNews(items){
+  const el=document.getElementById('newslist');
+  el.innerHTML=(items||FALLBACK_NEWS).map(n=>`<div class="ncard" onclick="window.open('${n.link}','_blank')">
+    <div class="nico" style="background:${NCOLS[n.type]||'#003F72'}">${NICONS[n.type]||'📰'}</div>
+    <div style="flex:1">
+      <div class="ntit">${n.title}</div>
+      <div class="ndes">${n.desc||''}</div>
+      <div class="nsrc"><span style="font-weight:600;color:var(--b)">${n.src}</span><div style="width:3px;height:3px;background:var(--mu);border-radius:50%"></div><span>${n.time}</span><span style="margin-left:auto;color:var(--b);font-size:10px;font-weight:600">Read More →</span></div>
+    </div>
+  </div>`).join('');
+}
+
+async function fetchNews(){
+  const el=document.getElementById('newslist');
+  el.innerHTML='<div class="loading"><div class="spin"></div> Fetching live infrastructure intelligence...</div>';
+  try{
+    const qs=['india+NHAI+highway+tender+awarded+2025','india+coal+mining+contract+excavator+2025','india+infrastructure+construction+contract'];
+    const all=[];
+    for(const q of qs){
+      const url=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://news.google.com/rss/search?q='+q+'&hl=en-IN&gl=IN&ceid=IN:en')}&count=5`;
+      const r=await fetch(url);const d=await r.json();
+      if(d.items){d.items.forEach(i=>{
+        const ago=Math.round((Date.now()-new Date(i.pubDate))/3600000);
+        all.push({title:i.title,desc:(i.description||'').replace(/<[^>]*>/g,'').substring(0,160)+'...',src:i.author||'Google News',time:ago<1?'Just now':ago+'h ago',link:i.link,type:q.includes('coal')?'mining':'highways'});
+      });}
+    }
+    if(all.length>0){renderNews(all.slice(0,12));toast('📰','Feed Updated',all.length+' live intelligence items loaded');}
+    else{renderNews(FALLBACK_NEWS);toast('ℹ️','Cached Data','Using latest cached intelligence feed');}
+  }catch(e){renderNews(FALLBACK_NEWS);toast('⚠️','Fallback','Showing latest cached news');}
+}
+
+
+// ===================== TABS =====================
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+t));
+  if(t==='news')fetchNews();
+  if(t==='map'&&map)setTimeout(()=>map.invalidateSize(),100);
+}
+
+// ===================== TOAST =====================
+function toast(icon,title,body,dur=4500){
+  const c=document.getElementById('tcon');
+  const d=document.createElement('div');d.className='toast';
+  d.innerHTML=`<div style="font-size:16px">${icon}</div><div><div style="font-weight:700;font-size:11.5px">${title}</div><div style="font-size:10.5px;color:var(--mu);margin-top:1px">${body}</div></div><button onclick="this.parentElement.remove()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--mu);font-size:14px;padding:2px">✕</button>`;
+  c.appendChild(d);setTimeout(()=>d.remove(),dur);
+}
+
+// ===================== NOTIFICATIONS =====================
+
+
 
 function syncData(){
   const btn=document.getElementById('syncbtn');
