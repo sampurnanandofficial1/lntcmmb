@@ -538,9 +538,49 @@ async function loadAllData() {
       db.collection('contracts').get(),
       db.collection('contractors').get()
     ]);
-    CD    = cSnap.empty  ? FALLBACK_CD    : cSnap.docs.map(d  => ({...d.data(),  id: d.id}));
-    CONTR = ctSnap.empty ? FALLBACK_CONTR : ctSnap.docs.map(d => ({...d.data(), id: d.id}));
-    const src = cSnap.empty ? 'embedded cache' : 'Firestore';
+
+    if (cSnap.empty) {
+      CD = FALLBACK_CD;
+    } else {
+      // Merge: Firestore data + fill ANY missing fields from FALLBACK_CD
+      // This fixes the case where Firestore has old seed data without date fields
+      const fallbackMap = {};
+      FALLBACK_CD.forEach(c => { fallbackMap[c.id] = c; });
+
+      CD = cSnap.docs.map(d => {
+        const fs = {...d.data(), id: d.id};
+        const fb = fallbackMap[fs.id] || {};
+        // Always ensure date fields are present — Firestore wins if it has them, fallback fills gaps
+        return {
+          ...fb,        // start with fallback (has all fields)
+          ...fs,        // Firestore overrides everything it has
+          // But FORCE these critical fields from fallback if Firestore is missing them
+          publishedDate: fs.publishedDate || fb.publishedDate || null,
+          bidDate:       fs.bidDate  || fs.bd  || fb.bidDate  || null,
+          awardDate:     (fs.awardDate !== undefined && fs.awardDate !== 'null')
+                           ? fs.awardDate
+                           : (fs.ad || fb.awardDate || null),
+          leadScore:     fs.leadScore || fb.leadScore || 'Medium',
+          excScore:      fs.excScore  || fb.excScore  || 50,
+          machines:      fs.machines  || fs.mach || fb.machines || 0,
+          earthwork:     fs.earthwork || fs.ew   || fb.earthwork || 'Medium',
+          mining:        fs.mining    !== undefined ? fs.mining : (fb.mining || false),
+        };
+      });
+
+      // Add any FALLBACK_CD contracts that don't exist in Firestore yet
+      const fsIds = new Set(cSnap.docs.map(d => d.id));
+      FALLBACK_CD.forEach(c => { if (!fsIds.has(c.id)) CD.push(c); });
+    }
+
+    CONTR = ctSnap.empty ? FALLBACK_CONTR : ctSnap.docs.map(d => {
+      const fs = {...d.data(), id: d.id};
+      const fb = (FALLBACK_CONTR.find(c => c.id === fs.id) || {});
+      return {...fb, ...fs};
+    });
+    if (ctSnap.empty || CONTR.length === 0) CONTR = FALLBACK_CONTR;
+
+    const src = cSnap.empty ? 'embedded cache' : `Firestore + local merge (${CD.length} contracts)`;
     bootUI();
     toast('✅', 'Data Loaded', `${CD.length} contracts · ${CONTR.length} contractors — ${src}`);
   } catch(err) {
@@ -1005,21 +1045,27 @@ function openMod(id){
     </div>
     <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:12px;margin-bottom:10px">
       <div style="font-size:10px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">📅 Date Intelligence</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:12px">
-        <div style="background:#fff;border-radius:6px;padding:8px;border:1px solid #DBEAFE">
-          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600">📌 Published Date</div>
-          <div style="font-weight:700;color:var(--b);font-size:13px">${formatDate(c.publishedDate)||'—'}</div>
-          <div style="font-size:10px;color:${rec.color};font-weight:600;margin-top:2px">${rec.emoji} ${daysOldLabel(c.publishedDate)}</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div style="background:#fff;border-radius:6px;padding:9px;border:1px solid #BFDBFE">
+          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;font-weight:700">📌 Published Date</div>
+          <div style="font-weight:700;color:var(--b);font-size:14px">${formatDate(c.publishedDate) || '<span style=\'color:#DC2626\'>Not set</span>'}</div>
+          <div style="font-size:10px;font-weight:600;color:${rec.color};margin-top:3px">${rec.emoji} ${daysOldLabel(c.publishedDate)}</div>
         </div>
-        <div style="background:#fff;border-radius:6px;padding:8px;border:1px solid #DBEAFE">
-          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600">📋 Bid / Due Date</div>
-          <div style="font-weight:700;color:var(--t1);font-size:13px">${(()=>{const d=formatDate(c.bidDate||c.bd);return d||'<span style=\"font-weight:500;color:#D97706;font-style:italic\">Check portal</span>';})()}</div>
-          <div style="font-size:10px;color:var(--mu);margin-top:2px">${c.stage==='Awarded'?'Bid closed':'Bid submission deadline'}</div>
+        <div style="background:#fff;border-radius:6px;padding:9px;border:1px solid #BFDBFE">
+          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;font-weight:700">📋 Bid / Due Date</div>
+          <div style="font-weight:700;color:var(--t1);font-size:14px">${formatDate(c.bidDate || c.bd) || '<span style=\'color:#D97706\'>See tender portal</span>'}</div>
+          <div style="font-size:10px;color:var(--mu);margin-top:3px">${c.stage === 'Awarded' ? '🔒 Bid closed' : '⏰ Submission deadline'}</div>
         </div>
-        <div style="background:#fff;border-radius:6px;padding:8px;border:1px solid ${(c.awardDate&&c.awardDate!=='null')||c.ad?'#A7F3D0':'#DBEAFE'}">
-          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:600">🏆 Award Date</div>
-          <div style="font-weight:700;font-size:13px;color:${(c.awardDate&&c.awardDate!=='null')||c.ad?'#059669':'var(--mu)'}">${(()=>{const d=formatDate(c.awardDate||c.ad);if(d)return d;if(c.stage==='Awarded')return'<span style=\"color:#D97706\">Date not recorded</span>';const est=estimateAwardDate(c.bidDate||c.bd);return est?'<span style=\"font-weight:500;color:var(--mu)\">Est. ~'+est+'</span>':'<span style=\"font-weight:500;font-style:italic;color:var(--mu)\">Pending award</span>';})()}</div>
-          <div style="font-size:10px;color:var(--mu);margin-top:2px">${c.stage==='Awarded'?'✅ Contract awarded':c.stage==='Tender Live'?'⏳ Bid evaluation pending':c.stage==='Under Execution'?'🔨 In execution':'📌 Pre-award stage'}</div>
+        <div style="background:#fff;border-radius:6px;padding:9px;border:1px solid ${c.awardDate && c.awardDate !== 'null' ? '#A7F3D0' : '#BFDBFE'}">
+          <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;font-weight:700">🏆 Award Date</div>
+          ${(function(){
+            const d = formatDate(c.awardDate || c.ad);
+            if (d) return '<div style=\'font-weight:700;color:#059669;font-size:14px\'>' + d + '</div><div style=\'font-size:10px;color:#059669;margin-top:3px\'>✅ Contract awarded</div>';
+            const est = estimateAwardDate(c.bidDate || c.bd);
+            if (c.stage === 'Awarded') return '<div style=\'font-weight:600;color:#D97706;font-size:13px\'>Date not recorded</div><div style=\'font-size:10px;color:var(--mu);margin-top:3px\'>✅ Contract awarded</div>';
+            if (est) return '<div style=\'font-weight:600;color:var(--mu);font-size:13px\'>~' + est + '</div><div style=\'font-size:10px;color:var(--mu);margin-top:3px\'>📌 Estimated (bid+75d)</div>';
+            return '<div style=\'font-weight:500;color:var(--mu);font-size:13px;font-style:italic\'>Pending award</div><div style=\'font-size:10px;color:var(--mu);margin-top:3px\'>' + c.stage + '</div>';
+          })()}
         </div>
       </div>
     </div>
