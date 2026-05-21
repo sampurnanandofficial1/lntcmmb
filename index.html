@@ -533,15 +533,16 @@ function isHomepageUrl(url) {
 // Returns the best link for a news article
 function smartNewsLink(title, directUrl) {
   if (!isHomepageUrl(directUrl)) return directUrl; // Already a real article URL
-  // Generate Google News search — surfaces exact article as first result
-  const q = encodeURIComponent(title.substring(0, 120).replace(/['"]/g, ''));
-  return `https://news.google.com/search?q=${q}&hl=en-IN&gl=IN&ceid=IN:en`;
+  // Generate Google Search — always works in browser, shows news results
+  const q = encodeURIComponent('"' + title.substring(0, 80).replace(/['"]/g, '') + '" India infrastructure');
+  return `https://www.google.com/search?q=${q}&num=10`;
 }
 
 // Returns Google search URL for a specific contract/tender
 function tenderSearchUrl(c) {
-  const q = encodeURIComponent(`${c.name} ${c.authority} tender ${new Date().getFullYear()}`);
-  return `https://www.google.com/search?q=${q}`;
+  const parts = [c.name, c.authority, 'contract', 'India', new Date().getFullYear()];
+  const q = encodeURIComponent(parts.join(' '));
+  return `https://www.google.com/search?q=${q}&num=10`;
 }
 
 // Returns search URL for official portal
@@ -827,21 +828,26 @@ const FALLBACK_CONTR=[
 ];
 
 const FALLBACK_NEWS=[
-  {title:"NHAI awards 5 new expressway packages worth ₹12,400 crore this week",src:"Economic Times Infra",time:"2 hours ago",type:"highways",
-   link:"https://news.google.com/search?q=NHAI+awards+expressway+packages+12400+crore+2026&hl=en-IN&gl=IN&ceid=IN:en",
-   desc:"NHAI has awarded five major expressway packages totalling ₹12,400 crore across Rajasthan, MP and Telangana. Each requires significant earthmoving with 80+ excavator units."},
-  {title:"Coal India plans 50 new OC mine expansions — 400+ excavators needed in FY26",src:"Business Standard",time:"4 hours ago",type:"mining",
-   link:"https://news.google.com/search?q=Coal+India+opencast+mine+expansion+excavator+FY2026&hl=en-IN&gl=IN&ceid=IN:en",
-   desc:"Coal India's expanded mining plan calls for significant opencast development across SECL, ECL, WCL and MCL. Total excavator requirement estimated at 400+ units."},
-  {title:"Ken–Betwa Link Project receives final environment clearance; canal work starts Q2 FY26",src:"Hindustan Times",time:"8 hours ago",type:"irrigation",
-   link:"https://news.google.com/search?q=Ken+Betwa+Link+Project+environment+clearance+canal+2026&hl=en-IN&gl=IN&ceid=IN:en",
-   desc:"The Ken-Betwa inter-linking project has received all clearances. Major canal earthwork worth ₹3,600 crore is expected to begin by Q2 FY2026."},
-  {title:"NHAI to float tenders for 150 new highway packages worth ₹2.5 lakh crore by March 2026",src:"Economic Times",time:"2 days ago",type:"highways",
-   link:"https://news.google.com/search?q=NHAI+150+highway+packages+2.5+lakh+crore+tenders+2026&hl=en-IN&gl=IN&ceid=IN:en",
-   desc:"NHAI Chairman confirms aggressive tendering calendar with 150 packages planned before FY2026 end, creating massive excavator demand pipeline."},
-  {title:"India iron ore production up 18% as 12 new blocks go live across Odisha, Karnataka",src:"Financial Express",time:"1 day ago",type:"mining",
-   link:"https://news.google.com/search?q=India+iron+ore+production+18+percent+new+blocks+Odisha+Karnataka+2026&hl=en-IN&gl=IN&ceid=IN:en",
-   desc:"Ministry of Mines data shows 12 new mining blocks have become operational, driving strong equipment demand in the 20-ton excavator segment."}
+  {title:"NHAI awards 5 new expressway packages worth ₹12,400 crore this week",
+   src:"Economic Times Infra",time:"2 hours ago",type:"highways",
+   link:"https://www.google.com/search?q=NHAI+expressway+packages+12400+crore+awarded+2026+India",
+   desc:"NHAI has awarded five major expressway packages across Rajasthan, MP and Telangana. Each requires significant earthmoving with 80+ excavator units."},
+  {title:"Coal India plans 50 new OC mine expansions — 400+ excavators needed in FY26",
+   src:"Business Standard",time:"4 hours ago",type:"mining",
+   link:"https://www.google.com/search?q=Coal+India+opencast+mine+expansion+excavator+2026+India",
+   desc:"Coal India's expanded mining plan calls for significant opencast development across SECL, ECL, WCL and MCL subsidiaries. Total excavator requirement 400+ units."},
+  {title:"NHAI to float tenders for 150 new highway packages worth ₹2.5 lakh crore",
+   src:"Economic Times",time:"1 day ago",type:"highways",
+   link:"https://www.google.com/search?q=NHAI+150+highway+packages+tenders+2.5+lakh+crore+2026",
+   desc:"NHAI confirms aggressive tendering calendar with 150 packages planned before FY2026 end, creating massive excavator demand pipeline."},
+  {title:"Ken–Betwa Link Project receives final clearance; canal work begins Q2 FY26",
+   src:"Hindustan Times",time:"1 day ago",type:"irrigation",
+   link:"https://www.google.com/search?q=Ken+Betwa+Link+Project+canal+earthwork+contract+2026",
+   desc:"The Ken-Betwa river inter-linking project has received all clearances. Canal earthwork worth ₹3,600 crore expected to begin by Q2 FY2026."},
+  {title:"India iron ore production up 18% — 12 new blocks live in Odisha and Karnataka",
+   src:"Financial Express",time:"2 days ago",type:"mining",
+   link:"https://www.google.com/search?q=India+iron+ore+production+new+mining+blocks+Odisha+Karnataka+2026",
+   desc:"Ministry of Mines data shows 12 new mining blocks operational. Odisha leads with 7 new blocks driving equipment demand in the 20-ton excavator segment."}
 ];
 
 
@@ -1172,18 +1178,18 @@ function openMod(id){
         <a href="https://${ct.website}" target="_blank" style="flex:1;padding:7px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">🌐 Website</a>
       </div>
     </div>`:''})()}
-    <div style="background:#F8FAFF;border:1px solid var(--br);border-radius:8px;padding:11px;margin-top:8px">
-      <div style="font-size:10px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">🔍 Source Verification</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
-        <a href="${tenderSearchUrl(c)}" target="_blank" style="padding:7px 4px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:6px;color:var(--b);text-decoration:none;font-size:11px;font-weight:600;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px">
-          <span style="font-size:14px">🔍</span><span>Find Tender</span><span style="font-size:9px;font-weight:400;color:var(--mu)">Google Search</span>
-        </a>
-        <a href="${portalSearchUrl(c.authority, c.name)}" target="_blank" style="padding:7px 4px;background:#F0FDF4;border:1px solid #A7F3D0;border-radius:6px;color:#065F46;text-decoration:none;font-size:11px;font-weight:600;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px">
-          <span style="font-size:14px">🏛️</span><span>Official Portal</span><span style="font-size:9px;font-weight:400;color:var(--mu)">${c.authority}</span>
-        </a>
-        <a href="https://news.google.com/search?q=${encodeURIComponent(c.name+' '+c.authority+' contract award')}&hl=en-IN&gl=IN&ceid=IN:en" target="_blank" style="padding:7px 4px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:6px;color:#92400E;text-decoration:none;font-size:11px;font-weight:600;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px">
-          <span style="font-size:14px">📰</span><span>News Coverage</span><span style="font-size:9px;font-weight:400;color:var(--mu)">Google News</span>
-        </a>
+    <div style="background:#F0F9FF;border:1px solid #BFDBFE;border-radius:8px;padding:11px;margin-top:8px">
+      <div style="font-size:10px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">🔍 Verify This Contract</div>
+      <a href="${tenderSearchUrl(c)}" target="_blank"
+         style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;
+                background:var(--b);color:#fff;border-radius:7px;font-size:12.5px;font-weight:700;
+                text-decoration:none;box-sizing:border-box">
+        <span style="font-size:15px">🔍</span>
+        Search "${c.name.length>40?c.name.substring(0,38)+'...':c.name}" on Google
+        <span style="font-size:11px;opacity:.8;margin-left:2px">→</span>
+      </a>
+      <div style="font-size:10px;color:var(--mu);margin-top:5px;text-align:center">
+        Opens Google Search · Shows news articles, tender notices and official announcements
       </div>
     </div>
     <div style="display:flex;gap:7px;margin-top:10px">
@@ -1447,7 +1453,7 @@ function renderNews(items){
   // News cards
   html += news.map(n=>{
     const link = smartNewsLink(n.title, n.link);
-    const isSearch = link.includes('google.com/search') || link.includes('news.google.com');
+    const isSearch = link.includes('google.com/search');
     const isNSE    = n.source_label === 'NSE Announcements';
     const isWB     = n.source_label === 'World Bank';
     const linkBadge = isNSE  ? '<span style="background:#D1FAE5;color:#065F46;padding:1px 6px;border-radius:3px;font-size:9.5px;font-weight:700;flex-shrink:0">📈 NSE</span>' :
@@ -1934,19 +1940,19 @@ const API_SOURCES = [
    desc:'Government press releases — cabinet approvals, NH sanctions, coal blocks', status:'live',
    url:'https://pib.gov.in/AllRelMain.aspx', apiUrl:'https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=1',
    format:'RSS', rate:'Continuous', cost:'Free',
-   testUrl:'https://news.google.com/search?q=PIB+infrastructure+highway+contract+India&hl=en-IN&gl=IN&ceid=IN:en'},
+   testUrl:'https://www.google.com/search?q=PIB+infrastructure+highway+contract+India'},
   {id:'gn_nhai',   tier:1, name:'Google News — NHAI/Highways', type:'highways', icon:'🛣️', color:'#003F72',
    desc:'NHAI awards, highway EPC contracts, MoRTH projects — 28 targeted queries', status:'live',
-   url:'https://news.google.com/search?q=NHAI+highway+contract+awarded+2026&hl=en-IN&gl=IN',
+   url:'https://www.google.com/search?q=NHAI+highway+contract+awarded+2026&hl=en-IN&gl=IN',
    apiUrl:'https://news.google.com/rss/search?q=NHAI+highway+tender+awarded+2026&hl=en-IN&gl=IN&ceid=IN:en',
    format:'RSS', rate:'~10 min', cost:'Free',
-   testUrl:'https://news.google.com/search?q=NHAI+highway+contract+awarded+2026&hl=en-IN&gl=IN&ceid=IN:en'},
+   testUrl:'https://www.google.com/search?q=NHAI+highway+contract+awarded+2026'},
   {id:'gn_mining', tier:1, name:'Google News — Mining/Coal',   type:'mining',   icon:'⛏️', color:'#7C3AED',
    desc:'Coal India, NMDC, SCCL overburden & mine-development contracts', status:'live',
-   url:'https://news.google.com/search?q=coal+india+mine+OC+overburden+contract&hl=en-IN&gl=IN',
+   url:'https://www.google.com/search?q=coal+india+mine+OC+overburden+contract&hl=en-IN&gl=IN',
    apiUrl:'https://news.google.com/rss/search?q=coal+india+mine+OC+overburden+contract+awarded&hl=en-IN&gl=IN&ceid=IN:en',
    format:'RSS', rate:'~10 min', cost:'Free',
-   testUrl:'https://news.google.com/search?q=coal+india+mine+overburden+contract+awarded+2026&hl=en-IN&gl=IN'},
+   testUrl:'https://www.google.com/search?q=coal+india+mine+overburden+contract+awarded+2026&hl=en-IN&gl=IN'},
   {id:'wb',        tier:1, name:'World Bank Projects API',     type:'highways',  icon:'🌏', color:'#003F72',
    desc:'Active World Bank India projects — Transport, Mining, Water/Sanitation, Urban', status:'live',
    url:'https://projects.worldbank.org/en/projects-operations/projects-list?lang=en&countrycode_exact=IN',
@@ -2066,7 +2072,7 @@ function renderSources() {
       </div>
     </div>`;
     (byTier[tier]||[]).forEach(s => {
-      const contractCount = CD ? CD.filter(c => {
+      const contractCount = (CD && CD.length > 0) ? CD.filter(c => {
         if (s.type==='mining')    return c.mining;
         if (s.type==='railways')  return c.type==='Railways';
         if (s.type==='corporate') return c.contractor && c.value > 1000;
@@ -2172,6 +2178,7 @@ function renderSources() {
   </div>`;
 
   // ── Integration Status Summary ─────────────────────────────────────
+  // Safe — renderSources() works even if CD not yet loaded
   const live = API_SOURCES.filter(s=>s.status==='live').length;
   const needKey = API_SOURCES.filter(s=>s.status==='key-needed').length;
   const paid = API_SOURCES.filter(s=>s.status==='paid').length;
