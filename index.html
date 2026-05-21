@@ -1083,23 +1083,140 @@ function renderContractors(){
 
 // ===================== CHARTS =====================
 function initCharts(){
-  Chart.defaults.font.family="'Inter',sans-serif";Chart.defaults.color='#4A5568';
+  if(chartsInitialized)return;
+  chartsInitialized=true;
+  Chart.defaults.font.family="'Inter',sans-serif";
+  Chart.defaults.color='#4A5568';
   const blues=['#003F72','#005B9A','#0A6EBD','#1E88E5','#42A5F5','#64B5F6','#90CAF9','#BBDEFB'];
   const tcols={Highways:'#003F72',Mining:'#7C3AED',Railways:'#0D9488',Metro:'#1D4ED8',Irrigation:'#0284C7',Ports:'#0F766E','Smart City':'#D97706',Industrial:'#B45309'};
+
+  // ── 1. STATE-WISE COUNT (from actual CD) ──────────────────────────────────
   const stD={};CD.forEach(c=>{stD[c.state]=(stD[c.state]||0)+1});
   const sts=Object.entries(stD).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  new Chart(document.getElementById('ch-st'),{type:'bar',data:{labels:sts.map(s=>s[0]),datasets:[{label:'Projects',data:sts.map(s=>s[1]),backgroundColor:blues,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+  new Chart(document.getElementById('ch-st'),{
+    type:'bar',
+    data:{labels:sts.map(s=>s[0]),datasets:[{label:'Contracts',data:sts.map(s=>s[1]),backgroundColor:blues,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw} contracts`}}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}
+  });
+
+  // ── 2. PROJECT TYPE DISTRIBUTION (from actual CD) ─────────────────────────
   const tyD={};CD.forEach(c=>{tyD[c.type]=(tyD[c.type]||0)+1});
-  new Chart(document.getElementById('ch-ty'),{type:'doughnut',data:{labels:Object.keys(tyD),datasets:[{data:Object.values(tyD),backgroundColor:Object.keys(tyD).map(t=>tcols[t]||'#6B7280'),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}}}}});
-  const vR={'<₹500Cr':0,'₹500–1000Cr':0,'₹1000–2000Cr':0,'₹2000–3500Cr':0,'>₹3500Cr':0};
-  CD.forEach(c=>{if(c.value<500)vR['<₹500Cr']++;else if(c.value<1000)vR['₹500–1000Cr']++;else if(c.value<2000)vR['₹1000–2000Cr']++;else if(c.value<3500)vR['₹2000–3500Cr']++;else vR['>₹3500Cr']++});
-  new Chart(document.getElementById('ch-vl'),{type:'bar',data:{labels:Object.keys(vR),datasets:[{label:'Contracts',data:Object.values(vR),backgroundColor:'#005B9A',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false}}}}});
-  const lD={'Very High':0,'High':0,'Medium':0,'Low':0};CD.forEach(c=>{lD[c.ls]++});
-  new Chart(document.getElementById('ch-ld'),{type:'doughnut',data:{labels:Object.keys(lD),datasets:[{data:Object.values(lD),backgroundColor:['#DC2626','#D97706','#2563EB','#6B7280'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}}}}});
-  new Chart(document.getElementById('ch-tr'),{type:'line',data:{labels:['Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26'],datasets:[{label:'Contracts Awarded',data:[28,34,41,38,52,47,63,58,71,69,84,92],borderColor:'#003F72',backgroundColor:'rgba(0,63,114,.1)',tension:.4,fill:true,pointBackgroundColor:'#003F72',pointRadius:4},{label:'Value (₹100 Cr)',data:[84,102,123,114,156,141,189,174,213,207,252,276],borderColor:'#D97706',backgroundColor:'rgba(217,119,6,.08)',tension:.4,fill:false,pointBackgroundColor:'#D97706',pointRadius:4,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'},title:{display:true,text:'Contracts'}},y2:{position:'right',beginAtZero:true,grid:{display:false},title:{display:true,text:'₹ Cr (×100)'}},x:{grid:{display:false}}}}});
-  const top=CONTR.sort((a,b)=>b.val-a.val).slice(0,10);
-  new Chart(document.getElementById('ch-cn'),{type:'bar',data:{labels:top.map(c=>c.name.replace(' Infrastructure','').replace(' Construction','')),datasets:[{label:'Total Value (₹ Cr)',data:top.map(c=>c.totalValue),backgroundColor:blues.map((c,i)=>blues[i%blues.length]),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+  new Chart(document.getElementById('ch-ty'),{
+    type:'doughnut',
+    data:{labels:Object.keys(tyD),datasets:[{data:Object.values(tyD),backgroundColor:Object.keys(tyD).map(t=>tcols[t]||'#6B7280'),borderWidth:2,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}},tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw} contracts`}}}}
+  });
+
+  // ── 3. VALUE DISTRIBUTION (from actual CD values) ─────────────────────────
+  const vR={'<₹500Cr':[],'₹500–1000Cr':[],'₹1000–2000Cr':[],'₹2000–3500Cr':[],'₹3500Cr+':[]};
+  CD.forEach(c=>{
+    if(c.value<500)vR['<₹500Cr'].push(c);
+    else if(c.value<1000)vR['₹500–1000Cr'].push(c);
+    else if(c.value<2000)vR['₹1000–2000Cr'].push(c);
+    else if(c.value<3500)vR['₹2000–3500Cr'].push(c);
+    else vR['₹3500Cr+'].push(c);
+  });
+  new Chart(document.getElementById('ch-vl'),{
+    type:'bar',
+    data:{labels:Object.keys(vR),datasets:[{label:'Contracts',data:Object.values(vR).map(a=>a.length),backgroundColor:'#005B9A',borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw} contracts — ₹${Object.values(vR)[ctx.dataIndex].reduce((s,c)=>s+c.value,0).toLocaleString('en-IN')} Cr total`}}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false}}}}
+  });
+
+  // ── 4. EFFECTIVE LEAD SCORE BREAKDOWN (date-adjusted) ────────────────────
+  const lD={'Very High':0,'High':0,'Medium':0,'Low':0,'Archive':0};
+  CD.forEach(c=>{ const s=effectiveLeadScore(c); if(lD[s]!==undefined) lD[s]++; });
+  const lLabels=Object.keys(lD).filter(k=>lD[k]>0);
+  const lVals=lLabels.map(k=>lD[k]);
+  const lColors={'Very High':'#DC2626','High':'#D97706','Medium':'#2563EB','Low':'#6B7280','Archive':'#9CA3AF'};
+  new Chart(document.getElementById('ch-ld'),{
+    type:'doughnut',
+    data:{labels:lLabels,datasets:[{data:lVals,backgroundColor:lLabels.map(l=>lColors[l]),borderWidth:2,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}},tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw} contracts`}}}}
+  });
+
+  // ── 5. MONTHLY TREND (computed from actual publishedDate & awardDate in CD) ─
+  // Build 12-month rolling window ending at current month
+  const MONTH_LABELS=[];
+  const monthCounts={};    // published this month
+  const awardCounts={};    // awarded this month
+  const monthValues={};    // total ₹ Cr awarded this month
+  const now=new Date('2026-05-21');
+  for(let i=11;i>=0;i--){
+    const d=new Date(now.getFullYear(),now.getMonth()-i,1);
+    const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    const label=d.toLocaleString('en-IN',{month:'short',year:'2-digit'});
+    MONTH_LABELS.push({key,label});
+    monthCounts[key]=0;
+    awardCounts[key]=0;
+    monthValues[key]=0;
+  }
+  CD.forEach(c=>{
+    if(c.publishedDate){
+      const k=c.publishedDate.substring(0,7);
+      if(monthCounts[k]!==undefined) monthCounts[k]++;
+    }
+    if(c.awardDate && c.awardDate!=='null'){
+      const k=c.awardDate.substring(0,7);
+      if(awardCounts[k]!==undefined){ awardCounts[k]++; monthValues[k]+=(c.value||0); }
+    }
+  });
+  new Chart(document.getElementById('ch-tr'),{
+    type:'bar',
+    data:{
+      labels:MONTH_LABELS.map(m=>m.label),
+      datasets:[
+        {label:'New Contracts Published',type:'bar',data:MONTH_LABELS.map(m=>monthCounts[m.key]),backgroundColor:'rgba(0,63,114,0.7)',borderRadius:3,yAxisID:'y'},
+        {label:'Contracts Awarded',type:'bar',data:MONTH_LABELS.map(m=>awardCounts[m.key]),backgroundColor:'rgba(16,185,129,0.75)',borderRadius:3,yAxisID:'y'},
+        {label:'Value Awarded (₹100 Cr)',type:'line',data:MONTH_LABELS.map(m=>Math.round(monthValues[m.key]/100)),borderColor:'#D97706',backgroundColor:'rgba(217,119,6,0)',tension:.4,pointBackgroundColor:'#D97706',pointRadius:4,yAxisID:'y2'}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{boxWidth:12,font:{size:11}}},
+        tooltip:{callbacks:{label:ctx=>{
+          if(ctx.dataset.label.includes('Value')) return `₹${(ctx.raw*100).toLocaleString('en-IN')} Cr awarded`;
+          return `${ctx.raw} contracts`;
+        }}}
+      },
+      scales:{
+        y:{beginAtZero:true,grid:{color:'#F3F4F6'},title:{display:true,text:'Contracts'}},
+        y2:{position:'right',beginAtZero:true,grid:{display:false},title:{display:true,text:'₹ Cr (×100)'}},
+        x:{grid:{display:false}}
+      }
+    }
+  });
+
+  // ── 6. TOP CONTRACTORS BY CONTRACTS WON (from actual CD) ─────────────────
+  const contractorWins={};
+  const contractorValue={};
+  const contractorMachines={};
+  CD.forEach(c=>{
+    if(!c.contractor||c.contractor===''||c.contractor==='(Contractor TBD)') return;
+    contractorWins[c.contractor]=(contractorWins[c.contractor]||0)+1;
+    contractorValue[c.contractor]=(contractorValue[c.contractor]||0)+(c.value||0);
+    contractorMachines[c.contractor]=(contractorMachines[c.contractor]||0)+(c.machines||0);
+  });
+  const topContractors=Object.entries(contractorValue)
+    .sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const shortName=n=>n.replace(' Infrastructure','').replace(' Construction','').replace(' Limited','').replace(' Ltd','').replace(' International','').replace(' Engineering','');
+  new Chart(document.getElementById('ch-cn'),{
+    type:'bar',
+    data:{
+      labels:topContractors.map(([n])=>shortName(n)),
+      datasets:[
+        {label:'Total Value (₹ Cr)',data:topContractors.map(([,v])=>v),backgroundColor:blues,borderRadius:4},
+        {label:'Contracts Won',data:topContractors.map(([n])=>contractorWins[n]),backgroundColor:'rgba(16,185,129,0.5)',borderRadius:4,yAxisID:'y2'}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11}}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label.includes('Value')?`₹${ctx.raw.toLocaleString('en-IN')} Cr`:`${ctx.raw} contracts`}}},
+      scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'},title:{display:true,text:'₹ Cr'}},y2:{position:'right',beginAtZero:true,grid:{display:false},title:{display:true,text:'Contracts Won'}},x:{grid:{display:false},ticks:{font:{size:10}}}}
+    }
+  });
 }
+
 
 // ===================== NEWS =====================
 const NICONS={highways:'🛣️',mining:'⛏️',railways:'🚂',irrigation:'💧',corporate:'🏢',smartcity:'🏙️'};
@@ -1507,24 +1624,7 @@ function renderContractors(){
 }
 
 // ===================== CHARTS =====================
-function initCharts(){
-  Chart.defaults.font.family="'Inter',sans-serif";Chart.defaults.color='#4A5568';
-  const blues=['#003F72','#005B9A','#0A6EBD','#1E88E5','#42A5F5','#64B5F6','#90CAF9','#BBDEFB'];
-  const tcols={Highways:'#003F72',Mining:'#7C3AED',Railways:'#0D9488',Metro:'#1D4ED8',Irrigation:'#0284C7',Ports:'#0F766E','Smart City':'#D97706',Industrial:'#B45309'};
-  const stD={};CD.forEach(c=>{stD[c.state]=(stD[c.state]||0)+1});
-  const sts=Object.entries(stD).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  new Chart(document.getElementById('ch-st'),{type:'bar',data:{labels:sts.map(s=>s[0]),datasets:[{label:'Projects',data:sts.map(s=>s[1]),backgroundColor:blues,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
-  const tyD={};CD.forEach(c=>{tyD[c.type]=(tyD[c.type]||0)+1});
-  new Chart(document.getElementById('ch-ty'),{type:'doughnut',data:{labels:Object.keys(tyD),datasets:[{data:Object.values(tyD),backgroundColor:Object.keys(tyD).map(t=>tcols[t]||'#6B7280'),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}}}}});
-  const vR={'<₹500Cr':0,'₹500–1000Cr':0,'₹1000–2000Cr':0,'₹2000–3500Cr':0,'>₹3500Cr':0};
-  CD.forEach(c=>{if(c.value<500)vR['<₹500Cr']++;else if(c.value<1000)vR['₹500–1000Cr']++;else if(c.value<2000)vR['₹1000–2000Cr']++;else if(c.value<3500)vR['₹2000–3500Cr']++;else vR['>₹3500Cr']++});
-  new Chart(document.getElementById('ch-vl'),{type:'bar',data:{labels:Object.keys(vR),datasets:[{label:'Contracts',data:Object.values(vR),backgroundColor:'#005B9A',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false}}}}});
-  const lD={'Very High':0,'High':0,'Medium':0,'Low':0};CD.forEach(c=>{lD[c.ls]++});
-  new Chart(document.getElementById('ch-ld'),{type:'doughnut',data:{labels:Object.keys(lD),datasets:[{data:Object.values(lD),backgroundColor:['#DC2626','#D97706','#2563EB','#6B7280'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}}}}});
-  new Chart(document.getElementById('ch-tr'),{type:'line',data:{labels:['Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26'],datasets:[{label:'Contracts Awarded',data:[28,34,41,38,52,47,63,58,71,69,84,92],borderColor:'#003F72',backgroundColor:'rgba(0,63,114,.1)',tension:.4,fill:true,pointBackgroundColor:'#003F72',pointRadius:4},{label:'Value (₹100 Cr)',data:[84,102,123,114,156,141,189,174,213,207,252,276],borderColor:'#D97706',backgroundColor:'rgba(217,119,6,.08)',tension:.4,fill:false,pointBackgroundColor:'#D97706',pointRadius:4,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'},title:{display:true,text:'Contracts'}},y2:{position:'right',beginAtZero:true,grid:{display:false},title:{display:true,text:'₹ Cr (×100)'}},x:{grid:{display:false}}}}});
-  const top=CONTR.sort((a,b)=>b.val-a.val).slice(0,10);
-  new Chart(document.getElementById('ch-cn'),{type:'bar',data:{labels:top.map(c=>c.name.replace(' Infrastructure','').replace(' Construction','')),datasets:[{label:'Total Value (₹ Cr)',data:top.map(c=>c.totalValue),backgroundColor:blues.map((c,i)=>blues[i%blues.length]),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F3F4F6'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
-}
+
 
 // ===================== NEWS =====================
 
