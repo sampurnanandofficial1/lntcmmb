@@ -215,10 +215,10 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   </div>
   <div class="sbsec"><div class="sbttl"><i class="fa fa-calendar-alt"></i> Date / Recency</div>
     <div class="fg">
-      <label class="fck"><input type="radio" name="fdate" value="hot" class="fdater" checked onchange="applyF()"> <span style="color:#DC2626;font-weight:700">🔴 HOT</span> — last 30 days <span class="fct">10</span></label>
-      <label class="fck"><input type="radio" name="fdate" value="warm" class="fdater" onchange="applyF()"> <span style="color:#D97706;font-weight:700">🟡 WARM</span> — 1–3 months <span class="fct">9</span></label>
-      <label class="fck"><input type="radio" name="fdate" value="cooling" class="fdater" onchange="applyF()"> <span style="color:#2563EB;font-weight:700">🔵 COOLING</span> — 3–6 months <span class="fct">8</span></label>
-      <label class="fck"><input type="radio" name="fdate" value="archive" class="fdater" onchange="applyF()"> <span style="color:#6B7280;font-weight:700">⚫ ARCHIVE</span> — 6–12 months <span class="fct">14</span></label>
+      <label class="fck"><input type="radio" name="fdate" value="hot" class="fdater" checked onchange="applyF()"> <span style="color:#DC2626;font-weight:700">🔴 HOT</span> — last 30 days <span class="fct" id="fc-hot">—</span></label>
+      <label class="fck"><input type="radio" name="fdate" value="warm" class="fdater" onchange="applyF()"> <span style="color:#D97706;font-weight:700">🟡 WARM</span> — 1–3 months <span class="fct" id="fc-warm">—</span></label>
+      <label class="fck"><input type="radio" name="fdate" value="cooling" class="fdater" onchange="applyF()"> <span style="color:#2563EB;font-weight:700">🔵 COOLING</span> — 3–6 months <span class="fct" id="fc-cooling">—</span></label>
+      <label class="fck"><input type="radio" name="fdate" value="archive" class="fdater" onchange="applyF()"> <span style="color:#6B7280;font-weight:700">⚫ ARCHIVE</span> — 6–12 months <span class="fct" id="fc-archive">—</span></label>
       <label class="fck"><input type="radio" name="fdate" value="all" class="fdater" onchange="applyF()"> 📅 All dates (1 year)</label>
     </div>
     <div style="font-size:10px;color:#D97706;margin-top:6px;padding:5px 7px;background:#FEF3C7;border-radius:4px;line-height:1.5">
@@ -228,30 +228,30 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 
   <div class="sbsec"><div class="sbttl"><i class="fa fa-building"></i> Project Type</div>
     <div class="fg">
-      <label class="fck"><input type="checkbox" value="Highways" class="ftype" checked onchange="applyF()"> Highways / Roads <span class="fct">18</span></label>
-      <label class="fck"><input type="checkbox" value="Mining" class="ftype" checked onchange="applyF()"> Mining <span class="fct">10</span></label>
-      <label class="fck"><input type="checkbox" value="Railways" class="ftype" checked onchange="applyF()"> Railways / DFCC <span class="fct">4</span></label>
-      <label class="fck"><input type="checkbox" value="Metro" class="ftype" checked onchange="applyF()"> Metro <span class="fct">3</span></label>
-      <label class="fck"><input type="checkbox" value="Irrigation" class="ftype" checked onchange="applyF()"> Irrigation <span class="fct">3</span></label>
-      <label class="fck"><input type="checkbox" value="Ports" class="ftype" checked onchange="applyF()"> Ports <span class="fct">3</span></label>
-      <label class="fck"><input type="checkbox" value="Smart City" class="ftype" checked onchange="applyF()"> Smart City <span class="fct">2</span></label>
-      <label class="fck"><input type="checkbox" value="Industrial" class="ftype" checked onchange="applyF()"> Industrial <span class="fct">2</span></label>
+      <label class="fck"><input type="checkbox" value="Highways" class="ftype" checked onchange="applyF()"> Highways / Roads <span class="fct" id="fc-Highways">—</span></label>
+      <label class="fck"><input type="checkbox" value="Mining" class="ftype" checked onchange="applyF()"> Mining <span class="fct" id="fc-Mining">—</span></label>
+      <label class="fck"><input type="checkbox" value="Railways" class="ftype" checked onchange="applyF()"> Railways / DFCC <span class="fct" id="fc-Railways">—</span></label>
+      <label class="fck"><input type="checkbox" value="Metro" class="ftype" checked onchange="applyF()"> Metro <span class="fct" id="fc-Metro">—</span></label>
+      <label class="fck"><input type="checkbox" value="Irrigation" class="ftype" checked onchange="applyF()"> Irrigation <span class="fct" id="fc-Irrigation">—</span></label>
+      <label class="fck"><input type="checkbox" value="Ports" class="ftype" checked onchange="applyF()"> Ports <span class="fct" id="fc-Ports">—</span></label>
+      <label class="fck"><input type="checkbox" value="Smart City" class="ftype" checked onchange="applyF()"> Smart City <span class="fct" id="fc-SmartCity">—</span></label>
+      <label class="fck"><input type="checkbox" value="Industrial" class="ftype" checked onchange="applyF()"> Industrial <span class="fct" id="fc-Industrial">—</span></label>
     </div>
   </div>
   <div class="sbsec"><div class="sbttl"><i class="fa fa-tasks"></i> Project Stage</div>
     <div class="fg">
-      <label class="fck"><input type="checkbox" value="Awarded" class="fstage" checked onchange="applyF()"> Awarded <span class="fct">20</span></label>
-      <label class="fck"><input type="checkbox" value="Tender Live" class="fstage" checked onchange="applyF()"> Tender Live <span class="fct">11</span></label>
-      <label class="fck"><input type="checkbox" value="Under Execution" class="fstage" checked onchange="applyF()"> Under Execution <span class="fct">9</span></label>
-      <label class="fck"><input type="checkbox" value="Upcoming" class="fstage" checked onchange="applyF()"> Upcoming <span class="fct">7</span></label>
+      <label class="fck"><input type="checkbox" value="Awarded" class="fstage" checked onchange="applyF()"> Awarded <span class="fct" id="fc-Awarded">—</span></label>
+      <label class="fck"><input type="checkbox" value="Tender Live" class="fstage" checked onchange="applyF()"> Tender Live <span class="fct" id="fc-TenderLive">—</span></label>
+      <label class="fck"><input type="checkbox" value="Under Execution" class="fstage" checked onchange="applyF()"> Under Execution <span class="fct" id="fc-UnderExecution">—</span></label>
+      <label class="fck"><input type="checkbox" value="Upcoming" class="fstage" checked onchange="applyF()"> Upcoming <span class="fct" id="fc-Upcoming">—</span></label>
     </div>
   </div>
   <div class="sbsec"><div class="sbttl"><i class="fa fa-star"></i> Lead Score</div>
     <div class="fg">
-      <label class="fck"><input type="checkbox" value="Very High" class="flead" checked onchange="applyF()"> <span style="color:#DC2626;font-weight:700">●</span> Very High <span class="fct">16</span></label>
-      <label class="fck"><input type="checkbox" value="High" class="flead" checked onchange="applyF()"> <span style="color:#D97706;font-weight:700">●</span> High <span class="fct">18</span></label>
-      <label class="fck"><input type="checkbox" value="Medium" class="flead" checked onchange="applyF()"> <span style="color:#2563EB;font-weight:700">●</span> Medium <span class="fct">9</span></label>
-      <label class="fck"><input type="checkbox" value="Low" class="flead" checked onchange="applyF()"> <span style="color:#6B7280;font-weight:700">●</span> Low <span class="fct">4</span></label>
+      <label class="fck"><input type="checkbox" value="Very High" class="flead" checked onchange="applyF()"> <span style="color:#DC2626;font-weight:700">●</span> Very High <span class="fct" id="fc-VeryHigh">—</span></label>
+      <label class="fck"><input type="checkbox" value="High" class="flead" checked onchange="applyF()"> <span style="color:#D97706;font-weight:700">●</span> High <span class="fct" id="fc-High">—</span></label>
+      <label class="fck"><input type="checkbox" value="Medium" class="flead" checked onchange="applyF()"> <span style="color:#2563EB;font-weight:700">●</span> Medium <span class="fct" id="fc-Medium">—</span></label>
+      <label class="fck"><input type="checkbox" value="Low" class="flead" checked onchange="applyF()"> <span style="color:#6B7280;font-weight:700">●</span> Low <span class="fct" id="fc-Low">—</span></label>
     </div>
   </div>
   <div class="sbsec"><div class="sbttl"><i class="fa fa-rupee-sign"></i> Min Value (₹ Cr)</div>
@@ -388,7 +388,50 @@ let map, mgrp, hlayer, cgrp, view = 'cards';
 let AF = {state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:'',dateRange:'hot'};
 let chartsInitialized = false;
 
-// ===================== DATE INTELLIGENCE =====================
+// ===================== DYNAMIC FILTER COUNTS =====================
+function updateFilterCounts() {
+  if (!CD || !CD.length) return;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+  // Date recency counts
+  set('fc-hot',     CD.filter(c => daysOld(c.publishedDate) <= 30).length);
+  set('fc-warm',    CD.filter(c => { const d=daysOld(c.publishedDate); return d>30&&d<=90; }).length);
+  set('fc-cooling', CD.filter(c => { const d=daysOld(c.publishedDate); return d>90&&d<=180; }).length);
+  set('fc-archive', CD.filter(c => daysOld(c.publishedDate) > 180).length);
+
+  // Project type counts
+  ['Highways','Mining','Railways','Metro','Irrigation','Ports','Smart City','Industrial'].forEach(t => {
+    const id = 'fc-' + t.replace(' ','');
+    set(id, CD.filter(c => c.type === t).length);
+  });
+
+  // Stage counts
+  set('fc-Awarded',        CD.filter(c => c.stage === 'Awarded').length);
+  set('fc-TenderLive',     CD.filter(c => c.stage === 'Tender Live').length);
+  set('fc-UnderExecution', CD.filter(c => c.stage === 'Under Execution').length);
+  set('fc-Upcoming',       CD.filter(c => c.stage === 'Upcoming').length);
+
+  // Effective lead score counts (date-adjusted)
+  set('fc-VeryHigh', CD.filter(c => effectiveLeadScore(c) === 'Very High').length);
+  set('fc-High',     CD.filter(c => effectiveLeadScore(c) === 'High').length);
+  set('fc-Medium',   CD.filter(c => effectiveLeadScore(c) === 'Medium').length);
+  set('fc-Low',      CD.filter(c => effectiveLeadScore(c) === 'Low').length);
+
+  // Update KPI bar dynamic counts
+  const hotCount  = CD.filter(c => daysOld(c.publishedDate) <= 30).length;
+  const highPri   = CD.filter(c => ['Very High','High'].includes(effectiveLeadScore(c)) && daysOld(c.publishedDate)<=30).length;
+  const mineCount = CD.filter(c => c.mining && daysOld(c.publishedDate)<=90).length;
+  const todayCount= CD.filter(c => daysOld(c.publishedDate) <= 7).length;
+
+  // Update ccount tab badge
+  document.getElementById('ccount').textContent = FC.length;
+
+  // Find top state
+  const stateCounts = {};
+  CD.filter(c=>daysOld(c.publishedDate)<=90).forEach(c => { stateCounts[c.state]=(stateCounts[c.state]||0)+1; });
+  const topState = Object.entries(stateCounts).sort((a,b)=>b[1]-a[1])[0];
+}
+
 const TODAY_MS = Date.now();
 
 function daysOld(publishedDate) {
@@ -414,9 +457,19 @@ function effectiveLeadScore(contract) {
 }
 
 function formatDate(dateStr) {
-  if (!dateStr) return '—';
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  if (!dateStr || dateStr === 'null') return '—';
+  try {
+    // Parse YYYY-MM-DD safely (avoid UTC timezone shift)
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+      const [y,m,d] = dateStr.split('-').map(Number);
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${d} ${months[m-1]} ${y}`;
+    }
+    const d = new Date(dateStr);
+    if (isNaN(d)) return dateStr; // return as-is if unparseable
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+  } catch(e) { return dateStr || '—'; }
 }
 
 function daysOldLabel(publishedDate) {
@@ -479,6 +532,7 @@ function bootUI() {
   document.getElementById('ccount').textContent = FC.length;
   setTimeout(() => { if (!chartsInitialized) initCharts(); }, 300);
   setTimeout(initNotifs, 1500);
+  updateFilterCounts();
 }
 
 async function fetchNews() {
@@ -1298,20 +1352,7 @@ function startClock(){
 }
 
 // ===================== MAP =====================
-function initMap(){
-  map=L.map('india-map',{center:[22,82],zoom:5,zoomControl:true});
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap © CARTO | L&T CMMB',subdomains:'abcd',maxZoom:19}).addTo(map);
-  mgrp=L.layerGroup().addTo(map);
-  cgrp=L.markerClusterGroup({maxClusterRadius:60,iconCreateFunction:cl=>{
-    const n=cl.getChildCount();
-    return L.divIcon({html:`<div style="background:var(--b);color:#fff;border-radius:50%;border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.3);width:38px;height:38px">${n}</div>`,className:'',iconSize:[38,38]});
-  }});
-  renderMarkers();
-  // Legend
-  const leg=L.control({position:'bottomright'});
-  leg.onAdd=()=>{const d=L.DomUtil.create('div');d.innerHTML=`<div style="background:#fff;padding:10px;border-radius:8px;box-shadow:var(--sh);font-family:Inter,sans-serif;font-size:11px"><div style="font-weight:700;color:var(--b);margin-bottom:6px;font-size:10px;text-transform:uppercase">Lead Score</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><div style="width:11px;height:11px;background:#DC2626;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>Very High</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><div style="width:11px;height:11px;background:#D97706;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>High</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><div style="width:11px;height:11px;background:#2563EB;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>Medium</div><div style="display:flex;align-items:center;gap:6px"><div style="width:11px;height:11px;background:#6B7280;border-radius:50%;border:1.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>Low</div></div>`;return d;};
-  leg.addTo(map);
-}
+
 
 function mcolor(ls){return ls==='Very High'?'#DC2626':ls==='High'?'#D97706':ls==='Medium'?'#2563EB':'#6B7280'}
 function ticon(t){const m={Highways:'🛣️',Mining:'⛏️',Railways:'🚂',Metro:'🚇',Irrigation:'💧',Ports:'⚓','Smart City':'🏙️',Industrial:'🏭'};return m[t]||'📋'}
@@ -1340,74 +1381,9 @@ function togL(t){
 }
 
 // ===================== FILTERS =====================
-function applyF(){
-  AF.state  = document.getElementById('fstate').value;
-  AF.auth   = document.getElementById('fauth').value;
-  AF.types  = [...document.querySelectorAll('.ftype:checked')].map(c=>c.value);
-  AF.stages = [...document.querySelectorAll('.fstage:checked')].map(c=>c.value);
-  AF.leads  = [...document.querySelectorAll('.flead:checked')].map(c=>c.value);
-  AF.minV   = parseInt(document.getElementById('fval').value)||0;
-  AF.mine   = document.getElementById('fmine').checked;
-  AF.heavy  = document.getElementById('fheavy').checked;
-  AF.hsc    = document.getElementById('fhsc').checked;
-  AF.q      = (document.getElementById('sinput')?.value||'').toLowerCase();
-  AF.dateRange = document.querySelector('.fdater:checked')?.value || 'hot';
 
-  FC = CD.filter(c => {
-    if (AF.state  && c.state     !== AF.state)  return false;
-    if (AF.auth   && c.authority !== AF.auth)   return false;
-    if (AF.types.length  && !AF.types.includes(c.type))    return false;
-    if (AF.stages.length && !AF.stages.includes(c.stage))  return false;
-    if (AF.minV > 0 && c.value < AF.minV) return false;
-    if (AF.mine  && !c.mining)   return false;
-    if (AF.heavy && !['High','Very High','Extreme'].includes(c.earthwork)) return false;
-    if (AF.hsc   && c.excScore < 80) return false;
-    if (AF.q && !c.name.toLowerCase().includes(AF.q) &&
-        !c.state.toLowerCase().includes(AF.q) &&
-        !c.contractor.toLowerCase().includes(AF.q) &&
-        !c.authority.toLowerCase().includes(AF.q) &&
-        !c.type.toLowerCase().includes(AF.q)) return false;
-    // Date range filter
-    const d = daysOld(c.publishedDate);
-    if (AF.dateRange === 'hot'     && d > 30)  return false;
-    if (AF.dateRange === 'warm'    && (d <= 30 || d > 90))  return false;
-    if (AF.dateRange === 'cooling' && (d <= 90 || d > 180)) return false;
-    if (AF.dateRange === 'archive' && d <= 180) return false;
-    // Lead score filter uses EFFECTIVE score (date-adjusted)
-    if (AF.leads.length) {
-      const eff = effectiveLeadScore(c);
-      if (!AF.leads.includes(eff) && eff !== 'Archive') return false;
-    }
-    return true;
-  });
 
-  document.getElementById('ccount').textContent = FC.length;
-  renderCards();
-  renderMarkers();
-  // Auto-switch to contracts tab so user sees results immediately
-  switchTab('contracts');
-}
 
-function resetF(){
-  document.getElementById('fstate').value='';
-  document.getElementById('fauth').value='';
-  document.getElementById('fval').value='0';
-  document.getElementById('fmine').checked=false;
-  document.getElementById('fheavy').checked=false;
-  document.getElementById('fhsc').checked=false;
-  document.querySelectorAll('.ftype,.fstage,.flead').forEach(c=>c.checked=true);
-  if(document.getElementById('sinput'))document.getElementById('sinput').value='';
-  // Reset date to HOT (default — most useful view)
-  document.querySelector('.fdater[value="hot"]').checked=true;
-  updR(document.getElementById('fval'));
-  AF={state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:'',dateRange:'hot'};
-  document.querySelectorAll('.ftype:checked').forEach(c=>AF.types.push(c.value));
-  document.querySelectorAll('.fstage:checked').forEach(c=>AF.stages.push(c.value));
-  document.querySelectorAll('.flead:checked').forEach(c=>AF.leads.push(c.value));
-  FC=CD.filter(c=>daysOld(c.publishedDate)<=30);
-  document.getElementById('ccount').textContent=FC.length;
-  renderCards();renderMarkers();
-}
 
 function updR(el){const v=parseInt(el.value);document.getElementById('rvd').textContent=v>0?'Min ₹'+v.toLocaleString('en-IN')+' Cr':'No minimum'}
 
@@ -1452,57 +1428,7 @@ function setStateF(s){document.getElementById('fstate').value=s;applyF();switchT
 // ===================== RENDER CARDS =====================
 function stClass(s){return s==='Awarded'?'awarded':s==='Tender Live'?'live':s==='Under Execution'?'exec':'upcoming'}
 
-function renderCards(){
-  const el=document.getElementById('clist');
-  if(!FC.length){el.innerHTML=`<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--mu)"><div style="font-size:36px;margin-bottom:10px">🔍</div><div style="font-size:14px;font-weight:600">No contracts match your filters</div><div style="font-size:12px;margin-top:4px;margin-bottom:14px">Try a wider date range or reset filters</div><button onclick="resetF()" style="padding:6px 16px;background:var(--b);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px">Reset Filters</button></div>`;return;}
-  el.innerHTML=FC.map(c=>{
-    const rec=recencyStatus(c.publishedDate);
-    const eff=effectiveLeadScore(c);
-    const ec=eff.toLowerCase().replace(' ','-');
-    const isArchive=eff==='Archive';
-    return `<div class="cc ${ec}" onclick="openMod('${c.id}')" style="opacity:${isArchive?'0.6':'1'}">
-      <div class="chd"><div class="ctit">${c.name}</div><span class="lb ${ec}">${eff}</span></div>
-      <div class="cmeta">
-        <span class="ctag">🏛️ ${c.authority}</span>
-        <span class="ctag">📍 ${c.state}</span>
-        <span class="ctag">${ticon(c.type)} ${c.type}</span>
-        ${c.mining?'<span class="ctag" style="background:#EDE9FE;color:#7C3AED">⛏️ Mining</span>':''}
-        <span class="ctag" style="background:${rec.bg};color:${rec.color};font-weight:700">${rec.emoji} ${rec.label} · ${daysOldLabel(c.publishedDate)}</span>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-        <div class="cval">₹${c.value.toLocaleString('en-IN')} Cr</div>
-        <span class="stb ${stClass(c.stage)}">${c.stage}</span>
-      </div>
-      <div style="font-size:10.5px;color:var(--mu);margin-bottom:5px">
-        📅 Published: <strong style="color:var(--t1)">${formatDate(c.publishedDate)}</strong>
-        ${isArchive?' <span style="color:#DC2626;font-weight:600">⚠️ Likely already procured</span>':''}
-      </div>
-      <div class="cft">
-        <div class="ebar">
-          <span class="elbl">Exc. Score</span>
-          <div class="btr"><div class="bfi" style="width:${c.excScore}%"></div></div>
-          <span class="bsc">${c.excScore}</span>
-        </div>
-        <span style="font-size:11px;color:var(--mu);margin-left:10px;white-space:nowrap">🚜 ${c.machines} units</span>
-      </div>
-    </div>`;
-  }).join('');
-  document.getElementById('tbody').innerHTML=FC.map(c=>{
-    const rec=recencyStatus(c.publishedDate);
-    const eff=effectiveLeadScore(c);
-    return `<tr onclick="openMod('${c.id}')" style="cursor:pointer">
-      <td><strong style="color:var(--b);font-size:12px">${c.name}</strong><br><span style="font-size:10px;color:var(--mu)">${c.district} · ${formatDate(c.publishedDate)}</span></td>
-      <td>${c.authority}</td><td>${c.state}</td>
-      <td><span class="ctag" style="display:inline-flex">${ticon(c.type)} ${c.type}</span></td>
-      <td><strong style="color:var(--b)">₹${c.value.toLocaleString('en-IN')}</strong></td>
-      <td><span style="font-weight:700;color:${rec.color}">${rec.emoji} ${rec.label}</span><br><span style="font-size:10px;color:var(--mu)">${daysOldLabel(c.publishedDate)}</span></td>
-      <td><span class="stb ${stClass(c.stage)}">${c.stage}</span></td>
-      <td><span class="lb ${eff.toLowerCase().replace(' ','-')}">${eff}</span></td>
-      <td><div style="display:flex;align-items:center;gap:4px"><div style="flex:1;height:4px;background:var(--br);border-radius:2px;overflow:hidden;min-width:36px"><div style="width:${c.excScore}%;height:100%;background:var(--b);border-radius:2px"></div></div><span style="font-size:11px;font-weight:700;color:var(--b)">${c.excScore}</span></div></td>
-      <td style="font-size:11px">${c.contractor}</td>
-    </tr>`;
-  }).join('');
-}
+
 
 function setView(v){
   view=v;
@@ -1512,80 +1438,7 @@ function setView(v){
   document.getElementById('tblwrap').style.display=v==='table'?'block':'none';
 }
 
-// ===================== MODAL =====================
-function openMod(id){
-  const c=CD.find(x=>x.id===id);if(!c)return;
-  const rec=recencyStatus(c.publishedDate);
-  const eff=effectiveLeadScore(c);
-  document.getElementById('mtit').textContent=ticon(c.type)+' Contract Intelligence Report';
-  document.getElementById('mbody').innerHTML=`
-    <div style="background:linear-gradient(135deg,#003F72,#005B9A);color:#fff;padding:14px;border-radius:8px;margin-bottom:14px">
-      <div style="font-size:15px;font-weight:700;margin-bottom:4px">${c.name}</div>
-      <div style="font-size:11.5px;opacity:.8">${c.district}, ${c.state}</div>
-      <div style="margin-top:6px;display:flex;gap:8px;align-items:center">
-        <span style="background:${rec.bg};color:${rec.color};padding:2px 9px;border-radius:4px;font-size:11px;font-weight:700">${rec.emoji} ${rec.label} — ${daysOldLabel(c.publishedDate)}</span>
-        ${eff==='Archive'?'<span style="background:#FEE2E2;color:#DC2626;padding:2px 9px;border-radius:4px;font-size:11px;font-weight:700">⚠️ Likely already procured</span>':''}
-      </div>
-    </div>
-    <div class="dgrid">
-      <div class="di"><div class="dlbl">Contract Value</div><div class="dval" style="color:var(--b);font-size:22px">₹${(c.value||0).toLocaleString('en-IN')} Cr</div></div>
-      <div class="di"><div class="dlbl">Excavator Score</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="flex:1;height:8px;background:#E5E7EB;border-radius:4px;overflow:hidden"><div style="width:${c.excScore||0}%;height:100%;background:linear-gradient(90deg,#003F72,#0A6EBD);border-radius:4px"></div></div><span style="font-size:18px;font-weight:800;color:var(--b)">${c.excScore||0}/100</span></div></div>
-      <div class="di"><div class="dlbl">Effective Lead Score</div><div class="dval"><span class="lb ${eff.toLowerCase().replace(' ','-')}" style="font-size:12px;padding:4px 10px">${eff}</span></div></div>
-      <div class="di"><div class="dlbl">Base Lead Score</div><div class="dval"><span class="lb ${(c.leadScore||'medium').toLowerCase().replace(' ','-')}" style="font-size:12px;padding:4px 10px">${c.leadScore||'—'}</span></div></div>
-      <div class="di"><div class="dlbl">Project Stage</div><div class="dval"><span class="stb ${stClass(c.stage)}" style="font-size:12px;padding:4px 10px">${c.stage}</span></div></div>
-      <div class="di"><div class="dlbl">Earthwork Intensity</div><div class="dval">${c.earthwork||c.ew||'—'}</div></div>
-      <div class="di"><div class="dlbl">Awarding Authority</div><div class="dval">${c.authority}</div></div>
-      <div class="di"><div class="dlbl">Ministry</div><div class="dval">${c.ministry||'—'}</div></div>
-      <div class="di"><div class="dlbl">Primary Contractor</div><div class="dval">${c.contractor}</div></div>
-      <div class="di"><div class="dlbl">Est. Komatsu Excavators</div><div class="dval" style="color:#DC2626">🚜 ${c.machines||c.mach||'—'} units (20-ton class)</div></div>
-      <div class="di"><div class="dlbl">Project Type</div><div class="dval">${ticon(c.type)} ${c.type}</div></div>
-      <div class="di"><div class="dlbl">Source Portal</div><div class="dval">${c.source||'Government Portal'}</div></div>
-    </div>
-    <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:12px;margin-bottom:10px">
-      <div style="font-size:10px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">📅 Date Intelligence</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px">
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Published Date</div><div style="font-weight:600;color:var(--t1)">${formatDate(c.publishedDate)}</div><div style="font-size:10px;color:${rec.color};font-weight:600">${rec.emoji} ${daysOldLabel(c.publishedDate)}</div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Bid / Due Date</div><div style="font-weight:600;color:var(--t1)">${c.bidDate?formatDate(c.bidDate):c.bd?c.bd:'Not announced'}</div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Award Date</div><div style="font-weight:600;color:${(c.awardDate||c.ad)?'#059669':'var(--mu)'}">${c.awardDate?formatDate(c.awardDate):c.ad?c.ad:'Pending'}</div></div>
-      </div>
-    </div>
-    <div class="dgrid" style="margin-top:0">
-      <div class="di full"><div class="dlbl">Project Description</div><div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:4px">${c.desc}</div></div>
-    </div>
-    <div style="background:#F8FAFF;border:1px solid var(--br);border-radius:8px;padding:13px;margin-top:6px">
-      <div style="font-size:11px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px">🎯 Sales Intelligence — L&T CMMB Action Plan</div>
-      <div style="font-size:12px;color:var(--t2);line-height:1.8">
-        <strong>Opportunity:</strong> This ${c.type} project in <strong>${c.state}</strong> requires approximately <strong>${c.machines||c.mach||'—'} Komatsu PC200/PC210 crawler excavators</strong>.<br>
-        <strong>Recency:</strong> ${rec.emoji} <strong>${rec.label}</strong> — ${rec.desc}. ${eff==='Archive'?'<span style="color:#DC2626">Machines likely already procured. Use for relationship tracking only.</span>':''}<br>
-        <strong>Stage Action:</strong> ${c.stage==='Awarded'?'Awarded — mobilization active. <strong>Call '+c.contractor+' procurement today.</strong>':c.stage==='Tender Live'?'Tender live — sourcing discussions underway. <strong>Contact before bid closing date.</strong>':c.stage==='Under Execution'?'Execution phase — discuss replacement units and fleet additions.':'Pre-award — build relationship with '+c.contractor+' for preferred equipment position.'}<br>
-        <strong>Territory:</strong> ${c.state} Regional Office · Service Center: ${c.district}
-      </div>
-    </div>
-    ${(()=>{const ct=CONTR.find(x=>x.name===c.contractor);return ct?`
-    <div style="background:#F0FDF4;border:1px solid #A7F3D0;border-radius:8px;padding:13px;margin-top:8px">
-      <div style="font-size:11px;font-weight:700;color:#065F46;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">📞 Contractor Contact Intelligence — ${ct.name}</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--t2)">
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Head Office</div><div style="font-size:11px">${ct.hq}</div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Key Contact</div><div style="font-weight:600;color:var(--t1)">${ct.keyContact||ct.contact||'—'}</div><div style="font-size:11px;color:var(--mu)">${ct.procContact}</div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Corp Phone</div><div><a href="tel:${ct.phone}" style="color:var(--b);font-weight:600;text-decoration:none;font-size:13px">${ct.phone}</a></div><div><a href="tel:${ct.altPhone}" style="color:var(--t2);text-decoration:none;font-size:11px">${ct.altPhone}</a></div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Procurement Phone</div><div><a href="tel:${ct.procPhone}" style="color:#065F46;font-weight:700;text-decoration:none;font-size:13px">${ct.procPhone}</a></div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">General Email</div><div><a href="mailto:${ct.email}" style="color:var(--b);text-decoration:none">${ct.email}</a></div></div>
-        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Procurement Email</div><div><a href="mailto:${ct.procEmail}" style="color:#065F46;font-weight:600;text-decoration:none">${ct.procEmail}</a></div></div>
-      </div>
-      <div style="display:flex;gap:6px;margin-top:10px">
-        <a href="tel:${ct.procPhone}" style="flex:1;padding:7px;background:#065F46;color:#fff;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">📱 Call Procurement</a>
-        <a href="mailto:${ct.procEmail}?subject=Komatsu PC210 Equipment — ${c.name}" style="flex:1;padding:7px;background:var(--b);color:#fff;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">📧 Email Procurement</a>
-        <a href="https://${ct.website}" target="_blank" style="flex:1;padding:7px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">🌐 Website</a>
-      </div>
-    </div>`:''})()}
-    <div style="display:flex;gap:7px;margin-top:12px">
-      <button onclick="closeMod()" style="flex:1;padding:8px;background:var(--bg);border:1px solid var(--br);border-radius:6px;cursor:pointer;font-size:12px">Close</button>
-      <button onclick="toast('📋','Watchlist','Contract added to territory watchlist')" style="flex:1;padding:8px;background:var(--b);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add to Watchlist</button>
-      <button onclick="toast('📤','Alert Sent','Territory sales team notified')" style="flex:1;padding:8px;background:transparent;border:1px solid var(--b);color:var(--b);border-radius:6px;cursor:pointer;font-size:12px">Alert Team</button>
-    </div>`;
-  document.getElementById('mover').classList.add('open');
-}
-function closeMod(e){if(!e||e.target===document.getElementById('mover'))document.getElementById('mover').classList.remove('open');}
+
 // ===================== CONTRACTORS =====================
 function renderContractors(){
   const q=(document.getElementById('csearch')?.value||'').toLowerCase();
