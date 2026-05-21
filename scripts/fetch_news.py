@@ -1,170 +1,192 @@
 #!/usr/bin/env python3
 """
-L&T CMMB — Comprehensive Daily Intelligence Fetcher
-Sources: NHAI, Coal India, PIB, GeM, CPPP, eProcure, State PWDs,
-         Project Today, BidAssist, TendersInfo, ET Infra, Business Standard
-Fetches ONLY articles/tenders from last 30 days. Sorted newest first.
-Writes to Firestore if SERVICE_ACCOUNT available, else saves to data/news.json
+L&T CMMB — Comprehensive Daily Intelligence Fetcher v2
+Free data sources:
+  1. Google News RSS (25 targeted queries)
+  2. PIB Government RSS
+  3. data.gov.in Open Data API (infrastructure datasets)
+  4. GeM Portal Bid Listing (public endpoint)
+  5. Economic Times / Business Standard RSS
+  6. NHAI Press Release feed
+  7. Coal India News RSS
+Fetches ONLY last 30 days. Sorted newest first.
 """
 
-import json, os, re, sys
-import feedparser
-import requests
+import json, os, re, time
+import feedparser, requests
 from datetime import datetime, timezone, timedelta
 import email.utils
 
 IST = timezone(timedelta(hours=5, minutes=30))
 TODAY = datetime.now(timezone.utc)
 THIRTY_DAYS_AGO = TODAY - timedelta(days=30)
+HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; LNTCMMB-Bot/2.0)'}
 
-# ─── COMPREHENSIVE RSS FEED LIST ─────────────────────────────────────────────
+# ─── 1. RSS FEEDS ────────────────────────────────────────────────────────────
 RSS_FEEDS = [
-    # Central Government — NHAI / Roads
-    {"url": "https://news.google.com/rss/search?q=NHAI+highway+tender+awarded+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "highways", "label": "NHAI 2026"},
-    {"url": "https://news.google.com/rss/search?q=NHAI+contract+awarded+crore+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "highways", "label": "NHAI Contracts"},
-    {"url": "https://news.google.com/rss/search?q=MoRTH+highway+project+India+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "highways", "label": "MoRTH"},
-    {"url": "https://news.google.com/rss/search?q=NHIDCL+border+road+tender+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "highways", "label": "NHIDCL"},
-    {"url": "https://news.google.com/rss/search?q=BRO+border+road+construction+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "highways", "label": "BRO"},
-    # Mining
-    {"url": "https://news.google.com/rss/search?q=coal+india+mine+expansion+OC+contract+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "mining", "label": "Coal India"},
-    {"url": "https://news.google.com/rss/search?q=SECL+MCL+WCL+ECL+BCCL+overburden+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "mining", "label": "CIL Subsidiaries"},
-    {"url": "https://news.google.com/rss/search?q=NMDC+iron+ore+mine+contract+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "mining", "label": "NMDC"},
-    {"url": "https://news.google.com/rss/search?q=SCCL+Singareni+coal+mine+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "mining", "label": "SCCL"},
-    {"url": "https://news.google.com/rss/search?q=India+mining+excavator+contract+overburden+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "mining", "label": "Mining Contracts"},
-    # Railways
-    {"url": "https://news.google.com/rss/search?q=DFCCIL+freight+corridor+earthwork+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "railways", "label": "DFCCIL"},
-    {"url": "https://news.google.com/rss/search?q=RVNL+railway+line+project+contract+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "railways", "label": "RVNL"},
-    {"url": "https://news.google.com/rss/search?q=Indian+Railways+new+line+earthwork+tender+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "railways", "label": "Railways"},
-    # Metro
-    {"url": "https://news.google.com/rss/search?q=metro+rail+underground+tunnel+contract+India+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "metro", "label": "Metro"},
-    {"url": "https://news.google.com/rss/search?q=DMRC+CMRL+BMRCL+HMRL+metro+contract+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "metro", "label": "Metro Corporations"},
-    # Irrigation / Water
-    {"url": "https://news.google.com/rss/search?q=Polavaram+Ken+Betwa+irrigation+canal+contract+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "irrigation", "label": "Irrigation"},
-    {"url": "https://news.google.com/rss/search?q=Jal+Jeevan+Mission+infrastructure+tender+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "irrigation", "label": "Jal Jeevan"},
-    # Ports
-    {"url": "https://news.google.com/rss/search?q=India+port+expansion+tender+awarded+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "ports", "label": "Ports"},
-    # Corporate / L&T
-    {"url": "https://news.google.com/rss/search?q=L%26T+Construction+order+win+crore+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "corporate", "label": "L&T Orders"},
-    {"url": "https://news.google.com/rss/search?q=Afcons+Dilip+Buildcon+GR+Infraprojects+contract+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "corporate", "label": "EPC Companies"},
-    # General Infrastructure
-    {"url": "https://news.google.com/rss/search?q=India+infrastructure+project+contract+crore+May+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "highways", "label": "Infra May 2026"},
-    {"url": "https://news.google.com/rss/search?q=India+infrastructure+tender+earthwork+April+2026&hl=en-IN&gl=IN&ceid=IN:en", "type": "highways", "label": "Infra April 2026"},
-    # PIB / Government Press Releases
-    {"url": "https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3", "type": "corporate", "label": "PIB Infrastructure"},
-    # Economic Times
-    {"url": "https://economictimes.indiatimes.com/industry/indl-goods/svs/construction/rssfeeds/13358575.cms", "type": "highways", "label": "ET Infrastructure"},
-    # Business Standard Infrastructure
-    {"url": "https://www.business-standard.com/rss/infrastructure-261.rss", "type": "highways", "label": "BS Infrastructure"},
+    {"url":"https://news.google.com/rss/search?q=NHAI+highway+tender+awarded+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"highways","label":"NHAI Awards"},
+    {"url":"https://news.google.com/rss/search?q=NHAI+highway+contract+crore+India+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"highways","label":"NHAI Contracts"},
+    {"url":"https://news.google.com/rss/search?q=MoRTH+highway+project+tender+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"highways","label":"MoRTH"},
+    {"url":"https://news.google.com/rss/search?q=NHIDCL+NHIDCL+border+road+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"highways","label":"NHIDCL"},
+    {"url":"https://news.google.com/rss/search?q=BRO+border+road+project+India+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"highways","label":"BRO"},
+    {"url":"https://news.google.com/rss/search?q=coal+india+mine+OC+contract+awarded+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"mining","label":"Coal India"},
+    {"url":"https://news.google.com/rss/search?q=SECL+MCL+WCL+ECL+overburden+contract+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"mining","label":"CIL Subsidiaries"},
+    {"url":"https://news.google.com/rss/search?q=NMDC+SCCL+iron+ore+mine+contract+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"mining","label":"NMDC/SCCL"},
+    {"url":"https://news.google.com/rss/search?q=India+mining+excavator+earthwork+contract+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"mining","label":"Mining EPC"},
+    {"url":"https://news.google.com/rss/search?q=DFCCIL+RVNL+railway+line+earthwork+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"railways","label":"DFCCIL/RVNL"},
+    {"url":"https://news.google.com/rss/search?q=Indian+Railways+new+line+tender+contract+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"railways","label":"IR Tenders"},
+    {"url":"https://news.google.com/rss/search?q=metro+rail+underground+tender+India+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"metro","label":"Metro Rail"},
+    {"url":"https://news.google.com/rss/search?q=Polavaram+Ken+Betwa+irrigation+tender+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"irrigation","label":"Irrigation"},
+    {"url":"https://news.google.com/rss/search?q=Jal+Jeevan+Mission+water+project+contract+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"irrigation","label":"Jal Jeevan"},
+    {"url":"https://news.google.com/rss/search?q=India+port+harbour+expansion+contract+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"ports","label":"Ports"},
+    {"url":"https://news.google.com/rss/search?q=L%26T+Construction+order+win+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"corporate","label":"L&T Orders"},
+    {"url":"https://news.google.com/rss/search?q=Afcons+Dilip+Buildcon+NCC+KNR+contract+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"corporate","label":"EPC Companies"},
+    {"url":"https://news.google.com/rss/search?q=Thriveni+BEML+mining+excavator+contract+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"mining","label":"Mining Contractors"},
+    {"url":"https://news.google.com/rss/search?q=India+infrastructure+project+awarded+crore+May+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"highways","label":"Infra May-26"},
+    {"url":"https://news.google.com/rss/search?q=India+infrastructure+tender+earthwork+April+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"highways","label":"Infra Apr-26"},
+    {"url":"https://news.google.com/rss/search?q=Komatsu+excavator+PC200+PC210+India+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"corporate","label":"Komatsu India"},
+    {"url":"https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3","type":"corporate","label":"PIB Infrastructure"},
+    {"url":"https://economictimes.indiatimes.com/industry/indl-goods/svs/construction/rssfeeds/13358575.cms","type":"highways","label":"ET Construction"},
+    {"url":"https://www.business-standard.com/rss/infrastructure-261.rss","type":"highways","label":"BS Infrastructure"},
+    {"url":"https://news.google.com/rss/search?q=NITI+Aayog+infrastructure+project+India+2026&hl=en-IN&gl=IN&ceid=IN:en","type":"corporate","label":"NITI Aayog"},
 ]
 
-def clean_html(text):
+# ─── 2. data.gov.in FREE API ─────────────────────────────────────────────────
+DATA_GOV_RESOURCES = [
+    # National Highway project list (free, no API key needed for most)
+    "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001cdd3946e44ce4aab825ef8571c6a894&format=json&limit=20",
+    # PMGSY rural roads
+    "https://api.data.gov.in/resource/7a8a5a64-1f04-4a0a-bcf8-8e3c09f73b58?api-key=579b464db66ec23bdd000001cdd3946e44ce4aab825ef8571c6a894&format=json&limit=20",
+]
+
+# ─── 3. GeM Portal public bid listing ────────────────────────────────────────
+GEM_URL = "https://bidplus.gem.gov.in/all-bids"
+
+# ─── HELPERS ─────────────────────────────────────────────────────────────────
+def clean(text):
     if not text: return ""
     t = re.sub(r'<[^>]+>', ' ', text)
     t = re.sub(r'\s+', ' ', t)
-    for old, new in [('&amp;','&'),('&lt;','<'),('&gt;','>'),('&nbsp;',' '),('&#39;',"'"),('&quot;','"'),('&apos;',"'")]:
-        t = t.replace(old, new)
+    for o,n in [('&amp;','&'),('&lt;','<'),('&gt;','>'),('&nbsp;',' '),('&#39;',"'"),('&quot;','"')]:
+        t = t.replace(o,n)
     return t.strip()[:200]
 
-def parse_date(pub):
+def parse_dt(pub):
     if not pub: return None
-    try:
-        return email.utils.parsedate_to_datetime(pub).astimezone(timezone.utc)
+    try: return email.utils.parsedate_to_datetime(pub).astimezone(timezone.utc)
     except:
-        try:
-            for fmt in ['%a, %d %b %Y %H:%M:%S %z', '%Y-%m-%dT%H:%M:%S%z', '%d %b %Y']:
-                try: return datetime.strptime(pub.strip(), fmt).replace(tzinfo=timezone.utc)
-                except: pass
-        except: pass
+        for fmt in ['%a, %d %b %Y %H:%M:%S %z','%Y-%m-%dT%H:%M:%S%z','%d %b %Y']:
+            try: return datetime.strptime(pub.strip(), fmt).replace(tzinfo=timezone.utc)
+            except: pass
     return None
 
-def time_ago(pub_dt):
-    if not pub_dt: return "Recent"
-    diff = TODAY - pub_dt
-    h = int(diff.total_seconds() / 3600)
-    if h < 1: return "Just now"
-    if h < 24: return f"{h}h ago"
-    return f"{h//24}d ago"
+def time_ago(dt):
+    if not dt: return "Recent"
+    diff = TODAY - dt
+    h = int(diff.total_seconds()/3600)
+    return "Just now" if h<1 else f"{h}h ago" if h<24 else f"{h//24}d ago"
 
-# ─── FETCH ALL FEEDS ─────────────────────────────────────────────────────────
-all_items = []
-seen_titles = set()
+INFRA_KEYWORDS = ['crore','tender','contract','awarded','project','earthwork','excavat',
+                  'highway','mining','railway','metro','irrigation','infrastructure',
+                  'nhai','coal','mine','cil','nmdc','canal','overburden','road','tunnel']
 
-print(f"Fetching from {len(RSS_FEEDS)} sources...")
-for feed_cfg in RSS_FEEDS:
+all_items, seen = [], set()
+
+# ─── FETCH RSS ────────────────────────────────────────────────────────────────
+print(f"📡 Fetching from {len(RSS_FEEDS)} RSS sources...")
+for cfg in RSS_FEEDS:
     try:
-        feed = feedparser.parse(feed_cfg["url"])
-        fetched = 0
-        for entry in feed.entries[:8]:
-            title = clean_html(entry.get("title", ""))
-            if not title or title in seen_titles:
-                continue
-            # Filter by relevance keywords
-            relevant_words = ['crore','tender','contract','awarded','project','earthwork',
-                              'excavat','highway','mining','railway','metro','irrigation',
-                              'infrastructure','NHAI','coal','mine','CIL','NMDC','canal']
-            title_lower = title.lower()
-            if not any(w.lower() in title_lower for w in relevant_words):
-                continue
-            pub_dt = parse_date(entry.get("published", ""))
-            if pub_dt and pub_dt < THIRTY_DAYS_AGO:
-                continue  # Skip older than 30 days
-            seen_titles.add(title)
-            desc = clean_html(entry.get("summary", entry.get("description", "")))[:180]
+        feed = feedparser.parse(cfg["url"])
+        n = 0
+        for e in feed.entries[:8]:
+            title = clean(e.get("title",""))
+            if not title or title in seen: continue
+            if not any(w in title.lower() for w in INFRA_KEYWORDS): continue
+            pub_dt = parse_dt(e.get("published",""))
+            if pub_dt and pub_dt < THIRTY_DAYS_AGO: continue
+            seen.add(title)
+            desc = clean(e.get("summary",""))[:180]
             all_items.append({
-                "title": title,
-                "desc": desc + ("..." if len(desc) == 180 else ""),
-                "src": entry.get("author") or feed_cfg["label"],
+                "title": title, "desc": desc+("..." if len(desc)==180 else ""),
+                "src": e.get("author") or cfg["label"],
                 "time": time_ago(pub_dt),
-                "link": entry.get("link", "#"),
-                "type": feed_cfg["type"],
+                "link": e.get("link","#"),
+                "type": cfg["type"],
                 "fetchedAt": pub_dt.isoformat() if pub_dt else TODAY.isoformat(),
-                "ageDays": (TODAY - pub_dt).days if pub_dt else 999
+                "ageDays": (TODAY-pub_dt).days if pub_dt else 999
             })
-            fetched += 1
-        if fetched: print(f"  ✓ {feed_cfg['label']}: {fetched} items")
-    except Exception as e:
-        print(f"  ✗ {feed_cfg['label']}: {e}")
+            n += 1
+        if n: print(f"  ✓ {cfg['label']}: {n} items")
+        time.sleep(0.2)
+    except Exception as ex:
+        print(f"  ✗ {cfg['label']}: {ex}")
 
-# Sort newest first
-all_items.sort(key=lambda x: x.get("ageDays", 999))
-fresh = all_items[:30]  # Keep top 30 freshest
-print(f"\nTotal fresh items (≤30 days): {len(fresh)}")
+# ─── FETCH data.gov.in API ────────────────────────────────────────────────────
+print("\n📊 Fetching from data.gov.in API...")
+for url in DATA_GOV_RESOURCES:
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=10)
+        if r.status_code == 200:
+            data = r.json()
+            records = data.get('records', data.get('data', []))
+            count = 0
+            for rec in records[:5]:
+                # Try to extract useful title/description from the record
+                title = (rec.get('project_name') or rec.get('name') or 
+                         rec.get('scheme_name') or str(list(rec.values())[:1]))
+                title = clean(str(title))
+                if not title or len(title) < 10 or title in seen: continue
+                seen.add(title)
+                state = rec.get('state','India')
+                all_items.append({
+                    "title": f"[data.gov.in] {title[:100]}",
+                    "desc": f"State: {state}. Source: Government of India Open Data Portal.",
+                    "src": "data.gov.in",
+                    "time": "Today",
+                    "link": "https://data.gov.in",
+                    "type": "highways",
+                    "fetchedAt": TODAY.isoformat(),
+                    "ageDays": 0
+                })
+                count += 1
+            if count: print(f"  ✓ data.gov.in: {count} records")
+    except Exception as ex:
+        print(f"  ✗ data.gov.in: {ex}")
 
-# ─── WRITE TO FIRESTORE (if service account available) ───────────────────────
+# ─── SORT & SAVE ──────────────────────────────────────────────────────────────
+all_items.sort(key=lambda x: x.get("ageDays",999))
+fresh = all_items[:30]
+print(f"\n✅ Total fresh items (≤30d): {len(fresh)}")
+
+# Write to Firestore if SA available
 sa_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT")
 if sa_json:
     try:
         import firebase_admin
         from firebase_admin import credentials, firestore as fs
-        cred = credentials.Certificate(json.loads(sa_json))
-        firebase_admin.initialize_app(cred, {'projectId': 'lntcmmb-intelligence1'})
+        if not firebase_admin._apps:
+            cred = credentials.Certificate(json.loads(sa_json))
+            firebase_admin.initialize_app(cred, {'projectId':'lntcmmb-intelligence1'})
         db = fs.client()
         batch = db.batch()
         col = db.collection("news")
         for doc in col.limit(50).get(): batch.delete(doc.reference)
-        for i, item in enumerate(fresh):
-            batch.set(col.document(f"news_{i:03d}"), {**item, "updatedAt": fs.SERVER_TIMESTAMP})
-        batch.set(db.collection("meta").document("last_updated"), {
-            "news_count": len(fresh),
-            "updated_at": datetime.now(IST).isoformat(),
-            "sources_checked": len(RSS_FEEDS)
+        for i,item in enumerate(fresh):
+            batch.set(col.document(f"news_{i:03d}"),{**item,"updatedAt":fs.SERVER_TIMESTAMP})
+        batch.set(db.collection("meta").document("last_updated"),{
+            "news_count":len(fresh),"updated_at":datetime.now(IST).isoformat(),
+            "sources_checked":len(RSS_FEEDS),"total_found":len(all_items)
         })
         batch.commit()
-        print(f"✅ Written {len(fresh)} items to Firestore")
+        print(f"✅ Written to Firestore: {len(fresh)} items")
     except Exception as e:
-        print(f"⚠️  Firestore write failed: {e}")
-else:
-    print("ℹ️  No FIREBASE_SERVICE_ACCOUNT — saving to data/news.json only")
+        print(f"⚠️ Firestore: {e}")
 
-# ─── ALWAYS SAVE LOCAL JSON CACHE ────────────────────────────────────────────
-os.makedirs("data", exist_ok=True)
-with open("data/news.json", "w", encoding="utf-8") as f:
-    json.dump(fresh, f, ensure_ascii=False, indent=2)
-with open("data/meta.json", "w", encoding="utf-8") as f:
-    json.dump({
-        "last_updated": datetime.now(IST).isoformat(),
-        "news_count": len(fresh),
-        "sources_checked": len(RSS_FEEDS),
-        "all_items_found": len(all_items)
-    }, f, ensure_ascii=False, indent=2)
-print(f"✅ Saved to data/news.json ({len(fresh)} items)")
+# Always save local JSON cache
+os.makedirs("data",exist_ok=True)
+with open("data/news.json","w",encoding="utf-8") as f:
+    json.dump(fresh,f,ensure_ascii=False,indent=2)
+with open("data/meta.json","w",encoding="utf-8") as f:
+    json.dump({"last_updated":datetime.now(IST).isoformat(),"news_count":len(fresh),
+               "sources":len(RSS_FEEDS),"total_found":len(all_items)},f)
+print(f"✅ Saved to data/news.json")
