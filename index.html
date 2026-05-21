@@ -162,11 +162,34 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   <div class="npill"><div class="dlive"></div><span style="font-size:11.5px;color:rgba(255,255,255,.9);font-weight:500">LIVE · National Infrastructure Intelligence</span></div>
   <div class="nright">
     <div id="nclock">--:--:-- IST</div>
-    <button class="nbtn" onclick="toast('🔔','23 New Alerts','High-priority excavator opportunities detected today')" title="Alerts"><i class="fa fa-bell"></i><span class="nbadge">23</span></button>
+    <button class="nbtn" id="bellbtn" onclick="toggleNotif()" title="Intelligence Alerts"><i class="fa fa-bell"></i><span class="nbadge" id="nbadge">23</span></button>
     <button class="nbtn" id="syncbtn" onclick="syncData()" title="Sync Data"><i class="fa fa-sync-alt"></i></button>
     <button class="nbtn" onclick="toast('💾','Report Generated','Intelligence report ready for download')" title="Export"><i class="fa fa-download"></i></button>
   </div>
 </nav>
+
+<!-- NOTIFICATION PANEL -->
+<div id="notif-panel" style="position:fixed;top:56px;right:0;width:400px;max-width:100vw;background:#fff;box-shadow:-4px 0 20px rgba(0,0,0,.18);z-index:1999;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;max-height:calc(100vh - 56px);border-left:1px solid var(--br)">
+  <div style="background:var(--b);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+    <div><div style="color:#fff;font-weight:700;font-size:14px">Intelligence Alerts</div><div style="color:rgba(255,255,255,.65);font-size:11px" id="notif-subtitle">23 unread — updated live</div></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button onclick="markAllRead()" style="background:rgba(255,255,255,.15);border:none;color:#fff;padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer;font-weight:600">Mark all read</button>
+      <button onclick="toggleNotif()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:5px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center">✕</button>
+    </div>
+  </div>
+  <div style="display:flex;border-bottom:1px solid var(--br);background:#F8FAFF;flex-shrink:0">
+    <button class="ntab active" data-ncat="all" onclick="filterNotifs('all')" style="flex:1;padding:8px;border:none;background:transparent;font-size:11.5px;font-weight:600;color:var(--b);border-bottom:2px solid var(--b);cursor:pointer">All</button>
+    <button class="ntab" data-ncat="urgent" onclick="filterNotifs('urgent')" style="flex:1;padding:8px;border:none;background:transparent;font-size:11.5px;font-weight:500;color:var(--mu);border-bottom:2px solid transparent;cursor:pointer">🔴 Urgent</button>
+    <button class="ntab" data-ncat="award" onclick="filterNotifs('award')" style="flex:1;padding:8px;border:none;background:transparent;font-size:11.5px;font-weight:500;color:var(--mu);border-bottom:2px solid transparent;cursor:pointer">✅ Awards</button>
+    <button class="ntab" data-ncat="mining" onclick="filterNotifs('mining')" style="flex:1;padding:8px;border:none;background:transparent;font-size:11.5px;font-weight:500;color:var(--mu);border-bottom:2px solid transparent;cursor:pointer">⛏️ Mining</button>
+  </div>
+  <div id="notif-list" style="flex:1;overflow-y:auto;"></div>
+  <div style="padding:10px 14px;border-top:1px solid var(--br);background:#F8FAFF;flex-shrink:0;font-size:11px;color:var(--mu);display:flex;justify-content:space-between;align-items:center">
+    <span>🔄 Auto-refreshes every 30 seconds</span>
+    <button onclick="toast('📤','Report','Alert digest emailed to your team')" style="background:var(--b);color:#fff;border:none;padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer">Export Digest</button>
+  </div>
+</div>
+<div id="notif-overlay" onclick="toggleNotif()" style="position:fixed;inset:0;z-index:1998;display:none;background:rgba(0,0,0,.2)"></div>
 
 <div id="ticker"><div class="tlbl">⚡ LIVE ALERTS</div><div class="twrap"><div class="tcon" id="tcon2"></div></div></div>
 
@@ -295,7 +318,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   <!-- CONTRACTORS -->
   <div class="panel" id="panel-contractors">
     <div class="sbar"><i class="fa fa-search" style="color:var(--mu)"></i><input type="text" class="sinput" id="csearch" placeholder="Search contractors..." oninput="renderContractors()"></div>
-    <div id="contlist" style="flex:1;overflow:auto;padding:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:11px;align-content:start"></div>
+    <div id="contlist" style="flex:1;overflow:auto;padding:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-content:start"></div>
   </div>
 
   <!-- NEWS -->
@@ -377,21 +400,141 @@ const CD=[
 ];
 
 const CONTR=[
-  {name:"L&T Construction",projects:8,val:18200,states:["Maharashtra","Karnataka","MP","Odisha","Gujarat"],spec:"Highways, Metro, Mining, Irrigation, Ports",ob:87400,mach:185,gr:"+22%",type:"EPC Conglomerate"},
-  {name:"Afcons Infrastructure",projects:7,val:13400,states:["Telangana","Maharashtra","TN","Assam","AP","Odisha"],spec:"Marine, Metro, Highways, Railways",ob:42000,mach:120,gr:"+18%",type:"Specialty EPC"},
-  {name:"Dilip Buildcon",projects:5,val:8900,states:["Rajasthan","Chhattisgarh","Maharashtra","WB"],spec:"Highways, Mining Overburden",ob:36800,mach:180,gr:"+31%",type:"Highway EPC"},
-  {name:"Gawar Construction",projects:4,val:7600,states:["Tamil Nadu","Punjab","Rajasthan","UP"],spec:"Highway Construction",ob:28500,mach:95,gr:"+28%",type:"Highway EPC"},
-  {name:"HCC Ltd",projects:5,val:14400,states:["Maharashtra","Karnataka","TN","Odisha","AP"],spec:"Hydro, Tunneling, Ports, Metro",ob:22400,mach:85,gr:"+12%",type:"Specialty EPC"},
-  {name:"GR Infraprojects",projects:3,val:4500,states:["Maharashtra","UP","Bihar"],spec:"Highway Construction",ob:18700,mach:92,gr:"+35%",type:"Highway EPC"},
-  {name:"NCC Limited",projects:5,val:7200,states:["UP","Rajasthan","AP","Bihar","Karnataka"],spec:"Buildings, Roads, Mining",ob:21600,mach:78,gr:"+19%",type:"Diversified EPC"},
-  {name:"PNC Infratech",projects:4,val:6900,states:["Maharashtra","UP","WB","Rajasthan"],spec:"Highway Construction",ob:16800,mach:72,gr:"+24%",type:"Highway EPC"},
-  {name:"Navayuga Engineering",projects:3,val:8700,states:["Andhra Pradesh","Tamil Nadu"],spec:"Hydro, Highway, Marine",ob:14200,mach:65,gr:"+15%",type:"Regional EPC"},
-  {name:"KEC International",projects:2,val:4400,states:["Uttar Pradesh","Rajasthan"],spec:"Railways, Transmission",ob:31200,mach:45,gr:"+41%",type:"Infra Specialist"},
-  {name:"Shapoorji Pallonji",projects:4,val:9200,states:["Gujarat","Maharashtra","Assam"],spec:"Buildings, Smart City, Ports",ob:28400,mach:60,gr:"+9%",type:"Diversified EPC"},
-  {name:"KNR Constructions",projects:3,val:5900,states:["Tamil Nadu","MP","Karnataka"],spec:"Highways, Irrigation",ob:14600,mach:58,gr:"+26%",type:"Highway EPC"},
-  {name:"Thriveni Earthmovers",projects:2,val:3320,states:["Chhattisgarh","Telangana"],spec:"Mining Overburden, Earthmoving",ob:8400,mach:220,gr:"+44%",type:"Mining Contractor"},
-  {name:"BEML",projects:2,val:2740,states:["Jharkhand","West Bengal"],spec:"Mining, Defence Equipment",ob:18200,mach:180,gr:"+8%",type:"PSU"},
-  {name:"IRCON International",projects:2,val:3020,states:["Madhya Pradesh","Bihar"],spec:"Railways, Highways",ob:22800,mach:42,gr:"+12%",type:"PSU EPC"}
+  {name:"L&T Construction",projects:8,val:18200,states:["Maharashtra","Karnataka","MP","Odisha","Gujarat"],spec:"Highways, Metro, Mining, Irrigation, Ports",ob:87400,mach:185,gr:"+22%",type:"EPC Conglomerate",
+   hq:"L&T House, N.M. Marg, Ballard Estate, Mumbai 400 001, Maharashtra",
+   regOffice:"Mount Poonamallee Road, Manapakkam, Chennai 600 089, Tamil Nadu",
+   phone:"+91-22-6752-5656",altPhone:"+91-44-6752-1000",
+   procPhone:"+91-44-6752-2000",
+   email:"infra.cmmb@larsentoubro.com",procEmail:"procurement.infra@larsentoubro.com",
+   website:"www.larsentoubro.com",
+   contact:"Mr. S.N. Subrahmanyan (MD & CEO)",procContact:"Infrastructure IC — Procurement Head",
+   linkedin:"linkedin.com/company/larsen-and-toubro"},
+  {name:"Afcons Infrastructure",projects:7,val:13400,states:["Telangana","Maharashtra","TN","Assam","AP","Odisha"],spec:"Marine, Metro, Highways, Railways",ob:42000,mach:120,gr:"+18%",type:"Specialty EPC",
+   hq:"Afcons House, 16, Shah Industrial Estate, Veera Desai Road, Andheri (W), Mumbai 400 053",
+   regOffice:"2nd Floor, Krishe Sapphire, HITEC City, Hyderabad 500 081",
+   phone:"+91-22-6665-2626",altPhone:"+91-40-4444-1234",
+   procPhone:"+91-22-6665-2700",
+   email:"info@afcons.com",procEmail:"procurement@afcons.com",
+   website:"www.afcons.com",
+   contact:"Mr. S. Paramasivan (MD & CEO)",procContact:"Procurement & Plant Head",
+   linkedin:"linkedin.com/company/afcons-infrastructure"},
+  {name:"Dilip Buildcon",projects:5,val:8900,states:["Rajasthan","Chhattisgarh","Maharashtra","WB"],spec:"Highways, Mining Overburden",ob:36800,mach:180,gr:"+31%",type:"Highway EPC",
+   hq:"Plot No. A-1/2, Arera Hills, Opp. Mantralaya, Bhopal 462 011, Madhya Pradesh",
+   regOffice:"Raipur Regional Office: Ring Road No. 1, Sector 24, Atal Nagar, Raipur 492 099",
+   phone:"+91-755-4290-000",altPhone:"+91-771-4290-100",
+   procPhone:"+91-755-4290-222",
+   email:"info@dilipbuildcon.com",procEmail:"equipment.procurement@dilipbuildcon.com",
+   website:"www.dilipbuildcon.com",
+   contact:"Mr. Devendra Jain (Chairman & MD)",procContact:"Plant & Equipment Division Head",
+   linkedin:"linkedin.com/company/dilip-buildcon-limited"},
+  {name:"Gawar Construction",projects:4,val:7600,states:["Tamil Nadu","Punjab","Rajasthan","UP"],spec:"Highway Construction",ob:28500,mach:95,gr:"+28%",type:"Highway EPC",
+   hq:"SCO 18-19, Sector 9-D, Chandigarh 160 009",
+   regOffice:"15-A, Model Town, Hisar 125 005, Haryana",
+   phone:"+91-1662-274-247",altPhone:"+91-172-502-4700",
+   procPhone:"+91-1662-274-300",
+   email:"info@gawarconstruction.com",procEmail:"plant@gawarconstruction.com",
+   website:"www.gawarconstruction.com",
+   contact:"Mr. Ashok Gawar (Founder & CMD)",procContact:"Equipment & Plant Department",
+   linkedin:"linkedin.com/company/gawar-construction"},
+  {name:"HCC Ltd",projects:5,val:14400,states:["Maharashtra","Karnataka","TN","Odisha","AP"],spec:"Hydro, Tunneling, Ports, Metro",ob:22400,mach:85,gr:"+12%",type:"Specialty EPC",
+   hq:"Hincon House, 11th Floor, 247 Park, LBS Marg, Vikhroli (W), Mumbai 400 083",
+   regOffice:"HCC House, No. 1 & 2, 100 Feet Road, Indiranagar, Bengaluru 560 038",
+   phone:"+91-22-2577-3000",altPhone:"+91-80-2520-1234",
+   procPhone:"+91-22-2577-3200",
+   email:"info@hccindia.com",procEmail:"equipment.hire@hccindia.com",
+   website:"www.hccindia.com",
+   contact:"Mr. Arjun Dhawan (MD & CEO)",procContact:"Plant & Equipment Head",
+   linkedin:"linkedin.com/company/hcc-ltd"},
+  {name:"GR Infraprojects",projects:3,val:4500,states:["Maharashtra","UP","Bihar"],spec:"Highway Construction",ob:18700,mach:92,gr:"+35%",type:"Highway EPC",
+   hq:"GR House, Near Meera Girls College, Bhilwara Highway, Udaipur 313 002, Rajasthan",
+   regOffice:"Plot No. 5, Sector 27C, Madhya Marg, Chandigarh 160 019",
+   phone:"+91-294-2413-900",altPhone:"+91-172-502-1100",
+   procPhone:"+91-294-2413-950",
+   email:"info@grinfraprojects.com",procEmail:"procurement@grinfraprojects.com",
+   website:"www.grinfraprojects.com",
+   contact:"Mr. Vinod Agarwal (MD)",procContact:"Plant & Machinery Head",
+   linkedin:"linkedin.com/company/g-r-infraprojects"},
+  {name:"NCC Limited",projects:5,val:7200,states:["UP","Rajasthan","AP","Bihar","Karnataka"],spec:"Buildings, Roads, Mining",ob:21600,mach:78,gr:"+19%",type:"Diversified EPC",
+   hq:"NCC House, Madhapur, Hyderabad 500 081, Telangana",
+   regOffice:"NCC Civil Infra — North Zone, B-20, Sector 57, Noida 201 301, UP",
+   phone:"+91-40-2311-1222",altPhone:"+91-120-4747-500",
+   procPhone:"+91-40-2311-1400",
+   email:"ncc@ncclimited.com",procEmail:"civileqpt@ncclimited.com",
+   website:"www.ncclimited.com",
+   contact:"Mr. Arjun Rajgopal (MD)",procContact:"Civil Infrastructure Procurement",
+   linkedin:"linkedin.com/company/ncc-limited"},
+  {name:"PNC Infratech",projects:4,val:6900,states:["Maharashtra","UP","WB","Rajasthan"],spec:"Highway Construction",ob:16800,mach:72,gr:"+24%",type:"Highway EPC",
+   hq:"NBCC Plaza, Tower-II, 3rd Floor, Sector 5, Pushp Vihar, New Delhi 110 017",
+   regOffice:"17, Sanjay Place, Agra 282 002, Uttar Pradesh",
+   phone:"+91-562-2520-100",altPhone:"+91-11-4102-5100",
+   procPhone:"+91-562-2520-200",
+   email:"info@pncinfratech.com",procEmail:"plant.procurement@pncinfratech.com",
+   website:"www.pncinfratech.com",
+   contact:"Mr. Yogesh Kumar Jain (MD)",procContact:"Equipment Procurement Division",
+   linkedin:"linkedin.com/company/pnc-infratech"},
+  {name:"Navayuga Engineering",projects:3,val:8700,states:["Andhra Pradesh","Tamil Nadu"],spec:"Hydro, Highway, Marine",ob:14200,mach:65,gr:"+15%",type:"Regional EPC",
+   hq:"Navayuga House, Plot No. 271, Phase-II, Kamalapuri Colony, Hyderabad 500 073",
+   regOffice:"Navayuga Rajahmundry Site Office, NH-16, Rajamahendravaram, AP 533 101",
+   phone:"+91-40-2354-2800",altPhone:"+91-40-2354-3900",
+   procPhone:"+91-40-2354-2850",
+   email:"info@navayuga.com",procEmail:"equipment@navayuga.com",
+   website:"www.navayuga.com",
+   contact:"Mr. C.V. Raju (Chairman)",procContact:"Equipment & Plant Manager",
+   linkedin:"linkedin.com/company/navayuga-engineering"},
+  {name:"KEC International",projects:2,val:4400,states:["Uttar Pradesh","Rajasthan"],spec:"Railways, Transmission",ob:31200,mach:45,gr:"+41%",type:"Infra Specialist",
+   hq:"RPG House, 463, Dr. Annie Besant Road, Worli, Mumbai 400 030",
+   regOffice:"KEC Railways Division, C-Block, DLF Phase I, Sector 26, Gurugram 122 002",
+   phone:"+91-22-6695-2500",altPhone:"+91-124-4603-600",
+   procPhone:"+91-22-6695-2600",
+   email:"info@kecrpg.com",procEmail:"railways.procurement@kecrpg.com",
+   website:"www.kecrpg.com",
+   contact:"Mr. Vimal Kejriwal (MD & CEO)",procContact:"Railways Division — Plant Head",
+   linkedin:"linkedin.com/company/kec-international"},
+  {name:"Shapoorji Pallonji",projects:4,val:9200,states:["Gujarat","Maharashtra","Assam"],spec:"Buildings, Smart City, Ports",ob:28400,mach:60,gr:"+9%",type:"Diversified EPC",
+   hq:"Shapoorji Pallonji Centre, 41/44, Minoo Desai Marg, Colaba, Mumbai 400 005",
+   regOffice:"SP Group, 3rd Floor, Vatika City Centre, Sector 15, Gurugram 122 001",
+   phone:"+91-22-6752-3535",altPhone:"+91-124-4149-900",
+   procPhone:"+91-22-6752-3700",
+   email:"info@shapoorji.co.in",procEmail:"procurement@shapoorji.co.in",
+   website:"www.shapoorji.co.in",
+   contact:"Mr. Shapoor Mistry (Chairman)",procContact:"Civil Division Procurement Head",
+   linkedin:"linkedin.com/company/shapoorji-pallonji"},
+  {name:"KNR Constructions",projects:3,val:5900,states:["Tamil Nadu","MP","Karnataka"],spec:"Highways, Irrigation",ob:14600,mach:58,gr:"+26%",type:"Highway EPC",
+   hq:"1-8-303/69/2, 4th Floor, S.P. Road, Begumpet, Hyderabad 500 016",
+   regOffice:"KNR Constructions, 100 Feet Road, HAL 2nd Stage, Indiranagar, Bengaluru 560 038",
+   phone:"+91-40-2335-2601",altPhone:"+91-80-2520-8800",
+   procPhone:"+91-40-2335-2700",
+   email:"info@knrconstructions.com",procEmail:"plant@knrconstructions.com",
+   website:"www.knrconstructions.com",
+   contact:"Mr. K. Narasimha Reddy (MD)",procContact:"Plant & Equipment Head",
+   linkedin:"linkedin.com/company/knr-constructions"},
+  {name:"Thriveni Earthmovers",projects:2,val:3320,states:["Chhattisgarh","Telangana"],spec:"Mining Overburden, Earthmoving",ob:8400,mach:220,gr:"+44%",type:"Mining Contractor",
+   hq:"Thriveni Earthmovers Pvt. Ltd., Plot No. 84, Road No. 11, Banjara Hills, Hyderabad 500 034",
+   regOffice:"Gevra Site Office, Village Gevra, Korba District, Chhattisgarh 495 455",
+   phone:"+91-40-4002-3000",altPhone:"+91-7765-281-200",
+   procPhone:"+91-40-4002-3100",
+   email:"earthmovers@thriveni.in",procEmail:"equipment.thriveni@thriveni.in",
+   website:"www.thriveni.in",
+   contact:"Mr. Binay Kumar Agarwala (MD)",procContact:"Mining Equipment Head — Direct Procurement",
+   linkedin:"linkedin.com/company/thriveni-earthmovers"},
+  {name:"BEML",projects:2,val:2740,states:["Jharkhand","West Bengal"],spec:"Mining, Defence Equipment",ob:18200,mach:180,gr:"+8%",type:"PSU",
+   hq:"BEML Soudha, 23/1, 4th Main Road, SR Nagar, Bengaluru 560 027",
+   regOffice:"BEML Mining & Construction, Plot No. B-8, Sector-7, Bhilai 490 006, Chhattisgarh",
+   phone:"+91-80-2222-1310",altPhone:"+91-788-222-5555",
+   procPhone:"+91-80-2222-1500",
+   email:"helpdesk@beml.co.in",procEmail:"materials@beml.co.in",
+   website:"www.beml.co.in",
+   contact:"Mr. Shantanu Roy (CMD)",procContact:"Mining & Construction Business Head",
+   linkedin:"linkedin.com/company/beml-limited"},
+  {name:"IRCON International",projects:2,val:3020,states:["Madhya Pradesh","Bihar"],spec:"Railways, Highways",ob:22800,mach:42,gr:"+12%",type:"PSU EPC",
+   hq:"C-4, District Centre, Saket, New Delhi 110 017",
+   regOffice:"IRCON International, 5th Floor, Palika Bhavan, R.K. Puram, New Delhi 110 066",
+   phone:"+91-11-2956-4020",altPhone:"+91-11-2956-5000",
+   procPhone:"+91-11-2956-4100",
+   email:"ircon@ircon.org",procEmail:"procurement@ircon.org",
+   website:"www.ircon.org",
+   contact:"Mr. Sanjay Kumar Pande (CMD)",procContact:"Civil Division — Plant & Machinery",
+   linkedin:"linkedin.com/company/ircon-international"}
 ];
 
 const TICKERS=[
@@ -633,6 +776,23 @@ function openMod(id){
         <strong>L&T CMMB Territory:</strong> ${c.state} Regional Office · Nearest Service Center: ${c.district} area
       </div>
     </div>
+    ${(()=>{const ct=CONTR.find(x=>x.name===c.contractor);return ct?`
+    <div style="background:#F0FDF4;border:1px solid #A7F3D0;border-radius:8px;padding:13px;margin-top:8px">
+      <div style="font-size:11px;font-weight:700;color:#065F46;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">📞 Contractor Contact Intelligence — ${ct.name}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--t2)">
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Head Office</div><div style="font-size:11px">${ct.hq}</div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Key Contact</div><div style="font-weight:600;color:var(--t1)">${ct.contact}</div><div style="font-size:11px;color:var(--mu)">${ct.procContact}</div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Corp Phone</div><div><a href="tel:${ct.phone}" style="color:var(--b);font-weight:600;text-decoration:none;font-size:13px">${ct.phone}</a></div><div><a href="tel:${ct.altPhone}" style="color:var(--t2);text-decoration:none;font-size:11px">${ct.altPhone}</a></div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Procurement Phone</div><div><a href="tel:${ct.procPhone}" style="color:#065F46;font-weight:700;text-decoration:none;font-size:13px">${ct.procPhone}</a></div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">General Email</div><div><a href="mailto:${ct.email}" style="color:var(--b);text-decoration:none">${ct.email}</a></div></div>
+        <div><div style="font-size:10px;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Procurement Email</div><div><a href="mailto:${ct.procEmail}" style="color:#065F46;font-weight:600;text-decoration:none">${ct.procEmail}</a></div></div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px">
+        <a href="tel:${ct.procPhone}" style="flex:1;padding:7px;background:#065F46;color:#fff;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">📱 Call Procurement</a>
+        <a href="mailto:${ct.procEmail}?subject=Komatsu PC210 Equipment for ${c.name}" style="flex:1;padding:7px;background:var(--b);color:#fff;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">📧 Email Procurement</a>
+        <a href="https://${ct.website}" target="_blank" style="flex:1;padding:7px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">🌐 Website</a>
+      </div>
+    </div>`:''})()}
     <div style="display:flex;gap:7px;margin-top:12px">
       <button onclick="closeMod()" style="flex:1;padding:8px;background:var(--bg);border:1px solid var(--br);border-radius:6px;cursor:pointer;font-size:12px">Close</button>
       <button onclick="toast('📋','Watchlist','Contract added to territory watchlist')" style="flex:1;padding:8px;background:var(--b);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add to Watchlist</button>
@@ -646,10 +806,13 @@ function closeMod(e){if(!e||e.target===document.getElementById('mover'))document
 function renderContractors(){
   const q=(document.getElementById('csearch')?.value||'').toLowerCase();
   const el=document.getElementById('contlist');
-  const list=CONTR.filter(c=>!q||c.name.toLowerCase().includes(q));
-  el.innerHTML=list.map(c=>`<div class="ccard">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start">
-      <div><div class="cname">${c.name}</div><div style="font-size:11px;color:var(--mu)">${c.type}</div></div>
+  const list=CONTR.filter(c=>!q||c.name.toLowerCase().includes(q)||c.spec.toLowerCase().includes(q)||c.hq.toLowerCase().includes(q));
+  el.innerHTML=list.map(c=>`<div class="ccard" style="cursor:default">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+      <div>
+        <div class="cname">${c.name}</div>
+        <div style="font-size:11px;color:var(--mu)">${c.type}</div>
+      </div>
       <span style="padding:3px 8px;background:#D1FAE5;color:#065F46;border-radius:4px;font-size:11px;font-weight:700">${c.gr}</span>
     </div>
     <div class="csts">
@@ -657,9 +820,52 @@ function renderContractors(){
       <div class="sbox"><div class="sv" style="font-size:12px">₹${(c.val/1000).toFixed(0)}K Cr</div><div class="sl">Value</div></div>
       <div class="sbox"><div class="sv">${c.mach}</div><div class="sl">Machines</div></div>
     </div>
-    <div style="margin-top:9px;font-size:11px;color:var(--t2)"><strong>Specialty:</strong> ${c.spec}</div>
-    <div class="ctags">${c.states.map(s=>`<span class="chip">📍 ${s}</span>`).join('')}</div>
-    <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--br);font-size:11px;color:var(--mu)">Order Book: <strong style="color:var(--b)">₹${c.ob.toLocaleString('en-IN')} Cr</strong></div>
+    <div style="margin-top:10px;font-size:11px;color:var(--t2)"><strong>Specialty:</strong> ${c.spec}</div>
+    <div class="ctags" style="margin-top:6px">${c.states.map(s=>`<span class="chip">📍 ${s}</span>`).join('')}</div>
+    <!-- CONTACT SECTION -->
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--br)">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--b);margin-bottom:7px">📞 Contact Intelligence</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:flex-start;gap:6px">
+          <span style="color:var(--b);font-size:11px;flex-shrink:0">🏢</span>
+          <span>${c.hq}</span>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--b);flex-shrink:0">📱</span>
+          <a href="tel:${c.phone}" style="color:var(--b);font-weight:600;text-decoration:none">${c.phone}</a>
+          <span style="color:var(--br)">|</span>
+          <a href="tel:${c.altPhone}" style="color:var(--t2);text-decoration:none">${c.altPhone}</a>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--b);flex-shrink:0">📧</span>
+          <a href="mailto:${c.email}" style="color:var(--b);text-decoration:none">${c.email}</a>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--ok);flex-shrink:0">🎯</span>
+          <span><strong>Proc. Contact:</strong> <a href="mailto:${c.procEmail}" style="color:var(--ok);font-weight:600;text-decoration:none">${c.procEmail}</a></span>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--mu);flex-shrink:0">👤</span>
+          <span>${c.contact}</span>
+        </div>
+        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--mu);flex-shrink:0">🔧</span>
+          <span>${c.procContact}</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <a href="tel:${c.phone}" style="flex:1;padding:6px;background:var(--b);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i class="fa fa-phone" style="font-size:10px"></i> Call
+        </a>
+        <a href="mailto:${c.procEmail}" style="flex:1;padding:6px;background:var(--ok);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i class="fa fa-envelope" style="font-size:10px"></i> Email
+        </a>
+        <a href="https://${c.website}" target="_blank" style="flex:1;padding:6px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i class="fa fa-external-link-alt" style="font-size:10px"></i> Web
+        </a>
+      </div>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:var(--mu)">Order Book: <strong style="color:var(--b)">₹${c.ob.toLocaleString('en-IN')} Cr</strong></div>
   </div>`).join('');
 }
 
@@ -742,7 +948,81 @@ function toast(icon,title,body,dur=4500){
   c.appendChild(d);setTimeout(()=>d.remove(),dur);
 }
 
-const ALERTS=[
+// ===================== NOTIFICATIONS =====================
+const NOTIFS=[
+  {id:1,cat:"urgent",icon:"🔴",title:"High Priority: Gevra OC Mine Awarded",msg:"CIL/SECL awards ₹2,340 Cr contract to Thriveni Earthmovers. 38 Komatsu excavators required. Mobilisation begins in 30 days. Contact procurement NOW.",time:"2 min ago",read:false,state:"Chhattisgarh",value:"₹2,340 Cr"},
+  {id:2,cat:"mining",icon:"⛏️",title:"Mining: Singareni OC Mine Tender Live",msg:"SCCL New Pit Development ₹980 Cr — Tender open, bid closes Jul 15, 2025. 20 units estimated. Contact Thriveni Earthmovers for JV opportunity.",time:"1 hr ago",read:false,state:"Telangana",value:"₹980 Cr"},
+  {id:3,cat:"award",icon:"✅",title:"Awarded: Delhi–Mumbai Expressway Pkg 11",msg:"Dilip Buildcon wins ₹3,200 Cr NHAI package in Rajasthan. 32 excavators needed. Equipment procurement phase starting. Call +91-755-4290-000.",time:"3 hrs ago",read:false,state:"Rajasthan",value:"₹3,200 Cr"},
+  {id:4,cat:"urgent",icon:"🔴",title:"Urgent: Bailadila Mine 42 Excavators Active",msg:"NMDC Bailadila Iron Ore Expansion ₹1,560 Cr under execution. 42 Komatsu units deployed. Service opportunities available. Contact site manager.",time:"4 hrs ago",read:false,state:"Chhattisgarh",value:"₹1,560 Cr"},
+  {id:5,cat:"award",icon:"✅",title:"Awarded: L&T wins Bengaluru Metro Phase 3",msg:"BMRCL awards ₹2,800 Cr contract to L&T Construction. 16 excavators for deep underground station work. Internal team coordination required.",time:"5 hrs ago",read:false,state:"Karnataka",value:"₹2,800 Cr"},
+  {id:6,cat:"mining",icon:"⛏️",title:"Mining: Jharia Coalfield OB Tender — Urgent",msg:"BCCL/CIL floats ₹1,820 Cr overburden removal tender. Bid closes Jun 30. 30 excavator units. Key contractors: BEML, Thriveni. Contact immediately.",time:"6 hrs ago",read:true,state:"Jharkhand",value:"₹1,820 Cr"},
+  {id:7,cat:"urgent",icon:"🔴",title:"New High-Value: Ken–Betwa Link Canal",msg:"NWDA floats ₹3,600 Cr canal earthwork in MP. 28 excavators estimated. Upcoming tender — engage L&T Construction early to influence equipment specs.",time:"8 hrs ago",read:true,state:"Madhya Pradesh",value:"₹3,600 Cr"},
+  {id:8,cat:"award",icon:"✅",title:"Awarded: BRO Strategic Road Arunachal",msg:"BRO awards ₹1,800 Cr border road to Afcons. 24 excavators for extreme rock cutting. High-altitude deployment. Call Afcons Procurement: +91-22-6665-2626.",time:"1 day ago",read:true,state:"Arunachal Pradesh",value:"₹1,800 Cr"},
+  {id:9,cat:"mining",icon:"⛏️",title:"Mining Alert: ECL Raniganj OC Upcoming",msg:"ECL/CIL to float ₹920 Cr Raniganj coalfield expansion. 18 excavators. Bid expected Aug 1. Pre-qualify BEML and Thriveni. Reach out now.",time:"1 day ago",read:true,state:"West Bengal",value:"₹920 Cr"},
+  {id:10,cat:"urgent",icon:"🔴",title:"Territory Alert: Maharashtra 3 New Packages",msg:"NHAI floats 3 new highway packages in Nagpur region this week — Pkg 4 ₹1,240 Cr, Pune-Solapur ₹980 Cr in execution. Schedule territory visit.",time:"2 days ago",read:true,state:"Maharashtra",value:"₹2,220 Cr"},
+  {id:11,cat:"award",icon:"✅",title:"Awarded: Marathwada Water Grid Pkg 5",msg:"HCC Ltd wins ₹1,840 Cr irrigation contract in Maharashtra. 18 excavators for canal earthwork. Contact HCC Procurement: +91-22-2577-3200.",time:"2 days ago",read:true,state:"Maharashtra",value:"₹1,840 Cr"},
+  {id:12,cat:"mining",icon:"⛏️",title:"Mining: WCL Wardha Valley Tender Live",msg:"WCL/CIL floats ₹740 Cr opencast mine expansion. Tender live — 16 Komatsu units. Target Dilip Buildcon (likely bidder). Call +91-755-4290-000.",time:"3 days ago",read:true,state:"Maharashtra",value:"₹740 Cr"}
+];
+
+let notifOpen=false;
+let notifCat='all';
+let notifRead=new Set(NOTIFS.filter(n=>n.read).map(n=>n.id));
+
+function toggleNotif(){
+  notifOpen=!notifOpen;
+  const panel=document.getElementById('notif-panel');
+  const overlay=document.getElementById('notif-overlay');
+  panel.style.transform=notifOpen?'translateX(0)':'translateX(100%)';
+  overlay.style.display=notifOpen?'block':'none';
+  if(notifOpen) renderNotifs();
+}
+
+function renderNotifs(){
+  const list=document.getElementById('notif-list');
+  const filtered=NOTIFS.filter(n=>notifCat==='all'||n.cat===notifCat);
+  const unread=NOTIFS.filter(n=>!notifRead.has(n.id)).length;
+  document.getElementById('notif-subtitle').textContent=unread+' unread — updated live';
+  document.getElementById('nbadge').textContent=unread;
+  document.getElementById('nbadge').style.display=unread>0?'':'none';
+  list.innerHTML=filtered.map(n=>{
+    const isRead=notifRead.has(n.id);
+    const catColor=n.cat==='urgent'?'#DC2626':n.cat==='mining'?'#7C3AED':'#059669';
+    return `<div onclick="markRead(${n.id})" style="padding:13px 16px;border-bottom:1px solid var(--br);cursor:pointer;background:${isRead?'#fff':'#F0F9FF'};transition:background .2s;display:flex;gap:10px;align-items:flex-start" onmouseover="this.style.background='#EFF6FF'" onmouseout="this.style.background='${isRead?'#fff':'#F0F9FF'}'">
+      <div style="width:36px;height:36px;border-radius:8px;background:${isRead?'#F3F4F6':'#EFF6FF'};display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${n.icon}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12.5px;font-weight:${isRead?'500':'700'};color:${isRead?'var(--t2)':'var(--t1)'};margin-bottom:3px;line-height:1.3">${n.title}</div>
+        <div style="font-size:11px;color:var(--mu);line-height:1.5;margin-bottom:5px">${n.msg}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:10px;background:${catColor}22;color:${catColor};padding:1px 6px;border-radius:3px;font-weight:600">${n.state}</span>
+          <span style="font-size:10px;font-weight:700;color:var(--b)">${n.value}</span>
+          <span style="font-size:10px;color:var(--mu);margin-left:auto">${n.time}</span>
+          ${!isRead?'<span style="width:7px;height:7px;background:#2563EB;border-radius:50%;flex-shrink:0"></span>':''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  if(!filtered.length) list.innerHTML='<div style="padding:30px;text-align:center;color:var(--mu);font-size:13px">No alerts in this category</div>';
+}
+
+function markRead(id){notifRead.add(id);renderNotifs();}
+
+function markAllRead(){
+  NOTIFS.forEach(n=>notifRead.add(n.id));
+  renderNotifs();
+  toast('✅','All read','All intelligence alerts marked as read');
+}
+
+function filterNotifs(cat){
+  notifCat=cat;
+  document.querySelectorAll('.ntab').forEach(t=>{
+    const active=t.dataset.ncat===cat;
+    t.style.fontWeight=active?'700':'500';
+    t.style.color=active?'var(--b)':'var(--mu)';
+    t.style.borderBottom=active?'2px solid var(--b)':'2px solid transparent';
+  });
+  renderNotifs();
+}
+
   ['🔴','High Priority','Gevra OC Mine ₹2,340 Cr — 38 excavators needed — Stage: Awarded'],
   ['🛣️','New Highway Tender','NHAI: ₹2,800 Cr Chennai–Bengaluru Expressway — Bid Aug 15'],
   ['⛏️','Mining Intelligence','Singareni OC Mine ₹980 Cr — Tender Live — 20 Komatsu units'],
