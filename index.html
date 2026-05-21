@@ -1928,187 +1928,280 @@ function toast(icon,title,body,dur=4500){
 
 
 // ===================== SOURCE VERIFICATION MODULE =====================
+const API_SOURCES = [
+  // TIER 1 — Active (free RSS/API, no key needed)
+  {id:'pib',       tier:1, name:'PIB Press Releases',        type:'highways',  icon:'📰', color:'#003F72',
+   desc:'Government press releases — cabinet approvals, NH sanctions, coal blocks', status:'live',
+   url:'https://pib.gov.in/AllRelMain.aspx', apiUrl:'https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=1',
+   format:'RSS', rate:'Continuous', cost:'Free',
+   testUrl:'https://news.google.com/search?q=PIB+infrastructure+highway+contract+India&hl=en-IN&gl=IN&ceid=IN:en'},
+  {id:'gn_nhai',   tier:1, name:'Google News — NHAI/Highways', type:'highways', icon:'🛣️', color:'#003F72',
+   desc:'NHAI awards, highway EPC contracts, MoRTH projects — 28 targeted queries', status:'live',
+   url:'https://news.google.com/search?q=NHAI+highway+contract+awarded+2026&hl=en-IN&gl=IN',
+   apiUrl:'https://news.google.com/rss/search?q=NHAI+highway+tender+awarded+2026&hl=en-IN&gl=IN&ceid=IN:en',
+   format:'RSS', rate:'~10 min', cost:'Free',
+   testUrl:'https://news.google.com/search?q=NHAI+highway+contract+awarded+2026&hl=en-IN&gl=IN&ceid=IN:en'},
+  {id:'gn_mining', tier:1, name:'Google News — Mining/Coal',   type:'mining',   icon:'⛏️', color:'#7C3AED',
+   desc:'Coal India, NMDC, SCCL overburden & mine-development contracts', status:'live',
+   url:'https://news.google.com/search?q=coal+india+mine+OC+overburden+contract&hl=en-IN&gl=IN',
+   apiUrl:'https://news.google.com/rss/search?q=coal+india+mine+OC+overburden+contract+awarded&hl=en-IN&gl=IN&ceid=IN:en',
+   format:'RSS', rate:'~10 min', cost:'Free',
+   testUrl:'https://news.google.com/search?q=coal+india+mine+overburden+contract+awarded+2026&hl=en-IN&gl=IN'},
+  {id:'wb',        tier:1, name:'World Bank Projects API',     type:'highways',  icon:'🌏', color:'#003F72',
+   desc:'Active World Bank India projects — Transport, Mining, Water/Sanitation, Urban', status:'live',
+   url:'https://projects.worldbank.org/en/projects-operations/projects-list?lang=en&countrycode_exact=IN',
+   apiUrl:'https://search.worldbank.org/api/v2/projects?format=json&countrycode_exact=IN&status_exact=Active&sector_exact=Transportation&rows=10',
+   format:'REST JSON', rate:'Daily', cost:'Free, No Auth',
+   testUrl:'https://search.worldbank.org/api/v2/projects?format=json&countrycode_exact=IN&status_exact=Active&sector_exact=Transportation&rows=5'},
+  {id:'et',        tier:1, name:'Economic Times Infrastructure', type:'highways', icon:'📊', color:'#D97706',
+   desc:'ET Infrastructure section RSS + Companies feed', status:'live',
+   url:'https://economictimes.indiatimes.com/news/economy/infrastructure',
+   apiUrl:'https://economictimes.indiatimes.com/news/economy/infrastructure/rssfeeds/12879402.cms',
+   format:'RSS', rate:'<30 min', cost:'Free',
+   testUrl:'https://economictimes.indiatimes.com/news/economy/infrastructure'},
+  {id:'bs',        tier:1, name:'Business Standard Infrastructure', type:'highways', icon:'📈', color:'#003F72',
+   desc:'Business Standard infrastructure section RSS', status:'live',
+   url:'https://www.business-standard.com/industry/infrastructure',
+   apiUrl:'https://www.business-standard.com/rss/infrastructure-261.rss',
+   format:'RSS', rate:'Hourly', cost:'Free',
+   testUrl:'https://www.business-standard.com/industry/infrastructure'},
+  {id:'openmeteo', tier:1, name:'Open-Meteo Weather API',       type:'highways', icon:'🌤️', color:'#0284C7',
+   desc:'3-day weather at 10 active project sites — rain/flood alerts for earthmoving', status:'live',
+   url:'https://open-meteo.com/',
+   apiUrl:'https://api.open-meteo.com/v1/forecast?latitude=22.3&longitude=82.7&current=temperature_2m,precipitation,weathercode&forecast_days=3',
+   format:'REST JSON', rate:'Hourly', cost:'Free, No Auth',
+   testUrl:'https://api.open-meteo.com/v1/forecast?latitude=22.342&longitude=82.689&current=temperature_2m,precipitation,weathercode&forecast_days=1&timezone=Asia/Kolkata'},
+  {id:'adb',       tier:1, name:'ADB India Projects',           type:'highways', icon:'🏗️', color:'#005B9A',
+   desc:'Asian Development Bank — India transport, water, energy projects ($4.83B in 2024)', status:'live',
+   url:'https://www.adb.org/where-we-work/india',
+   apiUrl:'https://www.adb.org/projects/rss/country/IND',
+   format:'RSS', rate:'Daily', cost:'Free',
+   testUrl:'https://www.adb.org/projects?field_project_country_value=india&field_project_status_value=Active'},
+  {id:'nse',       tier:1, name:'NSE Corporate Announcements',  type:'corporate', icon:'📉', color:'#059669',
+   desc:'Order-win filings for 20 listed EPC/mining contractors — ≤3 req/sec', status:'live',
+   url:'https://www.nseindia.com/companies-listing/corporate-filings-announcements',
+   apiUrl:'https://www.nseindia.com/api/corporate-announcements?index=equities',
+   format:'Unofficial JSON', rate:'15 min', cost:'Free (unofficial)',
+   testUrl:'https://www.nseindia.com/companies-listing/corporate-filings-announcements'},
+  // TIER 2 — Active with API key
+  {id:'datagov',   tier:2, name:'data.gov.in OGD API',          type:'highways', icon:'🏛️', color:'#003F72',
+   desc:'13 datasets: NH length, PMGSY roads, coal production, mineral stats, Smart Cities', status:'key-needed',
+   url:'https://data.gov.in/sector/transport',
+   apiUrl:'https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=YOUR_KEY&format=json&limit=100',
+   format:'REST JSON', rate:'Daily-Monthly', cost:'Free (API key from data.gov.in)',
+   keyName:'DATA_GOV_KEY',
+   testUrl:'https://data.gov.in/sector/transport'},
+  {id:'currents',  tier:2, name:'Currents API',                  type:'highways', icon:'📡', color:'#7C3AED',
+   desc:'1,000 req/day free — real-time India news with country filter', status:'key-needed',
+   url:'https://currentsapi.services/',
+   apiUrl:'https://api.currentsapi.services/v1/search?apiKey=KEY&keywords=NHAI+highway&country=IN&language=en',
+   format:'REST JSON', rate:'Real-time', cost:'Free (1,000/day)',
+   keyName:'CURRENTS_API_KEY',
+   testUrl:'https://currentsapi.services/en/signup'},
+  {id:'newsdata',  tier:2, name:'NewsData.io',                   type:'highways', icon:'📰', color:'#D97706',
+   desc:'Best India coverage free news API — business, politics, tech categories', status:'key-needed',
+   url:'https://newsdata.io/',
+   apiUrl:'https://newsdata.io/api/1/news?apikey=KEY&country=in&category=business&q=NHAI+infrastructure',
+   format:'REST JSON', rate:'Real-time', cost:'Free tier available',
+   keyName:'NEWSDATA_KEY',
+   testUrl:'https://newsdata.io/register'},
+  // TIER 3 — Paid (recommended)
+  {id:'bidassist', tier:3, name:'BidAssist Public API',          type:'highways', icon:'⭐', color:'#DC2626',
+   desc:'SINGLE BEST SOURCE: Aggregates CPPP + GeM + 30+ state portals. REST API, 5 req/sec, filter by keyword/value/state', status:'paid',
+   url:'https://bidassist.com/',
+   apiUrl:'https://api-doc.bidassist.com/',
+   format:'REST JSON', rate:'Real-time', cost:'₹3K/yr portal; API pricing via sales',
+   keyName:'BIDASSIST_API_KEY',
+   testUrl:'https://api-doc.bidassist.com/'},
+  {id:'mappls',    tier:3, name:'Mappls (MapMyIndia) API',       type:'highways', icon:'🗺️', color:'#059669',
+   desc:'India-best mapping API — road networks, district boundaries, India-compliant', status:'paid',
+   url:'https://maps.mapmyindia.com/api',
+   apiUrl:'https://apis.mappls.com/advancedmaps/api/KEY/map_sdk/',
+   format:'REST/SDK', rate:'Real-time', cost:'Free tier + $302/mo for 10K calls',
+   keyName:'MAPPLS_API_KEY',
+   testUrl:'https://about.mappls.com/api/maps-api-free/'},
+];
+
+const DATA_GOV_DATASETS = [
+  {id:'9ef84268-d588-465a-a308-a864a43d0070', sector:'Transport', title:'NH Length by State (MoRTH)', fields:'state, nh_number, length_km'},
+  {id:'7a8a5a64-1f04-4a0a-bcf8-8e3c09f73b58', sector:'Transport', title:'PMGSY Road Connectivity', fields:'state, district, habitation, road_length'},
+  {id:'90d9f99a-f93e-4a73-bcf1-0c5e06e72b25', sector:'Transport', title:'National Highway Kilometrage', fields:'year, total_nh_km, 4lane_km, 2lane_km'},
+  {id:'3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69', sector:'Transport', title:'State-wise NH Length', fields:'state, nh_length, nh_count'},
+  {id:'0c6ace86-e01c-4a0c-88a6-44a14c89e3f9', sector:'Mining',    title:'Mineral Production Statistics (IBM)', fields:'mineral, state, quantity, value'},
+  {id:'1ba6e98c-5976-47a3-9191-1e0e5b0e1c52', sector:'Mining',    title:'Coal Production by Coalfield (MoC)', fields:'coalfield, subsidiary, production_mt, year'},
+  {id:'f7e23a4c-1b5d-4e8f-9a2c-3d4e5f6a7b8c', sector:'Mining',    title:'Mining Leases State-wise (MoM)', fields:'state, mineral, lease_count, area_ha'},
+  {id:'c5d6e7f8-a9b0-1c2d-3e4f-567890abcdef', sector:'Urban',     title:'Smart Cities Mission Progress', fields:'city, project_count, value_cr, completion_pct'},
+  {id:'e1f2a3b4-c5d6-7e8f-9a0b-1c2d3e4f5a6b', sector:'Railways',  title:'Railway Network Length (MoR)', fields:'zone, route_km, track_km, year'},
+  {id:'f3a4b5c6-d7e8-9f0a-1b2c-3d4e5f6a7b8c', sector:'Railways',  title:'Freight Traffic by Railway Zone', fields:'zone, freight_mt, revenue_cr'},
+  {id:'b9e45f1c-3a7e-4d8b-9f0c-e2f1a8b3c4d5', sector:'Transport', title:'Road Accidents in India (MoRTH)', fields:'state, accidents, fatalities, year'},
+  {id:'a1b2c3d4-e5f6-7890-abcd-ef1234567890', sector:'Mining',    title:'Mine-wise Mineral Production (IBM)', fields:'mine_name, mineral, state, production'},
+  {id:'d8e9f0a1-b2c3-4d5e-6f7a-8b9c0d1e2f3a', sector:'Urban',    title:'Pradhan Mantri Awas Yojana (MoHUA)', fields:'state, houses_sanctioned, houses_completed'},
+];
+
 function renderSources() {
   const el = document.getElementById('sources-content');
   if (!el) return;
 
-  const SOURCES = [
-    // ── TIER 1: FULLY INTEGRATED (live in dashboard) ──────────────────────
-    {tier:1, status:'live', name:"Google News RSS (30 queries)", icon:"📡",
-     url:"https://news.google.com/rss",
-     desc:"30 targeted queries covering NHAI, Coal India, NMDC, SCCL, DFCCIL, RVNL, metro, mining, highways, ports, Komatsu.",
-     type:"news", cost:"Free", update:"~10 min", auth:"None",
-     searchUrl:"https://news.google.com/search?q=NHAI+highway+contract+India&hl=en-IN"},
-    {tier:1, status:'live', name:"PIB Press Release RSS", icon:"🏛️",
-     url:"https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=1",
-     desc:"Cabinet-approved infrastructure sanction announcements. Highest-signal free source for highway & mining awards.",
-     type:"news", cost:"Free", update:"Continuous", auth:"None",
-     searchUrl:"https://pib.gov.in/allRel.aspx"},
-    {tier:1, status:'live', name:"data.gov.in OGD API (7 datasets)", icon:"📊",
-     url:"https://api.data.gov.in/resource/",
-     desc:"Road lengths (MoRTH), coal production (CIL), mineral production (IBM), PMGSY rural roads, Smart Cities, Jal Jeevan Mission — live API.",
-     type:"data", cost:"Free (API key)", update:"Monthly/Quarterly", auth:"API Key",
-     searchUrl:"https://data.gov.in/catalogs"},
-    {tier:1, status:'live', name:"World Bank Projects API", icon:"🌐",
-     url:"https://search.worldbank.org/api/v2/projects",
-     desc:"Active India infrastructure projects — transportation, mining, water — 6-24 month pipeline view. No auth required.",
-     type:"data", cost:"Free", update:"Daily", auth:"None",
-     searchUrl:"https://projects.worldbank.org/en/projects-operations/project-detail/"},
-    {tier:1, status:'live', name:"NSE Corporate Announcements (unofficial)", icon:"📈",
-     url:"https://www.nseindia.com/api/corporate-announcements",
-     desc:"Order-win announcements for 15 listed EPC/mining contractors. Earliest signal: award decisions 2-4 weeks before equipment procurement.",
-     type:"financial", cost:"Free (unofficial)", update:"Real-time", auth:"Cookie session",
-     searchUrl:"https://www.nseindia.com/get-quotes/equity"},
-    {tier:1, status:'live', name:"Economic Times Infrastructure RSS", icon:"📰",
-     url:"https://economictimes.indiatimes.com/industry/indl-goods/svs/construction/rssfeeds/13358575.cms",
-     desc:"ET Construction section — awards, EPC contracts, order books. Sub-hourly updates.",
-     type:"news", cost:"Free", update:"<1 hour", auth:"None",
-     searchUrl:"https://economictimes.indiatimes.com/industry/indl-goods/svs/construction"},
-    {tier:1, status:'live', name:"Business Standard Infrastructure RSS", icon:"📰",
-     url:"https://www.business-standard.com/rss/infrastructure-261.rss",
-     desc:"BS Infrastructure section — tenders, awards, project updates.",
-     type:"news", cost:"Free", update:"<1 hour", auth:"None",
-     searchUrl:"https://www.business-standard.com/infrastructure"},
+  const TIER_LABEL = {1:'🟢 Active (Free)', 2:'🔑 Free with API Key', 3:'💰 Paid (Recommended)'};
+  const TIER_BG    = {1:'#F0FDF4', 2:'#EFF6FF', 3:'#FEF3C7'};
+  const TIER_BORDER= {1:'#A7F3D0', 2:'#BFDBFE', 3:'#FCD34D'};
+  const STATUS_BADGE = {
+    'live':        '<span style="background:#D1FAE5;color:#065F46;padding:2px 7px;border-radius:4px;font-size:9.5px;font-weight:700">● LIVE</span>',
+    'key-needed':  '<span style="background:#DBEAFE;color:#1E40AF;padding:2px 7px;border-radius:4px;font-size:9.5px;font-weight:700">🔑 KEY NEEDED</span>',
+    'paid':        '<span style="background:#FEF3C7;color:#92400E;padding:2px 7px;border-radius:4px;font-size:9.5px;font-weight:700">💰 PAID</span>',
+  };
 
-    // ── TIER 2: READY (add API keys in GitHub Secrets) ────────────────────
-    {tier:2, status:'ready', name:"NewsData.io API", icon:"📰",
-     url:"https://newsdata.io/api/1/news",
-     desc:"Best India-focused free news API. 200 requests/day free. Set NEWSDATA_API_KEY in GitHub Secrets.",
-     type:"news", cost:"Free (200/day)", update:"Real-time", auth:"API Key",
-     searchUrl:"https://newsdata.io"},
-    {tier:2, status:'ready', name:"Currents API", icon:"📰",
-     url:"https://api.currentsapi.services/v1/search",
-     desc:"1,000 free requests/day. Good India coverage. Set CURRENTS_API_KEY in GitHub Secrets.",
-     type:"news", cost:"Free (1000/day)", update:"Real-time", auth:"API Key",
-     searchUrl:"https://currentsapi.services"},
-    {tier:2, status:'ready', name:"ADB Projects RSS (India)", icon:"🌐",
-     url:"https://www.adb.org/projects/country/ind",
-     desc:"ADB committed $4.83bn to India in 2024. RSS feed for active tenders and projects. Free, no auth.",
-     type:"data", cost:"Free", update:"Daily", auth:"None",
-     searchUrl:"https://www.adb.org/projects/tenders/1000"},
-    {tier:2, status:'ready', name:"IMD Mausam API", icon:"🌦️",
-     url:"https://api.imd.gov.in/api/v1/",
-     desc:"India Meteorological Dept — site weather forecasts for active project locations. Free with registration.",
-     type:"data", cost:"Free (register)", update:"Hourly", auth:"JWT Key",
-     searchUrl:"https://api.imd.gov.in/public/register.php"},
-    {tier:2, status:'ready', name:"Open-Meteo (Weather)", icon:"🌤️",
-     url:"https://api.open-meteo.com/v1/forecast",
-     desc:"Free unlimited weather API — no key needed. Overlay 7-day forecast on active project coordinates.",
-     type:"data", cost:"Free", update:"Hourly", auth:"None",
-     searchUrl:"https://open-meteo.com"},
+  // Group by tier
+  const byTier = {};
+  API_SOURCES.forEach(s => { if(!byTier[s.tier]) byTier[s.tier]=[]; byTier[s.tier].push(s); });
 
-    // ── TIER 3: PAID / SUBSCRIPTIONS ─────────────────────────────────────
-    {tier:3, status:'paid', name:"BidAssist Public API", icon:"🏆",
-     url:"https://api-doc.bidassist.com",
-     desc:"BEST India tender aggregator. Covers CPPP, GeM, NHAI, Coal India, all states. 5 req/sec. Contact: 1800-102-9586 for API plan.",
-     type:"tender", cost:"₹3K+/yr (API plan: negotiated)", update:"Real-time", auth:"x-api-key",
-     searchUrl:"https://api-doc.bidassist.com"},
-    {tier:3, status:'paid', name:"GeM Portal Scraper (Apify)", icon:"🛒",
-     url:"https://apify.com/krawlify/gem-portal-scraper",
-     desc:"Government e-Marketplace bids — ~$1 per 1,000 results. Civil construction, EPC works.",
-     type:"tender", cost:"~$1/1000 results", update:"On-demand", auth:"Apify token",
-     searchUrl:"https://bidplus.gem.gov.in/all-bids"},
-    {tier:3, status:'paid', name:"Mappls (MapMyIndia) API", icon:"🗺️",
-     url:"https://apis.mappls.com",
-     desc:"Best India-specific mapping. Real Indian road data, district boundaries. $302/mo for 10K calls.",
-     type:"geo", cost:"$302/mo", update:"Live", auth:"API Key",
-     searchUrl:"https://developer.mappls.com"},
+  let html = '';
 
-    // ── TIER 4: CLOSED / SCRAPE-ONLY ─────────────────────────────────────
-    {tier:4, status:'closed', name:"CPPP / eprocure.gov.in", icon:"🏛️",
-     url:"https://eprocure.gov.in/eprocure/app",
-     desc:"Central Public Procurement Portal — NO public API or RSS. HTML scrape only. 80K+ tenders. GePNIC platform.",
-     type:"tender", cost:"Free (scrape)", update:"Real-time", auth:"None (scrape)",
-     searchUrl:"https://eprocure.gov.in/eprocure/app"},
-    {tier:4, status:'closed', name:"NHAI eProcurement", icon:"🛣️",
-     url:"https://etenders.gov.in/eprocure/app",
-     desc:"NHAI tenders on etenders.gov.in — GePNIC platform. NO API. HTML scrape only.",
-     type:"tender", cost:"Free (scrape)", update:"Real-time", auth:"None (scrape)",
-     searchUrl:"https://etenders.gov.in/eprocure/app"},
-    {tier:4, status:'closed', name:"Coal India Tenders", icon:"⛏️",
-     url:"https://coalindiatenders.nic.in",
-     desc:"All CIL/SECL/MCL/WCL/ECL tenders. GePNIC platform. NO API or RSS. Scrape only.",
-     type:"tender", cost:"Free (scrape)", update:"Real-time", auth:"None (scrape)",
-     searchUrl:"https://coalindiatenders.nic.in"},
-    {tier:4, status:'closed', name:"NMDC / SCCL / DFCCIL / RVNL", icon:"⛏️",
-     url:"https://nmdcportals.nmdc.co.in",
-     desc:"PSU tender portals — NMDC (MSTC), SCCL (direct), DFCCIL (ireps.gov.in), RVNL — all HTML only, no feeds.",
-     type:"tender", cost:"Free (scrape)", update:"Daily", auth:"None (scrape)",
-     searchUrl:"https://mstcecommerce.com/eprochome/nmdc"},
-  ];
-
-  const TIER_COLORS = {1:'#059669', 2:'#D97706', 3:'#7C3AED', 4:'#6B7280'};
-  const TIER_BG     = {1:'#D1FAE5', 2:'#FEF3C7', 3:'#EDE9FE', 4:'#F3F4F6'};
-  const TIER_LABEL  = {1:'✅ Live', 2:'⚙️ Ready (add key)', 3:'💳 Paid', 4:'🔒 Closed/Scrape'};
-
-  // Summary stats
-  const live  = SOURCES.filter(s=>s.status==='live').length;
-  const ready = SOURCES.filter(s=>s.status==='ready').length;
-  const paid  = SOURCES.filter(s=>s.status==='paid').length;
-  const closed= SOURCES.filter(s=>s.status==='closed').length;
-
-  el.innerHTML = `
-    <div style="grid-column:1/-1;background:#fff;border:1px solid var(--br);border-radius:10px;padding:16px;margin-bottom:4px">
-      <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:12px">📡 API & Data Source Integration Status</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px">
-        ${[['Live',live,'#059669','#D1FAE5'],['Ready',ready,'#D97706','#FEF3C7'],['Paid',paid,'#7C3AED','#EDE9FE'],['Closed',closed,'#6B7280','#F3F4F6']].map(([l,v,c,bg])=>`
-          <div style="background:${bg};border-radius:8px;padding:10px;text-align:center">
-            <div style="font-size:22px;font-weight:800;color:${c}">${v}</div>
-            <div style="font-size:11px;color:${c};font-weight:600">${l}</div>
-          </div>`).join('')}
+  // ── API Sources by tier ───────────────────────────────────────────
+  [1,2,3].forEach(tier => {
+    html += `<div style="grid-column:1/-1;margin-top:${tier>1?'16px':'0'}">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--b);
+                  margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid var(--br)">
+        ${TIER_LABEL[tier]} — ${byTier[tier]?.length||0} source${(byTier[tier]?.length||0)!==1?'s':''}
       </div>
-      <div style="font-size:11.5px;color:var(--mu);line-height:1.8">
-        <strong style="color:var(--t1)">Key finding:</strong> India's major tender portals (CPPP, NHAI, Coal India, NMDC, SCCL, DFCCIL, RVNL) publish <strong>NO public API or RSS</strong>. The only machine-readable routes are (1) paid aggregators like BidAssist, or (2) HTML scraping. Most data.gov.in infrastructure datasets are also download-only — only 7 datasets verified to have live REST APIs.
-      </div>
-    </div>
-    ${[1,2,3,4].map(tier=>{
-      const tierSrcs = SOURCES.filter(s=>s.tier===tier);
-      return `<div style="grid-column:1/-1;padding:8px 0 4px;font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;border-top:1px solid var(--br);margin-top:6px">
-        <span style="background:${TIER_BG[tier]};color:${TIER_COLORS[tier]};padding:2px 8px;border-radius:4px;margin-right:6px">${TIER_LABEL[tier]}</span>
-        Tier ${tier} Sources (${tierSrcs.length})
-      </div>
-      ${tierSrcs.map(s=>{
-        const contractCount = CD ? CD.filter(c=>{
-          if(s.name.includes('Mining')||s.name.includes('Coal')) return c.mining;
-          if(s.name.includes('Rail')) return c.type==='Railways';
-          return c.type==='Highways';
-        }).length : 0;
-        const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(s.name+' India tender infrastructure 2026')}`;
-        return `<div style="background:#fff;border:1px solid var(--br);border-left:3px solid ${TIER_COLORS[s.tier]};border-radius:10px;padding:13px">
-          <div style="display:flex;align-items:flex-start;gap:9px;margin-bottom:8px">
-            <span style="font-size:18px">${s.icon}</span>
-            <div style="flex:1">
-              <div style="font-size:13px;font-weight:700;color:var(--t1);line-height:1.3;margin-bottom:2px">${s.name}</div>
-              <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">
-                <span style="font-size:9.5px;background:${TIER_BG[s.tier]};color:${TIER_COLORS[s.tier]};padding:1px 6px;border-radius:3px;font-weight:700">${TIER_LABEL[s.tier]}</span>
-                <span style="font-size:9.5px;background:#F3F4F6;color:#4B5563;padding:1px 6px;border-radius:3px">${s.cost}</span>
-                <span style="font-size:9.5px;background:#F3F4F6;color:#4B5563;padding:1px 6px;border-radius:3px">🔄 ${s.update}</span>
-                <span style="font-size:9.5px;background:#F3F4F6;color:#4B5563;padding:1px 6px;border-radius:3px">🔑 ${s.auth}</span>
-              </div>
-              <div style="font-size:11px;color:var(--t2);line-height:1.5">${s.desc}</div>
+    </div>`;
+    (byTier[tier]||[]).forEach(s => {
+      const contractCount = CD ? CD.filter(c => {
+        if (s.type==='mining')    return c.mining;
+        if (s.type==='railways')  return c.type==='Railways';
+        if (s.type==='corporate') return c.contractor && c.value > 1000;
+        return c.type==='Highways';
+      }).length : 0;
+      html += `
+      <div style="background:#fff;border:1px solid ${TIER_BORDER[tier]};border-radius:10px;padding:14px;
+                  box-shadow:0 1px 3px rgba(0,0,0,.08);background:${TIER_BG[tier]}">
+        <div style="display:flex;align-items:flex-start;gap:9px;margin-bottom:8px">
+          <div style="width:36px;height:36px;background:#fff;border-radius:8px;display:flex;align-items:center;
+                      justify-content:center;font-size:18px;flex-shrink:0;border:1px solid ${TIER_BORDER[tier]}">${s.icon}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px">
+              <span style="font-size:12.5px;font-weight:700;color:${s.color}">${s.name}</span>
+              ${STATUS_BADGE[s.status]}
             </div>
+            <div style="font-size:11px;color:var(--mu)">${s.desc}</div>
           </div>
-          <div style="display:flex;gap:6px">
-            <a href="${s.url}" target="_blank" style="flex:1;padding:5px;background:${TIER_COLORS[s.tier]};color:#fff;border-radius:5px;font-size:10.5px;font-weight:600;text-decoration:none;text-align:center">Open Source</a>
-            <a href="${s.searchUrl}" target="_blank" style="flex:1;padding:5px;background:#F3F4F6;color:${TIER_COLORS[s.tier]};border-radius:5px;font-size:10.5px;font-weight:600;text-decoration:none;text-align:center">Search Data</a>
-          </div>
-        </div>`;
-      }).join('')}`;
-    }).join('')}
-    <div style="grid-column:1/-1;background:#FEF3C7;border:1px solid #FCD34D;border-radius:10px;padding:14px;margin-top:8px">
-      <div style="font-size:12px;font-weight:700;color:#92400E;margin-bottom:8px">⚙️ To activate Tier 2 APIs (add these GitHub Secrets)</div>
-      <table style="width:100%;font-size:11.5px;border-collapse:collapse">
-        <thead><tr style="background:rgba(0,0,0,.06)"><th style="padding:6px 10px;text-align:left">Secret Name</th><th style="padding:6px 10px;text-align:left">API</th><th style="padding:6px 10px;text-align:left">Get Key From</th><th style="padding:6px 10px;text-align:left">Free Tier</th></tr></thead>
+        </div>
+        <div style="background:#fff;border-radius:5px;padding:6px 8px;margin-bottom:8px;font-size:10.5px;
+                    border:1px solid ${TIER_BORDER[tier]}">
+          <span style="color:var(--mu);font-weight:600">API: </span>
+          <span style="font-family:monospace;color:var(--b);word-break:break-all">${s.apiUrl.length>70?s.apiUrl.substring(0,67)+'...':s.apiUrl}</span>
+        </div>
+        <div style="display:flex;gap:5px;margin-bottom:8px;font-size:10.5px;flex-wrap:wrap">
+          <span style="background:#fff;border:1px solid ${TIER_BORDER[tier]};padding:2px 7px;border-radius:4px">
+            📡 ${s.format}</span>
+          <span style="background:#fff;border:1px solid ${TIER_BORDER[tier]};padding:2px 7px;border-radius:4px">
+            🔄 ${s.rate}</span>
+          <span style="background:#fff;border:1px solid ${TIER_BORDER[tier]};padding:2px 7px;border-radius:4px">
+            💰 ${s.cost}</span>
+          ${s.keyName?`<span style="background:#FEF3C7;border:1px solid #FCD34D;padding:2px 7px;border-radius:4px;color:#92400E">
+            🔑 Secret: ${s.keyName}</span>`:''}
+        </div>
+        <div style="display:flex;gap:5px">
+          <a href="${s.url}" target="_blank"
+             style="flex:1;padding:6px;background:${s.color};color:#fff;border-radius:5px;font-size:11px;
+                    font-weight:600;text-decoration:none;text-align:center">
+            🌐 Open Portal
+          </a>
+          <a href="${s.testUrl}" target="_blank"
+             style="flex:1;padding:6px;background:#fff;color:${s.color};border:1px solid ${s.color};
+                    border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center">
+            ${s.status==='key-needed'?'🔑 Get API Key':s.status==='paid'?'💰 View Pricing':'🔍 Test API'}
+          </a>
+        </div>
+      </div>`;
+    });
+  });
+
+  // ── data.gov.in Dataset Catalog ───────────────────────────────────
+  html += `<div style="grid-column:1/-1;margin-top:20px">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--b);
+                margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid var(--br)">
+      🏛️ data.gov.in OGD API — ${DATA_GOV_DATASETS.length} Infrastructure Datasets Available
+    </div>
+    <div style="background:#fff;border:1px solid var(--br);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08)">
+      <table style="width:100%;border-collapse:collapse;font-size:11.5px">
+        <thead>
+          <tr style="background:var(--b);color:#fff">
+            <th style="padding:9px 12px;text-align:left">Dataset</th>
+            <th style="padding:9px 12px;text-align:left">Sector</th>
+            <th style="padding:9px 12px;text-align:left">Key Fields</th>
+            <th style="padding:9px 12px;text-align:center">API</th>
+            <th style="padding:9px 12px;text-align:center">Verify</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><td style="padding:5px 10px;font-family:monospace">NEWSDATA_API_KEY</td><td>NewsData.io</td><td><a href="https://newsdata.io/register" target="_blank" style="color:#003F72">newsdata.io/register</a></td><td>200 req/day</td></tr>
-          <tr style="background:rgba(0,0,0,.03)"><td style="padding:5px 10px;font-family:monospace">CURRENTS_API_KEY</td><td>Currents API</td><td><a href="https://currentsapi.services/en/register" target="_blank" style="color:#003F72">currentsapi.services</a></td><td>1,000 req/day</td></tr>
-          <tr><td style="padding:5px 10px;font-family:monospace">DATAGOV_API_KEY</td><td>data.gov.in OGD</td><td><a href="https://data.gov.in/user/register" target="_blank" style="color:#003F72">data.gov.in/register</a></td><td>Unlimited</td></tr>
-          <tr style="background:rgba(0,0,0,.03)"><td style="padding:5px 10px;font-family:monospace">FIREBASE_SERVICE_ACCOUNT</td><td>Firebase Firestore</td><td>Firebase Console → Service Accounts</td><td>Free tier</td></tr>
+          ${DATA_GOV_DATASETS.map((d,i) => `
+          <tr style="background:${i%2===0?'#fff':'#F8FAFF'}">
+            <td style="padding:8px 12px;font-weight:600;color:var(--b)">${d.title}</td>
+            <td style="padding:8px 12px">
+              <span style="background:${d.sector==='Mining'?'#EDE9FE':d.sector==='Transport'?'#EFF6FF':d.sector==='Railways'?'#CCFBF1':'#FEF3C7'};
+                           color:${d.sector==='Mining'?'#7C3AED':d.sector==='Transport'?'#1E40AF':d.sector==='Railways'?'#0F766E':'#92400E'};
+                           padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600">${d.sector}</span>
+            </td>
+            <td style="padding:8px 12px;font-family:monospace;font-size:10px;color:var(--mu)">${d.fields}</td>
+            <td style="padding:8px 12px;text-align:center">
+              <a href="https://api.data.gov.in/resource/${d.id}?api-key=YOUR_KEY&format=json&limit=5"
+                 target="_blank" style="padding:3px 8px;background:var(--b);color:#fff;border-radius:4px;
+                                        font-size:10px;font-weight:600;text-decoration:none">
+                📡 Endpoint
+              </a>
+            </td>
+            <td style="padding:8px 12px;text-align:center">
+              <a href="https://www.google.com/search?q=data.gov.in+${encodeURIComponent(d.title)}"
+                 target="_blank" style="padding:3px 8px;background:#EFF6FF;color:var(--b);
+                                        border:1px solid var(--b);border-radius:4px;font-size:10px;
+                                        font-weight:600;text-decoration:none">
+                🔍 Search
+              </a>
+            </td>
+          </tr>`).join('')}
         </tbody>
       </table>
-      <div style="margin-top:8px;font-size:11px;color:#92400E">👉 Go to: <strong>github.com/sampurnanandofficial1/lntcmmb → Settings → Secrets → Actions → New repository secret</strong></div>
     </div>
-  `;
+    <div style="margin-top:8px;font-size:11px;color:var(--mu);background:#EFF6FF;padding:8px 12px;border-radius:6px">
+      🔑 <strong>To activate data.gov.in:</strong> Register free at 
+      <a href="https://data.gov.in/user/register" target="_blank" style="color:var(--b);font-weight:600">data.gov.in/user/register</a> 
+      → My Account → API Key → Add as GitHub secret <code>DATA_GOV_KEY</code>. 
+      All 13 datasets will then be fetched daily by the GitHub Actions workflow.
+    </div>
+  </div>`;
+
+  // ── Integration Status Summary ─────────────────────────────────────
+  const live = API_SOURCES.filter(s=>s.status==='live').length;
+  const needKey = API_SOURCES.filter(s=>s.status==='key-needed').length;
+  const paid = API_SOURCES.filter(s=>s.status==='paid').length;
+
+  html += `<div style="grid-column:1/-1;margin-top:16px;background:var(--b);border-radius:10px;padding:14px;color:#fff">
+    <div style="font-size:13px;font-weight:700;margin-bottom:8px">📊 Integration Status</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center">
+      <div style="background:rgba(255,255,255,.1);border-radius:6px;padding:9px">
+        <div style="font-size:24px;font-weight:800">${live}</div>
+        <div style="font-size:10.5px;opacity:.8">🟢 Live Now</div>
+      </div>
+      <div style="background:rgba(255,255,255,.1);border-radius:6px;padding:9px">
+        <div style="font-size:24px;font-weight:800">${needKey}</div>
+        <div style="font-size:10.5px;opacity:.8">🔑 Need API Key</div>
+      </div>
+      <div style="background:rgba(255,255,255,.1);border-radius:6px;padding:9px">
+        <div style="font-size:24px;font-weight:800">${DATA_GOV_DATASETS.length}</div>
+        <div style="font-size:10.5px;opacity:.8">🏛️ data.gov.in Datasets</div>
+      </div>
+      <div style="background:rgba(255,255,255,.1);border-radius:6px;padding:9px">
+        <div style="font-size:24px;font-weight:800">${API_SOURCES.length + DATA_GOV_DATASETS.length}</div>
+        <div style="font-size:10.5px;opacity:.8">📡 Total Sources</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;opacity:.8">
+      Daily refresh at 07:00 IST via GitHub Actions · Weather at 10 project sites · NSE order-win scanning every 15 min
+    </div>
+  </div>`;
+
+  el.innerHTML = html;
 }
 
 function syncData(){
