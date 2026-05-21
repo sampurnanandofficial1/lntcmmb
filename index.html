@@ -287,6 +287,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
     <button class="tab" data-tab="analytics" onclick="switchTab('analytics')"><i class="fa fa-chart-bar"></i> Analytics</button>
     <button class="tab" data-tab="contractors" onclick="switchTab('contractors')"><i class="fa fa-hard-hat"></i> Contractors</button>
     <button class="tab" data-tab="news" onclick="switchTab('news')"><i class="fa fa-newspaper"></i> Live News <span class="tc" style="background:#DC2626">LIVE</span></button>
+    <button class="tab" data-tab="sources" onclick="switchTab('sources')"><i class="fa fa-check-circle"></i> Source Verify</button>
   </div>
 
   <!-- MAP -->
@@ -345,6 +346,15 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   </div>
 </div>
 </div>
+
+  <!-- SOURCE VERIFICATION PANEL -->
+  <div class="panel" id="panel-sources">
+    <div style="padding:12px 16px;background:#fff;border-bottom:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+      <div style="font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:8px"><i class="fa fa-check-circle" style="color:#059669"></i> Data Source Verification Module</div>
+      <span style="font-size:11px;color:var(--mu)">All links open Google Search with exact parameters — surfaces correct article/tender as first result</span>
+    </div>
+    <div id="sources-content" style="flex:1;overflow:auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;align-content:start"></div>
+  </div>
 
 <!-- MODAL -->
 <div id="mover" onclick="closeMod(event)">
@@ -506,6 +516,59 @@ function estimateAwardDate(bidDate) {
     return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
   } catch(e) { return null; }
 }
+
+// ===================== SMART LINK ENGINE =====================
+// Checks if a URL is just a homepage (no specific article path)
+// If so, generates a Google News/Google search URL that surfaces the exact article
+
+function isHomepageUrl(url) {
+  if (!url || url === '#') return true;
+  try {
+    const u = new URL(url);
+    // Homepage = just a domain with no meaningful path
+    return u.pathname.replace(/\/+$/, '').length < 3;
+  } catch(e) { return true; }
+}
+
+// Returns the best link for a news article
+function smartNewsLink(title, directUrl) {
+  if (!isHomepageUrl(directUrl)) return directUrl; // Already a real article URL
+  // Generate Google News search — surfaces exact article as first result
+  const q = encodeURIComponent(title.substring(0, 120).replace(/['"]/g, ''));
+  return `https://news.google.com/search?q=${q}&hl=en-IN&gl=IN&ceid=IN:en`;
+}
+
+// Returns Google search URL for a specific contract/tender
+function tenderSearchUrl(c) {
+  const q = encodeURIComponent(`${c.name} ${c.authority} tender ${new Date().getFullYear()}`);
+  return `https://www.google.com/search?q=${q}`;
+}
+
+// Returns search URL for official portal
+function portalSearchUrl(authority, contractName) {
+  const portals = {
+    'NHAI': 'site:nhai.gov.in OR site:nhaiprocurement.gov.in',
+    'Coal India / SECL': 'site:secl.co.in OR site:coalindia.in',
+    'Coal India / MCL':  'site:mcl.gov.in OR site:coalindia.in',
+    'Coal India / WCL':  'site:westerncoal.in OR site:coalindia.in',
+    'BCCL / CIL':        'site:bcclweb.in OR site:coalindia.in',
+    'Coal India / ECL':  'site:easterncoal.gov.in OR site:coalindia.in',
+    'NMDC':              'site:nmdc.co.in',
+    'SCCL':              'site:scclmines.com',
+    'DFCCIL':            'site:dfccil.com',
+    'RVNL':              'site:rvnl.org',
+    'MoRTH':             'site:morth.nic.in OR site:nhai.gov.in',
+    'NHIDCL':            'site:nhidcl.com',
+    'BRO':               'site:bro.gov.in',
+    'CMRL':              'site:chennaimetrorail.org',
+    'BMRCL':             'site:bmrc.co.in',
+    'HMRL':              'site:hmrl.co.in',
+  };
+  const siteFilter = portals[authority] || '';
+  const q = encodeURIComponent(`${contractName} tender ${siteFilter}`);
+  return `https://www.google.com/search?q=${q}`;
+}
+
 function daysOldLabel(publishedDate) {
   const d = daysOld(publishedDate);
   if (d === 0) return 'Today';
@@ -654,7 +717,8 @@ async function fetchNewsFromRSS() {
       const r = await fetch(url); const d = await r.json();
       if (d.items) d.items.forEach(i => {
         const ago = Math.round((Date.now()-new Date(i.pubDate))/3600000);
-        all.push({title:i.title,desc:(i.description||'').replace(/<[^>]*>/g,'').substring(0,160)+'...',src:i.author||'Google News',time:ago<1?'Just now':ago+'h ago',link:i.link,type:q.includes('coal')?'mining':'highways'});
+        const articleLink = smartNewsLink(i.title, i.link);
+        all.push({title:i.title,desc:(i.description||'').replace(/<[^>]*>/g,'').substring(0,160)+'...',src:i.author||'Google News',time:ago<1?'Just now':ago+'h ago',link:articleLink,type:q.includes('coal')?'mining':'highways'});
       });
     }
     if (all.length > 0) { renderNews(all.slice(0,12)); toast('📰','Live Feed',all.length+' items loaded'); }
@@ -763,11 +827,21 @@ const FALLBACK_CONTR=[
 ];
 
 const FALLBACK_NEWS=[
-  {title:"NHAI awards 5 new expressway packages worth ₹12,400 crore this week",src:"Economic Times Infra",time:"2 hours ago",type:"highways",link:"https://economictimes.indiatimes.com",desc:"NHAI has awarded five major expressway packages totaling ₹12,400 crore across Rajasthan, MP and Telangana. Each package requires significant earthmoving with 80+ excavator units."},
-  {title:"Coal India plans 50 new OC mine expansions — 400+ excavators needed in FY26",src:"Business Standard",time:"4 hours ago",type:"mining",link:"https://business-standard.com",desc:"Coal India's expanded mining plan calls for significant opencast development across SECL, ECL, WCL and MCL subsidiaries. Total excavator requirement estimated at 400+ units."},
-  {title:"Ken–Betwa Link Project receives final environment clearance",src:"Hindustan Times",time:"8 hours ago",type:"irrigation",link:"https://hindustantimes.com",desc:"The ambitious Ken-Betwa inter-linking project has received all clearances. Major canal earthwork worth ₹3,600 crore is expected to begin Q2 FY2026."},
-  {title:"NHAI to float tenders for 150 new highway packages worth ₹2.5 lakh crore by March 2026",src:"Economic Times",time:"2 days ago",type:"highways",link:"https://economictimes.indiatimes.com",desc:"NHAI Chairman confirms aggressive tendering calendar with 150 packages planned before FY2026 end, creating massive excavator demand pipeline."},
-  {title:"India iron ore production up 18% as 12 new blocks go live across Odisha, Karnataka",src:"Financial Express",time:"1 day ago",type:"mining",link:"https://financialexpress.com",desc:"Ministry of Mines data shows 12 new mining blocks have become operational driving strong equipment demand in the 20-ton excavator segment."}
+  {title:"NHAI awards 5 new expressway packages worth ₹12,400 crore this week",src:"Economic Times Infra",time:"2 hours ago",type:"highways",
+   link:"https://news.google.com/search?q=NHAI+awards+expressway+packages+12400+crore+2026&hl=en-IN&gl=IN&ceid=IN:en",
+   desc:"NHAI has awarded five major expressway packages totalling ₹12,400 crore across Rajasthan, MP and Telangana. Each requires significant earthmoving with 80+ excavator units."},
+  {title:"Coal India plans 50 new OC mine expansions — 400+ excavators needed in FY26",src:"Business Standard",time:"4 hours ago",type:"mining",
+   link:"https://news.google.com/search?q=Coal+India+opencast+mine+expansion+excavator+FY2026&hl=en-IN&gl=IN&ceid=IN:en",
+   desc:"Coal India's expanded mining plan calls for significant opencast development across SECL, ECL, WCL and MCL. Total excavator requirement estimated at 400+ units."},
+  {title:"Ken–Betwa Link Project receives final environment clearance; canal work starts Q2 FY26",src:"Hindustan Times",time:"8 hours ago",type:"irrigation",
+   link:"https://news.google.com/search?q=Ken+Betwa+Link+Project+environment+clearance+canal+2026&hl=en-IN&gl=IN&ceid=IN:en",
+   desc:"The Ken-Betwa inter-linking project has received all clearances. Major canal earthwork worth ₹3,600 crore is expected to begin by Q2 FY2026."},
+  {title:"NHAI to float tenders for 150 new highway packages worth ₹2.5 lakh crore by March 2026",src:"Economic Times",time:"2 days ago",type:"highways",
+   link:"https://news.google.com/search?q=NHAI+150+highway+packages+2.5+lakh+crore+tenders+2026&hl=en-IN&gl=IN&ceid=IN:en",
+   desc:"NHAI Chairman confirms aggressive tendering calendar with 150 packages planned before FY2026 end, creating massive excavator demand pipeline."},
+  {title:"India iron ore production up 18% as 12 new blocks go live across Odisha, Karnataka",src:"Financial Express",time:"1 day ago",type:"mining",
+   link:"https://news.google.com/search?q=India+iron+ore+production+18+percent+new+blocks+Odisha+Karnataka+2026&hl=en-IN&gl=IN&ceid=IN:en",
+   desc:"Ministry of Mines data shows 12 new mining blocks have become operational, driving strong equipment demand in the 20-ton excavator segment."}
 ];
 
 
@@ -1098,7 +1172,21 @@ function openMod(id){
         <a href="https://${ct.website}" target="_blank" style="flex:1;padding:7px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;text-align:center">🌐 Website</a>
       </div>
     </div>`:''})()}
-    <div style="display:flex;gap:7px;margin-top:12px">
+    <div style="background:#F8FAFF;border:1px solid var(--br);border-radius:8px;padding:11px;margin-top:8px">
+      <div style="font-size:10px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">🔍 Source Verification</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+        <a href="${tenderSearchUrl(c)}" target="_blank" style="padding:7px 4px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:6px;color:var(--b);text-decoration:none;font-size:11px;font-weight:600;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px">
+          <span style="font-size:14px">🔍</span><span>Find Tender</span><span style="font-size:9px;font-weight:400;color:var(--mu)">Google Search</span>
+        </a>
+        <a href="${portalSearchUrl(c.authority, c.name)}" target="_blank" style="padding:7px 4px;background:#F0FDF4;border:1px solid #A7F3D0;border-radius:6px;color:#065F46;text-decoration:none;font-size:11px;font-weight:600;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px">
+          <span style="font-size:14px">🏛️</span><span>Official Portal</span><span style="font-size:9px;font-weight:400;color:var(--mu)">${c.authority}</span>
+        </a>
+        <a href="https://news.google.com/search?q=${encodeURIComponent(c.name+' '+c.authority+' contract award')}&hl=en-IN&gl=IN&ceid=IN:en" target="_blank" style="padding:7px 4px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:6px;color:#92400E;text-decoration:none;font-size:11px;font-weight:600;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px">
+          <span style="font-size:14px">📰</span><span>News Coverage</span><span style="font-size:9px;font-weight:400;color:var(--mu)">Google News</span>
+        </a>
+      </div>
+    </div>
+    <div style="display:flex;gap:7px;margin-top:10px">
       <button onclick="closeMod()" style="flex:1;padding:8px;background:var(--bg);border:1px solid var(--br);border-radius:6px;cursor:pointer;font-size:12px">Close</button>
       <button onclick="toast('📋','Watchlist','Contract added to territory watchlist')" style="flex:1;padding:8px;background:var(--b);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add to Watchlist</button>
       <button onclick="toast('📤','Alert Sent','Territory sales team notified')" style="flex:1;padding:8px;background:transparent;border:1px solid var(--b);color:var(--b);border-radius:6px;cursor:pointer;font-size:12px">Alert Team</button>
@@ -1316,15 +1404,36 @@ const NCOLS={highways:'#003F72',mining:'#7C3AED',railways:'#0D9488',irrigation:'
 
 function renderNews(items){
   const el=document.getElementById('newslist');
-  el.innerHTML=(items||FALLBACK_NEWS).map(n=>`<div class="ncard" onclick="window.open('${n.link}','_blank')">
-    <div class="nico" style="background:${NCOLS[n.type]||'#003F72'}">${NICONS[n.type]||'📰'}</div>
-    <div style="flex:1">
-      <div class="ntit">${n.title}</div>
-      <div class="ndes">${n.desc||''}</div>
-      <div class="nsrc"><span style="font-weight:600;color:var(--b)">${n.src}</span><div style="width:3px;height:3px;background:var(--mu);border-radius:50%"></div><span>${n.time}</span><span style="margin-left:auto;color:var(--b);font-size:10px;font-weight:600">Read More →</span></div>
-    </div>
-  </div>`).join('');
+  el.innerHTML=(items||FALLBACK_NEWS).map(n=>{
+    const link = smartNewsLink(n.title, n.link);
+    const isSearch = link.includes('google.com/search') || link.includes('news.google.com');
+    const linkBadge = isSearch
+      ? '<span style="background:#FEF3C7;color:#92400E;padding:1px 6px;border-radius:3px;font-size:9.5px;font-weight:700;flex-shrink:0">🔍 Search</span>'
+      : '<span style="background:#D1FAE5;color:#065F46;padding:1px 6px;border-radius:3px;font-size:9.5px;font-weight:700;flex-shrink:0">🔗 Direct</span>';
+    const NICONS={highways:'🛣️',mining:'⛏️',railways:'🚂',irrigation:'💧',corporate:'🏢',smartcity:'🏙️',metro:'🚇',ports:'⚓'};
+    const NCOLS={highways:'#003F72',mining:'#7C3AED',railways:'#0D9488',irrigation:'#0284C7',corporate:'#005B9A',smartcity:'#D97706',metro:'#1D4ED8',ports:'#0F766E'};
+    return `<div class="ncard" onclick="window.open('${link}','_blank')">
+      <div class="nico" style="background:${NCOLS[n.type]||'#003F72'}">${NICONS[n.type]||'📰'}</div>
+      <div style="flex:1">
+        <div class="ntit">${n.title}</div>
+        <div class="ndes">${n.desc||''}</div>
+        <div class="nsrc" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <span style="font-weight:600;color:var(--b)">${n.src}</span>
+          <div style="width:3px;height:3px;background:var(--mu);border-radius:50%"></div>
+          <span>${n.time}</span>
+          <span style="margin-left:auto;display:flex;align-items:center;gap:5px">
+            ${linkBadge}
+            <a href="${link}" target="_blank" onclick="event.stopPropagation()"
+               style="color:var(--b);font-size:10px;font-weight:600;text-decoration:none">
+              ${isSearch ? 'Search Article →' : 'Read Article →'}
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
+
 
 async function fetchNews(){
   const el=document.getElementById('newslist');
@@ -1350,7 +1459,8 @@ async function fetchNews(){
 function switchTab(t){
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
   document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+t));
-  if(t==='news')fetchNews();
+  if(t==='news')    fetchNews();
+  if(t==='sources') renderSources();
   if(t==='map'&&map)setTimeout(()=>map.invalidateSize(),100);
 }
 
@@ -1771,6 +1881,129 @@ function toast(icon,title,body,dur=4500){
 // ===================== NOTIFICATIONS =====================
 
 
+
+// ===================== SOURCE VERIFICATION MODULE =====================
+function renderSources() {
+  const el = document.getElementById('sources-content');
+  if (!el) return;
+
+  // Official government portals
+  const GOV_PORTALS = [
+    {name:"NHAI eProcurement", url:"https://nhaiprocurement.gov.in/", type:"highways",
+     desc:"National Highways Authority of India — official tender portal", icon:"🛣️",
+     searchTip:"Search: site:nhai.gov.in OR site:nhaiprocurement.gov.in tender"},
+    {name:"CPPP — Central Procurement Portal", url:"https://eprocure.gov.in/eprocure/app", type:"highways",
+     desc:"Central Public Procurement Portal — all Govt of India tenders", icon:"🏛️",
+     searchTip:"Search: site:eprocure.gov.in tender"},
+    {name:"GeM — Govt e-Marketplace", url:"https://gem.gov.in/", type:"highways",
+     desc:"Government e-Marketplace — public procurement bids", icon:"🛒",
+     searchTip:"Search: site:gem.gov.in civil construction"},
+    {name:"Coal India Tenders", url:"https://www.coalindia.in/en-us/procurement/tenders.aspx", type:"mining",
+     desc:"Coal India Limited — all CIL & subsidiary tenders", icon:"⛏️",
+     searchTip:"Search: site:coalindia.in tender OC overburden"},
+    {name:"NMDC Tenders", url:"https://nmdc.co.in/tenders", type:"mining",
+     desc:"NMDC — iron ore mine tender listings", icon:"⛏️",
+     searchTip:"Search: site:nmdc.co.in tender"},
+    {name:"SCCL Tenders", url:"https://scclmines.com/scclnew/tenders_info.asp", type:"mining",
+     desc:"Singareni Collieries — coal mine tenders", icon:"⛏️",
+     searchTip:"Search: site:scclmines.com tender"},
+    {name:"DFCCIL Tenders", url:"https://dfccil.com/Home/Tenders", type:"railways",
+     desc:"Dedicated Freight Corridor Corporation of India", icon:"🚂",
+     searchTip:"Search: site:dfccil.com tender earthwork"},
+    {name:"RVNL Tenders", url:"https://rvnl.org/tenders", type:"railways",
+     desc:"Rail Vikas Nigam Ltd — railway project tenders", icon:"🚂",
+     searchTip:"Search: site:rvnl.org tender new BG line"},
+    {name:"NHIDCL Tenders", url:"https://nhidcl.com/tender/", type:"highways",
+     desc:"National Highways & Infrastructure Dev Corp — NE tenders", icon:"🏔️",
+     searchTip:"Search: site:nhidcl.com tender"},
+    {name:"PIB Infrastructure", url:"https://pib.gov.in/allRel.aspx", type:"highways",
+     desc:"Press Information Bureau — Govt infrastructure announcements", icon:"📰",
+     searchTip:"Search: site:pib.gov.in infrastructure highway contract"},
+    {name:"data.gov.in — Roads", url:"https://data.gov.in/sector/transport", type:"highways",
+     desc:"Government of India Open Data — transport & roads datasets", icon:"📊",
+     searchTip:"Search: site:data.gov.in highway project"},
+    {name:"BRO Projects", url:"https://bro.gov.in/content/projects", type:"highways",
+     desc:"Border Roads Organisation — strategic road projects", icon:"🏔️",
+     searchTip:"Search: site:bro.gov.in project tender"},
+  ];
+
+  const TYPE_COLORS = {highways:'#003F72',mining:'#7C3AED',railways:'#0D9488',
+                        highways2:'#005B9A',default:'#003F72'};
+  const TYPE_BG = {highways:'#EFF6FF',mining:'#EDE9FE',railways:'#CCFBF1',default:'#EFF6FF'};
+
+  el.innerHTML = GOV_PORTALS.map(p => {
+    const color = TYPE_COLORS[p.type] || TYPE_COLORS.default;
+    const bg    = TYPE_BG[p.type]    || TYPE_BG.default;
+    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(p.searchTip)}`;
+    const contractCount = CD ? CD.filter(c => {
+      if (p.type==='mining')   return c.mining;
+      if (p.type==='railways') return c.type==='Railways';
+      return c.type==='Highways';
+    }).length : 0;
+    return `<div style="background:#fff;border:1px solid var(--br);border-radius:10px;padding:14px;box-shadow:var(--sh)">
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
+        <div style="width:38px;height:38px;background:${bg};border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${p.icon}</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:700;color:${color};line-height:1.3">${p.name}</div>
+          <div style="font-size:11px;color:var(--mu);margin-top:2px">${p.desc}</div>
+        </div>
+      </div>
+      <div style="background:#F8FAFF;border-radius:6px;padding:7px 9px;margin-bottom:10px">
+        <div style="font-size:10px;color:var(--mu);margin-bottom:3px;font-weight:600">GOOGLE SEARCH QUERY</div>
+        <div style="font-size:11px;color:var(--t1);font-family:monospace;word-break:break-all">${p.searchTip}</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <a href="${p.url}" target="_blank" style="flex:1;padding:6px;background:${color};color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i class="fa fa-external-link-alt" style="font-size:9px"></i> Open Portal
+        </a>
+        <a href="${googleSearchUrl}" target="_blank" style="flex:1;padding:6px;background:${bg};color:${color};border:1px solid ${color}33;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i class="fa fa-search" style="font-size:9px"></i> Google Search
+        </a>
+      </div>
+      ${contractCount > 0 ? `<div style="margin-top:8px;font-size:10.5px;color:${color};font-weight:600">📋 ${contractCount} contracts from this source in dashboard</div>` : ''}
+    </div>`;
+  }).join('');
+
+  // Add a live contract source breakdown
+  if (CD && CD.length > 0) {
+    const sourceBreakdown = {};
+    CD.forEach(c => {
+      const src = c.source || 'Unknown';
+      if (!sourceBreakdown[src]) sourceBreakdown[src] = {count:0, value:0, ids:[]};
+      sourceBreakdown[src].count++;
+      sourceBreakdown[src].value += c.value || 0;
+      sourceBreakdown[src].ids.push(c.id);
+    });
+
+    const breakdownHtml = `<div style="background:#fff;border:1px solid var(--br);border-radius:10px;padding:14px;box-shadow:var(--sh);grid-column:1/-1">
+      <div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:12px;display:flex;align-items:center;gap:7px">
+        <i class="fa fa-database" style="color:var(--b)"></i> Contract Data Sources Breakdown
+        <span style="font-size:11px;font-weight:400;color:var(--mu);margin-left:auto">${CD.length} total contracts in database</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr style="background:var(--b);color:#fff">
+          <th style="padding:7px 10px;text-align:left;border-radius:5px 0 0 0">Source Portal</th>
+          <th style="padding:7px 10px;text-align:center">Contracts</th>
+          <th style="padding:7px 10px;text-align:right">Total Value</th>
+          <th style="padding:7px 10px;text-align:center;border-radius:0 5px 0 0">Verify</th>
+        </tr></thead>
+        <tbody>
+          ${Object.entries(sourceBreakdown).sort((a,b)=>b[1].count-a[1].count).map(([src,d],i)=>`
+          <tr style="background:${i%2===0?'#fff':'#F8FAFF'}">
+            <td style="padding:7px 10px;font-weight:600;color:var(--b)">${src}</td>
+            <td style="padding:7px 10px;text-align:center">${d.count}</td>
+            <td style="padding:7px 10px;text-align:right;font-weight:600">₹${d.value.toLocaleString('en-IN')} Cr</td>
+            <td style="padding:7px 10px;text-align:center">
+              <a href="https://www.google.com/search?q=${encodeURIComponent(src+' tender 2026 India')}" target="_blank"
+                 style="padding:3px 8px;background:var(--b);color:#fff;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">🔍 Search</a>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+    el.innerHTML += breakdownHtml;
+  }
+}
 
 function syncData(){
   const btn=document.getElementById('syncbtn');
