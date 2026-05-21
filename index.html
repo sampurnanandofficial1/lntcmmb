@@ -86,7 +86,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .chd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px;gap:7px}
 .ctit{font-size:12.5px;font-weight:600;color:var(--t1);line-height:1.3;flex:1}
 .lb{padding:2px 7px;border-radius:4px;font-size:9.5px;font-weight:700;white-space:nowrap;flex-shrink:0}
-.lb.very-high{background:#FEE2E2;color:#DC2626}.lb.high{background:#FEF3C7;color:#D97706}.lb.medium{background:#DBEAFE;color:#2563EB}.lb.low{background:#F3F4F6;color:#6B7280}
+.lb.very-high{background:#FEE2E2;color:#DC2626}.lb.high{background:#FEF3C7;color:#D97706}.lb.medium{background:#DBEAFE;color:#2563EB}.lb.low{background:#F3F4F6;color:#6B7280}.lb.archive{background:#F3F4F6;color:#6B7280}
+.cc.archive{border-left-color:#9CA3AF}
 .cmeta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px}
 .ctag{display:flex;align-items:center;gap:3px;font-size:10.5px;color:var(--t2);background:var(--bg);padding:2px 6px;border-radius:4px}
 .cval{font-size:15px;font-weight:700;color:var(--b)}
@@ -384,7 +385,7 @@ let CD = [];
 let CONTR = [];
 let FC = [];
 let map, mgrp, hlayer, cgrp, view = 'cards';
-let AF = {state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:''};
+let AF = {state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:'',dateRange:'hot'};
 let chartsInitialized = false;
 
 // ===================== DATE INTELLIGENCE =====================
