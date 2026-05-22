@@ -1,0 +1,52 @@
+[
+  {
+    "site": "Korba, CG",
+    "lat": 22.342,
+    "lon": 82.689,
+    "temp": "39.0\u00b0C",
+    "condition": "\u2600\ufe0f Clear",
+    "precip_3d": "0.0mm over 3 days",
+    "type": "mining",
+    "updated": "2026-05-22T12:02:44.532132+00:00"
+  },
+  {
+    "site": "Nagpur, MH",
+    "lat": 21.159,
+    "lon": 79.088,
+    "temp": "43.0\u00b0C",
+    "condition": "\u2600\ufe0f Clear",
+    "precip_3d": "0.0mm over 3 days",
+    "type": "highways",
+    "updated": "2026-05-22T12:02:44.532132+00:00"
+  },
+  {
+    "site": "Dausa, RJ",
+    "lat": 26.889,
+    "lon": 76.34,
+    "temp": "39.2\u00b0C",
+    "condition": "\u2600\ufe0f Clear",
+    "precip_3d": "0.0mm over 3 days",
+    "type": "highways",
+    "updated": "2026-05-22T12:02:44.532132+00:00"
+  },
+  {
+    "site": "Dhanbad, JH",
+    "lat": 23.795,
+    "lon": 86.439,
+    "temp": "33.4\u00b0C",
+    "condition": "\u26a0\ufe0f RAIN",
+    "precip_3d": "0.1mm over 3 days",
+    "type": "mining",
+    "updated": "2026-05-22T12:02:44.532132+00:00"
+  },
+  {
+    "site": "Keonjhar, OD",
+    "lat": 21.628,
+    "lon": 85.581,
+    "temp": "27.7\u00b0C",
+    "condition": "\u26a0\ufe0f RAIN",
+    "precip_3d": "3.9mm over 3 days",
+    "type": "mining",
+    "updated": "2026-05-22T12:02:44.532132+00:00"
+  }
+]
