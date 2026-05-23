@@ -1161,7 +1161,7 @@ function openMod(id){
         <div style="background:#fff;border-radius:6px;padding:9px;border:1px solid ${c.completionDate?'#D1FAE5':'#BFDBFE'}">
           <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:700;display:flex;align-items:center;gap:4px">
             🏁 Project Completion
-            <span class="ibtn" onclick="event.stopPropagation();showTT(this,completionDateExplain(window._curC||{}))" style="margin-left:auto">i</span>
+            <span class="ibtn" onclick="event.stopPropagation();_showCompTT(this)" style="margin-left:auto">i</span>
           </div>
           ${c.completionDate?
             `<div style='font-weight:700;color:#059669;font-size:14px'>${formatDate(c.completionDate)}</div>
@@ -1635,6 +1635,17 @@ function leadScoreExplain(c) {
     ${adj}`;
 }
 
+function _showCompTT(el) {
+  // Safe wrapper — uses window._curC set by openMod
+  const c = window._curC || {};
+  try { showTT(el, completionDateExplain(c)); }
+  catch(err) {
+    showTT(el, '<div class="tt-title">📅 Project Completion</div>' +
+              '<div class="tt-row"><span class="tt-lbl">Type</span><span class="tt-val">' + (c.type||'—') + '</span></div>' +
+              '<div class="tt-note">Estimated from contract period for this project type.</div>');
+  }
+}
+
 function completionDateExplain(c) {
   const typ = c.type || 'Highways';
   const periods = {Highways:36, Mining:24, Railways:42, Metro:48, Irrigation:48, Ports:36, 'Smart City':24, Industrial:30};
@@ -1658,6 +1669,58 @@ function infoBtn(ttHtml, id) {
 let _ttRegistry = {};
 
 // ===================== TOOLTIP ENGINE =====================
+let _ttVisible = false;
+
+function showTT(el, html) {
+  try {
+    const tt = document.getElementById('_tt');
+    if (!tt) return;
+    tt.innerHTML = html;
+
+    // Position: try right of button first, flip left if no room
+    const r   = el.getBoundingClientRect();
+    const tw  = Math.min(300, window.innerWidth - 20);
+    let left  = r.right + 10;
+    let top   = r.top;
+    if (left + tw > window.innerWidth - 10) left = r.left - tw - 10;
+    if (left < 6) left = 6;
+    if (top + 240 > window.innerHeight)     top  = window.innerHeight - 248;
+    if (top < 6)  top  = 6;
+
+    tt.style.left    = left + 'px';
+    tt.style.top     = top  + 'px';
+    tt.style.display = 'block';
+    _ttVisible = true;
+
+    // One-time outside-click closer — deferred so this same click doesn't fire it
+    setTimeout(() => {
+      document.addEventListener('click', _outsideClickClose, true);
+    }, 50);
+  } catch(err) {
+    console.warn('showTT error:', err);
+  }
+}
+
+function _outsideClickClose(e) {
+  // Keep open if click is ON an ibtn (let its own onclick handle it)
+  // or ON the tooltip itself
+  if (e.target.closest && (e.target.closest('.ibtn') || e.target.closest('#_tt'))) return;
+  hideTT();
+}
+
+function hideTT() {
+  const tt = document.getElementById('_tt');
+  if (tt) tt.style.display = 'none';
+  _ttVisible = false;
+  document.removeEventListener('click', _outsideClickClose, true);
+}
+
+// ESC key always closes
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hideTT(); });
+
+
+
+// ===================== TOOLTIP ENGINE =====================
 let _ttEl = null;
 function showTT(el, html) {
   const tt = document.getElementById('_tt');
@@ -1674,14 +1737,7 @@ function showTT(el, html) {
   tt.style.cssText = `display:block;left:${left}px;top:${top}px;max-width:${tw}px`;
 }
 function hideTT() { const tt=document.getElementById('_tt'); if(tt) tt.style.display='none'; }
-document.addEventListener('mousedown', e => {
-  // Close tooltip if click is outside any ibtn OR outside the tooltip itself
-  const tt = document.getElementById('_tt');
-  if (!tt || tt.style.display === 'none') return;
-  if (!e.target.closest('.ibtn') && !e.target.closest('#_tt')) hideTT();
-});
 document.addEventListener('scroll', hideTT, true);
-document.addEventListener('keydown', e => { if(e.key==='Escape') hideTT(); });
 
 // ===================== NOTIFICATION SYSTEM =====================
 // Dynamic — built from live contract data, stored in localStorage
