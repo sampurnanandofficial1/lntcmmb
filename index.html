@@ -374,6 +374,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   </div>
 </div>
 <div id="tcon"></div>
+<div id="_tt_overlay" onclick="hideTT()" style="display:none;position:fixed;inset:0;z-index:9998;background:transparent;cursor:default"></div>
 <div id="_tt"></div>
 <!-- LOADING OVERLAY -->
 <div id="loading-overlay" style="position:fixed;inset:0;background:rgba(0,31,57,.92);z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px">
@@ -1637,46 +1638,43 @@ function leadScoreExplain(c) {
 
 
 // ===================== TOOLTIP ENGINE =====================
+// Overlay approach: transparent full-screen div catches any outside click
+
 function showTT(el, html) {
   try {
-    var tt = document.getElementById('_tt');
+    var tt  = document.getElementById('_tt');
+    var ov  = document.getElementById('_tt_overlay');
     if (!tt) return;
-    hideTT();
+
     tt.innerHTML = html;
-    var r = el.getBoundingClientRect();
-    var tw = Math.min(300, window.innerWidth - 20);
+
+    // Position next to the button
+    var r   = el.getBoundingClientRect();
+    var tw  = Math.min(295, window.innerWidth - 20);
     var left = r.right + 10;
     var top  = r.top;
     if (left + tw > window.innerWidth - 10) left = r.left - tw - 10;
     if (left < 6) left = 6;
-    if (top + 240 > window.innerHeight) top = window.innerHeight - 248;
-    if (top < 6) top = 6;
-    tt.style.left    = left + 'px';
-    tt.style.top     = top  + 'px';
-    tt.style.display = 'block';
-    setTimeout(function(){ document.addEventListener('click', _ttClose); }, 0);
-  } catch(err) { console.warn('showTT:', err); }
-}
+    if (top + 260 > window.innerHeight) top = window.innerHeight - 266;
+    if (top < 6)  top  = 6;
 
-function _ttClose(e) {
-  var tt = document.getElementById('_tt');
-  if (tt && tt.contains(e.target)) return;
-  if (e.target.closest && e.target.closest('.ibtn')) return;
-  hideTT();
+    tt.style.cssText  = 'display:block;left:' + left + 'px;top:' + top + 'px;';
+    if (ov) ov.style.display = 'block';
+  } catch(e) { console.warn('showTT:', e); }
 }
 
 function hideTT() {
   var tt = document.getElementById('_tt');
+  var ov = document.getElementById('_tt_overlay');
   if (tt) tt.style.display = 'none';
-  document.removeEventListener('click', _ttClose);
+  if (ov) ov.style.display = 'none';
 }
 
 function _showCompTT(el) {
-  var c = window._curC || {};
-  showTT(el, completionDateExplain(c));
+  showTT(el, completionDateExplain(window._curC || {}));
 }
 
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideTT(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') hideTT(); });
 document.addEventListener('scroll',  hideTT, true);
 
 // ===================== NOTIFICATION SYSTEM =====================
