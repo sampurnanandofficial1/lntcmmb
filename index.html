@@ -687,43 +687,62 @@ function bootUI() {
 
 async function fetchNews() {
   const el = document.getElementById('newslist');
-  el.innerHTML = '<div class="loading"><div class="spin"></div> Fetching live intelligence...</div>';
-  // Try Firestore news collection first
+  if (!el) return;
+  el.innerHTML = '<div class="loading"><div class="spin"></div> Loading intelligence feed...</div>';
+
+  // ── Step 1: GitHub Pages JSON cache (updated daily 07:00 IST) ─────────────
+  // This is the most reliable source — always try it first
   try {
-    const snap = await db.collection('news').orderBy('fetchedAt','desc').limit(20).get();
+    const base  = (window.location.origin + window.location.pathname)
+                    .replace(/\/[^\/]*$/, '/');
+    const cache = await fetch(base + 'data/news.json?t=' + Date.now(),
+                              { cache: 'no-store' });
+    if (cache.ok) {
+      const items = await cache.json();
+      if (Array.isArray(items) && items.length > 0) {
+        renderNews(items);
+        toast('📰', 'Intelligence Feed', items.length + ' items loaded');
+        // ── Step 1b: Also try Firestore silently for any newer items ─────────
+        try {
+          const snap = await db.collection('news').limit(20).get();
+          if (!snap.empty) {
+            const live = snap.docs.map(d => d.data())
+              .sort((a,b) => (b.fetchedAt||'').localeCompare(a.fetchedAt||''));
+            if (live.length > 0) renderNews(live);
+          }
+        } catch(_) {}
+        return;
+      }
+    }
+  } catch(e) { console.warn('News cache fetch failed:', e.message); }
+
+  // ── Step 2: Firestore directly ────────────────────────────────────────────
+  try {
+    const snap = await db.collection('news').limit(20).get();
     if (!snap.empty) {
-      renderNews(snap.docs.map(d => d.data()));
-      toast('📰', 'Live Intelligence', snap.docs.length + ' items from database');
+      const items = snap.docs.map(d => d.data())
+        .sort((a,b) => (b.fetchedAt||'').localeCompare(a.fetchedAt||''));
+      renderNews(items);
+      toast('📰', 'Live Database', items.length + ' items from Firestore');
       return;
     }
-  } catch(e) { /* fall through to RSS */ }
-  // Fall back to live RSS
-  try {
-    const qs = [
-      'india+NHAI+highway+tender+awarded+2025',
-      'india+coal+mining+contract+excavator+2025',
-      'india+infrastructure+construction+contract'
-    ];
-    const all = [];
-    for (const q of qs) {
-      const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://news.google.com/rss/search?q='+q+'&hl=en-IN&gl=IN&ceid=IN:en')}&count=5`;
-      const r = await fetch(url); const d = await r.json();
-      if (d.items) d.items.forEach(i => {
-        const h = Math.round((Date.now()-new Date(i.pubDate))/3600000);
-        all.push({title:i.title, desc:(i.description||'').replace(/<[^>]*>/g,'').substring(0,160)+'...', src:i.author||'Google News', time:h<1?'Just now':h+'h ago', link:i.link, type:q.includes('coal')?'mining':'highways'});
-      });
-    }
-    if (all.length > 0) { renderNews(all.slice(0,12)); toast('📰','Live Feed',all.length+' items loaded'); }
-    else { await loadNewsCacheOrFallback(); }
-  } catch(e) { await loadNewsCacheOrFallback(); }
+  } catch(e) { console.warn('Firestore news fetch failed:', e.message); }
+
+  // ── Step 3: Embedded fallback (always works) ──────────────────────────────
+  renderNews(FALLBACK_NEWS);
+  toast('ℹ️', 'Offline Mode', 'Using embedded intelligence cache');
 }
 
 async function loadNewsCacheOrFallback() {
   try {
-    const base = window.location.href.replace(/\/[^/]*$/,'/');
-    const r = await fetch(base + 'data/news.json?t=' + Date.now());
-    if (r.ok) { const d = await r.json(); if (d&&d.length) { renderNews(d); return; } }
-  } catch(e) {}
+    const base = (window.location.origin + window.location.pathname)
+                   .replace(/\/[^\/]*$/, '/');
+    const r = await fetch(base + 'data/news.json?t=' + Date.now(), { cache: 'no-store' });
+    if (r.ok) {
+      const d = await r.json();
+      if (Array.isArray(d) && d.length > 0) { renderNews(d); return; }
+    }
+  } catch(e) { console.warn('Cache fallback failed:', e.message); }
   renderNews(FALLBACK_NEWS);
 }
 
