@@ -972,7 +972,7 @@ function applyF(){
     if (AF.minV > 0 && c.value < AF.minV) return false;
     if (AF.mine  && !c.mining)   return false;
     if (AF.heavy && !['High','Very High','Extreme'].includes(c.earthwork)) return false;
-    if (AF.hsc   && c.excScore < 80) return false;
+    if (AF.hsc   && calcExcScore(c) < 80) return false;
     if (AF.q && !c.name.toLowerCase().includes(AF.q) &&
         !c.state.toLowerCase().includes(AF.q) &&
         !c.contractor.toLowerCase().includes(AF.q) &&
@@ -1047,7 +1047,7 @@ function quickF(t){
   } else if(t==='excavator'){
     document.querySelector('.fdater[value="hot"]').checked=true;
     AF.dateRange='hot';
-    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && c.excScore>=80);
+    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && calcExcScore(c)>=80);
   } else if(t==='all'){
     document.querySelector('.fdater[value="all"]').checked=true;
     AF.dateRange='all';
@@ -1095,11 +1095,11 @@ function renderCards(){
           <span class="elbl" style="display:flex;align-items:center;gap:3px">Exc. Score
             <span class="ibtn" onclick="event.stopPropagation();showTT(this,excScoreExplain(${JSON.stringify(c).replace(/"/g,'&quot;')}))">i</span>
           </span>
-          <div class="btr"><div class="bfi" style="width:${c.excScore}%"></div></div>
-          <span class="bsc">${c.excScore}</span>
+          <div class="btr"><div class="bfi" style="width:${calcExcScore(c)}%"></div></div>
+          <span class="bsc">${calcExcScore(c)}</span>
         </div>
         <span style="font-size:11px;color:var(--mu);margin-left:10px;white-space:nowrap;display:flex;align-items:center;gap:3px">
-          🚜 ${c.machines} units
+          🚜 ${calcMachines(c)} units
           <span class="ibtn" onclick="event.stopPropagation();showTT(this,machinesExplain(${JSON.stringify(c).replace(/"/g,'&quot;')}))">i</span>
         </span>
       </div>
@@ -1116,7 +1116,7 @@ function renderCards(){
       <td><span style="font-weight:700;color:${rec.color}">${rec.emoji} ${rec.label}</span><br><span style="font-size:10px;color:var(--mu)">${daysOldLabel(c.publishedDate)}</span></td>
       <td><span class="stb ${stClass(c.stage)}">${c.stage}</span></td>
       <td><span class="lb ${eff.toLowerCase().replace(' ','-')}">${eff}</span></td>
-      <td><div style="display:flex;align-items:center;gap:4px"><div style="flex:1;height:4px;background:var(--br);border-radius:2px;overflow:hidden;min-width:36px"><div style="width:${c.excScore}%;height:100%;background:var(--b);border-radius:2px"></div></div><span style="font-size:11px;font-weight:700;color:var(--b)">${c.excScore}</span></div></td>
+      <td><div style="display:flex;align-items:center;gap:4px"><div style="flex:1;height:4px;background:var(--br);border-radius:2px;overflow:hidden;min-width:36px"><div style="width:${calcExcScore(c)}%;height:100%;background:var(--b);border-radius:2px"></div></div><span style="font-size:11px;font-weight:700;color:var(--b)">${calcExcScore(c)}</span></div></td>
       <td style="font-size:11px">${c.contractor}</td>
     </tr>`;
   }).join('');
@@ -1147,7 +1147,7 @@ function openMod(id){
     </div>
     <div class="dgrid">
       <div class="di"><div class="dlbl">Contract Value</div><div class="dval" style="color:var(--b);font-size:22px">₹${(c.value||0).toLocaleString('en-IN')} Cr</div></div>
-      <div class="di"><div class="dlbl" style="display:flex;align-items:center;gap:4px">Excavator Score <span class="ibtn" onclick="event.stopPropagation();showTT(this,excScoreExplain(window._curC||{}))">i</span></div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="flex:1;height:8px;background:#E5E7EB;border-radius:4px;overflow:hidden"><div style="width:${c.excScore||0}%;height:100%;background:linear-gradient(90deg,#003F72,#0A6EBD);border-radius:4px"></div></div><span style="font-size:18px;font-weight:800;color:var(--b)">${c.excScore||0}/100</span></div></div>
+      <div class="di"><div class="dlbl" style="display:flex;align-items:center;gap:4px">Excavator Score <span class="ibtn" onclick="event.stopPropagation();showTT(this,excScoreExplain(window._curC||{}))">i</span></div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="flex:1;height:8px;background:#E5E7EB;border-radius:4px;overflow:hidden"><div style="width:${calcExcScore(c)}%;height:100%;background:linear-gradient(90deg,#003F72,#0A6EBD);border-radius:4px"></div></div><span style="font-size:18px;font-weight:800;color:var(--b)">${calcExcScore(c)}/100</span></div></div>
       <div class="di"><div class="dlbl" style="display:flex;align-items:center;gap:4px">Effective Lead Score <span class="ibtn" onclick="event.stopPropagation();showTT(this,leadScoreExplain(window._curC||{}))">i</span></div><div class="dval"><span class="lb ${eff.toLowerCase().replace(' ','-')}" style="font-size:12px;padding:4px 10px">${eff}</span></div></div>
       <div class="di"><div class="dlbl">Base Lead Score</div><div class="dval"><span class="lb ${(c.leadScore||'medium').toLowerCase().replace(' ','-')}" style="font-size:12px;padding:4px 10px">${c.leadScore||'—'}</span></div></div>
       <div class="di"><div class="dlbl">Project Stage</div><div class="dval"><span class="stb ${stClass(c.stage)}" style="font-size:12px;padding:4px 10px">${c.stage}</span></div></div>
@@ -1155,7 +1155,7 @@ function openMod(id){
       <div class="di"><div class="dlbl">Awarding Authority</div><div class="dval">${c.authority}</div></div>
       <div class="di"><div class="dlbl">Ministry</div><div class="dval">${c.ministry||'—'}</div></div>
       <div class="di"><div class="dlbl">Primary Contractor</div><div class="dval">${c.contractor}</div></div>
-      <div class="di"><div class="dlbl" style="display:flex;align-items:center;gap:4px">Est. Komatsu Excavators <span class="ibtn" onclick="event.stopPropagation();showTT(this,machinesExplain(window._curC||{}))">i</span></div><div class="dval" style="color:#DC2626">🚜 ${c.machines||c.mach||'—'} units (20-ton class)</div></div>
+      <div class="di"><div class="dlbl" style="display:flex;align-items:center;gap:4px">Est. Komatsu Excavators <span class="ibtn" onclick="event.stopPropagation();showTT(this,machinesExplain(window._curC||{}))">i</span></div><div class="dval" style="color:#DC2626">🚜 ${calcMachines(c)} units (20-ton class)</div></div>
       <div class="di"><div class="dlbl">Project Type</div><div class="dval">${ticon(c.type)} ${c.type}</div></div>
       <div class="di"><div class="dlbl">Source Portal</div><div class="dval">${c.source||'Government Portal'}</div></div>
     </div>
@@ -1567,43 +1567,64 @@ function toast(icon,title,body,dur=4500){
 
 
 // ===================== SCORE EXPLANATIONS =====================
-function excScoreExplain(c) {
-  const rows = [];
-  const typ = c.type || 'Highways';
-  let base = 50;
-  const factors = [];
 
-  // Type factor
-  const typeScore = {Mining:35, Highways:25, Metro:20, Railways:20, Irrigation:22, Ports:18, 'Smart City':10, Industrial:15};
-  const ts = typeScore[typ] || 15;
-  base += ts;
-  factors.push(['Project Type (' + typ + ')', '+' + ts]);
+// ======= COMPUTED SCORE FUNCTIONS (single source of truth) =======
+// These are the ONLY place the formula lives. Tooltips and display
+// both call these — so they always match.
 
-  // Earthwork intensity
-  const ewScore = {Extreme:18, 'Very High':14, High:10, Medium:5, Low:0};
-  const ew = c.earthwork || c.ew || 'Medium';
-  const es = ewScore[ew] || 5;
-  base += es;
-  factors.push(['Earthwork Intensity (' + ew + ')', '+' + es]);
-
-  // Mining flag
-  if (c.mining) { base += 10; factors.push(['Mining Site', '+10']); }
-
-  // Value band
+function calcExcScore(c) {
+  const typeScore = {Mining:35, Highways:25, Metro:20, Railways:20,
+                     Irrigation:22, Ports:18, 'Smart City':10, Industrial:15};
+  const ewScore   = {Extreme:18, 'Very High':14, High:10, Medium:5, Low:0};
+  const ew  = c.earthwork || c.ew || 'Medium';
   const val = c.value || 0;
-  const vs = val >= 3000 ? 8 : val >= 1500 ? 5 : val >= 500 ? 3 : 0;
-  if (vs) { base += vs; factors.push(['Contract Value (₹' + val.toLocaleString('en-IN') + ' Cr)', '+' + vs]); }
+  let b = 50;
+  b += (typeScore[c.type] || 15);
+  b += (ewScore[ew]  || 5);
+  if (c.mining) b += 10;
+  b += (val >= 3000 ? 8 : val >= 1500 ? 5 : val >= 500 ? 3 : 0);
+  return Math.min(99, b);
+}
 
-  // Cap at 99
-  const final = Math.min(99, base);
-  factors.push(['Final Score (capped at 99)', final + '/100']);
+function calcMachines(c) {
+  const ewFactor = {Extreme:0.35, 'Very High':0.28, High:0.22, Medium:0.15, Low:0.08};
+  const periods  = {Highways:36, Mining:24, Railways:42, Metro:48,
+                    Irrigation:48, Ports:36, 'Smart City':24, Industrial:30};
+  const ew      = c.earthwork || c.ew || 'Medium';
+  const ef      = ewFactor[ew] || 0.15;
+  const months  = (periods[c.type] || 30);
+  const vol_m3  = (c.value * ef * 10_000_000) / 250;
+  const days    = months * 25;
+  return Math.max(1, Math.round(vol_m3 / (1800 * days)));
+}
 
-  let rows_html = factors.map(([l,v]) =>
-    `<div class="tt-row"><span class="tt-lbl">${l}</span><span class="tt-val">${v}</span></div>`).join('');
+function excScoreExplain(c) {
+  // Uses calcExcScore() — same formula as the displayed score
+  const typeScore = {Mining:35, Highways:25, Metro:20, Railways:20,
+                     Irrigation:22, Ports:18, 'Smart City':10, Industrial:15};
+  const ewScore   = {Extreme:18, 'Very High':14, High:10, Medium:5, Low:0};
+  const ew  = c.earthwork || c.ew || 'Medium';
+  const val = c.value || 0;
+  const ts  = typeScore[c.type] || 15;
+  const es  = ewScore[ew] || 5;
+  const vs  = val>=3000 ? 8 : val>=1500 ? 5 : val>=500 ? 3 : 0;
+  const final = calcExcScore(c);
 
-  return `<div class="tt-title">⚙️ Excavator Score Explained</div>
-    ${rows_html}
-    <div class="tt-note">Score = Base 50 + Type + Earthwork + Mining + Value factors. Higher = more likely to need Komatsu 20-ton crawlers.</div>`;
+  const rows = [
+    ['Base Score',                          '+50'],
+    ['Project Type (' + c.type + ')',       '+' + ts],
+    ['Earthwork (' + ew + ')',              '+' + es],
+    ...(c.mining ? [['Mining Site Bonus',   '+10']] : []),
+    ...(vs ? [['Value (₹' + val.toLocaleString('en-IN') + ' Cr)', '+' + vs]] : []),
+    ['─────────────────', '─────'],
+    ['Final Score',                         final + ' / 100'],
+  ];
+
+  return '<div class="tt-title">⚙️ Excavator Score — Calculation</div>' +
+    rows.map(([l,v]) =>
+      `<div class="tt-row"><span class="tt-lbl">${l}</span><span class="tt-val">${v}</span></div>`
+    ).join('') +
+    '<div class="tt-note">Base 50 + Project Type + Earthwork Intensity + Mining Bonus + Contract Value. Capped at 99.</div>';
 }
 
 function machinesExplain(c) {
@@ -1619,38 +1640,52 @@ function machinesExplain(c) {
   const total_days = months * 25;
   const machines = Math.max(1, Math.round(est_m3 / (rate_m3 * total_days)));
 
-  return `<div class="tt-title">🚜 Machine Count Explained</div>
+  const computed = calcMachines(c);
+  return `<div class="tt-title">🚜 Machine Count — Calculation</div>
     <div class="tt-row"><span class="tt-lbl">Contract Value</span><span class="tt-val">₹${val.toLocaleString('en-IN')} Cr</span></div>
     <div class="tt-row"><span class="tt-lbl">Earthwork Intensity</span><span class="tt-val">${ew}</span></div>
     <div class="tt-row"><span class="tt-lbl">Earthwork Cost Share</span><span class="tt-val">${Math.round(ef*100)}% of contract</span></div>
     <div class="tt-row"><span class="tt-lbl">Est. Earthwork Volume</span><span class="tt-val">${(est_m3/1000000).toFixed(2)}M m³</span></div>
-    <div class="tt-row"><span class="tt-lbl">PC210 Output</span><span class="tt-val">~1,800 m³/day</span></div>
-    <div class="tt-row"><span class="tt-lbl">Project Duration</span><span class="tt-val">${months} months</span></div>
-    <div class="tt-row"><span class="tt-lbl">Estimated Fleet</span><span class="tt-val">${c.machines || machines} units</span></div>
-    <div class="tt-note">Based on Komatsu PC210 productivity benchmarks and earthwork cost ratios for ${c.type} projects.</div>`;
+    <div class="tt-row"><span class="tt-lbl">PC210 Productivity</span><span class="tt-val">~1,800 m³/day</span></div>
+    <div class="tt-row"><span class="tt-lbl">Project Duration</span><span class="tt-val">${months} months (${total_days} working days)</span></div>
+    <div class="tt-row"><span class="tt-lbl">──────────────</span><span class="tt-val">──────</span></div>
+    <div class="tt-row"><span class="tt-lbl">Estimated Fleet</span><span class="tt-val">${computed} units</span></div>
+    <div class="tt-note">Komatsu PC210 benchmarks. Earthwork cost ratio for ${c.type} projects in India.</div>`;
 }
 
 function leadScoreExplain(c) {
   const base = c.leadScore || 'Medium';
   const eff  = effectiveLeadScore(c);
   const d    = daysOld(c.publishedDate);
-  const zone = d<=30?'HOT (≤30d)':d<=90?'WARM (31-90d)':d<=180?'COOLING (91-180d)':'ARCHIVE (>180d)';
-  const factors = [
-    ['Base Lead Score', base],
-    ['Contract Value', '₹' + (c.value||0).toLocaleString('en-IN') + ' Cr'],
-    ['Project Type', c.type],
-    ['Earthwork Intensity', c.earthwork || c.ew || 'Medium'],
-    ['Mining Project', c.mining ? 'Yes (+boost)' : 'No'],
-    ['Excavator Score', (c.excScore||0) + '/100'],
-    ['Age of Lead', zone],
-    ['Effective Score (date-adjusted)', eff],
+  const zone = d<=30?'🔴 HOT (≤30d)':d<=90?'🟡 WARM (31–90d)':d<=180?'🔵 COOLING (91–180d)':'⚫ ARCHIVE (>180d)';
+
+  // Downgrade table
+  const downgradeMap = {
+    hot:     {label:'No change — full score applies'},
+    warm:    {label:'Very High → High'},
+    cooling: {label:'Very High → Medium  |  High → Medium'},
+    archive: {label:'All → Archive'},
+  };
+  const ageKey = d<=30?'hot':d<=90?'warm':d<=180?'cooling':'archive';
+  const downgradeNote = downgradeMap[ageKey].label;
+  const changed = base !== eff;
+
+  const rows = [
+    ['Base Lead Score (stored)',  base],
+    ['Contract Age',             d + ' days  (' + zone + ')'],
+    ['Age Adjustment Rule',      downgradeNote],
+    ['──────────────────',       '──────────'],
+    ['Effective Lead Score',     eff],
   ];
-  const adj = base !== eff ?
-    `<div class="tt-note">⚠️ Downgraded ${base} → ${eff} because lead is ${d} days old. Machines may already be procured.</div>` :
-    `<div class="tt-note">✅ Score unchanged — lead is within 30 days, still actionable.</div>`;
-  return `<div class="tt-title">⭐ Lead Score Explained</div>
-    ${factors.map(([l,v])=>`<div class="tt-row"><span class="tt-lbl">${l}</span><span class="tt-val">${v}</span></div>`).join('')}
-    ${adj}`;
+
+  const note = changed
+    ? `<div class="tt-note">⚠️ ${base} downgraded to ${eff} — lead is ${d} days old.</div>`
+    : `<div class="tt-note">✅ No downgrade — lead is in the HOT zone (≤30 days).</div>`;
+
+  return '<div class="tt-title">⭐ Lead Score — Calculation</div>' +
+    rows.map(([l,v]) =>
+      `<div class="tt-row"><span class="tt-lbl">${l}</span><span class="tt-val">${v}</span></div>`
+    ).join('') + note;
 }
 
 
@@ -1948,7 +1983,7 @@ function quickF(t){
   } else if(t==='excavator'){
     document.querySelector('.fdater[value="hot"]').checked=true;
     AF.dateRange='hot';
-    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && c.excScore>=80);
+    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && calcExcScore(c)>=80);
   } else if(t==='all'){
     document.querySelector('.fdater[value="all"]').checked=true;
     AF.dateRange='all';
