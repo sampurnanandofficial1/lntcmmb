@@ -145,7 +145,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 /* INFO BUTTONS & TOOLTIPS */
 .ibtn{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;background:rgba(0,63,114,.12);border-radius:50%;border:1px solid rgba(0,63,114,.3);color:var(--b);font-size:9px;font-weight:800;cursor:pointer;flex-shrink:0;transition:all .2s;font-style:italic;vertical-align:middle;margin-left:2px}
 .ibtn:hover{background:var(--b);color:#fff;border-color:var(--b)}
-#_tt{display:none;position:fixed;z-index:9500;background:#0A1628;color:#fff;border-radius:10px;padding:14px 16px;max-width:320px;width:max-content;font-size:12px;line-height:1.65;box-shadow:0 8px 32px rgba(0,0,0,.5);pointer-events:none;font-family:Inter,sans-serif}
+#_tt{display:none;position:fixed;z-index:9999;background:#0A1628;color:#fff;border-radius:10px;padding:14px 16px;max-width:300px;width:max-content;font-size:12px;line-height:1.65;box-shadow:0 8px 32px rgba(0,0,0,.5);font-family:Inter,sans-serif;cursor:default}
 .tt-title{font-size:12.5px;font-weight:700;color:#93C5FD;margin-bottom:8px}
 .tt-row{display:flex;justify-content:space-between;gap:14px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .tt-row:last-of-type{border-bottom:none}
@@ -1635,109 +1635,49 @@ function leadScoreExplain(c) {
     ${adj}`;
 }
 
-function _showCompTT(el) {
-  // Safe wrapper — uses window._curC set by openMod
-  const c = window._curC || {};
-  try { showTT(el, completionDateExplain(c)); }
-  catch(err) {
-    showTT(el, '<div class="tt-title">📅 Project Completion</div>' +
-              '<div class="tt-row"><span class="tt-lbl">Type</span><span class="tt-val">' + (c.type||'—') + '</span></div>' +
-              '<div class="tt-note">Estimated from contract period for this project type.</div>');
-  }
-}
-
-function completionDateExplain(c) {
-  const typ = c.type || 'Highways';
-  const periods = {Highways:36, Mining:24, Railways:42, Metro:48, Irrigation:48, Ports:36, 'Smart City':24, Industrial:30};
-  const months = periods[typ] || 30;
-  const anchor = c.awardDate && c.awardDate!=='null' ? 'Award Date' : c.bidDate ? 'Bid Date +45d' : 'Published Date +75d';
-  return `<div class="tt-title">📅 Completion Date Explained</div>
-    <div class="tt-row"><span class="tt-lbl">Project Type</span><span class="tt-val">${typ}</span></div>
-    <div class="tt-row"><span class="tt-lbl">Typical Contract Period</span><span class="tt-val">${months} months</span></div>
-    <div class="tt-row"><span class="tt-lbl">Calculated From</span><span class="tt-val">${anchor}</span></div>
-    <div class="tt-row"><span class="tt-lbl">Date Type</span><span class="tt-val">${c.completionType==='exact'?'✅ Exact (from contract)':'~Estimated'}</span></div>
-    <div class="tt-note">Source: Standard contract periods from MoRTH/CIL tender documents for ${typ} projects in India.</div>`;
-}
-
-function infoBtn(ttHtml, id) {
-  const eid = 'ibtn_' + (id||Math.random().toString(36).slice(2,7));
-  // Store tooltip html in a data attribute via a simple registry
-  _ttRegistry = _ttRegistry || {};
-  _ttRegistry[eid] = ttHtml;
-  return `<span class="ibtn" id="${eid}" onclick="event.stopPropagation();showTT(this,_ttRegistry['${eid}'])">i</span>`;
-}
-let _ttRegistry = {};
 
 // ===================== TOOLTIP ENGINE =====================
-let _ttVisible = false;
-
 function showTT(el, html) {
   try {
-    const tt = document.getElementById('_tt');
+    var tt = document.getElementById('_tt');
     if (!tt) return;
+    hideTT();
     tt.innerHTML = html;
-
-    // Position: try right of button first, flip left if no room
-    const r   = el.getBoundingClientRect();
-    const tw  = Math.min(300, window.innerWidth - 20);
-    let left  = r.right + 10;
-    let top   = r.top;
+    var r = el.getBoundingClientRect();
+    var tw = Math.min(300, window.innerWidth - 20);
+    var left = r.right + 10;
+    var top  = r.top;
     if (left + tw > window.innerWidth - 10) left = r.left - tw - 10;
     if (left < 6) left = 6;
-    if (top + 240 > window.innerHeight)     top  = window.innerHeight - 248;
-    if (top < 6)  top  = 6;
-
+    if (top + 240 > window.innerHeight) top = window.innerHeight - 248;
+    if (top < 6) top = 6;
     tt.style.left    = left + 'px';
     tt.style.top     = top  + 'px';
     tt.style.display = 'block';
-    _ttVisible = true;
-
-    // One-time outside-click closer — deferred so this same click doesn't fire it
-    setTimeout(() => {
-      document.addEventListener('click', _outsideClickClose, true);
-    }, 50);
-  } catch(err) {
-    console.warn('showTT error:', err);
-  }
+    setTimeout(function(){ document.addEventListener('click', _ttClose); }, 0);
+  } catch(err) { console.warn('showTT:', err); }
 }
 
-function _outsideClickClose(e) {
-  // Keep open if click is ON an ibtn (let its own onclick handle it)
-  // or ON the tooltip itself
-  if (e.target.closest && (e.target.closest('.ibtn') || e.target.closest('#_tt'))) return;
+function _ttClose(e) {
+  var tt = document.getElementById('_tt');
+  if (tt && tt.contains(e.target)) return;
+  if (e.target.closest && e.target.closest('.ibtn')) return;
   hideTT();
 }
 
 function hideTT() {
-  const tt = document.getElementById('_tt');
+  var tt = document.getElementById('_tt');
   if (tt) tt.style.display = 'none';
-  _ttVisible = false;
-  document.removeEventListener('click', _outsideClickClose, true);
+  document.removeEventListener('click', _ttClose);
 }
 
-// ESC key always closes
-document.addEventListener('keydown', e => { if (e.key === 'Escape') hideTT(); });
-
-
-
-// ===================== TOOLTIP ENGINE =====================
-let _ttEl = null;
-function showTT(el, html) {
-  const tt = document.getElementById('_tt');
-  if (!tt) return;
-  tt.innerHTML = html;
-  const r = el.getBoundingClientRect();
-  const tw = Math.min(320, window.innerWidth - 24);
-  let left = r.right + 10;
-  let top  = r.top - 8;
-  if (left + tw > window.innerWidth - 12) left = r.left - tw - 10;
-  if (left < 8) left = 8;
-  if (top + 240 > window.innerHeight) top = window.innerHeight - 248;
-  if (top < 8) top = 8;
-  tt.style.cssText = `display:block;left:${left}px;top:${top}px;max-width:${tw}px`;
+function _showCompTT(el) {
+  var c = window._curC || {};
+  showTT(el, completionDateExplain(c));
 }
-function hideTT() { const tt=document.getElementById('_tt'); if(tt) tt.style.display='none'; }
-document.addEventListener('scroll', hideTT, true);
+
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideTT(); });
+document.addEventListener('scroll',  hideTT, true);
 
 // ===================== NOTIFICATION SYSTEM =====================
 // Dynamic — built from live contract data, stored in localStorage
