@@ -1,52 +1,102 @@
 [
   {
-    "site": "Korba, CG",
+    "site": "Korba (CG Coal)",
     "lat": 22.342,
     "lon": 82.689,
-    "temp": "39.0\u00b0C",
-    "condition": "\u2600\ufe0f Clear",
-    "precip_3d": "0.0mm over 3 days",
+    "temp": "41.8°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
     "type": "mining",
-    "updated": "2026-05-22T12:02:44.532132+00:00"
+    "updated": "2026-05-23T09:35:40.009495+00:00"
   },
   {
-    "site": "Nagpur, MH",
+    "site": "Nagpur (NH Hub)",
     "lat": 21.159,
     "lon": 79.088,
-    "temp": "43.0\u00b0C",
-    "condition": "\u2600\ufe0f Clear",
-    "precip_3d": "0.0mm over 3 days",
+    "temp": "43.0°C",
+    "condition": "⛅ Overcast",
+    "precip_3d_mm": 0.0,
     "type": "highways",
-    "updated": "2026-05-22T12:02:44.532132+00:00"
+    "updated": "2026-05-23T09:35:40.009495+00:00"
   },
   {
-    "site": "Dausa, RJ",
-    "lat": 26.889,
-    "lon": 76.34,
-    "temp": "39.2\u00b0C",
-    "condition": "\u2600\ufe0f Clear",
-    "precip_3d": "0.0mm over 3 days",
-    "type": "highways",
-    "updated": "2026-05-22T12:02:44.532132+00:00"
-  },
-  {
-    "site": "Dhanbad, JH",
+    "site": "Dhanbad (Jharia)",
     "lat": 23.795,
     "lon": 86.439,
-    "temp": "33.4\u00b0C",
-    "condition": "\u26a0\ufe0f RAIN",
-    "precip_3d": "0.1mm over 3 days",
+    "temp": "40.5°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
     "type": "mining",
-    "updated": "2026-05-22T12:02:44.532132+00:00"
+    "updated": "2026-05-23T09:35:40.009495+00:00"
   },
   {
-    "site": "Keonjhar, OD",
+    "site": "Keonjhar (NMDC)",
     "lat": 21.628,
     "lon": 85.581,
-    "temp": "27.7\u00b0C",
-    "condition": "\u26a0\ufe0f RAIN",
-    "precip_3d": "3.9mm over 3 days",
+    "temp": "33.0°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.9,
     "type": "mining",
-    "updated": "2026-05-22T12:02:44.532132+00:00"
+    "updated": "2026-05-23T09:35:40.009495+00:00"
+  },
+  {
+    "site": "Visakhapatnam",
+    "lat": 17.686,
+    "lon": 83.218,
+    "temp": "42.8°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.8,
+    "type": "ports",
+    "updated": "2026-05-23T09:35:40.009495+00:00"
+  },
+  {
+    "site": "Imphal (BRO/NH)",
+    "lat": 24.817,
+    "lon": 93.942,
+    "temp": "28.9°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 15.7,
+    "type": "highways",
+    "updated": "2026-05-23T09:35:40.009495+00:00"
+  },
+  {
+    "site": "Dibrugarh (NF Rail)",
+    "lat": 27.483,
+    "lon": 94.912,
+    "temp": "26.3°C",
+    "condition": "🌧️ Rain",
+    "precip_3d_mm": 158.4,
+    "type": "railways",
+    "updated": "2026-05-23T09:35:40.009495+00:00"
+  },
+  {
+    "site": "Barmer (NHAI RJ)",
+    "lat": 25.745,
+    "lon": 71.388,
+    "temp": "42.7°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "highways",
+    "updated": "2026-05-23T09:35:40.009495+00:00"
+  },
+  {
+    "site": "Jharsuguda (MCL)",
+    "lat": 21.856,
+    "lon": 84.007,
+    "temp": "40.6°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "mining",
+    "updated": "2026-05-23T09:35:40.009495+00:00"
+  },
+  {
+    "site": "Hyderabad (Metro)",
+    "lat": 17.385,
+    "lon": 78.486,
+    "temp": "37.5°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 1.5,
+    "type": "metro",
+    "updated": "2026-05-23T09:35:40.009495+00:00"
   }
 ]
