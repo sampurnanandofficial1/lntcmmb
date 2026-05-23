@@ -1,209 +1,262 @@
 /**
- * CPWD Contractor List — Browser Console Scraper
- * ================================================
- * HOW TO USE (takes ~15-20 minutes for all 10,268 records):
+ * CPWD Contractor Scraper v2 — CSP-Error Safe
+ * ============================================
+ * The CPWD page has broken Google Charts JS that throws errors.
+ * This scraper ignores those errors and directly reads the table + paginates.
  *
- * 1. Open https://cpwd.gov.in/Contractors/enlistedcontractorlist.aspx in Chrome/Edge
- * 2. Wait for the page to fully load
+ * HOW TO USE:
+ * 1. Go to: https://cpwd.gov.in/Contractors/enlistedcontractorlist.aspx
+ * 2. Wait for the page to load (ignore any red console errors — they are CPWD's own bugs)
  * 3. Press F12 → Console tab
  * 4. Paste this ENTIRE script and press Enter
- * 5. Wait for it to finish — it will auto-download cpwd_contractors.json
- * 6. Then run: python scripts/cpwd_import_json.py cpwd_contractors.json
- *
- * Do NOT close the browser tab while running.
+ * 5. File "cpwd_contractors.json" downloads automatically when done (~15 min)
+ * 6. Then: python scripts/cpwd_import_json.py cpwd_contractors.json
  */
 
 (async function scrapeCPWD() {
-  console.log('%c CPWD Contractor Scraper Started ', 'background:#003F72;color:#fff;font-size:14px;padding:4px 8px');
+
+  // ── Suppress CPWD's own errors so they don't confuse us ──────────────────
+  const _origError = window.onerror;
+  window.onerror = () => true; // suppress
+
+  console.clear();
+  console.log('%c CPWD Scraper v2 — Starting ', 'background:#003F72;color:#fff;font-size:14px;padding:5px 10px;border-radius:4px');
+  console.log('Ignore any red errors above — those are CPWD\'s own page bugs, not ours.\n');
 
   const ALL = [];
-  let page = 1;
-  let hasMore = true;
-  let errorCount = 0;
+  let pageNum = 1;
+  let consecutiveEmpty = 0;
 
-  // ── Helper: parse the current page's table ─────────────────────────────────
-  function parseCurrentPage() {
-    const results = [];
-    // CPWD GridView is inside a table — find the main data table
-    const tables = document.querySelectorAll('table');
-    let dataTable = null;
+  // ── STEP 1: Find which GridView / table has contractor data ──────────────
+  function findDataTable() {
+    // CPWD uses ASP.NET UpdatePanel + GridView
+    // The table id is usually "ctl00_ContentPlaceHolder1_GridView1" or similar
+    const candidates = [
+      document.getElementById('ctl00_ContentPlaceHolder1_GridView1'),
+      document.getElementById('GridView1'),
+      document.querySelector('table[id*="GridView"]'),
+      document.querySelector('table[id*="Gridview"]'),
+      document.querySelector('table[id*="grid"]'),
+      // Fallback: largest table with >3 rows
+      ...[...document.querySelectorAll('table')].sort(
+        (a,b) => b.querySelectorAll('tr').length - a.querySelectorAll('tr').length
+      ).slice(0, 3)
+    ].filter(Boolean);
 
-    for (const t of tables) {
+    for (const t of candidates) {
       const rows = t.querySelectorAll('tr');
-      if (rows.length > 5) {
-        // Check if it looks like contractor data
-        const firstRow = rows[0].innerText.toLowerCase();
-        if (firstRow.includes('name') || firstRow.includes('contractor') || firstRow.includes('s.no') || firstRow.includes('sno')) {
-          dataTable = t;
-          break;
-        }
+      if (rows.length < 3) continue;
+      const firstRowText = rows[0].innerText.toLowerCase();
+      // Must look like contractor data (has name/class/state columns)
+      if (firstRowText.includes('name') || firstRowText.includes('class') ||
+          firstRowText.includes('state') || firstRowText.includes('sno') ||
+          firstRowText.includes('s.no') || firstRowText.includes('agency')) {
+        return t;
       }
     }
+    return null;
+  }
 
-    if (!dataTable) {
-      // Fallback: largest table
-      dataTable = [...tables].sort((a,b) => b.querySelectorAll('tr').length - a.querySelectorAll('tr').length)[0];
-    }
+  // ── STEP 2: Parse one page of contractor rows ────────────────────────────
+  function parsePage(table) {
+    const rows = table.querySelectorAll('tr');
+    if (rows.length < 2) return [];
 
-    if (!dataTable) return results;
+    // Parse headers from row 0
+    const hdrs = [...rows[0].querySelectorAll('th,td')].map(
+      c => c.innerText.trim().toLowerCase().replace(/[\s.]+/g, '_').replace(/[^a-z0-9_]/g, '')
+    );
 
-    const rows = dataTable.querySelectorAll('tr');
-    const headers = [];
-
-    // Get headers
-    const headerRow = rows[0];
-    headerRow.querySelectorAll('th,td').forEach(cell => {
-      headers.push(cell.innerText.trim().toLowerCase()
-        .replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, ''));
-    });
-
-    // Parse data rows (skip header)
+    const records = [];
     for (let i = 1; i < rows.length; i++) {
-      const cells = rows[i].querySelectorAll('td');
-      if (cells.length < 4) continue;
+      const cells = [...rows[i].querySelectorAll('td')];
+      if (cells.length < 3) continue;
+      const vals = cells.map(c => c.innerText.trim());
 
-      const vals = [...cells].map(c => c.innerText.trim());
+      // Build object from headers
       const obj = {};
-      headers.forEach((h, idx) => { obj[h] = vals[idx] || ''; });
+      hdrs.forEach((h, idx) => { if (vals[idx] !== undefined) obj[h] = vals[idx]; });
 
-      // Map to standard fields — CPWD table columns:
-      // SNo | Name | Address | State | Class | Category | Date of Enlistment | Valid Upto | Enlistment Order
-      const name = obj.name_of_the_contractor || obj.name || obj.contractor_name || vals[1];
-      if (!name || name.length < 3) continue;
-
-      // Find the "View Document" link if present
+      // Extract enlistment doc link if present
       const linkEl = rows[i].querySelector('a[href]');
-      const docUrl = linkEl ? linkEl.href : '';
+      const docUrl = linkEl?.href || '';
 
-      results.push({
-        sno:            vals[0] || String(ALL.length + results.length + 1),
-        name:           name,
-        address:        obj.address || vals[2] || '',
-        state:          obj.state   || vals[3] || '',
-        class:          obj.class   || vals[4] || '',
-        category:       obj.category|| vals[5] || '',
-        enlistmentDate: obj.date_of_enlistment || obj.enlistment_date || vals[6] || '',
-        validUpto:      obj.valid_upto || obj.validity || vals[7] || '',
-        enlistmentOrder:obj.enlistment_order || vals[8] || '',
-        uploadedBy:     obj.uploaded_by || vals[9] || '',
-        documentUrl:    docUrl,
-        source:         'CPWD Enlisted Contractors',
-        sourceUrl:      'https://cpwd.gov.in/Contractors/enlistedcontractorlist.aspx',
-        scrapedAt:      new Date().toISOString(),
+      // Map to standard fields
+      // CPWD columns: SNo | Name of Contractor | Address | State | Class | Category | Date of Enlistment | Valid Upto | Enlistment Order
+      const name = obj.name_of_the_contractor || obj.name || obj.agency_name ||
+                   obj.contractor_name || vals[1] || '';
+      if (!name || name.length < 3 || /^s\.?no|^serial/i.test(name)) continue;
+
+      records.push({
+        sno:             vals[0] || String(ALL.length + records.length + 1),
+        name:            name.replace(/\s+/g,' '),
+        address:         (obj.address || vals[2] || '').replace(/\s+/g,' '),
+        state:           obj.state    || vals[3] || '',
+        class:           obj.class    || vals[4] || '',
+        category:        obj.category || vals[5] || '',
+        enlistmentDate:  obj.date_of_enlistment || obj.enlistment_date || vals[6] || '',
+        validUpto:       obj.valid_upto || obj.validity || vals[7] || '',
+        enlistmentOrder: obj.enlistment_order || vals[8] || '',
+        uploadedBy:      obj.uploaded_by || vals[9] || '',
+        documentUrl:     docUrl,
+        source:          'CPWD Enlisted Contractor List',
+        scrapedAt:       new Date().toISOString(),
       });
     }
-    return results;
+    return records;
   }
 
-  // ── Helper: click "next page" or a specific page number ───────────────────
-  async function goToNextPage(currentPage) {
-    return new Promise((resolve) => {
-      // Find pagination area — CPWD uses a row of page links at bottom of GridView
-      // Look for either a ">" next button or numbered links
-      const allLinks = document.querySelectorAll('a, input[type=submit]');
-      let nextBtn = null;
+  // ── STEP 3: Find pagination and navigate ─────────────────────────────────
+  function getTotalPages(table) {
+    // Look for pager row — usually the last row of the GridView with page numbers
+    const pagerRow = table.querySelector('tr:last-child td[colspan]') ||
+                     table.querySelector('.GridPager') ||
+                     table.querySelectorAll('tr')[table.querySelectorAll('tr').length - 1];
 
-      // Try to find ">" or next numbered page
-      for (const el of allLinks) {
-        const txt = el.innerText.trim();
-        if (txt === '>' || txt === '»' || txt === 'Next') {
-          nextBtn = el;
-          break;
+    if (!pagerRow) return null;
+    const links = pagerRow.querySelectorAll('a,span');
+    let maxPage = 1;
+    links.forEach(el => {
+      const n = parseInt(el.innerText.trim());
+      if (!isNaN(n) && n > maxPage) maxPage = n;
+    });
+    return maxPage > 1 ? maxPage : null;
+  }
+
+  async function clickPage(targetPageNum, gridId) {
+    return new Promise(resolve => {
+      // Strategy 1: Find the direct page link in the pager row
+      const allLinks = document.querySelectorAll('a');
+      for (const a of allLinks) {
+        const txt = a.innerText.trim();
+        const href = a.getAttribute('href') || '';
+        if ((txt === String(targetPageNum) || txt === '>' || txt === '»') &&
+            (href.includes('__doPostBack') || href.includes('Page$') || href.startsWith('java'))) {
+          a.click();
+          setTimeout(resolve, 2200);
+          return;
         }
       }
 
-      // If no "next" button, look for the number (currentPage+1)
-      if (!nextBtn) {
-        for (const el of allLinks) {
-          const txt = el.innerText.trim();
-          if (txt === String(currentPage + 1)) {
-            nextBtn = el;
-            break;
-          }
-        }
-      }
-
-      // If still not found, try __doPostBack approach
-      if (!nextBtn) {
-        // Try direct __doPostBack call
+      // Strategy 2: Direct __doPostBack call
+      if (typeof __doPostBack === 'function' && gridId) {
         try {
-          if (typeof __doPostBack === 'function') {
-            // Find the GridView ID
-            const grid = document.querySelector('table[id*="Grid"]') ||
-                          document.querySelector('table[id*="grid"]') ||
-                          document.querySelector('[id*="GridView"]');
-            const gridId = grid ? grid.id : 'ctl00$ContentPlaceHolder1$GridView1';
-            __doPostBack(gridId, 'Page$' + (currentPage + 1));
-            setTimeout(resolve, 2500);
-            return;
-          }
+          __doPostBack(gridId, 'Page$' + targetPageNum);
+          setTimeout(resolve, 2200);
+          return;
         } catch(e) {}
-        resolve(false);
-        return;
       }
 
-      nextBtn.click();
-      // Wait for page to reload
-      setTimeout(resolve, 2000);
+      // Strategy 3: Find "next" button (">")
+      for (const a of allLinks) {
+        const txt = a.innerText.trim();
+        if (txt === '>' || txt === '»' || txt === 'Next') {
+          a.click();
+          setTimeout(resolve, 2200);
+          return;
+        }
+      }
+
+      // Strategy 4: Form POST submission
+      try {
+        const form = document.querySelector('form');
+        if (form) {
+          const evt = form.querySelector('[name="__EVENTTARGET"]') ||
+                      Object.assign(document.createElement('input'), {type:'hidden', name:'__EVENTTARGET'});
+          const arg = form.querySelector('[name="__EVENTARGUMENT"]') ||
+                      Object.assign(document.createElement('input'), {type:'hidden', name:'__EVENTARGUMENT'});
+          evt.value = gridId || 'ctl00$ContentPlaceHolder1$GridView1';
+          arg.value = 'Page$' + targetPageNum;
+          if (!form.contains(evt)) form.appendChild(evt);
+          if (!form.contains(arg)) form.appendChild(arg);
+          form.submit();
+          setTimeout(resolve, 3000);
+          return;
+        }
+      } catch(e) {}
+
+      resolve(false); // couldn't navigate
     });
   }
 
-  // ── Main scrape loop ───────────────────────────────────────────────────────
-  // Parse page 1 first
-  const page1 = parseCurrentPage();
-  if (page1.length === 0) {
-    console.error('❌ No data found on page 1. Make sure you are on the CPWD contractor list page.');
+  // ── MAIN SCRAPE LOOP ─────────────────────────────────────────────────────
+  let table = findDataTable();
+  if (!table) {
+    console.error('❌ Could not find contractor data table.');
+    console.log('Make sure you are on: https://cpwd.gov.in/Contractors/enlistedcontractorlist.aspx');
+    console.log('And the table has loaded (you should see contractor rows on the page).');
     return;
   }
-  ALL.push(...page1);
-  console.log(`Page 1: ${page1.length} records (Total: ${ALL.length})`);
 
-  // Detect records per page and estimate total pages
-  const perPage = page1.length;
-  const TOTAL_EXPECTED = 10268;
-  const totalPages = Math.ceil(TOTAL_EXPECTED / perPage);
-  console.log(`Records/page: ${perPage} → Estimated pages: ${totalPages}`);
-  console.log('Starting pagination... Do NOT close this tab.\n');
+  const gridId = table.id || 'ctl00$ContentPlaceHolder1$GridView1';
+  console.log(`✅ Found table: #${gridId}`);
 
-  while (hasMore && page < totalPages && errorCount < 5) {
-    await goToNextPage(page);
+  // Parse page 1
+  const p1 = parsePage(table);
+  if (!p1.length) {
+    console.error('❌ Table found but no data rows parsed. Table HTML:');
+    console.log(table.outerHTML.substring(0, 500));
+    return;
+  }
+  ALL.push(...p1);
+  console.log(`Page 1: ${p1.length} records`);
 
-    const pageData = parseCurrentPage();
-    if (pageData.length === 0) {
-      errorCount++;
-      console.warn(`⚠️ Page ${page+1}: No data (error ${errorCount}/5)`);
-      if (errorCount >= 5) break;
-      await new Promise(r => setTimeout(r, 3000));
+  const perPage    = p1.length;
+  const EXPECTED   = 10268;
+  const totalPages = Math.ceil(EXPECTED / perPage);
+  console.log(`${perPage} records/page → ~${totalPages} pages total`);
+  console.log('Running... Do NOT close or navigate away from this tab.\n');
+
+  // Scrape remaining pages
+  for (let pg = 2; pg <= totalPages; pg++) {
+    await clickPage(pg, gridId.replace(/\$/g, '$'));
+
+    // Re-find table after navigation (DOM may have refreshed)
+    table = findDataTable();
+    if (!table) {
+      consecutiveEmpty++;
+      if (consecutiveEmpty >= 3) { console.warn('3 empty pages, stopping.'); break; }
+      await new Promise(r => setTimeout(r, 2000));
       continue;
     }
 
-    errorCount = 0;
-    page++;
-    ALL.push(...pageData);
-
-    // Progress log every 10 pages
-    if (page % 10 === 0 || page <= 5) {
-      const pct = Math.round(ALL.length / TOTAL_EXPECTED * 100);
-      console.log(`Page ${page}/${totalPages}: ${pageData.length} records | Total: ${ALL.length} (${pct}%)`);
+    const pageData = parsePage(table);
+    if (!pageData.length) {
+      consecutiveEmpty++;
+      console.warn(`Page ${pg}: empty (${consecutiveEmpty}/3)`);
+      if (consecutiveEmpty >= 3) break;
+    } else {
+      consecutiveEmpty = 0;
+      ALL.push(...pageData);
     }
 
-    // Short delay to be polite to CPWD servers
-    await new Promise(r => setTimeout(r, 800));
+    if (pg % 10 === 0) {
+      const pct = Math.round(ALL.length / EXPECTED * 100);
+      const bar = '█'.repeat(Math.floor(pct/5)) + '░'.repeat(20-Math.floor(pct/5));
+      console.log(`[${bar}] ${pct}% — Page ${pg}/${totalPages} — ${ALL.length.toLocaleString()} records`);
+    }
+
+    // Polite delay
+    await new Promise(r => setTimeout(r, 700 + Math.random()*400));
   }
 
-  console.log(`\n✅ Scraping complete! Total records: ${ALL.length}`);
+  // ── DOWNLOAD JSON ────────────────────────────────────────────────────────
+  console.log(`\n✅ Done! Total records: ${ALL.length.toLocaleString()}`);
 
-  // ── Download JSON ──────────────────────────────────────────────────────────
-  const blob = new Blob([JSON.stringify(ALL, null, 2)], { type: 'application/json' });
+  const json = JSON.stringify(ALL, null, 2);
+  const blob = new Blob([json], {type:'application/json'});
   const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = 'cpwd_contractors.json';
+  const a    = Object.assign(document.createElement('a'), {href:url, download:'cpwd_contractors.json'});
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
-  console.log('%c Downloaded: cpwd_contractors.json ', 'background:#059669;color:#fff;font-size:13px;padding:3px 7px');
-  console.log('Next step: Run  python scripts/cpwd_import_json.py cpwd_contractors.json');
+  console.log('%c ✅ Downloaded: cpwd_contractors.json ', 'background:#059669;color:#fff;font-size:13px;padding:4px 8px;border-radius:4px');
+  console.log('Next → run: python scripts/cpwd_import_json.py cpwd_contractors.json');
 
+  // Restore error handler
+  window.onerror = _origError;
   return ALL;
+
 })();
