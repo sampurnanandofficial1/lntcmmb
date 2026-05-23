@@ -714,8 +714,17 @@ async function fetchNews() {
       });
     }
     if (all.length > 0) { renderNews(all.slice(0,12)); toast('📰','Live Feed',all.length+' items loaded'); }
-    else { renderNews(FALLBACK_NEWS); }
-  } catch(e) { renderNews(FALLBACK_NEWS); }
+    else { await loadNewsCacheOrFallback(); }
+  } catch(e) { await loadNewsCacheOrFallback(); }
+}
+
+async function loadNewsCacheOrFallback() {
+  try {
+    const base = window.location.href.replace(/\/[^/]*$/,'/');
+    const r = await fetch(base + 'data/news.json?t=' + Date.now());
+    if (r.ok) { const d = await r.json(); if (d&&d.length) { renderNews(d); return; } }
+  } catch(e) {}
+  renderNews(FALLBACK_NEWS);
 }
 
 
@@ -735,8 +744,8 @@ async function fetchNewsFromRSS() {
       });
     }
     if (all.length > 0) { renderNews(all.slice(0,12)); toast('📰','Live Feed',all.length+' items loaded'); }
-    else { renderNews(FALLBACK_NEWS); toast('ℹ️','Cached','Using cached intelligence feed'); }
-  } catch(e) { renderNews(FALLBACK_NEWS); }
+    else { await loadNewsCacheOrFallback(); toast('ℹ️','Cached','Using cached intelligence feed'); }
+  } catch(e) { await loadNewsCacheOrFallback(); }
 }
 
 // ===================== FALLBACK EMBEDDED DATA =====================
@@ -818,7 +827,15 @@ const FALLBACK_CD=[
   {id:"SMART-26-001",publishedDate:"2026-05-16",bidDate:"2026-05-16",awardDate:null,completionDate:"2028-06-19",completionType:"estimated",name:"Agra Smart City Underground Infrastructure Pkg 2",desc:"Underground utility corridor and road reconstruction near Taj Trapezium Zone",authority:"Agra Smart City",ministry:"MoHUA",contractor:"",value:780,state:"Uttar Pradesh",district:"Agra",lat:27.177,lng:78.008,type:"Smart City",stage:"Tender Live",leadScore:"Medium",excScore:61,earthwork:"Medium",mining:false,machines:7,daysAgo:5,source:"Smart Cities Mission",tenderLink:"https://smartcities.gov.in"},
   // Ports April-May 2026
   {id:"MbPT-26-001",publishedDate:"2026-04-30",bidDate:"2026-02-20",awardDate:"2026-04-30",name:"Mumbai Port Trust Land Reclamation Phase 3",desc:"Marine reclamation and land development for port expansion — heavy earthmoving",authority:"Mumbai Port Trust",ministry:"Ministry of Ports",contractor:"Afcons Infrastructure",value:2900,state:"Maharashtra",district:"Mumbai",lat:18.933,lng:72.844,type:"Ports",stage:"Awarded",leadScore:"High",excScore:77,earthwork:"High",mining:false,machines:14,daysAgo:21,source:"Mumbai Port",tenderLink:"https://mumbaiport.gov.in"},
-  {id:"KOPT-26-001",publishedDate:"2026-04-24",bidDate:"2026-04-24",awardDate:null,completionDate:"2029-05-23",completionType:"estimated",name:"Kolkata Port Haldia Dock Expansion",desc:"Dock expansion with land reclamation and quay construction at Haldia",authority:"Kolkata Port Trust",ministry:"Ministry of Ports",contractor:"",value:1680,state:"West Bengal",district:"Purba Medinipur",lat:22.062,lng:88.096,type:"Ports",stage:"Tender Live",leadScore:"High",excScore:73,earthwork:"High",mining:false,machines:11,daysAgo:27,source:"KOPT",tenderLink:"https://kolkataporttrust.gov.in"}
+  {id:"KOPT-26-001",publishedDate:"2026-04-24",bidDate:"2026-04-24",awardDate:null,completionDate:"2029-05-23",completionType:"estimated",name:"Kolkata Port Haldia Dock Expansion",desc:"Dock expansion with land reclamation and quay construction at Haldia",authority:"Kolkata Port Trust",ministry:"Ministry of Ports",contractor:"",value:1680,state:"West Bengal",district:"Purba Medinipur",lat:22.062,lng:88.096,type:"Ports",stage:"Tender Live",leadScore:"High",excScore:73,earthwork:"High",mining:false,machines:11,daysAgo:27,source:"KOPT",tenderLink:"https://kolkataporttrust.gov.in"},
+  // ── MAY 23, 2026 — TODAY's ADDITIONS ─────────────────────────────────────
+  {id:"NHAI-26-009",publishedDate:"2026-05-23",bidDate:"2026-05-23",awardDate:null,completionDate:"2029-05-23",completionType:"estimated",name:"NH-44 Bengaluru–Chennai Greenfield Expressway Pkg 4",desc:"Greenfield access-controlled expressway through Andhra-Tamil Nadu border with deep rock cutting",authority:"NHAI",ministry:"MoRTH",contractor:"",value:4100,state:"Andhra Pradesh",district:"Chittoor",lat:13.234,lng:79.102,type:"Highways",stage:"Tender Live",leadScore:"Very High",excScore:93,earthwork:"Very High",mining:false,machines:38,source:"NHAI Portal"},
+  {id:"CIL-26-003",publishedDate:"2026-05-23",bidDate:"2026-05-23",awardDate:null,completionDate:"2028-05-23",completionType:"estimated",name:"MCL Bhubaneswari OC Mine Phase IV Expansion",desc:"Phase IV expansion of Bhubaneswari opencast mine in Odisha — major overburden stripping contract",authority:"Coal India / MCL",ministry:"Ministry of Coal",contractor:"",value:2280,state:"Odisha",district:"Jharsuguda",lat:21.856,lng:84.007,type:"Mining",stage:"Tender Live",leadScore:"Very High",excScore:98,earthwork:"Extreme",mining:true,machines:42,source:"MCL Tenders"},
+  {id:"RVNL-26-003",publishedDate:"2026-05-23",bidDate:"2026-05-23",awardDate:null,completionDate:"2029-11-23",completionType:"estimated",name:"New BG Railway Line Jiribam–Imphal Package 3",desc:"New broad gauge line through Manipur hills — extensive cutting and embankment in northeast",authority:"RVNL",ministry:"Ministry of Railways",contractor:"",value:3600,state:"Manipur",district:"Churachandpur",lat:24.333,lng:93.667,type:"Railways",stage:"Tender Live",leadScore:"Very High",excScore:95,earthwork:"Extreme",mining:false,machines:35,source:"RVNL Tenders"},
+  {id:"AP-26-002",publishedDate:"2026-05-23",bidDate:"2026-05-23",awardDate:null,completionDate:"2030-05-23",completionType:"estimated",name:"Godavari-Krishna Link Canal Phase 1 Earthwork",desc:"Inter-basin link canal earthwork in AP — massive excavation through Krishna-Godavari delta",authority:"AP Irrigation Dept",ministry:"Ministry of Jal Shakti",contractor:"",value:5200,state:"Andhra Pradesh",district:"Krishna",lat:16.510,lng:80.621,type:"Irrigation",stage:"Upcoming",leadScore:"Very High",excScore:94,earthwork:"Very High",mining:false,machines:48,source:"AP Irrigation"},
+  {id:"NMDC-26-002",publishedDate:"2026-05-22",bidDate:"2026-04-10",awardDate:"2026-05-22",completionDate:"2028-05-22",completionType:"estimated",name:"NMDC Bacheli Complex Mine Development",desc:"New mine area development at Bacheli iron ore complex in Chhattisgarh",authority:"NMDC",ministry:"Ministry of Steel",contractor:"Thriveni Earthmovers",value:1340,state:"Chhattisgarh",district:"Dantewada",lat:18.733,lng:81.383,type:"Mining",stage:"Awarded",leadScore:"Very High",excScore:96,earthwork:"Extreme",mining:true,machines:24,source:"NMDC"},
+  {id:"NHAI-26-010",publishedDate:"2026-05-22",bidDate:"2026-04-12",awardDate:"2026-05-22",completionDate:"2029-05-22",completionType:"estimated",name:"Amritsar–Jammu Expressway Package 2",desc:"Expressway through Punjab foothills with significant earthwork and retaining structures",authority:"NHAI",ministry:"MoRTH",contractor:"KNR Constructions",value:2640,state:"Punjab",district:"Gurdaspur",lat:32.039,lng:75.406,type:"Highways",stage:"Awarded",leadScore:"Very High",excScore:89,earthwork:"High",mining:false,machines:25,source:"NHAI Portal"},
+  {id:"BRO-26-002",publishedDate:"2026-05-21",bidDate:"2026-05-21",awardDate:null,completionDate:"2029-05-21",completionType:"estimated",name:"BRO Sela Pass All-Weather Road Package 2",desc:"All-weather road near Sela Pass at 13,700 ft — extreme rock cutting in Arunachal Pradesh",authority:"BRO",ministry:"Ministry of Defence",contractor:"",value:1860,state:"Arunachal Pradesh",district:"Tawang",lat:27.588,lng:91.867,type:"Highways",stage:"Tender Live",leadScore:"Very High",excScore:97,earthwork:"Extreme",mining:false,machines:22,source:"BRO"}
 ];
 
 const FALLBACK_CONTR=[
