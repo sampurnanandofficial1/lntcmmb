@@ -1162,7 +1162,7 @@ function openMod(id){
         <div style="background:#fff;border-radius:6px;padding:9px;border:1px solid ${c.completionDate?'#D1FAE5':'#BFDBFE'}">
           <div style="font-size:9.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;font-weight:700;display:flex;align-items:center;gap:4px">
             🏁 Project Completion
-            <span class="ibtn" onclick="event.stopPropagation();_showCompTT(this)" style="margin-left:auto">i</span>
+            
           </div>
           ${c.completionDate?
             `<div style='font-weight:700;color:#059669;font-size:14px'>${formatDate(c.completionDate)}</div>
@@ -1670,9 +1670,6 @@ function hideTT() {
   if (ov) ov.style.display = 'none';
 }
 
-function _showCompTT(el) {
-  showTT(el, completionDateExplain(window._curC || {}));
-}
 
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') hideTT(); });
 document.addEventListener('scroll',  hideTT, true);
