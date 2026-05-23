@@ -350,7 +350,41 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 
   <!-- CONTRACTORS -->
   <div class="panel" id="panel-contractors">
-    <div class="sbar"><i class="fa fa-search" style="color:var(--mu)"></i><input type="text" class="sinput" id="csearch" placeholder="Search contractors..." oninput="renderContractors()"></div>
+    <div style="background:#fff;border-bottom:1px solid var(--br);flex-shrink:0">
+      <div style="display:flex;padding:0 14px;gap:0">
+        <button class="ctab active" data-ct="tracked" onclick="switchContTab('tracked')"
+                style="padding:8px 14px;border:none;background:transparent;font-size:12px;font-weight:600;color:var(--b);border-bottom:2px solid var(--b);cursor:pointer">
+          🏗️ L&T Tracked <span style="background:var(--b);color:#fff;font-size:9.5px;padding:1px 6px;border-radius:10px;margin-left:4px" id="ct-tracked-count">15</span>
+        </button>
+        <button class="ctab" data-ct="cpwd" onclick="switchContTab('cpwd')"
+                style="padding:8px 14px;border:none;background:transparent;font-size:12px;font-weight:500;color:var(--mu);border-bottom:2px solid transparent;cursor:pointer">
+          🏛️ CPWD Enlisted <span style="background:#E2E8F0;color:#4A5568;font-size:9.5px;padding:1px 6px;border-radius:10px;margin-left:4px" id="ct-cpwd-count">—</span>
+        </button>
+      </div>
+      <div class="sbar" style="border-top:1px solid var(--br);border-bottom:none">
+        <i class="fa fa-search" style="color:var(--mu)"></i>
+        <input type="text" class="sinput" id="csearch" placeholder="Search contractors by name, state, class..." oninput="renderContractors()">
+        <div id="cpwd-filters" style="display:none;gap:6px">
+          <select id="cpwd-state-f" class="fsel" style="width:120px;font-size:11px" onchange="renderContractors()">
+            <option value="">All States</option>
+            <option>Delhi</option><option>Maharashtra</option><option>Karnataka</option>
+            <option>Tamil Nadu</option><option>Andhra Pradesh</option><option>Telangana</option>
+            <option>Uttar Pradesh</option><option>Rajasthan</option><option>Gujarat</option>
+            <option>West Bengal</option><option>Odisha</option><option>Jharkhand</option>
+            <option>Chhattisgarh</option><option>Madhya Pradesh</option><option>Bihar</option>
+          </select>
+          <select id="cpwd-class-f" class="fsel" style="width:100px;font-size:11px" onchange="renderContractors()">
+            <option value="">All Classes</option>
+            <option>SS</option><option>S</option><option>A</option>
+            <option>B</option><option>C</option><option>D</option><option>E</option>
+          </select>
+          <select id="cpwd-cat-f" class="fsel" style="width:110px;font-size:11px" onchange="renderContractors()">
+            <option value="">All Categories</option>
+            <option>Civil</option><option>Electrical</option><option>Horticulture</option>
+          </select>
+        </div>
+      </div>
+    </div>
     <div id="contlist" style="flex:1;overflow:auto;padding:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-content:start"></div>
   </div>
 
@@ -404,6 +438,7 @@ const db = firebase.firestore();
 // ===================== STATE =====================
 let CD = [];
 let CONTR = [];
+let CPWD_CONTRACTORS = [];  // CPWD enlisted contractors (up to 10,268)
 let FC = [];
 let map, mgrp, hlayer, cgrp, view = 'cards';
 let AF = {state:'',types:[],stages:[],leads:[],minV:0,auth:'',mine:false,heavy:false,hsc:false,q:'',dateRange:'hot'};
@@ -655,6 +690,15 @@ async function loadAllData() {
     });
     if (ctSnap.empty || CONTR.length === 0) CONTR = FALLBACK_CONTR;
 
+    // Also load CPWD contractors (separate collection, up to 10,268 records)
+    try {
+      const cpwdSnap = await db.collection('cpwd_contractors').limit(500).get();
+      if (!cpwdSnap.empty) {
+        CPWD_CONTRACTORS = cpwdSnap.docs.map(d => ({...d.data(), id: d.id, _source:'cpwd'}));
+        console.log(`Loaded ${CPWD_CONTRACTORS.length} CPWD contractors from Firestore`);
+      }
+    } catch(e) { console.warn('CPWD contractors not available:', e.message); }
+
     const src = cSnap.empty ? 'embedded cache' : `Firestore + local merge (${CD.length} contracts)`;
     bootUI();
     toast('✅', 'Data Loaded', `${CD.length} contracts · ${CONTR.length} contractors — ${src}`);
@@ -682,6 +726,11 @@ function bootUI() {
   setTimeout(() => { if (!chartsInitialized) initCharts(); }, 300);
   setTimeout(initNotifs, 1500);
   updateFilterCounts();
+  // Update contractor count badges
+  const ctTracked = document.getElementById('ct-tracked-count');
+  if(ctTracked) ctTracked.textContent = CONTR.length;
+  const ctCpwd = document.getElementById('ct-cpwd-count');
+  if(ctCpwd) ctCpwd.textContent = CPWD_CONTRACTORS.length > 0 ? CPWD_CONTRACTORS.length.toLocaleString('en-IN') : '—';
 }
 
 async function fetchNews() {
@@ -1225,72 +1274,141 @@ function openMod(id){
 function closeMod(e){if(!e||e.target===document.getElementById('mover'))document.getElementById('mover').classList.remove('open');}
 // ===================== CONTRACTORS =====================
 function renderContractors(){
-  const q=(document.getElementById('csearch')?.value||'').toLowerCase();
-  const el=document.getElementById('contlist');
-  const list=CONTR.filter(c=>!q||c.name.toLowerCase().includes(q)||c.specialty.toLowerCase().includes(q)||c.hq.toLowerCase().includes(q));
-  el.innerHTML=list.map(c=>`<div class="ccard" style="cursor:default">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-      <div>
-        <div class="cname">${c.name}</div>
-        <div style="font-size:11px;color:var(--mu)">${c.type}</div>
-      </div>
-      <span style="padding:3px 8px;background:#D1FAE5;color:#065F46;border-radius:4px;font-size:11px;font-weight:700">${c.growth}</span>
-    </div>
-    <div class="csts">
-      <div class="sbox"><div class="sv">${c.projects}</div><div class="sl">Projects</div></div>
-      <div class="sbox"><div class="sv" style="font-size:12px">₹${(c.totalValue/1000).toFixed(0)}K Cr</div><div class="sl">Value</div></div>
-      <div class="sbox"><div class="sv">${c.machines}</div><div class="sl">Machines</div></div>
-    </div>
-    <div style="margin-top:10px;font-size:11px;color:var(--t2)"><strong>Specialty:</strong> ${c.specialty}</div>
-    <div class="ctags" style="margin-top:6px">${c.states.map(s=>`<span class="chip">📍 ${s}</span>`).join('')}</div>
-    <!-- CONTACT SECTION -->
-    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--br)">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--b);margin-bottom:7px">📞 Contact Intelligence</div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        <div style="font-size:11px;color:var(--t2);display:flex;align-items:flex-start;gap:6px">
-          <span style="color:var(--b);font-size:11px;flex-shrink:0">🏢</span>
-          <span>${c.hq}</span>
-        </div>
-        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
-          <span style="color:var(--b);flex-shrink:0">📱</span>
-          <a href="tel:${c.phone}" style="color:var(--b);font-weight:600;text-decoration:none">${c.phone}</a>
-          <span style="color:var(--br)">|</span>
-          <a href="tel:${c.altPhone}" style="color:var(--t2);text-decoration:none">${c.altPhone}</a>
-        </div>
-        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
-          <span style="color:var(--b);flex-shrink:0">📧</span>
-          <a href="mailto:${c.email}" style="color:var(--b);text-decoration:none">${c.email}</a>
-        </div>
-        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
-          <span style="color:var(--ok);flex-shrink:0">🎯</span>
-          <span><strong>Proc. Contact:</strong> <a href="mailto:${c.procEmail}" style="color:var(--ok);font-weight:600;text-decoration:none">${c.procEmail}</a></span>
-        </div>
-        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
-          <span style="color:var(--mu);flex-shrink:0">👤</span>
-          <span>${c.contact}</span>
-        </div>
-        <div style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:6px">
-          <span style="color:var(--mu);flex-shrink:0">🔧</span>
-          <span>${c.procContact}</span>
-        </div>
-      </div>
-      <div style="display:flex;gap:6px;margin-top:8px">
-        <a href="tel:${c.phone}" style="flex:1;padding:6px;background:var(--b);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-phone" style="font-size:10px"></i> Call
-        </a>
-        <a href="mailto:${c.procEmail}" style="flex:1;padding:6px;background:var(--ok);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-envelope" style="font-size:10px"></i> Email
-        </a>
-        <a href="https://${c.website}" target="_blank" style="flex:1;padding:6px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-external-link-alt" style="font-size:10px"></i> Web
-        </a>
-      </div>
-    </div>
-    <div style="margin-top:8px;font-size:11px;color:var(--mu)">Order Book: <strong style="color:var(--b)">₹${c.orderBook.toLocaleString('en-IN')} Cr</strong></div>
-  </div>`).join('');
+  const q   = (document.getElementById('csearch')?.value||'').toLowerCase().trim();
+  const el  = document.getElementById('contlist');
+  const tab = document.querySelector('.ctab.active')?.dataset.ct || 'tracked';
+
+  if (tab === 'cpwd') {
+    renderCPWDContractors(q, el);
+  } else {
+    renderTrackedContractors(q, el);
+  }
 }
 
-// ===================== CHARTS =====================
+function switchContTab(which){
+  document.querySelectorAll('.ctab').forEach(b => {
+    const active = b.dataset.ct === which;
+    b.classList.toggle('active', active);
+    b.style.fontWeight   = active ? '700' : '500';
+    b.style.color        = active ? 'var(--b)' : 'var(--mu)';
+    b.style.borderBottom = active ? '2px solid var(--b)' : '2px solid transparent';
+  });
+  const cpwdFilters = document.getElementById('cpwd-filters');
+  if (cpwdFilters) cpwdFilters.style.display = which === 'cpwd' ? 'flex' : 'none';
+  renderContractors();
+}
+
+function renderTrackedContractors(q, el){
+  const list = CONTR.filter(c=>!q||c.name.toLowerCase().includes(q)||
+    (c.state||'').toLowerCase().includes(q)||(c.hq||'').toLowerCase().includes(q));
+  if(!list.length){el.innerHTML='<div style="padding:40px;text-align:center;color:var(--mu)">No contractors found</div>';return;}
+  el.innerHTML=list.map(c=>`
+    <div class="cc" style="border-left:4px solid var(--b);border-radius:0 10px 10px 0;padding:14px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px">
+        <div>
+          <div style="font-size:13.5px;font-weight:700;color:var(--t1)">${c.name}</div>
+          <div style="font-size:11px;color:var(--mu);margin-top:2px">${c.hq||c.regOffice||''}</div>
+        </div>
+        <span style="background:#EFF6FF;color:var(--b);font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;flex-shrink:0">${c.state||'India'}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11.5px;margin-bottom:10px">
+        <div><span style="color:var(--mu)">Key Contact:</span> <strong>${c.keyContact||c.contact||'—'}</strong></div>
+        <div><span style="color:var(--mu)">Proc Contact:</span> <strong>${c.procContact||'—'}</strong></div>
+        <div><span style="color:var(--mu)">Corp Phone:</span> <a href="tel:${c.phone}" style="color:var(--b);font-weight:600">${c.phone||'—'}</a></div>
+        <div><span style="color:var(--mu)">Proc Phone:</span> <a href="tel:${c.procPhone}" style="color:#059669;font-weight:700">${c.procPhone||'—'}</a></div>
+      </div>
+      <div style="display:flex;gap:5px">
+        <a href="tel:${c.procPhone}" style="flex:1;padding:6px;background:var(--b);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center">📱 Call</a>
+        <a href="mailto:${c.procEmail||c.email}?subject=Komatsu PC210 Equipment Enquiry" style="flex:1;padding:6px;background:#065F46;color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center">📧 Email</a>
+        <a href="https://${c.website||'google.com/search?q='+encodeURIComponent(c.name)}" target="_blank" style="flex:1;padding:6px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center">🌐 Web</a>
+      </div>
+    </div>`).join('');
+}
+
+function renderCPWDContractors(q, el){
+  const stateF = (document.getElementById('cpwd-state-f')?.value||'').toLowerCase();
+  const classF = (document.getElementById('cpwd-class-f')?.value||'').toLowerCase();
+  const catF   = (document.getElementById('cpwd-cat-f')?.value||'').toLowerCase();
+
+  if(!CPWD_CONTRACTORS.length){
+    el.innerHTML=`<div style="grid-column:1/-1;padding:48px;text-align:center;color:var(--mu)">
+      <div style="font-size:36px;margin-bottom:12px">🏛️</div>
+      <div style="font-size:15px;font-weight:700;color:var(--t1);margin-bottom:8px">CPWD Contractor Data Not Loaded Yet</div>
+      <div style="font-size:12px;max-width:480px;margin:0 auto;line-height:1.7">
+        To load all 10,268 CPWD enlisted contractors:<br>
+        <strong>Step 1:</strong> Open <a href="https://cpwd.gov.in/Contractors/enlistedcontractorlist.aspx" target="_blank" style="color:var(--b)">cpwd.gov.in contractor list</a> in Chrome<br>
+        <strong>Step 2:</strong> Press F12 → Console → paste <code>scripts/cpwd_browser_scraper.js</code><br>
+        <strong>Step 3:</strong> Run <code>python scripts/cpwd_import_json.py cpwd_contractors.json</code><br>
+        <strong>Step 4:</strong> Refresh dashboard
+      </div>
+    </div>`;
+    return;
+  }
+
+  let list = CPWD_CONTRACTORS.filter(c=>{
+    if(q && !c.name.toLowerCase().includes(q) &&
+       !(c.state||'').toLowerCase().includes(q) &&
+       !(c.address||'').toLowerCase().includes(q)) return false;
+    if(stateF && (c.state||'').toLowerCase() !== stateF) return false;
+    if(classF && (c.class||'').toLowerCase() !== classF) return false;
+    if(catF   && !(c.category||'').toLowerCase().includes(catF)) return false;
+    return true;
+  });
+
+  // Update count badge
+  const badge = document.getElementById('ct-cpwd-count');
+  if(badge) badge.textContent = CPWD_CONTRACTORS.length.toLocaleString('en-IN');
+
+  // Limit display to 100 at a time (performance)
+  const showing = list.slice(0,100);
+  const more    = list.length - showing.length;
+
+  const CLASS_COLOR = {
+    'I(AA)':'#DC2626','I(A)':'#D97706','I':'#D97706',
+    'II':'#2563EB','III':'#059669','IV':'#7C3AED',
+    'SS':'#003F72','S':'#0D9488','A':'#DC2626','B':'#D97706',
+    'C':'#2563EB','D':'#059669','E':'#6B7280'
+  };
+
+  el.innerHTML = showing.map(c=>{
+    const clr = CLASS_COLOR[c.class] || '#003F72';
+    const isValid = c.validUpto && new Date(c.validUpto.split('/').reverse().join('-')) > new Date();
+    return `<div class="cc" style="border-left:4px solid ${clr};border-radius:0 10px 10px 0;padding:12px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12.5px;font-weight:700;color:var(--t1);line-height:1.3">${c.name}</div>
+          <div style="font-size:10.5px;color:var(--mu);margin-top:2px;line-height:1.4">${c.address||'Address not listed'}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0">
+          <span style="background:${clr}22;color:${clr};font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px">Class ${c.class}</span>
+          <span style="background:${isValid?'#D1FAE5':'#FEE2E2'};color:${isValid?'#065F46':'#DC2626'};font-size:9.5px;padding:1px 6px;border-radius:4px">
+            ${isValid?'✅ Active':'⚠️ Check validity'}
+          </span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;font-size:10.5px;margin-bottom:8px">
+        <div><span style="color:var(--mu)">State:</span> <strong>${c.state||'—'}</strong></div>
+        <div><span style="color:var(--mu)">Category:</span> <strong>${c.category||'—'}</strong></div>
+        <div><span style="color:var(--mu)">Enlisted:</span> <strong>${c.enlistmentDate||'—'}</strong></div>
+        <div><span style="color:var(--mu)">Valid Upto:</span> <strong style="color:${isValid?'#059669':'#DC2626'}">${c.validUpto||'—'}</strong></div>
+        ${c.enlistmentOrder?`<div style="grid-column:1/-1"><span style="color:var(--mu)">Order No:</span> <strong>${c.enlistmentOrder}</strong></div>`:''}
+      </div>
+      <div style="display:flex;gap:5px">
+        <a href="https://www.google.com/search?q=${encodeURIComponent(c.name+' CPWD contractor '+c.state)}" target="_blank"
+           style="flex:1;padding:5px;background:var(--b);color:#fff;border-radius:5px;font-size:10.5px;font-weight:600;text-decoration:none;text-align:center">
+          🔍 Search Company
+        </a>
+        ${c.documentUrl?`<a href="${c.documentUrl}" target="_blank"
+           style="flex:1;padding:5px;background:#F0FDF4;color:#065F46;border:1px solid #A7F3D0;border-radius:5px;font-size:10.5px;font-weight:600;text-decoration:none;text-align:center">
+          📄 Enlistment Doc
+        </a>`:''}
+      </div>
+    </div>`;
+  }).join('') + (more>0?`<div style="grid-column:1/-1;text-align:center;padding:16px;color:var(--mu);font-size:12px">
+    Showing 100 of ${list.length.toLocaleString('en-IN')} results — use search/filter to narrow down
+  </div>`:'');
+}
+
 function initCharts(){
   if(chartsInitialized)return;
   chartsInitialized=true;
