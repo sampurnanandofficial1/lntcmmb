@@ -21,18 +21,22 @@ jobs:
       - name: Install dependencies
         run: pip install requests feedparser firebase-admin
 
-      - name: Run comprehensive intelligence fetch (10 sources)
+      - name: Run intelligence fetch (13 sources)
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          DATA_GOV_KEY: ${{ secrets.DATA_GOV_KEY }}
-          CURRENTS_API_KEY: ${{ secrets.CURRENTS_API_KEY }}
-          NEWSDATA_KEY: ${{ secrets.NEWSDATA_KEY }}
+          NEWSDATA_KEY:              ${{ secrets.NEWSDATA_KEY }}
+          FREENEWS_API_KEY:          ${{ secrets.FREENEWS_API_KEY }}
+          CURRENTS_API_KEY:          ${{ secrets.CURRENTS_API_KEY }}
+          GNEWS_API_KEY:             ${{ secrets.GNEWS_API_KEY }}
+          MEDIASTACK_KEY:            ${{ secrets.MEDIASTACK_KEY }}
+          BIDASSIST_API_KEY:         ${{ secrets.BIDASSIST_API_KEY }}
         run: python scripts/fetch_news.py
 
-      - name: Commit data cache to repo
+      - name: Commit data cache
         run: |
-          git config user.name "L&T CMMB Intelligence Bot"
+          git config user.name  "L&T CMMB Intelligence Bot"
           git config user.email "cmmb-bot@lntcmmb.in"
           git add data/
-          git diff --staged --quiet || git commit -m "🔄 Auto: $(date -u '+%Y-%m-%d %H:%M') — news+weather+datagov update"
+          git diff --staged --quiet || git commit -m \
+            "🔄 Auto: $(date -u '+%Y-%m-%d %H:%M') — 13-source update"
           git push || true
