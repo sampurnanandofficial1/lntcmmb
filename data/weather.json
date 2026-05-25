@@ -3,41 +3,41 @@
     "site": "Korba CG",
     "lat": 22.342,
     "lon": 82.689,
-    "temp": "38.4°C",
+    "temp": "37.8°C",
     "condition": "☀️ Clear",
     "precip_3d_mm": 0.0,
     "type": "mining",
-    "updated": "2026-05-25T12:43:37.381200+00:00"
+    "updated": "2026-05-25T12:49:42.459149+00:00"
   },
   {
     "site": "Nagpur MH",
     "lat": 21.159,
     "lon": 79.088,
-    "temp": "42.4°C",
+    "temp": "42.0°C",
     "condition": "☀️ Clear",
     "precip_3d_mm": 0.0,
     "type": "highways",
-    "updated": "2026-05-25T12:43:37.381200+00:00"
+    "updated": "2026-05-25T12:49:42.459149+00:00"
   },
   {
     "site": "Dhanbad JH",
     "lat": 23.795,
     "lon": 86.439,
-    "temp": "35.2°C",
+    "temp": "34.4°C",
     "condition": "☀️ Clear",
     "precip_3d_mm": 0.2,
     "type": "mining",
-    "updated": "2026-05-25T12:43:37.381200+00:00"
+    "updated": "2026-05-25T12:49:42.459149+00:00"
   },
   {
     "site": "Keonjhar OD",
     "lat": 21.628,
     "lon": 85.581,
-    "temp": "30.1°C",
+    "temp": "29.7°C",
     "condition": "⚠️ FLOOD RISK",
     "precip_3d_mm": 6.1,
     "type": "mining",
-    "updated": "2026-05-25T12:43:37.381200+00:00"
+    "updated": "2026-05-25T12:49:42.459149+00:00"
   },
   {
     "site": "Vizag AP",
@@ -47,17 +47,17 @@
     "condition": "⚠️ FLOOD RISK",
     "precip_3d_mm": 0.0,
     "type": "ports",
-    "updated": "2026-05-25T12:43:37.381200+00:00"
+    "updated": "2026-05-25T12:49:42.459149+00:00"
   },
   {
     "site": "Imphal MN",
     "lat": 24.817,
     "lon": 93.942,
     "temp": "25.4°C",
-    "condition": "☀️ Clear",
+    "condition": "⛅ Overcast",
     "precip_3d_mm": 29.3,
     "type": "highways",
-    "updated": "2026-05-25T12:43:37.381200+00:00"
+    "updated": "2026-05-25T12:49:42.459149+00:00"
   },
   {
     "site": "Dibrugarh AS",
@@ -67,7 +67,7 @@
     "condition": "⛅ Overcast",
     "precip_3d_mm": 42.4,
     "type": "railways",
-    "updated": "2026-05-25T12:43:37.381200+00:00"
+    "updated": "2026-05-25T12:49:42.459149+00:00"
   },
   {
     "site": "Barmer RJ",
@@ -77,6 +77,6 @@
     "condition": "☀️ Clear",
     "precip_3d_mm": 0.0,
     "type": "highways",
-    "updated": "2026-05-25T12:43:37.381200+00:00"
+    "updated": "2026-05-25T12:49:42.459149+00:00"
   }
 ]
