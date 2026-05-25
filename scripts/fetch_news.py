@@ -610,6 +610,9 @@ with open('data/bidassist_awards.json','w',encoding='utf-8') as f: json.dump(ba_
 with open('data/meta.json','w',encoding='utf-8') as f:
     json.dump({'last_updated':datetime.now(IST).isoformat(),
                'news_count':len(fresh),'total_found':len(all_news),
-               'ba_tenders':len(ba_tenders),'sources_active':len(active_keys)+4},f)
+               'ba_tenders':len(ba_tenders),
+               'sources_active':len(active_keys)+4,
+               'keys_active':active_keys,
+               'weather_sites':len(weather)},f,indent=2)
 
 print(f"✅ data/news.json: {len(fresh)} items")
