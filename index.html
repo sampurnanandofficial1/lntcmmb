@@ -1545,24 +1545,7 @@ function renderNews(items){
 }
 
 
-async function fetchNews(){
-  const el=document.getElementById('newslist');
-  el.innerHTML='<div class="loading"><div class="spin"></div> Fetching live infrastructure intelligence...</div>';
-  try{
-    const qs=['india+NHAI+highway+tender+awarded+2025','india+coal+mining+contract+excavator+2025','india+infrastructure+construction+contract'];
-    const all=[];
-    for(const q of qs){
-      const url=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://news.google.com/rss/search?q='+q+'&hl=en-IN&gl=IN&ceid=IN:en')}&count=5`;
-      const r=await fetch(url);const d=await r.json();
-      if(d.items){d.items.forEach(i=>{
-        const ago=Math.round((Date.now()-new Date(i.pubDate))/3600000);
-        all.push({title:i.title,desc:(i.description||'').replace(/<[^>]*>/g,'').substring(0,160)+'...',src:i.author||'Google News',time:ago<1?'Just now':ago+'h ago',link:i.link,type:q.includes('coal')?'mining':'highways'});
-      });}
-    }
-    if(all.length>0){renderNews(all.slice(0,12));toast('📰','Feed Updated',all.length+' live intelligence items loaded');}
-    else{renderNews(FALLBACK_NEWS);toast('ℹ️','Cached Data','Using latest cached intelligence feed');}
-  }catch(e){renderNews(FALLBACK_NEWS);toast('⚠️','Fallback','Showing latest cached news');}
-}
+
 
 
 // ===================== TABS =====================
@@ -2113,24 +2096,7 @@ function renderNews(items){
   </div>`).join('');
 }
 
-async function fetchNews(){
-  const el=document.getElementById('newslist');
-  el.innerHTML='<div class="loading"><div class="spin"></div> Fetching live infrastructure intelligence...</div>';
-  try{
-    const qs=['india+NHAI+highway+tender+awarded+2025','india+coal+mining+contract+excavator+2025','india+infrastructure+construction+contract'];
-    const all=[];
-    for(const q of qs){
-      const url=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://news.google.com/rss/search?q='+q+'&hl=en-IN&gl=IN&ceid=IN:en')}&count=5`;
-      const r=await fetch(url);const d=await r.json();
-      if(d.items){d.items.forEach(i=>{
-        const ago=Math.round((Date.now()-new Date(i.pubDate))/3600000);
-        all.push({title:i.title,desc:(i.description||'').replace(/<[^>]*>/g,'').substring(0,160)+'...',src:i.author||'Google News',time:ago<1?'Just now':ago+'h ago',link:i.link,type:q.includes('coal')?'mining':'highways'});
-      });}
-    }
-    if(all.length>0){renderNews(all.slice(0,12));toast('📰','Feed Updated',all.length+' live intelligence items loaded');}
-    else{renderNews(FALLBACK_NEWS);toast('ℹ️','Cached Data','Using latest cached intelligence feed');}
-  }catch(e){renderNews(FALLBACK_NEWS);toast('⚠️','Fallback','Showing latest cached news');}
-}
+
 
 
 // ===================== TABS =====================
