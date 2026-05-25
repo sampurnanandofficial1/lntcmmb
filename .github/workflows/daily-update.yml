@@ -2,8 +2,10 @@ name: Daily Intelligence Feed Update
 
 on:
   schedule:
-    - cron: '30 1 * * *'   # 07:00 AM IST daily
-  workflow_dispatch:        # Manual trigger
+    - cron: '30 1 * * *'    # 07:00 IST (primary)
+    - cron: '30 7 * * *'    # 13:00 IST (backup — fires if primary skipped)
+    - cron: '30 13 * * *'   # 19:00 IST (evening refresh)
+  workflow_dispatch:         # Manual trigger from GitHub UI or API
 
 jobs:
   update-intelligence:
@@ -13,15 +15,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: pip
 
       - name: Install dependencies
         run: pip install requests feedparser firebase-admin
 
-      - name: Run intelligence fetch (13 sources)
+      - name: Run intelligence fetch (v7 — 13 sources)
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           NEWSDATA_KEY:              ${{ secrets.NEWSDATA_KEY }}
@@ -32,11 +37,11 @@ jobs:
           BIDASSIST_API_KEY:         ${{ secrets.BIDASSIST_API_KEY }}
         run: python scripts/fetch_news.py
 
-      - name: Commit data cache
+      - name: Commit and push data cache
         run: |
           git config user.name  "L&T CMMB Intelligence Bot"
           git config user.email "cmmb-bot@lntcmmb.in"
           git add data/
           git diff --staged --quiet || git commit -m \
-            "🔄 Auto: $(date -u '+%Y-%m-%d %H:%M') — 13-source update"
+            "🔄 Auto: $(date -u '+%Y-%m-%d %H:%M UTC') — $(python3 -c \"import json; m=json.load(open('data/meta.json')); print(f'{m.get(chr(110)+chr(101)+chr(119)+chr(115)+chr(95)+chr(99)+chr(111)+chr(117)+chr(110)+chr(116),0)} news items\")"
           git push || true
