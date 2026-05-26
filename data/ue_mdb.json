@@ -1,0 +1,38 @@
+{
+  "projects": [
+    {
+      "country": "Kenya",
+      "flag": "\ud83c\uddf0\ud83c\uddea",
+      "org": "AfDB",
+      "name": "Kenya Transport Sector Support Program",
+      "sector": "Transport",
+      "valueUSD": 350000000
+    },
+    {
+      "country": "Tanzania",
+      "flag": "\ud83c\uddf9\ud83c\uddff",
+      "org": "AfDB",
+      "name": "Tanzania SGR Support Project",
+      "sector": "Transport",
+      "valueUSD": 900000000
+    },
+    {
+      "country": "Ethiopia",
+      "flag": "\ud83c\uddea\ud83c\uddf9",
+      "org": "AfDB",
+      "name": "Ethiopia Roads Connectivity Project",
+      "sector": "Transport",
+      "valueUSD": 280000000
+    },
+    {
+      "country": "Mozambique",
+      "flag": "\ud83c\uddf2\ud83c\uddff",
+      "org": "AfDB",
+      "name": "Mozambique ANE Road Rehabilitation",
+      "sector": "Transport",
+      "valueUSD": 450000000
+    }
+  ],
+  "count": 4,
+  "updated": "2026-05-26T05:42:24.937308+00:00"
+}
