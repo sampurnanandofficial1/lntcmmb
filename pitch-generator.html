@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L&T CMMB | AI Pitch Generator</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#003F72;--blue:#005B9A;--ltblue:#EFF6FF;
+  --green:#059669;--ltgreen:#D1FAE5;
+  --amber:#D97706;--ltamber:#FEF3C7;
+  --red:#DC2626;--ltred:#FEE2E2;
+  --purple:#7C3AED;--ltpurp:#EDE9FE;
+  --gold:#B45309;--ltgold:#FEF9C3;
+  --gray:#64748B;--br:#E2E8F0;
+  --white:#fff;--bg:#F0F4F8;
+  --shadow:0 2px 12px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 32px rgba(0,63,114,.15);
+}
+
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A;min-height:100vh;display:flex;flex-direction:column}
+
+/* ── HEADER ────────────────────────────────────────────────────────────── */
+.pg-header{
+  background:linear-gradient(135deg,#001F3F 0%,#003F72 55%,#005B9A 100%);
+  padding:0 18px;display:flex;align-items:center;justify-content:space-between;
+  height:56px;box-shadow:0 2px 12px rgba(0,0,0,.35);flex-shrink:0;position:sticky;top:0;z-index:100
+}
+.pg-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.pg-logo-badge{background:linear-gradient(135deg,#B45309,#D97706);border:none;
+  border-radius:6px;padding:4px 10px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px}
+.pg-logo-title{font-size:14px;font-weight:700;color:#fff}
+.ai-badge{background:linear-gradient(135deg,#7C3AED,#6D28D9);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.5px;margin-left:4px}
+.pg-header-right{display:flex;align-items:center;gap:8px}
+.pg-nav-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;
+  cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:5px;transition:background .2s}
+.pg-nav-btn:hover{background:rgba(255,255,255,.22)}
+
+/* ── LAYOUT ────────────────────────────────────────────────────────────── */
+.pg-body{display:flex;flex:1;overflow:hidden;height:calc(100vh - 56px)}
+
+/* ── LEFT PANEL ─────────────────────────────────────────────────────────── */
+.pg-left{
+  width:300px;flex-shrink:0;background:#fff;border-right:1px solid var(--br);
+  overflow-y:auto;display:flex;flex-direction:column;gap:0
+}
+.pg-section-head{
+  padding:10px 14px 6px;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:.6px;color:var(--gray);font-weight:700;border-top:1px solid var(--br);
+  background:#FAFBFC
+}
+.pg-section-head:first-child{border-top:none}
+.pg-field-group{padding:4px 12px 8px}
+.pg-label{font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;display:block}
+.pg-select,.pg-input,.pg-textarea{
+  width:100%;font-size:11.5px;padding:6px 9px;border:1px solid var(--br);
+  border-radius:6px;background:#fff;color:#0F172A;
+  transition:border .15s;font-family:'Inter',sans-serif
+}
+.pg-select:focus,.pg-input:focus,.pg-textarea:focus{
+  outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,91,154,.1)}
+.pg-textarea{resize:vertical;min-height:64px;line-height:1.5}
+.pg-chip-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+.pg-chip{
+  padding:3px 9px;border:1px solid var(--br);border-radius:12px;
+  font-size:10.5px;font-weight:500;cursor:pointer;transition:all .15s;
+  background:#fff;color:#475569
+}
+.pg-chip.active{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:600}
+.pg-generate-btn{
+  margin:12px;padding:11px;background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;
+  cursor:pointer;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 3px 12px rgba(0,63,114,.3);flex-shrink:0
+}
+.pg-generate-btn:hover{opacity:.9}
+.pg-generate-btn:disabled{opacity:.55;cursor:not-allowed}
+.pg-generate-btn .spin{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── RIGHT PANEL ─────────────────────────────────────────────────────────── */
+.pg-right{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── PITCH TYPE SELECTOR ─────────────────────────────────────────────── */
+.pg-pitch-tabs{
+  background:#fff;border-bottom:1px solid var(--br);padding:0 14px;
+  display:flex;gap:0;overflow-x:auto;flex-shrink:0
+}
+.pg-ptab{
+  padding:9px 14px;border:none;background:transparent;font-size:11.5px;
+  font-weight:500;color:var(--gray);border-bottom:2px solid transparent;
+  cursor:pointer;white-space:nowrap;transition:all .2s
+}
+.pg-ptab.active{color:var(--navy);font-weight:700;border-bottom-color:var(--navy)}
+.pg-ptab:hover:not(.active){color:var(--navy);background:var(--ltblue)}
+
+/* ── OUTPUT AREA ─────────────────────────────────────────────────────────── */
+.pg-output{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+
+/* Welcome screen */
+.pg-welcome{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px;text-align:center;gap:16px
+}
+.pg-welcome-icon{font-size:56px;margin-bottom:4px}
+.pg-welcome h2{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy)}
+.pg-welcome p{font-size:13px;color:var(--gray);max-width:440px;line-height:1.7}
+.pg-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:480px;margin-top:8px}
+.pg-quick-card{
+  background:#fff;border:1px solid var(--br);border-radius:9px;padding:10px 12px;
+  cursor:pointer;text-align:left;transition:all .2s;border-top:3px solid var(--navy)
+}
+.pg-quick-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.pg-quick-card .qc-icon{font-size:20px;margin-bottom:4px}
+.pg-quick-card .qc-title{font-size:12px;font-weight:700;color:var(--navy)}
+.pg-quick-card .qc-desc{font-size:10.5px;color:var(--gray);margin-top:2px}
+
+/* Loading */
+.pg-loading{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px
+}
+.pg-loading-ring{
+  width:56px;height:56px;border:4px solid var(--br);
+  border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite
+}
+.pg-loading-text{font-size:14px;color:var(--gray);font-weight:500}
+.pg-loading-sub{font-size:12px;color:#94A3B8}
+
+/* Result card */
+.pg-result-header{
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  border-radius:10px 10px 0 0;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start
+}
+.pg-result-title{font-family:'DM Serif Display',serif;font-size:18px;color:#fff;line-height:1.3}
+.pg-result-meta{font-size:10.5px;color:rgba(255,255,255,.7);margin-top:3px}
+.pg-result-actions{display:flex;gap:6px;flex-shrink:0;margin-left:12px}
+.pg-action-btn{
+  padding:5px 11px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);
+  color:#fff;font-size:11px;font-weight:600;border-radius:5px;cursor:pointer;
+  transition:background .15s;white-space:nowrap;text-decoration:none;
+  display:inline-flex;align-items:center;gap:4px
+}
+.pg-action-btn:hover{background:rgba(255,255,255,.25)}
+.pg-action-btn.whatsapp{background:#25D366;border-color:#25D366}
+.pg-result-body{
+  background:#fff;border:1px solid var(--br);border-top:none;
+  border-radius:0 0 10px 10px;padding:16px 18px
+}
+.pg-pitch-content{
+  font-size:13px;line-height:1.85;color:#1E293B;
+  white-space:pre-wrap;font-family:'Inter',sans-serif
+}
+.pg-pitch-content strong{color:var(--navy)}
+
+/* TCO table inside pitch */
+.tco-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}
+.tco-table th{background:var(--navy);color:#fff;padding:7px 10px;text-align:left}
+.tco-table td{padding:6px 10px;border-bottom:1px solid var(--br)}
+.tco-table tr:nth-child(even) td{background:#F8FAFC}
+.tco-win{color:var(--green);font-weight:700}
+.tco-loss{color:var(--red)}
+
+/* History */
+.pg-history{
+  background:#fff;border:1px solid var(--br);border-radius:8px;
+  overflow:hidden;flex-shrink:0
+}
+.pg-history-head{
+  padding:8px 14px;background:#FAFBFC;border-bottom:1px solid var(--br);
+  font-size:11px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between
+}
+.pg-history-item{
+  padding:9px 14px;border-bottom:1px solid #F1F5F9;cursor:pointer;
+  display:flex;align-items:center;gap:10px;transition:background .15s
+}
+.pg-history-item:hover{background:var(--ltblue)}
+.pg-history-item:last-child{border-bottom:none}
+.ph-icon{width:30px;height:30px;border-radius:6px;background:var(--ltblue);
+  color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.ph-title{font-size:11.5px;font-weight:600;color:#0F172A}
+.ph-meta{font-size:10px;color:var(--gray);margin-top:1px}
+
+/* Competitor matrix */
+.comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.comp-card{background:#F8FAFC;border-radius:7px;padding:8px 10px;border-top:3px solid var(--br)}
+.comp-card.winner{border-top-color:var(--green);background:var(--ltgreen)}
+.comp-card .comp-name{font-size:11px;font-weight:700;color:var(--navy)}
+.comp-card .comp-score{font-size:22px;font-weight:800;margin:3px 0}
+.comp-card .comp-label{font-size:9.5px;color:var(--gray)}
+
+/* Language badge */
+.lang-badge{
+  display:inline-block;padding:2px 8px;background:var(--ltpurp);
+  color:var(--purple);border-radius:10px;font-size:10px;font-weight:700;margin-right:4px
+}
+
+/* Responsive */
+@media(max-width:900px){.pg-left{width:260px}.comp-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.pg-body{flex-direction:column}.pg-left{width:100%;max-height:50vh}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="pg-header">
+  <div class="pg-logo">
+    <div class="pg-logo-badge">L&T CMMB</div>
+    <div class="pg-logo-title">🤖 AI Pitch Generator <span class="ai-badge">CLAUDE AI</span></div>
+  </div>
+  <div class="pg-header-right">
+    <a href="used-equipment.html" class="pg-nav-btn"><i class="fa fa-cog"></i> Used Equipment</a>
+    <a href="index.html" class="pg-nav-btn"><i class="fa fa-arrow-left"></i> Main Dashboard</a>
+  </div>
+</div>
+
+<!-- MAIN BODY -->
+<div class="pg-body">
+
+  <!-- LEFT PANEL — CUSTOMER PROFILE -->
+  <div class="pg-left">
+
+    <div class="pg-section-head">Customer Profile</div>
+    <div class="pg-field-group">
+      <label class="pg-label">Customer Name</label>
+      <input class="pg-input" id="cust-name" placeholder="e.g. Ramesh Contractors">
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Company Name</label>
+      <input class="pg-input" id="cust-company" placeholder="e.g. ABC Infra Pvt Ltd">
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Customer Type</label>
+      <select class="pg-select" id="cust-type">
+        <option value="fleet_owner">Fleet Owner (10+ machines)</option>
+        <option value="medium_contractor">Medium Contractor (3-10 machines)</option>
+        <option value="small_contractor" selected>Small Contractor (1-3 machines)</option>
+        <option value="first_time">First-time Buyer</option>
+        <option value="rental">Rental / Hiring Company</option>
+        <option value="mining_company">Mining Company (Direct)</option>
+        <option value="govt_psu">Govt / PSU Contractor</option>
+      </select>
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Price Sensitivity</label>
+      <div class="pg-chip-row">
+        <span class="pg-chip" onclick="toggleChip(this,'price-sense')" data-val="price_sensitive">Price Sensitive</span>
+        <span class="pg-chip active" onclick="toggleChip(this,'price-sense')" data-val="value_focused">Value Focused</span>
+        <span class="pg-chip" onclick="toggleChip(this,'price-sense')" data-val="premium">Premium Buyer</span>
+      </div>
+    </div>
+
+    <div class="pg-section-head">Segment & Region</div>
+    <div class="pg-field-group">
+      <label class="pg-label">Work Segment</label>
+      <select class="pg-select" id="cust-segment">
+        <option value="highways">Road & Highways (EPC/HAM)</option>
+        <option value="mining" selected>Mining (Coal / Iron Ore)</option>
+        <option value="railways">Railways & Metro</option>
+        <option value="irrigation">Irrigation & Dams</option>
+        <option value="ports">Ports & Waterways</option>
+        <option value="real_estate">Real Estate & Buildings</option>
+        <option value="quarrying">Quarrying & Aggregate</option>
+        <option value="general">General Construction</option>
+      </select>
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Region</label>
+      <select class="pg-select" id="cust-region">
+        <option value="north">North India (UP/MP/Rajasthan/Punjab)</option>
+        <option value="south" selected>South India (TN/AP/Telangana/Kerala)</option>
+        <option value="west">West India (Maharashtra/Gujarat)</option>
+        <option value="east">East India (Odisha/Jharkhand/WB/Assam)</option>
+        <option value="central">Central India (CG/Madhya Pradesh)</option>
+        <option value="northeast">Northeast India (Assam/Manipur/Mizoram)</option>
+      </select>
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Output Language</label>
+      <div class="pg-chip-row">
+        <span class="pg-chip active" onclick="setLang(this)" data-val="English">English</span>
+        <span class="pg-chip" onclick="setLang(this)" data-val="Hindi">हिंदी</span>
+        <span class="pg-chip" onclick="setLang(this)" data-val="Gujarati">ગુજ.</span>
+        <span class="pg-chip" onclick="setLang(this)" data-val="Marathi">मराठी</span>
+        <span class="pg-chip" onclick="setLang(this)" data-val="Tamil">தமிழ்</span>
+        <span class="pg-chip" onclick="setLang(this)" data-val="Telugu">తెలుగు</span>
+        <span class="pg-chip" onclick="setLang(this)" data-val="Kannada">ಕನ್ನಡ</span>
+        <span class="pg-chip" onclick="setLang(this)" data-val="Bengali">বাংলা</span>
+      </div>
+    </div>
+
+    <div class="pg-section-head">Machine & Competitor</div>
+    <div class="pg-field-group">
+      <label class="pg-label">Komatsu Model to Pitch</label>
+      <select class="pg-select" id="komatsu-model">
+        <option value="PC210-10M0" selected>PC210-10M0 (21T flagship)</option>
+        <option value="PC200-8M0">PC200-8M0 (20T workhorse)</option>
+        <option value="PC205-7">PC205-7 (20T mining spec)</option>
+        <option value="PC240-10M0">PC240-10M0 (24T heavy)</option>
+        <option value="PC290-11">PC290-11 (29T super heavy)</option>
+        <option value="PC360-11">PC360-11 (36T large mining)</option>
+      </select>
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Competitor to Compare Against</label>
+      <div class="pg-chip-row">
+        <span class="pg-chip active" onclick="toggleChip(this,'competitor')" data-val="CAT">CAT</span>
+        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="Hitachi">Hitachi</span>
+        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="JCB">JCB</span>
+        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="Hyundai">Hyundai</span>
+        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="Kobelco">Kobelco</span>
+        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="Volvo">Volvo</span>
+        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="SANY">SANY</span>
+      </div>
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Customer's Pain Point</label>
+      <div class="pg-chip-row">
+        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="high_fuel_cost">High Fuel Cost</span>
+        <span class="pg-chip active" onclick="toggleChip(this,'pain')" data-val="frequent_breakdown">Breakdowns</span>
+        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="poor_resale">Poor Resale</span>
+        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="high_maintenance">High Maintenance</span>
+        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="slow_support">Slow Service</span>
+        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="financing_cost">Financing Cost</span>
+        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="low_productivity">Low Output</span>
+      </div>
+    </div>
+
+    <div class="pg-section-head">Usage Parameters</div>
+    <div class="pg-field-group">
+      <label class="pg-label">Daily Operating Hours</label>
+      <select class="pg-select" id="hours-day">
+        <option value="8">8 hrs/day (single shift)</option>
+        <option value="12" selected>12 hrs/day (double shift)</option>
+        <option value="16">16 hrs/day (heavy)</option>
+        <option value="20">20+ hrs/day (mine continuous)</option>
+      </select>
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Fleet Size (machines customer has)</label>
+      <select class="pg-select" id="fleet-size">
+        <option value="1">1 machine</option>
+        <option value="3" selected>2–5 machines</option>
+        <option value="10">6–15 machines</option>
+        <option value="25">16–30 machines</option>
+        <option value="50">30+ machines</option>
+      </select>
+    </div>
+    <div class="pg-field-group">
+      <label class="pg-label">Additional Context (optional)</label>
+      <textarea class="pg-textarea" id="extra-context" placeholder="e.g. Customer has 3 old CAT 320s, complaining about fuel costs. Site is limestone quarry in Rajasthan. Budget Rs 60L. Looking for AMC option."></textarea>
+    </div>
+
+    <button class="pg-generate-btn" id="generate-btn" onclick="generatePitch()">
+      <i class="fa fa-magic"></i>
+      <span id="gen-btn-text">Generate AI Pitch</span>
+    </button>
+
+  </div><!-- end left panel -->
+
+  <!-- RIGHT PANEL -->
+  <div class="pg-right">
+
+    <!-- PITCH TYPE TABS -->
+    <div class="pg-pitch-tabs">
+      <button class="pg-ptab active" data-ptype="full_sales_speech" onclick="setPitchType(this)">🎯 Full Sales Speech</button>
+      <button class="pg-ptab" data-ptype="tco_comparison" onclick="setPitchType(this)">📊 TCO Comparison</button>
+      <button class="pg-ptab" data-ptype="objection_handling" onclick="setPitchType(this)">🛡 Objection Handler</button>
+      <button class="pg-ptab" data-ptype="whatsapp_summary" onclick="setPitchType(this)">💬 WhatsApp Summary</button>
+      <button class="pg-ptab" data-ptype="rental_vs_own" onclick="setPitchType(this)">🔄 Rent vs Own</button>
+      <button class="pg-ptab" data-ptype="amc_financing" onclick="setPitchType(this)">💳 AMC + Finance</button>
+      <button class="pg-ptab" data-ptype="site_visit_flow" onclick="setPitchType(this)">🏗 Site Visit Script</button>
+      <button class="pg-ptab" data-ptype="dealer_training" onclick="setPitchType(this)">🎓 Dealer Training</button>
+    </div>
+
+    <!-- OUTPUT AREA -->
+    <div class="pg-output" id="pg-output">
+
+      <!-- WELCOME SCREEN -->
+      <div class="pg-welcome" id="welcome-screen">
+        <div class="pg-welcome-icon">🤖</div>
+        <h2>AI Pitch Generator</h2>
+        <p>Fill the customer profile on the left and click <strong>Generate AI Pitch</strong> — Claude AI will craft a custom, data-driven sales script tailored to your customer, segment, and competitor.</p>
+        <div class="pg-quick-grid">
+          <div class="pg-quick-card" onclick="quickGenerate('full_sales_speech','highways','CAT')">
+            <div class="qc-icon">🛣️</div>
+            <div class="qc-title">Highway Pitch vs CAT</div>
+            <div class="qc-desc">EPC contractor, double shift, value-focused</div>
+          </div>
+          <div class="pg-quick-card" onclick="quickGenerate('tco_comparison','mining','Hitachi')">
+            <div class="qc-icon">⛏️</div>
+            <div class="qc-title">Mining TCO vs Hitachi</div>
+            <div class="qc-desc">Coal mine, 20hr operation, fleet owner</div>
+          </div>
+          <div class="pg-quick-card" onclick="quickGenerate('objection_handling','general','SANY')">
+            <div class="qc-icon">🛡️</div>
+            <div class="qc-title">SANY Price Objection</div>
+            <div class="qc-desc">Price-sensitive first-time buyer</div>
+          </div>
+          <div class="pg-quick-card" onclick="quickGenerate('whatsapp_summary','mining','JCB')">
+            <div class="qc-icon">💬</div>
+            <div class="qc-title">WhatsApp Summary</div>
+            <div class="qc-desc">Post-visit follow-up message, Hindi</div>
+          </div>
+          <div class="pg-quick-card" onclick="quickGenerate('amc_financing','highways','Hyundai')">
+            <div class="qc-icon">💳</div>
+            <div class="qc-title">AMC + Finance Bundle</div>
+            <div class="qc-desc">Small contractor, financing hesitation</div>
+          </div>
+          <div class="pg-quick-card" onclick="quickGenerate('site_visit_flow','mining','Volvo')">
+            <div class="qc-icon">🏗️</div>
+            <div class="qc-title">Site Visit Script</div>
+            <div class="qc-desc">Limestone quarry, fleet replacement</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end output -->
+  </div><!-- end right panel -->
+</div><!-- end body -->
+
+<script>
+// ════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════
+let pitchType   = 'full_sales_speech';
+let outputLang  = 'English';
+let generating  = false;
+let pitchHistory = [];
+
+// ════════════════════════════════════════════════════
+// UI HELPERS
+// ════════════════════════════════════════════════════
+function toggleChip(el, group) {
+  // For competitor and pain: allow multiple selections
+  if (group === 'pain') {
+    el.classList.toggle('active');
+  } else {
+    // Single-select for price-sense, single for competitor
+    document.querySelectorAll(`.pg-chip[onclick*="${group}"]`).forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+}
+
+function setLang(el) {
+  document.querySelectorAll('.pg-chip[onclick*="setLang"]').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  outputLang = el.dataset.val;
+}
+
+function setPitchType(el) {
+  document.querySelectorAll('.pg-ptab').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  pitchType = el.dataset.ptype;
+}
+
+function getChipValues(selector) {
+  return [...document.querySelectorAll(selector + '.active')].map(c => c.dataset.val);
+}
+
+function getProfile() {
+  return {
+    customerName:  document.getElementById('cust-name').value  || 'Valued Customer',
+    companyName:   document.getElementById('cust-company').value|| 'Construction Company',
+    customerType:  document.getElementById('cust-type').value,
+    segment:       document.getElementById('cust-segment').value,
+    region:        document.getElementById('cust-region').value,
+    model:         document.getElementById('komatsu-model').value,
+    hoursPerDay:   document.getElementById('hours-day').value,
+    fleetSize:     document.getElementById('fleet-size').value,
+    extraContext:  document.getElementById('extra-context').value,
+    language:      outputLang,
+    pitchType:     pitchType,
+    competitor:    getChipValues('.pg-chip[onclick*="competitor"]').join(', ') || 'CAT',
+    priceSense:    getChipValues('.pg-chip[onclick*="price-sense"]').join('') || 'value_focused',
+    painPoints:    getChipValues('.pg-chip[onclick*="pain"]').join(', ') || 'frequent_breakdown',
+  };
+}
+
+// ════════════════════════════════════════════════════
+// SYSTEM PROMPT — TCO KNOWLEDGE BASE
+// ════════════════════════════════════════════════════
+function buildSystemPrompt() {
+  return `You are an elite AI sales strategist and construction equipment domain expert specialising in 20-tonne excavator sales in India. You work for L&T CMMB (Construction & Mining Machinery Business), the exclusive distributor of Komatsu excavators in India.
+
+YOUR CORE MISSION: Transform complex ownership economics into simple, persuasive, customer-ready sales conversations that help inexperienced sales engineers sell like veterans.
+
+══════════════════════════════════════════════
+KOMATSU PC210-10M0 — VERIFIED SPECIFICATIONS
+══════════════════════════════════════════════
+• Engine: Komatsu SAA6D107E-3, 155 HP (Tier 4 equivalent)
+• Operating weight: 21,600 kg
+• Bucket capacity: 0.93 m³ (standard)
+• Fuel consumption: 15.2–18.0 litres/hour (SMART construction mode)
+• KOMTRAX telematics: standard, free, cloud-based
+• SmartMining system: auto grade control
+• Rear view camera: standard
+• Noise level: 70 dB (cab) — industry lowest
+• Swing speed: 12.1 rpm
+• Maximum digging depth: 6.63m
+• Ex-showroom India (2026): ₹72–76 lakh (varies by state)
+• Warranty: 2 years / 4,000 hours (whichever earlier)
+• AMC (Annual Maintenance Contract): available from L&T
+• Resale after 5 years: typically 60–65% of ex-showroom (highest in class)
+• Recommended service interval: 500 hours
+• EMI (60-month finance @ 10.5%): approx. ₹1.55L/month
+
+══════════════════════════════════════════════
+COMPETITOR INTELLIGENCE — TCO DATA (per 5-year, 10,000-hour lifecycle)
+══════════════════════════════════════════════
+
+CATERPILLAR 320 GC / 320 (Direct competitor):
+• Fuel: 17.5–20.5 L/hr (8–13% higher than PC210)
+• Spare parts cost: 15–20% higher than Komatsu in India
+• Service: Good network but parts on import — 2–4 day delay
+• Resale: 55–60% of ex-showroom (slightly lower)
+• Financing: CAT Finance India — competitive
+• AEMP telematics: standard but subscription-based (₹24K/yr)
+• TCO advantage over Komatsu PC210: Komatsu saves ₹8–12L over 5yr on fuel + parts
+
+HITACHI ZX210-6:
+• Fuel: 16.5–19.5 L/hr
+• Known issue: Hydraulic pump wear at 6,000–7,000 hours
+• Resale: 52–58% of ex-showroom
+• Dealer network: thin outside Tier-1 cities — 24–48hr service delay common
+• Parts: mostly imported — 3–7 day lead time
+• TCO disadvantage: ₹6–9L higher than Komatsu over 5yr
+
+JCB 220X / JS220:
+• Fuel: 14.8–17.0 L/hr (competitive, slightly better in light applications)
+• Built in India (Ballabhgarh) — parts readily available
+• Service: good dealer density in North and West India
+• Resale: 50–55% — lower premium resale value
+• Hydraulic efficiency: 8% lower than PC210 in hard rock
+• TCO: roughly equivalent, but lower resale hurts 5yr total
+• Weakness: not suitable for heavy mining overburden work
+
+HYUNDAI HX220L / HX220A:
+• Fuel: 16.8–19.0 L/hr
+• Korean-made, India dealer network sparse outside South
+• Resale: 42–50% — weakest resale in class
+• Finance: Hyundai Capital — limited tie-ups in rural
+• Parts: imported, 5–10 day lead time
+• TCO disadvantage: ₹12–18L vs Komatsu over 5yr (poor resale + high fuel)
+
+KOBELCO SK220-10:
+• Fuel: 14.8–16.8 L/hr (competitive)
+• Swing priority: excellent — faster cycle times in river sand work
+• Dealer network: very thin — primarily Mumbai, Chennai, Kolkata
+• Service delays: 48–72hrs average outside metro
+• Resale: 48–55%
+• Weakness: after 8,000 hours, maintenance costs spike
+
+VOLVO EC220D:
+• Premium brand, good fuel (15.0–17.0 L/hr)
+• Excellent operator comfort — best in class
+• Parts: most expensive in class, all imported
+• Resale: 58–62% — premium market only
+• Finance: Volvo Financial Services — good rates
+• Weakness: high parts cost erodes TCO advantage; not recommended for mining
+
+SANY SY215C / SY215H:
+• Price: ₹56–62 lakh (20–25% cheaper than Komatsu)
+• Fuel: 18.0–22.0 L/hr (highest in class)
+• Resale: 28–38% — dramatically lower
+• Dealer network: thin, service quality inconsistent
+• Parts: some locally made, quality variable
+• Financing: limited formal options
+• Failure risk: 15–20% higher warranty claim rate vs Japanese brands
+• TCO over 5yr: despite lower purchase price, SANY costs ₹4–8L MORE than Komatsu due to fuel + maintenance + poor resale
+
+══════════════════════════════════════════════
+TCO CALCULATION ENGINE — STANDARD INPUTS
+══════════════════════════════════════════════
+• HSD diesel price: ₹90–95/litre (average India 2026)
+• Annual working hours: daily_hours × 300 working days
+• 5-year total hours: annual × 5
+• Fuel cost = hours × litre_rate × diesel_price
+• Maintenance = ₹280/hr for Komatsu (AMC basis), ₹350–420/hr for competitors
+• Downtime cost = ₹8,000–15,000/day (revenue loss)
+• Resale gap = (Komatsu % - Competitor %) × purchase price
+• Finance cost = loan amount × rate × tenure
+
+══════════════════════════════════════════════
+SALES PSYCHOLOGY & INDIA CONTEXT
+══════════════════════════════════════════════
+• Mining contractors: focus on uptime, OB productivity, KOMTRAX data
+• Highway EPC: focus on cycle time, fuel efficiency, NHAI OFC compliance
+• First-time buyers: focus on simplicity, AMC comfort, warranty, financing
+• Price-sensitive: NEVER compete on price — reframe to per-hour cost + resale
+• Fleet owners: focus on fleet standardisation, KOMTRAX fleet analytics, bulk AMC rates
+• Rental companies: focus on uptime %, resale value, low maintenance cost
+• Government/PSU: focus on documented TCO, KOMTRAX reports, compliance
+
+GOLDEN RULE: Never say "Komatsu is cheaper." Always say "Komatsu costs LESS to OWN."
+
+PERSUASION FRAMEWORK (use in every pitch):
+1. Pain → Amplify their known problem
+2. Prove → Show quantified proof (₹ numbers)
+3. Promise → What Komatsu delivers specifically
+4. Personalise → Connect to their specific site/project
+5. Push → Clear call to action
+
+══════════════════════════════════════════════
+LANGUAGE STYLE GUIDE
+══════════════════════════════════════════════
+• English: Formal yet conversational. Use ₹ values, bullet points.
+• Hindi: Mix with English technical terms. Use respectful "aap". Start with "Namaste".
+• Gujarati: Business-first, numbers-first culture. Be direct about savings.
+• Marathi: Respectful, relationship-first. Start with "Namaskar".
+• Tamil: Formal, technical. Reference local projects (TANROADS, Chennai Metro).
+• Telugu: Reference Hyderabad metro, AP expressways, local contractors.
+• Kannada: Reference Bangalore metro, Karnataka mining, KRDCL projects.
+• Bengali: Reference Kolkata, DVC projects, coal mines of eastern region.
+
+Always output the full pitch in the requested language. Keep English technical terms (KOMTRAX, TCO, AMC, EMI) even in regional languages.`;
+}
+
+function buildUserPrompt(profile) {
+  const pitchTypeInstructions = {
+    full_sales_speech: `Generate a COMPLETE, PERSUASIVE full sales speech (400-600 words) that a sales engineer would deliver face-to-face to this customer. Include: (1) Warm opener, (2) Pain identification, (3) Komatsu vs ${profile.competitor} TCO comparison with specific ₹ numbers for their usage pattern (${profile.hoursPerDay} hrs/day), (4) Key advantages of ${profile.model}, (5) KOMTRAX telematics value, (6) L&T service network strength, (7) Financing/AMC option, (8) Powerful close. Make it conversational, not a brochure.`,
+    
+    tco_comparison: `Generate a detailed TCO COMPARISON ANALYSIS between Komatsu ${profile.model} and ${profile.competitor} for this customer's usage pattern (${profile.hoursPerDay} hrs/day, ${profile.fleetSize} machines, ${profile.segment} sector). Include: (1) Side-by-side 5-year TCO table with actual ₹ numbers, (2) Fuel cost comparison, (3) Maintenance cost comparison, (4) Resale value comparison, (5) Downtime cost comparison, (6) Total 5-year net ownership cost, (7) Monthly EMI comparison, (8) Final verdict with specific ₹ savings figure. Make numbers concrete and believable.`,
+    
+    objection_handling: `Generate OBJECTION HANDLING SCRIPTS for the top 5 objections a ${profile.segment} customer would raise when comparing Komatsu ${profile.model} vs ${profile.competitor}. For each objection: (1) State the objection verbatim (as customer would say it), (2) Acknowledge empathetically, (3) Reframe with data, (4) Provide Komatsu-specific proof point. Customer pain points: ${profile.painPoints}. Customer is ${profile.priceSense.replace(/_/g,' ')}.`,
+    
+    whatsapp_summary: `Generate a WHATSAPP-READY follow-up message (150-200 words max) to send after a customer meeting. Should be: friendly, formatted for WhatsApp (use emojis appropriately, bullet points with • ), include key TCO savings number, next step (demo / trial offer), L&T contact info placeholder [SALES_NAME] [MOBILE]. Customer: ${profile.customerName} from ${profile.companyName}. Make it feel personal, not templated.`,
+    
+    rental_vs_own: `Generate a RENTAL vs OWNERSHIP DECISION GUIDE for this customer. Compare: (1) Rental cost per hour (typical market rate for ${profile.segment}), (2) EMI-based ownership cost per hour for ${profile.model}, (3) Break-even point analysis, (4) Which option suits this customer profile (${profile.customerType}), (5) Hybrid option: buy 1, rent seasonal peak machines, (6) ROI timeline, (7) Recommendation with clear reasoning.`,
+    
+    amc_financing: `Generate a BUNDLED AMC + FINANCING PITCH that positions the Komatsu ${profile.model} as the best-value financed purchase. Include: (1) L&T Finance EMI structure (60 months), (2) AMC (Annual Maintenance Contract) — what it covers and cost, (3) Insurance add-on, (4) Monthly outgo table (EMI + AMC + Insurance vs revenue generated), (5) How AMC prevents surprise costs that hit ${profile.competitor} owners, (6) ROI at ${profile.hoursPerDay}hrs/day, (7) Special bundle offer pitch close.`,
+    
+    site_visit_flow: `Generate a SITE VISIT CONVERSATION FLOW — a step-by-step guide for what a sales engineer should observe, ask, and say during a customer site visit. Include: (1) Pre-visit preparation (what to check about site), (2) Arrival observations (look for competitor machines, site conditions), (3) Opening questions to ask the customer, (4) Demonstration points to highlight on the Komatsu ${profile.model}, (5) KOMTRAX live demo script, (6) Handling the site foreman/operator, (7) Closing conversation with decision-maker, (8) Post-visit follow-up actions.`,
+    
+    dealer_training: `Generate a DEALER TRAINING MODULE — a training script for a new L&T CMMB dealer/sales engineer to learn how to position Komatsu ${profile.model} against ${profile.competitor} in the ${profile.segment} segment. Include: (1) Competitive intelligence briefing, (2) Key differentiators to memorise, (3) Common mistakes to avoid, (4) Role-play scenario with sample dialogue, (5) Quick reference card with ₹ numbers, (6) Do's and Don'ts in field sales, (7) Practice questions and answers.`,
+  };
+
+  const inst = pitchTypeInstructions[profile.pitchType] || pitchTypeInstructions.full_sales_speech;
+
+  return `Generate a sales pitch with the following customer profile and instructions:
+
+CUSTOMER PROFILE:
+- Name: ${profile.customerName} | Company: ${profile.companyName}
+- Type: ${profile.customerType.replace(/_/g,' ')} | Segment: ${profile.segment.replace(/_/g,' ')}
+- Region: ${profile.region.replace(/_/g,' ')}
+- Komatsu Model: ${profile.model}
+- Primary Competitor: ${profile.competitor}
+- Customer Pain Points: ${profile.painPoints.replace(/_/g,' ')}
+- Price Sensitivity: ${profile.priceSense.replace(/_/g,' ')}
+- Daily Operating Hours: ${profile.hoursPerDay} hrs/day
+- Fleet Size: ${profile.fleetSize} machines
+- Additional Context: ${profile.extraContext || 'None provided'}
+
+OUTPUT LANGUAGE: ${profile.language} (write the ENTIRE pitch in ${profile.language}, keep English technical terms like KOMTRAX, TCO, AMC, EMI)
+
+PITCH TYPE: ${profile.pitchType.replace(/_/g,' ').toUpperCase()}
+
+SPECIFIC INSTRUCTIONS: ${inst}
+
+MANDATORY ELEMENTS IN EVERY OUTPUT:
+- At least one specific ₹ savings figure (quantified, believable)
+- One reference to KOMTRAX telematics advantage
+- One reference to L&T service network / 72-hour uptime guarantee
+- A clear, actionable closing statement
+- Do NOT be vague — use specific numbers, specific machine specs, specific time periods
+
+Format the output clearly with headers (use ── or ===) and proper paragraph spacing. Make it ready to use immediately by a field sales engineer.`;
+}
+
+// ════════════════════════════════════════════════════
+// GENERATE PITCH via Anthropic API
+// ════════════════════════════════════════════════════
+async function generatePitch() {
+  if (generating) return;
+  const profile = getProfile();
+
+  generating = true;
+  const btn = document.getElementById('generate-btn');
+  const btnText = document.getElementById('gen-btn-text');
+  btn.disabled = true;
+  btnText.innerHTML = '<i class="fa fa-circle-notch fa-spin"></i>&nbsp; Generating...';
+
+  // Hide welcome, show loader
+  document.getElementById('welcome-screen')?.remove();
+  const output = document.getElementById('pg-output');
+  
+  const loader = document.createElement('div');
+  loader.id = 'pg-loader';
+  loader.className = 'pg-loading';
+  loader.innerHTML = `
+    <div class="pg-loading-ring"></div>
+    <div class="pg-loading-text">Claude AI is crafting your pitch...</div>
+    <div class="pg-loading-sub">Analysing ${profile.competitor} TCO data for ${profile.segment} sector in ${profile.region} region</div>
+  `;
+  output.innerHTML = '';
+  output.appendChild(loader);
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: buildSystemPrompt(),
+        messages: [{ role: 'user', content: buildUserPrompt(profile) }]
+      })
+    });
+
+    const data = await response.json();
+    const pitchText = data.content?.[0]?.text || 'Error: Could not generate pitch. Please try again.';
+
+    // Remove loader
+    output.innerHTML = '';
+
+    // Add result
+    const pitchTypeLabel = document.querySelector('.pg-ptab.active')?.textContent?.trim() || 'Sales Pitch';
+    renderResult(pitchText, profile, pitchTypeLabel);
+
+    // Save to history
+    pitchHistory.unshift({ profile, pitchText, pitchTypeLabel, ts: new Date() });
+    renderHistory();
+
+  } catch(err) {
+    output.innerHTML = '';
+    const errDiv = document.createElement('div');
+    errDiv.style.cssText = 'padding:40px;text-align:center;color:#DC2626';
+    errDiv.innerHTML = `<div style="font-size:40px;margin-bottom:12px">⚠️</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:8px">Generation failed</div>
+      <div style="font-size:12px;color:#64748B">${err.message}</div>
+      <button onclick="generatePitch()" style="margin-top:16px;padding:8px 20px;background:#003F72;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600">Retry</button>`;
+    output.appendChild(errDiv);
+  } finally {
+    generating = false;
+    btn.disabled = false;
+    btnText.innerHTML = '<i class="fa fa-magic"></i> Generate AI Pitch';
+  }
+}
+
+function renderResult(pitchText, profile, pitchTypeLabel) {
+  const output = document.getElementById('pg-output');
+  
+  const resultDiv = document.createElement('div');
+  
+  // Escape for HTML display
+  const escaped = pitchText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  
+  // Format: bold lines starting with ─── or ===
+  const formatted = escaped
+    .replace(/^(─+.+)/gm, '<strong style="color:#003F72;font-size:14px">$1</strong>')
+    .replace(/^(={3}.+)/gm, '<strong style="color:#003F72;font-size:13px">$1</strong>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+  const whatsappText = encodeURIComponent(pitchText.substring(0, 800));
+  
+  resultDiv.innerHTML = `
+    <div class="pg-result-header">
+      <div>
+        <div class="pg-result-title">${pitchTypeLabel}</div>
+        <div class="pg-result-meta">
+          <span class="lang-badge">${profile.language}</span>
+          ${profile.customerName} · ${profile.companyName} · Komatsu ${profile.model} vs ${profile.competitor}
+        </div>
+      </div>
+      <div class="pg-result-actions">
+        <button class="pg-action-btn" onclick="copyPitch(this)" data-text="${pitchText.replace(/"/g,'&quot;')}">
+          <i class="fa fa-copy"></i> Copy
+        </button>
+        <a class="pg-action-btn whatsapp" href="https://wa.me/?text=${whatsappText}" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="pg-result-body">
+      <div class="pg-pitch-content">${formatted}</div>
+    </div>
+  `;
+  output.appendChild(resultDiv);
+}
+
+function copyPitch(btn) {
+  const text = btn.getAttribute('data-text').replace(/&quot;/g,'"');
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="fa fa-check"></i> Copied!';
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  });
+}
+
+function renderHistory() {
+  const output = document.getElementById('pg-output');
+  // Remove existing history
+  const existing = output.querySelector('.pg-history');
+  if (existing) existing.remove();
+
+  if (pitchHistory.length < 2) return;
+
+  const histDiv = document.createElement('div');
+  histDiv.className = 'pg-history';
+  histDiv.innerHTML = `
+    <div class="pg-history-head">
+      <span>Recent Pitches</span>
+      <span style="color:var(--gray);font-weight:400">${pitchHistory.length} generated this session</span>
+    </div>
+    ${pitchHistory.slice(1, 6).map(h => `
+      <div class="pg-history-item" onclick="showHistoryItem(${pitchHistory.indexOf(h)})">
+        <div class="ph-icon">🤖</div>
+        <div>
+          <div class="ph-title">${h.pitchTypeLabel} · ${h.profile.model} vs ${h.profile.competitor}</div>
+          <div class="ph-meta">${h.profile.customerName} · ${h.profile.language} · ${h.ts.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}</div>
+        </div>
+      </div>
+    `).join('')}
+  `;
+  output.appendChild(histDiv);
+}
+
+function showHistoryItem(idx) {
+  const h = pitchHistory[idx];
+  if (!h) return;
+  document.getElementById('pg-output').innerHTML = '';
+  renderResult(h.pitchText, h.profile, h.pitchTypeLabel);
+  renderHistory();
+}
+
+// ════════════════════════════════════════════════════
+// QUICK GENERATE (from welcome cards)
+// ════════════════════════════════════════════════════
+function quickGenerate(ptype, segment, competitor) {
+  // Set pitch type tab
+  document.querySelectorAll('.pg-ptab').forEach(b => {
+    b.classList.toggle('active', b.dataset.ptype === ptype);
+  });
+  pitchType = ptype;
+
+  // Set segment
+  document.getElementById('cust-segment').value = segment;
+
+  // Set competitor chip
+  document.querySelectorAll('.pg-chip[onclick*="competitor"]').forEach(c => {
+    c.classList.toggle('active', c.dataset.val === competitor);
+  });
+
+  // Set language for whatsapp demo
+  if (ptype === 'whatsapp_summary') {
+    document.querySelectorAll('.pg-chip[onclick*="setLang"]').forEach(c => {
+      const active = c.dataset.val === 'Hindi';
+      c.classList.toggle('active', active);
+    });
+    outputLang = 'Hindi';
+  }
+
+  generatePitch();
+}
+</script>
+</body>
+</html>
