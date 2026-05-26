@@ -76,6 +76,29 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
 .verdict-box{background:linear-gradient(135deg,var(--ltgreen),#ECFDF5);border:1px solid #6EE7B7;border-radius:8px;padding:12px 14px;margin-top:12px}
 .verdict-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:4px}
 .verdict-text{font-size:12px;color:#065F46;line-height:1.6}
+/* AI config modal */
+.ai-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
+.ai-modal-overlay.open{display:flex}
+.ai-modal{background:#fff;border-radius:12px;padding:24px;width:460px;max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.ai-modal h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.ai-modal p{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:14px}
+.ai-key-input{width:100%;padding:8px 12px;border:1px solid var(--br);border-radius:7px;font-size:13px;font-family:'Inter',sans-serif;letter-spacing:.05em}
+.ai-key-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,91,154,.1)}
+.ai-save-btn{width:100%;margin-top:12px;padding:10px;background:linear-gradient(135deg,var(--purple),#6D28D9);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer}
+.ai-save-btn:hover{opacity:.9}
+.ai-links{margin-top:10px;font-size:11px;color:var(--gray)}
+.ai-links a{color:var(--blue)}
+/* Status bar */
+.ai-status-bar{padding:5px 14px;display:flex;align-items:center;gap:8px;font-size:11px;border-bottom:1px solid var(--br);flex-shrink:0}
+.ai-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ai-dot.connected{background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+.ai-dot.disconnected{background:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,11,.2)}
+/* Loading overlay inside result */
+.pg-generating{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:14px;padding:60px}
+.pg-gen-ring{width:52px;height:52px;border:4px solid var(--br);border-top-color:var(--purple);border-radius:50%;animation:spin 1s linear infinite}
+.pg-gen-msg{font-size:14px;color:var(--gray);font-weight:500}
+.pg-gen-sub{font-size:11.5px;color:#94A3B8;text-align:center;max-width:280px;line-height:1.5}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -86,6 +109,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
     <div class="pg-logo-title">🤖 AI Pitch Generator <span class="ai-pill">TCO ENGINE</span></div>
   </div>
   <div class="pg-header-right">
+    <button class="pg-nav-btn" id="ai-config-btn" onclick="openAIConfig()" title="Connect Claude AI">
+      <i class="fa fa-robot"></i> <span id="ai-status-label">Configure AI</span>
+    </button>
     <a href="used-equipment.html" class="pg-nav-btn"><i class="fa fa-cog"></i> Used Equipment</a>
     <a href="index.html" class="pg-nav-btn"><i class="fa fa-arrow-left"></i> Main Dashboard</a>
   </div>
@@ -206,7 +232,23 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
   </button>
 </div>
 
+<!-- AI CONFIG MODAL -->
+<div class="ai-modal-overlay" id="ai-modal-overlay" onclick="if(event.target===this)closeAIConfig()">
+  <div class="ai-modal">
+    <h3>🤖 Connect Claude AI</h3>
+    <p>Enter your Anthropic API key. It is saved locally in your browser — never sent anywhere except directly to Claude AI (api.anthropic.com). This tool uses Claude Sonnet for high-quality pitch generation.</p>
+    <input class="ai-key-input" id="ai-key-input" type="password" placeholder="sk-ant-api03-...">
+    <div id="ai-key-status" style="font-size:11px;margin-top:6px;min-height:16px"></div>
+    <button class="ai-save-btn" onclick="saveAPIKey()">💾 Save & Connect</button>
+    <div class="ai-links">Don't have a key? <a href="https://console.anthropic.com/api-keys" target="_blank">Get one free at console.anthropic.com →</a></div>
+  </div>
+</div>
+
 <div class="pg-right">
+  <div class="ai-status-bar" id="ai-status-bar">
+    <div class="ai-dot disconnected" id="ai-dot"></div>
+    <span id="ai-status-text" style="color:var(--amber);font-weight:600">Claude AI not connected — click "Configure AI" to enter your API key</span>
+  </div>
   <div class="pitch-tabs" id="pitch-tabs">
     <button class="ptab on" data-pt="full_speech"     onclick="selectTab(this)">🎯 Full Sales Speech</button>
     <button class="ptab"    data-pt="tco_comparison"  onclick="selectTab(this)">📊 TCO Comparison</button>
@@ -218,8 +260,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
     <button class="ptab"    data-pt="dealer_training" onclick="selectTab(this)">🎓 Dealer Training</button>
   </div>
   <div class="pg-out" id="pg-out"></div>
-</div>
-</div>
+</div><!-- end pg-right -->
+</div><!-- end pg-body -->
 
 <script>
 var pitchType='full_speech', outputLang='English', isGenerating=false;
@@ -358,31 +400,175 @@ function genSiteVisit(p,t){
 function genDealerTraining(p,t){
   return lnote(p.language)+'── DEALER TRAINING MODULE ──────────────────────────────\nKomatsu '+p.model+' vs '+p.competitor+' | '+(SEGS[p.segment]||SEGS['general']).label+' Segment\nFor: New Sales Engineers — L&T CMMB Dealer Network\n\n═══ MODULE 1: MEMORISE THESE NUMBERS ══════════════════\n\nKomatsu '+p.model+' price:         Rs'+t.pl+' lakh\n'+p.competitor+' price:           Rs'+t.cpl+' lakh\n5-year TCO advantage:            Komatsu saves Rs'+t.sav+' lakh\nAnnual fuel saving vs '+p.competitor+':  Rs'+(((t.Cf-t.Kf)/5)).toFixed(1)+' lakh/year\nResale yr5: Komatsu Rs'+t.Kr+'L vs '+p.competitor+' Rs'+t.Cr+'L\nOur EMI:                         Rs'+t.emi+' lakh/month (85%, 60m)\nAMC rate:                        Rs280/hour (vs '+p.competitor+' ~Rs'+Math.round(COMPETITORS[p.competitor].maintMult*280)+'/hr)\nKOMTRAX:                         FREE\nService response:                72-hour uptime guarantee\n\n═══ MODULE 2: TOP 5 THINGS TO SAY FIRST ═══════════════\n\n1. "KOMTRAX telematics is FREE — real-time monitoring from your phone, no subscription."\n2. "72-hour uptime guarantee — if we fail, we pay for the downtime. In writing."\n3. "63% resale after 5 years. Best in class. '+p.competitor+' gives '+(COMPETITORS[p.competitor].resale5yr*100)+'%."\n4. "AMC at Rs280/hour — fixed cost, no surprise bills, ever."\n5. "SmartMining Eco mode saves '+( p.competitor==='CAT'?'12%':'8-15%')+' fuel vs '+p.competitor+' in same conditions."\n\n═══ MODULE 3: NEVER DO THESE ══════════════════════════\n\n❌ NEVER say "Komatsu is cheaper." Say "Komatsu costs LESS to OWN."\n❌ NEVER attack the competitor brand. Use numbers, not opinions.\n❌ NEVER quote without asking daily operating hours first.\n❌ NEVER give a discount without a commitment (demo date, timeline).\n❌ NEVER skip asking about their biggest maintenance pain — it is your entry point.\n\n═══ MODULE 4: ROLE-PLAY SCENARIO ══════════════════════\n\nTrainer plays: '+( SEGS[p.segment]||SEGS['general']).label+' contractor, 2 × '+p.competitor+' machines\nTrainee plays: L&T CMMB sales engineer\n\nCustomer: "I have two '+p.competitor+'s working fine. Why should I look at Komatsu?"\n\nTrainee model answer:\n"Great that your machines are running. Can I ask — what are you spending per hour on maintenance right now? And what did your last '+p.competitor+' fetch when you sold it?"\n\n[If they do not know → that is your opening]\n\n"Most '+p.competitor+' owners do not track this. But over 5 years, '+p.competitor+' costs you Rs'+t.Cm+'L in maintenance vs Rs'+t.Km+'L for Komatsu on our AMC. That is Rs'+(t.Cm-t.Km).toFixed(1)+'L extra — money that stays in your pocket with Komatsu."\n\n═══ MODULE 5: QUICK REFERENCE CARD ════════════════════\n\n  KOMATSU '+p.model+'        '+p.competitor+'\n  ─────────────────────────────────────────\n  Price:    Rs'+t.pl+'L             Rs'+t.cpl+'L\n  Fuel 5yr: Rs'+t.Kf+'L            Rs'+t.Cf+'L\n  Maint 5yr:Rs'+t.Km+'L            Rs'+t.Cm+'L\n  Resale:   Rs'+t.Kr+'L            Rs'+t.Cr+'L\n  Net TCO:  Rs'+t.Kt+'L            Rs'+t.Ct+'L\n  ─────────────────────────────────────────\n  KOMATSU SAVES: Rs'+t.sav+'L OVER 5 YEARS\n\nExercise: Memorise these numbers. Recite without looking in 48 hours.';}
 
-function generatePitch(){
+// ─── API KEY MANAGEMENT ──────────────────────────────────────────────────
+function getAPIKey(){return localStorage.getItem('lntcmmb_anthropic_key')||'';}
+function saveAPIKey(){
+  var k=document.getElementById('ai-key-input').value.trim();
+  if(!k||!k.startsWith('sk-ant')){
+    document.getElementById('ai-key-status').innerHTML='<span style="color:#DC2626">⚠ Invalid key — Anthropic keys start with sk-ant-...</span>';
+    return;
+  }
+  localStorage.setItem('lntcmmb_anthropic_key',k);
+  document.getElementById('ai-key-status').innerHTML='<span style="color:#059669">✅ Key saved successfully!</span>';
+  updateAIStatus();
+  setTimeout(closeAIConfig,800);
+}
+function openAIConfig(){
+  document.getElementById('ai-key-input').value=getAPIKey()||'';
+  document.getElementById('ai-key-status').innerHTML='';
+  document.getElementById('ai-modal-overlay').classList.add('open');
+}
+function closeAIConfig(){document.getElementById('ai-modal-overlay').classList.remove('open');}
+function updateAIStatus(){
+  var k=getAPIKey(), dot=document.getElementById('ai-dot'), txt=document.getElementById('ai-status-text'), lbl=document.getElementById('ai-status-label');
+  if(k){
+    dot.className='ai-dot connected';
+    txt.style.color='#059669';txt.style.fontWeight='600';
+    txt.innerHTML='Claude AI connected — ready to generate pitches';
+    if(lbl){lbl.textContent='AI Connected';}
+  }else{
+    dot.className='ai-dot disconnected';
+    txt.style.color='#D97706';txt.style.fontWeight='600';
+    txt.innerHTML='Claude AI not connected — <a href="#" onclick="openAIConfig();return false;" style="color:var(--blue);font-weight:700">click to configure your API key</a>';
+    if(lbl){lbl.textContent='Configure AI';}
+  }
+}
+
+// ─── SYSTEM PROMPT ────────────────────────────────────────────────────────
+function buildSystemPrompt(){
+return `You are an elite sales strategist and construction equipment domain expert for L&T CMMB (Larsen & Toubro Construction & Mining Machinery Business), the exclusive distributor of Komatsu excavators in India.
+
+YOUR ROLE: Generate high-quality, customer-ready sales pitches and scripts for field sales engineers selling 20-tonne Komatsu excavators. You write exactly what a sales engineer should say — persuasive, specific, data-driven, and adapted to the customer profile.
+
+CORE PRINCIPLE: Never say "Komatsu is cheaper." Always say "Komatsu costs LESS to OWN." Use value-selling, never discount-selling.
+
+PERSUASION FRAMEWORK (use in every pitch):
+1. Pain → Identify and amplify the customer's known problem
+2. Prove → Show quantified proof with specific Rs numbers
+3. Promise → What Komatsu specifically delivers
+4. Personalise → Connect to their exact site, segment, and usage
+5. Push → Clear, confident call to action
+
+KOMATSU PC210-10M0 KEY FACTS:
+- Engine: 155 HP Komatsu SAA6D107E-3, Tier 4 equivalent
+- Fuel: SmartMining Eco mode (industry benchmark for fuel efficiency)
+- KOMTRAX telematics: FREE, cloud-based, real-time — no subscription fee ever
+- 72-hour uptime guarantee from L&T service network
+- Resale: Best-in-class after 5 years
+- Warranty: 2 years / 4,000 hours
+- AMC rate: Rs280/hour fixed (no surprise bills)
+
+LANGUAGE STYLE:
+- English: Professional but conversational, use Rs for currency
+- Hindi: Mix with English technical terms, respectful "aap" form, start with "Namaste"
+- Regional languages (Gujarati/Marathi/Tamil/Telugu/Kannada/Bengali): Keep KOMTRAX, TCO, AMC, EMI in English; translate everything else
+
+GOLDEN RULES:
+- Always use specific Rs numbers from the TCO data provided
+- Always mention KOMTRAX telematics
+- Always mention L&T 72-hour uptime guarantee  
+- Always include a clear closing call-to-action
+- Never be vague — numbers must be concrete and believable`;}
+
+// ─── USER PROMPT BUILDER ─────────────────────────────────────────────────
+function buildUserPrompt(p,t){
+  var typeInstructions={
+    full_speech:`Generate a complete, persuasive SALES SPEECH (500–700 words) to deliver face-to-face. Structure: (1) Warm greeting, (2) Pain identification for their segment, (3) 5-year TCO comparison using the exact numbers below, (4) Top 3 Komatsu advantages specific to their work, (5) KOMTRAX telematics value, (6) L&T service + 72-hr guarantee, (7) Financing/AMC option, (8) Strong closing with specific ask. Make it conversational — what a sales engineer actually says, not a brochure.`,
+    tco_comparison:`Generate a detailed TCO COMPARISON NARRATIVE (400–500 words) explaining the 5-year ownership economics. Use the exact numbers below. Walk through each cost component — fuel, maintenance, downtime, resale — and build to the final net savings figure. Include a "verdict" paragraph at the end. Format clearly with section headers using ── markers.`,
+    objections:`Generate OBJECTION HANDLING SCRIPTS for exactly 6 objections this customer type would raise. Format each as: OBJECTION N: "[verbatim customer statement]" then Response: [empathetic + data-backed reframe + Komatsu proof]. Cover: price, "my current machine is fine", service availability, spare parts cost, competitor brand loyalty, "need time to think". Use the exact Rs numbers provided.`,
+    whatsapp:`Generate a WhatsApp follow-up message (max 180 words). Format for WhatsApp: use *bold* for emphasis, bullet points with •, relevant emojis (not excessive). Include: greeting with customer name, 3 key numbers from TCO, 3 Komatsu advantages, next step, placeholder [SALES_NAME] and [MOBILE]. Ready to copy and send immediately.`,
+    rent_vs_own:`Generate a RENTAL vs OWNERSHIP ANALYSIS (400 words). Use the numbers below. Compare: monthly rental outgo vs monthly EMI+AMC+insurance. Show break-even timeline. Build to a clear recommendation based on the customer type and segment. Include a persuasive closing statement.`,
+    amc_finance:`Generate an AMC + FINANCING BUNDLE PITCH (400 words). Show the monthly bundle breakdown (EMI + AMC + Insurance) as one number vs the revenue the machine generates daily. Explain what AMC protects against (use competitor failure examples). Include compelling closing statement about fixed predictable costs vs competitor's surprise bills.`,
+    site_visit:`Generate a SITE VISIT CONVERSATION GUIDE with clear sections: Pre-Visit Checklist, What to Observe on Arrival, Opening Questions (start with their pain not with Komatsu), KOMTRAX Demo Script (step by step), Closing with Decision-Maker, Post-Visit Actions. Include actual dialogue examples the sales engineer should say.`,
+    dealer_training:`Generate a DEALER TRAINING MODULE with: (1) Key numbers to memorise (use exact figures below), (2) Top 5 differentiators in one sentence each, (3) Never-do list (5 mistakes), (4) Role-play scenario with customer objection and ideal response, (5) Quick Reference Card with a comparison table. Tone: coaching, not lecturing.`
+  };
+
+  var seg=p.segment.replace(/_/g,' '), reg=p.region.replace(/_/g,' ');
+  var comp=p.competitor, model=p.model;
+  var pain=p.painPoints.join(', ').replace(/_/g,' ')||'general cost concerns';
+  var hrsDay=p.hrsDay, fleet=p.fleetSize;
+  var ctype=p.type.replace(/_/g,' ');
+
+  return `CUSTOMER PROFILE:
+- Name: ${p.name} | Company: ${p.company}
+- Customer Type: ${ctype} | Work Segment: ${seg}
+- Region: ${reg} | Language: ${p.language}
+- Price Sensitivity: ${p.priceSense.replace(/_/g,' ')}
+- Pain Points: ${pain}
+- Komatsu Model: ${model} | Competitor: ${comp}
+- Operation: ${hrsDay} hrs/day | Fleet: ${fleet} machines
+- Extra context: ${p.extraCtx||'none'}
+
+PRE-COMPUTED TCO DATA (use these exact numbers in the pitch):
+- Komatsu purchase price: Rs${t.pl} lakh | ${comp} price: Rs${t.cpl} lakh | Difference: Rs${Math.abs(t.pdiff)} lakh
+- 5-year fuel — Komatsu: Rs${t.Kf}L | ${comp}: Rs${t.Cf}L | Komatsu saves Rs${(t.Cf-t.Kf).toFixed(1)}L
+- 5-year maintenance — Komatsu AMC: Rs${t.Km}L | ${comp} open market: Rs${t.Cm}L | Komatsu saves Rs${(t.Cm-t.Km).toFixed(1)}L
+- Downtime days (5yr) — Komatsu: ${t.Kdd} days (Rs${t.Kdt}L) | ${comp}: ${t.Cdd} days (Rs${t.Cdt}L)
+- Resale after 5yr — Komatsu: Rs${t.Kr}L | ${comp}: Rs${t.Cr}L | Komatsu Rs${(t.Kr-t.Cr).toFixed(1)}L higher
+- NET 5-year TCO — Komatsu: Rs${t.Kt}L | ${comp}: Rs${t.Ct}L | Total savings: Rs${t.sav}L
+- Monthly EMI (85%, 60 months, 10.5%): Rs${t.emi} lakh/month
+- ${comp} weakness: ${COMPETITORS[comp]?COMPETITORS[comp].weakness:'Higher total ownership cost'}
+
+OUTPUT LANGUAGE: ${p.language} — write the ENTIRE pitch in ${p.language}. Keep KOMTRAX, TCO, AMC, EMI, Rs as-is.
+
+PITCH TYPE: ${p.pitchType.replace(/_/g,' ').toUpperCase()}
+INSTRUCTIONS: ${typeInstructions[p.pitchType]||typeInstructions.full_speech}
+
+Use the exact Rs numbers above. Do not invent different numbers. Make the pitch ready to use immediately by a field sales engineer.`;}
+
+// ─── MAIN GENERATE FUNCTION (AI-POWERED) ─────────────────────────────────
+async function generatePitch(){
   if(isGenerating)return;
+  var key=getAPIKey();
+  if(!key){
+    openAIConfig();
+    document.getElementById('ai-key-status').innerHTML='<span style="color:#D97706">⚠ Please enter your API key first to generate AI pitches.</span>';
+    return;
+  }
   var p=getProfile(), t=computeTCO(p);
   isGenerating=true;
   var btn=document.getElementById('gen-btn');
   document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-circle-notch fa-spin-me"></i> Generating...';
   btn.disabled=true;
-  setTimeout(function(){
-    try{
-      var out=document.getElementById('pg-out');
-      var title=PITCH_DESC[p.pitchType]?PITCH_DESC[p.pitchType].title:'Sales Pitch';
-      if(p.pitchType==='tco_comparison'){
-        renderHTML(title,genTCOHTML(p,t),p,t,out);
-      }else{
-        var gens={full_speech:genFullSpeech,objections:genObjections,whatsapp:genWhatsapp,rent_vs_own:genRentVsOwn,amc_finance:genAMCFinance,site_visit:genSiteVisit,dealer_training:genDealerTraining};
-        var fn=gens[p.pitchType]||genFullSpeech;
-        renderText(title,fn(p,t),p,t,out);
-      }
-    }catch(e){
-      document.getElementById('pg-out').innerHTML='<div style="padding:40px;text-align:center;color:#DC2626"><div style="font-size:36px;margin-bottom:10px">⚠️</div><div style="font-size:14px;font-weight:700">Error: '+e.message+'</div></div>';
-    }finally{
-      isGenerating=false;btn.disabled=false;
-      document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-magic"></i> Generate Pitch';
+
+  // Show loading state
+  var out=document.getElementById('pg-out');
+  var title=PITCH_DESC[p.pitchType]?PITCH_DESC[p.pitchType].title:'Sales Pitch';
+  out.innerHTML='<div class="pg-generating"><div class="pg-gen-ring"></div><div class="pg-gen-msg">Claude AI is generating your pitch...</div><div class="pg-gen-sub">Analysing '+p.model+' vs '+p.competitor+' TCO data for '+p.segment.replace(/_/g,' ')+' segment in '+p.region+' region</div></div>';
+
+  try{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json',
+        'x-api-key':key,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1500,
+        system:buildSystemPrompt(),
+        messages:[{role:'user',content:buildUserPrompt(p,t)}]
+      })
+    });
+    if(!res.ok){
+      var errData=await res.json().catch(function(){return {};});
+      var errMsg=errData.error?errData.error.message:'HTTP '+res.status;
+      if(res.status===401){errMsg='Invalid API key. Please check your key in Configure AI.';}
+      else if(res.status===429){errMsg='Rate limit reached. Please wait a moment and try again.';}
+      throw new Error(errMsg);
     }
-  },500);
+    var data=await res.json();
+    var text=data.content&&data.content[0]?data.content[0].text:'No response generated.';
+    out.innerHTML='';
+    renderText(title,text,p,t,out);
+  }catch(err){
+    out.innerHTML='<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">⚠️</div><div style="font-size:14px;font-weight:700;color:#DC2626;margin-bottom:6px">Generation failed</div><div style="font-size:12px;color:#64748B;margin-bottom:16px">'+err.message+'</div><button onclick="generatePitch()" style="padding:8px 20px;background:var(--navy);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px">Retry</button></div>';
+  }finally{
+    isGenerating=false;btn.disabled=false;
+    document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-magic"></i> Generate Pitch';
+  }
 }
 
 function renderText(title,text,p,t,out){
@@ -425,7 +611,7 @@ function chipSingle(el,g){document.querySelectorAll('#'+g+' .chip').forEach(func
 function chipMulti(el){el.classList.toggle('on');}
 function setLang(el){outputLang=el.dataset.v;}
 
-window.addEventListener('DOMContentLoaded',function(){showReady();});
+window.addEventListener('DOMContentLoaded',function(){showReady();updateAIStatus();});
 </script>
 </body>
 </html>
