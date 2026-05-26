@@ -1,0 +1,46 @@
+{
+  "tariffs": {
+    "KEN": {
+      "rate": 0,
+      "type": "EAC zero-rated",
+      "note": "EAC member \u2014 0% for used machinery"
+    },
+    "TZA": {
+      "rate": 0,
+      "type": "EAC zero-rated",
+      "note": "EAC member \u2014 0% for capital goods"
+    },
+    "ETH": {
+      "rate": 5,
+      "type": "MFN",
+      "note": "5% import duty; VAT 15% additional"
+    },
+    "BGD": {
+      "rate": 5,
+      "type": "MFN",
+      "note": "5% + SD 20% supplementary duty"
+    },
+    "MMR": {
+      "rate": 5,
+      "type": "MFN",
+      "note": "5% customs duty for heavy machinery"
+    },
+    "ARE": {
+      "rate": 5,
+      "type": "GCC",
+      "note": "5% GCC uniform customs duty"
+    },
+    "MOZ": {
+      "rate": 7.5,
+      "type": "MFN",
+      "note": "7.5% SADC preferential rate"
+    },
+    "KHM": {
+      "rate": 15,
+      "type": "MFN",
+      "note": "15% \u2014 ASEAN FTA reduces for some origins"
+    }
+  },
+  "hs": "842952",
+  "updated": "2026-05-26T05:42:24.937308+00:00"
+}
