@@ -257,6 +257,34 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
   .ue-rate-grid{grid-template-columns:1fr 1fr}
 }
 </style>
+
+<!-- Leaflet World Map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<style>
+#ue-worldmap{width:100%;height:100%;min-height:520px}
+.ue-map-wrap{flex:1;position:relative;min-height:520px;border-radius:0 0 10px 10px;overflow:hidden}
+.leaflet-popup-content-wrapper{border-radius:10px!important;box-shadow:0 8px 24px rgba(0,0,0,.2)!important;padding:0!important;overflow:hidden}
+.leaflet-popup-content{margin:0!important;padding:0}
+.ue-popup{min-width:240px;font-family:'Inter',system-ui,sans-serif}
+.ue-popup-head{background:linear-gradient(135deg,#003F72,#005B9A);color:#fff;padding:10px 14px}
+.ue-popup-title{font-size:14px;font-weight:700}
+.ue-popup-sub{font-size:11px;color:rgba(255,255,255,.75);margin-top:2px}
+.ue-popup-body{padding:10px 14px;font-size:11.5px}
+.ue-popup-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #F1F5F9}
+.ue-popup-row:last-child{border-bottom:none}
+.ue-popup-key{color:#64748B}
+.ue-popup-val{font-weight:600;color:#0F172A}
+.ue-popup-foot{padding:8px 14px;background:#F8FAFC;display:flex;gap:6px}
+.ue-popup-btn{flex:1;padding:4px 8px;border:none;border-radius:5px;font-size:10.5px;font-weight:600;cursor:pointer;text-decoration:none;text-align:center;display:inline-block}
+.ue-map-legend{background:#fff;border-radius:8px;padding:10px 12px;box-shadow:0 2px 10px rgba(0,0,0,.12);font-size:11px;min-width:140px}
+.ue-legend-row{display:flex;align-items:center;gap:6px;padding:2px 0}
+.ue-legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+</style>
+
 </head>
 <body>
 
@@ -386,6 +414,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
       <button class="ue-tab" data-tab="logistics" onclick="switchUETab('logistics')">🚢 Logistics</button>
       <button class="ue-tab" data-tab="valuation" onclick="switchUETab('valuation')">📈 Valuation Engine</button>
       <button class="ue-tab" data-tab="intel" onclick="switchUETab('intel')">📰 Market Intel</button>
+      <button class="ue-tab" data-tab="worldmap" onclick="switchUETab('worldmap')">🗺️ World Map</button>
     </div>
 
     <!-- ══════════════ INVENTORY PANEL ══════════════ -->
@@ -737,6 +766,44 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════ WORLD MAP PANEL ══════════════ -->
+    <div class="ue-panel" id="panel-worldmap">
+
+      <!-- Controls row -->
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <div style="font-size:13px;font-weight:700;color:var(--navy)">🗺️ Export Intelligence — World Map</div>
+        <div style="display:flex;gap:6px;margin-left:auto;flex-wrap:wrap">
+          <button onclick="toggleRouteLines()" id="route-toggle-btn"
+            style="padding:5px 12px;background:var(--navy);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer">
+            ✈️ Hide Routes
+          </button>
+          <button onclick="filterMapByPriority('all')"
+            style="padding:5px 12px;background:var(--ltblue);color:var(--navy);border:1px solid var(--br);border-radius:5px;font-size:11px;font-weight:600;cursor:pointer">
+            All Markets
+          </button>
+          <button onclick="filterMapByPriority('high')"
+            style="padding:5px 12px;background:#D1FAE5;color:#065F46;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer">
+            ★★★ High Priority
+          </button>
+          <button onclick="filterMapByPriority('med')"
+            style="padding:5px 12px;background:#FEF3C7;color:#D97706;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer">
+            ★★ Medium
+          </button>
+        </div>
+      </div>
+
+      <!-- Map container -->
+      <div style="flex:1;background:#fff;border-radius:10px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-height:540px">
+        <div id="ue-worldmap" style="flex:1;min-height:520px"></div>
+      </div>
+
+      <!-- Market summary row below map -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px" id="map-market-strip">
+        <!-- Populated by JS -->
       </div>
     </div>
 
@@ -1572,6 +1639,392 @@ function hideUETT() {
   if (ov) ov.style.display = 'none';
 }
 document.addEventListener('keydown', e => { if (e.key==='Escape') hideUETT(); });
+
+
+// ════════════════════════════════════════════════════
+// WORLD MAP — Leaflet + CARTO tiles
+// ════════════════════════════════════════════════════
+let worldMap = null;
+let routeLayerGroup = null;
+let markerLayerGroup = null;
+let routesVisible = true;
+
+// ── Geographic data for markers ──────────────────────────────────────────
+// Origin: INNSA (Nhava Sheva, Mumbai)
+const INNSA = { lat: 18.950, lng: 72.939, name: 'INNSA (Nhava Sheva, Mumbai)', label: '🚢 Origin Port' };
+
+// Target export market markers
+const MAP_MARKETS = [
+  {
+    name: 'Kenya', flag: '🇰🇪', lat: -1.286, lng: 36.820,
+    port: 'Mombasa', portLat: -4.043, portLng: 39.668,
+    priority: 'high', demand: 'High',
+    infra: 'USD 4.2B', prefModel: 'PC210-10',
+    priceRange: 'USD 44,000–58,000', transitDays: '18–22',
+    fcl40: '$850–1,100', topBuyer: 'KeNHA contractors',
+    insight: 'Most active buyer market. Strong preference for Komatsu with KOMTRAX history.',
+    color: '#059669', wbProjects: 12
+  },
+  {
+    name: 'Bangladesh', flag: '🇧🇩', lat: 23.685, lng: 90.356,
+    port: 'Chittagong', portLat: 22.330, portLng: 91.811,
+    priority: 'high', demand: 'High',
+    infra: 'USD 6.1B', prefModel: 'PC210-10',
+    priceRange: 'USD 44,000–58,000', transitDays: '7–10',
+    fcl40: '$380–550', topBuyer: 'BGCCL / road contractors',
+    insight: 'Familiar with Indian-origin machines. ADB + WB both active. Fastest transit.',
+    color: '#059669', wbProjects: 18
+  },
+  {
+    name: 'Tanzania', flag: '🇹🇿', lat: -6.369, lng: 34.889,
+    port: 'Dar es Salaam', portLat: -6.824, portLng: 39.289,
+    priority: 'high', demand: 'Growing',
+    infra: 'USD 3.1B', prefModel: 'PC210-10',
+    priceRange: 'USD 38,000–52,000', transitDays: '20–24',
+    fcl40: '$900–1,200', topBuyer: 'TANROADS contractors',
+    insight: 'SGR Phase 2 + AfDB road programme driving demand.',
+    color: '#059669', wbProjects: 8
+  },
+  {
+    name: 'UAE', flag: '🇦🇪', lat: 24.215, lng: 55.267,
+    port: 'Jebel Ali', portLat: 25.009, portLng: 55.064,
+    priority: 'high', demand: 'Re-export',
+    infra: 'USD 12B', prefModel: 'PC210-10',
+    priceRange: 'USD 46,000–62,000', transitDays: '5–7',
+    fcl40: '$250–450', topBuyer: 'Dubai equipment traders',
+    insight: 'Shortest transit (5–7 days). Traders re-export to Africa. Highest realisation.',
+    color: '#059669', wbProjects: 0
+  },
+  {
+    name: 'Ethiopia', flag: '🇪🇹', lat: 9.145, lng: 40.489,
+    port: 'Djibouti', portLat: 11.589, portLng: 43.145,
+    priority: 'med', demand: 'Growing',
+    infra: 'USD 2.8B', prefModel: 'PC200-8',
+    priceRange: 'USD 36,000–48,000', transitDays: '12–16',
+    fcl40: '$650–900', topBuyer: 'ERA contractors',
+    insight: 'Post-conflict reconstruction + ERA road programme. Monitor currency.',
+    color: '#D97706', wbProjects: 14
+  },
+  {
+    name: 'Myanmar', flag: '🇲🇲', lat: 19.763, lng: 96.078,
+    port: 'Yangon', portLat: 16.800, portLng: 96.156,
+    priority: 'med', demand: 'Moderate',
+    infra: 'USD 1.4B', prefModel: 'PC200-8',
+    priceRange: 'USD 32,000–44,000', transitDays: '10–14',
+    fcl40: '$480–680', topBuyer: 'MONREC contractors',
+    insight: 'ADB-financed projects prefer Japanese OEM. USD transactions only.',
+    color: '#D97706', wbProjects: 3
+  },
+  {
+    name: 'Mozambique', flag: '🇲🇿', lat: -18.665, lng: 35.529,
+    port: 'Maputo', portLat: -25.969, portLng: 32.573,
+    priority: 'med', demand: 'Growing',
+    infra: 'USD 1.9B', prefModel: 'PC210-10',
+    priceRange: 'USD 36,000–50,000', transitDays: '25–30',
+    fcl40: '$1,100–1,500', topBuyer: 'ANE road contractors',
+    insight: 'LNG infrastructure + ANE road programme. Long transit — plan ahead.',
+    color: '#D97706', wbProjects: 7
+  },
+  {
+    name: 'Cambodia', flag: '🇰🇭', lat: 12.565, lng: 104.991,
+    port: 'Sihanoukville', portLat: 10.631, portLng: 103.519,
+    priority: 'med', demand: 'Moderate',
+    infra: 'USD 1.2B', prefModel: 'PC200-8',
+    priceRange: 'USD 30,000–42,000', transitDays: '14–18',
+    fcl40: '$550–780', topBuyer: 'ADB-backed contractors',
+    insight: 'USD-denominated economy. ADB road + water projects active.',
+    color: '#D97706', wbProjects: 5
+  },
+];
+
+function initWorldMap() {
+  if (worldMap) return; // already initialized
+
+  worldMap = L.map('ue-worldmap', {
+    center: [10, 60],   // Indian Ocean — India + Africa + SE Asia all visible
+    zoom: 3,
+    zoomControl: true,
+    minZoom: 2,
+    maxZoom: 12,
+  });
+
+  // CARTO light tiles (same as main dashboard)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors © CARTO | L&T CMMB Used Equipment',
+    subdomains: 'abcd',
+    maxZoom: 19,
+  }).addTo(worldMap);
+
+  routeLayerGroup  = L.layerGroup().addTo(worldMap);
+  markerLayerGroup = L.layerGroup().addTo(worldMap);
+
+  renderWorldMapMarkers();
+  renderRouteLines();
+  renderMapLegend();
+  renderMapMarketStrip();
+}
+
+function getMarkerIcon(market) {
+  const isHigh = market.priority === 'high';
+  const bg = isHigh ? '#059669' : '#D97706';
+  const size = isHigh ? 42 : 36;
+  return L.divIcon({
+    html: `<div style="
+      background:${bg};color:#fff;
+      border-radius:50%;border:3px solid #fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:${isHigh?'16':'14'}px;
+      box-shadow:0 3px 12px rgba(0,0,0,.35);
+      width:${size}px;height:${size}px;
+      cursor:pointer;
+    ">${market.flag}</div>`,
+    className: '',
+    iconSize:   [size, size],
+    iconAnchor: [size/2, size/2],
+    popupAnchor: [0, -(size/2 + 4)],
+  });
+}
+
+function getPortIcon(market) {
+  const bg = market.priority === 'high' ? '#065F46' : '#92400E';
+  return L.divIcon({
+    html: `<div style="
+      background:${bg};color:#fff;
+      border-radius:4px;border:2px solid #fff;
+      padding:1px 5px;font-size:9px;font-weight:700;
+      box-shadow:0 2px 8px rgba(0,0,0,.25);white-space:nowrap
+    ">⚓ ${market.port}</div>`,
+    className: '',
+    iconSize: [null, null],
+    iconAnchor: [30, 14],
+    popupAnchor: [0, -16],
+  });
+}
+
+function getOriginIcon() {
+  return L.divIcon({
+    html: `<div style="
+      background:#003F72;color:#fff;
+      border-radius:50%;border:3px solid #FFD700;
+      display:flex;align-items:center;justify-content:center;
+      font-size:16px;width:44px;height:44px;
+      box-shadow:0 3px 14px rgba(0,63,114,.5);
+      cursor:pointer;
+    ">🏭</div>`,
+    className: '',
+    iconSize:   [44, 44],
+    iconAnchor: [22, 22],
+    popupAnchor: [0, -26],
+  });
+}
+
+function buildPopup(m) {
+  const inrRate = fxRates.INR || 83.5;
+  const fcl = m.fcl40;
+  const usdLow  = parseInt(fcl.replace('$','').split('–')[0].replace(/,/g,''));
+  const inrLow  = (usdLow / inrRate / 100000).toFixed(1);
+
+  return `<div class="ue-popup">
+    <div class="ue-popup-head">
+      <div class="ue-popup-title">${m.flag} ${m.name}</div>
+      <div class="ue-popup-sub">${m.port} · ${m.transitDays} days from INNSA</div>
+    </div>
+    <div class="ue-popup-body">
+      <div class="ue-popup-row"><span class="ue-popup-key">Demand Level</span>
+        <span class="ue-popup-val" style="color:${m.color}">${m.demand}</span></div>
+      <div class="ue-popup-row"><span class="ue-popup-key">Infra Pipeline</span>
+        <span class="ue-popup-val">${m.infra}</span></div>
+      <div class="ue-popup-row"><span class="ue-popup-key">PC210 Price Range</span>
+        <span class="ue-popup-val">${m.priceRange}</span></div>
+      <div class="ue-popup-row"><span class="ue-popup-key">FCL 40ft Freight</span>
+        <span class="ue-popup-val">${m.fcl40} (≈ ₹${inrLow}L)</span></div>
+      <div class="ue-popup-row"><span class="ue-popup-key">Preferred Model</span>
+        <span class="ue-popup-val">${m.prefModel}</span></div>
+      <div class="ue-popup-row"><span class="ue-popup-key">Top Buyer</span>
+        <span class="ue-popup-val">${m.topBuyer}</span></div>
+      <div style="margin-top:6px;padding:6px;background:#F8FAFC;border-radius:5px;font-size:10.5px;color:#475569;line-height:1.5">${m.insight}</div>
+    </div>
+    <div class="ue-popup-foot">
+      <a href="https://www.google.com/search?q=used+Komatsu+excavator+${encodeURIComponent(m.name)}+2026"
+         target="_blank" class="ue-popup-btn" style="background:#003F72;color:#fff">
+        🔍 Find Buyers
+      </a>
+      <a href="https://www.google.com/search?q=${encodeURIComponent(m.name)}+infrastructure+project+equipment+2026"
+         target="_blank" class="ue-popup-btn" style="background:#059669;color:#fff">
+        🌐 Projects
+      </a>
+    </div>
+  </div>`;
+}
+
+function renderWorldMapMarkers() {
+  markerLayerGroup.clearLayers();
+
+  // Origin marker — INNSA
+  const originMarker = L.marker([INNSA.lat, INNSA.lng], { icon: getOriginIcon(), zIndexOffset: 1000 });
+  originMarker.bindPopup(`
+    <div class="ue-popup">
+      <div class="ue-popup-head">
+        <div class="ue-popup-title">🏭 L&T CMMB — Origin Port</div>
+        <div class="ue-popup-sub">INNSA Nhava Sheva, Navi Mumbai</div>
+      </div>
+      <div class="ue-popup-body">
+        <div class="ue-popup-row"><span class="ue-popup-key">Port Code</span><span class="ue-popup-val">INNSA</span></div>
+        <div class="ue-popup-row"><span class="ue-popup-key">Export Routes</span><span class="ue-popup-val">8 destinations</span></div>
+        <div class="ue-popup-row"><span class="ue-popup-key">Container Type</span><span class="ue-popup-val">FCL 40ft flat-rack</span></div>
+        <div class="ue-popup-row"><span class="ue-popup-key">Frequency</span><span class="ue-popup-val">Daily departures</span></div>
+      </div>
+    </div>`, { maxWidth: 260 });
+  markerLayerGroup.addLayer(originMarker);
+
+  // Chennai marker (secondary origin for SE Asia routes)
+  const chennaiIcon = L.divIcon({
+    html: `<div style="background:#1E40AF;color:#fff;border-radius:4px;border:2px solid #fff;padding:1px 6px;font-size:9px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.2);white-space:nowrap">🚢 Chennai</div>`,
+    className:'', iconSize:[null,null], iconAnchor:[30,14], popupAnchor:[0,-16]
+  });
+  L.marker([13.083, 80.274], { icon: chennaiIcon })
+   .bindTooltip('Chennai Port — SE Asia routes', { direction:'top' })
+   .addTo(markerLayerGroup);
+
+  // Target country markers
+  MAP_MARKETS.forEach(m => {
+    // Country marker
+    const marker = L.marker([m.lat, m.lng], { icon: getMarkerIcon(m) });
+    marker.bindPopup(buildPopup(m), { maxWidth: 280 });
+    marker.bindTooltip(`${m.flag} ${m.name} — ${m.demand} demand`, {
+      direction: 'top', offset: [0, -20]
+    });
+    markerLayerGroup.addLayer(marker);
+
+    // Port marker
+    const portMarker = L.marker([m.portLat, m.portLng], { icon: getPortIcon(m) });
+    portMarker.bindTooltip(`⚓ ${m.port}`, { direction: 'top' });
+    markerLayerGroup.addLayer(portMarker);
+  });
+}
+
+function renderRouteLines() {
+  routeLayerGroup.clearLayers();
+  if (!routesVisible) return;
+
+  // SE Asia routes from Chennai
+  const seAsiaCountries = ['Bangladesh','Myanmar','Cambodia'];
+
+  MAP_MARKETS.forEach(m => {
+    const origin = seAsiaCountries.includes(m.name)
+      ? [13.083, 80.274]   // Chennai
+      : [INNSA.lat, INNSA.lng];
+
+    const dest = [m.portLat, m.portLng];
+    const isHigh = m.priority === 'high';
+
+    // Animate-able dashed polyline
+    const line = L.polyline([origin, dest], {
+      color:     isHigh ? '#059669' : '#D97706',
+      weight:    isHigh ? 2.5 : 1.8,
+      opacity:   0.75,
+      dashArray: '8, 6',
+    });
+
+    // Add animated ship emoji along the route midpoint as a tooltip
+    const midLat = (origin[0] + dest[0]) / 2;
+    const midLng = (origin[1] + dest[1]) / 2;
+    const shipIcon = L.divIcon({
+      html: `<div style="font-size:14px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))">✈️</div>`,
+      className: '', iconSize: [16,16], iconAnchor: [8,8]
+    });
+    L.marker([midLat, midLng], { icon: shipIcon })
+      .bindTooltip(`${m.flag} ${m.name}: ${m.fcl40} · ${m.transitDays}d`, { direction:'top' })
+      .addTo(routeLayerGroup);
+
+    routeLayerGroup.addLayer(line);
+  });
+}
+
+function toggleRouteLines() {
+  routesVisible = !routesVisible;
+  const btn = document.getElementById('route-toggle-btn');
+  if (btn) btn.textContent = routesVisible ? '✈️ Hide Routes' : '✈️ Show Routes';
+  renderRouteLines();
+}
+
+function filterMapByPriority(priority) {
+  markerLayerGroup.clearLayers();
+  routeLayerGroup.clearLayers();
+
+  // Always show origin
+  const originMarker = L.marker([INNSA.lat, INNSA.lng], { icon: getOriginIcon(), zIndexOffset: 1000 });
+  originMarker.bindPopup('<div class="ue-popup"><div class="ue-popup-head"><div class="ue-popup-title">🏭 INNSA Origin Port</div></div></div>');
+  markerLayerGroup.addLayer(originMarker);
+
+  const filtered = priority === 'all' ? MAP_MARKETS : MAP_MARKETS.filter(m => m.priority === priority);
+  filtered.forEach(m => {
+    const marker = L.marker([m.lat, m.lng], { icon: getMarkerIcon(m) });
+    marker.bindPopup(buildPopup(m), { maxWidth: 280 });
+    markerLayerGroup.addLayer(marker);
+
+    const portMarker = L.marker([m.portLat, m.portLng], { icon: getPortIcon(m) });
+    markerLayerGroup.addLayer(portMarker);
+
+    // Route line
+    const seAsia = ['Bangladesh','Myanmar','Cambodia'];
+    const origin = seAsia.includes(m.name) ? [13.083, 80.274] : [INNSA.lat, INNSA.lng];
+    L.polyline([origin, [m.portLat, m.portLng]], {
+      color: m.priority === 'high' ? '#059669' : '#D97706',
+      weight: 2, opacity: 0.7, dashArray: '8,6'
+    }).addTo(routeLayerGroup);
+  });
+}
+
+function renderMapLegend() {
+  const legend = L.control({ position: 'bottomright' });
+  legend.onAdd = function() {
+    const div = L.DomUtil.create('div', 'ue-map-legend');
+    div.innerHTML = `
+      <div style="font-size:11px;font-weight:700;color:#003F72;margin-bottom:6px">Legend</div>
+      <div class="ue-legend-row"><div class="ue-legend-dot" style="background:#003F72;border:2px solid #FFD700"></div><span>Origin (INNSA / Chennai)</span></div>
+      <div class="ue-legend-row"><div class="ue-legend-dot" style="background:#059669"></div><span>★★★ High Priority Market</span></div>
+      <div class="ue-legend-row"><div class="ue-legend-dot" style="background:#D97706"></div><span>★★ Medium Priority Market</span></div>
+      <div class="ue-legend-row"><div class="ue-legend-dot" style="background:#065F46;border-radius:3px"></div><span>Export Port</span></div>
+      <div style="border-top:1px solid #E2E8F0;margin-top:5px;padding-top:5px;font-size:10px;color:#64748B">Click any marker for details</div>
+    `;
+    return div;
+  };
+  legend.addTo(worldMap);
+}
+
+function renderMapMarketStrip() {
+  const strip = document.getElementById('map-market-strip');
+  if (!strip) return;
+  strip.innerHTML = MAP_MARKETS.map(m => `
+    <div onclick='worldMap.setView([${m.lat},${m.lng}],6); worldMap.eachLayer(l=>{ if(l._latlng && l._latlng.lat===${m.lat}) l.openPopup() })'
+      style="background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:8px 12px;
+             cursor:pointer;border-left:3px solid ${m.color};transition:box-shadow .15s"
+      onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.15)'"
+      onmouseout="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:12px;font-weight:700;color:#0F172A">${m.flag} ${m.name}</div>
+        <div style="font-size:9.5px;font-weight:700;padding:1px 6px;border-radius:8px;
+                    background:${m.color}22;color:${m.color}">${m.demand}</div>
+      </div>
+      <div style="font-size:10.5px;color:#64748B;margin-top:2px">${m.fcl40} · ${m.transitDays}d</div>
+      <div style="font-size:10px;color:#003F72;font-weight:600;margin-top:2px">${m.prefModel} · ${m.priceRange.split('–')[0]}+</div>
+    </div>
+  `).join('');
+}
+
+// ── Hook into tab switch to init map ───────────────────────────────────────
+const _origSwitchUETab = switchUETab;
+function switchUETab(tab) {
+  _origSwitchUETab(tab);
+  if (tab === 'worldmap') {
+    setTimeout(() => {
+      initWorldMap();
+      if (worldMap) worldMap.invalidateSize();
+    }, 80);
+  }
+}
+
 </script>
 </body>
 </html>
