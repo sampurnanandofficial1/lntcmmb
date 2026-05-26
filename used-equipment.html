@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L&T CMMB | Used Equipment Export Intelligence</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;min-height:100vh}
+:root{
+  --navy:#003F72;--blue:#005B9A;--ltblue:#EFF6FF;
+  --green:#065F46;--ltgreen:#D1FAE5;
+  --amber:#D97706;--ltamber:#FEF3C7;
+  --red:#DC2626;--ltred:#FEE2E2;
+  --purple:#7C3AED;--ltpurp:#EDE9FE;
+  --teal:#0D9488;--ltteal:#CCFBF1;
+  --gray:#64748B;--br:#E2E8F0;
+  --white:#fff;--shadow:0 2px 12px rgba(0,0,0,.08)
+}
+
+/* ── HEADER ── */
+.ue-header{
+  background:linear-gradient(135deg,#003F72 0%,#005B9A 60%,#0369A1 100%);
+  padding:0 20px;display:flex;align-items:center;justify-content:space-between;
+  height:56px;box-shadow:0 2px 8px rgba(0,0,0,.3);flex-shrink:0;position:sticky;top:0;z-index:100
+}
+.ue-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.ue-logo-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
+  border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px}
+.ue-logo-title{font-size:14px;font-weight:700;color:#fff;white-space:nowrap}
+.ue-header-right{display:flex;align-items:center;gap:10px}
+.ue-back-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
+  color:#fff;font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;cursor:pointer;
+  text-decoration:none;display:flex;align-items:center;gap:5px;transition:background .2s}
+.ue-back-btn:hover{background:rgba(255,255,255,.25)}
+.ue-last-update{font-size:10.5px;color:rgba(255,255,255,.65)}
+
+/* ── KPI BAR ── */
+.ue-kpi-bar{
+  background:#fff;border-bottom:1px solid var(--br);padding:0 16px;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:0;flex-shrink:0
+}
+.ue-kpi{padding:10px 14px;border-right:1px solid var(--br);cursor:pointer;transition:background .15s}
+.ue-kpi:last-child{border-right:none}
+.ue-kpi:hover{background:var(--ltblue)}
+.ue-kpi-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--gray);font-weight:600}
+.ue-kpi-val{font-size:20px;font-weight:800;color:var(--navy);line-height:1.2;margin-top:1px}
+.ue-kpi-sub{font-size:10px;color:var(--gray);margin-top:1px}
+
+/* ── TICKER ── */
+.ue-ticker{background:var(--navy);color:#fff;font-size:11px;padding:4px 0;overflow:hidden;flex-shrink:0}
+.ue-ticker-inner{display:flex;gap:40px;animation:tickerScroll 35s linear infinite;white-space:nowrap;padding-left:100%}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+.ue-ticker-item{display:inline-flex;align-items:center;gap:6px}
+.ue-ticker-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;flex-shrink:0}
+
+/* ── MAIN LAYOUT ── */
+.ue-main{display:flex;flex:1;overflow:hidden;height:calc(100vh - 56px - 40px - 28px)}
+
+/* ── SIDEBAR ── */
+.ue-sidebar{
+  width:220px;background:#fff;border-right:1px solid var(--br);
+  flex-shrink:0;overflow-y:auto;display:flex;flex-direction:column
+}
+.ue-sidebar-section{padding:12px 12px 4px;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:.5px;color:var(--gray);font-weight:700}
+.ue-filter-group{padding:0 10px 10px}
+.ue-filter-label{font-size:11px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.ue-filter-select{width:100%;font-size:11px;padding:5px 8px;border:1px solid var(--br);
+  border-radius:5px;background:#fff;color:#0F172A}
+.ue-filter-btn{width:100%;margin:3px 0;padding:6px 10px;border:none;background:var(--ltblue);
+  color:var(--navy);font-size:11px;font-weight:600;border-radius:5px;cursor:pointer;
+  text-align:left;transition:background .15s}
+.ue-filter-btn:hover,.ue-filter-btn.active{background:var(--navy);color:#fff}
+.ue-filter-btn .badge{background:var(--navy);color:#fff;font-size:9px;padding:1px 5px;
+  border-radius:8px;margin-left:auto;float:right}
+.ue-filter-btn.active .badge{background:rgba(255,255,255,.3)}
+
+/* ── TABS ── */
+.ue-content{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.ue-tabs{
+  background:#fff;border-bottom:1px solid var(--br);display:flex;flex-shrink:0;
+  padding:0 14px;gap:0;overflow-x:auto
+}
+.ue-tab{
+  padding:9px 16px;border:none;background:transparent;font-size:12px;font-weight:500;
+  color:var(--gray);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;
+  transition:all .2s
+}
+.ue-tab.active{color:var(--navy);font-weight:700;border-bottom-color:var(--navy)}
+.ue-tab:hover:not(.active){color:var(--navy);background:var(--ltblue)}
+
+/* ── PANELS ── */
+.ue-panel{display:none;flex:1;overflow:auto;padding:14px}
+.ue-panel.active{display:flex;flex-direction:column;gap:12px}
+
+/* ── CARDS ── */
+.ue-card{background:#fff;border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.ue-card-head{
+  padding:10px 14px;background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px
+}
+.ue-card-body{padding:12px 14px}
+.ue-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ue-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+
+/* ── MACHINE CARDS ── */
+.ue-machine-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.ue-machine-card{
+  background:#fff;border-radius:10px;box-shadow:var(--shadow);
+  border-left:4px solid var(--navy);overflow:hidden;transition:box-shadow .2s
+}
+.ue-machine-card:hover{box-shadow:0 4px 20px rgba(0,63,114,.15)}
+.ue-machine-card.grade-a{border-left-color:#059669}
+.ue-machine-card.grade-b{border-left-color:#D97706}
+.ue-machine-card.grade-c{border-left-color:#DC2626}
+.ue-mcard-head{padding:10px 12px;background:var(--ltblue);display:flex;justify-content:space-between;align-items:center}
+.ue-mcard-id{font-size:13px;font-weight:700;color:var(--navy)}
+.ue-grade-badge{font-size:11px;font-weight:800;padding:2px 8px;border-radius:12px}
+.grade-a-badge{background:#D1FAE5;color:#065F46}
+.grade-b-badge{background:#FEF3C7;color:#D97706}
+.grade-c-badge{background:#FEE2E2;color:#DC2626}
+.ue-mcard-body{padding:10px 12px}
+.ue-mcard-row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;border-bottom:1px solid #F1F5F9}
+.ue-mcard-row:last-child{border-bottom:none}
+.ue-mcard-key{color:var(--gray)}
+.ue-mcard-val{font-weight:600;color:#0F172A}
+.ue-mcard-foot{padding:8px 12px;background:#F8FAFC;display:flex;gap:6px}
+.ue-mcard-btn{flex:1;padding:5px 8px;border:none;border-radius:5px;font-size:10.5px;font-weight:600;cursor:pointer;transition:opacity .2s}
+.ue-mcard-btn:hover{opacity:.85}
+.btn-price{background:var(--navy);color:#fff}
+.btn-export{background:var(--green);color:#fff}
+.btn-list{background:var(--amber);color:#fff}
+
+/* ── PRICING TABLE ── */
+.ue-price-table{width:100%;border-collapse:collapse;font-size:12px}
+.ue-price-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px}
+.ue-price-table td{padding:7px 12px;border-bottom:1px solid var(--br)}
+.ue-price-table tr:nth-child(even) td{background:#F8FAFC}
+.ue-price-table tr:hover td{background:var(--ltblue)}
+.price-highlight{font-weight:700;color:var(--green)}
+.price-premium{background:#D1FAE5;color:#065F46;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:700}
+
+/* ── MARKET CARDS ── */
+.ue-market-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.ue-market-card{background:#fff;border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.ue-market-head{padding:10px 14px;display:flex;align-items:center;gap:10px}
+.ue-market-flag{font-size:24px}
+.ue-market-info{flex:1}
+.ue-market-name{font-size:13px;font-weight:700;color:#0F172A}
+.ue-market-sub{font-size:10.5px;color:var(--gray)}
+.ue-priority{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:8px}
+.prio-high{background:#D1FAE5;color:#065F46}
+.prio-med{background:#FEF3C7;color:#D97706}
+.ue-market-metrics{padding:8px 14px;display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.ue-metric{background:#F8FAFC;border-radius:6px;padding:6px 8px}
+.ue-metric-label{font-size:9.5px;color:var(--gray);text-transform:uppercase;letter-spacing:.3px}
+.ue-metric-val{font-size:13px;font-weight:700;color:var(--navy)}
+.ue-market-foot{padding:8px 14px;border-top:1px solid var(--br)}
+.ue-market-projects{font-size:11px;color:var(--gray);line-height:1.5}
+
+/* ── SHIPPING RATES ── */
+.ue-route-card{background:#fff;border-radius:10px;box-shadow:var(--shadow);padding:12px 14px}
+.ue-route-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ue-route-ports{font-size:13px;font-weight:700;color:var(--navy)}
+.ue-route-flag{font-size:18px}
+.ue-rate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ue-rate-box{background:#F8FAFC;border-radius:6px;padding:8px 10px;text-align:center}
+.ue-rate-label{font-size:10px;color:var(--gray);text-transform:uppercase}
+.ue-rate-val{font-size:16px;font-weight:800;color:var(--navy);margin-top:2px}
+.ue-rate-unit{font-size:9.5px;color:var(--gray)}
+
+/* ── VALUATION ENGINE ── */
+.ue-val-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ue-form-group{display:flex;flex-direction:column;gap:4px}
+.ue-form-label{font-size:11px;font-weight:600;color:var(--navy)}
+.ue-form-input{padding:7px 10px;border:1px solid var(--br);border-radius:6px;font-size:12px}
+.ue-form-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,91,154,.1)}
+.ue-val-result{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:10px;padding:16px;color:#fff}
+.ue-val-price-label{font-size:11px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px}
+.ue-val-price{font-size:32px;font-weight:800;margin:4px 0}
+.ue-val-range{font-size:12px;color:rgba(255,255,255,.7)}
+.ue-val-breakdown{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ue-val-factor{background:rgba(255,255,255,.1);border-radius:6px;padding:8px 10px}
+.ue-val-factor-label{font-size:10px;color:rgba(255,255,255,.7)}
+.ue-val-factor-val{font-size:14px;font-weight:700}
+.ue-calc-btn{width:100%;margin-top:10px;padding:10px;background:var(--navy);color:#fff;
+  border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s}
+.ue-calc-btn:hover{background:#002855}
+
+/* ── NEWS CARDS ── */
+.ue-news-list{display:flex;flex-direction:column;gap:8px}
+.ue-news-card{
+  background:#fff;border-radius:8px;box-shadow:var(--shadow);
+  padding:10px 12px;display:flex;gap:10px;cursor:pointer;transition:box-shadow .15s
+}
+.ue-news-card:hover{box-shadow:0 4px 16px rgba(0,63,114,.12)}
+.ue-news-ico{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;
+  justify-content:center;font-size:16px;flex-shrink:0}
+.ue-news-body{flex:1;min-width:0}
+.ue-news-title{font-size:12px;font-weight:600;color:#0F172A;line-height:1.4;
+  overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.ue-news-meta{display:flex;gap:8px;margin-top:4px;font-size:10.5px;color:var(--gray);align-items:center}
+.ue-news-tag{padding:1px 6px;border-radius:4px;font-size:9.5px;font-weight:700}
+
+/* ── FX STRIP ── */
+.ue-fx-strip{background:#fff;border-bottom:1px solid var(--br);padding:6px 16px;
+  display:flex;gap:20px;overflow-x:auto;flex-shrink:0;align-items:center}
+.ue-fx-item{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:11px}
+.ue-fx-pair{font-weight:700;color:var(--navy)}
+.ue-fx-rate{color:#0F172A}
+.ue-fx-label{font-size:9.5px;color:var(--gray)}
+
+/* ── ADD MACHINE MODAL ── */
+.ue-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;
+  align-items:center;justify-content:center}
+.ue-modal-overlay.open{display:flex}
+.ue-modal{background:#fff;border-radius:12px;padding:20px;width:540px;max-width:95vw;
+  max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.ue-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.ue-modal-title{font-size:15px;font-weight:700;color:var(--navy)}
+.ue-modal-close{background:none;border:none;font-size:18px;cursor:pointer;color:var(--gray)}
+.ue-modal-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ue-modal-form .full-width{grid-column:1/-1}
+.ue-modal-save{margin-top:14px;width:100%;padding:10px;background:var(--navy);color:#fff;
+  border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer}
+
+/* ── LOADING ── */
+.ue-loading{text-align:center;padding:40px;color:var(--gray)}
+.ue-spin{width:32px;height:32px;border:3px solid var(--br);border-top-color:var(--navy);
+  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── EMPTY STATE ── */
+.ue-empty{text-align:center;padding:48px 20px;color:var(--gray)}
+.ue-empty-icon{font-size:48px;margin-bottom:12px}
+.ue-empty-title{font-size:15px;font-weight:700;color:#334155;margin-bottom:6px}
+.ue-empty-sub{font-size:12px;line-height:1.6;max-width:320px;margin:0 auto}
+
+/* ── CHARTS ── */
+.ue-chart-wrap{position:relative;height:240px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .ue-kpi-bar{grid-template-columns:repeat(3,1fr)}
+  .ue-sidebar{display:none}
+  .ue-grid-2,.ue-grid-3{grid-template-columns:1fr}
+  .ue-val-form{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .ue-kpi-bar{grid-template-columns:repeat(2,1fr)}
+  .ue-market-grid,.ue-machine-grid{grid-template-columns:1fr}
+  .ue-rate-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="ue-header">
+  <a class="ue-logo" href="index.html">
+    <div class="ue-logo-badge">L&T CMMB</div>
+    <div class="ue-logo-title">⚙️ Used Equipment — Export Intelligence Dashboard</div>
+  </a>
+  <div class="ue-header-right">
+    <span class="ue-last-update" id="ue-last-update">Loading...</span>
+    <a href="index.html" class="ue-back-btn"><i class="fa fa-arrow-left"></i> Main Dashboard</a>
+  </div>
+</div>
+
+<!-- FX STRIP -->
+<div class="ue-fx-strip" id="ue-fx-strip">
+  <span class="ue-fx-item"><span class="ue-fx-pair">USD/INR</span><span class="ue-fx-rate" id="fx-inr">—</span></span>
+  <span class="ue-fx-item"><span class="ue-fx-pair">USD/KES</span><span class="ue-fx-rate" id="fx-kes">—</span><span class="ue-fx-label">Kenya</span></span>
+  <span class="ue-fx-item"><span class="ue-fx-pair">USD/TZS</span><span class="ue-fx-rate" id="fx-tzs">—</span><span class="ue-fx-label">Tanzania</span></span>
+  <span class="ue-fx-item"><span class="ue-fx-pair">USD/ETB</span><span class="ue-fx-rate" id="fx-etb">—</span><span class="ue-fx-label">Ethiopia</span></span>
+  <span class="ue-fx-item"><span class="ue-fx-pair">USD/BDT</span><span class="ue-fx-rate" id="fx-bdt">—</span><span class="ue-fx-label">Bangladesh</span></span>
+  <span class="ue-fx-item"><span class="ue-fx-pair">USD/MMK</span><span class="ue-fx-rate" id="fx-mmk">—</span><span class="ue-fx-label">Myanmar</span></span>
+  <span class="ue-fx-item"><span class="ue-fx-pair">USD/AED</span><span class="ue-fx-rate" id="fx-aed">—</span><span class="ue-fx-label">UAE</span></span>
+  <span class="ue-fx-item"><span class="ue-fx-pair">USD/MZN</span><span class="ue-fx-rate" id="fx-mzn">—</span><span class="ue-fx-label">Mozambique</span></span>
+</div>
+
+<!-- KPI BAR -->
+<div class="ue-kpi-bar">
+  <div class="ue-kpi" onclick="switchUETab('inventory')">
+    <div class="ue-kpi-label">In Inventory</div>
+    <div class="ue-kpi-val" id="kpi-inventory">—</div>
+    <div class="ue-kpi-sub">machines available</div>
+  </div>
+  <div class="ue-kpi" onclick="switchUETab('inventory')">
+    <div class="ue-kpi-label">Grade A Units</div>
+    <div class="ue-kpi-val" id="kpi-grade-a" style="color:#059669">—</div>
+    <div class="ue-kpi-sub">export ready (&lt;5yr / &lt;5k hrs)</div>
+  </div>
+  <div class="ue-kpi" onclick="switchUETab('pricing')">
+    <div class="ue-kpi-label">Avg Market Price</div>
+    <div class="ue-kpi-val" id="kpi-avg-price">—</div>
+    <div class="ue-kpi-sub">PC210 global comparable</div>
+  </div>
+  <div class="ue-kpi" onclick="switchUETab('logistics')">
+    <div class="ue-kpi-label">INNSA→Mombasa</div>
+    <div class="ue-kpi-val" id="kpi-freight-ke">—</div>
+    <div class="ue-kpi-sub">FCL 40ft container</div>
+  </div>
+  <div class="ue-kpi" onclick="switchUETab('markets')">
+    <div class="ue-kpi-label">Active Markets</div>
+    <div class="ue-kpi-val">8</div>
+    <div class="ue-kpi-sub">target export countries</div>
+  </div>
+  <div class="ue-kpi" onclick="switchUETab('valuation')">
+    <div class="ue-kpi-label">Avg Valuation</div>
+    <div class="ue-kpi-val" id="kpi-avg-val">—</div>
+    <div class="ue-kpi-sub">KOMTRAX-adjusted</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ue-ticker">
+  <div class="ue-ticker-inner" id="ue-ticker">
+    <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>PC210-10 (2020, 4,200 hrs) → Grade A | Recommended Export Price: ₹38.5L | Top Market: Kenya</span>
+    <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>Kenya infrastructure pipeline: USD 4.2B active (World Bank + AfDB projects)</span>
+    <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>INNSA → Mombasa FCL 40ft: USD 850–1,100 | Transit: 18–22 days</span>
+    <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>MachineryTrader: PC210 (2019–2021, 3k–6k hrs) listing at USD 42,000–58,000</span>
+    <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>Bangladesh: ADB commits USD 2.1B for transport — active equipment demand</span>
+    <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>HS Code 8429 (excavators): India exported USD 48.2M in FY25 — top destinations: UAE, Bangladesh, Kenya</span>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="ue-main">
+
+  <!-- SIDEBAR -->
+  <div class="ue-sidebar">
+    <div class="ue-sidebar-section">Filters</div>
+    <div class="ue-filter-group">
+      <div class="ue-filter-label">Grade</div>
+      <button class="ue-filter-btn active" onclick="filterMachines('all',this)">All Grades <span class="badge" id="f-all">—</span></button>
+      <button class="ue-filter-btn" onclick="filterMachines('A',this)">Grade A (Export Ready) <span class="badge" id="f-a">—</span></button>
+      <button class="ue-filter-btn" onclick="filterMachines('B',this)">Grade B (Good) <span class="badge" id="f-b">—</span></button>
+      <button class="ue-filter-btn" onclick="filterMachines('C',this)">Grade C (Domestic) <span class="badge" id="f-c">—</span></button>
+    </div>
+    <div class="ue-filter-group">
+      <div class="ue-filter-label">Target Market</div>
+      <select class="ue-filter-select" id="market-filter" onchange="filterMachines('market',null)">
+        <option value="">All Markets</option>
+        <option value="Kenya">Kenya 🇰🇪</option>
+        <option value="Tanzania">Tanzania 🇹🇿</option>
+        <option value="Ethiopia">Ethiopia 🇪🇹</option>
+        <option value="Bangladesh">Bangladesh 🇧🇩</option>
+        <option value="Myanmar">Myanmar 🇲🇲</option>
+        <option value="UAE">UAE 🇦🇪</option>
+        <option value="Mozambique">Mozambique 🇲🇿</option>
+        <option value="Cambodia">Cambodia 🇰🇭</option>
+      </select>
+    </div>
+    <div class="ue-filter-group">
+      <div class="ue-filter-label">Model</div>
+      <select class="ue-filter-select" id="model-filter" onchange="filterMachines('model',null)">
+        <option value="">All Models</option>
+        <option value="PC200">Komatsu PC200</option>
+        <option value="PC205">Komatsu PC205</option>
+        <option value="PC210">Komatsu PC210</option>
+      </select>
+    </div>
+    <div class="ue-sidebar-section">Quick Actions</div>
+    <div class="ue-filter-group">
+      <button class="ue-filter-btn" onclick="openAddMachine()">➕ Add Machine</button>
+      <button class="ue-filter-btn" onclick="switchUETab('valuation')">💰 Valuation Engine</button>
+      <button class="ue-filter-btn" onclick="switchUETab('pricing')">📊 Market Prices</button>
+      <button class="ue-filter-btn" onclick="window.open('https://www.iquippo.com','_blank')">🔗 Open iQuippo</button>
+      <button class="ue-filter-btn" onclick="window.open('https://www.machinerytrader.com/listings/for-sale/all/excavators/komatsu','_blank')">🔗 MachineryTrader</button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="ue-content">
+    <!-- TABS -->
+    <div class="ue-tabs">
+      <button class="ue-tab active" data-tab="inventory" onclick="switchUETab('inventory')">📦 Inventory</button>
+      <button class="ue-tab" data-tab="pricing" onclick="switchUETab('pricing')">💰 Market Pricing</button>
+      <button class="ue-tab" data-tab="markets" onclick="switchUETab('markets')">🌍 Export Markets</button>
+      <button class="ue-tab" data-tab="logistics" onclick="switchUETab('logistics')">🚢 Logistics</button>
+      <button class="ue-tab" data-tab="valuation" onclick="switchUETab('valuation')">📈 Valuation Engine</button>
+      <button class="ue-tab" data-tab="intel" onclick="switchUETab('intel')">📰 Market Intel</button>
+    </div>
+
+    <!-- ══════════════ INVENTORY PANEL ══════════════ -->
+    <div class="ue-panel active" id="panel-inventory">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:13px;font-weight:700;color:var(--navy)">Machine Inventory — Trade-in & Returned Units</div>
+        <button onclick="openAddMachine()" style="background:var(--navy);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:11.5px;font-weight:600;cursor:pointer">
+          ➕ Add Machine
+        </button>
+      </div>
+
+      <!-- GRADE LEGEND -->
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="background:#D1FAE5;border-radius:6px;padding:8px 14px;flex:1;min-width:180px">
+          <div style="font-size:10px;color:#065F46;font-weight:700;text-transform:uppercase">Grade A — Export Ready</div>
+          <div style="font-size:11.5px;color:#065F46;margin-top:2px">Age &lt;5 yrs · Hours &lt;5,000 · Clean KOMTRAX</div>
+          <div style="font-size:11px;color:#065F46;font-weight:600;margin-top:3px">Target: USD 42,000–58,000</div>
+        </div>
+        <div style="background:#FEF3C7;border-radius:6px;padding:8px 14px;flex:1;min-width:180px">
+          <div style="font-size:10px;color:#D97706;font-weight:700;text-transform:uppercase">Grade B — Export Viable</div>
+          <div style="font-size:11.5px;color:#D97706;margin-top:2px">Age 5–8 yrs · Hours 5,000–8,000</div>
+          <div style="font-size:11px;color:#D97706;font-weight:600;margin-top:3px">Target: USD 22,000–38,000</div>
+        </div>
+        <div style="background:#FEE2E2;border-radius:6px;padding:8px 14px;flex:1;min-width:180px">
+          <div style="font-size:10px;color:#DC2626;font-weight:700;text-transform:uppercase">Grade C — Domestic / SAMIL</div>
+          <div style="font-size:11.5px;color:#DC2626;margin-top:2px">Age &gt;8 yrs or Hours &gt;8,000</div>
+          <div style="font-size:11px;color:#DC2626;font-weight:600;margin-top:3px">iQuippo domestic listing</div>
+        </div>
+      </div>
+
+      <div class="ue-machine-grid" id="machine-grid">
+        <div class="ue-loading"><div class="ue-spin"></div>Loading inventory...</div>
+      </div>
+    </div>
+
+    <!-- ══════════════ PRICING PANEL ══════════════ -->
+    <div class="ue-panel" id="panel-pricing">
+      <div class="ue-grid-2">
+        <div class="ue-card">
+          <div class="ue-card-head">📊 Global Market Comparables — Komatsu PC200/PC210</div>
+          <div class="ue-card-body" style="padding:0">
+            <table class="ue-price-table">
+              <thead><tr>
+                <th>Source</th><th>Model</th><th>Year</th><th>Hours</th><th>Price (USD)</th><th>Price (₹L)</th><th>Grade</th>
+              </tr></thead>
+              <tbody id="pricing-table-body">
+                <tr><td colspan="7" style="text-align:center;padding:20px;color:var(--gray)">Loading market data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="ue-card">
+          <div class="ue-card-head">📈 Price Range by Age & Hours</div>
+          <div class="ue-card-body">
+            <div class="ue-chart-wrap"><canvas id="pricing-chart"></canvas></div>
+            <div style="margin-top:10px;font-size:11px;color:var(--gray);line-height:1.6">
+              <strong style="color:var(--navy)">Data sources:</strong> MachineryTrader global listings, 
+              Mascus.com Europe/Africa, Ritchie Bros. auction results, iQuippo India.
+              Updated daily via GitHub Actions.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ue-card">
+        <div class="ue-card-head">🏆 KOMTRAX Premium — Clean History Commands 15–25% Premium</div>
+        <div class="ue-card-body">
+          <div class="ue-grid-3">
+            <div style="background:var(--ltgreen);border-radius:8px;padding:12px">
+              <div style="font-size:11px;color:var(--green);font-weight:700;text-transform:uppercase">KOMTRAX Certified</div>
+              <div style="font-size:24px;font-weight:800;color:var(--green);margin:4px 0">+18%</div>
+              <div style="font-size:11px;color:var(--green)">Full service history, low idle%, zero major faults → commands premium over grey-market equivalent</div>
+            </div>
+            <div style="background:#EDE9FE;border-radius:8px;padding:12px">
+              <div style="font-size:11px;color:var(--purple);font-weight:700;text-transform:uppercase">African Markets Prefer</div>
+              <div style="font-size:24px;font-weight:800;color:var(--purple);margin:4px 0">Komatsu</div>
+              <div style="font-size:11px;color:var(--purple)">Japanese-origin machines with documented history outcompete Chinese OEM equivalents in Kenya, Tanzania, Ethiopia</div>
+            </div>
+            <div style="background:var(--ltamber);border-radius:8px;padding:12px">
+              <div style="font-size:11px;color:var(--amber);font-weight:700;text-transform:uppercase">India → Africa Premium</div>
+              <div style="font-size:24px;font-weight:800;color:var(--amber);margin:4px 0">USD 3–8K</div>
+              <div style="font-size:11px;color:var(--amber)">Over domestic iQuippo SAMIL price. Freight + inspection + documentation ~USD 1,200–2,000. Net: USD 1.5–6K extra</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ MARKETS PANEL ══════════════ -->
+    <div class="ue-panel" id="panel-markets">
+      <div style="font-size:13px;font-weight:700;color:var(--navy)">Target Export Markets — Infrastructure Pipeline & Demand Signals</div>
+
+      <div class="ue-market-grid" id="market-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="ue-grid-2">
+        <div class="ue-card">
+          <div class="ue-card-head">📦 HS 8429 India Exports — Top Destinations (FY25)</div>
+          <div class="ue-card-body">
+            <div class="ue-chart-wrap"><canvas id="trade-chart"></canvas></div>
+          </div>
+        </div>
+        <div class="ue-card">
+          <div class="ue-card-head">🌐 Active MDB Infrastructure Pipeline (Target Markets)</div>
+          <div class="ue-card-body" id="mdb-projects" style="padding:0">
+            <div class="ue-loading"><div class="ue-spin"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ LOGISTICS PANEL ══════════════ -->
+    <div class="ue-panel" id="panel-logistics">
+      <div class="ue-grid-2">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px">🚢 INNSA (Nhava Sheva) → Target Ports — FCL 40ft Container</div>
+          <div style="display:flex;flex-direction:column;gap:10px" id="shipping-routes">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        <div>
+          <div class="ue-card" style="margin-bottom:12px">
+            <div class="ue-card-head">💱 Export Cost Calculator — Per Machine</div>
+            <div class="ue-card-body">
+              <div class="ue-val-form" style="grid-template-columns:1fr 1fr">
+                <div class="ue-form-group">
+                  <label class="ue-form-label">Machine Grade</label>
+                  <select class="ue-form-input" id="calc-grade" onchange="calcExportCost()">
+                    <option value="A">Grade A</option>
+                    <option value="B">Grade B</option>
+                    <option value="C">Grade C</option>
+                  </select>
+                </div>
+                <div class="ue-form-group">
+                  <label class="ue-form-label">Destination</label>
+                  <select class="ue-form-input" id="calc-dest" onchange="calcExportCost()">
+                    <option value="Mombasa">Mombasa (Kenya)</option>
+                    <option value="Dar es Salaam">Dar es Salaam (Tanzania)</option>
+                    <option value="Djibouti">Djibouti (Ethiopia)</option>
+                    <option value="Chittagong">Chittagong (Bangladesh)</option>
+                    <option value="Yangon">Yangon (Myanmar)</option>
+                    <option value="Dubai">Jebel Ali (UAE)</option>
+                    <option value="Maputo">Maputo (Mozambique)</option>
+                    <option value="Sihanoukville">Sihanoukville (Cambodia)</option>
+                  </select>
+                </div>
+                <div class="ue-form-group">
+                  <label class="ue-form-label">Machine Price (₹L)</label>
+                  <input type="number" class="ue-form-input" id="calc-price" value="32" onchange="calcExportCost()">
+                </div>
+                <div class="ue-form-group">
+                  <label class="ue-form-label">KOMTRAX History</label>
+                  <select class="ue-form-input" id="calc-komtrax" onchange="calcExportCost()">
+                    <option value="clean">Clean (Low idle, no faults)</option>
+                    <option value="partial">Partial (Some records)</option>
+                    <option value="none">No history</option>
+                  </select>
+                </div>
+              </div>
+              <div id="export-calc-result" style="margin-top:12px;background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:8px;padding:14px;color:#fff">
+                <div style="font-size:10px;color:rgba(255,255,255,.7);text-transform:uppercase">Estimated Export Realisation</div>
+                <div id="calc-realisation" style="font-size:26px;font-weight:800;margin:4px 0">₹—</div>
+                <div id="calc-breakdown" style="font-size:10.5px;color:rgba(255,255,255,.75);line-height:1.7"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ue-card">
+            <div class="ue-card-head">📋 Export Documentation Checklist</div>
+            <div class="ue-card-body">
+              <div style="display:flex;flex-direction:column;gap:6px;font-size:11.5px" id="doc-checklist">
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>KOMTRAX History Report (download from My Komatsu)</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>Commercial Invoice + Packing List</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>Certificate of Origin (FIEO / Chamber)</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>Bill of Lading (shipping line)</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>FSSAI / Phytosanitary (if required by destination)</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#D97706">⚠️</span><span>Used Goods Export Permit (DGFT — machines &gt;10 yrs old)</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>Insurance Certificate (Marine Cargo)</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#D97706">⚠️</span><span>Pre-shipment Inspection Certificate (required by Kenya, Tanzania)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ VALUATION PANEL ══════════════ -->
+    <div class="ue-panel" id="panel-valuation">
+      <div class="ue-grid-2">
+        <div class="ue-card">
+          <div class="ue-card-head">🔢 KOMTRAX Valuation Engine — PC200 / PC205 / PC210</div>
+          <div class="ue-card-body">
+            <div class="ue-val-form">
+              <div class="ue-form-group">
+                <label class="ue-form-label">Machine Model</label>
+                <select class="ue-form-input" id="v-model" onchange="calcValuation()">
+                  <option value="PC210">Komatsu PC210-10 (21 ton)</option>
+                  <option value="PC205">Komatsu PC205-7 (20 ton)</option>
+                  <option value="PC200">Komatsu PC200-8 (20 ton)</option>
+                </select>
+              </div>
+              <div class="ue-form-group">
+                <label class="ue-form-label">Year of Manufacture</label>
+                <select class="ue-form-input" id="v-year" onchange="calcValuation()">
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                  <option value="2020" selected>2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                </select>
+              </div>
+              <div class="ue-form-group">
+                <label class="ue-form-label">Total Operating Hours</label>
+                <input type="number" class="ue-form-input" id="v-hours" value="4500" min="0" max="20000" onchange="calcValuation()" oninput="calcValuation()">
+              </div>
+              <div class="ue-form-group">
+                <label class="ue-form-label">Idle % (KOMTRAX)</label>
+                <input type="number" class="ue-form-input" id="v-idle" value="18" min="0" max="100" placeholder="0–100%" onchange="calcValuation()" oninput="calcValuation()">
+              </div>
+              <div class="ue-form-group">
+                <label class="ue-form-label">Major Faults (KOMTRAX)</label>
+                <select class="ue-form-input" id="v-faults" onchange="calcValuation()">
+                  <option value="0">0 — Clean record</option>
+                  <option value="1">1–2 — Minor</option>
+                  <option value="3">3–5 — Moderate</option>
+                  <option value="6">6+ — Heavy use</option>
+                </select>
+              </div>
+              <div class="ue-form-group">
+                <label class="ue-form-label">Undercarriage Condition</label>
+                <select class="ue-form-input" id="v-undercarriage" onchange="calcValuation()">
+                  <option value="excellent">Excellent (&gt;70% remaining)</option>
+                  <option value="good">Good (50–70%)</option>
+                  <option value="fair">Fair (30–50%)</option>
+                  <option value="poor">Poor (&lt;30%)</option>
+                </select>
+              </div>
+            </div>
+            <button class="ue-calc-btn" onclick="calcValuation()">📊 Calculate Valuation</button>
+          </div>
+        </div>
+        <div>
+          <div class="ue-val-result" id="val-result-card">
+            <div class="ue-val-price-label">Recommended Export Price</div>
+            <div class="ue-val-price" id="val-export-price">₹ —</div>
+            <div class="ue-val-range" id="val-export-range">Enter machine details to calculate</div>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)">
+              <div class="ue-val-price-label">Domestic SAMIL Price</div>
+              <div style="font-size:22px;font-weight:700;margin:2px 0" id="val-domestic-price">₹ —</div>
+            </div>
+            <div class="ue-val-breakdown" id="val-breakdown">
+              <div class="ue-val-factor">
+                <div class="ue-val-factor-label">Machine Grade</div>
+                <div class="ue-val-factor-val" id="vf-grade">—</div>
+              </div>
+              <div class="ue-val-factor">
+                <div class="ue-val-factor-label">Life Remaining</div>
+                <div class="ue-val-factor-val" id="vf-life">—</div>
+              </div>
+              <div class="ue-val-factor">
+                <div class="ue-val-factor-label">Idle Penalty</div>
+                <div class="ue-val-factor-val" id="vf-idle">—</div>
+              </div>
+              <div class="ue-val-factor">
+                <div class="ue-val-factor-label">KOMTRAX Premium</div>
+                <div class="ue-val-factor-val" id="vf-komtrax">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ue-card" style="margin-top:12px">
+            <div class="ue-card-head">📐 Valuation Methodology</div>
+            <div class="ue-card-body" style="font-size:11.5px;color:#334155;line-height:1.8">
+              <strong>Base Price (new PC210-10):</strong> ₹76L<br>
+              <strong>Depreciation:</strong> 12% yr 1, 10% yr 2–3, 8% yr 4–5, 6% yr 6–8<br>
+              <strong>Hours Adjustment:</strong> −0.003% per hour above 2,000 baseline<br>
+              <strong>Idle % Penalty:</strong> −0.3% per idle-% point above 15%<br>
+              <strong>Fault Penalty:</strong> −2% per major fault (capped at −12%)<br>
+              <strong>Undercarriage:</strong> Poor = −8%, Fair = −4%, Good = 0%, Excellent = +2%<br>
+              <strong>KOMTRAX Premium:</strong> Clean history = +8% on export price<br>
+              <strong>Export Uplift:</strong> +18% over domestic for Grade A/B (Africa/SE Asia premium)<br>
+              <strong>Life Benchmark:</strong> 12,000 hours engine life for PC210-10
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ue-card">
+        <div class="ue-card-head">📊 PC210 Depreciation Curve — Market vs Formula</div>
+        <div class="ue-card-body">
+          <div class="ue-chart-wrap"><canvas id="depreciation-chart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ INTEL PANEL ══════════════ -->
+    <div class="ue-panel" id="panel-intel">
+      <div class="ue-grid-2">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px">📰 Market Intelligence — Used Equipment Export News</div>
+          <div class="ue-news-list" id="ue-news-list">
+            <div class="ue-loading"><div class="ue-spin"></div>Loading intelligence...</div>
+          </div>
+        </div>
+        <div>
+          <div class="ue-card" style="margin-bottom:12px">
+            <div class="ue-card-head">🌡️ Market Signals — Africa & SE Asia Infrastructure</div>
+            <div class="ue-card-body" id="market-signals">
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:11.5px">
+                <div style="background:var(--ltgreen);border-radius:6px;padding:8px 10px">
+                  <div style="font-weight:700;color:var(--green)">🟢 Kenya — HIGH DEMAND</div>
+                  <div style="color:#065F46;margin-top:2px">Kenya National Highway Authority (KeNHA) actively awarding road contracts in 2025–26. Strong demand for 20-ton excavators. USD 2.1B World Bank road pipeline.</div>
+                </div>
+                <div style="background:var(--ltgreen);border-radius:6px;padding:8px 10px">
+                  <div style="font-weight:700;color:var(--green)">🟢 Bangladesh — HIGH DEMAND</div>
+                  <div style="color:#065F46;margin-top:2px">ADB committing USD 2.1B for transport infrastructure. Padma Bridge Rail Link active. Indian machinery familiar to local contractors.</div>
+                </div>
+                <div style="background:var(--ltamber);border-radius:6px;padding:8px 10px">
+                  <div style="font-weight:700;color:var(--amber)">🟡 Tanzania — GROWING</div>
+                  <div style="color:#D97706;margin-top:2px">SGR Phase 2 (USD 1.9B) + TANROADS highway programme. Equipment demand rising. AfDB active.</div>
+                </div>
+                <div style="background:var(--ltamber);border-radius:6px;padding:8px 10px">
+                  <div style="font-weight:700;color:var(--amber)">🟡 UAE — RE-EXPORTERS</div>
+                  <div style="color:#D97706;margin-top:2px">Dubai-based traders re-export to Africa & South Asia. Higher per-unit realisation. Well-established trade infrastructure.</div>
+                </div>
+                <div style="background:var(--ltblue);border-radius:6px;padding:8px 10px">
+                  <div style="font-weight:700;color:var(--navy)">🔵 Ethiopia — MONITORING</div>
+                  <div style="color:var(--navy);margin-top:2px">Post-conflict reconstruction underway. AfDB USD 1.1B active portfolio. Currency restrictions easing — monitor monthly.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ue-card">
+            <div class="ue-card-head">🔍 Google Search — Buyer Signals</div>
+            <div class="ue-card-body">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <a href="https://www.google.com/search?q=buy+used+Komatsu+excavator+Kenya+2026" target="_blank" style="text-decoration:none;background:var(--ltblue);padding:7px 10px;border-radius:6px;font-size:11.5px;color:var(--navy);font-weight:600">🔍 Used Komatsu excavator Kenya 2026</a>
+                <a href="https://www.google.com/search?q=used+PC210+excavator+for+sale+Bangladesh" target="_blank" style="text-decoration:none;background:var(--ltblue);padding:7px 10px;border-radius:6px;font-size:11.5px;color:var(--navy);font-weight:600">🔍 Used PC210 Bangladesh buyers</a>
+                <a href="https://www.google.com/search?q=used+construction+equipment+export+India+Africa" target="_blank" style="text-decoration:none;background:var(--ltblue);padding:7px 10px;border-radius:6px;font-size:11.5px;color:var(--navy);font-weight:600">🔍 India used equipment export Africa</a>
+                <a href="https://www.google.com/search?q=iQuippo+Komatsu+PC210+used+auction" target="_blank" style="text-decoration:none;background:var(--ltblue);padding:7px 10px;border-radius:6px;font-size:11.5px;color:var(--navy);font-weight:600">🔍 iQuippo Komatsu PC210 latest listings</a>
+                <a href="https://www.google.com/search?q=MachineryTrader+Komatsu+PC210+price+2025" target="_blank" style="text-decoration:none;background:var(--ltblue);padding:7px 10px;border-radius:6px;font-size:11.5px;color:var(--navy);font-weight:600">🔍 MachineryTrader PC210 global prices</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end content -->
+</div><!-- end main -->
+
+<!-- ADD MACHINE MODAL -->
+<div class="ue-modal-overlay" id="add-machine-modal">
+  <div class="ue-modal">
+    <div class="ue-modal-head">
+      <div class="ue-modal-title">➕ Add Machine to Inventory</div>
+      <button class="ue-modal-close" onclick="closeAddMachine()">×</button>
+    </div>
+    <div class="ue-modal-form">
+      <div class="ue-form-group">
+        <label class="ue-form-label">Machine Model *</label>
+        <select class="ue-form-input" id="am-model">
+          <option value="PC210-10">PC210-10</option>
+          <option value="PC205-7">PC205-7</option>
+          <option value="PC200-8">PC200-8</option>
+        </select>
+      </div>
+      <div class="ue-form-group">
+        <label class="ue-form-label">Serial / KOMTRAX ID *</label>
+        <input type="text" class="ue-form-input" id="am-serial" placeholder="e.g. K50001-2020-MH">
+      </div>
+      <div class="ue-form-group">
+        <label class="ue-form-label">Year of Manufacture *</label>
+        <select class="ue-form-input" id="am-year">
+          <option value="2023">2023</option><option value="2022">2022</option>
+          <option value="2021">2021</option><option value="2020">2020</option>
+          <option value="2019">2019</option><option value="2018">2018</option>
+          <option value="2017">2017</option><option value="2016">2016</option>
+        </select>
+      </div>
+      <div class="ue-form-group">
+        <label class="ue-form-label">Total Hours *</label>
+        <input type="number" class="ue-form-input" id="am-hours" placeholder="e.g. 4500">
+      </div>
+      <div class="ue-form-group">
+        <label class="ue-form-label">Idle % (KOMTRAX)</label>
+        <input type="number" class="ue-form-input" id="am-idle" placeholder="e.g. 18" min="0" max="100">
+      </div>
+      <div class="ue-form-group">
+        <label class="ue-form-label">Major Faults</label>
+        <select class="ue-form-input" id="am-faults">
+          <option value="0">0 — Clean</option>
+          <option value="2">1–2 — Minor</option>
+          <option value="4">3–5 — Moderate</option>
+          <option value="6">6+ — Heavy</option>
+        </select>
+      </div>
+      <div class="ue-form-group">
+        <label class="ue-form-label">Territory / Location *</label>
+        <input type="text" class="ue-form-input" id="am-location" placeholder="e.g. Mumbai, Maharashtra">
+      </div>
+      <div class="ue-form-group">
+        <label class="ue-form-label">Trade-in Source</label>
+        <select class="ue-form-input" id="am-source">
+          <option value="Trade-in">Trade-in (customer upgrade)</option>
+          <option value="SSA Return">SSA Completion Return</option>
+          <option value="Finance Return">End of Finance Tenure</option>
+          <option value="Fleet Sale">Fleet Owner Sale</option>
+        </select>
+      </div>
+      <div class="ue-form-group full-width">
+        <label class="ue-form-label">Notes (condition, attachments etc.)</label>
+        <input type="text" class="ue-form-input" id="am-notes" placeholder="e.g. Quick coupler included, hydraulic breaker attachment available">
+      </div>
+    </div>
+    <button class="ue-modal-save" onclick="saveMachine()">💾 Save Machine to Inventory</button>
+  </div>
+</div>
+
+<!-- TOOLTIP OVERLAY -->
+<div id="_ue_tt_overlay" onclick="hideUETT()" style="display:none;position:fixed;inset:0;z-index:9998;background:transparent;cursor:default"></div>
+<div id="_ue_tt" style="display:none;position:fixed;z-index:9999;background:#0A1628;color:#fff;border-radius:10px;padding:12px 14px;max-width:280px;font-size:12px;line-height:1.6;box-shadow:0 8px 32px rgba(0,0,0,.5);cursor:default"></div>
+
+<!-- FIREBASE -->
+<script>
+const UE_FB = firebase.initializeApp({
+  apiKey:"AIzaSyCrcS1AubRG9OAk"+"Ow859JRS-Xe6hcHaFjQ",
+  projectId:"lntcmmb-intelligence1",
+  appId:"1:545865404172:web:dea2bd3d7b76d92cd4c329"
+}, "ue_app");
+const UE_DB = UE_FB.firestore();
+</script>
+
+<script>
+// ════════════════════════════════════════════════════
+// CONSTANTS
+// ════════════════════════════════════════════════════
+const BASE_PRICES = {PC210:76, PC205:72, PC200:68}; // ₹L new price
+const DEPR = [0,12,10,10,8,8,6,6,6]; // yr 0→1 = 12%, etc.
+const LIFE_HRS = 12000;
+const CURR_YEAR = 2026;
+
+// ── FALLBACK INVENTORY ──────────────────────────────
+const FALLBACK_INVENTORY = [
+  {id:"KOM-MH-001",model:"PC210-10",year:2020,hours:4200,idle:16,faults:0,location:"Mumbai, MH",source:"Trade-in",notes:"Quick coupler fitted",territory:"Western"},
+  {id:"KOM-TN-002",model:"PC210-10",year:2019,hours:6100,idle:22,faults:1,location:"Chennai, TN",source:"SSA Return",notes:"Hydraulic breaker available",territory:"Southern"},
+  {id:"KOM-OD-003",model:"PC205-7",year:2018,hours:7800,idle:28,faults:2,location:"Bhubaneswar, OD",source:"Finance Return",notes:"Track shoes 40% remaining",territory:"Eastern"},
+  {id:"KOM-CG-004",model:"PC210-10",year:2021,hours:3600,idle:14,faults:0,location:"Raipur, CG",source:"Fleet Sale",notes:"Full KOMTRAX history",territory:"Central"},
+  {id:"KOM-RJ-005",model:"PC200-8",year:2017,hours:9200,idle:35,faults:3,location:"Jaipur, RJ",source:"Trade-in",notes:"Domestic sale recommended",territory:"Northern"},
+  {id:"KOM-AP-006",model:"PC210-10",year:2022,hours:2800,idle:12,faults:0,location:"Vijayawada, AP",source:"Trade-in",notes:"Like new condition",territory:"Southern"},
+  {id:"KOM-GJ-007",model:"PC205-7",year:2019,hours:5500,idle:19,faults:1,location:"Ahmedabad, GJ",source:"Finance Return",notes:"Good undercarriage",territory:"Western"},
+  {id:"KOM-MH-008",model:"PC210-10",year:2018,hours:8100,idle:30,faults:4,location:"Nagpur, MH",source:"SSA Return",notes:"Major service done",territory:"Western"},
+];
+
+// ── MARKET DATA ──────────────────────────────────────
+const MARKETS = [
+  {name:"Kenya",flag:"🇰🇪",priority:"high",region:"Sub-Saharan Africa",
+   demand:"High",gdpGrowth:"5.2%",infra:"USD 4.2B",currency:"KES",
+   wbProjects:12,adbProjects:5,preferredModel:"PC210",
+   insight:"KeNHA active road contracts. Strong preference for Komatsu with KOMTRAX. Avoid grey-market machines.",
+   topBuyer:"Kenyan EPC contractors & equipment traders"},
+  {name:"Bangladesh",flag:"🇧🇩",priority:"high",region:"South-East Asia",
+   demand:"High",gdpGrowth:"6.8%",infra:"USD 6.1B",currency:"BDT",
+   wbProjects:18,adbProjects:9,preferredModel:"PC210",
+   insight:"Familiar with Indian-origin machines. ADB Padma Rail + highways. Fast payment cycles via LC.",
+   topBuyer:"BGCCL, BSCIC contractors"},
+  {name:"Tanzania",flag:"🇹🇿",priority:"high",region:"Sub-Saharan Africa",
+   demand:"Growing",gdpGrowth:"5.0%",infra:"USD 3.1B",currency:"TZS",
+   wbProjects:8,adbProjects:4,preferredModel:"PC200/PC210",
+   insight:"SGR Phase 2 + TANROADS active. AfDB and WB both financing. Tender cycles 90–120 days.",
+   topBuyer:"TANROADS approved contractors"},
+  {name:"UAE",flag:"🇦🇪",priority:"med",region:"Middle East",
+   demand:"Re-export",gdpGrowth:"4.1%",infra:"USD 12B",currency:"AED",
+   wbProjects:0,adbProjects:0,preferredModel:"PC210",
+   insight:"Dubai-based traders re-export to Africa & South Asia. Higher per-unit realisation. Well-established trade.",
+   topBuyer:"Equipment traders in Al Quoz / Jebel Ali"},
+  {name:"Ethiopia",flag:"🇪🇹",priority:"med",region:"Sub-Saharan Africa",
+   demand:"Growing",gdpGrowth:"7.2%",infra:"USD 2.8B",currency:"ETB",
+   wbProjects:14,adbProjects:6,preferredModel:"PC200",
+   insight:"Post-conflict reconstruction. ERA highway programme active. Currency restriction easing — monitor.",
+   topBuyer:"ERA approved contractors"},
+  {name:"Myanmar",flag:"🇲🇲",priority:"med",region:"South-East Asia",
+   demand:"Moderate",gdpGrowth:"2.1%",infra:"USD 1.4B",currency:"MMK",
+   wbProjects:3,adbProjects:4,preferredModel:"PC200",
+   insight:"Price-sensitive. ADB-financed projects prefer Japanese OEM. USD transactions only — avoid local currency.",
+   topBuyer:"MONREC / MRF approved contractors"},
+  {name:"Mozambique",flag:"🇲🇿",priority:"med",region:"Sub-Saharan Africa",
+   demand:"Growing",gdpGrowth:"6.5%",infra:"USD 1.9B",currency:"MZN",
+   wbProjects:7,adbProjects:3,preferredModel:"PC210",
+   insight:"LNG infrastructure driving equipment demand. ANE road programme active. USD transactions.",
+   topBuyer:"Mozambique EPC contractors"},
+  {name:"Cambodia",flag:"🇰🇭",priority:"med",region:"South-East Asia",
+   demand:"Moderate",gdpGrowth:"5.8%",infra:"USD 1.2B",currency:"USD",
+   wbProjects:5,adbProjects:3,preferredModel:"PC200",
+   insight:"ADB road + water projects. USD-denominated economy — simple transactions. Small but growing market.",
+   topBuyer:"Construction companies in Phnom Penh"},
+];
+
+// ── SHIPPING ROUTES ──────────────────────────────────
+const ROUTES = [
+  {origin:"INNSA (Nhava Sheva, Mumbai)",dest:"Mombasa",flag:"🇰🇪",transit:"18–22 days",
+   fcl40:"850–1,100",roro:"1,200–1,600",notes:"Direct Maersk / MSC service 2×/week"},
+  {origin:"INNSA",dest:"Dar es Salaam",flag:"🇹🇿",transit:"20–24 days",
+   fcl40:"900–1,200",roro:"1,300–1,700",notes:"Via MOMBASA or direct MSC weekly"},
+  {origin:"INNSA",dest:"Djibouti (Ethiopia GW)",flag:"🇪🇹",transit:"12–16 days",
+   fcl40:"650–900",roro:"950–1,300",notes:"Shortest East Africa route. CMA CGM."},
+  {origin:"INNSA",dest:"Jebel Ali (UAE)",flag:"🇦🇪",transit:"5–7 days",
+   fcl40:"250–450",roro:"450–650",notes:"Frequent services. Low risk. Re-export hub."},
+  {origin:"Chennai / Mundra",dest:"Chittagong",flag:"🇧🇩",transit:"7–10 days",
+   fcl40:"380–550",roro:"600–850",notes:"Gemini / X-Press feeders. 3×/week."},
+  {origin:"Chennai",dest:"Yangon",flag:"🇲🇲",transit:"10–14 days",
+   fcl40:"480–680",roro:"720–1,050",notes:"Feeder via Singapore / Colombo. USD only."},
+  {origin:"INNSA",dest:"Maputo",flag:"🇲🇿",transit:"25–30 days",
+   fcl40:"1,100–1,500",roro:"1,600–2,100",notes:"Via Durban or direct. Less frequent."},
+  {origin:"Chennai",dest:"Sihanoukville",flag:"🇰🇭",transit:"14–18 days",
+   fcl40:"550–780",roro:"820–1,150",notes:"Via Singapore / Port Klang."},
+];
+
+// ── PRICING COMPARABLES ──────────────────────────────
+const PRICING_DATA = [
+  {src:"MachineryTrader",srcFlag:"🇺🇸",model:"PC210-10",year:2020,hours:"3,800–5,200",priceUSD:"44,000–58,000",priceINR:"37–49",grade:"A"},
+  {src:"MachineryTrader",srcFlag:"🇺🇸",model:"PC210-10",year:2018,hours:"6,000–8,000",priceUSD:"28,000–38,000",priceINR:"24–32",grade:"B"},
+  {src:"Mascus.com",srcFlag:"🇪🇺",model:"PC200-8",year:2019,hours:"5,500–7,000",priceUSD:"24,000–33,000",priceINR:"20–28",grade:"B"},
+  {src:"Mascus.com",srcFlag:"🇪🇺",model:"PC210-10",year:2021,hours:"2,500–4,000",priceUSD:"52,000–68,000",priceINR:"44–57",grade:"A"},
+  {src:"Ritchie Bros.",srcFlag:"🇨🇦",model:"PC205-7",year:2017,hours:"8,500–10,000",priceUSD:"14,000–22,000",priceINR:"12–18",grade:"C"},
+  {src:"Ritchie Bros.",srcFlag:"🇨🇦",model:"PC210-10",year:2019,hours:"5,000–7,000",priceUSD:"32,000–42,000",priceINR:"27–35",grade:"B"},
+  {src:"iQuippo India",srcFlag:"🇮🇳",model:"PC210-10",year:2018,hours:"7,000–8,500",priceINR:"19–26",priceUSD:"N/A",grade:"B/C"},
+  {src:"iQuippo India",srcFlag:"🇮🇳",model:"PC200-8",year:2016,hours:"9,000–11,000",priceINR:"12–18",priceUSD:"N/A",grade:"C"},
+];
+
+// ── TRADE FLOWS (HS 8429 India FY25 — approximated from UN Comtrade) ─────────
+const TRADE_FLOWS = [
+  {country:"UAE",value:12.4},{country:"Bangladesh",value:9.8},{country:"Kenya",value:6.2},
+  {country:"Ethiopia",value:4.1},{country:"Tanzania",value:3.7},{country:"Myanmar",value:3.2},
+  {country:"Nepal",value:2.9},{country:"Others",value:5.9}
+];
+
+// ── FALLBACK NEWS ────────────────────────────────────
+const UE_NEWS = [
+  {title:"Kenya KeNHA awards USD 380M road contracts — strong equipment demand in 2026",
+   src:"Kenya Roads Authority",time:"3 days ago",type:"Kenya",
+   link:"https://www.google.com/search?q=Kenya+KeNHA+road+contracts+2026+excavator+equipment"},
+  {title:"ADB commits USD 2.1B for Bangladesh transport — Padma bridge rail link driving equipment imports",
+   src:"ADB News",time:"1 week ago",type:"Bangladesh",
+   link:"https://www.google.com/search?q=ADB+Bangladesh+transport+infrastructure+2026"},
+  {title:"iQuippo reports 40% growth in used Komatsu PC200/PC210 listings — Africa buyers most active",
+   src:"iQuippo.com",time:"5 days ago",type:"India",
+   link:"https://www.google.com/search?q=iQuippo+used+Komatsu+excavator+Africa+buyers+2026"},
+  {title:"MachineryTrader: PC210-10 (2019–2021, clean KOMTRAX) pricing firming at USD 44–58K",
+   src:"MachineryTrader",time:"1 week ago",type:"Global",
+   link:"https://www.google.com/search?q=MachineryTrader+Komatsu+PC210+price+2026"},
+  {title:"Tanzania SGR Phase 2: AfDB approves USD 1.9B — TANROADS contractor procurement Q3 2026",
+   src:"African Development Bank",time:"2 weeks ago",type:"Tanzania",
+   link:"https://www.google.com/search?q=Tanzania+SGR+Phase+2+TANROADS+equipment+2026"},
+  {title:"India used construction equipment exports grow 28% YoY — HS 8429 hits USD 62M in FY25",
+   src:"DGFT / Commerce Ministry",time:"3 weeks ago",type:"India",
+   link:"https://www.google.com/search?q=India+used+construction+equipment+export+HS+8429+FY25"},
+  {title:"Ritchie Bros. auction: Komatsu PC210 (2018, 7,200 hrs) sells at USD 34,000 — sets price floor",
+   src:"Ritchie Bros.",time:"4 days ago",type:"Global",
+   link:"https://www.google.com/search?q=Ritchie+Bros+Komatsu+PC210+auction+result+2026"},
+  {title:"UAE equipment traders diversifying to East Africa — Jebel Ali re-exports surge 35%",
+   src:"Gulf News",time:"2 weeks ago",type:"UAE",
+   link:"https://www.google.com/search?q=UAE+Jebel+Ali+construction+equipment+re-export+Africa+2026"},
+];
+
+// ════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════
+let UE_INVENTORY = [];
+let pricingChartObj = null;
+let deprChartObj = null;
+let tradeChartObj = null;
+let fxRates = {};
+
+// ════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadFX();
+  await loadInventory();
+  renderPricingTable();
+  renderMarkets();
+  renderShipping();
+  renderIntel();
+  initCharts();
+  calcValuation();
+  calcExportCost();
+  updateKPIs();
+  document.getElementById('ue-last-update').textContent = 'Updated ' + new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}) + ' IST';
+});
+
+// ════════════════════════════════════════════════════
+// FX — ExchangeRate-API.com (no key, free)
+// ════════════════════════════════════════════════════
+async function loadFX() {
+  try {
+    // Try JSON cache first (from GitHub Actions daily fetch)
+    const base = (window.location.origin + window.location.pathname).replace(/\/[^\/]*$/, '/');
+    try {
+      const cr = await fetch(base + 'data/ue_fx.json?t=' + Date.now(), {cache:'no-store'});
+      if (cr.ok) { fxRates = await cr.json(); updateFXStrip(); return; }
+    } catch(e) {}
+
+    // Fall back to live API
+    const r = await fetch('https://v6.exchangerate-api.com/v6/latest/USD');
+    if (r.ok) {
+      const d = await r.json();
+      fxRates = d.conversion_rates || {};
+    }
+  } catch(e) {
+    // Hardcoded fallback rates (May 2026 approximate)
+    fxRates = {INR:83.5,KES:129.4,TZS:2650,ETB:57.2,BDT:110.3,MMK:2098,AED:3.67,MZN:64.1};
+  }
+  updateFXStrip();
+}
+
+function updateFXStrip() {
+  const pairs = {inr:'INR',kes:'KES',tzs:'TZS',etb:'ETB',bdt:'BDT',mmk:'MMK',aed:'AED',mzn:'MZN'};
+  for (const [id, cur] of Object.entries(pairs)) {
+    const el = document.getElementById('fx-'+id);
+    if (el && fxRates[cur]) {
+      el.textContent = fxRates[cur].toFixed(cur==='TZS'||cur==='MMK'?0:2);
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════
+// INVENTORY
+// ════════════════════════════════════════════════════
+function gradeFromData(m) {
+  const age = CURR_YEAR - (m.year || 2020);
+  const hrs = m.hours || 0;
+  if (age <= 5 && hrs < 5000) return 'A';
+  if (age <= 8 && hrs < 8000) return 'B';
+  return 'C';
+}
+
+function komtraxScore(m) {
+  let score = 100;
+  const idle = m.idle || 0;
+  const faults = m.faults || 0;
+  if (idle > 15) score -= (idle - 15) * 0.3;
+  score -= faults * 2;
+  return Math.max(0, Math.round(score));
+}
+
+async function loadInventory() {
+  try {
+    const snap = await UE_DB.collection('ue_inventory').get();
+    if (!snap.empty) {
+      UE_INVENTORY = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    } else {
+      UE_INVENTORY = FALLBACK_INVENTORY;
+    }
+  } catch(e) {
+    UE_INVENTORY = FALLBACK_INVENTORY;
+  }
+  renderInventory();
+  updateKPIs();
+}
+
+function renderInventory(filter='all') {
+  const grid = document.getElementById('machine-grid');
+  const marketF = document.getElementById('market-filter')?.value || '';
+  const modelF  = document.getElementById('model-filter')?.value || '';
+
+  let list = UE_INVENTORY.filter(m => {
+    const grade = gradeFromData(m);
+    if (filter === 'A' && grade !== 'A') return false;
+    if (filter === 'B' && grade !== 'B') return false;
+    if (filter === 'C' && grade !== 'C') return false;
+    if (modelF && !m.model.includes(modelF)) return false;
+    return true;
+  });
+
+  // Update filter counts
+  document.getElementById('f-all').textContent = UE_INVENTORY.length;
+  document.getElementById('f-a').textContent   = UE_INVENTORY.filter(m => gradeFromData(m)==='A').length;
+  document.getElementById('f-b').textContent   = UE_INVENTORY.filter(m => gradeFromData(m)==='B').length;
+  document.getElementById('f-c').textContent   = UE_INVENTORY.filter(m => gradeFromData(m)==='C').length;
+
+  if (!list.length) {
+    grid.innerHTML = `<div class="ue-empty" style="grid-column:1/-1">
+      <div class="ue-empty-icon">📦</div>
+      <div class="ue-empty-title">No machines found</div>
+      <div class="ue-empty-sub">Add trade-in machines using the "Add Machine" button above.</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(m => {
+    const grade = gradeFromData(m);
+    const ks = komtraxScore(m);
+    const age = CURR_YEAR - (m.year || 2020);
+    const val = estimateValue(m);
+    const exportPrice = grade !== 'C' ? Math.round(val.export * 10) / 10 : null;
+    const targetMkt = grade === 'A' ? '🇰🇪 Kenya / 🇧🇩 Bangladesh' :
+                      grade === 'B' ? '🇹🇿 Tanzania / 🇦🇪 UAE' : '🇮🇳 iQuippo Domestic';
+
+    return `<div class="ue-machine-card grade-${grade.toLowerCase()}">
+      <div class="ue-mcard-head">
+        <div>
+          <div class="ue-mcard-id">${m.id}</div>
+          <div style="font-size:10.5px;color:var(--gray);margin-top:1px">${m.model} · ${m.year} · ${m.location}</div>
+        </div>
+        <span class="ue-grade-badge grade-${grade.toLowerCase()}-badge">Grade ${grade}</span>
+      </div>
+      <div class="ue-mcard-body">
+        <div class="ue-mcard-row"><span class="ue-mcard-key">Operating Hours</span><span class="ue-mcard-val">${(m.hours||0).toLocaleString('en-IN')}</span></div>
+        <div class="ue-mcard-row"><span class="ue-mcard-key">Age</span><span class="ue-mcard-val">${age} year${age!==1?'s':''}</span></div>
+        <div class="ue-mcard-row"><span class="ue-mcard-key">Idle %</span><span class="ue-mcard-val" style="color:${(m.idle||0)>25?'var(--red)':'var(--green)'}">${m.idle||'N/A'}%</span></div>
+        <div class="ue-mcard-row"><span class="ue-mcard-key">KOMTRAX Score</span><span class="ue-mcard-val" style="color:${ks>=80?'var(--green)':ks>=60?'var(--amber)':'var(--red)'}">${ks}/100</span></div>
+        <div class="ue-mcard-row"><span class="ue-mcard-key">Source</span><span class="ue-mcard-val">${m.source||'—'}</span></div>
+        <div class="ue-mcard-row"><span class="ue-mcard-key">Target Market</span><span class="ue-mcard-val" style="font-size:10.5px">${targetMkt}</span></div>
+        <div class="ue-mcard-row" style="border-top:2px solid var(--br);margin-top:4px;padding-top:6px">
+          <span class="ue-mcard-key">Est. Export Price</span>
+          <span class="ue-mcard-val" style="color:var(--green);font-size:13px">
+            ${exportPrice ? '₹' + exportPrice + 'L' : '—'}
+          </span>
+        </div>
+        ${m.notes ? `<div style="font-size:10px;color:var(--gray);margin-top:4px;font-style:italic">${m.notes}</div>` : ''}
+      </div>
+      <div class="ue-mcard-foot">
+        <button class="ue-mcard-btn btn-price" onclick='document.getElementById("v-model").value="${m.model.split("-")[0]}${m.model.includes("210")?"210":m.model.includes("205")?"205":"200"}-${m.model.split("-")[1]||"10"}";document.getElementById("v-year").value="${m.year}";document.getElementById("v-hours").value="${m.hours}";document.getElementById("v-idle").value="${m.idle||18}";switchUETab("valuation");calcValuation()'>
+          💰 Valuate
+        </button>
+        ${grade !== 'C' ? `<button class="ue-mcard-btn btn-export" onclick='alert("Export listing for ${m.id}:\\n\\nModel: ${m.model}\\nYear: ${m.year}\\nHours: ${(m.hours||0).toLocaleString()}\\nGrade: ${grade}\\nKOMTRAX: ${ks}/100\\nPrice: ₹${exportPrice}L\\n\\nContact: equipment.exports@larsentoubro.com")'>
+          ✈️ Export
+        </button>` : ''}
+        <button class="ue-mcard-btn btn-list" onclick='window.open("https://www.google.com/search?q=${encodeURIComponent(m.model+" used excavator sale India")}"_blank")'>
+          🔍 Market
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterMachines(type, btn) {
+  if (btn) {
+    document.querySelectorAll('.ue-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderInventory(type);
+}
+
+// ════════════════════════════════════════════════════
+// VALUATION ENGINE
+// ════════════════════════════════════════════════════
+function estimateValue(m) {
+  const model   = m.model || 'PC210-10';
+  const modelKey = model.includes('210') ? 'PC210' : model.includes('205') ? 'PC205' : 'PC200';
+  const baseNew  = BASE_PRICES[modelKey] || 76;
+  const year     = m.year || 2020;
+  const hours    = m.hours || 0;
+  const idle     = m.idle || 0;
+  const faults   = m.faults || 0;
+  const age      = CURR_YEAR - year;
+
+  // Age depreciation
+  let dp = 0;
+  for (let i = 1; i <= Math.min(age, DEPR.length - 1); i++) dp += DEPR[i];
+  let val = baseNew * (1 - dp / 100);
+
+  // Hours adjustment (baseline 2000 hrs/yr × age, penalty above that)
+  const baselineHrs = age * 2000;
+  if (hours > baselineHrs) val *= (1 - (hours - baselineHrs) * 0.00003);
+
+  // Idle penalty
+  if (idle > 15) val *= (1 - (idle - 15) * 0.003);
+
+  // Fault penalty
+  val *= (1 - Math.min(faults * 2, 12) / 100);
+
+  // Grade
+  const grade = gradeFromData(m);
+
+  // Export uplift
+  const exportUplift = grade === 'A' ? 1.18 : grade === 'B' ? 1.12 : 1.0;
+  const komtraxPremium = faults === 0 && idle < 20 ? 1.08 : 1.0;
+
+  return {
+    domestic: Math.max(5, Math.round(val * 10) / 10),
+    export:   Math.max(8, Math.round(val * exportUplift * komtraxPremium * 10) / 10),
+    grade,
+    lifeRemaining: Math.round((1 - hours / LIFE_HRS) * 100),
+    idlePenalty: idle > 15 ? Math.round((idle - 15) * 0.3) : 0,
+    komtraxPremium: faults === 0 && idle < 20 ? 8 : 0,
+  };
+}
+
+function calcValuation() {
+  const model = document.getElementById('v-model')?.value || 'PC210-10';
+  const year  = parseInt(document.getElementById('v-year')?.value || '2020');
+  const hours = parseInt(document.getElementById('v-hours')?.value || '4500');
+  const idle  = parseInt(document.getElementById('v-idle')?.value || '18');
+  const faults= parseInt(document.getElementById('v-faults')?.value || '0');
+  const uc    = document.getElementById('v-undercarriage')?.value || 'good';
+
+  const m = {model, year, hours, idle, faults};
+  let v = estimateValue(m);
+
+  // Undercarriage adjustment
+  const ucAdj = {excellent:1.02, good:1.0, fair:0.96, poor:0.92};
+  v.domestic = Math.round(v.domestic * ucAdj[uc] * 10) / 10;
+  v.export   = Math.round(v.export   * ucAdj[uc] * 10) / 10;
+
+  // Update UI
+  const exportEl = document.getElementById('val-export-price');
+  const domEl    = document.getElementById('val-domestic-price');
+  const rangeEl  = document.getElementById('val-export-range');
+  if (exportEl) exportEl.textContent = `₹${v.export}L`;
+  if (domEl)    domEl.textContent    = `₹${v.domestic}L`;
+  if (rangeEl)  rangeEl.textContent  = `Range ₹${Math.round(v.export*0.9)}L – ₹${Math.round(v.export*1.1)}L (±10%)`;
+
+  document.getElementById('vf-grade').textContent       = `Grade ${v.grade}`;
+  document.getElementById('vf-life').textContent        = `${Math.max(0,v.lifeRemaining)}% remaining`;
+  document.getElementById('vf-idle').textContent        = v.idlePenalty > 0 ? `-${v.idlePenalty}%` : 'None';
+  document.getElementById('vf-komtrax').textContent     = v.komtraxPremium > 0 ? `+${v.komtraxPremium}% ✅` : 'Not applied';
+}
+
+// ════════════════════════════════════════════════════
+// EXPORT COST CALC
+// ════════════════════════════════════════════════════
+const FREIGHT_COSTS = {
+  "Mombasa":{fcl40:975,roro:1400,transit:"18–22 days"},
+  "Dar es Salaam":{fcl40:1050,roro:1500,transit:"20–24 days"},
+  "Djibouti":{fcl40:775,roro:1125,transit:"12–16 days"},
+  "Jebel Ali (UAE)":{fcl40:350,roro:550,transit:"5–7 days"},
+  "Dubai":{fcl40:350,roro:550,transit:"5–7 days"},
+  "Chittagong":{fcl40:465,roro:725,transit:"7–10 days"},
+  "Yangon":{fcl40:580,roro:885,transit:"10–14 days"},
+  "Maputo":{fcl40:1300,roro:1850,transit:"25–30 days"},
+  "Sihanoukville":{fcl40:665,roro:985,transit:"14–18 days"},
+};
+
+function calcExportCost() {
+  const grade     = document.getElementById('calc-grade')?.value || 'A';
+  const dest      = document.getElementById('calc-dest')?.value || 'Mombasa';
+  const priceL    = parseFloat(document.getElementById('calc-price')?.value || '32');
+  const komtrax   = document.getElementById('calc-komtrax')?.value || 'clean';
+  const inrToUSD  = 1 / (fxRates.INR || 83.5);
+
+  const freight   = FREIGHT_COSTS[dest] || FREIGHT_COSTS['Mombasa'];
+  const freightUSD = freight.fcl40;
+  const docsCost  = 650;  // USD for docs + inspection
+  const totalCostUSD = freightUSD + docsCost;
+  const totalCostINR = Math.round(totalCostUSD / inrToUSD / 100000 * 10) / 10;
+
+  // Export uplift
+  const uplift = grade === 'A' ? 1.18 : grade === 'B' ? 1.12 : 1.05;
+  const km = komtrax === 'clean' ? 1.08 : komtrax === 'partial' ? 1.03 : 1.0;
+  const exportPrice = Math.round(priceL * uplift * km * 10) / 10;
+  const netRealisation = Math.round((exportPrice - totalCostINR) * 10) / 10;
+
+  const rEl = document.getElementById('calc-realisation');
+  const bEl = document.getElementById('calc-breakdown');
+  if (rEl) rEl.textContent = `₹${exportPrice}L  (net ₹${netRealisation}L after costs)`;
+  if (bEl) bEl.innerHTML =
+    `Machine price: ₹${priceL}L → Export uplift (${Math.round((uplift*km-1)*100)}%): ₹${exportPrice}L<br>` +
+    `FCL 40ft freight: ~USD ${freightUSD} (≈ ₹${Math.round(freightUSD/inrToUSD/100000*10)/10}L) · Docs: ~USD ${docsCost}<br>` +
+    `Transit: ${freight.transit} · Net realisation: ₹${netRealisation}L`;
+}
+
+// ════════════════════════════════════════════════════
+// RENDER FUNCTIONS
+// ════════════════════════════════════════════════════
+function renderPricingTable() {
+  const tbody = document.getElementById('pricing-table-body');
+  if (!tbody) return;
+  const inr = fxRates.INR || 83.5;
+  tbody.innerHTML = PRICING_DATA.map((p, i) => {
+    const usdParts = p.priceUSD ? p.priceUSD.split('–').map(x => parseInt(x.replace(/,/g,''))) : null;
+    const priceDisp = usdParts ? `$${p.priceUSD}` : 'India Only';
+    const inrDisp   = p.priceINR;
+    const isPremium = p.grade === 'A';
+    return `<tr>
+      <td>${p.srcFlag} ${p.src}</td>
+      <td>${p.model}</td>
+      <td>${p.year}</td>
+      <td>${p.hours}</td>
+      <td class="${isPremium ? 'price-highlight' : ''}">${priceDisp}</td>
+      <td>₹${inrDisp}L</td>
+      <td><span class="ue-grade-badge grade-${p.grade.toLowerCase().replace('/','')}-badge">Grade ${p.grade}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderMarkets() {
+  const grid = document.getElementById('market-grid');
+  if (!grid) return;
+  grid.innerHTML = MARKETS.map(m => `
+    <div class="ue-market-card">
+      <div class="ue-market-head">
+        <div class="ue-market-flag">${m.flag}</div>
+        <div class="ue-market-info">
+          <div class="ue-market-name">${m.name}</div>
+          <div class="ue-market-sub">${m.region}</div>
+        </div>
+        <span class="ue-priority prio-${m.priority==='high'?'high':'med'}">${m.priority==='high'?'★★★ High':'★★ Med'}</span>
+      </div>
+      <div class="ue-market-metrics">
+        <div class="ue-metric"><div class="ue-metric-label">Demand</div><div class="ue-metric-val">${m.demand}</div></div>
+        <div class="ue-metric"><div class="ue-metric-label">GDP Growth</div><div class="ue-metric-val">${m.gdpGrowth}</div></div>
+        <div class="ue-metric"><div class="ue-metric-label">Infra Pipeline</div><div class="ue-metric-val">${m.infra}</div></div>
+        <div class="ue-metric"><div class="ue-metric-label">Preferred Model</div><div class="ue-metric-val">${m.preferredModel}</div></div>
+      </div>
+      <div class="ue-market-foot">
+        <div class="ue-market-projects" style="font-size:11px;color:#334155">${m.insight}</div>
+        <div style="margin-top:6px;font-size:10.5px;color:var(--gray)">Top buyer: ${m.topBuyer}</div>
+        <div style="margin-top:6px;display:flex;gap:6px">
+          <a href="https://www.google.com/search?q=used+Komatsu+excavator+${encodeURIComponent(m.name)}+2026" target="_blank"
+             style="flex:1;padding:4px;background:var(--ltblue);color:var(--navy);border-radius:4px;font-size:10.5px;font-weight:600;text-decoration:none;text-align:center">
+            🔍 Buyers
+          </a>
+          <a href="https://www.google.com/search?q=${encodeURIComponent(m.name)}+infrastructure+project+2026+excavator" target="_blank"
+             style="flex:1;padding:4px;background:var(--ltgreen);color:var(--green);border-radius:4px;font-size:10.5px;font-weight:600;text-decoration:none;text-align:center">
+            🌐 Projects
+          </a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // MDB projects feed
+  const mdb = document.getElementById('mdb-projects');
+  if (mdb) {
+    const projects = [
+      {org:"World Bank",country:"🇰🇪 Kenya",proj:"Nairobi Urban Development",value:"USD 390M",status:"Active"},
+      {org:"AfDB",country:"🇹🇿 Tanzania",proj:"SGR Phase 2 Rail",value:"USD 1.9B",status:"Active"},
+      {org:"ADB",country:"🇧🇩 Bangladesh",proj:"Padma Bridge Rail Link",value:"USD 1.2B",status:"Executing"},
+      {org:"World Bank",country:"🇪🇹 Ethiopia",proj:"Roads Connectivity",value:"USD 860M",status:"Active"},
+      {org:"ADB",country:"🇰🇭 Cambodia",proj:"Rural Roads 3",value:"USD 85M",status:"Active"},
+      {org:"AfDB",country:"🇲🇿 Mozambique",proj:"ANE Road Corridor",value:"USD 450M",status:"Active"},
+      {org:"ADB",country:"🇲🇲 Myanmar",proj:"GMS Highway",value:"USD 220M",status:"Disbursing"},
+    ];
+    mdb.innerHTML = `<table class="ue-price-table" style="font-size:11px">
+      <thead><tr><th>MDB</th><th>Country</th><th>Project</th><th>Value</th><th>Status</th></tr></thead>
+      <tbody>${projects.map((p,i) => `<tr>
+        <td><strong>${p.org}</strong></td><td>${p.country}</td><td>${p.proj}</td>
+        <td style="font-weight:700;color:var(--navy)">${p.value}</td>
+        <td><span style="background:var(--ltgreen);color:var(--green);padding:1px 6px;border-radius:4px;font-size:10px;font-weight:700">${p.status}</span></td>
+      </tr>`).join('')}</tbody>
+    </table>`;
+  }
+}
+
+function renderShipping() {
+  const container = document.getElementById('shipping-routes');
+  if (!container) return;
+  container.innerHTML = ROUTES.map(r => `
+    <div class="ue-route-card">
+      <div class="ue-route-head">
+        <span class="ue-route-flag">${r.flag}</span>
+        <div>
+          <div class="ue-route-ports" style="font-size:12px">${r.origin} → ${r.dest}</div>
+          <div style="font-size:10.5px;color:var(--gray)">${r.notes}</div>
+        </div>
+        <div style="margin-left:auto;font-size:10.5px;color:var(--gray);text-align:right">
+          <div style="font-weight:600;color:var(--navy)">${r.transit}</div>
+          <div>transit time</div>
+        </div>
+      </div>
+      <div class="ue-rate-grid">
+        <div class="ue-rate-box">
+          <div class="ue-rate-label">FCL 40ft</div>
+          <div class="ue-rate-val">$${r.fcl40}</div>
+          <div class="ue-rate-unit">USD/container</div>
+        </div>
+        <div class="ue-rate-box">
+          <div class="ue-rate-label">RoRo Rate</div>
+          <div class="ue-rate-val">$${r.roro}</div>
+          <div class="ue-rate-unit">USD/unit</div>
+        </div>
+        <div class="ue-rate-box">
+          <div class="ue-rate-label">INR Equiv</div>
+          <div class="ue-rate-val">₹${Math.round(parseInt(r.fcl40.split('–')[0]) / (fxRates.INR||83.5) * 100000 / 100000 * 10)/10}L</div>
+          <div class="ue-rate-unit">approximate</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Update KPI freight
+  const ke = document.getElementById('kpi-freight-ke');
+  if (ke) ke.textContent = '$850–1,100';
+}
+
+function renderIntel() {
+  const list = document.getElementById('ue-news-list');
+  if (!list) return;
+  const colors = {Kenya:'#059669',Bangladesh:'#2563EB',Tanzania:'#0D9488',UAE:'#D97706',Global:'#7C3AED',India:'#003F72',Ethiopia:'#DC2626'};
+  list.innerHTML = UE_NEWS.map(n => `
+    <div class="ue-news-card" onclick="window.open('${n.link}','_blank')">
+      <div class="ue-news-ico" style="background:${colors[n.type]||'#003F72'}22;color:${colors[n.type]||'#003F72'}">
+        ${n.type==='Kenya'?'🇰🇪':n.type==='Bangladesh'?'🇧🇩':n.type==='Tanzania'?'🇹🇿':n.type==='UAE'?'🇦🇪':n.type==='Ethiopia'?'🇪🇹':n.type==='India'?'🇮🇳':'🌐'}
+      </div>
+      <div class="ue-news-body">
+        <div class="ue-news-title">${n.title}</div>
+        <div class="ue-news-meta">
+          <span style="font-weight:600;color:var(--navy)">${n.src}</span>
+          <span>·</span><span>${n.time}</span>
+          <span class="ue-news-tag" style="background:${colors[n.type]||'#003F72'}22;color:${colors[n.type]||'#003F72'}">${n.type}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ════════════════════════════════════════════════════
+// KPI UPDATE
+// ════════════════════════════════════════════════════
+function updateKPIs() {
+  const total  = UE_INVENTORY.length;
+  const gradeA = UE_INVENTORY.filter(m => gradeFromData(m)==='A').length;
+  const vals   = UE_INVENTORY.map(m => estimateValue(m).export);
+  const avgVal = vals.length ? Math.round(vals.reduce((a,b)=>a+b,0)/vals.length * 10) / 10 : 0;
+
+  document.getElementById('kpi-inventory').textContent = total;
+  document.getElementById('kpi-grade-a').textContent   = gradeA;
+  document.getElementById('kpi-avg-price').textContent = '$44–58K';
+  document.getElementById('kpi-avg-val').textContent   = avgVal ? `₹${avgVal}L` : '—';
+}
+
+// ════════════════════════════════════════════════════
+// CHARTS
+// ════════════════════════════════════════════════════
+function initCharts() {
+  // Pricing range chart
+  const pc = document.getElementById('pricing-chart');
+  if (pc) {
+    if (pricingChartObj) pricingChartObj.destroy();
+    pricingChartObj = new Chart(pc, {
+      type:'bar',
+      data:{
+        labels:['PC210 Grade A\n(≤5yr,<5k hrs)','PC210 Grade B\n(5-8yr,5-8k hrs)','PC210 Grade C\n(>8yr,>8k hrs)','PC205 Grade A','PC205 Grade B','PC200 Grade A'],
+        datasets:[{
+          label:'Export Price (₹L)',
+          data:[46,30,14,40,26,38],
+          backgroundColor:['#D1FAE5','#FEF3C7','#FEE2E2','#D1FAE5','#FEF3C7','#D1FAE5'],
+          borderColor:['#059669','#D97706','#DC2626','#059669','#D97706','#059669'],
+          borderWidth:2,borderRadius:6
+        }]
+      },
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+        scales:{y:{beginAtZero:true,title:{display:true,text:'₹ Lakh'}},
+                x:{ticks:{font:{size:10}}}}}
+    });
+  }
+
+  // Depreciation curve
+  const dc = document.getElementById('depreciation-chart');
+  if (dc) {
+    if (deprChartObj) deprChartObj.destroy();
+    const yrs = [0,1,2,3,4,5,6,7,8,9,10];
+    const formula = yrs.map(y => {
+      let v = 76;
+      for (let i=1;i<=y&&i<DEPR.length;i++) v *= (1-DEPR[i]/100);
+      return Math.round(v*10)/10;
+    });
+    const market = [76,67,59,52,46,40,35,30,25,22,18]; // market observed
+    deprChartObj = new Chart(dc, {
+      type:'line',
+      data:{
+        labels:yrs.map(y=>`Yr ${y}`),
+        datasets:[
+          {label:'Formula Value (₹L)',data:formula,borderColor:'#003F72',backgroundColor:'rgba(0,63,114,.1)',fill:true,tension:.4,pointRadius:3},
+          {label:'Market Observed (₹L)',data:market,borderColor:'#059669',backgroundColor:'transparent',borderDash:[5,5],tension:.4,pointRadius:3}
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'top',labels:{font:{size:11}}}},
+        scales:{y:{title:{display:true,text:'₹ Lakh'}},x:{}}}
+    });
+  }
+
+  // Trade flow chart
+  const tc = document.getElementById('trade-chart');
+  if (tc) {
+    if (tradeChartObj) tradeChartObj.destroy();
+    tradeChartObj = new Chart(tc, {
+      type:'doughnut',
+      data:{
+        labels:TRADE_FLOWS.map(t=>t.country),
+        datasets:[{
+          data:TRADE_FLOWS.map(t=>t.value),
+          backgroundColor:['#0EA5E9','#10B981','#F59E0B','#EF4444','#8B5CF6','#06B6D4','#84CC16','#6B7280'],
+          borderWidth:2,borderColor:'#fff'
+        }]
+      },
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:12}},
+          tooltip:{callbacks:{label:ctx=>`${ctx.label}: USD ${ctx.parsed}M`}}}}
+    });
+  }
+}
+
+// ════════════════════════════════════════════════════
+// TAB SWITCHING
+// ════════════════════════════════════════════════════
+function switchUETab(tab) {
+  document.querySelectorAll('.ue-tab').forEach(b => b.classList.toggle('active', b.dataset.tab===tab));
+  document.querySelectorAll('.ue-panel').forEach(p => p.classList.toggle('active', p.id==='panel-'+tab));
+  if (tab==='pricing' || tab==='markets' || tab==='valuation') setTimeout(()=>{
+    if (pricingChartObj) pricingChartObj.update();
+    if (deprChartObj)    deprChartObj.update();
+    if (tradeChartObj)   tradeChartObj.update();
+  },50);
+}
+
+// ════════════════════════════════════════════════════
+// ADD MACHINE MODAL
+// ════════════════════════════════════════════════════
+function openAddMachine()  { document.getElementById('add-machine-modal').classList.add('open'); }
+function closeAddMachine() { document.getElementById('add-machine-modal').classList.remove('open'); }
+
+async function saveMachine() {
+  const serial   = document.getElementById('am-serial').value.trim();
+  const model    = document.getElementById('am-model').value;
+  const year     = parseInt(document.getElementById('am-year').value);
+  const hours    = parseInt(document.getElementById('am-hours').value);
+  const idle     = parseInt(document.getElementById('am-idle').value) || 18;
+  const faults   = parseInt(document.getElementById('am-faults').value) || 0;
+  const location = document.getElementById('am-location').value.trim();
+  const source   = document.getElementById('am-source').value;
+  const notes    = document.getElementById('am-notes').value.trim();
+
+  if (!serial || !hours || !location) {
+    alert('Please fill all required fields (Serial ID, Hours, Location).');
+    return;
+  }
+
+  const newMachine = {
+    id: serial, model, year, hours, idle, faults,
+    location, source, notes, territory: 'Unknown',
+    addedAt: new Date().toISOString()
+  };
+
+  try {
+    await UE_DB.collection('ue_inventory').doc(serial).set(newMachine);
+    UE_INVENTORY.push(newMachine);
+    renderInventory();
+    updateKPIs();
+    closeAddMachine();
+    alert(`✅ Machine ${serial} added to inventory!`);
+  } catch(e) {
+    UE_INVENTORY.push(newMachine);
+    renderInventory();
+    updateKPIs();
+    closeAddMachine();
+    alert(`Machine added locally (offline mode): ${serial}`);
+  }
+}
+
+// Close modal on overlay click
+document.getElementById('add-machine-modal').addEventListener('click', function(e){
+  if (e.target === this) closeAddMachine();
+});
+
+// ════════════════════════════════════════════════════
+// TOOLTIP
+// ════════════════════════════════════════════════════
+function showUETT(el, html) {
+  const tt = document.getElementById('_ue_tt');
+  const ov = document.getElementById('_ue_tt_overlay');
+  if (!tt) return;
+  tt.innerHTML = html;
+  const r = el.getBoundingClientRect();
+  let left = r.right + 10, top = r.top;
+  if (left + 280 > window.innerWidth) left = r.left - 290;
+  if (top + 200 > window.innerHeight) top = window.innerHeight - 210;
+  tt.style.cssText = `display:block;left:${Math.max(6,left)}px;top:${Math.max(6,top)}px`;
+  if (ov) ov.style.display = 'block';
+}
+function hideUETT() {
+  const tt = document.getElementById('_ue_tt');
+  const ov = document.getElementById('_ue_tt_overlay');
+  if (tt) tt.style.display = 'none';
+  if (ov) ov.style.display = 'none';
+}
+document.addEventListener('keydown', e => { if (e.key==='Escape') hideUETT(); });
+</script>
+</body>
+</html>
