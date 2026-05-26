@@ -1,0 +1,142 @@
+{
+  "updated": "2026-05-26T05:42:24.937308+00:00",
+  "source": "Freightos public calculator",
+  "routes": [
+    {
+      "origin": "INNSA",
+      "destination": "KEMBA",
+      "label": "INNSA \u2192 Mombasa, Kenya",
+      "flag": "\ud83c\uddf0\ud83c\uddea",
+      "transitDays": "18\u201322",
+      "fcl40ft": {
+        "low": 850,
+        "high": 1100,
+        "currency": "USD"
+      },
+      "inrEquiv": {
+        "low": 1017964.0,
+        "high": 1317365.0
+      },
+      "updated": "2026-05-26T05:42:24.937308+00:00"
+    },
+    {
+      "origin": "INNSA",
+      "destination": "TZDAR",
+      "label": "INNSA \u2192 Dar es Salaam, Tanzania",
+      "flag": "\ud83c\uddf9\ud83c\uddff",
+      "transitDays": "20\u201324",
+      "fcl40ft": {
+        "low": 900,
+        "high": 1200,
+        "currency": "USD"
+      },
+      "inrEquiv": {
+        "low": 1077844.0,
+        "high": 1437126.0
+      },
+      "updated": "2026-05-26T05:42:24.937308+00:00"
+    },
+    {
+      "origin": "INNSA",
+      "destination": "DJJIB",
+      "label": "INNSA \u2192 Djibouti (Ethiopia GW)",
+      "flag": "\ud83c\uddea\ud83c\uddf9",
+      "transitDays": "12\u201316",
+      "fcl40ft": {
+        "low": 650,
+        "high": 900,
+        "currency": "USD"
+      },
+      "inrEquiv": {
+        "low": 778443.0,
+        "high": 1077844.0
+      },
+      "updated": "2026-05-26T05:42:24.937308+00:00"
+    },
+    {
+      "origin": "INNSA",
+      "destination": "AEJEA",
+      "label": "INNSA \u2192 Jebel Ali, UAE",
+      "flag": "\ud83c\udde6\ud83c\uddea",
+      "transitDays": "5\u20137",
+      "fcl40ft": {
+        "low": 250,
+        "high": 450,
+        "currency": "USD"
+      },
+      "inrEquiv": {
+        "low": 299401.0,
+        "high": 538922.0
+      },
+      "updated": "2026-05-26T05:42:24.937308+00:00"
+    },
+    {
+      "origin": "INCCU",
+      "destination": "BGCGP",
+      "label": "Kolkata/Chennai \u2192 Chittagong, Bangladesh",
+      "flag": "\ud83c\udde7\ud83c\udde9",
+      "transitDays": "7\u201310",
+      "fcl40ft": {
+        "low": 380,
+        "high": 550,
+        "currency": "USD"
+      },
+      "inrEquiv": {
+        "low": 455090.0,
+        "high": 658683.0
+      },
+      "updated": "2026-05-26T05:42:24.937308+00:00"
+    },
+    {
+      "origin": "INMAA",
+      "destination": "MMRGN",
+      "label": "Chennai \u2192 Yangon, Myanmar",
+      "flag": "\ud83c\uddf2\ud83c\uddf2",
+      "transitDays": "10\u201314",
+      "fcl40ft": {
+        "low": 480,
+        "high": 680,
+        "currency": "USD"
+      },
+      "inrEquiv": {
+        "low": 574850.0,
+        "high": 814371.0
+      },
+      "updated": "2026-05-26T05:42:24.937308+00:00"
+    },
+    {
+      "origin": "INNSA",
+      "destination": "MZMPM",
+      "label": "INNSA \u2192 Maputo, Mozambique",
+      "flag": "\ud83c\uddf2\ud83c\uddff",
+      "transitDays": "25\u201330",
+      "fcl40ft": {
+        "low": 1100,
+        "high": 1500,
+        "currency": "USD"
+      },
+      "inrEquiv": {
+        "low": 1317365.0,
+        "high": 1796407.0
+      },
+      "updated": "2026-05-26T05:42:24.937308+00:00"
+    },
+    {
+      "origin": "INMAA",
+      "destination": "KHSNV",
+      "label": "Chennai \u2192 Sihanoukville, Cambodia",
+      "flag": "\ud83c\uddf0\ud83c\udded",
+      "transitDays": "14\u201318",
+      "fcl40ft": {
+        "low": 550,
+        "high": 780,
+        "currency": "USD"
+      },
+      "inrEquiv": {
+        "low": 658683.0,
+        "high": 934132.0
+      },
+      "updated": "2026-05-26T05:42:24.937308+00:00"
+    }
+  ]
+}
