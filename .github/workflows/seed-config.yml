@@ -11,9 +11,22 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install firebase-admin
-      - name: Write key to Firestore
+      - run: pip install firebase-admin requests
+      - name: Write Anthropic key to Firestore
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/seed_api_key.py
+        run: |
+          python3 -c "
+import json, os, firebase_admin
+from firebase_admin import credentials, firestore
+
+sa = os.environ['FIREBASE_SERVICE_ACCOUNT']
+ak = os.environ['ANTHROPIC_API_KEY']
+
+cred = credentials.Certificate(json.loads(sa))
+firebase_admin.initialize_app(cred, {'projectId':'lntcmmb-intelligence1'})
+db = firestore.client()
+db.collection('meta').document('api_config').set({'anthropic_key': ak})
+print('Stored OK')
+"
