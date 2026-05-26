@@ -1,0 +1,55 @@
+{
+  "flows": [
+    {
+      "country": "UAE",
+      "iso3": "ARE",
+      "valueUSD": 12400000,
+      "period": "2024"
+    },
+    {
+      "country": "Bangladesh",
+      "iso3": "BGD",
+      "valueUSD": 9800000,
+      "period": "2024"
+    },
+    {
+      "country": "Kenya",
+      "iso3": "KEN",
+      "valueUSD": 6200000,
+      "period": "2024"
+    },
+    {
+      "country": "Ethiopia",
+      "iso3": "ETH",
+      "valueUSD": 4100000,
+      "period": "2024"
+    },
+    {
+      "country": "Tanzania",
+      "iso3": "TZA",
+      "valueUSD": 3700000,
+      "period": "2024"
+    },
+    {
+      "country": "Myanmar",
+      "iso3": "MMR",
+      "valueUSD": 3200000,
+      "period": "2024"
+    },
+    {
+      "country": "Nepal",
+      "iso3": "NPL",
+      "valueUSD": 2900000,
+      "period": "2024"
+    },
+    {
+      "country": "Others",
+      "iso3": "WLD",
+      "valueUSD": 5900000,
+      "period": "2024"
+    }
+  ],
+  "updated": "2026-05-26T05:42:24.937308+00:00",
+  "source": "UN Comtrade",
+  "_fallback": true
+}
