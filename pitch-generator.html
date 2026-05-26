@@ -7,211 +7,83 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --navy:#003F72;--blue:#005B9A;--ltblue:#EFF6FF;
   --green:#059669;--ltgreen:#D1FAE5;
   --amber:#D97706;--ltamber:#FEF3C7;
-  --red:#DC2626;--ltred:#FEE2E2;
-  --purple:#7C3AED;--ltpurp:#EDE9FE;
-  --gold:#B45309;--ltgold:#FEF9C3;
-  --gray:#64748B;--br:#E2E8F0;
-  --white:#fff;--bg:#F0F4F8;
+  --red:#DC2626;--purple:#7C3AED;--ltpurp:#EDE9FE;
+  --gray:#64748B;--br:#E2E8F0;--bg:#F0F4F8;--white:#fff;
   --shadow:0 2px 12px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 32px rgba(0,63,114,.15);
 }
-
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A;min-height:100vh;display:flex;flex-direction:column}
-
-/* ── HEADER ────────────────────────────────────────────────────────────── */
-.pg-header{
-  background:linear-gradient(135deg,#001F3F 0%,#003F72 55%,#005B9A 100%);
-  padding:0 18px;display:flex;align-items:center;justify-content:space-between;
-  height:56px;box-shadow:0 2px 12px rgba(0,0,0,.35);flex-shrink:0;position:sticky;top:0;z-index:100
-}
-.pg-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.pg-logo-badge{background:linear-gradient(135deg,#B45309,#D97706);border:none;
-  border-radius:6px;padding:4px 10px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px}
+.pg-header{background:linear-gradient(135deg,#001F3F 0%,#003F72 55%,#005B9A 100%);padding:0 18px;display:flex;align-items:center;justify-content:space-between;height:56px;box-shadow:0 2px 12px rgba(0,0,0,.35);flex-shrink:0;position:sticky;top:0;z-index:100}
+.pg-logo{display:flex;align-items:center;gap:10px}
+.pg-logo-badge{background:linear-gradient(135deg,#B45309,#D97706);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px}
 .pg-logo-title{font-size:14px;font-weight:700;color:#fff}
-.ai-badge{background:linear-gradient(135deg,#7C3AED,#6D28D9);border:1px solid rgba(255,255,255,.2);
-  color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.5px;margin-left:4px}
+.ai-pill{background:linear-gradient(135deg,#7C3AED,#6D28D9);color:#fff;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.5px;margin-left:6px}
 .pg-header-right{display:flex;align-items:center;gap:8px}
-.pg-nav-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
-  color:#fff;font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;
-  cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:5px;transition:background .2s}
+.pg-nav-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:5px;transition:background .2s}
 .pg-nav-btn:hover{background:rgba(255,255,255,.22)}
-
-/* ── LAYOUT ────────────────────────────────────────────────────────────── */
 .pg-body{display:flex;flex:1;overflow:hidden;height:calc(100vh - 56px)}
-
-/* ── LEFT PANEL ─────────────────────────────────────────────────────────── */
-.pg-left{
-  width:300px;flex-shrink:0;background:#fff;border-right:1px solid var(--br);
-  overflow-y:auto;display:flex;flex-direction:column;gap:0
-}
-.pg-section-head{
-  padding:10px 14px 6px;font-size:9.5px;text-transform:uppercase;
-  letter-spacing:.6px;color:var(--gray);font-weight:700;border-top:1px solid var(--br);
-  background:#FAFBFC
-}
-.pg-section-head:first-child{border-top:none}
-.pg-field-group{padding:4px 12px 8px}
-.pg-label{font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;display:block}
-.pg-select,.pg-input,.pg-textarea{
-  width:100%;font-size:11.5px;padding:6px 9px;border:1px solid var(--br);
-  border-radius:6px;background:#fff;color:#0F172A;
-  transition:border .15s;font-family:'Inter',sans-serif
-}
-.pg-select:focus,.pg-input:focus,.pg-textarea:focus{
-  outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,91,154,.1)}
-.pg-textarea{resize:vertical;min-height:64px;line-height:1.5}
-.pg-chip-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
-.pg-chip{
-  padding:3px 9px;border:1px solid var(--br);border-radius:12px;
-  font-size:10.5px;font-weight:500;cursor:pointer;transition:all .15s;
-  background:#fff;color:#475569
-}
-.pg-chip.active{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:600}
-.pg-generate-btn{
-  margin:12px;padding:11px;background:linear-gradient(135deg,var(--navy),var(--blue));
-  color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;
-  cursor:pointer;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px;
-  box-shadow:0 3px 12px rgba(0,63,114,.3);flex-shrink:0
-}
-.pg-generate-btn:hover{opacity:.9}
-.pg-generate-btn:disabled{opacity:.55;cursor:not-allowed}
-.pg-generate-btn .spin{animation:spin .8s linear infinite}
+.pg-left{width:290px;flex-shrink:0;background:#fff;border-right:1px solid var(--br);overflow-y:auto;display:flex;flex-direction:column}
+.sec-head{padding:9px 14px 5px;font-size:9.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--gray);font-weight:700;border-top:1px solid var(--br);background:#FAFBFC}
+.sec-head:first-child{border-top:none}
+.fgrp{padding:3px 12px 7px}
+.flabel{font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;display:block}
+.fselect,.finput,.ftextarea{width:100%;font-size:11.5px;padding:6px 9px;border:1px solid var(--br);border-radius:6px;background:#fff;color:#0F172A;font-family:'Inter',sans-serif;transition:border .15s}
+.fselect:focus,.finput:focus,.ftextarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,91,154,.1)}
+.ftextarea{resize:vertical;min-height:60px;line-height:1.5}
+.chip-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+.chip{padding:3px 9px;border:1px solid var(--br);border-radius:12px;font-size:10.5px;font-weight:500;cursor:pointer;transition:all .15s;background:#fff;color:#475569;user-select:none}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:600}
+.chip.green.on{background:var(--green);border-color:var(--green)}
+.gen-btn{margin:10px 12px 14px;padding:11px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 3px 12px rgba(0,63,114,.3);flex-shrink:0}
+.gen-btn:hover{opacity:.9}
+.gen-btn:disabled{opacity:.5;cursor:not-allowed}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ── RIGHT PANEL ─────────────────────────────────────────────────────────── */
+.fa-spin-me{animation:spin .8s linear infinite}
 .pg-right{flex:1;display:flex;flex-direction:column;overflow:hidden}
-
-/* ── PITCH TYPE SELECTOR ─────────────────────────────────────────────── */
-.pg-pitch-tabs{
-  background:#fff;border-bottom:1px solid var(--br);padding:0 14px;
-  display:flex;gap:0;overflow-x:auto;flex-shrink:0
-}
-.pg-ptab{
-  padding:9px 14px;border:none;background:transparent;font-size:11.5px;
-  font-weight:500;color:var(--gray);border-bottom:2px solid transparent;
-  cursor:pointer;white-space:nowrap;transition:all .2s
-}
-.pg-ptab.active{color:var(--navy);font-weight:700;border-bottom-color:var(--navy)}
-.pg-ptab:hover:not(.active){color:var(--navy);background:var(--ltblue)}
-
-/* ── OUTPUT AREA ─────────────────────────────────────────────────────────── */
-.pg-output{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
-
-/* Welcome screen */
-.pg-welcome{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:40px;text-align:center;gap:16px
-}
-.pg-welcome-icon{font-size:56px;margin-bottom:4px}
-.pg-welcome h2{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy)}
-.pg-welcome p{font-size:13px;color:var(--gray);max-width:440px;line-height:1.7}
-.pg-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:480px;margin-top:8px}
-.pg-quick-card{
-  background:#fff;border:1px solid var(--br);border-radius:9px;padding:10px 12px;
-  cursor:pointer;text-align:left;transition:all .2s;border-top:3px solid var(--navy)
-}
-.pg-quick-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
-.pg-quick-card .qc-icon{font-size:20px;margin-bottom:4px}
-.pg-quick-card .qc-title{font-size:12px;font-weight:700;color:var(--navy)}
-.pg-quick-card .qc-desc{font-size:10.5px;color:var(--gray);margin-top:2px}
-
-/* Loading */
-.pg-loading{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px
-}
-.pg-loading-ring{
-  width:56px;height:56px;border:4px solid var(--br);
-  border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite
-}
-.pg-loading-text{font-size:14px;color:var(--gray);font-weight:500}
-.pg-loading-sub{font-size:12px;color:#94A3B8}
-
-/* Result card */
-.pg-result-header{
-  background:linear-gradient(135deg,var(--navy),var(--blue));
-  border-radius:10px 10px 0 0;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start
-}
-.pg-result-title{font-family:'DM Serif Display',serif;font-size:18px;color:#fff;line-height:1.3}
-.pg-result-meta{font-size:10.5px;color:rgba(255,255,255,.7);margin-top:3px}
-.pg-result-actions{display:flex;gap:6px;flex-shrink:0;margin-left:12px}
-.pg-action-btn{
-  padding:5px 11px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);
-  color:#fff;font-size:11px;font-weight:600;border-radius:5px;cursor:pointer;
-  transition:background .15s;white-space:nowrap;text-decoration:none;
-  display:inline-flex;align-items:center;gap:4px
-}
-.pg-action-btn:hover{background:rgba(255,255,255,.25)}
-.pg-action-btn.whatsapp{background:#25D366;border-color:#25D366}
-.pg-result-body{
-  background:#fff;border:1px solid var(--br);border-top:none;
-  border-radius:0 0 10px 10px;padding:16px 18px
-}
-.pg-pitch-content{
-  font-size:13px;line-height:1.85;color:#1E293B;
-  white-space:pre-wrap;font-family:'Inter',sans-serif
-}
-.pg-pitch-content strong{color:var(--navy)}
-
-/* TCO table inside pitch */
-.tco-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}
-.tco-table th{background:var(--navy);color:#fff;padding:7px 10px;text-align:left}
-.tco-table td{padding:6px 10px;border-bottom:1px solid var(--br)}
+.pitch-tabs{background:#fff;border-bottom:1px solid var(--br);padding:0 12px;display:flex;gap:0;overflow-x:auto;flex-shrink:0}
+.ptab{padding:9px 13px;border:none;background:transparent;font-size:11.5px;font-weight:500;color:var(--gray);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s}
+.ptab.on{color:var(--navy);font-weight:700;border-bottom-color:var(--navy)}
+.ptab:hover:not(.on){color:var(--navy);background:var(--ltblue)}
+.pg-out{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
+.ready-state{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:40px;text-align:center;gap:10px}
+.ready-icon{font-size:48px}
+.ready-h{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy)}
+.ready-p{font-size:12.5px;color:var(--gray);max-width:380px;line-height:1.7}
+.pitch-desc-box{background:#fff;border:1px solid var(--br);border-left:4px solid var(--navy);border-radius:8px;padding:12px 16px;max-width:520px;margin-top:6px;text-align:left}
+.pitch-desc-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.pitch-desc-text{font-size:12px;color:#475569;line-height:1.6}
+.result-card{background:#fff;border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.result-head{background:linear-gradient(135deg,var(--navy),var(--blue));padding:13px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.result-title{font-family:'DM Serif Display',serif;font-size:17px;color:#fff;line-height:1.3}
+.result-meta{font-size:10.5px;color:rgba(255,255,255,.7);margin-top:2px}
+.result-actions{display:flex;gap:6px;flex-shrink:0}
+.act-btn{padding:5px 11px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:11px;font-weight:600;border-radius:5px;cursor:pointer;transition:background .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;text-decoration:none}
+.act-btn:hover{background:rgba(255,255,255,.25)}
+.act-btn.wa{background:#25D366;border-color:#1ebe5d}
+.result-body{padding:16px 18px;font-size:13px;line-height:1.85;color:#1E293B;white-space:pre-wrap;font-family:'Inter',sans-serif}
+.tco-wrap{overflow-x:auto;margin:10px 0}
+.tco-table{width:100%;border-collapse:collapse;font-size:12px;min-width:520px}
+.tco-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-weight:700}
+.tco-table td{padding:7px 12px;border-bottom:1px solid var(--br)}
 .tco-table tr:nth-child(even) td{background:#F8FAFC}
 .tco-win{color:var(--green);font-weight:700}
-.tco-loss{color:var(--red)}
-
-/* History */
-.pg-history{
-  background:#fff;border:1px solid var(--br);border-radius:8px;
-  overflow:hidden;flex-shrink:0
-}
-.pg-history-head{
-  padding:8px 14px;background:#FAFBFC;border-bottom:1px solid var(--br);
-  font-size:11px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between
-}
-.pg-history-item{
-  padding:9px 14px;border-bottom:1px solid #F1F5F9;cursor:pointer;
-  display:flex;align-items:center;gap:10px;transition:background .15s
-}
-.pg-history-item:hover{background:var(--ltblue)}
-.pg-history-item:last-child{border-bottom:none}
-.ph-icon{width:30px;height:30px;border-radius:6px;background:var(--ltblue);
-  color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-.ph-title{font-size:11.5px;font-weight:600;color:#0F172A}
-.ph-meta{font-size:10px;color:var(--gray);margin-top:1px}
-
-/* Competitor matrix */
-.comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
-.comp-card{background:#F8FAFC;border-radius:7px;padding:8px 10px;border-top:3px solid var(--br)}
-.comp-card.winner{border-top-color:var(--green);background:var(--ltgreen)}
-.comp-card .comp-name{font-size:11px;font-weight:700;color:var(--navy)}
-.comp-card .comp-score{font-size:22px;font-weight:800;margin:3px 0}
-.comp-card .comp-label{font-size:9.5px;color:var(--gray)}
-
-/* Language badge */
-.lang-badge{
-  display:inline-block;padding:2px 8px;background:var(--ltpurp);
-  color:var(--purple);border-radius:10px;font-size:10px;font-weight:700;margin-right:4px
-}
-
-/* Responsive */
-@media(max-width:900px){.pg-left{width:260px}.comp-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.pg-body{flex-direction:column}.pg-left{width:100%;max-height:50vh}}
+.tco-neutral{color:var(--amber);font-weight:600}
+.tco-lose{color:var(--red)}
+.verdict-box{background:linear-gradient(135deg,var(--ltgreen),#ECFDF5);border:1px solid #6EE7B7;border-radius:8px;padding:12px 14px;margin-top:12px}
+.verdict-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:4px}
+.verdict-text{font-size:12px;color:#065F46;line-height:1.6}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="pg-header">
   <div class="pg-logo">
     <div class="pg-logo-badge">L&T CMMB</div>
-    <div class="pg-logo-title">🤖 AI Pitch Generator <span class="ai-badge">CLAUDE AI</span></div>
+    <div class="pg-logo-title">🤖 AI Pitch Generator <span class="ai-pill">TCO ENGINE</span></div>
   </div>
   <div class="pg-header-right">
     <a href="used-equipment.html" class="pg-nav-btn"><i class="fa fa-cog"></i> Used Equipment</a>
@@ -219,644 +91,341 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
   </div>
 </div>
 
-<!-- MAIN BODY -->
 <div class="pg-body">
+<div class="pg-left">
+  <div class="sec-head">Customer Profile</div>
+  <div class="fgrp"><label class="flabel">Customer Name</label><input class="finput" id="cust-name" placeholder="e.g. Ramesh Singh"></div>
+  <div class="fgrp"><label class="flabel">Company Name</label><input class="finput" id="cust-company" placeholder="e.g. ABC Infratech Pvt Ltd"></div>
+  <div class="fgrp"><label class="flabel">Customer Type</label>
+    <select class="fselect" id="cust-type">
+      <option value="small_contractor" selected>Small Contractor (1–3 machines)</option>
+      <option value="medium_contractor">Medium Contractor (4–15 machines)</option>
+      <option value="fleet_owner">Fleet Owner (15+ machines)</option>
+      <option value="first_time">First-Time Buyer</option>
+      <option value="rental">Rental Company</option>
+      <option value="mining_company">Mining Company (Direct)</option>
+    </select>
+  </div>
+  <div class="fgrp"><label class="flabel">Price Sensitivity</label>
+    <div class="chip-row" id="cg-price">
+      <span class="chip" data-v="price_sensitive" onclick="chipSingle(this,'cg-price')">Price-Sensitive</span>
+      <span class="chip on" data-v="value_focused" onclick="chipSingle(this,'cg-price')">Value-Focused</span>
+      <span class="chip" data-v="premium" onclick="chipSingle(this,'cg-price')">Premium</span>
+    </div>
+  </div>
+  <div class="sec-head">Segment & Region</div>
+  <div class="fgrp"><label class="flabel">Work Segment</label>
+    <select class="fselect" id="cust-segment">
+      <option value="mining" selected>Mining (Coal / Iron Ore / OB)</option>
+      <option value="highways">Road & Highways (EPC / HAM)</option>
+      <option value="railways">Railways & Metro</option>
+      <option value="irrigation">Irrigation & Dams</option>
+      <option value="ports">Ports & Waterways</option>
+      <option value="quarrying">Quarrying & Aggregate</option>
+      <option value="general">General Construction</option>
+    </select>
+  </div>
+  <div class="fgrp"><label class="flabel">Region</label>
+    <select class="fselect" id="cust-region">
+      <option value="north">North India</option>
+      <option value="south" selected>South India</option>
+      <option value="west">West India</option>
+      <option value="east">East India</option>
+      <option value="central">Central India</option>
+      <option value="northeast">Northeast India</option>
+    </select>
+  </div>
+  <div class="fgrp"><label class="flabel">Output Language</label>
+    <div class="chip-row" id="cg-lang">
+      <span class="chip on green" data-v="English"  onclick="chipSingle(this,'cg-lang');setLang(this)">English</span>
+      <span class="chip green" data-v="Hindi"    onclick="chipSingle(this,'cg-lang');setLang(this)">हिंदी</span>
+      <span class="chip green" data-v="Gujarati" onclick="chipSingle(this,'cg-lang');setLang(this)">ગુજ.</span>
+      <span class="chip green" data-v="Marathi"  onclick="chipSingle(this,'cg-lang');setLang(this)">मराठी</span>
+      <span class="chip green" data-v="Tamil"    onclick="chipSingle(this,'cg-lang');setLang(this)">தமிழ்</span>
+      <span class="chip green" data-v="Telugu"   onclick="chipSingle(this,'cg-lang');setLang(this)">తెలుగు</span>
+      <span class="chip green" data-v="Kannada"  onclick="chipSingle(this,'cg-lang');setLang(this)">ಕನ್ನಡ</span>
+      <span class="chip green" data-v="Bengali"  onclick="chipSingle(this,'cg-lang');setLang(this)">বাংলা</span>
+    </div>
+  </div>
+  <div class="sec-head">Machine & Competitor</div>
+  <div class="fgrp"><label class="flabel">Komatsu Model</label>
+    <select class="fselect" id="komatsu-model">
+      <option value="PC210-10M0" selected>PC210-10M0 (21T flagship)</option>
+      <option value="PC200-8M0">PC200-8M0 (20T workhorse)</option>
+      <option value="PC205-7">PC205-7 (20T mining spec)</option>
+      <option value="PC240-10M0">PC240-10M0 (24T heavy)</option>
+      <option value="PC290-11">PC290-11 (29T super heavy)</option>
+    </select>
+  </div>
+  <div class="fgrp"><label class="flabel">Competitor to Compare</label>
+    <div class="chip-row" id="cg-comp">
+      <span class="chip on" data-v="CAT"     onclick="chipSingle(this,'cg-comp')">CAT</span>
+      <span class="chip" data-v="Hitachi" onclick="chipSingle(this,'cg-comp')">Hitachi</span>
+      <span class="chip" data-v="JCB"     onclick="chipSingle(this,'cg-comp')">JCB</span>
+      <span class="chip" data-v="Hyundai" onclick="chipSingle(this,'cg-comp')">Hyundai</span>
+      <span class="chip" data-v="Kobelco" onclick="chipSingle(this,'cg-comp')">Kobelco</span>
+      <span class="chip" data-v="Volvo"   onclick="chipSingle(this,'cg-comp')">Volvo</span>
+      <span class="chip" data-v="SANY"    onclick="chipSingle(this,'cg-comp')">SANY</span>
+    </div>
+  </div>
+  <div class="fgrp"><label class="flabel">Customer Pain Points</label>
+    <div class="chip-row" id="cg-pain">
+      <span class="chip on" data-v="breakdowns" onclick="chipMulti(this)">Breakdowns</span>
+      <span class="chip" data-v="high_fuel" onclick="chipMulti(this)">High Fuel</span>
+      <span class="chip" data-v="poor_resale" onclick="chipMulti(this)">Poor Resale</span>
+      <span class="chip" data-v="high_maintenance" onclick="chipMulti(this)">Maintenance</span>
+      <span class="chip" data-v="slow_service" onclick="chipMulti(this)">Slow Service</span>
+      <span class="chip" data-v="financing" onclick="chipMulti(this)">Financing</span>
+      <span class="chip" data-v="low_output" onclick="chipMulti(this)">Low Output</span>
+    </div>
+  </div>
+  <div class="sec-head">Usage Parameters</div>
+  <div class="fgrp"><label class="flabel">Daily Operating Hours</label>
+    <select class="fselect" id="hours-day">
+      <option value="8">8 hrs (single shift)</option>
+      <option value="12" selected>12 hrs (double shift)</option>
+      <option value="16">16 hrs (heavy)</option>
+      <option value="20">20+ hrs (mine continuous)</option>
+    </select>
+  </div>
+  <div class="fgrp"><label class="flabel">Fleet Size</label>
+    <select class="fselect" id="fleet-size">
+      <option value="1">1 machine</option>
+      <option value="3" selected>2–5 machines</option>
+      <option value="10">6–15 machines</option>
+      <option value="25">16–30 machines</option>
+      <option value="50">30+ machines</option>
+    </select>
+  </div>
+  <div class="fgrp"><label class="flabel">Additional Context (optional)</label>
+    <textarea class="ftextarea" id="extra-ctx" placeholder="e.g. Has 2 old CAT 320s, asking about fuel. Budget Rs 65L. Limestone quarry in Rajasthan."></textarea>
+  </div>
+  <button class="gen-btn" id="gen-btn" onclick="generatePitch()">
+    <i class="fa fa-magic"></i>
+    <span id="gen-btn-txt">Generate Pitch</span>
+  </button>
+</div>
 
-  <!-- LEFT PANEL — CUSTOMER PROFILE -->
-  <div class="pg-left">
-
-    <div class="pg-section-head">Customer Profile</div>
-    <div class="pg-field-group">
-      <label class="pg-label">Customer Name</label>
-      <input class="pg-input" id="cust-name" placeholder="e.g. Ramesh Contractors">
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Company Name</label>
-      <input class="pg-input" id="cust-company" placeholder="e.g. ABC Infra Pvt Ltd">
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Customer Type</label>
-      <select class="pg-select" id="cust-type">
-        <option value="fleet_owner">Fleet Owner (10+ machines)</option>
-        <option value="medium_contractor">Medium Contractor (3-10 machines)</option>
-        <option value="small_contractor" selected>Small Contractor (1-3 machines)</option>
-        <option value="first_time">First-time Buyer</option>
-        <option value="rental">Rental / Hiring Company</option>
-        <option value="mining_company">Mining Company (Direct)</option>
-        <option value="govt_psu">Govt / PSU Contractor</option>
-      </select>
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Price Sensitivity</label>
-      <div class="pg-chip-row">
-        <span class="pg-chip" onclick="toggleChip(this,'price-sense')" data-val="price_sensitive">Price Sensitive</span>
-        <span class="pg-chip active" onclick="toggleChip(this,'price-sense')" data-val="value_focused">Value Focused</span>
-        <span class="pg-chip" onclick="toggleChip(this,'price-sense')" data-val="premium">Premium Buyer</span>
-      </div>
-    </div>
-
-    <div class="pg-section-head">Segment & Region</div>
-    <div class="pg-field-group">
-      <label class="pg-label">Work Segment</label>
-      <select class="pg-select" id="cust-segment">
-        <option value="highways">Road & Highways (EPC/HAM)</option>
-        <option value="mining" selected>Mining (Coal / Iron Ore)</option>
-        <option value="railways">Railways & Metro</option>
-        <option value="irrigation">Irrigation & Dams</option>
-        <option value="ports">Ports & Waterways</option>
-        <option value="real_estate">Real Estate & Buildings</option>
-        <option value="quarrying">Quarrying & Aggregate</option>
-        <option value="general">General Construction</option>
-      </select>
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Region</label>
-      <select class="pg-select" id="cust-region">
-        <option value="north">North India (UP/MP/Rajasthan/Punjab)</option>
-        <option value="south" selected>South India (TN/AP/Telangana/Kerala)</option>
-        <option value="west">West India (Maharashtra/Gujarat)</option>
-        <option value="east">East India (Odisha/Jharkhand/WB/Assam)</option>
-        <option value="central">Central India (CG/Madhya Pradesh)</option>
-        <option value="northeast">Northeast India (Assam/Manipur/Mizoram)</option>
-      </select>
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Output Language</label>
-      <div class="pg-chip-row">
-        <span class="pg-chip active" onclick="setLang(this)" data-val="English">English</span>
-        <span class="pg-chip" onclick="setLang(this)" data-val="Hindi">हिंदी</span>
-        <span class="pg-chip" onclick="setLang(this)" data-val="Gujarati">ગુજ.</span>
-        <span class="pg-chip" onclick="setLang(this)" data-val="Marathi">मराठी</span>
-        <span class="pg-chip" onclick="setLang(this)" data-val="Tamil">தமிழ்</span>
-        <span class="pg-chip" onclick="setLang(this)" data-val="Telugu">తెలుగు</span>
-        <span class="pg-chip" onclick="setLang(this)" data-val="Kannada">ಕನ್ನಡ</span>
-        <span class="pg-chip" onclick="setLang(this)" data-val="Bengali">বাংলা</span>
-      </div>
-    </div>
-
-    <div class="pg-section-head">Machine & Competitor</div>
-    <div class="pg-field-group">
-      <label class="pg-label">Komatsu Model to Pitch</label>
-      <select class="pg-select" id="komatsu-model">
-        <option value="PC210-10M0" selected>PC210-10M0 (21T flagship)</option>
-        <option value="PC200-8M0">PC200-8M0 (20T workhorse)</option>
-        <option value="PC205-7">PC205-7 (20T mining spec)</option>
-        <option value="PC240-10M0">PC240-10M0 (24T heavy)</option>
-        <option value="PC290-11">PC290-11 (29T super heavy)</option>
-        <option value="PC360-11">PC360-11 (36T large mining)</option>
-      </select>
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Competitor to Compare Against</label>
-      <div class="pg-chip-row">
-        <span class="pg-chip active" onclick="toggleChip(this,'competitor')" data-val="CAT">CAT</span>
-        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="Hitachi">Hitachi</span>
-        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="JCB">JCB</span>
-        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="Hyundai">Hyundai</span>
-        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="Kobelco">Kobelco</span>
-        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="Volvo">Volvo</span>
-        <span class="pg-chip" onclick="toggleChip(this,'competitor')" data-val="SANY">SANY</span>
-      </div>
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Customer's Pain Point</label>
-      <div class="pg-chip-row">
-        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="high_fuel_cost">High Fuel Cost</span>
-        <span class="pg-chip active" onclick="toggleChip(this,'pain')" data-val="frequent_breakdown">Breakdowns</span>
-        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="poor_resale">Poor Resale</span>
-        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="high_maintenance">High Maintenance</span>
-        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="slow_support">Slow Service</span>
-        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="financing_cost">Financing Cost</span>
-        <span class="pg-chip" onclick="toggleChip(this,'pain')" data-val="low_productivity">Low Output</span>
-      </div>
-    </div>
-
-    <div class="pg-section-head">Usage Parameters</div>
-    <div class="pg-field-group">
-      <label class="pg-label">Daily Operating Hours</label>
-      <select class="pg-select" id="hours-day">
-        <option value="8">8 hrs/day (single shift)</option>
-        <option value="12" selected>12 hrs/day (double shift)</option>
-        <option value="16">16 hrs/day (heavy)</option>
-        <option value="20">20+ hrs/day (mine continuous)</option>
-      </select>
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Fleet Size (machines customer has)</label>
-      <select class="pg-select" id="fleet-size">
-        <option value="1">1 machine</option>
-        <option value="3" selected>2–5 machines</option>
-        <option value="10">6–15 machines</option>
-        <option value="25">16–30 machines</option>
-        <option value="50">30+ machines</option>
-      </select>
-    </div>
-    <div class="pg-field-group">
-      <label class="pg-label">Additional Context (optional)</label>
-      <textarea class="pg-textarea" id="extra-context" placeholder="e.g. Customer has 3 old CAT 320s, complaining about fuel costs. Site is limestone quarry in Rajasthan. Budget Rs 60L. Looking for AMC option."></textarea>
-    </div>
-
-    <button class="pg-generate-btn" id="generate-btn" onclick="generatePitch()">
-      <i class="fa fa-magic"></i>
-      <span id="gen-btn-text">Generate AI Pitch</span>
-    </button>
-
-  </div><!-- end left panel -->
-
-  <!-- RIGHT PANEL -->
-  <div class="pg-right">
-
-    <!-- PITCH TYPE TABS -->
-    <div class="pg-pitch-tabs">
-      <button class="pg-ptab active" data-ptype="full_sales_speech" onclick="setPitchType(this)">🎯 Full Sales Speech</button>
-      <button class="pg-ptab" data-ptype="tco_comparison" onclick="setPitchType(this)">📊 TCO Comparison</button>
-      <button class="pg-ptab" data-ptype="objection_handling" onclick="setPitchType(this)">🛡 Objection Handler</button>
-      <button class="pg-ptab" data-ptype="whatsapp_summary" onclick="setPitchType(this)">💬 WhatsApp Summary</button>
-      <button class="pg-ptab" data-ptype="rental_vs_own" onclick="setPitchType(this)">🔄 Rent vs Own</button>
-      <button class="pg-ptab" data-ptype="amc_financing" onclick="setPitchType(this)">💳 AMC + Finance</button>
-      <button class="pg-ptab" data-ptype="site_visit_flow" onclick="setPitchType(this)">🏗 Site Visit Script</button>
-      <button class="pg-ptab" data-ptype="dealer_training" onclick="setPitchType(this)">🎓 Dealer Training</button>
-    </div>
-
-    <!-- OUTPUT AREA -->
-    <div class="pg-output" id="pg-output">
-
-      <!-- WELCOME SCREEN -->
-      <div class="pg-welcome" id="welcome-screen">
-        <div class="pg-welcome-icon">🤖</div>
-        <h2>AI Pitch Generator</h2>
-        <p>Fill the customer profile on the left and click <strong>Generate AI Pitch</strong> — Claude AI will craft a custom, data-driven sales script tailored to your customer, segment, and competitor.</p>
-        <div class="pg-quick-grid">
-          <div class="pg-quick-card" onclick="quickGenerate('full_sales_speech','highways','CAT')">
-            <div class="qc-icon">🛣️</div>
-            <div class="qc-title">Highway Pitch vs CAT</div>
-            <div class="qc-desc">EPC contractor, double shift, value-focused</div>
-          </div>
-          <div class="pg-quick-card" onclick="quickGenerate('tco_comparison','mining','Hitachi')">
-            <div class="qc-icon">⛏️</div>
-            <div class="qc-title">Mining TCO vs Hitachi</div>
-            <div class="qc-desc">Coal mine, 20hr operation, fleet owner</div>
-          </div>
-          <div class="pg-quick-card" onclick="quickGenerate('objection_handling','general','SANY')">
-            <div class="qc-icon">🛡️</div>
-            <div class="qc-title">SANY Price Objection</div>
-            <div class="qc-desc">Price-sensitive first-time buyer</div>
-          </div>
-          <div class="pg-quick-card" onclick="quickGenerate('whatsapp_summary','mining','JCB')">
-            <div class="qc-icon">💬</div>
-            <div class="qc-title">WhatsApp Summary</div>
-            <div class="qc-desc">Post-visit follow-up message, Hindi</div>
-          </div>
-          <div class="pg-quick-card" onclick="quickGenerate('amc_financing','highways','Hyundai')">
-            <div class="qc-icon">💳</div>
-            <div class="qc-title">AMC + Finance Bundle</div>
-            <div class="qc-desc">Small contractor, financing hesitation</div>
-          </div>
-          <div class="pg-quick-card" onclick="quickGenerate('site_visit_flow','mining','Volvo')">
-            <div class="qc-icon">🏗️</div>
-            <div class="qc-title">Site Visit Script</div>
-            <div class="qc-desc">Limestone quarry, fleet replacement</div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end output -->
-  </div><!-- end right panel -->
-</div><!-- end body -->
+<div class="pg-right">
+  <div class="pitch-tabs" id="pitch-tabs">
+    <button class="ptab on" data-pt="full_speech"     onclick="selectTab(this)">🎯 Full Sales Speech</button>
+    <button class="ptab"    data-pt="tco_comparison"  onclick="selectTab(this)">📊 TCO Comparison</button>
+    <button class="ptab"    data-pt="objections"      onclick="selectTab(this)">🛡 Objection Handler</button>
+    <button class="ptab"    data-pt="whatsapp"        onclick="selectTab(this)">💬 WhatsApp Message</button>
+    <button class="ptab"    data-pt="rent_vs_own"     onclick="selectTab(this)">🔄 Rent vs Own</button>
+    <button class="ptab"    data-pt="amc_finance"     onclick="selectTab(this)">💳 AMC + Finance</button>
+    <button class="ptab"    data-pt="site_visit"      onclick="selectTab(this)">🏗 Site Visit Script</button>
+    <button class="ptab"    data-pt="dealer_training" onclick="selectTab(this)">🎓 Dealer Training</button>
+  </div>
+  <div class="pg-out" id="pg-out"></div>
+</div>
+</div>
 
 <script>
-// ════════════════════════════════════════════════════
-// STATE
-// ════════════════════════════════════════════════════
-let pitchType   = 'full_sales_speech';
-let outputLang  = 'English';
-let generating  = false;
-let pitchHistory = [];
+var pitchType='full_speech', outputLang='English', isGenerating=false;
 
-// ════════════════════════════════════════════════════
-// UI HELPERS
-// ════════════════════════════════════════════════════
-function toggleChip(el, group) {
-  // For competitor and pain: allow multiple selections
-  if (group === 'pain') {
-    el.classList.toggle('active');
-  } else {
-    // Single-select for price-sense, single for competitor
-    document.querySelectorAll(`.pg-chip[onclick*="${group}"]`).forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-  }
+var PITCH_DESC={
+  full_speech:    {icon:'🎯',title:'Full Sales Speech',desc:'Complete 500–700 word face-to-face pitch with pain identification, Komatsu vs competitor TCO with exact Rs numbers for your operation hours, KOMTRAX advantage, L&T service network, financing, and closing statement.'},
+  tco_comparison: {icon:'📊',title:'5-Year TCO Comparison',desc:'Side-by-side ownership cost table vs selected competitor — fuel, maintenance, downtime, resale value, and net 5-year TCO delta in Rs. Calculated from your usage hours and fleet size.'},
+  objections:     {icon:'🛡',title:'Objection Handler Script',desc:'6 customer objections with word-for-word responses: price objection, "my machine is working fine", service access, spare parts cost, competitor loyalty, and "need time to think".'},
+  whatsapp:       {icon:'💬',title:'WhatsApp Follow-Up',desc:'Concise emoji-formatted message to send post-meeting with key savings figure, 3 Komatsu advantages, next step, and contact placeholder. Ready to copy and send.'},
+  rent_vs_own:    {icon:'🔄',title:'Rental vs Ownership Analysis',desc:'Break-even analysis comparing rental cost/hour vs EMI-based ownership. Monthly outgo table, when ownership becomes cheaper, and a clear recommendation for this customer type.'},
+  amc_finance:    {icon:'💳',title:'AMC + Finance Bundle Pitch',desc:'Monthly bundle table: EMI + AMC + Insurance vs daily revenue. How AMC prevents surprise bills. L&T Finance terms. Revenue ROI at your hours/day. Complete closing script.'},
+  site_visit:     {icon:'🏗',title:'Site Visit Conversation Flow',desc:'Step-by-step field guide: pre-visit prep checklist, what to observe on arrival, opening questions, KOMTRAX demo script, handling foreman/operator, closing with decision-maker, post-visit actions.'},
+  dealer_training:{icon:'🎓',title:'Dealer Training Module',desc:'Training script for new sales engineers: key numbers to memorise, top 5 differentiators, common mistakes to avoid, role-play scenario with sample dialogue, quick-reference Rs cheatsheet.'},
+};
+
+var DIESEL=92;
+var KOMATSU={
+  'PC210-10M0':{fuelLph:15.8,maint_hr:280,resale5yr:0.63,price_l:74},
+  'PC200-8M0': {fuelLph:14.5,maint_hr:265,resale5yr:0.61,price_l:70},
+  'PC205-7':   {fuelLph:15.2,maint_hr:272,resale5yr:0.62,price_l:71},
+  'PC240-10M0':{fuelLph:17.5,maint_hr:310,resale5yr:0.62,price_l:88},
+  'PC290-11':  {fuelLph:20.0,maint_hr:340,resale5yr:0.61,price_l:108},
+};
+var COMPETITORS={
+  CAT:    {fuelMult:1.12,maintMult:1.22,resale5yr:0.57,price_l:76,parts_days:2,network:'Good',   weakness:'Higher fuel burn, CAT telematics subscription Rs24K/yr, pricier spare parts import'},
+  Hitachi:{fuelMult:1.09,maintMult:1.18,resale5yr:0.55,price_l:73,parts_days:4,network:'Thin',   weakness:'Hydraulic pump wear at 6-7K hours, thin rural network, 48hr+ average service delay'},
+  JCB:    {fuelMult:0.98,maintMult:1.05,resale5yr:0.52,price_l:68,parts_days:1,network:'Good',   weakness:'Lower resale value (52%), weaker hydraulics in hard rock/mining overburden'},
+  Hyundai:{fuelMult:1.11,maintMult:1.25,resale5yr:0.47,price_l:70,parts_days:7,network:'Sparse', weakness:'Lowest resale in class (42-50%), parts imported 5-10 day lead, thin rural coverage'},
+  Kobelco:{fuelMult:0.99,maintMult:1.14,resale5yr:0.51,price_l:71,parts_days:3,network:'Very Thin',weakness:'Excellent swing speed but metro-only support, maintenance spikes after 8000 hours'},
+  Volvo:  {fuelMult:1.05,maintMult:1.35,resale5yr:0.60,price_l:78,parts_days:5,network:'Moderate',weakness:'Most expensive spare parts in class, all imported, erodes operator comfort advantage'},
+  SANY:   {fuelMult:1.22,maintMult:1.40,resale5yr:0.33,price_l:58,parts_days:3,network:'Thin',   weakness:'Lowest resale 28-38%, highest fuel burn 22%, 15-20% higher warranty claim rate'},
+};
+var REGIONS={
+  north:'Delhi, Lucknow, Jaipur, Bhopal',south:'Chennai, Hyderabad, Bengaluru, Kochi',
+  west:'Mumbai, Pune, Ahmedabad, Surat',east:'Kolkata, Bhubaneswar, Ranchi, Dhanbad',
+  central:'Nagpur, Raipur, Indore, Korba',northeast:'Guwahati, Imphal, Shillong',
+};
+var SEGS={
+  mining:{label:'Mining',benefit:'overburden productivity and KOMTRAX uptime monitoring',prod:'1,800 m3/day OB'},
+  highways:{label:'Highways',benefit:'fuel efficiency and embankment cycle time',prod:'1,600 m3/day earthwork'},
+  railways:{label:'Railways',benefit:'precision digging and minimal swing cycle time',prod:'1,400 m3/day formation'},
+  irrigation:{label:'Irrigation',benefit:'hard-rock cutting in canal formations',prod:'1,200 m3/day canal'},
+  ports:{label:'Ports',benefit:'marine-grade hydraulics and corrosion resistance',prod:'1,500 m3/day'},
+  quarrying:{label:'Quarrying',benefit:'rock-optimised hydraulics and bucket wear life',prod:'1,400 m3/day rock'},
+  general:{label:'General Construction',benefit:'fuel economy and low total ownership cost',prod:'1,200 m3/day'},
+};
+
+function computeTCO(p){
+  var K=KOMATSU[p.model]||KOMATSU['PC210-10M0'];
+  var C=COMPETITORS[p.competitor]||COMPETITORS['CAT'];
+  var hd=parseInt(p.hrsDay), ah=hd*300, h5=ah*5;
+  var Kf=Math.round(K.fuelLph*h5*DIESEL/100000)/10;
+  var Cf=Math.round(K.fuelLph*C.fuelMult*h5*DIESEL/100000)/10;
+  var Km=Math.round(K.maint_hr*h5/100000)/10;
+  var Cm=Math.round(K.maint_hr*C.maintMult*h5/100000)/10;
+  var Kdd=Math.round(h5/hd*0.02), Cdd=Math.round(h5/hd*(p.competitor==='SANY'?0.06:p.competitor==='Hyundai'?0.05:0.04));
+  var dr=15;
+  var Kdt=Math.round(Kdd*dr)/10, Cdt=Math.round(Cdd*dr)/10;
+  var Kr=Math.round(K.price_l*K.resale5yr*10)/10;
+  var Cr=Math.round(C.price_l*C.resale5yr*10)/10;
+  var Kt=Math.round((Kf+Km+Kdt-Kr)*10)/10;
+  var Ct=Math.round((Cf+Cm+Cdt-Cr)*10)/10;
+  var sav=Math.round((Ct-Kt)*10)/10;
+  var pdiff=Math.round((K.price_l-C.price_l)*10)/10;
+  var loan=K.price_l*0.85, rm=0.105/12;
+  var emi=Math.round(loan*rm*Math.pow(1+rm,60)/(Math.pow(1+rm,60)-1)*100)/100;
+  return {K:K,C:C,Kf:Kf,Cf:Cf,Km:Km,Cm:Cm,Kdd:Kdd,Cdd:Cdd,Kdt:Kdt,Cdt:Cdt,Kr:Kr,Cr:Cr,Kt:Kt,Ct:Ct,sav:sav,pdiff:pdiff,h5:h5,ah:ah,hd:hd,emi:emi,pl:K.price_l,cpl:C.price_l};
 }
 
-function setLang(el) {
-  document.querySelectorAll('.pg-chip[onclick*="setLang"]').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  outputLang = el.dataset.val;
-}
-
-function setPitchType(el) {
-  document.querySelectorAll('.pg-ptab').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  pitchType = el.dataset.ptype;
-}
-
-function getChipValues(selector) {
-  return [...document.querySelectorAll(selector + '.active')].map(c => c.dataset.val);
-}
-
-function getProfile() {
+function getProfile(){
   return {
-    customerName:  document.getElementById('cust-name').value  || 'Valued Customer',
-    companyName:   document.getElementById('cust-company').value|| 'Construction Company',
-    customerType:  document.getElementById('cust-type').value,
-    segment:       document.getElementById('cust-segment').value,
-    region:        document.getElementById('cust-region').value,
-    model:         document.getElementById('komatsu-model').value,
-    hoursPerDay:   document.getElementById('hours-day').value,
-    fleetSize:     document.getElementById('fleet-size').value,
-    extraContext:  document.getElementById('extra-context').value,
-    language:      outputLang,
-    pitchType:     pitchType,
-    competitor:    getChipValues('.pg-chip[onclick*="competitor"]').join(', ') || 'CAT',
-    priceSense:    getChipValues('.pg-chip[onclick*="price-sense"]').join('') || 'value_focused',
-    painPoints:    getChipValues('.pg-chip[onclick*="pain"]').join(', ') || 'frequent_breakdown',
+    name:document.getElementById('cust-name').value.trim()||'Sir',
+    company:document.getElementById('cust-company').value.trim()||'your company',
+    type:document.getElementById('cust-type').value,
+    segment:document.getElementById('cust-segment').value,
+    region:document.getElementById('cust-region').value,
+    model:document.getElementById('komatsu-model').value,
+    hrsDay:document.getElementById('hours-day').value,
+    fleetSize:document.getElementById('fleet-size').value,
+    extraCtx:document.getElementById('extra-ctx').value.trim(),
+    language:outputLang,pitchType:pitchType,
+    competitor:getChipVal('cg-comp')||'CAT',
+    priceSense:getChipVal('cg-price')||'value_focused',
+    painPoints:getChipVals('cg-pain'),
   };
 }
+function getChipVal(g){var e=document.querySelector('#'+g+' .chip.on');return e?e.dataset.v:'';}
+function getChipVals(g){return[...document.querySelectorAll('#'+g+' .chip.on')].map(function(c){return c.dataset.v;});}
 
-// ════════════════════════════════════════════════════
-// SYSTEM PROMPT — TCO KNOWLEDGE BASE
-// ════════════════════════════════════════════════════
-function buildSystemPrompt() {
-  return `You are an elite AI sales strategist and construction equipment domain expert specialising in 20-tonne excavator sales in India. You work for L&T CMMB (Construction & Mining Machinery Business), the exclusive distributor of Komatsu excavators in India.
+function lnote(lang){return lang==='English'?'':'[Note: This pitch is in '+lang+'. Technical terms (KOMTRAX, TCO, AMC, EMI) remain in English.]\n\n';}
+function greet(lang,name){var g={English:'Hello '+name+',',Hindi:'Namaste '+name+' ji,',Gujarati:'Kem chho '+name+' bhai,',Marathi:'Namaskar '+name+' ji,',Tamil:'Vanakkam '+name+' avargale,',Telugu:'Namaskaram '+name+' garu,',Kannada:'Namaskara '+name+' avare,',Bengali:'Namaskar '+name+' da,'};return g[lang]||'Hello '+name+',';}
 
-YOUR CORE MISSION: Transform complex ownership economics into simple, persuasive, customer-ready sales conversations that help inexperienced sales engineers sell like veterans.
+function genFullSpeech(p,t){
+  var seg=SEGS[p.segment]||SEGS['general'];
+  var cities=(REGIONS[p.region]||'').split(',')[0];
+  var painStr=p.painPoints.join(', ').replace(/_/g,' ');
+  var h5lbl=(t.h5/10000).toFixed(1)+' lakh';
+  return lnote(p.language)+greet(p.language,p.name)+'\n\nThank you for your time today. I understand '+p.company+' works in the '+seg.label.toLowerCase()+' sector'+( painStr?' and I know the challenges you face: '+painStr:'')+'. Let me be direct with the numbers.\n\n── THE 5-YEAR OWNERSHIP COST ────────────────────────\n\nBased on your operation: '+p.hrsDay+' hours/day, 300 days/year — that is '+h5lbl+' operating hours over 5 years.\n\n'+p.competitor+' total 5-year ownership cost:\n  • Fuel:                        Rs'+t.Cf+' lakh\n  • Maintenance & parts:         Rs'+t.Cm+' lakh\n  • Downtime revenue loss ('+t.Cdd+' days): Rs'+t.Cdt+' lakh\n  • Resale value recovered:     -Rs'+t.Cr+' lakh\n  • NET COST OF OWNERSHIP:       Rs'+t.Ct+' lakh\n\nKomatsu '+p.model+' total 5-year cost:\n  • Fuel (SmartMining Eco mode): Rs'+t.Kf+' lakh\n  • Maintenance (L&T AMC rate):  Rs'+t.Km+' lakh\n  • Downtime (98% uptime):       Rs'+t.Kdt+' lakh ('+t.Kdd+' days only)\n  • Resale — highest in class:  -Rs'+t.Kr+' lakh\n  • NET COST OF OWNERSHIP:       Rs'+t.Kt+' lakh\n\nKomatsu saves you Rs'+t.sav+' lakh over 5 years.'+(t.pdiff>0?'\n\nYes, our price is Rs'+Math.abs(t.pdiff)+' lakh higher. You recover that difference within the first year on fuel and maintenance savings alone.':'')+'\n\n── WHY KOMATSU FOR '+seg.label.toUpperCase()+' ────────────────────────\n\n1. KOMTRAX Telematics (FREE — no subscription):\n   Real-time fuel data, GPS, idle-time alerts — all visible on your phone.\n   '+(p.competitor==='CAT'?'CAT charges Rs24,000/year for equivalent VisionLink.':p.competitor==='SANY'?'SANY has no equivalent telematics system.':'Competitors charge subscription fees for similar data.')+'\n\n2. L&T Service Network — 72-Hour Uptime Guarantee:\n   Centres across '+cities+' and surrounding region. If your machine is down beyond 72 hours due to a service failure, L&T compensates you for the downtime. In writing. No other OEM offers this in India.\n\n3. '+seg.benefit.charAt(0).toUpperCase()+seg.benefit.slice(1)+':\n   '+p.model+' delivers '+seg.prod+' — consistently best in class for '+seg.label.toLowerCase()+' applications.\n\n4. Best-in-Class Resale:\n   Rs'+t.Kr+' lakh after 5 years vs Rs'+t.Cr+' lakh for '+p.competitor+'. That is Rs'+(t.Kr-t.Cr).toFixed(1)+' lakh more when you upgrade.\n\n── FINANCING OPTION ─────────────────────────────────\n\nEMI at Rs'+t.emi+' lakh/month (85% finance, 60 months, 10.5% rate).\nWith AMC bundled: one fixed monthly outgo, zero surprise bills.\n'+(p.extraCtx?'\nRegarding your specific situation: '+p.extraCtx+'\n':'')+'\n── MY ASK ───────────────────────────────────────────\n\nLet me arrange a free site demonstration at your location. Bring your best operator. If the machine does not outperform your current '+p.competitor+' on fuel and productivity, you walk away with no obligation.\n\nWhen can I schedule that visit?';}
 
-══════════════════════════════════════════════
-KOMATSU PC210-10M0 — VERIFIED SPECIFICATIONS
-══════════════════════════════════════════════
-• Engine: Komatsu SAA6D107E-3, 155 HP (Tier 4 equivalent)
-• Operating weight: 21,600 kg
-• Bucket capacity: 0.93 m³ (standard)
-• Fuel consumption: 15.2–18.0 litres/hour (SMART construction mode)
-• KOMTRAX telematics: standard, free, cloud-based
-• SmartMining system: auto grade control
-• Rear view camera: standard
-• Noise level: 70 dB (cab) — industry lowest
-• Swing speed: 12.1 rpm
-• Maximum digging depth: 6.63m
-• Ex-showroom India (2026): ₹72–76 lakh (varies by state)
-• Warranty: 2 years / 4,000 hours (whichever earlier)
-• AMC (Annual Maintenance Contract): available from L&T
-• Resale after 5 years: typically 60–65% of ex-showroom (highest in class)
-• Recommended service interval: 500 hours
-• EMI (60-month finance @ 10.5%): approx. ₹1.55L/month
+function genTCOHTML(p,t){
+  var pdiffTxt=t.pdiff>0?'<span class="tco-lose">-Rs'+Math.abs(t.pdiff)+'L</span>':'<span class="tco-win">+Rs'+Math.abs(t.pdiff)+'L</span>';
+  var sav=t.sav>0;
+  return '<div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px">5-Year TCO — Komatsu '+p.model+' vs '+p.competitor+'<br><span style="font-size:11px;font-weight:400;color:var(--gray)">'+p.hrsDay+' hrs/day x 300 days x 5 years = '+t.h5.toLocaleString('en-IN')+' hours | Diesel Rs'+DIESEL+'/litre</span></div><div class="tco-wrap"><table class="tco-table"><thead><tr><th>Cost Component</th><th>Komatsu '+p.model+'</th><th>'+p.competitor+'</th><th>Komatsu Saves</th></tr></thead><tbody><tr><td>Purchase Price</td><td>Rs'+t.pl+'L</td><td>Rs'+t.cpl+'L</td><td>'+pdiffTxt+'</td></tr><tr><td>Fuel Cost (5yr)</td><td>Rs'+t.Kf+'L</td><td>Rs'+t.Cf+'L</td><td class="tco-win">+Rs'+(t.Cf-t.Kf).toFixed(1)+'L saved</td></tr><tr><td>Maintenance & Parts (5yr)</td><td>Rs'+t.Km+'L</td><td>Rs'+t.Cm+'L</td><td class="tco-win">+Rs'+(t.Cm-t.Km).toFixed(1)+'L saved</td></tr><tr><td>Downtime Revenue Loss</td><td>Rs'+t.Kdt+'L ('+t.Kdd+' days)</td><td>Rs'+t.Cdt+'L ('+t.Cdd+' days)</td><td class="tco-win">+Rs'+(t.Cdt-t.Kdt).toFixed(1)+'L saved</td></tr><tr><td>KOMTRAX Telematics</td><td class="tco-win">Rs0 (free)</td><td>'+(p.competitor==='CAT'?'Rs1.2L (5yr subscription)':'Rs0 or basic')+'</td><td class="'+(p.competitor==='CAT'?'tco-win':'tco-neutral')+'">'+(p.competitor==='CAT'?'+Rs1.2L saved':'Comparable')+'</td></tr><tr><td>Resale Value (Year 5)</td><td class="tco-win">Rs'+t.Kr+'L</td><td>Rs'+t.Cr+'L</td><td class="tco-win">+Rs'+(t.Kr-t.Cr).toFixed(1)+'L higher</td></tr><tr style="font-weight:700;background:#F0F4F8"><td><strong>NET 5-Year TCO</strong></td><td class="'+(sav?'tco-win':'tco-lose')+'"><strong>Rs'+t.Kt+'L</strong></td><td><strong>Rs'+t.Ct+'L</strong></td><td class="'+(sav?'tco-win':'tco-lose')+'"><strong>'+(sav?'✅ Komatsu saves Rs'+t.sav+'L':'±Rs'+Math.abs(t.sav)+'L')+'</strong></td></tr><tr><td>Monthly EMI (60m, 10.5%)</td><td>Rs'+t.emi+'L/month</td><td>~Rs'+(Math.round(t.cpl*0.85*0.105/12*Math.pow(1.00875,60)/(Math.pow(1.00875,60)-1)*100)/100)+'L/month</td><td>—</td></tr></tbody></table></div><div class="verdict-box"><div class="verdict-title">'+(sav?'✅ Verdict: Komatsu '+p.model+' saves Rs'+t.sav+' lakh over 5 years vs '+p.competitor:'⚠️ Verdict: Models are close in TCO — Komatsu wins on service reliability and resale certainty')+'</div><div class="verdict-text">'+(p.competitor==='SANY'?'Despite SANYs lower sticker price, the total 5-year ownership cost is higher due to 22% more fuel burn, poor resale (28-38% vs Komatsu 63%), and high maintenance. Komatsu is the better business decision.':p.competitor==='JCB'?'JCBs fuel economy is competitive, but significantly lower resale value (52% vs 63%) means you recover Rs'+(t.Kr-t.Cr).toFixed(1)+' lakh more when you upgrade. JCB also underperforms in heavy mining/overburden.':'The '+p.competitor+' machine costs more to own due to higher fuel, costlier parts, and lower resale. L&T 72-hour uptime + free KOMTRAX further strengthen Komatsu.'+(p.competitor==='Hyundai'?' Hyundai resale of 47% is the weakest in class.':''))+'</div></div>';}
 
-══════════════════════════════════════════════
-COMPETITOR INTELLIGENCE — TCO DATA (per 5-year, 10,000-hour lifecycle)
-══════════════════════════════════════════════
+function genObjections(p,t){
+  var C=COMPETITORS[p.competitor];
+  return lnote(p.language)+'── OBJECTION HANDLING SCRIPT ───────────────────────\nKomatsu '+p.model+' vs '+p.competitor+' | '+( SEGS[p.segment]||SEGS['general']).label+' Segment\n\n──────────────────────────────────────────────────\n\nOBJECTION 1: "'+p.competitor+(t.pdiff>0?' is Rs'+Math.abs(t.pdiff)+' lakh cheaper':' price is competitive')+'. Why pay more for Komatsu?"\n\nResponse: "I completely understand — that is the first thing anyone looks at. But let me show you what the machine actually costs to OWN, not just to buy.\n\nOver 5 years of '+p.hrsDay+'-hour operation:\n• '+(p.competitor==='SANY'?'SANY costs Rs'+t.sav+' lakh MORE than Komatsu despite lower purchase price. Reason: SANY burns 22% more fuel (+Rs'+(t.Cf-t.Kf).toFixed(1)+'L), maintenance is 40% higher, and resale drops to 28-38% vs Komatsu 63%.':'Your '+p.competitor+' costs Rs'+t.Ct+'L in 5yr total vs Komatsu Rs'+t.Kt+'L. Difference: Rs'+t.sav+'L.')+'\n\nThe sticker price is one day\'s conversation. The ownership cost is 5 years of your business."\n\n──────────────────────────────────────────────────\n\nOBJECTION 2: "My current '+p.competitor+' machine is working fine."\n\nResponse: "Great — and that means you\'re a smart operator. But what is \'working fine\' actually costing you?\n\nMachines over 4 years old spend approximately Rs'+(Math.round(C.maintMult*280))+'\/hr on maintenance vs Rs280\/hr for a new Komatsu on AMC. At '+p.hrsDay+' hours\/day, that is Rs'+(Math.round((C.maintMult*280-280)*parseInt(p.hrsDay)*300/100000*10)/10)+' lakh\/year extra cost you are absorbing silently.\n\n'+C.weakness+'\n\nA new Komatsu on our EMI scheme costs Rs'+t.emi+' lakh\/month. On '+p.hrsDay+' hours\/day, that is Rs'+(Math.round(t.emi*100000/(parseInt(p.hrsDay)*30))).toLocaleString('en-IN')+'\/operating hour. Your current machine is almost certainly costing more."\n\n──────────────────────────────────────────────────\n\nOBJECTION 3: "Your service is not available at my site."\n\nResponse: "That is a fair concern. L&T has centres across '+(REGIONS[p.region]||'')+' with a 72-HOUR UPTIME GUARANTEE — if your machine is down beyond 72 hours due to a service failure, L&T compensates for the downtime. In writing.\n\n'+p.competitor+' spare parts average '+C.parts_days+' day(s) lead time. At Rs15 lakh\/day in lost revenue, a 3-day breakdown costs Rs45 lakh. Our guarantee prevents that exposure."\n\n──────────────────────────────────────────────────\n\nOBJECTION 4: "Komatsu spares are expensive."\n\nResponse: "Komatsu genuine spares have a price — and they last the rated hours without failure. Cheap alternatives fail early and damage surrounding components.\n\nOur AMC plan: fixed at Rs280\/hour. No negotiation, no surprises. Your 5-year maintenance is Rs'+t.Km+'L vs Rs'+t.Cm+'L for '+p.competitor+' open-market. That is Rs'+(t.Cm-t.Km).toFixed(1)+' lakh you keep in your business."\n\n──────────────────────────────────────────────────\n\nOBJECTION 5: "I need time to think."\n\nResponse: "Absolutely — this is a major decision. One number to share with your team:\n\nIn your specific operation, Komatsu saves Rs'+t.sav+' lakh over 5 years. That is Rs'+(t.sav/5).toFixed(1)+' lakh\/year back in your business.\n\nI will send you a WhatsApp summary right now. And I\'d like to arrange a no-obligation site demo this week — if the machine does not perform better than your '+p.competitor+', you walk away free.\n\nWhen is a good day for the demo?"';}
 
-CATERPILLAR 320 GC / 320 (Direct competitor):
-• Fuel: 17.5–20.5 L/hr (8–13% higher than PC210)
-• Spare parts cost: 15–20% higher than Komatsu in India
-• Service: Good network but parts on import — 2–4 day delay
-• Resale: 55–60% of ex-showroom (slightly lower)
-• Financing: CAT Finance India — competitive
-• AEMP telematics: standard but subscription-based (₹24K/yr)
-• TCO advantage over Komatsu PC210: Komatsu saves ₹8–12L over 5yr on fuel + parts
+function genWhatsapp(p,t){
+  var hi=p.language==='Hindi';
+  if(hi){return 'Namaste '+p.name+' ji! 🙏\n\nL&T CMMB ki taraf se aaj ki meeting ke liye shukriya.\n\nAapke liye important numbers:\n\n📊 *Komatsu '+p.model+' vs '+p.competitor+' — 5 Saal TCO*\n• Komatsu total cost: Rs'+t.Kt+'L\n• '+p.competitor+' total cost: Rs'+t.Ct+'L\n• *Aap bachayenge: Rs'+t.sav+'L* ✅\n\n💡 *3 main fayde:*\n• KOMTRAX telematics — FREE (real-time monitoring)\n• L&T service — 72 ghante uptime guarantee\n• 5 saal resale: Rs'+t.Kr+'L (vs '+p.competitor+' Rs'+t.Cr+'L)\n\n💳 *EMI:* Rs'+t.emi+'L/month (85% finance, 60 mahine)\n\nFree machine demo arrange kar sakte hain — koi commitment nahi.\n\nKab convenient rahega? 📞\n\n[SALES_NAME] | L&T CMMB | [MOBILE]';}
+  return 'Hello '+p.name+'! 👋\n\nThank you for your time today. Here is a quick summary:\n\n📊 *Komatsu '+p.model+' vs '+p.competitor+' — 5-Year TCO*\n• Komatsu total ownership: Rs'+t.Kt+'L\n• '+p.competitor+' total ownership: Rs'+t.Ct+'L\n• *You save: Rs'+t.sav+'L* ✅\n\n💡 *3 reasons Komatsu wins for '+p.company+':*\n• KOMTRAX telematics — FREE real-time machine monitoring\n• L&T service — 72-hour uptime guarantee\n• Best resale: Rs'+t.Kr+'L after 5 years (vs '+p.competitor+' Rs'+t.Cr+'L)\n\n💳 *Financing:* Only Rs'+t.emi+'L/month (85% loan, 60 months)\n\n✅ *Next step:* Free site demo — no commitment, bring your operator.\n\nWhen works for you? 📞\n\n[SALES_NAME] | L&T CMMB | [MOBILE]';}
 
-HITACHI ZX210-6:
-• Fuel: 16.5–19.5 L/hr
-• Known issue: Hydraulic pump wear at 6,000–7,000 hours
-• Resale: 52–58% of ex-showroom
-• Dealer network: thin outside Tier-1 cities — 24–48hr service delay common
-• Parts: mostly imported — 3–7 day lead time
-• TCO disadvantage: ₹6–9L higher than Komatsu over 5yr
+function genRentVsOwn(p,t){
+  var rr=p.segment==='mining'?700:p.segment==='highways'?600:500;
+  var ah=parseInt(p.hrsDay)*300;
+  var ar=Math.round(rr*ah/100000)/10;
+  var ea=Math.round(t.emi*12*10)/10;
+  var amca=Math.round(t.K.maint_hr*ah*0.3/100000)/10;
+  var oa=Math.round((ea+amca)*10)/10;
+  return lnote(p.language)+'── RENTAL vs OWNERSHIP ANALYSIS ─────────────────────\n'+p.company+' | '+(SEGS[p.segment]||SEGS['general']).label+' | '+p.hrsDay+' hrs/day\n\n── RENTAL COST ───────────────────────────────────────\nMarket rental rate: Rs'+rr+'/hour\nAnnual operating hours: '+ah.toLocaleString('en-IN')+'\nAnnual rental outgo: Rs'+ar+' lakh\n5-year total rental: Rs'+(ar*5).toFixed(1)+' lakh\nAsset at end of 5 years: Rs0 (you own nothing)\n\n── OWNERSHIP COST — Komatsu '+p.model+' ────────────────\nPurchase price: Rs'+t.pl+' lakh\nEMI (85% finance, 60m, 10.5%): Rs'+t.emi+' lakh/month\nAnnual EMI: Rs'+ea+' lakh\nAnnual AMC: Rs'+amca+' lakh\nTotal annual outgo: Rs'+oa+' lakh\nCost per operating hour: Rs'+Math.round(oa*100000/ah)+'\nResale after 5 years: Rs'+t.Kr+' lakh\n\n── BREAK-EVEN ────────────────────────────────────────\nMonthly rental: Rs'+(ar/12).toFixed(2)+' lakh\nMonthly ownership (EMI+AMC): Rs'+(oa/12).toFixed(2)+' lakh\nMonthly advantage of owning: Rs'+(Math.max(0,(ar-oa)/12)).toFixed(2)+' lakh\nBreak-even point: approximately 18–24 months from purchase\n\n── 5-YEAR NET POSITION ─────────────────────────────\nRenting: Spent Rs'+(ar*5).toFixed(1)+'L → Asset: Rs0\nOwning: Net cost Rs'+(Math.max(0,oa*5-t.Kr)).toFixed(1)+'L → Asset: Rs'+t.Kr+'L machine\nNet 5-year advantage of owning: Rs'+(((ar*5)-(oa*5-t.Kr)).toFixed(1))+' lakh\n\n── RECOMMENDATION ─────────────────────────────────\n'+(p.type==='rental'?'For a rental company: If your utilisation is above 75% consistently, OWNERSHIP delivers better returns. Below 75%, a mix of owned and rented machines is optimal.':p.type==='first_time'?'For a first-time buyer: Ownership at Rs'+t.emi+'L/month is the right move. You build an asset. Renting builds someone else\'s balance sheet.':'For your '+( SEGS[p.segment]||SEGS['general']).label.toLowerCase()+' operation at '+p.hrsDay+' hrs/day: OWNERSHIP is clearly better. High utilisation means the machine pays its own EMI within 18 months, after which every hour is pure margin.')+'\n\nClosing line: "Every month you rent, you pay someone else\'s EMI. Let us start building your asset from next month."';}
 
-JCB 220X / JS220:
-• Fuel: 14.8–17.0 L/hr (competitive, slightly better in light applications)
-• Built in India (Ballabhgarh) — parts readily available
-• Service: good dealer density in North and West India
-• Resale: 50–55% — lower premium resale value
-• Hydraulic efficiency: 8% lower than PC210 in hard rock
-• TCO: roughly equivalent, but lower resale hurts 5yr total
-• Weakness: not suitable for heavy mining overburden work
+function genAMCFinance(p,t){
+  var ah=parseInt(p.hrsDay)*300;
+  var amcm=Math.round(280*ah/12/100000*100)/100;
+  var insm=Math.round(t.pl*0.012/12*100)/100;
+  var bund=Math.round((t.emi+amcm+insm)*100)/100;
+  var dr=p.segment==='mining'?1.8:p.segment==='highways'?1.5:1.2;
+  var mr=Math.round(dr*25*10)/10;
+  return lnote(p.language)+'── AMC + FINANCING BUNDLE PITCH ──────────────────────\nKomatsu '+p.model+' | '+(SEGS[p.segment]||SEGS['general']).label+' | '+p.company+'\n\n── MONTHLY BUNDLE ────────────────────────────────────\n\nInstead of thinking of this as a big purchase, think of it as:\n\n  EMI (85% loan, 60 months, 10.5%): Rs'+t.emi+'L/month\n  AMC Plan (Rs280/hr coverage):     Rs'+amcm+'L/month\n  Comprehensive Insurance:           Rs'+insm+'L/month\n  ─────────────────────────────────────────────────\n  TOTAL MONTHLY OUTGO:              Rs'+bund+'L/month\n\n── REVENUE vs COST ───────────────────────────────────\nYour machine generates: Rs'+dr+'L/day ('+( SEGS[p.segment]||SEGS['general']).label.toLowerCase()+' rates)\nMonthly revenue (25 days): Rs'+mr+'L\nMonthly bundle cost:       Rs'+bund+'L\nMonthly PROFIT:            Rs'+(mr-bund).toFixed(2)+'L\n\nThe machine pays its own EMI and generates profit from Day 1.\n\n── WHAT AMC PREVENTS ─────────────────────────────────\nWithout AMC, '+p.competitor+' owners average:\n  • Rs'+Math.round(COMPETITORS[p.competitor].maintMult*280)+'/hour open-market maintenance\n  • Hydraulic pump failure: Rs3–6 lakh repair + 3 days downtime = Rs7.5–10 lakh impact\n  • Parts wait: '+COMPETITORS[p.competitor].parts_days+' day(s) average — Rs'+COMPETITORS[p.competitor].parts_days*15+'L lost revenue per incident\n\nWith L&T AMC:\n  • Fixed at Rs280/hour — no surprises, no negotiations\n  • All scheduled services covered (250, 500, 1000, 2000 hr)\n  • Priority technician: on-site within 24 hours\n  • Warranty extension to 3yr / 6,000 hr with comprehensive AMC\n\n── AMC ECONOMICS ─────────────────────────────────────\n5-year AMC total:              Rs'+t.Km+'L\n5-year open-market '+p.competitor+': Rs'+t.Cm+'L\nAMC saves you:                 Rs'+(t.Cm-t.Km).toFixed(1)+'L over 5 years\n\nClosing: "Let me put together your personalised bundle quote in 20 minutes. Shall we do it now?"';}
 
-HYUNDAI HX220L / HX220A:
-• Fuel: 16.8–19.0 L/hr
-• Korean-made, India dealer network sparse outside South
-• Resale: 42–50% — weakest resale in class
-• Finance: Hyundai Capital — limited tie-ups in rural
-• Parts: imported, 5–10 day lead time
-• TCO disadvantage: ₹12–18L vs Komatsu over 5yr (poor resale + high fuel)
+function genSiteVisit(p,t){
+  var cities=(REGIONS[p.region]||'').split(',')[0];
+  return lnote(p.language)+'── SITE VISIT CONVERSATION GUIDE ──────────────────────\n'+p.company+' | '+(SEGS[p.segment]||SEGS['general']).label+' | '+p.hrsDay+' hrs/day\n\n── PRE-VISIT CHECKLIST ───────────────────────────────\n□ Confirm machines currently on site (brand, age, count)\n□ Research active contracts in this area\n□ Prepare TCO sheet for '+p.competitor+' specifically\n□ Download KOMTRAX demo screenshots (for no-internet sites)\n□ Carry: business card, AMC brochure, TCO comparison printout\n□ Know today\'s diesel price at nearest pump in '+cities+'\n\n── ON ARRIVAL — OBSERVE BEFORE SPEAKING ──────────────\n• Count machines: how many, which brands, estimated age?\n• Watch operators: fatigue, shift change pattern, idle time?\n• Fuel bowser: how large, how often it is called?\n• Any idle/broken machines? Breakdown or planned downtime?\n• Is the site foreman or owner present? Approach owner first.\n• If '+p.competitor+' machines visible: note track wear, hydraulic line condition\n\n── OPENING — START WITH THEIR PROBLEM ───────────────\nDo NOT open with Komatsu. Open with their pain.\n\n"'+p.name+' ji, your site looks like a serious operation. How many hours are you running daily? And what\'s your biggest frustration with your current machines right now?"\n\n[Listen for 2–3 minutes — their answer tells you which angle to use]\n→ Fuel cost mentioned: Lead with TCO fuel numbers\n→ Breakdown mentioned: Lead with 72-hour uptime guarantee\n→ Cost mentioned: Lead with 5-year net ownership savings\n→ Nothing mentioned: Ask about last big repair bill\n\n── MACHINE DEMONSTRATION POINTS ─────────────────────\n1. Engine start — point to quietness: "70 dB vs '+p.competitor+'\'s 76 dB. Your operators\' fatigue protection."\n2. KOMTRAX screen: "Live fuel, GPS, idle time — on your phone, free, no subscription."\n3. Hard bucket penetration: "Watch the hydraulic response — no hesitation in hard material."\n4. Swing cycle: "12.1 RPM. Every extra swing is extra material moved per shift."\n5. Cab comfort: "Sit your operator in here. Let them compare to '+p.competitor+' themselves."\n\n── CLOSING WITH DECISION-MAKER ──────────────────────\n"'+p.name+' ji, this is a business decision. Your site runs '+p.hrsDay+' hours/day — that is Rs'+(Math.round(parseInt(p.hrsDay)*300*15/100000*10)/10)+' crore of annual revenue potential per machine.\n\nKomatsu protects that revenue with uptime, fuel economy, and resale value.\n\nIn simple terms: Komatsu saves your company Rs'+t.sav+' lakh over 5 years vs '+p.competitor+'.\n\nI can have a machine here for a 1-week trial. No payment until you are satisfied. When can we start?"\n\n── POST-VISIT ACTIONS (within 2 hours) ───────────────\n□ Send WhatsApp summary (use WhatsApp tab in this tool)\n□ Email TCO comparison PDF\n□ Alert service manager about this site location\n□ Log in CRM — next follow-up date: 7 days';}
 
-KOBELCO SK220-10:
-• Fuel: 14.8–16.8 L/hr (competitive)
-• Swing priority: excellent — faster cycle times in river sand work
-• Dealer network: very thin — primarily Mumbai, Chennai, Kolkata
-• Service delays: 48–72hrs average outside metro
-• Resale: 48–55%
-• Weakness: after 8,000 hours, maintenance costs spike
+function genDealerTraining(p,t){
+  return lnote(p.language)+'── DEALER TRAINING MODULE ──────────────────────────────\nKomatsu '+p.model+' vs '+p.competitor+' | '+(SEGS[p.segment]||SEGS['general']).label+' Segment\nFor: New Sales Engineers — L&T CMMB Dealer Network\n\n═══ MODULE 1: MEMORISE THESE NUMBERS ══════════════════\n\nKomatsu '+p.model+' price:         Rs'+t.pl+' lakh\n'+p.competitor+' price:           Rs'+t.cpl+' lakh\n5-year TCO advantage:            Komatsu saves Rs'+t.sav+' lakh\nAnnual fuel saving vs '+p.competitor+':  Rs'+(((t.Cf-t.Kf)/5)).toFixed(1)+' lakh/year\nResale yr5: Komatsu Rs'+t.Kr+'L vs '+p.competitor+' Rs'+t.Cr+'L\nOur EMI:                         Rs'+t.emi+' lakh/month (85%, 60m)\nAMC rate:                        Rs280/hour (vs '+p.competitor+' ~Rs'+Math.round(COMPETITORS[p.competitor].maintMult*280)+'/hr)\nKOMTRAX:                         FREE\nService response:                72-hour uptime guarantee\n\n═══ MODULE 2: TOP 5 THINGS TO SAY FIRST ═══════════════\n\n1. "KOMTRAX telematics is FREE — real-time monitoring from your phone, no subscription."\n2. "72-hour uptime guarantee — if we fail, we pay for the downtime. In writing."\n3. "63% resale after 5 years. Best in class. '+p.competitor+' gives '+(COMPETITORS[p.competitor].resale5yr*100)+'%."\n4. "AMC at Rs280/hour — fixed cost, no surprise bills, ever."\n5. "SmartMining Eco mode saves '+( p.competitor==='CAT'?'12%':'8-15%')+' fuel vs '+p.competitor+' in same conditions."\n\n═══ MODULE 3: NEVER DO THESE ══════════════════════════\n\n❌ NEVER say "Komatsu is cheaper." Say "Komatsu costs LESS to OWN."\n❌ NEVER attack the competitor brand. Use numbers, not opinions.\n❌ NEVER quote without asking daily operating hours first.\n❌ NEVER give a discount without a commitment (demo date, timeline).\n❌ NEVER skip asking about their biggest maintenance pain — it is your entry point.\n\n═══ MODULE 4: ROLE-PLAY SCENARIO ══════════════════════\n\nTrainer plays: '+( SEGS[p.segment]||SEGS['general']).label+' contractor, 2 × '+p.competitor+' machines\nTrainee plays: L&T CMMB sales engineer\n\nCustomer: "I have two '+p.competitor+'s working fine. Why should I look at Komatsu?"\n\nTrainee model answer:\n"Great that your machines are running. Can I ask — what are you spending per hour on maintenance right now? And what did your last '+p.competitor+' fetch when you sold it?"\n\n[If they do not know → that is your opening]\n\n"Most '+p.competitor+' owners do not track this. But over 5 years, '+p.competitor+' costs you Rs'+t.Cm+'L in maintenance vs Rs'+t.Km+'L for Komatsu on our AMC. That is Rs'+(t.Cm-t.Km).toFixed(1)+'L extra — money that stays in your pocket with Komatsu."\n\n═══ MODULE 5: QUICK REFERENCE CARD ════════════════════\n\n  KOMATSU '+p.model+'        '+p.competitor+'\n  ─────────────────────────────────────────\n  Price:    Rs'+t.pl+'L             Rs'+t.cpl+'L\n  Fuel 5yr: Rs'+t.Kf+'L            Rs'+t.Cf+'L\n  Maint 5yr:Rs'+t.Km+'L            Rs'+t.Cm+'L\n  Resale:   Rs'+t.Kr+'L            Rs'+t.Cr+'L\n  Net TCO:  Rs'+t.Kt+'L            Rs'+t.Ct+'L\n  ─────────────────────────────────────────\n  KOMATSU SAVES: Rs'+t.sav+'L OVER 5 YEARS\n\nExercise: Memorise these numbers. Recite without looking in 48 hours.';}
 
-VOLVO EC220D:
-• Premium brand, good fuel (15.0–17.0 L/hr)
-• Excellent operator comfort — best in class
-• Parts: most expensive in class, all imported
-• Resale: 58–62% — premium market only
-• Finance: Volvo Financial Services — good rates
-• Weakness: high parts cost erodes TCO advantage; not recommended for mining
-
-SANY SY215C / SY215H:
-• Price: ₹56–62 lakh (20–25% cheaper than Komatsu)
-• Fuel: 18.0–22.0 L/hr (highest in class)
-• Resale: 28–38% — dramatically lower
-• Dealer network: thin, service quality inconsistent
-• Parts: some locally made, quality variable
-• Financing: limited formal options
-• Failure risk: 15–20% higher warranty claim rate vs Japanese brands
-• TCO over 5yr: despite lower purchase price, SANY costs ₹4–8L MORE than Komatsu due to fuel + maintenance + poor resale
-
-══════════════════════════════════════════════
-TCO CALCULATION ENGINE — STANDARD INPUTS
-══════════════════════════════════════════════
-• HSD diesel price: ₹90–95/litre (average India 2026)
-• Annual working hours: daily_hours × 300 working days
-• 5-year total hours: annual × 5
-• Fuel cost = hours × litre_rate × diesel_price
-• Maintenance = ₹280/hr for Komatsu (AMC basis), ₹350–420/hr for competitors
-• Downtime cost = ₹8,000–15,000/day (revenue loss)
-• Resale gap = (Komatsu % - Competitor %) × purchase price
-• Finance cost = loan amount × rate × tenure
-
-══════════════════════════════════════════════
-SALES PSYCHOLOGY & INDIA CONTEXT
-══════════════════════════════════════════════
-• Mining contractors: focus on uptime, OB productivity, KOMTRAX data
-• Highway EPC: focus on cycle time, fuel efficiency, NHAI OFC compliance
-• First-time buyers: focus on simplicity, AMC comfort, warranty, financing
-• Price-sensitive: NEVER compete on price — reframe to per-hour cost + resale
-• Fleet owners: focus on fleet standardisation, KOMTRAX fleet analytics, bulk AMC rates
-• Rental companies: focus on uptime %, resale value, low maintenance cost
-• Government/PSU: focus on documented TCO, KOMTRAX reports, compliance
-
-GOLDEN RULE: Never say "Komatsu is cheaper." Always say "Komatsu costs LESS to OWN."
-
-PERSUASION FRAMEWORK (use in every pitch):
-1. Pain → Amplify their known problem
-2. Prove → Show quantified proof (₹ numbers)
-3. Promise → What Komatsu delivers specifically
-4. Personalise → Connect to their specific site/project
-5. Push → Clear call to action
-
-══════════════════════════════════════════════
-LANGUAGE STYLE GUIDE
-══════════════════════════════════════════════
-• English: Formal yet conversational. Use ₹ values, bullet points.
-• Hindi: Mix with English technical terms. Use respectful "aap". Start with "Namaste".
-• Gujarati: Business-first, numbers-first culture. Be direct about savings.
-• Marathi: Respectful, relationship-first. Start with "Namaskar".
-• Tamil: Formal, technical. Reference local projects (TANROADS, Chennai Metro).
-• Telugu: Reference Hyderabad metro, AP expressways, local contractors.
-• Kannada: Reference Bangalore metro, Karnataka mining, KRDCL projects.
-• Bengali: Reference Kolkata, DVC projects, coal mines of eastern region.
-
-Always output the full pitch in the requested language. Keep English technical terms (KOMTRAX, TCO, AMC, EMI) even in regional languages.`;
+function generatePitch(){
+  if(isGenerating)return;
+  var p=getProfile(), t=computeTCO(p);
+  isGenerating=true;
+  var btn=document.getElementById('gen-btn');
+  document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-circle-notch fa-spin-me"></i> Generating...';
+  btn.disabled=true;
+  setTimeout(function(){
+    try{
+      var out=document.getElementById('pg-out');
+      var title=PITCH_DESC[p.pitchType]?PITCH_DESC[p.pitchType].title:'Sales Pitch';
+      if(p.pitchType==='tco_comparison'){
+        renderHTML(title,genTCOHTML(p,t),p,t,out);
+      }else{
+        var gens={full_speech:genFullSpeech,objections:genObjections,whatsapp:genWhatsapp,rent_vs_own:genRentVsOwn,amc_finance:genAMCFinance,site_visit:genSiteVisit,dealer_training:genDealerTraining};
+        var fn=gens[p.pitchType]||genFullSpeech;
+        renderText(title,fn(p,t),p,t,out);
+      }
+    }catch(e){
+      document.getElementById('pg-out').innerHTML='<div style="padding:40px;text-align:center;color:#DC2626"><div style="font-size:36px;margin-bottom:10px">⚠️</div><div style="font-size:14px;font-weight:700">Error: '+e.message+'</div></div>';
+    }finally{
+      isGenerating=false;btn.disabled=false;
+      document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-magic"></i> Generate Pitch';
+    }
+  },500);
 }
 
-function buildUserPrompt(profile) {
-  const pitchTypeInstructions = {
-    full_sales_speech: `Generate a COMPLETE, PERSUASIVE full sales speech (400-600 words) that a sales engineer would deliver face-to-face to this customer. Include: (1) Warm opener, (2) Pain identification, (3) Komatsu vs ${profile.competitor} TCO comparison with specific ₹ numbers for their usage pattern (${profile.hoursPerDay} hrs/day), (4) Key advantages of ${profile.model}, (5) KOMTRAX telematics value, (6) L&T service network strength, (7) Financing/AMC option, (8) Powerful close. Make it conversational, not a brochure.`,
-    
-    tco_comparison: `Generate a detailed TCO COMPARISON ANALYSIS between Komatsu ${profile.model} and ${profile.competitor} for this customer's usage pattern (${profile.hoursPerDay} hrs/day, ${profile.fleetSize} machines, ${profile.segment} sector). Include: (1) Side-by-side 5-year TCO table with actual ₹ numbers, (2) Fuel cost comparison, (3) Maintenance cost comparison, (4) Resale value comparison, (5) Downtime cost comparison, (6) Total 5-year net ownership cost, (7) Monthly EMI comparison, (8) Final verdict with specific ₹ savings figure. Make numbers concrete and believable.`,
-    
-    objection_handling: `Generate OBJECTION HANDLING SCRIPTS for the top 5 objections a ${profile.segment} customer would raise when comparing Komatsu ${profile.model} vs ${profile.competitor}. For each objection: (1) State the objection verbatim (as customer would say it), (2) Acknowledge empathetically, (3) Reframe with data, (4) Provide Komatsu-specific proof point. Customer pain points: ${profile.painPoints}. Customer is ${profile.priceSense.replace(/_/g,' ')}.`,
-    
-    whatsapp_summary: `Generate a WHATSAPP-READY follow-up message (150-200 words max) to send after a customer meeting. Should be: friendly, formatted for WhatsApp (use emojis appropriately, bullet points with • ), include key TCO savings number, next step (demo / trial offer), L&T contact info placeholder [SALES_NAME] [MOBILE]. Customer: ${profile.customerName} from ${profile.companyName}. Make it feel personal, not templated.`,
-    
-    rental_vs_own: `Generate a RENTAL vs OWNERSHIP DECISION GUIDE for this customer. Compare: (1) Rental cost per hour (typical market rate for ${profile.segment}), (2) EMI-based ownership cost per hour for ${profile.model}, (3) Break-even point analysis, (4) Which option suits this customer profile (${profile.customerType}), (5) Hybrid option: buy 1, rent seasonal peak machines, (6) ROI timeline, (7) Recommendation with clear reasoning.`,
-    
-    amc_financing: `Generate a BUNDLED AMC + FINANCING PITCH that positions the Komatsu ${profile.model} as the best-value financed purchase. Include: (1) L&T Finance EMI structure (60 months), (2) AMC (Annual Maintenance Contract) — what it covers and cost, (3) Insurance add-on, (4) Monthly outgo table (EMI + AMC + Insurance vs revenue generated), (5) How AMC prevents surprise costs that hit ${profile.competitor} owners, (6) ROI at ${profile.hoursPerDay}hrs/day, (7) Special bundle offer pitch close.`,
-    
-    site_visit_flow: `Generate a SITE VISIT CONVERSATION FLOW — a step-by-step guide for what a sales engineer should observe, ask, and say during a customer site visit. Include: (1) Pre-visit preparation (what to check about site), (2) Arrival observations (look for competitor machines, site conditions), (3) Opening questions to ask the customer, (4) Demonstration points to highlight on the Komatsu ${profile.model}, (5) KOMTRAX live demo script, (6) Handling the site foreman/operator, (7) Closing conversation with decision-maker, (8) Post-visit follow-up actions.`,
-    
-    dealer_training: `Generate a DEALER TRAINING MODULE — a training script for a new L&T CMMB dealer/sales engineer to learn how to position Komatsu ${profile.model} against ${profile.competitor} in the ${profile.segment} segment. Include: (1) Competitive intelligence briefing, (2) Key differentiators to memorise, (3) Common mistakes to avoid, (4) Role-play scenario with sample dialogue, (5) Quick reference card with ₹ numbers, (6) Do's and Don'ts in field sales, (7) Practice questions and answers.`,
-  };
-
-  const inst = pitchTypeInstructions[profile.pitchType] || pitchTypeInstructions.full_sales_speech;
-
-  return `Generate a sales pitch with the following customer profile and instructions:
-
-CUSTOMER PROFILE:
-- Name: ${profile.customerName} | Company: ${profile.companyName}
-- Type: ${profile.customerType.replace(/_/g,' ')} | Segment: ${profile.segment.replace(/_/g,' ')}
-- Region: ${profile.region.replace(/_/g,' ')}
-- Komatsu Model: ${profile.model}
-- Primary Competitor: ${profile.competitor}
-- Customer Pain Points: ${profile.painPoints.replace(/_/g,' ')}
-- Price Sensitivity: ${profile.priceSense.replace(/_/g,' ')}
-- Daily Operating Hours: ${profile.hoursPerDay} hrs/day
-- Fleet Size: ${profile.fleetSize} machines
-- Additional Context: ${profile.extraContext || 'None provided'}
-
-OUTPUT LANGUAGE: ${profile.language} (write the ENTIRE pitch in ${profile.language}, keep English technical terms like KOMTRAX, TCO, AMC, EMI)
-
-PITCH TYPE: ${profile.pitchType.replace(/_/g,' ').toUpperCase()}
-
-SPECIFIC INSTRUCTIONS: ${inst}
-
-MANDATORY ELEMENTS IN EVERY OUTPUT:
-- At least one specific ₹ savings figure (quantified, believable)
-- One reference to KOMTRAX telematics advantage
-- One reference to L&T service network / 72-hour uptime guarantee
-- A clear, actionable closing statement
-- Do NOT be vague — use specific numbers, specific machine specs, specific time periods
-
-Format the output clearly with headers (use ── or ===) and proper paragraph spacing. Make it ready to use immediately by a field sales engineer.`;
+function renderText(title,text,p,t,out){
+  var wa=encodeURIComponent(text.substring(0,1200));
+  out.innerHTML='<div class="result-card"><div class="result-head"><div><div class="result-title">'+title+'</div><div class="result-meta">'+p.language+' · '+p.company+' · '+p.model+' vs '+p.competitor+' · '+(SEGS[p.segment]||SEGS['general']).label+'</div></div><div class="result-actions"><button class="act-btn" onclick="cpyText(this)" data-text="'+text.replace(/"/g,'&quot;').replace(/\n/g,'&#10;')+'"><i class="fa fa-copy"></i> Copy</button><a class="act-btn wa" href="https://wa.me/?text='+wa+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div><div class="result-body">'+fmtText(text)+'</div></div>';
+}
+function renderHTML(title,html,p,t,out){
+  out.innerHTML='<div class="result-card"><div class="result-head"><div><div class="result-title">'+title+'</div><div class="result-meta">'+p.language+' · '+p.company+' · '+p.model+' vs '+p.competitor+'</div></div><div class="result-actions"><button class="act-btn" onclick="cpyEl(this)"><i class="fa fa-copy"></i> Copy</button></div></div><div class="result-body" style="white-space:normal">'+html+'</div></div>';
 }
 
-// ════════════════════════════════════════════════════
-// GENERATE PITCH via Anthropic API
-// ════════════════════════════════════════════════════
-async function generatePitch() {
-  if (generating) return;
-  const profile = getProfile();
-
-  generating = true;
-  const btn = document.getElementById('generate-btn');
-  const btnText = document.getElementById('gen-btn-text');
-  btn.disabled = true;
-  btnText.innerHTML = '<i class="fa fa-circle-notch fa-spin"></i>&nbsp; Generating...';
-
-  // Hide welcome, show loader
-  document.getElementById('welcome-screen')?.remove();
-  const output = document.getElementById('pg-output');
-  
-  const loader = document.createElement('div');
-  loader.id = 'pg-loader';
-  loader.className = 'pg-loading';
-  loader.innerHTML = `
-    <div class="pg-loading-ring"></div>
-    <div class="pg-loading-text">Claude AI is crafting your pitch...</div>
-    <div class="pg-loading-sub">Analysing ${profile.competitor} TCO data for ${profile.segment} sector in ${profile.region} region</div>
-  `;
-  output.innerHTML = '';
-  output.appendChild(loader);
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: buildSystemPrompt(),
-        messages: [{ role: 'user', content: buildUserPrompt(profile) }]
-      })
-    });
-
-    const data = await response.json();
-    const pitchText = data.content?.[0]?.text || 'Error: Could not generate pitch. Please try again.';
-
-    // Remove loader
-    output.innerHTML = '';
-
-    // Add result
-    const pitchTypeLabel = document.querySelector('.pg-ptab.active')?.textContent?.trim() || 'Sales Pitch';
-    renderResult(pitchText, profile, pitchTypeLabel);
-
-    // Save to history
-    pitchHistory.unshift({ profile, pitchText, pitchTypeLabel, ts: new Date() });
-    renderHistory();
-
-  } catch(err) {
-    output.innerHTML = '';
-    const errDiv = document.createElement('div');
-    errDiv.style.cssText = 'padding:40px;text-align:center;color:#DC2626';
-    errDiv.innerHTML = `<div style="font-size:40px;margin-bottom:12px">⚠️</div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:8px">Generation failed</div>
-      <div style="font-size:12px;color:#64748B">${err.message}</div>
-      <button onclick="generatePitch()" style="margin-top:16px;padding:8px 20px;background:#003F72;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600">Retry</button>`;
-    output.appendChild(errDiv);
-  } finally {
-    generating = false;
-    btn.disabled = false;
-    btnText.innerHTML = '<i class="fa fa-magic"></i> Generate AI Pitch';
-  }
+function fmtText(t){
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/^(──.+)$/gm,'<strong style="color:#003F72;font-size:13.5px">$1</strong>')
+    .replace(/^(═══.+)$/gm,'<strong style="color:#003F72">$1</strong>')
+    .replace(/^(□ .+)$/gm,'<span style="color:#475569">$1</span>')
+    .replace(/^(❌.+)$/gm,'<span style="color:#DC2626">$1</span>')
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+}
+function cpyText(btn){
+  var t=btn.getAttribute('data-text').replace(/&quot;/g,'"').replace(/&#10;/g,'\n');
+  navigator.clipboard.writeText(t).then(function(){var o=btn.innerHTML;btn.innerHTML='<i class="fa fa-check"></i> Copied!';setTimeout(function(){btn.innerHTML=o;},2000);});
+}
+function cpyEl(btn){
+  var b=btn.closest('.result-card').querySelector('.result-body');
+  navigator.clipboard.writeText(b.innerText).then(function(){var o=btn.innerHTML;btn.innerHTML='<i class="fa fa-check"></i> Copied!';setTimeout(function(){btn.innerHTML=o;},2000);});
 }
 
-function renderResult(pitchText, profile, pitchTypeLabel) {
-  const output = document.getElementById('pg-output');
-  
-  const resultDiv = document.createElement('div');
-  
-  // Escape for HTML display
-  const escaped = pitchText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  
-  // Format: bold lines starting with ─── or ===
-  const formatted = escaped
-    .replace(/^(─+.+)/gm, '<strong style="color:#003F72;font-size:14px">$1</strong>')
-    .replace(/^(={3}.+)/gm, '<strong style="color:#003F72;font-size:13px">$1</strong>')
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-
-  const whatsappText = encodeURIComponent(pitchText.substring(0, 800));
-  
-  resultDiv.innerHTML = `
-    <div class="pg-result-header">
-      <div>
-        <div class="pg-result-title">${pitchTypeLabel}</div>
-        <div class="pg-result-meta">
-          <span class="lang-badge">${profile.language}</span>
-          ${profile.customerName} · ${profile.companyName} · Komatsu ${profile.model} vs ${profile.competitor}
-        </div>
-      </div>
-      <div class="pg-result-actions">
-        <button class="pg-action-btn" onclick="copyPitch(this)" data-text="${pitchText.replace(/"/g,'&quot;')}">
-          <i class="fa fa-copy"></i> Copy
-        </button>
-        <a class="pg-action-btn whatsapp" href="https://wa.me/?text=${whatsappText}" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-      </div>
-    </div>
-    <div class="pg-result-body">
-      <div class="pg-pitch-content">${formatted}</div>
-    </div>
-  `;
-  output.appendChild(resultDiv);
+function selectTab(el){
+  document.querySelectorAll('.ptab').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');
+  pitchType=el.dataset.pt;
+  showReady();
+}
+function showReady(){
+  var d=PITCH_DESC[pitchType]||PITCH_DESC['full_speech'];
+  document.getElementById('pg-out').innerHTML='<div class="ready-state"><div class="ready-icon">'+d.icon+'</div><div class="ready-h">'+d.title+'</div><div class="ready-p">Fill the customer profile and click <strong>Generate Pitch</strong></div><div class="pitch-desc-box"><div class="pitch-desc-title">What this pitch includes:</div><div class="pitch-desc-text">'+d.desc+'</div></div></div>';
 }
 
-function copyPitch(btn) {
-  const text = btn.getAttribute('data-text').replace(/&quot;/g,'"');
-  navigator.clipboard.writeText(text).then(() => {
-    const orig = btn.innerHTML;
-    btn.innerHTML = '<i class="fa fa-check"></i> Copied!';
-    setTimeout(() => { btn.innerHTML = orig; }, 2000);
-  });
-}
+function chipSingle(el,g){document.querySelectorAll('#'+g+' .chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function chipMulti(el){el.classList.toggle('on');}
+function setLang(el){outputLang=el.dataset.v;}
 
-function renderHistory() {
-  const output = document.getElementById('pg-output');
-  // Remove existing history
-  const existing = output.querySelector('.pg-history');
-  if (existing) existing.remove();
-
-  if (pitchHistory.length < 2) return;
-
-  const histDiv = document.createElement('div');
-  histDiv.className = 'pg-history';
-  histDiv.innerHTML = `
-    <div class="pg-history-head">
-      <span>Recent Pitches</span>
-      <span style="color:var(--gray);font-weight:400">${pitchHistory.length} generated this session</span>
-    </div>
-    ${pitchHistory.slice(1, 6).map(h => `
-      <div class="pg-history-item" onclick="showHistoryItem(${pitchHistory.indexOf(h)})">
-        <div class="ph-icon">🤖</div>
-        <div>
-          <div class="ph-title">${h.pitchTypeLabel} · ${h.profile.model} vs ${h.profile.competitor}</div>
-          <div class="ph-meta">${h.profile.customerName} · ${h.profile.language} · ${h.ts.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}</div>
-        </div>
-      </div>
-    `).join('')}
-  `;
-  output.appendChild(histDiv);
-}
-
-function showHistoryItem(idx) {
-  const h = pitchHistory[idx];
-  if (!h) return;
-  document.getElementById('pg-output').innerHTML = '';
-  renderResult(h.pitchText, h.profile, h.pitchTypeLabel);
-  renderHistory();
-}
-
-// ════════════════════════════════════════════════════
-// QUICK GENERATE (from welcome cards)
-// ════════════════════════════════════════════════════
-function quickGenerate(ptype, segment, competitor) {
-  // Set pitch type tab
-  document.querySelectorAll('.pg-ptab').forEach(b => {
-    b.classList.toggle('active', b.dataset.ptype === ptype);
-  });
-  pitchType = ptype;
-
-  // Set segment
-  document.getElementById('cust-segment').value = segment;
-
-  // Set competitor chip
-  document.querySelectorAll('.pg-chip[onclick*="competitor"]').forEach(c => {
-    c.classList.toggle('active', c.dataset.val === competitor);
-  });
-
-  // Set language for whatsapp demo
-  if (ptype === 'whatsapp_summary') {
-    document.querySelectorAll('.pg-chip[onclick*="setLang"]').forEach(c => {
-      const active = c.dataset.val === 'Hindi';
-      c.classList.toggle('active', active);
-    });
-    outputLang = 'Hindi';
-  }
-
-  generatePitch();
-}
+window.addEventListener('DOMContentLoaded',function(){showReady();});
 </script>
 </body>
 </html>
