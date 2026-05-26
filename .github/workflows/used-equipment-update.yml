@@ -1,0 +1,38 @@
+name: Used Equipment — Daily Data Refresh
+
+on:
+  schedule:
+    - cron: '0 2 * * *'    # 07:30 IST daily
+    - cron: '0 8 * * *'    # 13:30 IST backup
+  workflow_dispatch:        # Manual trigger
+
+jobs:
+  refresh-used-equipment:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests feedparser firebase-admin
+
+      - name: Fetch used equipment intelligence data
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          COMTRADE_KEY:             ${{ secrets.COMTRADE_KEY }}
+          OPENEXCHANGERATES_KEY:    ${{ secrets.OPENEXCHANGERATES_KEY }}
+        run: python scripts/fetch_used_equipment.py
+
+      - name: Commit data files
+        run: |
+          git config user.name  "L&T CMMB UE Bot"
+          git config user.email "cmmb-bot@lntcmmb.in"
+          git add data/ue_*.json
+          git diff --staged --quiet || git commit -m "🔄 UE data: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push || true
