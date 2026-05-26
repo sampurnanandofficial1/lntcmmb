@@ -1561,11 +1561,19 @@ function initCharts() {
 function switchUETab(tab) {
   document.querySelectorAll('.ue-tab').forEach(b => b.classList.toggle('active', b.dataset.tab===tab));
   document.querySelectorAll('.ue-panel').forEach(p => p.classList.toggle('active', p.id==='panel-'+tab));
-  if (tab==='pricing' || tab==='markets' || tab==='valuation') setTimeout(()=>{
-    if (pricingChartObj) pricingChartObj.update();
-    if (deprChartObj)    deprChartObj.update();
-    if (tradeChartObj)   tradeChartObj.update();
-  },50);
+  if (tab==='pricing' || tab==='markets' || tab==='valuation') {
+    setTimeout(()=>{
+      if (pricingChartObj) pricingChartObj.update();
+      if (deprChartObj)    deprChartObj.update();
+      if (tradeChartObj)   tradeChartObj.update();
+    }, 50);
+  }
+  if (tab === 'worldmap') {
+    setTimeout(() => {
+      initWorldMap();
+      if (worldMap) worldMap.invalidateSize();
+    }, 80);
+  }
 }
 
 // ════════════════════════════════════════════════════
@@ -2013,17 +2021,7 @@ function renderMapMarketStrip() {
   `).join('');
 }
 
-// ── Hook into tab switch to init map ───────────────────────────────────────
-const _origSwitchUETab = switchUETab;
-function switchUETab(tab) {
-  _origSwitchUETab(tab);
-  if (tab === 'worldmap') {
-    setTimeout(() => {
-      initWorldMap();
-      if (worldMap) worldMap.invalidateSize();
-    }, 80);
-  }
-}
+// World map init is handled inside switchUETab directly
 
 </script>
 </body>
