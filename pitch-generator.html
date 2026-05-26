@@ -119,49 +119,64 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
 
 <div class="pg-body">
 <div class="pg-left">
+
   <div class="sec-head">Customer Profile</div>
-  <div class="fgrp"><label class="flabel">Customer Name</label><input class="finput" id="cust-name" placeholder="e.g. Ramesh Singh"></div>
-  <div class="fgrp"><label class="flabel">Company Name</label><input class="finput" id="cust-company" placeholder="e.g. ABC Infratech Pvt Ltd"></div>
-  <div class="fgrp"><label class="flabel">Customer Type</label>
+  <div class="fgrp">
+    <label class="flabel">Customer Name</label>
+    <input class="finput" id="cust-name" placeholder="e.g. Ramesh Singh">
+  </div>
+  <div class="fgrp">
+    <label class="flabel">Company Name</label>
+    <input class="finput" id="cust-company" placeholder="e.g. ABC Infratech Pvt Ltd">
+  </div>
+  <div class="fgrp">
+    <label class="flabel">Customer Type</label>
     <select class="fselect" id="cust-type">
+      <option value="fleet_owner">Fleet Owner (10+ machines)</option>
+      <option value="medium_contractor">Medium Contractor (3–10 machines)</option>
       <option value="small_contractor" selected>Small Contractor (1–3 machines)</option>
-      <option value="medium_contractor">Medium Contractor (4–15 machines)</option>
-      <option value="fleet_owner">Fleet Owner (15+ machines)</option>
       <option value="first_time">First-Time Buyer</option>
-      <option value="rental">Rental Company</option>
+      <option value="rental">Rental / Hiring Company</option>
       <option value="mining_company">Mining Company (Direct)</option>
+      <option value="govt_psu">Govt / PSU Contractor</option>
     </select>
   </div>
-  <div class="fgrp"><label class="flabel">Price Sensitivity</label>
+  <div class="fgrp">
+    <label class="flabel">Price Sensitivity</label>
     <div class="chip-row" id="cg-price">
       <span class="chip" data-v="price_sensitive" onclick="chipSingle(this,'cg-price')">Price-Sensitive</span>
       <span class="chip on" data-v="value_focused" onclick="chipSingle(this,'cg-price')">Value-Focused</span>
-      <span class="chip" data-v="premium" onclick="chipSingle(this,'cg-price')">Premium</span>
+      <span class="chip" data-v="premium" onclick="chipSingle(this,'cg-price')">Premium Buyer</span>
     </div>
   </div>
+
   <div class="sec-head">Segment & Region</div>
-  <div class="fgrp"><label class="flabel">Work Segment</label>
+  <div class="fgrp">
+    <label class="flabel">Work Segment</label>
     <select class="fselect" id="cust-segment">
-      <option value="mining" selected>Mining (Coal / Iron Ore / OB)</option>
       <option value="highways">Road & Highways (EPC / HAM)</option>
+      <option value="mining" selected>Mining (Coal / Iron Ore)</option>
       <option value="railways">Railways & Metro</option>
       <option value="irrigation">Irrigation & Dams</option>
       <option value="ports">Ports & Waterways</option>
+      <option value="real_estate">Real Estate & Buildings</option>
       <option value="quarrying">Quarrying & Aggregate</option>
       <option value="general">General Construction</option>
     </select>
   </div>
-  <div class="fgrp"><label class="flabel">Region</label>
+  <div class="fgrp">
+    <label class="flabel">Region</label>
     <select class="fselect" id="cust-region">
-      <option value="north">North India</option>
-      <option value="south" selected>South India</option>
-      <option value="west">West India</option>
-      <option value="east">East India</option>
-      <option value="central">Central India</option>
-      <option value="northeast">Northeast India</option>
+      <option value="north">North India (UP / MP / Rajasthan / Punjab)</option>
+      <option value="south" selected>South India (TN / AP / Telangana / Kerala)</option>
+      <option value="west">West India (Maharashtra / Gujarat)</option>
+      <option value="east">East India (Odisha / Jharkhand / WB / Assam)</option>
+      <option value="central">Central India (CG / Madhya Pradesh)</option>
+      <option value="northeast">Northeast India (Assam / Manipur / Mizoram)</option>
     </select>
   </div>
-  <div class="fgrp"><label class="flabel">Output Language</label>
+  <div class="fgrp">
+    <label class="flabel">Output Language</label>
     <div class="chip-row" id="cg-lang">
       <span class="chip on green" data-v="English"  onclick="chipSingle(this,'cg-lang');setLang(this)">English</span>
       <span class="chip green" data-v="Hindi"    onclick="chipSingle(this,'cg-lang');setLang(this)">हिंदी</span>
@@ -173,17 +188,21 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
       <span class="chip green" data-v="Bengali"  onclick="chipSingle(this,'cg-lang');setLang(this)">বাংলা</span>
     </div>
   </div>
+
   <div class="sec-head">Machine & Competitor</div>
-  <div class="fgrp"><label class="flabel">Komatsu Model</label>
+  <div class="fgrp">
+    <label class="flabel">Komatsu Model to Pitch</label>
     <select class="fselect" id="komatsu-model">
       <option value="PC210-10M0" selected>PC210-10M0 (21T flagship)</option>
       <option value="PC200-8M0">PC200-8M0 (20T workhorse)</option>
       <option value="PC205-7">PC205-7 (20T mining spec)</option>
       <option value="PC240-10M0">PC240-10M0 (24T heavy)</option>
       <option value="PC290-11">PC290-11 (29T super heavy)</option>
+      <option value="PC360-11">PC360-11 (36T large mining)</option>
     </select>
   </div>
-  <div class="fgrp"><label class="flabel">Competitor to Compare</label>
+  <div class="fgrp">
+    <label class="flabel">Competitor to Compare Against</label>
     <div class="chip-row" id="cg-comp">
       <span class="chip on" data-v="CAT"     onclick="chipSingle(this,'cg-comp')">CAT</span>
       <span class="chip" data-v="Hitachi" onclick="chipSingle(this,'cg-comp')">Hitachi</span>
@@ -194,41 +213,47 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
       <span class="chip" data-v="SANY"    onclick="chipSingle(this,'cg-comp')">SANY</span>
     </div>
   </div>
-  <div class="fgrp"><label class="flabel">Customer Pain Points</label>
+  <div class="fgrp">
+    <label class="flabel">Customer Pain Points</label>
     <div class="chip-row" id="cg-pain">
-      <span class="chip on" data-v="breakdowns" onclick="chipMulti(this)">Breakdowns</span>
-      <span class="chip" data-v="high_fuel" onclick="chipMulti(this)">High Fuel</span>
-      <span class="chip" data-v="poor_resale" onclick="chipMulti(this)">Poor Resale</span>
-      <span class="chip" data-v="high_maintenance" onclick="chipMulti(this)">Maintenance</span>
-      <span class="chip" data-v="slow_service" onclick="chipMulti(this)">Slow Service</span>
-      <span class="chip" data-v="financing" onclick="chipMulti(this)">Financing</span>
-      <span class="chip" data-v="low_output" onclick="chipMulti(this)">Low Output</span>
+      <span class="chip on" data-v="breakdowns"        onclick="chipMulti(this)">Frequent Breakdown</span>
+      <span class="chip"    data-v="high_fuel"         onclick="chipMulti(this)">High Fuel Cost</span>
+      <span class="chip"    data-v="poor_resale"       onclick="chipMulti(this)">Poor Resale Value</span>
+      <span class="chip"    data-v="high_maintenance"  onclick="chipMulti(this)">High Maintenance</span>
+      <span class="chip"    data-v="slow_service"      onclick="chipMulti(this)">Slow Service Support</span>
+      <span class="chip"    data-v="financing"         onclick="chipMulti(this)">Financing Cost</span>
+      <span class="chip"    data-v="low_output"        onclick="chipMulti(this)">Low Productivity</span>
     </div>
   </div>
+
   <div class="sec-head">Usage Parameters</div>
-  <div class="fgrp"><label class="flabel">Daily Operating Hours</label>
+  <div class="fgrp">
+    <label class="flabel">Daily Operating Hours</label>
     <select class="fselect" id="hours-day">
-      <option value="8">8 hrs (single shift)</option>
-      <option value="12" selected>12 hrs (double shift)</option>
-      <option value="16">16 hrs (heavy)</option>
-      <option value="20">20+ hrs (mine continuous)</option>
+      <option value="8">8 hrs / day (single shift)</option>
+      <option value="12" selected>12 hrs / day (double shift)</option>
+      <option value="16">16 hrs / day (heavy operation)</option>
+      <option value="20">20+ hrs / day (mine — continuous)</option>
     </select>
   </div>
-  <div class="fgrp"><label class="flabel">Fleet Size</label>
+  <div class="fgrp">
+    <label class="flabel">Fleet Size (existing machines)</label>
     <select class="fselect" id="fleet-size">
       <option value="1">1 machine</option>
-      <option value="3" selected>2–5 machines</option>
-      <option value="10">6–15 machines</option>
-      <option value="25">16–30 machines</option>
+      <option value="3" selected>2 – 5 machines</option>
+      <option value="10">6 – 15 machines</option>
+      <option value="25">16 – 30 machines</option>
       <option value="50">30+ machines</option>
     </select>
   </div>
-  <div class="fgrp"><label class="flabel">Additional Context (optional)</label>
-    <textarea class="ftextarea" id="extra-ctx" placeholder="e.g. Has 2 old CAT 320s, asking about fuel. Budget Rs 65L. Limestone quarry in Rajasthan."></textarea>
+  <div class="fgrp">
+    <label class="flabel">Additional Context <span style="font-weight:400;color:var(--gray)">(optional)</span></label>
+    <textarea class="ftextarea" id="extra-ctx" placeholder="e.g. Has 2 old CAT 320s, complaining about fuel costs. Site is limestone quarry in Rajasthan. Budget ₹60L. Interested in AMC option."></textarea>
   </div>
+
   <button class="gen-btn" id="gen-btn" onclick="generatePitch()">
     <i class="fa fa-magic"></i>
-    <span id="gen-btn-txt">Generate Pitch</span>
+    <span id="gen-btn-txt">Generate AI Pitch</span>
   </button>
 </div>
 
