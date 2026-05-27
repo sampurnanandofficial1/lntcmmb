@@ -597,20 +597,54 @@ SINGLE SOURCE OF TRUTH — INTERNAL DATA (HEX_-_Economics.xlsx + Ownership_Renta
 • Ownership rational threshold: above 2,800-3,000 productive hrs/yr
 • L&T AMC rate: Rs 280/hr fixed
 
-COMPETITOR DATA — OFFICIAL OEM SOURCES ONLY (11 OEMs in India market):
-• CAT (Caterpillar) 320D3 GC: fuel 11-13 L/hr (cat.com official), VisionLink telematics paid subscription
-• Tata Hitachi: Made in India, ConSite telematics, 4,500 hr hydraulic oil interval (tatahitachi.co.in)
-• JCB: Made in India, JCB LiveLink 4.0 standard, 14% fuel saving vs prev gen, Rs 2.9L/yr saving claim (jcb.com/en-IN)
-• Hyundai CE: HiMate telematics — India-specific fuel & price NOT published officially
-• Kobelco: KOMICS telematics — India-specific data NOT published officially
-• Volvo CE: 168 hp, CareTrack telematics standard — fuel L/hr NOT published on volvoce.com
-• SANY: No telematics mentioned on official pages — fuel & India price NOT published officially
-• XCMG: India network growing, official India pricing NOT published
-• LiuGong: India presence with LiuGong India Pvt Ltd, +39% growth FY25 (ICEMA data)
+COMPETITOR DATA — OFFICIAL OEM SOURCES ONLY (sourced from official product pages, May 2026):
+Stored in Firebase Firestore collection: oem_specs
+
+• CAT (cat.com/en_IN — 320D3 GC):
+  Engine: 123 HP (92 kW) net, ISO 9249 | Weight: 19,800 kg | Bucket: 1.19 m3
+  Fuel: 11-13 L/hr earthmoving (OFFICIAL — cat.com) | VisionLink telematics: paid subscription
+  DGMS-compliant ROPS/FOGS optional | Made in India via dealer assembly
+
+• Tata Hitachi (tatahitachi.co.in — EX 215LC Prime):
+  Engine: Cummins 140 HP @ 2000 rpm | Weight: 20,800-21,900 kg | Bucket: 1.05-1.70 m3
+  Fuel: NOT PUBLISHED on tatahitachi.co.in | Hydraulic oil interval: 4,500 hrs (official)
+  ConSite telematics | Made in India (Dharwad, Karnataka)
+
+• JCB (jcb.com/en-IN — NXT 225LC M):
+  Engine: ecoMAX 148 HP | Weight: 22,200 kg | Bucket: 1.2 m3 HD | Fuel tank: 343 L
+  Fuel L/hr: NOT PUBLISHED | "14% fuel saving vs prev gen, Rs 2.9L/yr saving" (JCB India press Oct 2024)
+  JCB LiveLink 4.0 standard | 67 dB cab | Made in India (Ballabhgarh)
+
+• Hyundai CE (hyundai-ce.eu — HX220A L):
+  Engine: Cummins B4.5 Stage V, 129 kW (173 HP) | Weight: 22,150 kg | Bucket: 0.80-1.34 m3
+  Fuel: NOT PUBLISHED | Hi Mate telematics | EGR-free engine | Made in South Korea
+
+• Kobelco (kobelco-europe.com — SK220XDLC-10):
+  Engine: 118 kW (158 HP) ISO14396 | Weight: 21,800-22,000 kg | Bucket: 0.59-1.2 m3
+  Fuel: NOT PUBLISHED | KOMICS telematics | Made in Japan | 10th generation SK series
+
+• Volvo CE (volvoce.com — EC220E):
+  Engine: Volvo D6J, 172-173 HP (129 kW) Tier 4 Final | Weight: 20,600-25,100 kg | Bucket: 0.48-1.27 m3
+  Fuel: NOT PUBLISHED | CareTrack telematics STANDARD (no extra cost) | Made in Sweden
+
+• SANY (sany.in — SY215C-9LC SPARC):
+  Engine: Mitsubishi D06S2, 140 HP (103 kW) | Weight: 21,500 kg | Bucket: 0.93 m3
+  Fuel: NOT PUBLISHED on sany.in | No telematics mentioned officially
+  Made in India (Pune) | DOMC energy optimization system
+
+• XCMG (xcmg.com — XE215C):
+  Engine: Cummins/Weichai/Isuzu, 128.5-129 kW (172 HP) | Weight: 21,450 kg | Bucket: 0.8-1.0 m3
+  Fuel: NOT PUBLISHED | Up to 7% fuel saving vs prev gen (xcmg.com claim) | Made in China
+  XCMG Intelligent Telematics
+
+• LiuGong (liugongindia.com — 922E XD):
+  Engine: Cummins QSB7/6BTAA5.9, 117-148 HP | Weight: 22,000 kg | Bucket: 1.0 m3 | Fuel tank: 420 L
+  Fuel: NOT PUBLISHED | iLink telematics standard | Made in China (Guangxi)
+  +39% India growth FY25 (ICEMA) | IPC intelligent power control system
 
 DATA INTEGRITY RULES (NON-NEGOTIABLE):
 1. USE ONLY data from Internal HEX/TIPL files for Komatsu economics. These are the SINGLE SOURCE OF TRUTH.
-2. For competitors, use ONLY data sourced from official OEM websites/brochures.
+2. For competitors, use ONLY data sourced from official OEM websites/brochures (stored in Firebase: oem_specs collection).
 3. If a data point is NOT available from official sources, state "Not published officially" — NEVER invent numbers.
 4. DO NOT quote pricing for any OEM that has not officially published it.
 5. You MAY use qualitative statements from OEM press releases (e.g., "14% better fuel efficiency vs previous generation" from JCB India).
