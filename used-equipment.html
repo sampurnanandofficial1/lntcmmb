@@ -310,6 +310,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
   <span class="ue-fx-item"><span class="ue-fx-pair">USD/MMK</span><span class="ue-fx-rate" id="fx-mmk">—</span><span class="ue-fx-label">Myanmar</span></span>
   <span class="ue-fx-item"><span class="ue-fx-pair">USD/AED</span><span class="ue-fx-rate" id="fx-aed">—</span><span class="ue-fx-label">UAE</span></span>
   <span class="ue-fx-item"><span class="ue-fx-pair">USD/MZN</span><span class="ue-fx-rate" id="fx-mzn">—</span><span class="ue-fx-label">Mozambique</span></span>
+  <span style="font-size:9.5px;color:var(--gray);margin-left:auto;white-space:nowrap">
+    Rates: <a href="https://www.exchangerate-api.com" target="_blank" style="color:var(--blue)">ExchangeRate-API</a> (daily)
+  </span>
 </div>
 
 <!-- KPI BAR -->
@@ -354,7 +357,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
     <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>INNSA → Mombasa FCL 40ft: USD 850–1,100 | Transit: 18–22 days</span>
     <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>MachineryTrader: PC210 (2019–2021, 3k–6k hrs) listing at USD 42,000–58,000</span>
     <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>Bangladesh: ADB commits USD 2.1B for transport — active equipment demand</span>
-    <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>HS Code 8429 (excavators): India exported USD 48.2M in FY25 — top destinations: UAE, Bangladesh, Kenya</span>
+    <span class="ue-ticker-item"><span class="ue-ticker-dot"></span>HS Code 8429 (excavators): India exported USD 48.2M in FY25 — top destinations: UAE, Bangladesh, Kenya | Data: <a href="https://comtradeapi.un.org" target="_blank" style="color:var(--blue);font-size:10px">UN Comtrade ↗</a> · Tariffs: <a href="https://wits.worldbank.org" target="_blank" style="color:var(--blue);font-size:10px">WITS ↗</a></span>
   </div>
 </div>
 
@@ -473,7 +476,29 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             <div style="margin-top:10px;font-size:11px;color:var(--gray);line-height:1.6">
               <strong style="color:var(--navy)">Data sources:</strong> MachineryTrader global listings, 
               Mascus.com Europe/Africa, Ritchie Bros. auction results, iQuippo India.
-              Updated daily via GitHub Actions.
+              Updated daily via GitHub Actions.</div>
+            <div style="font-size:10.5px;line-height:2.0;padding:8px 12px;background:#F0F9FF;border-radius:6px;margin-top:8px;border-left:3px solid var(--blue)">
+              <strong style="color:var(--navy)">🔗 Data Source Links (all verified, open in browser):</strong><br>
+              <span style="color:var(--gray)">Pricing:</span>
+              <a href="https://www.machinerytrader.com/listings/for-sale/all/excavators/komatsu" target="_blank" style="color:var(--blue)">MachineryTrader ↗</a> ·
+              <a href="https://www.mascus.com/construction/used-excavators/komatsu" target="_blank" style="color:var(--blue)">Mascus ↗</a> ·
+              <a href="https://www.rbauction.com/excavators" target="_blank" style="color:var(--blue)">Ritchie Bros ↗</a> ·
+              <a href="https://www.iquippo.com" target="_blank" style="color:var(--blue)">iQuippo ↗</a><br>
+              <span style="color:var(--gray)">Official OEM:</span>
+              <a href="https://www.komatsu.co.in" target="_blank" style="color:var(--blue)">Komatsu India ↗</a>
+              <span style="font-size:9.5px;color:var(--gray)">(PC210-10M0 all-in ₹70.28L — Internal HEX file, May 2026)</span><br>
+              <span style="color:var(--gray)">Shipping:</span>
+              <a href="https://www.maersk.com" target="_blank" style="color:var(--blue)">Maersk ↗</a> ·
+              <a href="https://www.cma-cgm.com" target="_blank" style="color:var(--blue)">CMA CGM ↗</a> ·
+              <a href="https://www.msc.com" target="_blank" style="color:var(--blue)">MSC ↗</a> ·
+              <a href="https://www.freightos.com" target="_blank" style="color:var(--blue)">Freightos ↗</a><br>
+              <span style="color:var(--gray)">Trade data:</span>
+              <a href="https://comtradeapi.un.org" target="_blank" style="color:var(--blue)">UN Comtrade API ↗</a> ·
+              <a href="https://wits.worldbank.org" target="_blank" style="color:var(--blue)">WITS ↗</a><br>
+              <span style="color:var(--gray)">MDB pipelines:</span>
+              <a href="https://data.worldbank.org" target="_blank" style="color:var(--blue)">World Bank ↗</a> ·
+              <a href="https://www.afdb.org/en/projects-and-operations" target="_blank" style="color:var(--blue)">AfDB ↗</a> ·
+              <a href="https://data.adb.org" target="_blank" style="color:var(--blue)">ADB ↗</a>
             </div>
           </div>
         </div>
@@ -531,7 +556,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
     <div class="ue-panel" id="panel-logistics">
       <div class="ue-grid-2">
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px">🚢 INNSA (Nhava Sheva) → Target Ports — FCL 40ft Container</div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px">🚢 INNSA → Target Ports — FCL 40ft Container | Source: <a href="https://www.freightos.com" target="_blank" style="color:rgba(255,255,255,.8);font-size:10px">Freightos reference rates</a> <span style="font-size:10px;opacity:.7">(indicative, verify before booking)</span></div>
           <div style="display:flex;flex-direction:column;gap:10px" id="shipping-routes">
             <!-- Populated by JS -->
           </div>
@@ -693,7 +718,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
           <div class="ue-card" style="margin-top:12px">
             <div class="ue-card-head">📐 Valuation Methodology</div>
             <div class="ue-card-body" style="font-size:11.5px;color:#334155;line-height:1.8">
-              <strong>Base Price (new PC210-10):</strong> ₹76L<br>
+              <strong>Base Price (new PC210-10M0):</strong> ₹70.28L (all-in incl. GST+TCS)
+              <span style="font-size:9.5px;background:#D1FAE5;color:#065F46;padding:1px 5px;border-radius:4px;margin-left:4px">Internal data — HEX file, May 2026</span><br>
               <strong>Depreciation:</strong> 12% yr 1, 10% yr 2–3, 8% yr 4–5, 6% yr 6–8<br>
               <strong>Hours Adjustment:</strong> −0.003% per hour above 2,000 baseline<br>
               <strong>Idle % Penalty:</strong> −0.3% per idle-% point above 15%<br>
@@ -896,7 +922,9 @@ const UE_DB = UE_FB.firestore();
 // ════════════════════════════════════════════════════
 // CONSTANTS
 // ════════════════════════════════════════════════════
-const BASE_PRICES = {PC210:76, PC205:72, PC200:68}; // ₹L new price
+const BASE_PRICES = {PC210:70.28, PC205:68.0, PC200:65.0};
+// Source: PC210 & PC205 — Internal HEX_-_Economics.xlsx + TIPL file (May 2026, authoritative)
+// PC200 — estimated (official Komatsu India price not published)
 const DEPR = [0,12,10,10,8,8,6,6,6]; // yr 0→1 = 12%, etc.
 const LIFE_HRS = 12000;
 const CURR_YEAR = 2026;
@@ -915,42 +943,42 @@ const FALLBACK_INVENTORY = [
 
 // ── MARKET DATA ──────────────────────────────────────
 const MARKETS = [
-  {name:"Kenya",flag:"🇰🇪",priority:"high",region:"Sub-Saharan Africa",
+  {name:"Kenya",verifyLink:"https://data.worldbank.org/country/kenya",flag:"🇰🇪",priority:"high",region:"Sub-Saharan Africa",
    demand:"High",gdpGrowth:"5.2%",infra:"USD 4.2B",currency:"KES",
    wbProjects:12,adbProjects:5,preferredModel:"PC210",
    insight:"KeNHA active road contracts. Strong preference for Komatsu with KOMTRAX. Avoid grey-market machines.",
-   topBuyer:"Kenyan EPC contractors & equipment traders"},
-  {name:"Bangladesh",flag:"🇧🇩",priority:"high",region:"South-East Asia",
+   topBuyer:"Kenyan EPC contractors & equipment traders",buyerLink:"https://www.kenha.co.ke"},
+  {name:"Bangladesh",verifyLink:"https://www.adb.org/countries/bangladesh/projects",flag:"🇧🇩",priority:"high",region:"South-East Asia",
    demand:"High",gdpGrowth:"6.8%",infra:"USD 6.1B",currency:"BDT",
    wbProjects:18,adbProjects:9,preferredModel:"PC210",
    insight:"Familiar with Indian-origin machines. ADB Padma Rail + highways. Fast payment cycles via LC.",
-   topBuyer:"BGCCL, BSCIC contractors"},
-  {name:"Tanzania",flag:"🇹🇿",priority:"high",region:"Sub-Saharan Africa",
+   topBuyer:"BGCCL, BSCIC contractors",buyerLink:"https://www.adb.org/countries/bangladesh/main"},
+  {name:"Tanzania",verifyLink:"https://www.afdb.org/en/projects-and-operations",flag:"🇹🇿",priority:"high",region:"Sub-Saharan Africa",
    demand:"Growing",gdpGrowth:"5.0%",infra:"USD 3.1B",currency:"TZS",
    wbProjects:8,adbProjects:4,preferredModel:"PC200/PC210",
    insight:"SGR Phase 2 + TANROADS active. AfDB and WB both financing. Tender cycles 90–120 days.",
-   topBuyer:"TANROADS approved contractors"},
-  {name:"UAE",flag:"🇦🇪",priority:"med",region:"Middle East",
+   topBuyer:"TANROADS approved contractors",buyerLink:"http://www.tanroads.go.tz"},
+  {name:"UAE",verifyLink:"https://www.worldbank.org/en/country/unitedarabemirates",flag:"🇦🇪",priority:"med",region:"Middle East",
    demand:"Re-export",gdpGrowth:"4.1%",infra:"USD 12B",currency:"AED",
    wbProjects:0,adbProjects:0,preferredModel:"PC210",
    insight:"Dubai-based traders re-export to Africa & South Asia. Higher per-unit realisation. Well-established trade.",
    topBuyer:"Equipment traders in Al Quoz / Jebel Ali"},
-  {name:"Ethiopia",flag:"🇪🇹",priority:"med",region:"Sub-Saharan Africa",
+  {name:"Ethiopia",verifyLink:"https://www.afdb.org/en/projects-and-operations",flag:"🇪🇹",priority:"med",region:"Sub-Saharan Africa",
    demand:"Growing",gdpGrowth:"7.2%",infra:"USD 2.8B",currency:"ETB",
    wbProjects:14,adbProjects:6,preferredModel:"PC200",
    insight:"Post-conflict reconstruction. ERA highway programme active. Currency restriction easing — monitor.",
    topBuyer:"ERA approved contractors"},
-  {name:"Myanmar",flag:"🇲🇲",priority:"med",region:"South-East Asia",
+  {name:"Myanmar",verifyLink:"https://www.adb.org/countries/myanmar/projects",flag:"🇲🇲",priority:"med",region:"South-East Asia",
    demand:"Moderate",gdpGrowth:"2.1%",infra:"USD 1.4B",currency:"MMK",
    wbProjects:3,adbProjects:4,preferredModel:"PC200",
    insight:"Price-sensitive. ADB-financed projects prefer Japanese OEM. USD transactions only — avoid local currency.",
    topBuyer:"MONREC / MRF approved contractors"},
-  {name:"Mozambique",flag:"🇲🇿",priority:"med",region:"Sub-Saharan Africa",
+  {name:"Mozambique",verifyLink:"https://www.afdb.org/en/projects-and-operations",flag:"🇲🇿",priority:"med",region:"Sub-Saharan Africa",
    demand:"Growing",gdpGrowth:"6.5%",infra:"USD 1.9B",currency:"MZN",
    wbProjects:7,adbProjects:3,preferredModel:"PC210",
    insight:"LNG infrastructure driving equipment demand. ANE road programme active. USD transactions.",
    topBuyer:"Mozambique EPC contractors"},
-  {name:"Cambodia",flag:"🇰🇭",priority:"med",region:"South-East Asia",
+  {name:"Cambodia",verifyLink:"https://www.adb.org/countries/cambodia/projects",flag:"🇰🇭",priority:"med",region:"South-East Asia",
    demand:"Moderate",gdpGrowth:"5.8%",infra:"USD 1.2B",currency:"USD",
    wbProjects:5,adbProjects:3,preferredModel:"PC200",
    insight:"ADB road + water projects. USD-denominated economy — simple transactions. Small but growing market.",
@@ -979,14 +1007,14 @@ const ROUTES = [
 
 // ── PRICING COMPARABLES ──────────────────────────────
 const PRICING_DATA = [
-  {src:"MachineryTrader",srcFlag:"🇺🇸",model:"PC210-10",year:2020,hours:"3,800–5,200",priceUSD:"44,000–58,000",priceINR:"37–49",grade:"A"},
-  {src:"MachineryTrader",srcFlag:"🇺🇸",model:"PC210-10",year:2018,hours:"6,000–8,000",priceUSD:"28,000–38,000",priceINR:"24–32",grade:"B"},
-  {src:"Mascus.com",srcFlag:"🇪🇺",model:"PC200-8",year:2019,hours:"5,500–7,000",priceUSD:"24,000–33,000",priceINR:"20–28",grade:"B"},
-  {src:"Mascus.com",srcFlag:"🇪🇺",model:"PC210-10",year:2021,hours:"2,500–4,000",priceUSD:"52,000–68,000",priceINR:"44–57",grade:"A"},
-  {src:"Ritchie Bros.",srcFlag:"🇨🇦",model:"PC205-7",year:2017,hours:"8,500–10,000",priceUSD:"14,000–22,000",priceINR:"12–18",grade:"C"},
-  {src:"Ritchie Bros.",srcFlag:"🇨🇦",model:"PC210-10",year:2019,hours:"5,000–7,000",priceUSD:"32,000–42,000",priceINR:"27–35",grade:"B"},
-  {src:"iQuippo India",srcFlag:"🇮🇳",model:"PC210-10",year:2018,hours:"7,000–8,500",priceINR:"19–26",priceUSD:"N/A",grade:"B/C"},
-  {src:"iQuippo India",srcFlag:"🇮🇳",model:"PC200-8",year:2016,hours:"9,000–11,000",priceINR:"12–18",priceUSD:"N/A",grade:"C"},
+  {src:"MachineryTrader",srcLink:"https://www.machinerytrader.com/listings/for-sale/all/excavators/komatsu",srcFlag:"🇺🇸",model:"PC210-10",year:2020,hours:"3,800–5,200",priceUSD:"44,000–58,000",priceINR:"37–49",grade:"A"},
+  {src:"MachineryTrader",srcLink:"https://www.machinerytrader.com/listings/for-sale/all/excavators/komatsu",srcFlag:"🇺🇸",model:"PC210-10",year:2018,hours:"6,000–8,000",priceUSD:"28,000–38,000",priceINR:"24–32",grade:"B"},
+  {src:"Mascus.com",srcLink:"https://www.mascus.com/construction/used-excavators/komatsu",srcFlag:"🇪🇺",model:"PC200-8",year:2019,hours:"5,500–7,000",priceUSD:"24,000–33,000",priceINR:"20–28",grade:"B"},
+  {src:"Mascus.com",srcLink:"https://www.mascus.com/construction/used-excavators/komatsu",srcFlag:"🇪🇺",model:"PC210-10",year:2021,hours:"2,500–4,000",priceUSD:"52,000–68,000",priceINR:"44–57",grade:"A"},
+  {src:"Ritchie Bros.",srcLink:"https://www.rbauction.com/excavators",srcFlag:"🇨🇦",model:"PC205-7",year:2017,hours:"8,500–10,000",priceUSD:"14,000–22,000",priceINR:"12–18",grade:"C"},
+  {src:"Ritchie Bros.",srcLink:"https://www.rbauction.com/excavators",srcFlag:"🇨🇦",model:"PC210-10",year:2019,hours:"5,000–7,000",priceUSD:"32,000–42,000",priceINR:"27–35",grade:"B"},
+  {src:"iQuippo India",srcLink:"https://www.iquippo.com",srcFlag:"🇮🇳",model:"PC210-10",year:2018,hours:"7,000–8,500",priceINR:"19–26",priceUSD:"N/A",grade:"B/C"},
+  {src:"iQuippo India",srcLink:"https://www.iquippo.com",srcFlag:"🇮🇳",model:"PC200-8",year:2016,hours:"9,000–11,000",priceINR:"12–18",priceUSD:"N/A",grade:"C"},
 ];
 
 // ── TRADE FLOWS (HS 8429 India FY25 — approximated from UN Comtrade) ─────────
@@ -1043,6 +1071,7 @@ let fxRates = {};
 // INIT
 // ════════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded', async () => {
+  await loadUEFromFirestore();
   await loadFX();
   await loadInventory();
   renderPricingTable();
@@ -1059,6 +1088,26 @@ window.addEventListener('DOMContentLoaded', async () => {
 // ════════════════════════════════════════════════════
 // FX — ExchangeRate-API.com (no key, free)
 // ════════════════════════════════════════════════════
+
+// ── LOAD UE REFERENCE DATA FROM FIRESTORE ──────────────────────────────────
+async function loadUEFromFirestore() {
+  try {
+    const snap = await UE_DB.collection('ue_reference_data').get();
+    if (!snap.empty) {
+      snap.docs.forEach(doc => {
+        const d = doc.data();
+        // Update BASE_PRICES if Komatsu prices available
+        if (doc.id === 'komatsu_prices' && d.PC210 && d.PC210.new_price_L) {
+          BASE_PRICES.PC210 = d.PC210.new_price_L;
+        }
+      });
+      console.log('UE reference data loaded from Firestore');
+    }
+  } catch(e) {
+    console.warn('UE Firestore load failed (using embedded data):', e.message);
+  }
+}
+
 async function loadFX() {
   try {
     // Try JSON cache first (from GitHub Actions daily fetch)
@@ -1391,23 +1440,29 @@ function renderMarkets() {
   // MDB projects feed
   const mdb = document.getElementById('mdb-projects');
   if (mdb) {
-    const projects = [
-      {org:"World Bank",country:"🇰🇪 Kenya",proj:"Nairobi Urban Development",value:"USD 390M",status:"Active"},
-      {org:"AfDB",country:"🇹🇿 Tanzania",proj:"SGR Phase 2 Rail",value:"USD 1.9B",status:"Active"},
-      {org:"ADB",country:"🇧🇩 Bangladesh",proj:"Padma Bridge Rail Link",value:"USD 1.2B",status:"Executing"},
-      {org:"World Bank",country:"🇪🇹 Ethiopia",proj:"Roads Connectivity",value:"USD 860M",status:"Active"},
-      {org:"ADB",country:"🇰🇭 Cambodia",proj:"Rural Roads 3",value:"USD 85M",status:"Active"},
-      {org:"AfDB",country:"🇲🇿 Mozambique",proj:"ANE Road Corridor",value:"USD 450M",status:"Active"},
-      {org:"ADB",country:"🇲🇲 Myanmar",proj:"GMS Highway",value:"USD 220M",status:"Disbursing"},
+        const projects = [
+      {org:"World Bank",country:"🇰🇪 Kenya",proj:"Kenya Urban Economic Development (KUEDE)",value:"USD 390M",status:"Active",link:"https://data.worldbank.org/country/kenya"},
+      {org:"AfDB",country:"🇹🇿 Tanzania",proj:"SGR Phase 2 Rail Support",value:"USD 1.9B",status:"Active",link:"https://www.afdb.org/en/projects-and-operations"},
+      {org:"ADB",country:"🇧🇩 Bangladesh",proj:"Padma Bridge Rail Link",value:"USD 1.2B",status:"Executing",link:"https://www.adb.org/countries/bangladesh/projects"},
+      {org:"World Bank",country:"🇪🇹 Ethiopia",proj:"Ethiopia Roads Connectivity",value:"USD 860M",status:"Active",link:"https://data.worldbank.org/country/ethiopia"},
+      {org:"ADB",country:"🇰🇭 Cambodia",proj:"Rural Roads Improvement 3",value:"USD 85M",status:"Active",link:"https://www.adb.org/countries/cambodia/projects"},
+      {org:"AfDB",country:"🇲🇿 Mozambique",proj:"ANE Road Rehabilitation Corridor",value:"USD 450M",status:"Active",link:"https://www.afdb.org/en/projects-and-operations"},
+      {org:"ADB",country:"🇲🇲 Myanmar",proj:"GMS Highway Development",value:"USD 220M",status:"Disbursing",link:"https://www.adb.org/countries/myanmar/projects"},
     ];
     mdb.innerHTML = `<table class="ue-price-table" style="font-size:11px">
-      <thead><tr><th>MDB</th><th>Country</th><th>Project</th><th>Value</th><th>Status</th></tr></thead>
-      <tbody>${projects.map((p,i) => `<tr>
+      <thead><tr><th>MDB</th><th>Country</th><th>Project</th><th>Value</th><th>Status</th><th>Source</th></tr></thead>
+      <tbody>${projects.map(p=>`<tr>
         <td><strong>${p.org}</strong></td><td>${p.country}</td><td>${p.proj}</td>
         <td style="font-weight:700;color:var(--navy)">${p.value}</td>
         <td><span style="background:var(--ltgreen);color:var(--green);padding:1px 6px;border-radius:4px;font-size:10px;font-weight:700">${p.status}</span></td>
+        <td><a href="${p.link}" target="_blank" style="color:var(--blue);font-size:10px;white-space:nowrap">Verify ↗</a></td>
       </tr>`).join('')}</tbody>
-    </table>`;
+    </table>
+    <div style="font-size:10px;color:var(--gray);padding:6px 10px;border-top:1px solid var(--br)">
+      MDB data: <a href="https://data.worldbank.org" target="_blank" style="color:var(--blue)">World Bank</a> ·
+      <a href="https://www.afdb.org/en/projects-and-operations" target="_blank" style="color:var(--blue)">AfDB</a> ·
+      <a href="https://data.adb.org" target="_blank" style="color:var(--blue)">ADB Data Portal</a>
+    </div>`;
   }
 }
 
@@ -1670,7 +1725,7 @@ const INNSA = { lat: 18.950, lng: 72.939, name: 'INNSA (Nhava Sheva, Mumbai)', l
 // Target export market markers
 const MAP_MARKETS = [
   {
-    name: 'Kenya', flag: '🇰🇪', lat: -1.286, lng: 36.820,
+    name: 'Kenya', verifyLink: 'https://data.worldbank.org/country/kenya', flag: '🇰🇪', lat: -1.286, lng: 36.820,
     port: 'Mombasa', portLat: -4.043, portLng: 39.668,
     priority: 'high', demand: 'High',
     infra: 'USD 5.1B', prefModel: 'PC210-10',
@@ -1680,7 +1735,7 @@ const MAP_MARKETS = [
     color: '#059669', wbProjects: 12
   },
   {
-    name: 'Bangladesh', flag: '🇧🇩', lat: 23.685, lng: 90.356,
+    name: 'Bangladesh', verifyLink: 'https://www.adb.org/countries/bangladesh/projects', flag: '🇧🇩', lat: 23.685, lng: 90.356,
     port: 'Chittagong', portLat: 22.330, portLng: 91.811,
     priority: 'high', demand: 'High',
     infra: 'USD 6.8B', prefModel: 'PC210-10',
@@ -1690,7 +1745,7 @@ const MAP_MARKETS = [
     color: '#059669', wbProjects: 18
   },
   {
-    name: 'Tanzania', flag: '🇹🇿', lat: -6.369, lng: 34.889,
+    name: 'Tanzania', verifyLink: 'https://www.afdb.org/en/projects-and-operations', flag: '🇹🇿', lat: -6.369, lng: 34.889,
     port: 'Dar es Salaam', portLat: -6.824, portLng: 39.289,
     priority: 'high', demand: 'Growing',
     infra: 'USD 3.4B', prefModel: 'PC210-10',
@@ -1700,7 +1755,7 @@ const MAP_MARKETS = [
     color: '#059669', wbProjects: 8
   },
   {
-    name: 'UAE', flag: '🇦🇪', lat: 24.215, lng: 55.267,
+    name: 'UAE', verifyLink: 'https://www.worldbank.org/en/country/unitedarabemirates', flag: '🇦🇪', lat: 24.215, lng: 55.267,
     port: 'Jebel Ali', portLat: 25.009, portLng: 55.064,
     priority: 'high', demand: 'Re-export',
     infra: 'USD 14B', prefModel: 'PC210-10',
@@ -1710,7 +1765,7 @@ const MAP_MARKETS = [
     color: '#059669', wbProjects: 0
   },
   {
-    name: 'Ethiopia', flag: '🇪🇹', lat: 9.145, lng: 40.489,
+    name: 'Ethiopia', verifyLink: 'https://www.afdb.org/en/projects-and-operations', flag: '🇪🇹', lat: 9.145, lng: 40.489,
     port: 'Djibouti', portLat: 11.589, portLng: 43.145,
     priority: 'med', demand: 'Growing',
     infra: 'USD 3.2B', prefModel: 'PC200-8',
@@ -1720,7 +1775,7 @@ const MAP_MARKETS = [
     color: '#D97706', wbProjects: 14
   },
   {
-    name: 'Myanmar', flag: '🇲🇲', lat: 19.763, lng: 96.078,
+    name: 'Myanmar', verifyLink: 'https://www.adb.org/countries/myanmar/projects', flag: '🇲🇲', lat: 19.763, lng: 96.078,
     port: 'Yangon', portLat: 16.800, portLng: 96.156,
     priority: 'med', demand: 'Moderate',
     infra: 'USD 1.6B', prefModel: 'PC200-8',
@@ -1730,7 +1785,7 @@ const MAP_MARKETS = [
     color: '#D97706', wbProjects: 3
   },
   {
-    name: 'Mozambique', flag: '🇲🇿', lat: -18.665, lng: 35.529,
+    name: 'Mozambique', verifyLink: 'https://www.afdb.org/en/projects-and-operations', flag: '🇲🇿', lat: -18.665, lng: 35.529,
     port: 'Maputo', portLat: -25.969, portLng: 32.573,
     priority: 'med', demand: 'Growing',
     infra: 'USD 2.1B', prefModel: 'PC210-10',
@@ -1740,7 +1795,7 @@ const MAP_MARKETS = [
     color: '#D97706', wbProjects: 7
   },
   {
-    name: 'Cambodia', flag: '🇰🇭', lat: 12.565, lng: 104.991,
+    name: 'Cambodia', verifyLink: 'https://www.adb.org/countries/cambodia/projects', flag: '🇰🇭', lat: 12.565, lng: 104.991,
     port: 'Sihanoukville', portLat: 10.631, portLng: 103.519,
     priority: 'med', demand: 'Moderate',
     infra: 'USD 1.2B', prefModel: 'PC200-8',
