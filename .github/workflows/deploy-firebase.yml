@@ -3,81 +3,82 @@ name: Deploy to Firebase Hosting
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
         with:
-          node-version: '20'
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
-      - name: Install Firebase Tools
-        run: npm install -g firebase-tools
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools@latest
 
-      - name: Write service account
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: echo "$FIREBASE_SERVICE_ACCOUNT" > /tmp/sa.json
-
-      - name: Create Firebase config
+      - name: Create firebase.json
         run: |
           cat > firebase.json << 'EOF'
           {
             "hosting": {
               "site": "lntcmmb-intelligence",
               "public": ".",
-              "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "scripts/**", ".github/**", "data/**"],
+              "ignore": [
+                "firebase.json",
+                "**/.*",
+                "scripts/**",
+                ".github/**",
+                "data/**",
+                "**/*.py",
+                "**/*.yml",
+                "sa_temp.txt"
+              ],
               "headers": [
                 {
                   "source": "**",
                   "headers": [
-                    { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+                    {"key": "Cache-Control", "value": "no-cache, no-store, must-revalidate"}
                   ]
                 }
-              ],
-              "rewrites": [
-                { "source": "/", "destination": "/index.html" }
               ]
             }
           }
           EOF
 
-      - name: Create Firebase project config
+      - name: Create .firebaserc
         run: |
           cat > .firebaserc << 'EOF'
           {
             "projects": {
               "default": "lntcmmb-intelligence1"
-            },
-            "targets": {
-              "lntcmmb-intelligence1": {
-                "hosting": {
-                  "lntcmmb-intelligence": ["lntcmmb-intelligence"]
-                }
-              }
             }
           }
           EOF
 
-      - name: Create hosting site if not exists
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: /tmp/sa.json
+      - name: Create hosting site (if not exists)
         run: |
-          firebase hosting:sites:create lntcmmb-intelligence --project lntcmmb-intelligence1 || echo "Site may already exist, continuing..."
+          firebase hosting:sites:create lntcmmb-intelligence --project lntcmmb-intelligence1 2>/dev/null && echo "Site created" || echo "Site already exists"
+        continue-on-error: true
 
       - name: Deploy to Firebase Hosting
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: /tmp/sa.json
         run: |
           firebase deploy --only hosting:lntcmmb-intelligence --project lntcmmb-intelligence1
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
 
-      - name: Show live URLs
+      - name: Success
         run: |
           echo ""
-          echo "🚀 DEPLOYED TO FIREBASE HOSTING"
-          echo "================================"
-          echo "Main Dashboard:     https://lntcmmb-intelligence.web.app/"
-          echo "Used Equipment:     https://lntcmmb-intelligence.web.app/used-equipment.html"
-          echo "AI Pitch Generator: https://lntcmmb-intelligence.web.app/pitch-generator.html"
+          echo "==================================================="
+          echo "✅  LNTCMMB deployed to Firebase Hosting"
+          echo "==================================================="
+          echo "Main Dashboard:      https://lntcmmb-intelligence.web.app/"
+          echo "Used Equipment:      https://lntcmmb-intelligence.web.app/used-equipment.html"
+          echo "AI Pitch Generator:  https://lntcmmb-intelligence.web.app/pitch-generator.html"
+          echo "==================================================="
