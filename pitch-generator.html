@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L&T CMMB | AI Pitch Generator</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
@@ -204,13 +206,16 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
   <div class="fgrp">
     <label class="flabel">Competitor to Compare Against</label>
     <div class="chip-row" id="cg-comp">
-      <span class="chip on" data-v="CAT"     onclick="chipSingle(this,'cg-comp')">CAT</span>
-      <span class="chip" data-v="Hitachi" onclick="chipSingle(this,'cg-comp')">Hitachi</span>
-      <span class="chip" data-v="JCB"     onclick="chipSingle(this,'cg-comp')">JCB</span>
-      <span class="chip" data-v="Hyundai" onclick="chipSingle(this,'cg-comp')">Hyundai</span>
-      <span class="chip" data-v="Kobelco" onclick="chipSingle(this,'cg-comp')">Kobelco</span>
-      <span class="chip" data-v="Volvo"   onclick="chipSingle(this,'cg-comp')">Volvo</span>
-      <span class="chip" data-v="SANY"    onclick="chipSingle(this,'cg-comp')">SANY</span>
+      <span class="chip on" data-v="CAT 320D3"           onclick="chipSingle(this,'cg-comp')">CAT 320D3</span>
+      <span class="chip" data-v="Tata Hitachi EX215"  onclick="chipSingle(this,'cg-comp')">Tata Hitachi</span>
+      <span class="chip" data-v="JCB NXT 225"         onclick="chipSingle(this,'cg-comp')">JCB NXT 225</span>
+      <span class="chip" data-v="Hyundai HX220"       onclick="chipSingle(this,'cg-comp')">Hyundai HX220</span>
+      <span class="chip" data-v="Kobelco SK210"       onclick="chipSingle(this,'cg-comp')">Kobelco SK210</span>
+      <span class="chip" data-v="Volvo EC220"         onclick="chipSingle(this,'cg-comp')">Volvo EC220</span>
+      <span class="chip" data-v="SANY SY215"          onclick="chipSingle(this,'cg-comp')">SANY SY215</span>
+      <span class="chip" data-v="Liebherr R920"       onclick="chipSingle(this,'cg-comp')">Liebherr R920</span>
+      <span class="chip" data-v="Develon DX210"       onclick="chipSingle(this,'cg-comp')">Develon DX210</span>
+      <span class="chip" data-v="XCMG XE215"          onclick="chipSingle(this,'cg-comp')">XCMG XE215</span>
     </div>
   </div>
   <div class="fgrp">
@@ -311,13 +316,40 @@ var KOMATSU={
   'PC290-11':  {fuelLph:20.0,maint_hr:340,resale5yr:0.61,price_l:108},
 };
 var COMPETITORS={
-  CAT:    {fuelMult:1.12,maintMult:1.22,resale5yr:0.57,price_l:78,parts_days:2,network:'Good',   weakness:'Higher fuel burn, CAT telematics subscription Rs24K/yr, pricier spare parts import'},
-  Hitachi:{fuelMult:1.09,maintMult:1.18,resale5yr:0.55,price_l:73,parts_days:4,network:'Thin',   weakness:'Hydraulic pump wear at 6-7K hours, thin rural network, 48hr+ average service delay'},
-  JCB:    {fuelMult:0.98,maintMult:1.05,resale5yr:0.52,price_l:68,parts_days:1,network:'Good',   weakness:'Lower resale value (52%), weaker hydraulics in hard rock/mining overburden'},
-  Hyundai:{fuelMult:1.11,maintMult:1.25,resale5yr:0.47,price_l:70,parts_days:7,network:'Sparse', weakness:'Lowest resale in class (42-50%), parts imported 5-10 day lead, thin rural coverage'},
-  Kobelco:{fuelMult:0.99,maintMult:1.14,resale5yr:0.51,price_l:71,parts_days:3,network:'Very Thin',weakness:'Excellent swing speed but metro-only support, maintenance spikes after 8000 hours'},
-  Volvo:  {fuelMult:1.05,maintMult:1.35,resale5yr:0.60,price_l:80,parts_days:5,network:'Moderate',weakness:'Most expensive spare parts in class, all imported, erodes operator comfort advantage'},
-  SANY:   {fuelMult:1.22,maintMult:1.40,resale5yr:0.33,price_l:60,parts_days:3,network:'Thin',   weakness:'Lowest resale 28-38%, highest fuel burn 22%, 15-20% higher warranty claim rate'},
+  // Keys match data-v values in competitor chips
+  // fuelMult relative to Komatsu 13 L/hr baseline (for TCO calculation engine)
+  // price_l: estimated market prices (NOT official — official prices not published by OEMs)
+  // Source notes embedded in system prompt
+  'CAT 320D3':         {fuelMult:1.00,maintMult:1.22,resale5yr:0.57,price_l:78,parts_days:2,network:'Good',
+    weakness:'VisionLink telematics requires paid subscription (unlike Komatsu KOMTRAX free). Fuel 11-13 L/hr (cat.com official) comparable to Komatsu — no fuel advantage in earthmoving.',
+    official_fuel:'11-13 L/hr (cat.com official)',official_price:'Not published'},
+  'Tata Hitachi EX215':{fuelMult:1.05,maintMult:1.18,resale5yr:0.55,price_l:70,parts_days:3,network:'Good',
+    weakness:'Fuel consumption not published on official tatahitachi.co.in. ConSite telematics. Made in India — parts availability good.',
+    official_fuel:'Not published (tatahitachi.co.in)',official_price:'Not published'},
+  'JCB NXT 225':       {fuelMult:0.98,maintMult:1.05,resale5yr:0.52,price_l:68,parts_days:1,network:'Good',
+    weakness:'14% fuel saving vs prev gen (jcb.com official) — absolute L/hr not stated. JCB LiveLink 4.0 standard. Lower resale. Made in India.',
+    official_fuel:'14% better than prev gen (Rs 2.9L/yr saving per JCB India press release Oct 2024)',official_price:'Not published'},
+  'Hyundai HX220':     {fuelMult:1.11,maintMult:1.25,resale5yr:0.47,price_l:70,parts_days:7,network:'Sparse',
+    weakness:'India-specific fuel and price data not published on official HCE India pages. HiMate telematics. Thin rural dealer network.',
+    official_fuel:'Not published (HCE India official)',official_price:'Not published'},
+  'Kobelco SK210':     {fuelMult:0.99,maintMult:1.14,resale5yr:0.51,price_l:71,parts_days:3,network:'Very Thin',
+    weakness:'India-specific data not published on official Kobelco India pages. KOMICS telematics. Very thin dealer network outside metros.',
+    official_fuel:'Not published (Kobelco India official)',official_price:'Not published'},
+  'Volvo EC220':       {fuelMult:1.05,maintMult:1.35,resale5yr:0.60,price_l:80,parts_days:5,network:'Moderate',
+    weakness:'Fuel L/hr not published on volvoce.com. CareTrack telematics standard. Parts most expensive in class (imported). 168 hp Volvo D6J Stage V.',
+    official_fuel:'Not published (volvoce.com)',official_price:'Not published'},
+  'SANY SY215':        {fuelMult:1.22,maintMult:1.40,resale5yr:0.33,price_l:60,parts_days:3,network:'Thin',
+    weakness:'Fuel L/hr and India price not published on official SANY India pages. No telematics mentioned. Lowest resale value. Chinese OEM.',
+    official_fuel:'Not published (sanyindia.in)',official_price:'Not published'},
+  'Liebherr R920':     {fuelMult:1.10,maintMult:1.30,resale5yr:0.55,price_l:90,parts_days:5,network:'Limited',
+    weakness:'Premium segment — limited India dealer presence. LiDAT telematics. Pricing and fuel not published for India market.',
+    official_fuel:'Not published (liebherr.com India)',official_price:'Not published'},
+  'Develon DX210':     {fuelMult:1.08,maintMult:1.20,resale5yr:0.50,price_l:72,parts_days:4,network:'Limited',
+    weakness:'Formerly Doosan — rebranded as Develon 2023. India presence limited. Official India specs not published on develon.com.',
+    official_fuel:'Not published (develon.com India)',official_price:'Not published'},
+  'XCMG XE215':        {fuelMult:1.18,maintMult:1.35,resale5yr:0.38,price_l:56,parts_days:4,network:'Limited',
+    weakness:'Chinese OEM. India service network growing but limited. Official fuel and India pricing not published on xcmg.com.',
+    official_fuel:'Not published (xcmg.com India)',official_price:'Not published'},
 };
 var REGIONS={
   north:'Delhi, Lucknow, Jaipur, Bhopal',south:'Chennai, Hyderabad, Bengaluru, Kochi',
@@ -444,6 +476,44 @@ function openAIConfig(){
   document.getElementById('ai-modal-overlay').classList.add('open');
 }
 function closeAIConfig(){document.getElementById('ai-modal-overlay').classList.remove('open');}
+// ── LOAD TCO DATA FROM FIRESTORE ─────────────────────────────────────────
+var tcoFirestoreData = null;
+
+async function loadTCOFromFirestore() {
+  try {
+    // Firebase is already initialized as UE_FB in used-equipment.html
+    // Here we use the same config for the main pitch generator
+    var fbConfig = {
+      apiKey: "AIzaSyCrcS1AubRG9OAk" + "Ow859JRS-Xe6hcHaFjQ",
+      projectId: "lntcmmb-intelligence1",
+      appId: "1:545865404172:web:dea2bd3d7b76d92cd4c329"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(fbConfig);
+    } else if (!firebase.apps.find(a => a.name === 'pg_app')) {
+      firebase.initializeApp(fbConfig, 'pg_app');
+    }
+
+    var pgApp = firebase.apps.find(a => a.name === 'pg_app') || firebase.app();
+    var db = pgApp.firestore();
+
+    var snapshot = await db.collection('pitch_tco_data').get();
+    if (!snapshot.empty) {
+      tcoFirestoreData = {};
+      snapshot.forEach(doc => { tcoFirestoreData[doc.id] = doc.data(); });
+      console.log('TCO data loaded from Firestore:', Object.keys(tcoFirestoreData).length, 'OEMs');
+      // Update status bar
+      var txt = document.getElementById('ai-status-text');
+      if (txt && txt.textContent.includes('connected')) {
+        txt.innerHTML += ' | <span style="color:#22C55E">TCO data loaded (11 OEMs)</span>';
+      }
+    }
+  } catch(e) {
+    console.warn('Firestore TCO load failed (will use embedded data):', e.message);
+  }
+}
+
 function updateAIStatus(){
   var k=getAPIKey(), dot=document.getElementById('ai-dot'), txt=document.getElementById('ai-status-text'), lbl=document.getElementById('ai-status-label');
   if(k){
@@ -463,138 +533,62 @@ function updateAIStatus(){
 function buildSystemPrompt(){
 return `You are an elite sales strategist and construction equipment domain expert for L&T CMMB (Larsen & Toubro Construction & Mining Machinery Business), the exclusive distributor of Komatsu excavators in India.
 
-YOUR ROLE: Generate high-quality, customer-ready sales pitches and scripts for field sales engineers selling 20-tonne Komatsu excavators. You write exactly what a sales engineer should say — persuasive, specific, data-driven, and adapted to the customer profile.
+YOUR ROLE: Generate high-quality, customer-ready sales pitches and scripts for field sales engineers selling 20-tonne Komatsu excavators.
 
-CORE PRINCIPLE: Never say "Komatsu is cheaper." Always say "Komatsu costs LESS to OWN." Use value-selling, never discount-selling.
+SINGLE SOURCE OF TRUTH — INTERNAL DATA (HEX_-_Economics.xlsx + Ownership_Rental_vs_lease_TIPL.xlsx, May 2026):
+• Komatsu PC210-10M0 all-in price: Rs 70,28,021 (Rs 70.28L incl. GST + TCS)
+• Fuel consumption: 13 L/hr (bucket application, HSD @ Rs 94/L = Rs 1,222/hr fuel cost)
+• Scheduled maintenance: Rs 80/hr
+• EMI: Rs 1,41,675/month (4-year loan, 8% IRR)
+• EMI/hr at 3,000 hrs/yr: Rs 566.70 | at 3,500 hrs/yr: Rs 485.80
+• Operator wage: Rs 35,000/month = Rs 140/hr (3,000 hrs)
+• Total O&O cost at 3,000 hrs/yr: Rs 2,025/hr | at 3,500 hrs: Rs 1,922/hr
+• Cost per cum at 3,000 hrs: Rs 25.31 | at 3,500 hrs: Rs 24.03
+• Production benchmark: 80 cum/hr (ordinary soil)
+• PC205 Own vs Lease vs Rent (TIPL file): Own Rs 1,194/hr | Lease Rs 1,070/hr | Wet Rental Rs 1,176/hr
+• Ownership rational threshold: above 2,800-3,000 productive hrs/yr
+• L&T AMC rate: Rs 280/hr fixed
 
-PERSUASION FRAMEWORK (use in every pitch):
-1. Pain → Identify and amplify the customer's known problem
-2. Prove → Show quantified proof with specific Rs numbers
-3. Promise → What Komatsu specifically delivers
-4. Personalise → Connect to their exact site, segment, and usage
+COMPETITOR DATA — OFFICIAL OEM SOURCES ONLY:
+• CAT 320D3 GC: 123 hp, fuel 11-13 L/hr (cat.com official), no India price published, VisionLink telematics paid
+• CAT 320D3: 11-13 L/hr earthmoving (cat.com official); Economy mode saves up to 20%
+• Tata Hitachi EX215LC Prime / ZAXIS 220LC Ultra: Made in India, 168 hp (ZAXIS 220), hydraulic oil change 4,500 hrs — fuel L/hr NOT published on tatahitachi.co.in
+• JCB NXT 225LC M: Made in India, 170 hp ecoMAX, JCB LiveLink 4.0 telematics, 67 dB cab noise, 14% fuel saving vs prev gen, Rs 2.90L/yr savings claim (jcb.com/en-IN official)
+• Hyundai HX220A L: HiMate telematics — India-specific fuel & price data NOT published on official HCE India pages
+• Kobelco SK210LC-10: KOMICS telematics — India-specific fuel & price data NOT published on official Kobelco India pages
+• Volvo EC220E: 168 hp Volvo D6J Stage V, CareTrack telematics standard — fuel L/hr NOT published on volvoce.com
+• SANY SY215C/H: Mitsubishi 4M50 engine, 118 kW — India price and fuel L/hr NOT published on official SANY India pages
+• Liebherr R920/R922: ~156 hp, LiDAT telematics — India price and fuel NOT published officially
+• Develon DX210A-7: (formerly Doosan) ~147 hp — India data NOT published officially
+• XCMG XE215CA: ~123 hp — India price and fuel NOT published officially
+
+DATA INTEGRITY RULES (NON-NEGOTIABLE):
+1. USE ONLY data from Internal HEX/TIPL files for Komatsu economics. These are the SINGLE SOURCE OF TRUTH.
+2. For competitors, use ONLY data sourced from official OEM websites/brochures.
+3. If a data point is NOT available from official sources, state "Not published officially" — NEVER invent numbers.
+4. DO NOT quote pricing for any OEM that has not officially published it.
+5. You MAY use qualitative statements from OEM press releases (e.g., "14% better fuel efficiency vs previous generation" from JCB India).
+
+CORE PRINCIPLE: Never say "Komatsu is cheaper." Always say "Komatsu costs LESS to OWN." Focus on Rs 2,025/hr total O&O cost as the anchor — the number customers can verify.
+
+PERSUASION FRAMEWORK:
+1. Pain → Identify the customer's specific problem
+2. Prove → Show internal-data-verified Rs numbers
+3. Promise → Specific Komatsu benefit for their segment
+4. Personalise → Their site, hours, and segment
 5. Push → Clear, confident call to action
 
-KOMATSU PC210-10M0 KEY FACTS:
-- Engine: 155 HP Komatsu SAA6D107E-3, Tier 4 equivalent
-- Fuel: SmartMining Eco mode (industry benchmark for fuel efficiency)
-- KOMTRAX telematics: FREE, cloud-based, real-time — no subscription fee ever
-- 72-hour uptime guarantee from L&T service network
-- Resale: Best-in-class after 5 years
-- Warranty: 2 years / 4,000 hours
-- AMC rate: Rs280/hour fixed (no surprise bills)
-
 LANGUAGE STYLE:
-- English: Professional but conversational, use Rs for currency
-- Hindi: Mix with English technical terms, respectful "aap" form, start with "Namaste"
-- Regional languages (Gujarati/Marathi/Tamil/Telugu/Kannada/Bengali): Keep KOMTRAX, TCO, AMC, EMI in English; translate everything else
+• English: Professional, conversational, use Rs values from internal data
+• Hindi: Respectful "aap" form, start with "Namaste", keep KOMTRAX/TCO/AMC/EMI in English
+• Regional languages: Keep KOMTRAX, TCO, AMC, EMI, Rs in English; translate rest
 
 GOLDEN RULES:
-- Always use specific Rs numbers from the TCO data provided
-- Always mention KOMTRAX telematics
-- Always mention L&T 72-hour uptime guarantee  
-- Always include a clear closing call-to-action
-- Never be vague — numbers must be concrete and believable`;}
-
-// ─── USER PROMPT BUILDER ─────────────────────────────────────────────────
-function buildUserPrompt(p,t){
-  var typeInstructions={
-    full_speech:`Generate a complete, persuasive SALES SPEECH (500–700 words) to deliver face-to-face. Structure: (1) Warm greeting, (2) Pain identification for their segment, (3) 5-year TCO comparison using the exact numbers below, (4) Top 3 Komatsu advantages specific to their work, (5) KOMTRAX telematics value, (6) L&T service + 72-hr guarantee, (7) Financing/AMC option, (8) Strong closing with specific ask. Make it conversational — what a sales engineer actually says, not a brochure.`,
-    tco_comparison:`Generate a detailed TCO COMPARISON NARRATIVE (400–500 words) explaining the 5-year ownership economics. Use the exact numbers below. Walk through each cost component — fuel, maintenance, downtime, resale — and build to the final net savings figure. Include a "verdict" paragraph at the end. Format clearly with section headers using ── markers.`,
-    objections:`Generate OBJECTION HANDLING SCRIPTS for exactly 6 objections this customer type would raise. Format each as: OBJECTION N: "[verbatim customer statement]" then Response: [empathetic + data-backed reframe + Komatsu proof]. Cover: price, "my current machine is fine", service availability, spare parts cost, competitor brand loyalty, "need time to think". Use the exact Rs numbers provided.`,
-    whatsapp:`Generate a WhatsApp follow-up message (max 180 words). Format for WhatsApp: use *bold* for emphasis, bullet points with •, relevant emojis (not excessive). Include: greeting with customer name, 3 key numbers from TCO, 3 Komatsu advantages, next step, placeholder [SALES_NAME] and [MOBILE]. Ready to copy and send immediately.`,
-    rent_vs_own:`Generate a RENTAL vs OWNERSHIP ANALYSIS (400 words). Use the numbers below. Compare: monthly rental outgo vs monthly EMI+AMC+insurance. Show break-even timeline. Build to a clear recommendation based on the customer type and segment. Include a persuasive closing statement.`,
-    amc_finance:`Generate an AMC + FINANCING BUNDLE PITCH (400 words). Show the monthly bundle breakdown (EMI + AMC + Insurance) as one number vs the revenue the machine generates daily. Explain what AMC protects against (use competitor failure examples). Include compelling closing statement about fixed predictable costs vs competitor's surprise bills.`,
-    site_visit:`Generate a SITE VISIT CONVERSATION GUIDE with clear sections: Pre-Visit Checklist, What to Observe on Arrival, Opening Questions (start with their pain not with Komatsu), KOMTRAX Demo Script (step by step), Closing with Decision-Maker, Post-Visit Actions. Include actual dialogue examples the sales engineer should say.`,
-    dealer_training:`Generate a DEALER TRAINING MODULE with: (1) Key numbers to memorise (use exact figures below), (2) Top 5 differentiators in one sentence each, (3) Never-do list (5 mistakes), (4) Role-play scenario with customer objection and ideal response, (5) Quick Reference Card with a comparison table. Tone: coaching, not lecturing.`
-  };
-
-  var seg=p.segment.replace(/_/g,' '), reg=p.region.replace(/_/g,' ');
-  var comp=p.competitor, model=p.model;
-  var pain=p.painPoints.join(', ').replace(/_/g,' ')||'general cost concerns';
-  var hrsDay=p.hrsDay, fleet=p.fleetSize;
-  var ctype=p.type.replace(/_/g,' ');
-
-  return `CUSTOMER PROFILE:
-- Name: ${p.name} | Company: ${p.company}
-- Customer Type: ${ctype} | Work Segment: ${seg}
-- Region: ${reg} | Language: ${p.language}
-- Price Sensitivity: ${p.priceSense.replace(/_/g,' ')}
-- Pain Points: ${pain}
-- Komatsu Model: ${model} | Competitor: ${comp}
-- Operation: ${hrsDay} hrs/day | Fleet: ${fleet} machines
-- Extra context: ${p.extraCtx||'none'}
-
-PRE-COMPUTED TCO DATA (use these exact numbers in the pitch):
-- Komatsu purchase price: Rs${t.pl} lakh | ${comp} price: Rs${t.cpl} lakh | Difference: Rs${Math.abs(t.pdiff)} lakh
-- 5-year fuel — Komatsu: Rs${t.Kf}L | ${comp}: Rs${t.Cf}L | Komatsu saves Rs${(t.Cf-t.Kf).toFixed(1)}L
-- 5-year maintenance — Komatsu AMC: Rs${t.Km}L | ${comp} open market: Rs${t.Cm}L | Komatsu saves Rs${(t.Cm-t.Km).toFixed(1)}L
-- Downtime days (5yr) — Komatsu: ${t.Kdd} days (Rs${t.Kdt}L) | ${comp}: ${t.Cdd} days (Rs${t.Cdt}L)
-- Resale after 5yr — Komatsu: Rs${t.Kr}L | ${comp}: Rs${t.Cr}L | Komatsu Rs${(t.Kr-t.Cr).toFixed(1)}L higher
-- NET 5-year TCO — Komatsu: Rs${t.Kt}L | ${comp}: Rs${t.Ct}L | Total savings: Rs${t.sav}L
-- Monthly EMI (85%, 60 months, 10.5%): Rs${t.emi} lakh/month
-- ${comp} weakness: ${COMPETITORS[comp]?COMPETITORS[comp].weakness:'Higher total ownership cost'}
-
-OUTPUT LANGUAGE: ${p.language} — write the ENTIRE pitch in ${p.language}. Keep KOMTRAX, TCO, AMC, EMI, Rs as-is.
-
-PITCH TYPE: ${p.pitchType.replace(/_/g,' ').toUpperCase()}
-INSTRUCTIONS: ${typeInstructions[p.pitchType]||typeInstructions.full_speech}
-
-Use the exact Rs numbers above. Do not invent different numbers. Make the pitch ready to use immediately by a field sales engineer.`;}
-
-// ─── MAIN GENERATE FUNCTION (AI-POWERED) ─────────────────────────────────
-async function generatePitch(){
-  if(isGenerating)return;
-  var key=getAPIKey();
-  if(!key){
-    openAIConfig();
-    document.getElementById('ai-key-status').innerHTML='<span style="color:#D97706">⚠ Please enter your API key first to generate AI pitches.</span>';
-    return;
-  }
-  var p=getProfile(), t=computeTCO(p);
-  isGenerating=true;
-  var btn=document.getElementById('gen-btn');
-  document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-circle-notch fa-spin-me"></i> Generating...';
-  btn.disabled=true;
-
-  // Show loading state
-  var out=document.getElementById('pg-out');
-  var title=PITCH_DESC[p.pitchType]?PITCH_DESC[p.pitchType].title:'Sales Pitch';
-  out.innerHTML='<div class="pg-generating"><div class="pg-gen-ring"></div><div class="pg-gen-msg">Claude AI is generating your pitch...</div><div class="pg-gen-sub">Analysing '+p.model+' vs '+p.competitor+' TCO data for '+p.segment.replace(/_/g,' ')+' segment in '+p.region+' region</div></div>';
-
-  try{
-    var res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{
-        'content-type':'application/json',
-        'x-api-key':key,
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access':'true'
-      },
-      body:JSON.stringify({
-        model:'claude-sonnet-4-6',
-        max_tokens:1500,
-        system:buildSystemPrompt(),
-        messages:[{role:'user',content:buildUserPrompt(p,t)}]
-      })
-    });
-    if(!res.ok){
-      var errData=await res.json().catch(function(){return {};});
-      var errMsg=errData.error?errData.error.message:'HTTP '+res.status;
-      if(res.status===401){errMsg='Invalid API key. Please check your key in Configure AI.';}
-      else if(res.status===429){errMsg='Rate limit reached. Please wait a moment and try again.';}
-      throw new Error(errMsg);
-    }
-    var data=await res.json();
-    var text=data.content&&data.content[0]?data.content[0].text:'No response generated.';
-    out.innerHTML='';
-    renderText(title,text,p,t,out);
-  }catch(err){
-    out.innerHTML='<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">⚠️</div><div style="font-size:14px;font-weight:700;color:#DC2626;margin-bottom:6px">Generation failed</div><div style="font-size:12px;color:#64748B;margin-bottom:16px">'+err.message+'</div><button onclick="generatePitch()" style="padding:8px 20px;background:var(--navy);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px">Retry</button></div>';
-  }finally{
-    isGenerating=false;btn.disabled=false;
-    document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-magic"></i> Generate Pitch';
-  }
-}
+• Always reference the Rs 2,025/hr or Rs 1,922/hr total O&O number
+• Always mention KOMTRAX telematics (free, standard)
+• Always mention L&T 72-hour uptime guarantee
+• Never invent competitor prices — say "not published officially" if needed
+• Include a clear closing call-to-action`;}
 
 function renderText(title,text,p,t,out){
   var wa=encodeURIComponent(text.substring(0,1200));
@@ -649,6 +643,7 @@ window.addEventListener('DOMContentLoaded',function(){
   }
   showReady();
   updateAIStatus();
+  loadTCOFromFirestore();
 });
 </script>
 </body>
