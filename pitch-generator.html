@@ -565,60 +565,87 @@ function dispatchWA(num, text, btn){
 
 function showWAModal(text, triggerBtn){
   window._waPendingText = text;
-  var existing = document.getElementById('wa-modal');
-  if(existing) existing.remove();
+  var ex = document.getElementById('wa-modal');
+  if(ex) ex.remove();
 
-  var overlay = document.createElement('div');
-  overlay.id = 'wa-modal';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  var ov = document.createElement('div');
+  ov.id = 'wa-modal';
+  Object.assign(ov.style, {position:'fixed',inset:'0',background:'rgba(0,0,0,.55)',
+    zIndex:'9999',display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'});
 
   var box = document.createElement('div');
-  box.style.cssText = 'background:#fff;border-radius:14px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);';
-  box.innerHTML =
-    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">' +
-      '<div style="width:40px;height:40px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
-        '<i class="fab fa-whatsapp" style="color:#fff;font-size:20px"></i>' +
-      '</div>' +
-      '<div>' +
-        '<div style="font-size:15px;font-weight:700;color:#1E293B">Send via WhatsApp</div>' +
-        '<div style="font-size:11px;color:#64748B">Enter the recipient number</div>' +
-      '</div>' +
+  Object.assign(box.style, {background:'#fff',borderRadius:'14px',padding:'28px 24px',
+    maxWidth:'360px',width:'100%',boxShadow:'0 20px 60px rgba(0,0,0,.3)'});
+
+  // Header
+  var hdr = document.createElement('div');
+  Object.assign(hdr.style, {display:'flex',alignItems:'center',gap:'10px',marginBottom:'18px'});
+  hdr.innerHTML =
+    '<div style="width:40px;height:40px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center">' +
+      '<i class="fab fa-whatsapp" style="color:#fff;font-size:20px"></i>' +
     '</div>' +
-    '<label style="font-size:12px;font-weight:600;color:#475569;display:block;margin-bottom:6px">Mobile Number</label>' +
-    '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">' +
-      '<span style="font-size:13px;font-weight:700;color:#1E293B;background:#F1F5F9;padding:9px 10px;border-radius:7px;border:1px solid #CBD5E1">+91</span>' +
-      '<input id="wa-modal-num" type="tel" placeholder="98765 43210"' +
-        ' style="flex:1;padding:9px 12px;font-size:14px;border:1.5px solid #CBD5E1;border-radius:7px;outline:none;letter-spacing:0.5px"' +
-        ' maxlength="10">' +
-    '</div>' +
-    '<div style="display:flex;align-items:center;gap:6px;margin-bottom:18px">' +
-      '<input type="checkbox" id="wa-save-check" style="cursor:pointer">' +
-      '<label for="wa-save-check" style="font-size:11px;color:#64748B;cursor:pointer">Save this number for future pitches</label>' +
-    '</div>' +
-    '<div style="display:flex;gap:10px">' +
-      '<button onclick="document.getElementById('wa-modal').remove()"' +
-        ' style="flex:1;padding:10px;background:#F1F5F9;color:#475569;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">Cancel</button>' +
-      '<button id="wa-modal-send"' +
-        ' style="flex:2;padding:10px;background:#25D366;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer"' +
-        ' onclick="submitWAModal()">' +
-        '<i class="fab fa-whatsapp"></i> Send Now' +
-      '</button>' +
+    '<div>' +
+      '<div style="font-size:15px;font-weight:700;color:#1E293B">Send via WhatsApp</div>' +
+      '<div style="font-size:11px;color:#64748B">Enter the recipient number</div>' +
     '</div>';
+  box.appendChild(hdr);
 
-  overlay.appendChild(box);
-  document.body.appendChild(overlay);
+  // Label
+  var lbl = document.createElement('label');
+  lbl.textContent = 'Mobile Number';
+  Object.assign(lbl.style, {fontSize:'12px',fontWeight:'600',color:'#475569',display:'block',marginBottom:'6px'});
+  box.appendChild(lbl);
 
-  // Numeric-only filter
-  var numInp = document.getElementById('wa-modal-num');
-  if(numInp){
-    numInp.addEventListener('input', function(){
-      this.value = this.value.replace(/\D/g,'').substring(0,10);
-    });
-    numInp.addEventListener('keydown', function(e){
-      if(e.key === 'Enter') submitWAModal();
-    });
-    setTimeout(function(){ numInp.focus(); }, 100);
-  }
+  // Input row
+  var row = document.createElement('div');
+  Object.assign(row.style, {display:'flex',gap:'8px',alignItems:'center',marginBottom:'8px'});
+  var prefix = document.createElement('span');
+  prefix.textContent = '+91';
+  Object.assign(prefix.style, {fontSize:'13px',fontWeight:'700',color:'#1E293B',
+    background:'#F1F5F9',padding:'9px 10px',borderRadius:'7px',border:'1px solid #CBD5E1'});
+  var inp = document.createElement('input');
+  inp.id = 'wa-modal-num'; inp.type = 'tel'; inp.placeholder = '98765 43210'; inp.maxLength = 10;
+  Object.assign(inp.style, {flex:'1',padding:'9px 12px',fontSize:'14px',
+    border:'1.5px solid #CBD5E1',borderRadius:'7px',outline:'none',letterSpacing:'0.5px'});
+  inp.addEventListener('input', function(){ this.value = this.value.replace(/[^0-9]/g,'').substring(0,10); });
+  inp.addEventListener('keydown', function(e){ if(e.key==='Enter') submitWAModal(); });
+  row.appendChild(prefix); row.appendChild(inp);
+  box.appendChild(row);
+
+  // Save checkbox
+  var chkRow = document.createElement('div');
+  Object.assign(chkRow.style, {display:'flex',alignItems:'center',gap:'6px',marginBottom:'18px'});
+  var chk = document.createElement('input'); chk.type='checkbox'; chk.id='wa-save-check';
+  chk.style.cursor='pointer';
+  var chkLbl = document.createElement('label'); chkLbl.htmlFor='wa-save-check';
+  chkLbl.textContent = 'Save this number for future pitches';
+  Object.assign(chkLbl.style, {fontSize:'11px',color:'#64748B',cursor:'pointer'});
+  chkRow.appendChild(chk); chkRow.appendChild(chkLbl);
+  box.appendChild(chkRow);
+
+  // Buttons row
+  var btnRow = document.createElement('div');
+  Object.assign(btnRow.style, {display:'flex',gap:'10px'});
+
+  var cancelBtn = document.createElement('button');
+  cancelBtn.textContent = 'Cancel';
+  Object.assign(cancelBtn.style, {flex:'1',padding:'10px',background:'#F1F5F9',color:'#475569',
+    border:'none',borderRadius:'8px',fontSize:'13px',fontWeight:'600',cursor:'pointer'});
+  cancelBtn.addEventListener('click', function(){ document.getElementById('wa-modal').remove(); });
+
+  var sendBtn = document.createElement('button');
+  sendBtn.id = 'wa-modal-send';
+  sendBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Send Now';
+  Object.assign(sendBtn.style, {flex:'2',padding:'10px',background:'#25D366',color:'#fff',
+    border:'none',borderRadius:'8px',fontSize:'13px',fontWeight:'700',cursor:'pointer'});
+  sendBtn.addEventListener('click', submitWAModal);
+
+  btnRow.appendChild(cancelBtn); btnRow.appendChild(sendBtn);
+  box.appendChild(btnRow);
+
+  ov.appendChild(box);
+  document.body.appendChild(ov);
+  setTimeout(function(){ inp.focus(); }, 80);
 }
 
 function submitWAModal(){ var text = window._waPendingText||'';
