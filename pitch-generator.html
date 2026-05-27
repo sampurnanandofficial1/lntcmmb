@@ -457,6 +457,53 @@ function genDealerTraining(p,t){
   return lnote(p.language)+'── DEALER TRAINING MODULE ──────────────────────────────\nKomatsu '+p.model+' vs '+p.competitor+' | '+(SEGS[p.segment]||SEGS['general']).label+' Segment\nFor: New Sales Engineers — L&T CMMB Dealer Network\n\n═══ MODULE 1: MEMORISE THESE NUMBERS ══════════════════\n\nKomatsu '+p.model+' price:         Rs'+t.pl+' lakh\n'+p.competitor+' price:           Rs'+t.cpl+' lakh\n5-year TCO advantage:            Komatsu saves Rs'+t.sav+' lakh\nAnnual fuel saving vs '+p.competitor+':  Rs'+(((t.Cf-t.Kf)/5)).toFixed(1)+' lakh/year\nResale yr5: Komatsu Rs'+t.Kr+'L vs '+p.competitor+' Rs'+t.Cr+'L\nOur EMI:                         Rs'+t.emi+' lakh/month (85%, 60m)\nAMC rate:                        Rs280/hour (vs '+p.competitor+' ~Rs'+Math.round(COMPETITORS[p.competitor].maintMult*280)+'/hr)\nKOMTRAX:                         FREE\nService response:                72-hour uptime guarantee\n\n═══ MODULE 2: TOP 5 THINGS TO SAY FIRST ═══════════════\n\n1. "KOMTRAX telematics is FREE — real-time monitoring from your phone, no subscription."\n2. "72-hour uptime guarantee — if we fail, we pay for the downtime. In writing."\n3. "63% resale after 5 years. Best in class. '+p.competitor+' gives '+(COMPETITORS[p.competitor].resale5yr*100)+'%."\n4. "AMC at Rs280/hour — fixed cost, no surprise bills, ever."\n5. "SmartMining Eco mode saves '+( p.competitor==='CAT'?'12%':'8-15%')+' fuel vs '+p.competitor+' in same conditions."\n\n═══ MODULE 3: NEVER DO THESE ══════════════════════════\n\n❌ NEVER say "Komatsu is cheaper." Say "Komatsu costs LESS to OWN."\n❌ NEVER attack the competitor brand. Use numbers, not opinions.\n❌ NEVER quote without asking daily operating hours first.\n❌ NEVER give a discount without a commitment (demo date, timeline).\n❌ NEVER skip asking about their biggest maintenance pain — it is your entry point.\n\n═══ MODULE 4: ROLE-PLAY SCENARIO ══════════════════════\n\nTrainer plays: '+( SEGS[p.segment]||SEGS['general']).label+' contractor, 2 × '+p.competitor+' machines\nTrainee plays: L&T CMMB sales engineer\n\nCustomer: "I have two '+p.competitor+'s working fine. Why should I look at Komatsu?"\n\nTrainee model answer:\n"Great that your machines are running. Can I ask — what are you spending per hour on maintenance right now? And what did your last '+p.competitor+' fetch when you sold it?"\n\n[If they do not know → that is your opening]\n\n"Most '+p.competitor+' owners do not track this. But over 5 years, '+p.competitor+' costs you Rs'+t.Cm+'L in maintenance vs Rs'+t.Km+'L for Komatsu on our AMC. That is Rs'+(t.Cm-t.Km).toFixed(1)+'L extra — money that stays in your pocket with Komatsu."\n\n═══ MODULE 5: QUICK REFERENCE CARD ════════════════════\n\n  KOMATSU '+p.model+'        '+p.competitor+'\n  ─────────────────────────────────────────\n  Price:    Rs'+t.pl+'L             Rs'+t.cpl+'L\n  Fuel 5yr: Rs'+t.Kf+'L            Rs'+t.Cf+'L\n  Maint 5yr:Rs'+t.Km+'L            Rs'+t.Cm+'L\n  Resale:   Rs'+t.Kr+'L            Rs'+t.Cr+'L\n  Net TCO:  Rs'+t.Kt+'L            Rs'+t.Ct+'L\n  ─────────────────────────────────────────\n  KOMATSU SAVES: Rs'+t.sav+'L OVER 5 YEARS\n\nExercise: Memorise these numbers. Recite without looking in 48 hours.';}
 
 
+// ─── BUILD USER PROMPT ───────────────────────────────────────────────────────
+function buildUserPrompt(p,t){
+  var typeInstructions={
+    full_speech:'Generate a COMPLETE SALES SPEECH (500-700 words) to deliver face-to-face. Structure: (1) Warm greeting, (2) Pain identification for their segment, (3) 5-year TCO comparison using the EXACT numbers below, (4) Top 3 Komatsu advantages specific to their work, (5) KOMTRAX telematics value (FREE vs competitor paid/absent), (6) L&T 72-hr uptime guarantee, (7) EMI/AMC option, (8) Strong close with specific ask. Conversational — not a brochure.',
+    tco_comparison:'Generate a detailed TCO COMPARISON NARRATIVE (400-500 words). Use EXACT numbers below. Walk through each cost component — fuel, maintenance, downtime, resale — building to the final net savings figure. Include a verdict paragraph. Use section headers with ── markers.',
+    objections:'Generate OBJECTION HANDLING for exactly 6 objections this customer type would raise. Format: OBJECTION N: "[verbatim customer statement]" then Response: [empathetic + data-backed + proof]. Cover: price, "machine working fine", service, spare parts, brand loyalty, "need time". Use EXACT Rs numbers provided.',
+    whatsapp:'Generate a WhatsApp follow-up message (max 180 words). Use *bold* for emphasis, bullets with •, relevant emojis. Include: greeting, 3 key TCO numbers, 3 advantages, next step, [SALES_NAME] and [MOBILE] placeholders. Ready to send.',
+    rent_vs_own:'Generate RENTAL vs OWNERSHIP ANALYSIS (400 words). Use numbers below. Compare monthly rental outgo vs monthly EMI+AMC+insurance. Show break-even timeline. Recommendation based on customer type. Persuasive closing.',
+    amc_finance:'Generate AMC + FINANCING BUNDLE PITCH (400 words). Show monthly bundle (EMI+AMC+Insurance) as one number vs revenue generated. Explain what AMC prevents. Compelling closing about predictable fixed cost vs competitor surprise bills.',
+    site_visit:'Generate SITE VISIT CONVERSATION GUIDE with sections: Pre-Visit Checklist, What to Observe, Opening Questions (start with their pain), KOMTRAX Demo Script, Closing with Decision-Maker, Post-Visit Actions. Include actual dialogue examples.',
+    dealer_training:'Generate DEALER TRAINING MODULE: (1) Numbers to memorise using figures below, (2) Top 5 differentiators one sentence each, (3) 5 mistakes to never make, (4) Role-play scenario with ideal response, (5) Quick Reference comparison table.'
+  };
+  var inst=typeInstructions[p.pitchType]||typeInstructions.full_speech;
+  return 'CUSTOMER PROFILE:\n'+
+    '- Name: '+p.name+' | Company: '+p.company+'\n'+
+    '- Type: '+p.type.replace(/_/g,' ')+' | Segment: '+p.segment.replace(/_/g,' ')+'\n'+
+    '- Region: '+p.region.replace(/_/g,' ')+' | Language: '+p.language+'\n'+
+    '- Price Sensitivity: '+p.priceSense.replace(/_/g,' ')+'\n'+
+    '- Value Drivers that Matter Most: '+p.painPoints.map(function(x){return x.replace(/_/g,' ');}).join(', ')+'\n'+
+    '- Competitors customer is evaluating: '+p.competitor+'\n'+
+    '- Daily operation: '+p.hrsDay+' hrs/day | Fleet: '+p.fleetSize+' machines\n'+
+    '- Extra context: '+(p.extraCtx||'none')+'\n\n'+
+    'PRE-COMPUTED TCO DATA (use THESE EXACT numbers — sourced from Internal HEX file May 2026):\n'+
+    '- Komatsu '+p.model+': Rs'+t.pl+'L all-in | Primary competitor price: Rs'+t.cpl+'L (market estimate only — not official)\n'+
+    '- 5yr fuel — Komatsu: Rs'+t.Kf+'L | Competitor: Rs'+t.Cf+'L | Saving: Rs'+(t.Cf-t.Kf).toFixed(1)+'L\n'+
+    '- 5yr maintenance (L&T AMC Rs280/hr): Rs'+t.Km+'L | Competitor open market: Rs'+t.Cm+'L | Saving: Rs'+(t.Cm-t.Km).toFixed(1)+'L\n'+
+    '- 5yr downtime — Komatsu: '+t.Kdd+' days (Rs'+t.Kdt+'L) | Competitor: '+t.Cdd+' days (Rs'+t.Cdt+'L)\n'+
+    '- Resale yr5 — Komatsu: Rs'+t.Kr+'L | Competitor: Rs'+t.Cr+'L | Komatsu Rs'+(t.Kr-t.Cr).toFixed(1)+'L higher\n'+
+    '- NET 5yr TCO — Komatsu: Rs'+t.Kt+'L | Competitor: Rs'+t.Ct+'L | Total saving: Rs'+t.sav+'L\n'+
+    '- Monthly EMI (85%, 60m, 10.5%): Rs'+t.emi+'L/month\n'+
+    '- Total O&O at 3,000 hrs/yr: Rs2,025/hr (Internal HEX file — authoritative anchor number)\n\n'+
+    'COMPETITOR SPECS (from official OEM sources — stored in Firebase oem_specs collection):\n'+
+    '- CAT 320D3 GC: fuel 11-13 L/hr OFFICIAL (cat.com); VisionLink telematics PAID subscription\n'+
+    '- Tata Hitachi EX215LC Prime: 140HP, 20,800-21,900 kg; fuel NOT PUBLISHED (tatahitachi.co.in)\n'+
+    '- JCB NXT 225LC M: 148HP, 22,200 kg, bucket 1.2m3; fuel NOT PUBLISHED; LiveLink 4.0 FREE (jcb.com/en-IN)\n'+
+    '- Hyundai HX220A L: 173HP, 22,150 kg; fuel NOT PUBLISHED; Hi Mate telematics (hyundai-ce.eu)\n'+
+    '- Kobelco SK220XDLC-10: 158HP, 21,800-22,000 kg; fuel NOT PUBLISHED; KOMICS telematics\n'+
+    '- Volvo EC220E: 173HP, 20,600-25,100 kg; fuel NOT PUBLISHED; CareTrack FREE (volvoce.com)\n'+
+    '- SANY SY215C SPARC: 140HP, 21,500 kg, bucket 0.93m3; fuel NOT PUBLISHED; NO telematics (sany.in)\n'+
+    '- XCMG XE215C: 172HP, 21,450 kg; fuel NOT PUBLISHED; 7% fuel saving claim vs prev gen (xcmg.com)\n'+
+    '- LiuGong 922E XD: 157HP, 22,000 kg, fuel tank 420L; fuel NOT PUBLISHED; iLink FREE (liugongindia.com)\n\n'+
+    'OUTPUT LANGUAGE: '+p.language+' — write the ENTIRE pitch in '+p.language+'. Keep KOMTRAX, TCO, AMC, EMI, Rs in English.\n\n'+
+    'PITCH TYPE: '+p.pitchType.replace(/_/g,' ').toUpperCase()+'\n'+
+    'INSTRUCTIONS: '+inst+'\n\n'+
+    'MANDATORY: Use the EXACT Rs numbers above. Never invent different numbers. State "Not published officially" for any competitor spec not in this prompt.';
+}
+
 // ─── GENERATE PITCH (Claude AI) ─────────────────────────────────────────────
 async function generatePitch(){
   if(isGenerating)return;
