@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "lntcmmb-dashboards",
     "public": ".",
     "ignore": [
       "firebase.json",
@@ -7,13 +8,10 @@
       "scripts/**",
       ".github/**",
       ".devcontainer/**",
-      "data/**",
       "**/*.py",
       "**/*.sh",
       "**/*.md",
-      "DEPLOY.md",
-      "sa_export.b64",
-      "sa_temp.txt"
+      "sa_export.b64"
     ],
     "headers": [
       {
@@ -22,9 +20,6 @@
           { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
         ]
       }
-    ],
-    "rewrites": [
-      { "source": "/", "destination": "/index.html" }
     ]
   }
 }
