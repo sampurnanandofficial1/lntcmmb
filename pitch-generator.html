@@ -248,7 +248,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
       <input type="tel" id="wa-number" class="fselect" placeholder="98765 43210"
         style="flex:1;font-size:12px;letter-spacing:0.5px"
         maxlength="15"
-        oninput="this.value=this.value.replace(/[^0-9]/g,'').substring(0,10)"
+        oninput="this.value=this.value.replace(/\D/g,'').substring(0,10)"
         onchange="saveWANumber(this.value)">
     </div>
     <div style="font-size:10px;color:var(--gray);margin-top:3px;line-height:1.4">
@@ -563,51 +563,62 @@ function dispatchWA(num, text, btn){
   setTimeout(function(){ btn.innerHTML=orig; btn.style.background=''; }, 2500);
 }
 
-function showWAModal(text, triggerBtn){ window._waPendingText = text;
-  // Remove existing modal if any
+function showWAModal(text, triggerBtn){
+  window._waPendingText = text;
   var existing = document.getElementById('wa-modal');
   if(existing) existing.remove();
 
-  var modal = document.createElement('div');
-  modal.id = 'wa-modal';
-  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
-  modal.innerHTML = [
-    '<div style="background:#fff;border-radius:14px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)">',
-      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">',
-        '<div style="width:40px;height:40px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">',
-          '<i class="fab fa-whatsapp" style="color:#fff;font-size:20px"></i>',
-        '</div>',
-        '<div>',
-          '<div style="font-size:15px;font-weight:700;color:#1E293B">Send via WhatsApp</div>',
-          '<div style="font-size:11px;color:#64748B">Enter the recipient&#39;s number</div>',
-        '</div>',
-      '</div>',
-      '<label style="font-size:12px;font-weight:600;color:#475569;display:block;margin-bottom:6px">Mobile Number</label>',
-      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">',
-        '<span style="font-size:13px;font-weight:700;color:#1E293B;background:#F1F5F9;padding:9px 10px;border-radius:7px;border:1px solid #CBD5E1">+91</span>',
-        '<input id="wa-modal-num" type="tel" placeholder="98765 43210"',
-          ' style="flex:1;padding:9px 12px;font-size:14px;border:1.5px solid #CBD5E1;border-radius:7px;outline:none;letter-spacing:0.5px"',
-          ' maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'').substring(0,10)"',
-          ' onkeydown="if(event.key==='Enter')document.getElementById('wa-modal-send').click()">',
-      '</div>',
-      '<div style="display:flex;align-items:center;gap:6px;margin-bottom:18px">',
-        '<input type="checkbox" id="wa-save-check" style="cursor:pointer">',
-        '<label for="wa-save-check" style="font-size:11px;color:#64748B;cursor:pointer">Save this number for future pitches</label>',
-      '</div>',
-      '<div style="display:flex;gap:10px">',
-        '<button onclick="document.getElementById('wa-modal').remove()"',
-          ' style="flex:1;padding:10px;background:#F1F5F9;color:#475569;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">Cancel</button>',
-        '<button id="wa-modal-send"',
-          ' style="flex:2;padding:10px;background:#25D366;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px"',
-          ' onclick="submitWAModal()">',
-          '<i class="fab fa-whatsapp"></i> Send Now',
-        '</button>',
-      '</div>',
-    '</div>'
-  ].join('');
-  document.body.appendChild(modal);
-  // Focus input
-  setTimeout(function(){ var i=document.getElementById('wa-modal-num'); if(i) i.focus(); }, 100);
+  var overlay = document.createElement('div');
+  overlay.id = 'wa-modal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+
+  var box = document.createElement('div');
+  box.style.cssText = 'background:#fff;border-radius:14px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);';
+  box.innerHTML =
+    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">' +
+      '<div style="width:40px;height:40px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
+        '<i class="fab fa-whatsapp" style="color:#fff;font-size:20px"></i>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-size:15px;font-weight:700;color:#1E293B">Send via WhatsApp</div>' +
+        '<div style="font-size:11px;color:#64748B">Enter the recipient number</div>' +
+      '</div>' +
+    '</div>' +
+    '<label style="font-size:12px;font-weight:600;color:#475569;display:block;margin-bottom:6px">Mobile Number</label>' +
+    '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">' +
+      '<span style="font-size:13px;font-weight:700;color:#1E293B;background:#F1F5F9;padding:9px 10px;border-radius:7px;border:1px solid #CBD5E1">+91</span>' +
+      '<input id="wa-modal-num" type="tel" placeholder="98765 43210"' +
+        ' style="flex:1;padding:9px 12px;font-size:14px;border:1.5px solid #CBD5E1;border-radius:7px;outline:none;letter-spacing:0.5px"' +
+        ' maxlength="10">' +
+    '</div>' +
+    '<div style="display:flex;align-items:center;gap:6px;margin-bottom:18px">' +
+      '<input type="checkbox" id="wa-save-check" style="cursor:pointer">' +
+      '<label for="wa-save-check" style="font-size:11px;color:#64748B;cursor:pointer">Save this number for future pitches</label>' +
+    '</div>' +
+    '<div style="display:flex;gap:10px">' +
+      '<button onclick="document.getElementById('wa-modal').remove()"' +
+        ' style="flex:1;padding:10px;background:#F1F5F9;color:#475569;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">Cancel</button>' +
+      '<button id="wa-modal-send"' +
+        ' style="flex:2;padding:10px;background:#25D366;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer"' +
+        ' onclick="submitWAModal()">' +
+        '<i class="fab fa-whatsapp"></i> Send Now' +
+      '</button>' +
+    '</div>';
+
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+
+  // Numeric-only filter
+  var numInp = document.getElementById('wa-modal-num');
+  if(numInp){
+    numInp.addEventListener('input', function(){
+      this.value = this.value.replace(/\D/g,'').substring(0,10);
+    });
+    numInp.addEventListener('keydown', function(e){
+      if(e.key === 'Enter') submitWAModal();
+    });
+    setTimeout(function(){ numInp.focus(); }, 100);
+  }
 }
 
 function submitWAModal(){ var text = window._waPendingText||'';
