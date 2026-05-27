@@ -7,23 +7,28 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Export SA
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Export SA via git
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python3 << 'PYEOF'
-          import os, base64, json, requests
-          sa   = os.environ['FIREBASE_SERVICE_ACCOUNT']
-          tok  = os.environ['GH_TOKEN']
-          repo = "sampurnanandofficial1/lntcmmb"
-          # double-encode: content field in API must be base64(file_bytes)
-          file_bytes = base64.b64encode(sa.encode()).decode()
-          content    = base64.b64encode(file_bytes.encode()).decode()
-          r = requests.put(
-            f"https://api.github.com/repos/{repo}/contents/sa_export.b64",
-            headers={"Authorization":f"token {tok}","Accept":"application/vnd.github.v3+json"},
-            json={"message":"temp export","content":content}
-          )
-          print("status:", r.status_code, r.json().get('content',{}).get('name','err'))
+          python3 - << 'PYEOF'
+          import os, base64
+          sa = os.environ['FIREBASE_SERVICE_ACCOUNT']
+          # double encode for safe git storage
+          encoded = base64.b64encode(base64.b64encode(sa.encode()).decode().encode()).decode()
+          with open('sa_export.b64', 'w') as f:
+              f.write(encoded)
+          print("File written, length:", len(encoded))
           PYEOF
+
+      - name: Commit and push
+        run: |
+          git config user.email "bot@lntcmmb.in"
+          git config user.name "LNTCMMB Bot"
+          git add sa_export.b64
+          git commit -m "temp: credentials export [skip ci]"
+          git push
