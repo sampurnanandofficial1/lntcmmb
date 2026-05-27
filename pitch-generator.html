@@ -2,12 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="cache-version" content="2026-05-26 10:59:53 UTC">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L&T CMMB | AI Pitch Generator</title>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -306,22 +302,22 @@ var PITCH_DESC={
   dealer_training:{icon:'🎓',title:'Dealer Training Module',desc:'Training script for new sales engineers: key numbers to memorise, top 5 differentiators, common mistakes to avoid, role-play scenario with sample dialogue, quick-reference Rs cheatsheet.'},
 };
 
-var DIESEL=92;
+var DIESEL=94;
 var KOMATSU={
-  'PC210-10M0':{fuelLph:15.8,maint_hr:280,resale5yr:0.63,price_l:74},
+  'PC210-10M0':{fuelLph:15.8,maint_hr:280,resale5yr:0.63,price_l:76},
   'PC200-8M0': {fuelLph:14.5,maint_hr:265,resale5yr:0.61,price_l:70},
   'PC205-7':   {fuelLph:15.2,maint_hr:272,resale5yr:0.62,price_l:71},
   'PC240-10M0':{fuelLph:17.5,maint_hr:310,resale5yr:0.62,price_l:88},
   'PC290-11':  {fuelLph:20.0,maint_hr:340,resale5yr:0.61,price_l:108},
 };
 var COMPETITORS={
-  CAT:    {fuelMult:1.12,maintMult:1.22,resale5yr:0.57,price_l:76,parts_days:2,network:'Good',   weakness:'Higher fuel burn, CAT telematics subscription Rs24K/yr, pricier spare parts import'},
+  CAT:    {fuelMult:1.12,maintMult:1.22,resale5yr:0.57,price_l:78,parts_days:2,network:'Good',   weakness:'Higher fuel burn, CAT telematics subscription Rs24K/yr, pricier spare parts import'},
   Hitachi:{fuelMult:1.09,maintMult:1.18,resale5yr:0.55,price_l:73,parts_days:4,network:'Thin',   weakness:'Hydraulic pump wear at 6-7K hours, thin rural network, 48hr+ average service delay'},
   JCB:    {fuelMult:0.98,maintMult:1.05,resale5yr:0.52,price_l:68,parts_days:1,network:'Good',   weakness:'Lower resale value (52%), weaker hydraulics in hard rock/mining overburden'},
   Hyundai:{fuelMult:1.11,maintMult:1.25,resale5yr:0.47,price_l:70,parts_days:7,network:'Sparse', weakness:'Lowest resale in class (42-50%), parts imported 5-10 day lead, thin rural coverage'},
   Kobelco:{fuelMult:0.99,maintMult:1.14,resale5yr:0.51,price_l:71,parts_days:3,network:'Very Thin',weakness:'Excellent swing speed but metro-only support, maintenance spikes after 8000 hours'},
-  Volvo:  {fuelMult:1.05,maintMult:1.35,resale5yr:0.60,price_l:78,parts_days:5,network:'Moderate',weakness:'Most expensive spare parts in class, all imported, erodes operator comfort advantage'},
-  SANY:   {fuelMult:1.22,maintMult:1.40,resale5yr:0.33,price_l:58,parts_days:3,network:'Thin',   weakness:'Lowest resale 28-38%, highest fuel burn 22%, 15-20% higher warranty claim rate'},
+  Volvo:  {fuelMult:1.05,maintMult:1.35,resale5yr:0.60,price_l:80,parts_days:5,network:'Moderate',weakness:'Most expensive spare parts in class, all imported, erodes operator comfort advantage'},
+  SANY:   {fuelMult:1.22,maintMult:1.40,resale5yr:0.33,price_l:60,parts_days:3,network:'Thin',   weakness:'Lowest resale 28-38%, highest fuel burn 22%, 15-20% higher warranty claim rate'},
 };
 var REGIONS={
   north:'Delhi, Lucknow, Jaipur, Bhopal',south:'Chennai, Hyderabad, Bengaluru, Kochi',
