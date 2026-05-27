@@ -1,16 +1,6 @@
 {
   "projects": [
     {
-      "country": "Mozambique",
-      "flag": "\ud83c\uddf2\ud83c\uddff",
-      "org": "World Bank",
-      "name": "Mozambique Phase II: EITI Implementation",
-      "valueUSD": 0,
-      "sector": "Mining",
-      "id": "P127115",
-      "link": "https://projects.worldbank.org/en/projects-operations/project-detail/P127115"
-    },
-    {
       "country": "Kenya",
       "flag": "\ud83c\uddf0\ud83c\uddea",
       "org": "AfDB",
@@ -119,6 +109,6 @@
       "valueUSD": 0
     }
   ],
-  "count": 13,
-  "updated": "2026-05-27T14:34:51.502403+00:00"
+  "count": 12,
+  "updated": "2026-05-27T18:11:34.238425+00:00"
 }
