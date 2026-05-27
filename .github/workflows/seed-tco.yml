@@ -11,8 +11,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install firebase-admin
-      - name: Write TCO data to Firestore
+      - run: pip install requests google-auth
+      - name: Write TCO data to Firestore via REST API
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: python scripts/seed_tco_data.py < scripts/tco_data.json
+        run: python scripts/seed_tco_rest.py
