@@ -563,7 +563,7 @@ function dispatchWA(num, text, btn){
   setTimeout(function(){ btn.innerHTML=orig; btn.style.background=''; }, 2500);
 }
 
-function showWAModal(text, triggerBtn){
+function showWAModal(text, triggerBtn){ window._waPendingText = text;
   // Remove existing modal if any
   var existing = document.getElementById('wa-modal');
   if(existing) existing.remove();
@@ -579,7 +579,7 @@ function showWAModal(text, triggerBtn){
         '</div>',
         '<div>',
           '<div style="font-size:15px;font-weight:700;color:#1E293B">Send via WhatsApp</div>',
-          '<div style="font-size:11px;color:#64748B">Enter the recipient's number</div>',
+          '<div style="font-size:11px;color:#64748B">Enter the recipient&#39;s number</div>',
         '</div>',
       '</div>',
       '<label style="font-size:12px;font-weight:600;color:#475569;display:block;margin-bottom:6px">Mobile Number</label>',
@@ -599,8 +599,8 @@ function showWAModal(text, triggerBtn){
           ' style="flex:1;padding:10px;background:#F1F5F9;color:#475569;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">Cancel</button>',
         '<button id="wa-modal-send"',
           ' style="flex:2;padding:10px;background:#25D366;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px"',
-          ' onclick="submitWAModal(''+text.replace(/'/g,"\'")+'')">', 
-          '<i class=\"fab fa-whatsapp\"></i> Send Now',
+          ' onclick="submitWAModal()">',
+          '<i class="fab fa-whatsapp"></i> Send Now',
         '</button>',
       '</div>',
     '</div>'
@@ -610,7 +610,7 @@ function showWAModal(text, triggerBtn){
   setTimeout(function(){ var i=document.getElementById('wa-modal-num'); if(i) i.focus(); }, 100);
 }
 
-function submitWAModal(text){
+function submitWAModal(){ var text = window._waPendingText||'';
   var inp = document.getElementById('wa-modal-num');
   var num = inp ? inp.value.replace(/\D/g,'') : '';
   if(num.length < 10){
@@ -629,6 +629,7 @@ function submitWAModal(text){
   // Open WhatsApp
   var full = '91'+num;
   var url = 'https://wa.me/'+full+'?text='+encodeURIComponent(text);
+  window._waPendingText = null;
   window.open(url, '_blank');
 }
 
