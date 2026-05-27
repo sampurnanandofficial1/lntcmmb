@@ -204,33 +204,40 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
     </select>
   </div>
   <div class="fgrp">
-    <label class="flabel">Competitor to Compare Against</label>
+    <label class="flabel">Competitor to Compare Against <span style="font-size:9.5px;color:var(--gray);font-weight:400">(select multiple)</span></label>
     <div class="chip-row" id="cg-comp">
-      <span class="chip on" data-v="CAT 320D3"           onclick="chipSingle(this,'cg-comp')">CAT 320D3</span>
-      <span class="chip" data-v="Tata Hitachi EX215"  onclick="chipSingle(this,'cg-comp')">Tata Hitachi</span>
-      <span class="chip" data-v="JCB NXT 225"         onclick="chipSingle(this,'cg-comp')">JCB NXT 225</span>
-      <span class="chip" data-v="Hyundai HX220"       onclick="chipSingle(this,'cg-comp')">Hyundai HX220</span>
-      <span class="chip" data-v="Kobelco SK210"       onclick="chipSingle(this,'cg-comp')">Kobelco SK210</span>
-      <span class="chip" data-v="Volvo EC220"         onclick="chipSingle(this,'cg-comp')">Volvo EC220</span>
-      <span class="chip" data-v="SANY SY215"          onclick="chipSingle(this,'cg-comp')">SANY SY215</span>
-      <span class="chip" data-v="Liebherr R920"       onclick="chipSingle(this,'cg-comp')">Liebherr R920</span>
-      <span class="chip" data-v="Develon DX210"       onclick="chipSingle(this,'cg-comp')">Develon DX210</span>
-      <span class="chip" data-v="XCMG XE215"          onclick="chipSingle(this,'cg-comp')">XCMG XE215</span>
+      <span class="chip on" data-v="JCB"          onclick="chipMulti(this)">JCB</span>
+      <span class="chip on" data-v="SANY"         onclick="chipMulti(this)">SANY</span>
+      <span class="chip"    data-v="Tata Hitachi"  onclick="chipMulti(this)">Tata Hitachi</span>
+      <span class="chip"    data-v="CAT"           onclick="chipMulti(this)">CAT</span>
+      <span class="chip"    data-v="Volvo CE"      onclick="chipMulti(this)">Volvo CE</span>
+      <span class="chip"    data-v="Kobelco"       onclick="chipMulti(this)">Kobelco</span>
+      <span class="chip"    data-v="Hyundai CE"    onclick="chipMulti(this)">Hyundai CE</span>
+      <span class="chip"    data-v="XCMG"          onclick="chipMulti(this)">XCMG</span>
+      <span class="chip"    data-v="LiuGong"       onclick="chipMulti(this)">LiuGong</span>
+      <span class="chip"    data-v="Liebherr"      onclick="chipMulti(this)">Liebherr</span>
+      <span class="chip"    data-v="Develon"       onclick="chipMulti(this)">Develon</span>
     </div>
   </div>
   <div class="fgrp">
-    <label class="flabel">Customer Pain Points</label>
+    <label class="flabel">What Matters Most to the Customer <span style="font-size:9.5px;color:var(--gray);font-weight:400">(select all that apply)</span></label>
     <div class="chip-row" id="cg-pain">
-      <span class="chip on" data-v="breakdowns"        onclick="chipMulti(this)">Frequent Breakdown</span>
-      <span class="chip"    data-v="high_fuel"         onclick="chipMulti(this)">High Fuel Cost</span>
-      <span class="chip"    data-v="poor_resale"       onclick="chipMulti(this)">Poor Resale Value</span>
-      <span class="chip"    data-v="high_maintenance"  onclick="chipMulti(this)">High Maintenance</span>
-      <span class="chip"    data-v="slow_service"      onclick="chipMulti(this)">Slow Service Support</span>
-      <span class="chip"    data-v="financing"         onclick="chipMulti(this)">Financing Cost</span>
-      <span class="chip"    data-v="low_output"        onclick="chipMulti(this)">Low Productivity</span>
+      <span class="chip on"  data-v="purchase_price"      onclick="chipMulti(this)">Purchase Price / EMI</span>
+      <span class="chip on"  data-v="tco_5yr"             onclick="chipMulti(this)">TCO over 5 Years</span>
+      <span class="chip"     data-v="fuel_efficiency"     onclick="chipMulti(this)">Fuel Efficiency</span>
+      <span class="chip"     data-v="uptime_reliability"  onclick="chipMulti(this)">Uptime & Reliability</span>
+      <span class="chip"     data-v="service_network"     onclick="chipMulti(this)">Service Network</span>
+      <span class="chip"     data-v="parts_availability"  onclick="chipMulti(this)">Parts Availability</span>
+      <span class="chip"     data-v="resale_value"        onclick="chipMulti(this)">Resale Value</span>
+      <span class="chip"     data-v="financing_terms"     onclick="chipMulti(this)">Financing Terms</span>
+      <span class="chip"     data-v="telematics"          onclick="chipMulti(this)">Telematics / IoT</span>
+      <span class="chip"     data-v="operator_comfort"    onclick="chipMulti(this)">Operator Comfort</span>
+      <span class="chip"     data-v="brand_reputation"    onclick="chipMulti(this)">Brand Reputation</span>
+      <span class="chip"     data-v="warranty_terms"      onclick="chipMulti(this)">Warranty Terms</span>
+      <span class="chip"     data-v="attachment_options"  onclick="chipMulti(this)">Attachment Options</span>
+      <span class="chip"     data-v="amc_fmc"             onclick="chipMulti(this)">AMC / FMC Support</span>
     </div>
   </div>
-
   <div class="sec-head">Usage Parameters</div>
   <div class="fgrp">
     <label class="flabel">Daily Operating Hours</label>
@@ -400,7 +407,7 @@ function getProfile(){
     fleetSize:document.getElementById('fleet-size').value,
     extraCtx:document.getElementById('extra-ctx').value.trim(),
     language:outputLang,pitchType:pitchType,
-    competitor:getChipVal('cg-comp')||'CAT',
+    competitor:getChipVals('cg-comp').join(', ')||'JCB, SANY',
     priceSense:getChipVal('cg-price')||'value_focused',
     painPoints:getChipVals('cg-pain'),
   };
@@ -456,6 +463,55 @@ function genSiteVisit(p,t){
 
 function genDealerTraining(p,t){
   return lnote(p.language)+'── DEALER TRAINING MODULE ──────────────────────────────\nKomatsu '+p.model+' vs '+p.competitor+' | '+(SEGS[p.segment]||SEGS['general']).label+' Segment\nFor: New Sales Engineers — L&T CMMB Dealer Network\n\n═══ MODULE 1: MEMORISE THESE NUMBERS ══════════════════\n\nKomatsu '+p.model+' price:         Rs'+t.pl+' lakh\n'+p.competitor+' price:           Rs'+t.cpl+' lakh\n5-year TCO advantage:            Komatsu saves Rs'+t.sav+' lakh\nAnnual fuel saving vs '+p.competitor+':  Rs'+(((t.Cf-t.Kf)/5)).toFixed(1)+' lakh/year\nResale yr5: Komatsu Rs'+t.Kr+'L vs '+p.competitor+' Rs'+t.Cr+'L\nOur EMI:                         Rs'+t.emi+' lakh/month (85%, 60m)\nAMC rate:                        Rs280/hour (vs '+p.competitor+' ~Rs'+Math.round(COMPETITORS[p.competitor].maintMult*280)+'/hr)\nKOMTRAX:                         FREE\nService response:                72-hour uptime guarantee\n\n═══ MODULE 2: TOP 5 THINGS TO SAY FIRST ═══════════════\n\n1. "KOMTRAX telematics is FREE — real-time monitoring from your phone, no subscription."\n2. "72-hour uptime guarantee — if we fail, we pay for the downtime. In writing."\n3. "63% resale after 5 years. Best in class. '+p.competitor+' gives '+(COMPETITORS[p.competitor].resale5yr*100)+'%."\n4. "AMC at Rs280/hour — fixed cost, no surprise bills, ever."\n5. "SmartMining Eco mode saves '+( p.competitor==='CAT'?'12%':'8-15%')+' fuel vs '+p.competitor+' in same conditions."\n\n═══ MODULE 3: NEVER DO THESE ══════════════════════════\n\n❌ NEVER say "Komatsu is cheaper." Say "Komatsu costs LESS to OWN."\n❌ NEVER attack the competitor brand. Use numbers, not opinions.\n❌ NEVER quote without asking daily operating hours first.\n❌ NEVER give a discount without a commitment (demo date, timeline).\n❌ NEVER skip asking about their biggest maintenance pain — it is your entry point.\n\n═══ MODULE 4: ROLE-PLAY SCENARIO ══════════════════════\n\nTrainer plays: '+( SEGS[p.segment]||SEGS['general']).label+' contractor, 2 × '+p.competitor+' machines\nTrainee plays: L&T CMMB sales engineer\n\nCustomer: "I have two '+p.competitor+'s working fine. Why should I look at Komatsu?"\n\nTrainee model answer:\n"Great that your machines are running. Can I ask — what are you spending per hour on maintenance right now? And what did your last '+p.competitor+' fetch when you sold it?"\n\n[If they do not know → that is your opening]\n\n"Most '+p.competitor+' owners do not track this. But over 5 years, '+p.competitor+' costs you Rs'+t.Cm+'L in maintenance vs Rs'+t.Km+'L for Komatsu on our AMC. That is Rs'+(t.Cm-t.Km).toFixed(1)+'L extra — money that stays in your pocket with Komatsu."\n\n═══ MODULE 5: QUICK REFERENCE CARD ════════════════════\n\n  KOMATSU '+p.model+'        '+p.competitor+'\n  ─────────────────────────────────────────\n  Price:    Rs'+t.pl+'L             Rs'+t.cpl+'L\n  Fuel 5yr: Rs'+t.Kf+'L            Rs'+t.Cf+'L\n  Maint 5yr:Rs'+t.Km+'L            Rs'+t.Cm+'L\n  Resale:   Rs'+t.Kr+'L            Rs'+t.Cr+'L\n  Net TCO:  Rs'+t.Kt+'L            Rs'+t.Ct+'L\n  ─────────────────────────────────────────\n  KOMATSU SAVES: Rs'+t.sav+'L OVER 5 YEARS\n\nExercise: Memorise these numbers. Recite without looking in 48 hours.';}
+
+
+// ─── GENERATE PITCH (Claude AI) ─────────────────────────────────────────────
+async function generatePitch(){
+  if(isGenerating)return;
+  var key=getAPIKey();
+  if(!key){openAIConfig();document.getElementById('ai-key-status').innerHTML='<span style="color:#D97706">⚠ Please enter your API key first.</span>';return;}
+  var p=getProfile(), t=computeTCO(p);
+  isGenerating=true;
+  var btn=document.getElementById('gen-btn');
+  document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-circle-notch fa-spin-me"></i> Generating...';
+  btn.disabled=true;
+  var out=document.getElementById('pg-out');
+  var title=PITCH_DESC[p.pitchType]?PITCH_DESC[p.pitchType].title:'Sales Pitch';
+  out.innerHTML='<div class="pg-generating"><div class="pg-gen-ring"></div><div class="pg-gen-msg">Claude AI is crafting your pitch...</div><div class="pg-gen-sub">Analysing Komatsu vs '+p.competitor+' | '+p.segment+' segment | '+p.region+'</div></div>';
+  try{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json',
+        'x-api-key':key,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:1500,
+        system:buildSystemPrompt(),
+        messages:[{role:'user',content:buildUserPrompt(p,t)}]
+      })
+    });
+    if(!res.ok){
+      var errData=await res.json().catch(function(){return{};});
+      var errMsg=errData.error?errData.error.message:'HTTP '+res.status;
+      if(res.status===401)errMsg='Invalid API key. Click "Configure AI" to re-enter.';
+      else if(res.status===429)errMsg='Rate limit reached. Please wait a moment and retry.';
+      throw new Error(errMsg);
+    }
+    var data=await res.json();
+    var text=data.content&&data.content[0]?data.content[0].text:'No response generated.';
+    out.innerHTML='';
+    renderText(title,text,p,t,out);
+  }catch(err){
+    out.innerHTML='<div style="padding:40px;text-align:center"><div style="font-size:40px;margin-bottom:12px">⚠️</div><div style="font-size:14px;font-weight:700;color:#DC2626;margin-bottom:6px">Generation failed</div><div style="font-size:12px;color:#64748B;margin-bottom:16px">'+err.message+'</div><button onclick="generatePitch()" style="padding:8px 20px;background:var(--navy);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px">Retry</button></div>';
+  }finally{
+    isGenerating=false;btn.disabled=false;
+    document.getElementById('gen-btn-txt').innerHTML='<i class="fa fa-magic"></i> Generate AI Pitch';
+  }
+}
 
 // ─── API KEY MANAGEMENT ──────────────────────────────────────────────────
 function getAPIKey(){return localStorage.getItem('lntcmmb_anthropic_key')||'';}
@@ -549,18 +605,18 @@ SINGLE SOURCE OF TRUTH — INTERNAL DATA (HEX_-_Economics.xlsx + Ownership_Renta
 • Ownership rational threshold: above 2,800-3,000 productive hrs/yr
 • L&T AMC rate: Rs 280/hr fixed
 
-COMPETITOR DATA — OFFICIAL OEM SOURCES ONLY:
-• CAT 320D3 GC: 123 hp, fuel 11-13 L/hr (cat.com official), no India price published, VisionLink telematics paid
-• CAT 320D3: 11-13 L/hr earthmoving (cat.com official); Economy mode saves up to 20%
-• Tata Hitachi EX215LC Prime / ZAXIS 220LC Ultra: Made in India, 168 hp (ZAXIS 220), hydraulic oil change 4,500 hrs — fuel L/hr NOT published on tatahitachi.co.in
-• JCB NXT 225LC M: Made in India, 170 hp ecoMAX, JCB LiveLink 4.0 telematics, 67 dB cab noise, 14% fuel saving vs prev gen, Rs 2.90L/yr savings claim (jcb.com/en-IN official)
-• Hyundai HX220A L: HiMate telematics — India-specific fuel & price data NOT published on official HCE India pages
-• Kobelco SK210LC-10: KOMICS telematics — India-specific fuel & price data NOT published on official Kobelco India pages
-• Volvo EC220E: 168 hp Volvo D6J Stage V, CareTrack telematics standard — fuel L/hr NOT published on volvoce.com
-• SANY SY215C/H: Mitsubishi 4M50 engine, 118 kW — India price and fuel L/hr NOT published on official SANY India pages
-• Liebherr R920/R922: ~156 hp, LiDAT telematics — India price and fuel NOT published officially
-• Develon DX210A-7: (formerly Doosan) ~147 hp — India data NOT published officially
-• XCMG XE215CA: ~123 hp — India price and fuel NOT published officially
+COMPETITOR DATA — OFFICIAL OEM SOURCES ONLY (11 OEMs in India market):
+• CAT (Caterpillar) 320D3 GC: fuel 11-13 L/hr (cat.com official), VisionLink telematics paid subscription
+• Tata Hitachi: Made in India, ConSite telematics, 4,500 hr hydraulic oil interval (tatahitachi.co.in)
+• JCB: Made in India, JCB LiveLink 4.0 standard, 14% fuel saving vs prev gen, Rs 2.9L/yr saving claim (jcb.com/en-IN)
+• Hyundai CE: HiMate telematics — India-specific fuel & price NOT published officially
+• Kobelco: KOMICS telematics — India-specific data NOT published officially
+• Volvo CE: 168 hp, CareTrack telematics standard — fuel L/hr NOT published on volvoce.com
+• SANY: No telematics mentioned on official pages — fuel & India price NOT published officially
+• Liebherr: LiDAT telematics, premium segment, limited India presence
+• Develon (formerly Doosan): rebranded 2023, limited India-specific data officially
+• XCMG: India network growing, official India pricing NOT published
+• LiuGong: India presence with LiuGong India Pvt Ltd, +39% growth FY25 (ICEMA data)
 
 DATA INTEGRITY RULES (NON-NEGOTIABLE):
 1. USE ONLY data from Internal HEX/TIPL files for Komatsu economics. These are the SINGLE SOURCE OF TRUTH.
