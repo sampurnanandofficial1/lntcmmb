@@ -321,34 +321,26 @@ var KOMATSU={
   'PC290-11':  {fuelLph:20.0,maint_hr:340,resale5yr:0.61,price_l:108},
 };
 var COMPETITORS={
-  // Keys match data-v values in competitor chips
-  // fuelMult relative to Komatsu 13 L/hr baseline (for TCO calculation engine)
-  // price_l: estimated market prices (NOT official — official prices not published by OEMs)
-  // Source notes embedded in system prompt
-  'CAT 320D3':         {fuelMult:1.00,maintMult:1.22,resale5yr:0.57,price_l:78,parts_days:2,network:'Good',
-    weakness:'VisionLink telematics requires paid subscription (unlike Komatsu KOMTRAX free). Fuel 11-13 L/hr (cat.com official) comparable to Komatsu — no fuel advantage in earthmoving.',
-    official_fuel:'11-13 L/hr (cat.com official)',official_price:'Not published'},
-  'Tata Hitachi EX215':{fuelMult:1.05,maintMult:1.18,resale5yr:0.55,price_l:70,parts_days:3,network:'Good',
-    weakness:'Fuel consumption not published on official tatahitachi.co.in. ConSite telematics. Made in India — parts availability good.',
-    official_fuel:'Not published (tatahitachi.co.in)',official_price:'Not published'},
-  'JCB NXT 225':       {fuelMult:0.98,maintMult:1.05,resale5yr:0.52,price_l:68,parts_days:1,network:'Good',
-    weakness:'14% fuel saving vs prev gen (jcb.com official) — absolute L/hr not stated. JCB LiveLink 4.0 standard. Lower resale. Made in India.',
-    official_fuel:'14% better than prev gen (Rs 2.9L/yr saving per JCB India press release Oct 2024)',official_price:'Not published'},
-  'Hyundai HX220':     {fuelMult:1.11,maintMult:1.25,resale5yr:0.47,price_l:70,parts_days:7,network:'Sparse',
-    weakness:'India-specific fuel and price data not published on official HCE India pages. HiMate telematics. Thin rural dealer network.',
-    official_fuel:'Not published (HCE India official)',official_price:'Not published'},
-  'Kobelco SK210':     {fuelMult:0.99,maintMult:1.14,resale5yr:0.51,price_l:71,parts_days:3,network:'Very Thin',
-    weakness:'India-specific data not published on official Kobelco India pages. KOMICS telematics. Very thin dealer network outside metros.',
-    official_fuel:'Not published (Kobelco India official)',official_price:'Not published'},
-  'Volvo EC220':       {fuelMult:1.05,maintMult:1.35,resale5yr:0.60,price_l:80,parts_days:5,network:'Moderate',
-    weakness:'Fuel L/hr not published on volvoce.com. CareTrack telematics standard. Parts most expensive in class (imported). 168 hp Volvo D6J Stage V.',
-    official_fuel:'Not published (volvoce.com)',official_price:'Not published'},
-  'SANY SY215':        {fuelMult:1.22,maintMult:1.40,resale5yr:0.33,price_l:60,parts_days:3,network:'Thin',
-    weakness:'Fuel L/hr and India price not published on official SANY India pages. No telematics mentioned. Lowest resale value. Chinese OEM.',
-    official_fuel:'Not published (sanyindia.in)',official_price:'Not published'},
-  'XCMG XE215':        {fuelMult:1.18,maintMult:1.35,resale5yr:0.38,price_l:56,parts_days:4,network:'Limited',
-    weakness:'Chinese OEM. India service network growing but limited. Official fuel and India pricing not published on xcmg.com.',
-    official_fuel:'Not published (xcmg.com India)',official_price:'Not published'},
+  // Keys match chip data-v values exactly. fuelMult relative to Komatsu 13 L/hr baseline.
+  // price_l: estimated market prices for TCO calc — NOT official (official prices not published)
+  'JCB':          {fuelMult:0.98,maintMult:1.05,resale5yr:0.52,price_l:68,parts_days:1,network:'Good',
+    weakness:'Fuel L/hr NOT published officially (jcb.com). 14% improvement claim vs prev gen. Lower resale value 52% vs Komatsu 63%. Less suited for heavy mining overburden.'},
+  'SANY':         {fuelMult:1.22,maintMult:1.40,resale5yr:0.33,price_l:60,parts_days:3,network:'Thin',
+    weakness:'Fuel NOT published on sany.in. No telematics system on official pages. Lowest resale 33%. Chinese OEM.'},
+  'Tata Hitachi': {fuelMult:1.05,maintMult:1.18,resale5yr:0.55,price_l:70,parts_days:3,network:'Good',
+    weakness:'Fuel NOT published on tatahitachi.co.in. ConSite telematics. Made in India — parts good.'},
+  'CAT':          {fuelMult:1.00,maintMult:1.22,resale5yr:0.57,price_l:78,parts_days:2,network:'Good',
+    weakness:'VisionLink telematics PAID subscription. Fuel 11-13 L/hr (OFFICIAL cat.com) — comparable to Komatsu.'},
+  'Volvo CE':     {fuelMult:1.05,maintMult:1.35,resale5yr:0.60,price_l:80,parts_days:5,network:'Moderate',
+    weakness:'Fuel NOT published on volvoce.com. Most expensive spare parts. All imported. Premium pricing.'},
+  'Kobelco':      {fuelMult:0.99,maintMult:1.14,resale5yr:0.51,price_l:71,parts_days:3,network:'Very Thin',
+    weakness:'Fuel NOT published on kobelco-in.com. KOMICS telematics. Very thin dealer network outside metros.'},
+  'Hyundai CE':   {fuelMult:1.11,maintMult:1.25,resale5yr:0.47,price_l:70,parts_days:7,network:'Sparse',
+    weakness:'Fuel NOT published on hyundai-ce.eu India pages. Hi Mate telematics. Lowest resale 47%.'},
+  'XCMG':         {fuelMult:1.18,maintMult:1.35,resale5yr:0.38,price_l:56,parts_days:4,network:'Limited',
+    weakness:'Fuel NOT published on xcmg.com. 7% saving claim vs prev gen only. Chinese OEM. Growing India network.'},
+  'LiuGong':      {fuelMult:1.15,maintMult:1.30,resale5yr:0.40,price_l:58,parts_days:4,network:'Limited',
+    weakness:'Fuel NOT published on liugongindia.com. iLink telematics. Chinese OEM with growing India presence.'},
 };
 var REGIONS={
   north:'Delhi, Lucknow, Jaipur, Bhopal',south:'Chennai, Hyderabad, Bengaluru, Kochi',
@@ -367,7 +359,13 @@ var SEGS={
 
 function computeTCO(p){
   var K=KOMATSU[p.model]||KOMATSU['PC210-10M0'];
-  var C=COMPETITORS[p.competitor]||COMPETITORS['CAT'];
+  // competitor is multi-select string e.g. "JCB, SANY" — use first one for TCO calc
+  var primaryComp=(p.competitor||'JCB').split(',')[0].trim();
+  // find matching key in COMPETITORS (partial match)
+  var compKey=Object.keys(COMPETITORS).find(function(k){
+    return k.toLowerCase().indexOf(primaryComp.toLowerCase())!==-1;
+  })||Object.keys(COMPETITORS)[0];
+  var C=COMPETITORS[compKey];
   var hd=parseInt(p.hrsDay), ah=hd*300, h5=ah*5;
   var Kf=Math.round(K.fuelLph*h5*DIESEL/100000)/10;
   var Cf=Math.round(K.fuelLph*C.fuelMult*h5*DIESEL/100000)/10;
