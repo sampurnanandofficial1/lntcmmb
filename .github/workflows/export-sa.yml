@@ -1,35 +1,29 @@
-name: Export SA Temp
+name: Export SA
 
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/export-sa.yml'
 
 jobs:
   export:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Export SA to temp file  
+      - name: Export and commit SA
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: |
-          echo "$FIREBASE_SERVICE_ACCOUNT" | base64 -w 0 > /tmp/sa_b64.txt
-          cat /tmp/sa_b64.txt
-      - name: Write to outputs
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           python3 -c "
-import os, base64, json
+import os, base64, subprocess
 sa = os.environ['FIREBASE_SERVICE_ACCOUNT']
 data = base64.b64encode(sa.encode()).decode()
 with open('sa_temp.txt','w') as f:
     f.write(data)
-print('Written')
 "
-      - name: Commit temp file
-        run: |
           git config user.email 'bot@lntcmmb.in'
           git config user.name 'LNTCMMB Bot'
           git add sa_temp.txt
-          git commit -m 'temp: export SA [skip ci]'
+          git commit -m 'temp: SA export [skip ci]'
           git push
