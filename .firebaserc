@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "lntcmmb-intelligence1"
+  },
+  "targets": {
+    "lntcmmb-intelligence1": {
+      "hosting": {
+        "lntcmmb-intelligence": ["lntcmmb-intelligence"]
+      }
+    }
+  }
+}
