@@ -458,12 +458,12 @@ function genDealerTraining(p,t){
 // ─── BUILD USER PROMPT ───────────────────────────────────────────────────────
 function buildUserPrompt(p,t){
   var typeInstructions={
-    full_speech:'Generate a COMPLETE SALES SPEECH (500-700 words) to deliver face-to-face. Structure: (1) Warm greeting, (2) Pain identification for their segment, (3) 5-year TCO comparison using the EXACT numbers below, (4) Top 3 Komatsu advantages specific to their work, (5) KOMTRAX telematics value (FREE vs competitor paid/absent), (6) L&T 72-hr uptime guarantee, (7) EMI/AMC option, (8) Strong close with specific ask. Conversational — not a brochure.',
-    tco_comparison:'Generate a detailed TCO COMPARISON NARRATIVE (400-500 words). Use EXACT numbers below. Walk through each cost component — fuel, maintenance, downtime, resale — building to the final net savings figure. Include a verdict paragraph. Use section headers with ── markers.',
-    objections:'Generate OBJECTION HANDLING for exactly 6 objections this customer type would raise. Format: OBJECTION N: "[verbatim customer statement]" then Response: [empathetic + data-backed + proof]. Cover: price, "machine working fine", service, spare parts, brand loyalty, "need time". Use EXACT Rs numbers provided.',
-    whatsapp:'Generate a WhatsApp follow-up message (max 180 words). Use *bold* for emphasis, bullets with •, relevant emojis. Include: greeting, 3 key TCO numbers, 3 advantages, next step, [SALES_NAME] and [MOBILE] placeholders. Ready to send.',
-    rent_vs_own:'Generate RENTAL vs OWNERSHIP ANALYSIS (400 words). Use numbers below. Compare monthly rental outgo vs monthly EMI+AMC+insurance. Show break-even timeline. Recommendation based on customer type. Persuasive closing.',
-    amc_finance:'Generate AMC + FINANCING BUNDLE PITCH (400 words). Show monthly bundle (EMI+AMC+Insurance) as one number vs revenue generated. Explain what AMC prevents. Compelling closing about predictable fixed cost vs competitor surprise bills.',
+    full_speech:'Generate a COMPLETE, THOROUGH SALES SPEECH (no word limit — cover all sections fully) to deliver face-to-face. Structure: (1) Warm greeting, (2) Pain identification for their segment, (3) 5-year TCO comparison using the EXACT numbers below, (4) Top 3 Komatsu advantages specific to their work, (5) KOMTRAX telematics value (FREE vs competitor paid/absent), (6) L&T 72-hr uptime guarantee, (7) EMI/AMC option, (8) Strong close with specific ask. Conversational — not a brochure.',
+    tco_comparison:'Generate a DETAILED TCO COMPARISON NARRATIVE with complete analysis (no word limit). Use EXACT numbers below. Walk through each cost component — fuel, maintenance, downtime, resale — building to the final net savings figure. Include a verdict paragraph. Use section headers with ── markers.',
+    objections:'Generate COMPREHENSIVE OBJECTION HANDLING for exactly 6 objections this customer type would raise. Format: OBJECTION N: "[verbatim customer statement]" then Response: [empathetic + data-backed + proof]. Cover: price, "machine working fine", service, spare parts, brand loyalty, "need time". Use EXACT Rs numbers provided.',
+    whatsapp:'Generate a WhatsApp follow-up message (keep concise but complete — around 200 words). Use *bold* for emphasis, bullets with •, relevant emojis. Include: greeting, 3 key TCO numbers, 3 advantages, next step, [SALES_NAME] and [MOBILE] placeholders. Ready to send.',
+    rent_vs_own:'Generate a COMPLETE RENTAL vs OWNERSHIP ANALYSIS (no word limit — cover all sections). Use numbers below. Compare monthly rental outgo vs monthly EMI+AMC+insurance. Show break-even timeline. Recommendation based on customer type. Persuasive closing.',
+    amc_finance:'Generate a COMPLETE AMC + FINANCING BUNDLE PITCH (no word limit — cover all sections). Show monthly bundle (EMI+AMC+Insurance) as one number vs revenue generated. Explain what AMC prevents. Compelling closing about predictable fixed cost vs competitor surprise bills.',
     site_visit:'Generate SITE VISIT CONVERSATION GUIDE with sections: Pre-Visit Checklist, What to Observe, Opening Questions (start with their pain), KOMTRAX Demo Script, Closing with Decision-Maker, Post-Visit Actions. Include actual dialogue examples.',
     dealer_training:'Generate DEALER TRAINING MODULE: (1) Numbers to memorise using figures below, (2) Top 5 differentiators one sentence each, (3) 5 mistakes to never make, (4) Role-play scenario with ideal response, (5) Quick Reference comparison table.'
   };
@@ -526,7 +526,7 @@ async function generatePitch(){
       },
       body:JSON.stringify({
         model:'claude-sonnet-4-6',
-        max_tokens:1500,
+        max_tokens:4096,
         system:buildSystemPrompt(),
         messages:[{role:'user',content:buildUserPrompt(p,t)}]
       })
