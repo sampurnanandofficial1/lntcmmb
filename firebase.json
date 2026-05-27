@@ -1,0 +1,30 @@
+{
+  "hosting": {
+    "site": "lntcmmb-intelligence",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "scripts/**",
+      ".github/**",
+      "data/**",
+      "**/*.py",
+      "**/*.yml",
+      "**/*.sh",
+      "sa_export.b64",
+      "sa_temp.txt"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+          { "key": "Pragma", "value": "no-cache" }
+        ]
+      }
+    ],
+    "rewrites": [
+      { "source": "/", "destination": "/index.html" }
+    ]
+  }
+}
