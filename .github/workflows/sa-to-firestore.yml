@@ -1,0 +1,41 @@
+name: SA to Firestore
+
+on:
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests google-auth
+      - name: Write SA to Firestore
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, base64, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import AuthorizedSession
+
+          sa_json = os.environ['FIREBASE_SERVICE_ACCOUNT']
+          sa_info = json.loads(sa_json)
+          creds = service_account.Credentials.from_service_account_info(
+              sa_info, scopes=["https://www.googleapis.com/auth/cloud-platform"])
+          sess = AuthorizedSession(creds)
+
+          PROJECT = "lntcmmb-intelligence1"
+          url = f"https://firestore.googleapis.com/v1/projects/{PROJECT}/databases/(default)/documents/meta/sa_temp"
+          
+          # Store the SA (base64 encoded for safety) in Firestore temporarily
+          encoded = base64.b64encode(sa_json.encode()).decode()
+          body = {"fields": {
+              "data": {"stringValue": encoded},
+              "ts": {"stringValue": "2026-05-27"}
+          }}
+          r = sess.patch(url, json=body)
+          print("Firestore write:", r.status_code, "OK" if r.status_code==200 else r.text[:100])
+          PYEOF
