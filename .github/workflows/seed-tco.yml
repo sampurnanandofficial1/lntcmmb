@@ -12,7 +12,11 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests google-auth
-      - name: Write TCO data to Firestore via REST API
+      - name: Write TCO pitch data to Firestore
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: python scripts/seed_tco_rest.py
+      - name: Write Used Equipment reference data to Firestore
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: python scripts/seed_ue_firestore.py
