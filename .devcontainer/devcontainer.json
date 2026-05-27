@@ -1,0 +1,11 @@
+{
+  "name": "LNTCMMB Firebase Deploy",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {},
+  "postCreateCommand": "npm install -g firebase-tools && echo '\n✅ Firebase CLI ready. Run: bash deploy-codespace.sh'",
+  "customizations": {
+    "vscode": {
+      "settings": { "terminal.integrated.defaultProfile.linux": "bash" }
+    }
+  }
+}
