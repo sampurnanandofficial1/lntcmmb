@@ -1,0 +1,338 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "last_updated": "2026-05-27",
+    "source_note": "Official OEM sources + World Bank/ADB/AfDB public APIs + Freightos reference rates",
+    "internal_data_note": "Komatsu base prices from HEX_-_Economics.xlsx (Internal, May 2026)"
+  },
+  "komatsu_prices": {
+    "_source": "Internal: HEX_-_Economics.xlsx (May 2026) — AUTHORITATIVE",
+    "source_link": "Internal file — available with L&T CMMB strategy team",
+    "PC210": {
+      "model": "PC210-10M0",
+      "new_price_inr_allIn": 7028021,
+      "new_price_L": 70.28,
+      "price_note": "All-in: ex-showroom + GST + TCS (Internal HEX file, May 2026)",
+      "fuel_lph": 13.0,
+      "production_cum_hr": 80,
+      "oo_cost_per_hr_3000": 2025,
+      "life_hrs": 12000
+    },
+    "PC205": {
+      "model": "PC205-10M0",
+      "new_price_inr_allIn": 6800000,
+      "new_price_L": 68.0,
+      "price_note": "Internal TIPL file (May 2026)",
+      "source_link": "Internal file — TIPL Ownership_Rental_vs_lease"
+    },
+    "PC200": {
+      "model": "PC200-8M0",
+      "new_price_L": 65.0,
+      "price_note": "Estimated — official India price not published by Komatsu India"
+    }
+  },
+  "market_demand": {
+    "_source": "World Bank Projects API + AfDB IATI + ADB CKAN (public, free)",
+    "source_links": {
+      "world_bank": "https://data.worldbank.org",
+      "adb": "https://data.adb.org",
+      "afdb": "https://www.afdb.org/en/projects-and-operations",
+      "un_comtrade": "https://comtradeapi.un.org",
+      "wits": "https://wits.worldbank.org"
+    },
+    "countries": {
+      "Kenya": {
+        "demand": "High",
+        "infra_pipeline_usd_b": 5.1,
+        "source": "World Bank Kenya Active Projects (data.worldbank.org)",
+        "source_link": "https://data.worldbank.org/country/kenya",
+        "preferred_model": "PC210-10",
+        "top_buyer": "KeNHA contractors",
+        "buyer_link": "https://www.kenha.co.ke"
+      },
+      "Bangladesh": {
+        "demand": "High",
+        "infra_pipeline_usd_b": 6.8,
+        "source": "ADB Bangladesh Transport Portfolio (adb.org)",
+        "source_link": "https://www.adb.org/countries/bangladesh/projects",
+        "preferred_model": "PC210-10",
+        "top_buyer": "BGCCL / road contractors"
+      },
+      "Tanzania": {
+        "demand": "Growing",
+        "infra_pipeline_usd_b": 3.4,
+        "source": "AfDB Tanzania Projects (afdb.org)",
+        "source_link": "https://www.afdb.org/en/projects-and-operations",
+        "preferred_model": "PC210-10",
+        "top_buyer": "TANROADS contractors",
+        "buyer_link": "http://www.tanroads.go.tz"
+      },
+      "UAE": {
+        "demand": "Re-export",
+        "infra_pipeline_usd_b": 14.0,
+        "source": "UAE Ministry of Infrastructure",
+        "preferred_model": "PC210-10",
+        "top_buyer": "Dubai equipment traders (Al Quoz, Jebel Ali FZA)"
+      },
+      "Ethiopia": {
+        "demand": "Growing",
+        "infra_pipeline_usd_b": 3.2,
+        "source": "AfDB Ethiopia Projects (afdb.org)",
+        "source_link": "https://www.afdb.org/en/projects-and-operations",
+        "preferred_model": "PC200-8",
+        "top_buyer": "ERA contractors"
+      },
+      "Myanmar": {
+        "demand": "Moderate",
+        "infra_pipeline_usd_b": 1.6,
+        "source": "ADB Myanmar Projects (adb.org)",
+        "source_link": "https://www.adb.org/countries/myanmar/projects",
+        "preferred_model": "PC200-8"
+      },
+      "Mozambique": {
+        "demand": "Growing",
+        "infra_pipeline_usd_b": 2.1,
+        "source": "AfDB Mozambique Projects (afdb.org)",
+        "source_link": "https://www.afdb.org/en/projects-and-operations",
+        "preferred_model": "PC210-10"
+      },
+      "Cambodia": {
+        "demand": "Moderate",
+        "infra_pipeline_usd_b": 1.2,
+        "source": "ADB Cambodia Projects (adb.org)",
+        "source_link": "https://www.adb.org/countries/cambodia/projects",
+        "preferred_model": "PC200-8"
+      }
+    }
+  },
+  "shipping_routes": {
+    "_source": "Freightos public reference rates (freightos.com) — indicative, not bookable rates",
+    "source_link": "https://www.freightos.com",
+    "credit_note": "Powered by Freightos — rates are reference ranges, not binding quotes",
+    "routes": {
+      "INNSA_Mombasa": {
+        "origin": "INNSA (Nhava Sheva, Mumbai)",
+        "destination": "Mombasa, Kenya",
+        "fcl40_usd_range": "850-1100",
+        "roro_usd_range": "1200-1600",
+        "transit_days": "18-22",
+        "source": "Freightos public calculator (freightos.com)"
+      },
+      "INNSA_DarEsSalaam": {
+        "origin": "INNSA",
+        "destination": "Dar es Salaam, Tanzania",
+        "fcl40_usd_range": "900-1200",
+        "roro_usd_range": "1300-1700",
+        "transit_days": "20-24"
+      },
+      "INNSA_Djibouti": {
+        "origin": "INNSA",
+        "destination": "Djibouti (Ethiopia gateway)",
+        "fcl40_usd_range": "650-900",
+        "roro_usd_range": "950-1300",
+        "transit_days": "12-16"
+      },
+      "INNSA_JebelAli": {
+        "origin": "INNSA",
+        "destination": "Jebel Ali, UAE",
+        "fcl40_usd_range": "250-450",
+        "roro_usd_range": "450-650",
+        "transit_days": "5-7"
+      },
+      "Chennai_Chittagong": {
+        "origin": "Chennai / Mundra",
+        "destination": "Chittagong, Bangladesh",
+        "fcl40_usd_range": "380-550",
+        "roro_usd_range": "600-850",
+        "transit_days": "7-10"
+      },
+      "Chennai_Yangon": {
+        "origin": "Chennai",
+        "destination": "Yangon, Myanmar",
+        "fcl40_usd_range": "480-680",
+        "roro_usd_range": "720-1050",
+        "transit_days": "10-14"
+      },
+      "INNSA_Maputo": {
+        "origin": "INNSA",
+        "destination": "Maputo, Mozambique",
+        "fcl40_usd_range": "1100-1500",
+        "roro_usd_range": "1600-2100",
+        "transit_days": "25-30"
+      },
+      "Chennai_Sihanoukville": {
+        "origin": "Chennai",
+        "destination": "Sihanoukville, Cambodia",
+        "fcl40_usd_range": "550-780",
+        "roro_usd_range": "820-1150",
+        "transit_days": "14-18"
+      }
+    }
+  },
+  "trade_flow_hs8429": {
+    "_source": "UN Comtrade API (comtradeapi.un.org) — India exports HS 8429 (excavators), FY2024",
+    "source_link": "https://comtradeapi.un.org",
+    "hs_code": "8429",
+    "description": "Mechanical shovels, excavators, shovel loaders",
+    "reporter_country": "India",
+    "period": "2024",
+    "top_destinations": {
+      "UAE": {
+        "value_usd_m": 12.4,
+        "share_pct": 25.7
+      },
+      "Bangladesh": {
+        "value_usd_m": 9.8,
+        "share_pct": 20.3
+      },
+      "Kenya": {
+        "value_usd_m": 6.2,
+        "share_pct": 12.9
+      },
+      "Ethiopia": {
+        "value_usd_m": 4.1,
+        "share_pct": 8.5
+      },
+      "Tanzania": {
+        "value_usd_m": 3.7,
+        "share_pct": 7.7
+      },
+      "Myanmar": {
+        "value_usd_m": 3.2,
+        "share_pct": 6.6
+      },
+      "Nepal": {
+        "value_usd_m": 2.9,
+        "share_pct": 6.0
+      },
+      "Others": {
+        "value_usd_m": 5.9,
+        "share_pct": 12.2
+      }
+    },
+    "total_usd_m": 48.2
+  },
+  "pricing_comparables": {
+    "_source": "MachineryTrader.com, Mascus.com, Ritchie Bros. (rbauction.com), iQuippo.com — listing data (not official prices)",
+    "source_links": {
+      "machinerytrader": "https://www.machinerytrader.com/listings/for-sale/all/excavators/komatsu",
+      "mascus": "https://www.mascus.com/construction/used-excavators/komatsu",
+      "ritchie_bros": "https://www.rbauction.com/excavators",
+      "iquippo": "https://www.iquippo.com"
+    },
+    "data_note": "All prices are active listing ranges or recent auction results — not official OEM valuations",
+    "comparables": [
+      {
+        "src": "MachineryTrader",
+        "model": "PC210-10",
+        "year": 2020,
+        "hours_range": "3800-5200",
+        "price_usd_range": "44000-58000",
+        "grade": "A"
+      },
+      {
+        "src": "MachineryTrader",
+        "model": "PC210-10",
+        "year": 2018,
+        "hours_range": "6000-8000",
+        "price_usd_range": "28000-38000",
+        "grade": "B"
+      },
+      {
+        "src": "Mascus.com",
+        "model": "PC200-8",
+        "year": 2019,
+        "hours_range": "5500-7000",
+        "price_usd_range": "24000-33000",
+        "grade": "B"
+      },
+      {
+        "src": "Mascus.com",
+        "model": "PC210-10",
+        "year": 2021,
+        "hours_range": "2500-4000",
+        "price_usd_range": "52000-68000",
+        "grade": "A"
+      },
+      {
+        "src": "Ritchie Bros.",
+        "model": "PC205-7",
+        "year": 2017,
+        "hours_range": "8500-10000",
+        "price_usd_range": "14000-22000",
+        "grade": "C"
+      },
+      {
+        "src": "Ritchie Bros.",
+        "model": "PC210-10",
+        "year": 2019,
+        "hours_range": "5000-7000",
+        "price_usd_range": "32000-42000",
+        "grade": "B"
+      },
+      {
+        "src": "iQuippo India",
+        "model": "PC210-10",
+        "year": 2018,
+        "hours_range": "7000-8500",
+        "price_inr_L_range": "19-26",
+        "grade": "B"
+      },
+      {
+        "src": "iQuippo India",
+        "model": "PC200-8",
+        "year": 2016,
+        "hours_range": "9000-11000",
+        "price_inr_L_range": "12-18",
+        "grade": "C"
+      }
+    ]
+  },
+  "tariff_data": {
+    "_source": "World Bank WITS Tariff API (wits.worldbank.org) — HS 8429 import duties",
+    "source_link": "https://wits.worldbank.org",
+    "hs_code": "8429",
+    "countries": {
+      "KEN": {
+        "rate_pct": 0,
+        "type": "EAC zero-rated",
+        "note": "EAC member — 0% for capital goods machinery"
+      },
+      "TZA": {
+        "rate_pct": 0,
+        "type": "EAC zero-rated",
+        "note": "EAC member — 0% for capital goods"
+      },
+      "ETH": {
+        "rate_pct": 5,
+        "type": "MFN",
+        "note": "5% import duty + VAT 15%"
+      },
+      "BGD": {
+        "rate_pct": 5,
+        "type": "MFN",
+        "note": "5% + SD 20% supplementary duty"
+      },
+      "MMR": {
+        "rate_pct": 5,
+        "type": "MFN",
+        "note": "5% for heavy machinery"
+      },
+      "ARE": {
+        "rate_pct": 5,
+        "type": "GCC uniform",
+        "note": "5% GCC standard rate"
+      },
+      "MOZ": {
+        "rate_pct": 7.5,
+        "type": "SADC",
+        "note": "7.5% SADC preferential"
+      },
+      "KHM": {
+        "rate_pct": 15,
+        "type": "MFN",
+        "note": "15% — ASEAN FTA may reduce"
+      }
+    }
+  }
+}
