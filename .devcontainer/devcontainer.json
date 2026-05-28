@@ -1,11 +1,13 @@
 {
   "name": "LNTCMMB Firebase Deploy",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
-  "features": {},
-  "postCreateCommand": "npm install -g firebase-tools && echo '\n✅ Firebase CLI ready. Run: bash deploy-codespace.sh'",
+  "postCreateCommand": "npm install -g firebase-tools && firebase target:apply hosting lntcmmb-dashboards lntcmmb-dashboards --project lntcmmb-intelligence1 2>/dev/null || true",
+  "postStartCommand": "git pull --quiet && firebase deploy --only hosting:lntcmmb-dashboards --project lntcmmb-intelligence1 2>&1 | tail -5 && echo '\n✅ https://lntcmmb-dashboards.web.app is up to date'",
   "customizations": {
     "vscode": {
-      "settings": { "terminal.integrated.defaultProfile.linux": "bash" }
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
     }
   }
 }
