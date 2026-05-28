@@ -1,0 +1,102 @@
+name: 🕖 Daily 7 AM Data Routine
+
+on:
+  schedule:
+    - cron: '30 1 * * *'   # 07:00 IST (UTC+5:30 → 01:30 UTC)
+  workflow_dispatch:        # Manual trigger anytime
+
+jobs:
+  # ── Job 1: News & Intelligence (13 sources) ────────────────────────────
+  update-news:
+    name: Update News (13 sources)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests feedparser firebase-admin google-auth
+      - name: Fetch news from 13 sources
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          NEWSDATA_KEY:             ${{ secrets.NEWSDATA_KEY }}
+          FREENEWS_API_KEY:         ${{ secrets.FREENEWS_API_KEY }}
+          CURRENTS_API_KEY:         ${{ secrets.CURRENTS_API_KEY }}
+          GNEWS_API_KEY:            ${{ secrets.GNEWS_API_KEY }}
+          MEDIASTACK_KEY:           ${{ secrets.MEDIASTACK_KEY }}
+        run: python scripts/fetch_news.py
+
+  # ── Job 2: Used Equipment Intelligence ────────────────────────────────
+  update-used-equipment:
+    name: Update Used Equipment Data
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests feedparser firebase-admin google-auth
+      - name: Fetch used equipment intelligence
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: python scripts/fetch_used_equipment.py
+
+  # ── Job 3: FX Rates + Cache Refresh ───────────────────────────────────
+  update-fx-and-refresh:
+    name: Update FX Rates & Refresh Dashboards
+    runs-on: ubuntu-latest
+    needs: [update-used-equipment]
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests firebase-admin google-auth
+      - name: Run master daily update (FX + cache refresh + Firestore log)
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          GH_TOKEN:                 ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/daily_routine.py
+      - name: Commit and push if changed
+        run: |
+          git config user.email "daily-routine@lntcmmb.in"
+          git config user.name "LNTCMMB Daily Routine"
+          git pull origin main --rebase
+          git diff --quiet || (git add -A && git commit -m "🔄 Auto: $(date -u +'%Y-%m-%d') 07:00 IST daily routine — FX + cache refresh")
+          git push origin main || echo "Nothing to push"
+
+  # ── Job 4: Deploy to Firebase (self-hosted runner) ─────────────────────
+  deploy-to-firebase:
+    name: Deploy Updated Dashboards to Firebase
+    runs-on: self-hosted
+    needs: [update-news, update-used-equipment, update-fx-and-refresh]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          clean: true
+      - name: Pull latest and deploy
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          firebase target:apply hosting lntcmmb-dashboards lntcmmb-dashboards \
+            --project lntcmmb-intelligence1 2>/dev/null || true
+          firebase deploy --only hosting:lntcmmb-dashboards \
+            --project lntcmmb-intelligence1
+      - name: Confirm deployment
+        run: |
+          echo ""
+          echo "✅ Daily 7 AM Routine Complete!"
+          echo "   Date: $(TZ='Asia/Kolkata' date +'%Y-%m-%d %H:%M IST')"
+          echo "   News:     Updated (13 sources)"
+          echo "   FX Rates: Refreshed from ExchangeRate-API"
+          echo "   Lead scores auto-recalculate on browser load"
+          echo "   Live at:  https://lntcmmb-dashboards.web.app"
