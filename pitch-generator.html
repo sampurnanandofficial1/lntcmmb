@@ -511,7 +511,7 @@ function buildUserPrompt(p,t){
     '- 5yr maintenance (L&T AMC Rs280/hr): Rs'+t.Km+'L | Competitor open market: Rs'+t.Cm+'L | Saving: Rs'+(t.Cm-t.Km).toFixed(1)+'L\n'+
     '- 5yr downtime — Komatsu: '+t.Kdd+' days (Rs'+t.Kdt+'L) | Competitor: '+t.Cdd+' days (Rs'+t.Cdt+'L)\n'+
     '- Resale yr5 — Komatsu: Rs'+t.Kr+'L | Competitor: Rs'+t.Cr+'L | Komatsu Rs'+(t.Kr-t.Cr).toFixed(1)+'L higher\n'+
-    '- NET 5yr TCO — Komatsu: Rs'+t.Kt+'L | Competitor: Rs'+t.Ct+'L | Total saving: Rs'+t.sav+'L\n'+
+    '- NET 5yr TCO — Komatsu: Rs'+t.Kt+'L | Competitor: Rs'+t.Ct+'L\n'+
     '- Monthly EMI (85%, 60m, 10.5%): Rs'+t.emi+'L/month\n'+
     '- Total O&O at 3,000 hrs/yr: Rs2,025/hr (Internal HEX file — authoritative anchor number)\n\n'+
     'COMPETITOR SPECS (from official OEM sources — stored in Firebase oem_specs collection):\n'+
@@ -891,6 +891,7 @@ GOLDEN RULES:
 • Always mention L&T 72-hour uptime guarantee
 • Never invent competitor prices — say "not published officially" if needed
 • Include a clear closing call-to-action
+• NEVER mention 'total savings', 'net savings', 'you save Rs X lakhs', or any aggregate 5-year saving figure — these numbers appear unrealistically high and damage credibility. Instead focus on individual cost components: fuel cost per hour, maintenance per hour, EMI per month, resale value difference
 • NEVER start output with "Here is your pitch", "Here is the", "WhatsApp Message:", "Sales Speech:", or any label/header
 • NEVER add salesperson name, phone number, mobile, signature, or placeholders like [SALES_NAME] [MOBILE] [YOUR NAME] at the end
 • For 0-machine (first-time buyer) fleet: emphasise purchase decision benefits, EMI affordability, resale protection
