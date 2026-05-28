@@ -1,25 +1,26 @@
-name: Auto-Deploy to Firebase on Push
+name: Deploy to Firebase (Self-Hosted)
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'index.html'
       - 'used-equipment.html'
       - 'pitch-generator.html'
+  workflow_dispatch:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
+        with:
+          clean: true
 
       - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          projectId: lntcmmb-intelligence1
-          target: lntcmmb-dashboards
-          channelId: live
+        run: |
+          firebase target:apply hosting lntcmmb-dashboards lntcmmb-dashboards --project lntcmmb-intelligence1 2>/dev/null || true
+          firebase deploy --only hosting:lntcmmb-dashboards --project lntcmmb-intelligence1
+
+      - name: Done
+        run: echo "✅ Live at https://lntcmmb-dashboards.web.app"
