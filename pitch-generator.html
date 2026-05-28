@@ -251,6 +251,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
   <div class="fgrp">
     <label class="flabel">Fleet Size (existing machines)</label>
     <select class="fselect" id="fleet-size">
+      <option value="0">0 machines (First-time buyer)</option>
       <option value="1">1 machine</option>
       <option value="3" selected>2 – 5 machines</option>
       <option value="10">6 – 15 machines</option>
@@ -486,13 +487,13 @@ function genDealerTraining(p,t){
 function buildUserPrompt(p,t){
   var typeInstructions={
     full_speech:'Generate a COMPLETE, THOROUGH SALES SPEECH (no word limit — cover all sections fully) to deliver face-to-face. Structure: (1) Warm greeting, (2) Pain identification for their segment, (3) 5-year TCO comparison using the EXACT numbers below, (4) Top 3 Komatsu advantages specific to their work, (5) KOMTRAX telematics value (FREE vs competitor paid/absent), (6) L&T 72-hr uptime guarantee, (7) EMI/AMC option, (8) Strong close with specific ask. Conversational — not a brochure.',
-    tco_comparison:'Generate a DETAILED TCO COMPARISON NARRATIVE with complete analysis (no word limit). Use EXACT numbers below. Walk through each cost component — fuel, maintenance, downtime, resale — building to the final net savings figure. Include a verdict paragraph. Use section headers with ── markers.',
-    objections:'Generate COMPREHENSIVE OBJECTION HANDLING for exactly 6 objections this customer type would raise. Format: OBJECTION N: "[verbatim customer statement]" then Response: [empathetic + data-backed + proof]. Cover: price, "machine working fine", service, spare parts, brand loyalty, "need time". Use EXACT Rs numbers provided.',
-    whatsapp:'Generate a WhatsApp follow-up message (keep concise but complete — around 200 words). Use *bold* for emphasis, bullets with •, relevant emojis. Include: greeting, 3 key TCO numbers, 3 advantages, next step, [SALES_NAME] and [MOBILE] placeholders. Ready to send.',
-    rent_vs_own:'Generate a COMPLETE RENTAL vs OWNERSHIP ANALYSIS (no word limit — cover all sections). Use numbers below. Compare monthly rental outgo vs monthly EMI+AMC+insurance. Show break-even timeline. Recommendation based on customer type. Persuasive closing.',
-    amc_finance:'Generate a COMPLETE AMC + FINANCING BUNDLE PITCH (no word limit — cover all sections). Show monthly bundle (EMI+AMC+Insurance) as one number vs revenue generated. Explain what AMC prevents. Compelling closing about predictable fixed cost vs competitor surprise bills.',
-    site_visit:'Generate SITE VISIT CONVERSATION GUIDE with sections: Pre-Visit Checklist, What to Observe, Opening Questions (start with their pain), KOMTRAX Demo Script, Closing with Decision-Maker, Post-Visit Actions. Include actual dialogue examples.',
-    dealer_training:'Generate DEALER TRAINING MODULE: (1) Numbers to memorise using figures below, (2) Top 5 differentiators one sentence each, (3) 5 mistakes to never make, (4) Role-play scenario with ideal response, (5) Quick Reference comparison table.'
+    tco_comparison:'Generate a DETAILED TCO COMPARISON NARRATIVE. Output the analysis directly — no "Here is" header. Use exact numbers provided. Sections: cost breakdown, 5yr comparison table, net saving, verdict. NO salesperson signature. Use EXACT numbers below. Walk through each cost component — fuel, maintenance, downtime, resale — building to the final net savings figure. Include a verdict paragraph. Use section headers with ── markers.',
+    objections:'Generate COMPREHENSIVE OBJECTION HANDLING for exactly 6 objections. Start directly with "OBJECTION 1:" — no preamble. NO salesperson signature at end. this customer type would raise. Format: OBJECTION N: "[verbatim customer statement]" then Response: [empathetic + data-backed + proof]. Cover: price, "machine working fine", service, spare parts, brand loyalty, "need time". Use EXACT Rs numbers provided.',
+    whatsapp:'Generate a WhatsApp message (150-200 words). Use *bold* for emphasis, bullets with •, and relevant emojis throughout (✅ 🚀 💰 ⛽ 🔧 📊 💪 🤝). Structure: greeting with customer name, the core value proposition, 3 key numbers from TCO data above, 3 Komatsu advantages specific to their segment, one clear next step. DO NOT add salesperson name, phone number, signature, or any placeholder like [SALES_NAME] or [MOBILE]. End with a simple call-to-action question. JUST THE MESSAGE BODY — no headers, no labels like "WhatsApp Message:" or "Here is your pitch".',
+    rent_vs_own:'Generate a COMPLETE RENTAL vs OWNERSHIP ANALYSIS. Start directly with the analysis — no header. NO salesperson signature. Use numbers below. Compare monthly rental outgo vs monthly EMI+AMC+insurance. Show break-even timeline. Recommendation based on customer type. Persuasive closing.',
+    amc_finance:'Generate a COMPLETE AMC + FINANCING BUNDLE PITCH. Start directly — no "Here is" header. NO salesperson signature. Show monthly bundle (EMI+AMC+Insurance) as one number vs revenue generated. Explain what AMC prevents. Compelling closing about predictable fixed cost vs competitor surprise bills.',
+    site_visit:'Generate SITE VISIT CONVERSATION GUIDE. Start directly with the sections — no preamble header. NO salesperson signature. Sections: Pre-Visit Checklist, What to Observe, Opening Questions (start with their pain), KOMTRAX Demo Script, Closing with Decision-Maker, Post-Visit Actions. Include actual dialogue examples.',
+    dealer_training:'Generate DEALER TRAINING MODULE. Start directly with the content — no "Here is" header. NO salesperson signature. (1) Numbers to memorise using figures below, (2) Top 5 differentiators one sentence each, (3) 5 mistakes to never make, (4) Role-play scenario with ideal response, (5) Quick Reference comparison table.'
   };
   var inst=typeInstructions[p.pitchType]||typeInstructions.full_speech;
   return 'CUSTOMER PROFILE:\n'+
@@ -502,7 +503,7 @@ function buildUserPrompt(p,t){
     '- Price Sensitivity: '+p.priceSense.replace(/_/g,' ')+'\n'+
     '- Value Drivers that Matter Most: '+p.painPoints.map(function(x){return x.replace(/_/g,' ');}).join(', ')+'\n'+
     '- Competitors customer is evaluating: '+p.competitor+'\n'+
-    '- Daily operation: '+p.hrsDay+' hrs/day | Fleet: '+p.fleetSize+' machines\n'+
+    '- Daily operation: '+p.hrsDay+' hrs/day | Fleet: '+(p.fleetSize==='0'||p.fleetSize===0?'0 machines (First-time buyer — no existing equipment)':p.fleetSize+' machines')+'\n'+
     '- Extra context: '+(p.extraCtx||'none')+'\n\n'+
     'PRE-COMPUTED TCO DATA (use THESE EXACT numbers — sourced from Internal HEX file May 2026):\n'+
     '- Komatsu '+p.model+': Rs'+t.pl+'L all-in | Primary competitor price: Rs'+t.cpl+'L (market estimate only — not official)\n'+
@@ -889,7 +890,12 @@ GOLDEN RULES:
 • Always mention KOMTRAX telematics (free, standard)
 • Always mention L&T 72-hour uptime guarantee
 • Never invent competitor prices — say "not published officially" if needed
-• Include a clear closing call-to-action`;}
+• Include a clear closing call-to-action
+• NEVER start output with "Here is your pitch", "Here is the", "WhatsApp Message:", "Sales Speech:", or any label/header
+• NEVER add salesperson name, phone number, mobile, signature, or placeholders like [SALES_NAME] [MOBILE] [YOUR NAME] at the end
+• For 0-machine (first-time buyer) fleet: emphasise purchase decision benefits, EMI affordability, resale protection
+• Output ONLY the pitch content itself — start directly with the message
+• For WhatsApp type: use emojis throughout (✅ 💰 ⛽ 🔧 📊 🚀 💪 🤝 ✔️) — they must appear in the message`;} 
 
 function renderText(title,text,p,t,out){
   // Store full text for WA sending (no 1200 char truncation)
