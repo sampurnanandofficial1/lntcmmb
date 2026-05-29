@@ -104,7 +104,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
   padding:10px 14px;background:linear-gradient(135deg,var(--navy),var(--blue));
   color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px
 }
-.ue-card-body{padding:12px 14px}
+.ue-card-body{padding:10px 12px}
 .ue-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .ue-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 
@@ -175,21 +175,20 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 .ue-rate-unit{font-size:9.5px;color:var(--gray)}
 
 /* ── VALUATION ENGINE ── */
-.ue-val-form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ue-form-group{display:flex;flex-direction:column;gap:3px}
-.ue-form-label{font-size:11px;font-weight:600;color:var(--navy)}font-size:11px;
-.ue-form-input{padding:7px 10px;border:1px solid var(--br);border-radius:6px;font-size:11px}
+.ue-val-form{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ue-form-group{display:flex;flex-direction:column;gap:2px}
+.ue-form-label{font-size:10.5px;font-weight:600;color:#475569;letter-spacing:.2px}font-size:11px;
+.ue-form-input{padding:5px 9px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:11px;background:#FAFAFA;transition:border-color .15s}.ue-form-input:focus{border-color:var(--navy);outline:none;background:#fff}
 .ue-form-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,91,154,.1)}
 .ue-val-result{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:10px;padding:16px;color:#fff}
 .ue-val-price-label{font-size:11px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px}
-.ue-val-price{font-size:32px;font-weight:800;margin:4px 0}
+.ue-val-price{font-size:26px;font-weight:800;margin:3px 0}
 .ue-val-range{font-size:12px;color:rgba(255,255,255,.7)}
 .ue-val-breakdown{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ue-val-factor{background:rgba(255,255,255,.1);border-radius:6px;padding:8px 10px}
+.ue-val-factor{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:6px;padding:5px 9px}
 .ue-val-factor-label{font-size:10px;color:rgba(255,255,255,.7)}
 .ue-val-factor-val{font-size:14px;font-weight:700}
-.ue-calc-btn{width:100%;margin-top:10px;padding:10px;background:var(--navy);color:#fff;
-  border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s}
+.ue-calc-btn{width:100%;margin-top:8px;padding:9px;background:var(--navy);color:#fff;border:none;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;transition:background .2s}.ue-calc-btn:hover{background:var(--blue)}
 .ue-calc-btn:hover{background:#002855}
 
 /* ── NEWS CARDS ── */
@@ -631,28 +630,28 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
     <div class="ue-panel" id="panel-valuation">
 
   <!-- ═══ TAB SWITCHER ═══════════════════════════════════════════════════ -->
-  <div style="display:flex;gap:8px;margin-bottom:14px">
+  <div style="display:flex;gap:6px;margin-bottom:12px;background:#F1F5F9;border-radius:9px;padding:4px">
     <button id="eng-tab-team" onclick="switchEngine('team')"
-      style="flex:1;padding:9px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">
+      style="flex:1;padding:7px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer">
       🏢 L&T Sales Team Engine
     </button>
     <button id="eng-tab-customer" onclick="switchEngine('customer')"
-      style="flex:1;padding:9px;background:#E2E8F0;color:var(--navy);border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">
+      style="flex:1;padding:7px;background:transparent;color:var(--navy);border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer">
       👤 Customer Self-Assessment
     </button>
   </div>
 
   <!-- ═══ TEAM ENGINE ═══════════════════════════════════════════════════ -->
   <div id="engine-team">
-    <div class="ue-grid-2">
+    <div style="display:grid;grid-template-columns:52% 48%;gap:14px">
       <!-- LEFT: INPUTS -->
       <div class="ue-card">
         <div class="ue-card-head">🔢 L&T Sales Team Valuation Engine — PC200 / PC205 / PC210</div>
-        <div class="ue-card-body" style="overflow-y:auto;max-height:640px">
+        <div class="ue-card-body" style="overflow-y:auto;max-height:calc(100vh - 220px);min-height:400px">
           <div class="ue-val-form">
 
             <!-- MACHINE IDENTITY -->
-            <div style="grid-column:1/-1;font-size:10.5px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:5px 8px;border-radius:5px;margin-bottom:2px">
+            <div style="grid-column:1/-1;font-size:10px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:4px 8px;border-radius:5px;margin-bottom:1px">
               🔩 Machine Identity
             </div>
             <div class="ue-form-group">
@@ -693,7 +692,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             </div>
 
             <!-- CONDITION PARAMETERS -->
-            <div style="grid-column:1/-1;font-size:10.5px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:5px 8px;border-radius:5px;margin:4px 0 2px">
+            <div style="grid-column:1/-1;font-size:10px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:4px 8px;border-radius:5px;margin:3px 0 1px">
               🔧 Condition Parameters
             </div>
             <div class="ue-form-group">
@@ -743,7 +742,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             </div>
 
             <!-- SERVICE & DOCUMENTATION -->
-            <div style="grid-column:1/-1;font-size:10.5px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:5px 8px;border-radius:5px;margin:4px 0 2px">
+            <div style="grid-column:1/-1;font-size:10px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:4px 8px;border-radius:5px;margin:3px 0 1px">
               📋 Service History & Documentation
             </div>
             <div class="ue-form-group">
@@ -780,7 +779,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             </div>
 
             <!-- APPLICATION & ATTACHMENTS -->
-            <div style="grid-column:1/-1;font-size:10.5px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:5px 8px;border-radius:5px;margin:4px 0 2px">
+            <div style="grid-column:1/-1;font-size:10px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:4px 8px;border-radius:5px;margin:3px 0 1px">
               ⚙️ Application & Attachments
             </div>
             <div class="ue-form-group" style="grid-column:1/-1">
@@ -827,7 +826,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 
       <!-- RIGHT: RESULTS -->
       <div>
-        <div class="ue-val-result" id="val-result-card">
+        <div class="ue-val-result" id="val-result-card" style="padding:12px">
           <div class="ue-val-price-label">📤 Export Price (Africa / SE Asia)</div>
           <div class="ue-val-price" id="val-export-price">₹ —</div>
           <div class="ue-val-range" id="val-export-range">Enter details to calculate</div>
@@ -846,9 +845,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
         </div>
 
         <!-- FACTOR BREAKDOWN -->
-        <div class="ue-val-breakdown" id="val-breakdown" style="margin-top:12px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:12px">
+        <div class="ue-val-breakdown" id="val-breakdown" style="margin-top:10px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:10px">
           <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:8px">📊 Valuation Breakdown</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
             <div class="ue-val-factor"><div class="ue-val-factor-label">Grade</div><div class="ue-val-factor-val" id="vf-grade">—</div></div>
             <div class="ue-val-factor"><div class="ue-val-factor-label">Age × Hours</div><div class="ue-val-factor-val" id="vf-life">—</div></div>
             <div class="ue-val-factor"><div class="ue-val-factor-label">Engine</div><div class="ue-val-factor-val" id="vf-engine">—</div></div>
@@ -874,7 +873,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
     </div>
 
     <!-- METHODOLOGY -->
-    <div class="ue-grid-2" style="margin-top:14px">
+    <div style="display:grid;grid-template-columns:65% 35%;gap:14px;margin-top:14px">
       <div class="ue-card">
         <div class="ue-card-head">📐 Valuation Methodology — All Parameters & Sources</div>
         <div class="ue-card-body" style="font-size:11px;color:#334155;line-height:1.8;overflow-y:auto;max-height:520px">
@@ -984,7 +983,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 
   <!-- ═══ CUSTOMER ENGINE ═══════════════════════════════════════════════ -->
   <div id="engine-customer" style="display:none">
-    <div class="ue-grid-2">
+    <div style="display:grid;grid-template-columns:44% 56%;gap:14px">
       <div class="ue-card">
         <div class="ue-card-head">👤 Customer Self-Assessment — Know Your Machine's Value</div>
         <div class="ue-card-body" style="overflow-y:auto;max-height:580px">
