@@ -643,236 +643,264 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 
   <!-- ═══ TEAM ENGINE ═══════════════════════════════════════════════════ -->
   <div id="engine-team">
-    <div style="display:grid;grid-template-columns:52% 48%;gap:14px">
-      <!-- LEFT: INPUTS -->
-      <div class="ue-card">
-        <div class="ue-card-head">🔢 L&T Sales Team Valuation Engine — PC200 / PC205 / PC210</div>
-        <div class="ue-card-body" style="overflow-y:auto;max-height:calc(100vh - 220px);min-height:400px">
-          <div class="ue-val-form">
 
-            <!-- MACHINE IDENTITY -->
-            <div style="grid-column:1/-1;font-size:10px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:4px 8px;border-radius:5px;margin-bottom:1px">
-              🔩 Machine Identity
-            </div>
+    <!-- 3-COLUMN GRID: Left inputs | Middle inputs | Right results -->
+    <div style="display:grid;grid-template-columns:36% 30% 34%;gap:10px;align-items:start">
+
+      <!-- COL 1: Machine Identity + Condition -->
+      <div class="ue-card">
+        <div class="ue-card-head">🔩 Machine &amp; Condition</div>
+        <div class="ue-card-body">
+          <div style="display:flex;flex-direction:column;gap:7px">
+
             <div class="ue-form-group">
               <label class="ue-form-label">Model</label>
               <select class="ue-form-input" id="v-model" onchange="calcValuation()">
-                <option value="PC210">PC210-10M0 (21T, ₹72–76L new)</option>
-                <option value="PC205">PC205-10M0 (20T, ₹68L new)</option>
-                <option value="PC200">PC200-8M0 (20T, ₹65L est.)</option>
+                <option value="PC210">PC210-10M0 (21T · ₹72–76L new)</option>
+                <option value="PC205">PC205-10M0 (20T · ₹68L new)</option>
+                <option value="PC200">PC200-8M0 (20T · ₹65L est.)</option>
               </select>
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">Year of Manufacture</label>
-              <select class="ue-form-input" id="v-year" onchange="calcValuation()">
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
-                <option value="2020" selected>2020</option>
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
-                <option value="2015">2015</option>
-                <option value="2014">2014</option>
-                <option value="2013">2013</option>
-              </select>
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">Total Operating Hours</label>
-              <input type="number" class="ue-form-input" id="v-hours" value="4500" min="0" max="25000"
-                onchange="calcValuation()" oninput="calcValuation()"
-                style="font-size:13px;font-weight:700;color:var(--navy)">
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">Idle % (KOMTRAX)</label>
-              <input type="number" class="ue-form-input" id="v-idle" value="20" min="0" max="70"
-                placeholder="20–40% typical" onchange="calcValuation()" oninput="calcValuation()">
             </div>
 
-            <!-- CONDITION PARAMETERS -->
-            <div style="grid-column:1/-1;font-size:10px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:4px 8px;border-radius:5px;margin:3px 0 1px">
-              🔧 Condition Parameters
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+              <div class="ue-form-group">
+                <label class="ue-form-label">Year</label>
+                <select class="ue-form-input" id="v-year" onchange="calcValuation()">
+                  <option value="2024">2024</option><option value="2023">2023</option>
+                  <option value="2022">2022</option><option value="2021">2021</option>
+                  <option value="2020" selected>2020</option><option value="2019">2019</option>
+                  <option value="2018">2018</option><option value="2017">2017</option>
+                  <option value="2016">2016</option><option value="2015">2015</option>
+                  <option value="2014">2014</option><option value="2013">2013</option>
+                </select>
+              </div>
+              <div class="ue-form-group">
+                <label class="ue-form-label">Hours</label>
+                <input type="number" class="ue-form-input" id="v-hours" value="4500"
+                  min="0" max="25000" onchange="calcValuation()" oninput="calcValuation()"
+                  style="font-weight:700;color:var(--navy)">
+              </div>
             </div>
+
+            <div style="height:1px;background:#E2E8F0;margin:2px 0"></div>
+
             <div class="ue-form-group">
               <label class="ue-form-label">Undercarriage Remaining</label>
               <select class="ue-form-input" id="v-undercarriage" onchange="calcValuation()">
-                <option value="excellent">Excellent — >70% (saves ₹15–25L vs replacement)</option>
+                <option value="excellent">Excellent — &gt;70% (saves ₹15–25L)</option>
                 <option value="good" selected>Good — 50–70%</option>
                 <option value="fair">Fair — 30–50% (partial deduct)</option>
-                <option value="poor">Poor — &lt;30% (full deduct ₹15–25L)</option>
+                <option value="poor">Poor — &lt;30% (deduct ₹15–25L)</option>
               </select>
             </div>
+
             <div class="ue-form-group">
               <label class="ue-form-label">Engine Condition</label>
               <select class="ue-form-input" id="v-engine" onchange="calcValuation()">
-                <option value="excellent">Excellent — clean oil, minimal blow-by</option>
-                <option value="good" selected>Good — normal wear markers</option>
-                <option value="fair">Fair — elevated wear metals in oil analysis</option>
-                <option value="poor">Poor — smoke, blow-by, overhaul needed</option>
+                <option value="excellent">Excellent — clean oil, no blow-by</option>
+                <option value="good" selected>Good — normal wear</option>
+                <option value="fair">Fair — elevated wear metals</option>
+                <option value="poor">Poor — smoke / overhaul needed</option>
               </select>
             </div>
+
             <div class="ue-form-group">
               <label class="ue-form-label">Hydraulic System</label>
               <select class="ue-form-input" id="v-hydraulic" onchange="calcValuation()">
-                <option value="excellent">Excellent — clean oil, full cycle speed</option>
-                <option value="good" selected>Good — minor seal wear, no leaks</option>
-                <option value="fair">Fair — slow cycles, minor leaks</option>
-                <option value="poor">Poor — major leaks / sluggish (−20%+)</option>
+                <option value="excellent">Excellent — no leaks, full speed</option>
+                <option value="good" selected>Good — no leaks</option>
+                <option value="fair">Fair — slow cycles / minor leaks</option>
+                <option value="poor">Poor — major leaks / sluggish</option>
               </select>
             </div>
+
             <div class="ue-form-group">
               <label class="ue-form-label">Structural Condition</label>
               <select class="ue-form-input" id="v-structure" onchange="calcValuation()">
-                <option value="excellent">Excellent — no cracks, original paint</option>
-                <option value="good" selected>Good — minor dents, surface rust only</option>
-                <option value="fair">Fair — weld repairs, cosmetic damage</option>
-                <option value="poor">Poor — frame cracks / major structural damage</option>
-              </select>
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">KOMTRAX Fault History</label>
-              <select class="ue-form-input" id="v-faults" onchange="calcValuation()">
-                <option value="0">Clean — 0 major faults</option>
-                <option value="1">Minor — 1–2 faults (sensor/wiring)</option>
-                <option value="3">Moderate — 3–5 faults (mix)</option>
-                <option value="6">Heavy — 6+ recurring powertrain/hydraulic faults</option>
+                <option value="excellent">Excellent — no cracks</option>
+                <option value="good" selected>Good — minor dents only</option>
+                <option value="fair">Fair — weld repairs visible</option>
+                <option value="poor">Poor — frame cracks / damage</option>
               </select>
             </div>
 
-            <!-- SERVICE & DOCUMENTATION -->
-            <div style="grid-column:1/-1;font-size:10px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:4px 8px;border-radius:5px;margin:3px 0 1px">
-              📋 Service History & Documentation
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">Service Records</label>
-              <select class="ue-form-input" id="v-service" onchange="calcValuation()">
-                <option value="full_oem">Full OEM records + L&T MCP/AMC history</option>
-                <option value="partial" selected>Partial — some records available</option>
-                <option value="none">No records — local mechanic only</option>
-              </select>
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">MCP-5 / Warranty Status</label>
-              <select class="ue-form-input" id="v-warranty" onchange="calcValuation()">
-                <option value="active">Active MCP-5 (≤12,500 hrs, ≤5yr) — transferable</option>
-                <option value="expired" selected>Expired / none</option>
-                <option value="extended">Extended warranty purchased</option>
-              </select>
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">Previous Owners</label>
-              <select class="ue-form-input" id="v-owners" onchange="calcValuation()">
-                <option value="1" selected>Single owner (original)</option>
-                <option value="2">2 owners</option>
-                <option value="3">3+ owners</option>
-              </select>
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">Documentation</label>
-              <select class="ue-form-input" id="v-docs" onchange="calcValuation()">
-                <option value="complete">Complete — Invoice, Form 22, RC, NOC/Form 35, Insurance</option>
-                <option value="partial" selected>Partial — some documents missing</option>
-                <option value="none">Minimal / no clear title</option>
-              </select>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+              <div class="ue-form-group">
+                <label class="ue-form-label">Idle % (KOMTRAX)</label>
+                <input type="number" class="ue-form-input" id="v-idle"
+                  value="20" min="0" max="70" onchange="calcValuation()" oninput="calcValuation()">
+              </div>
+              <div class="ue-form-group">
+                <label class="ue-form-label">Fault History</label>
+                <select class="ue-form-input" id="v-faults" onchange="calcValuation()">
+                  <option value="0">Clean (0)</option>
+                  <option value="1">Minor (1–2)</option>
+                  <option value="3">Moderate (3–5)</option>
+                  <option value="6">Heavy (6+)</option>
+                </select>
+              </div>
             </div>
 
-            <!-- APPLICATION & ATTACHMENTS -->
-            <div style="grid-column:1/-1;font-size:10px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:4px 8px;border-radius:5px;margin:3px 0 1px">
-              ⚙️ Application & Attachments
-            </div>
-            <div class="ue-form-group" style="grid-column:1/-1">
-              <label class="ue-form-label">Type of Work / Application</label>
-              <select class="ue-form-input" id="v-worktype" onchange="calcValuation()">
-                <option value="real_estate">🏗️ Foundation / Real Estate (soft soil, 800–1,500 hrs/yr)</option>
-                <option value="irrigation">🌊 Irrigation / Canals / Dams (wet clay, moderate)</option>
-                <option value="highway_epc" selected>🛣️ Highway / Road EPC (soil cut, 2,000–2,800 hrs/yr)</option>
-                <option value="urban_metro">🚇 Metro / Urban Infra (breaker use, mixed ground)</option>
-                <option value="industrial">🏭 Industrial / Pipeline (mixed soil)</option>
-                <option value="ports">⚓ Ports / Airports (salt-air corrosion risk)</option>
-                <option value="rental">🔄 Rental Fleet (multi-operator, variable care)</option>
-                <option value="limestone_quarry">🪨 Limestone / Quarry / Cement (medium-hard, abrasive)</option>
-                <option value="coal_mining">⛏️ Coal OB Removal — SECL/MCL (3,500–5,000 hrs/yr)</option>
-                <option value="iron_ore">🔩 Iron Ore / Metal Mining (hardest rock, max abrasion)</option>
-              </select>
-              <div id="worktype-info" style="margin-top:3px;font-size:10px;color:var(--gray);line-height:1.5"></div>
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">Attachments</label>
-              <select class="ue-form-input" id="v-attachments" onchange="calcValuation()">
-                <option value="none">Standard bucket only</option>
-                <option value="bucket_good" selected>Bucket + good condition (sharp teeth, wear plates)</option>
-                <option value="coupler">Quick coupler + bucket</option>
-                <option value="breaker">Hydraulic breaker / hammer included</option>
-                <option value="full_set">Full set (coupler + bucket + breaker/thumb)</option>
-              </select>
-            </div>
-            <div class="ue-form-group">
-              <label class="ue-form-label">Region / Location</label>
-              <select class="ue-form-input" id="v-region" onchange="calcValuation()">
-                <option value="south" selected>South India (32% CE demand share)</option>
-                <option value="mining_belt">Mining Belt — CG/OD/JH (strong demand)</option>
-                <option value="north">North India (UP/HR/RJ/PB)</option>
-                <option value="west">West India (MH/GJ)</option>
-                <option value="east">East India (WB/AS)</option>
-                <option value="coastal">Coastal (corrosion risk)</option>
-              </select>
-            </div>
           </div>
-          <button class="ue-calc-btn" onclick="calcValuation()">📊 Calculate Full Valuation</button>
         </div>
       </div>
 
-      <!-- RIGHT: RESULTS -->
-      <div>
-        <div class="ue-val-result" id="val-result-card" style="padding:12px">
-          <div class="ue-val-price-label">📤 Export Price (Africa / SE Asia)</div>
-          <div class="ue-val-price" id="val-export-price">₹ —</div>
-          <div class="ue-val-range" id="val-export-range">Enter details to calculate</div>
+      <!-- COL 2: Service + Application -->
+      <div style="display:flex;flex-direction:column;gap:10px">
 
-          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.25)">
-            <div class="ue-val-price-label">🏪 Domestic Fair Market Value</div>
-            <div style="font-size:22px;font-weight:700;margin:2px 0" id="val-domestic-price">₹ —</div>
-            <div style="font-size:10px;opacity:.8" id="val-domestic-range">SAMIL / iQuippo market</div>
-          </div>
+        <div class="ue-card">
+          <div class="ue-card-head">📋 Service &amp; Docs</div>
+          <div class="ue-card-body">
+            <div style="display:flex;flex-direction:column;gap:7px">
 
-          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.25)">
-            <div class="ue-val-price-label">🔻 Floor Price (Scrap + Rebuild basis)</div>
-            <div style="font-size:18px;font-weight:700;margin:2px 0" id="val-floor-price">₹ —</div>
-            <div style="font-size:10px;opacity:.8" id="val-floor-label">Minimum acceptable / wholesale</div>
+              <div class="ue-form-group">
+                <label class="ue-form-label">Service Records</label>
+                <select class="ue-form-input" id="v-service" onchange="calcValuation()">
+                  <option value="full_oem">Full OEM + L&T MCP/AMC</option>
+                  <option value="partial" selected>Partial records</option>
+                  <option value="none">No records</option>
+                </select>
+              </div>
+
+              <div class="ue-form-group">
+                <label class="ue-form-label">MCP-5 / Warranty</label>
+                <select class="ue-form-input" id="v-warranty" onchange="calcValuation()">
+                  <option value="active">Active MCP-5 (transferable)</option>
+                  <option value="expired" selected>Expired / none</option>
+                  <option value="extended">Extended warranty</option>
+                </select>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+                <div class="ue-form-group">
+                  <label class="ue-form-label">Prev. Owners</label>
+                  <select class="ue-form-input" id="v-owners" onchange="calcValuation()">
+                    <option value="1" selected>1 (original)</option>
+                    <option value="2">2 owners</option>
+                    <option value="3">3+ owners</option>
+                  </select>
+                </div>
+                <div class="ue-form-group">
+                  <label class="ue-form-label">Documentation</label>
+                  <select class="ue-form-input" id="v-docs" onchange="calcValuation()">
+                    <option value="complete">Complete</option>
+                    <option value="partial" selected>Partial</option>
+                    <option value="none">None / loan on</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
 
-        <!-- FACTOR BREAKDOWN -->
-        <div class="ue-val-breakdown" id="val-breakdown" style="margin-top:10px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:10px">
-          <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:8px">📊 Valuation Breakdown</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Grade</div><div class="ue-val-factor-val" id="vf-grade">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Age × Hours</div><div class="ue-val-factor-val" id="vf-life">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Engine</div><div class="ue-val-factor-val" id="vf-engine">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Hydraulics</div><div class="ue-val-factor-val" id="vf-hydraulic">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Undercarriage</div><div class="ue-val-factor-val" id="vf-uc">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Structure</div><div class="ue-val-factor-val" id="vf-structure">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Service Records</div><div class="ue-val-factor-val" id="vf-service">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Idle Penalty</div><div class="ue-val-factor-val" id="vf-idle">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Work Type</div><div class="ue-val-factor-val" id="vf-worktype">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Attachments</div><div class="ue-val-factor-val" id="vf-attach">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">Docs / Owners</div><div class="ue-val-factor-val" id="vf-docs">—</div></div>
-            <div class="ue-val-factor"><div class="ue-val-factor-label">KOMTRAX / MCP</div><div class="ue-val-factor-val" id="vf-komtrax">—</div></div>
+        <div class="ue-card">
+          <div class="ue-card-head">⚙️ Application &amp; Location</div>
+          <div class="ue-card-body">
+            <div style="display:flex;flex-direction:column;gap:7px">
+
+              <div class="ue-form-group">
+                <label class="ue-form-label">Type of Work</label>
+                <select class="ue-form-input" id="v-worktype" onchange="calcValuation()">
+                  <option value="real_estate">🏗️ Foundation / Real Estate</option>
+                  <option value="irrigation">🌊 Irrigation / Canals</option>
+                  <option value="highway_epc" selected>🛣️ Highway / Road EPC</option>
+                  <option value="urban_metro">🚇 Metro / Urban Infra</option>
+                  <option value="industrial">🏭 Industrial / Pipeline</option>
+                  <option value="ports">⚓ Ports / Airports</option>
+                  <option value="rental">🔄 Rental Fleet</option>
+                  <option value="limestone_quarry">🪨 Limestone / Quarry</option>
+                  <option value="coal_mining">⛏️ Coal OB Removal</option>
+                  <option value="iron_ore">🔩 Iron Ore / Metal Mining</option>
+                </select>
+                <div id="worktype-info" style="font-size:9.5px;color:var(--gray);line-height:1.4;margin-top:2px"></div>
+              </div>
+
+              <div class="ue-form-group">
+                <label class="ue-form-label">Attachments</label>
+                <select class="ue-form-input" id="v-attachments" onchange="calcValuation()">
+                  <option value="none">Standard bucket only</option>
+                  <option value="bucket_good" selected>Bucket — good condition</option>
+                  <option value="coupler">Quick coupler + bucket</option>
+                  <option value="breaker">Hydraulic breaker included</option>
+                  <option value="full_set">Full set (coupler+bucket+breaker)</option>
+                </select>
+              </div>
+
+              <div class="ue-form-group">
+                <label class="ue-form-label">Region</label>
+                <select class="ue-form-input" id="v-region" onchange="calcValuation()">
+                  <option value="south" selected>South India (32% CE share)</option>
+                  <option value="mining_belt">Mining Belt — CG/OD/JH</option>
+                  <option value="north">North India</option>
+                  <option value="west">West India (MH/GJ)</option>
+                  <option value="east">East India</option>
+                  <option value="coastal">Coastal (corrosion risk)</option>
+                </select>
+              </div>
+
+              <button class="ue-calc-btn" onclick="calcValuation()">📊 Calculate Valuation</button>
+            </div>
           </div>
-          <div id="val-recommendation" style="margin-top:10px;padding:8px 10px;border-radius:7px;font-size:11px;font-weight:600;display:none"></div>
         </div>
 
-        <!-- QUICK TIPS -->
-        <div style="margin-top:10px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 12px;font-size:10.5px;color:#92400E">
-          <div style="font-weight:700;margin-bottom:4px">💡 Value Improvement Tips</div>
-          <div id="val-tips">Fill in the form to see personalised tips.</div>
-        </div>
       </div>
-    </div>
 
-    <!-- METHODOLOGY -->
+      <!-- COL 3: Results -->
+      <div style="display:flex;flex-direction:column;gap:10px;position:sticky;top:10px">
+
+        <div class="ue-val-result" id="val-result-card" style="padding:14px">
+          <div class="ue-val-price-label" style="font-size:10px;opacity:.85;letter-spacing:.5px">📤 EXPORT PRICE — Africa / SE Asia</div>
+          <div class="ue-val-price" id="val-export-price" style="font-size:28px">₹ —</div>
+          <div class="ue-val-range" id="val-export-range" style="font-size:10px;opacity:.75">Fill form to calculate</div>
+
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)">
+            <div class="ue-val-price-label" style="font-size:10px;opacity:.85;letter-spacing:.5px">🏪 DOMESTIC FAIR VALUE</div>
+            <div id="val-domestic-price" style="font-size:22px;font-weight:800;margin:2px 0">₹ —</div>
+            <div id="val-domestic-range" style="font-size:10px;opacity:.75">SAMIL / iQuippo market</div>
+          </div>
+
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)">
+            <div class="ue-val-price-label" style="font-size:10px;opacity:.85;letter-spacing:.5px">🔻 FLOOR / WHOLESALE</div>
+            <div id="val-floor-price" style="font-size:18px;font-weight:700;margin:2px 0">₹ —</div>
+            <div id="val-floor-label" style="font-size:10px;opacity:.75">Minimum / scrap+rebuild basis</div>
+          </div>
+        </div>
+
+        <!-- BREAKDOWN -->
+        <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:9px;padding:10px" id="val-breakdown">
+          <div style="font-size:10.5px;font-weight:700;color:var(--navy);margin-bottom:7px">📊 Factor Breakdown</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Grade</div><div class="ue-val-factor-val" id="vf-grade">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Age × Hrs</div><div class="ue-val-factor-val" id="vf-life">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Engine</div><div class="ue-val-factor-val" id="vf-engine">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Hydraulics</div><div class="ue-val-factor-val" id="vf-hydraulic">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Undercarriage</div><div class="ue-val-factor-val" id="vf-uc">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Structure</div><div class="ue-val-factor-val" id="vf-structure">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Service</div><div class="ue-val-factor-val" id="vf-service">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Idle / Faults</div><div class="ue-val-factor-val" id="vf-idle">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Work Type</div><div class="ue-val-factor-val" id="vf-worktype">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Attachments</div><div class="ue-val-factor-val" id="vf-attach">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Docs / Owners</div><div class="ue-val-factor-val" id="vf-docs">—</div></div>
+              <div class="ue-val-factor"><div class="ue-val-factor-label">Warranty</div><div class="ue-val-factor-val" id="vf-komtrax">—</div></div>
+            </div>
+          </div>
+          <div id="val-recommendation" style="margin-top:8px;padding:7px 9px;border-radius:6px;font-size:10.5px;font-weight:600;display:none"></div>
+        </div>
+
+        <!-- TIPS -->
+        <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:9px 11px;font-size:10.5px;color:#92400E">
+          <div style="font-weight:700;margin-bottom:4px">💡 Improvement Tips</div>
+          <div id="val-tips" style="line-height:1.6">Fill in the form to see tips.</div>
+        </div>
+
+      </div><!-- /COL 3 -->
+    </div><!-- /3-col grid -->
+
+    <!-- METHODOLOGY ROW -->
+    <div style="display:grid;grid-template-columns:65% 35%;gap:12px;margin-top:14px">
+<!-- METHODOLOGY -->
     <div style="display:grid;grid-template-columns:65% 35%;gap:14px;margin-top:14px">
       <div class="ue-card">
         <div class="ue-card-head">📐 Valuation Methodology — All Parameters & Sources</div>
