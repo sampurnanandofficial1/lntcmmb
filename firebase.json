@@ -1,23 +1,19 @@
 {
   "hosting": {
-    "target": "lntcmmb-dashboards",
     "public": ".",
     "ignore": [
-      "firebase.json",
-      "**/.*",
-      "scripts/**",
-      ".github/**",
-      ".devcontainer/**",
-      "**/*.py",
-      "**/*.sh",
-      "**/*.md",
-      "sa_export.b64"
+      "firebase.json","**/.*","scripts/**",".github/**",
+      ".devcontainer/**","**/*.py","**/*.sh","**/*.md",
+      "sa_export.b64","DEPLOY.md","sync-to-firebase.sh",
+      "setup-runner.sh","setup-firebase.sh","deploy.sh"
     ],
     "headers": [
       {
-        "source": "**",
+        "source": "**/*.html",
         "headers": [
-          { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+          {"key":"Cache-Control","value":"no-cache, no-store, must-revalidate"},
+          {"key":"Pragma","value":"no-cache"},
+          {"key":"Expires","value":"0"}
         ]
       }
     ]
