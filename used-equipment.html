@@ -632,21 +632,16 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
   <!-- TAB SWITCHER -->
   <div style="display:flex;gap:6px;margin-bottom:12px;background:#F1F5F9;border-radius:9px;padding:4px">
     <button id="eng-tab-team" onclick="switchEngine('team')"
-      style="flex:1;padding:7px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer">
-      🏢 L&T Sales Team Engine
-    </button>
+      style="flex:1;padding:7px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer">🏢 L&T Sales Team Engine</button>
     <button id="eng-tab-customer" onclick="switchEngine('customer')"
-      style="flex:1;padding:7px;background:transparent;color:var(--navy);border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer">
-      👤 Customer Self-Assessment
-    </button>
+      style="flex:1;padding:7px;background:transparent;color:var(--navy);border:none;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer">👤 Customer Self-Assessment</button>
   </div>
 
-  <!-- ═══ TEAM ENGINE ══════════════════════════════════════════════════════ -->
+  <!-- TEAM ENGINE -->
   <div id="engine-team">
-
     <div style="display:grid;grid-template-columns:36% 30% 34%;gap:10px;align-items:start">
 
-      <!-- COL 1: Machine + Condition -->
+      <!-- COL 1 -->
       <div class="ue-card">
         <div class="ue-card-head">🔩 Machine &amp; Condition</div>
         <div class="ue-card-body">
@@ -673,9 +668,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
               </div>
               <div class="ue-form-group">
                 <label class="ue-form-label">Hours</label>
-                <input type="number" class="ue-form-input" id="v-hours" value="4500"
-                  min="0" max="25000" onchange="calcValuation()" oninput="calcValuation()"
-                  style="font-weight:700;color:var(--navy)">
+                <input type="number" class="ue-form-input" id="v-hours" value="4500" min="0" max="25000"
+                  onchange="calcValuation()" oninput="calcValuation()" style="font-weight:700;color:var(--navy)">
               </div>
             </div>
             <hr style="border:none;border-top:1px solid #E2E8F0;margin:2px 0">
@@ -684,7 +678,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
               <select class="ue-form-input" id="v-undercarriage" onchange="calcValuation()">
                 <option value="excellent">Excellent — &gt;70% (saves ₹15–25L)</option>
                 <option value="good" selected>Good — 50–70%</option>
-                <option value="fair">Fair — 30–50% (partial deduct)</option>
+                <option value="fair">Fair — 30–50%</option>
                 <option value="poor">Poor — &lt;30% (deduct ₹15–25L)</option>
               </select>
             </div>
@@ -702,7 +696,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
               <select class="ue-form-input" id="v-hydraulic" onchange="calcValuation()">
                 <option value="excellent">Excellent — no leaks, full speed</option>
                 <option value="good" selected>Good — no leaks</option>
-                <option value="fair">Fair — slow cycles / minor leaks</option>
+                <option value="fair">Fair — slow / minor leaks</option>
                 <option value="poor">Poor — major leaks / sluggish</option>
               </select>
             </div>
@@ -712,14 +706,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
                 <option value="excellent">Excellent — no cracks</option>
                 <option value="good" selected>Good — minor dents only</option>
                 <option value="fair">Fair — weld repairs visible</option>
-                <option value="poor">Poor — frame cracks / damage</option>
+                <option value="poor">Poor — frame cracks</option>
               </select>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
               <div class="ue-form-group">
                 <label class="ue-form-label">Idle % (KOMTRAX)</label>
-                <input type="number" class="ue-form-input" id="v-idle"
-                  value="20" min="0" max="70" onchange="calcValuation()" oninput="calcValuation()">
+                <input type="number" class="ue-form-input" id="v-idle" value="20" min="0" max="70"
+                  onchange="calcValuation()" oninput="calcValuation()">
               </div>
               <div class="ue-form-group">
                 <label class="ue-form-label">Fault History</label>
@@ -735,7 +729,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
         </div>
       </div>
 
-      <!-- COL 2: Service + Application -->
+      <!-- COL 2 -->
       <div style="display:flex;flex-direction:column;gap:10px">
         <div class="ue-card">
           <div class="ue-card-head">📋 Service &amp; Docs</div>
@@ -804,7 +798,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
                   <option value="none">Standard bucket only</option>
                   <option value="bucket_good" selected>Bucket — good condition</option>
                   <option value="coupler">Quick coupler + bucket</option>
-                  <option value="breaker">Hydraulic breaker included</option>
+                  <option value="breaker">Hydraulic breaker</option>
                   <option value="full_set">Full set (coupler+bucket+breaker)</option>
                 </select>
               </div>
@@ -828,16 +822,16 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
       <!-- COL 3: Results -->
       <div style="display:flex;flex-direction:column;gap:10px">
         <div class="ue-val-result" id="val-result-card" style="padding:14px">
-          <div style="font-size:10px;opacity:.85;letter-spacing:.5px;text-transform:uppercase">📤 Export — Africa / SE Asia</div>
+          <div style="font-size:10px;opacity:.85;text-transform:uppercase;letter-spacing:.5px">📤 Export — Africa / SE Asia</div>
           <div class="ue-val-price" id="val-export-price" style="font-size:26px">₹ —</div>
           <div id="val-export-range" style="font-size:10px;opacity:.75">Fill form to calculate</div>
           <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)">
-            <div style="font-size:10px;opacity:.85;letter-spacing:.5px;text-transform:uppercase">🏪 Domestic Fair Value</div>
+            <div style="font-size:10px;opacity:.85;text-transform:uppercase;letter-spacing:.5px">🏪 Domestic Fair Value</div>
             <div id="val-domestic-price" style="font-size:22px;font-weight:800;margin:2px 0">₹ —</div>
             <div id="val-domestic-range" style="font-size:10px;opacity:.75">SAMIL / iQuippo market</div>
           </div>
           <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)">
-            <div style="font-size:10px;opacity:.85;letter-spacing:.5px;text-transform:uppercase">🔻 Floor / Wholesale</div>
+            <div style="font-size:10px;opacity:.85;text-transform:uppercase;letter-spacing:.5px">🔻 Floor / Wholesale</div>
             <div id="val-floor-price" style="font-size:18px;font-weight:700;margin:2px 0">₹ —</div>
             <div id="val-floor-label" style="font-size:10px;opacity:.75">Minimum / scrap+rebuild</div>
           </div>
@@ -866,13 +860,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
         </div>
       </div>
 
-    </div><!-- /3-col grid -->
+    </div>
 
-    <!-- METHODOLOGY ROW -->
     <div style="display:grid;grid-template-columns:65% 35%;gap:12px;margin-top:14px">
       <div class="ue-card">
-        <div class="ue-card-head">📐 Valuation Methodology — All Parameters & Sources</div>
+        <div class="ue-card-head">📐 Valuation Methodology — All Parameters &amp; Sources</div>
         <div class="ue-card-body" style="font-size:11px;color:#334155;line-height:1.8;overflow-y:auto;max-height:520px">
+
 
           <div style="font-weight:700;font-size:11.5px;color:var(--navy);margin-bottom:4px">Step 1 — Base Value (Age + Hours)</div>
           <strong>Depreciation Schedule</strong> — Declining balance, market-calibrated:
@@ -964,31 +958,26 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             <a href="https://www.samil.in" target="_blank" style="color:#2563EB">SAMIL (Shriram Automall) — India Used CE Auctions</a><br>
             <a href="https://www.iquippo.com" target="_blank" style="color:#2563EB">iQuippo (Srei) — India Used Equipment Marketplace</a>
           </div>
+   
         </div>
       </div>
-
-      <!-- RIGHT: DEPRECIATION CHART -->
-      <div>
-      </div>
-</div>
       <div class="ue-card">
-          <div class="ue-card-head">📊 PC210 Residual Value Curve — Market Data</div>
-          <div class="ue-card-body"><div class="ue-chart-wrap"><canvas id="depreciation-chart"></canvas></div></div>
-        </div>
+        <div class="ue-card-head">📊 PC210 Residual Value Curve — Market Data</div>
+        <div class="ue-card-body"><div class="ue-chart-wrap"><canvas id="depreciation-chart"></canvas></div></div>
+      </div>
     </div>
 
-  </div><!-- /engine-team -->
+  </div>
 
-  <!-- ═══ CUSTOMER ENGINE ═══════════════════════════════════════════════════ -->
+  <!-- CUSTOMER ENGINE -->
   <div id="engine-customer" style="display:none">
     <div style="display:grid;grid-template-columns:44% 56%;gap:14px">
 
-      <!-- LEFT: Form -->
       <div class="ue-card">
         <div class="ue-card-head">👤 Customer Self-Assessment — Know Your Machine's Value</div>
         <div class="ue-card-body">
           <div style="font-size:11px;color:#475569;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:7px;padding:8px 10px;margin-bottom:10px;line-height:1.6">
-            💡 <strong>How to use:</strong> Answer these simple questions to get an estimated resale range. For a firm offer, contact your nearest L&amp;T CMMB dealer.
+            💡 <strong>How to use:</strong> Answer these 7 simple questions to get an estimated resale range. For a firm offer, contact your nearest L&amp;T CMMB dealer.
           </div>
           <div class="ue-val-form">
             <div class="ue-form-group">
@@ -1018,16 +1007,16 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             <div class="ue-form-group">
               <label class="ue-form-label">Overall Condition</label>
               <select class="ue-form-input" id="cv-condition" onchange="calcCustomerVal()">
-                <option value="excellent">Excellent — all systems perfect, no damage</option>
-                <option value="good" selected>Good — normal wear, serviced regularly</option>
-                <option value="fair">Fair — some repairs needed, visible wear</option>
-                <option value="poor">Poor — major repairs required</option>
+                <option value="excellent">Excellent — all systems perfect</option>
+                <option value="good" selected>Good — normal wear, serviced</option>
+                <option value="fair">Fair — some repairs needed</option>
+                <option value="poor">Poor — major repairs needed</option>
               </select>
             </div>
             <div class="ue-form-group">
               <label class="ue-form-label">Service Records?</label>
               <select class="ue-form-input" id="cv-service" onchange="calcCustomerVal()">
-                <option value="yes">Yes — complete history with L&amp;T / dealer</option>
+                <option value="yes">Yes — complete dealer history</option>
                 <option value="partial" selected>Partial — some records</option>
                 <option value="no">No records</option>
               </select>
@@ -1035,9 +1024,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             <div class="ue-form-group">
               <label class="ue-form-label">Type of Work Done</label>
               <select class="ue-form-input" id="cv-work" onchange="calcCustomerVal()">
-                <option value="light">Light (real estate, irrigation, general)</option>
-                <option value="medium" selected>Medium (highways, urban, industrial)</option>
-                <option value="heavy">Heavy (mining, quarry, OB removal)</option>
+                <option value="light">Light (real estate, irrigation)</option>
+                <option value="medium" selected>Medium (highways, urban)</option>
+                <option value="heavy">Heavy (mining, quarry)</option>
               </select>
             </div>
             <div class="ue-form-group" style="grid-column:1/-1">
@@ -1053,7 +1042,6 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
         </div>
       </div>
 
-      <!-- RIGHT: Results -->
       <div style="display:flex;flex-direction:column;gap:10px">
         <div class="ue-val-result" id="cval-result-card" style="padding:14px">
           <div style="font-size:10px;opacity:.85;text-transform:uppercase;letter-spacing:.5px">📈 Best Case — Export / Premium Buyer</div>
@@ -1070,7 +1058,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
         </div>
         <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:12px;font-size:11px;color:#166534">
           <div style="font-weight:700;margin-bottom:6px">✅ Tips to Maximise Your Resale Price</div>
-          <div id="cval-tips">Fill in the form to see personalised tips.</div>
+          <div id="cval-tips">Fill in the form to see tips.</div>
         </div>
         <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 12px;font-size:10.5px;color:#1E40AF">
           <div style="font-weight:700;margin-bottom:4px">📞 Get a Firm Offer from L&amp;T CMMB</div>
@@ -1079,10 +1067,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
       </div>
 
     </div>
-  </div><!-- /engine-customer -->
+  </div>
 
-</div><!-- /panel-valuation -->
-
+</div>
 <div class="ue-panel" id="panel-intel">
       <div class="ue-grid-2">
         <div>
@@ -1716,6 +1703,8 @@ function estimateValue(m) {
 function switchEngine(type) {
   document.getElementById('engine-team').style.display = type === 'team' ? 'block' : 'none';
   document.getElementById('engine-customer').style.display = type === 'customer' ? 'block' : 'none';
+  if (type === 'customer') { setTimeout(calcCustomerVal, 50); }
+  if (type === 'team') { setTimeout(calcValuation, 50); }
   if (type === 'customer') calcCustomerVal();
   if (type === 'team') calcValuation();
   document.getElementById('eng-tab-team').style.background = type === 'team' ? 'var(--navy)' : '#E2E8F0';
