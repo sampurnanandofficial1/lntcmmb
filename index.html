@@ -665,12 +665,23 @@ async function loadAllData() {
       FALLBACK_CD.forEach(c => { if (!fsIds.has(c.id)) CD.push(c); });
     }
 
-    CONTR = ctSnap.empty ? FALLBACK_CONTR : ctSnap.docs.map(d => {
-      const fs = {...d.data(), id: d.id};
-      const fb = (FALLBACK_CONTR.find(c => c.id === fs.id) || {});
-      return {...fb, ...fs};
+    // Always start with full FALLBACK_CONTR (52 contractors), then overlay Firestore data
+    const fsContrMap = {};
+    if (!ctSnap.empty) {
+      ctSnap.docs.forEach(d => { fsContrMap[d.id] = d.data(); });
+    }
+    CONTR = FALLBACK_CONTR.map(fb => {
+      const fs = fsContrMap[fb.id];
+      return fs ? {...fb, ...fs, id: fb.id} : fb;
     });
-    if (ctSnap.empty || CONTR.length === 0) CONTR = FALLBACK_CONTR;
+    // Add any Firestore-only contractors not in FALLBACK
+    if (!ctSnap.empty) {
+      const fbIds = new Set(FALLBACK_CONTR.map(c => c.id));
+      ctSnap.docs.forEach(d => {
+        if (!fbIds.has(d.id)) CONTR.push({...d.data(), id: d.id});
+      });
+    }
+    if (CONTR.length === 0) CONTR = FALLBACK_CONTR;
 
     const src = cSnap.empty ? 'embedded cache' : `Firestore + local merge (${CD.length} contracts)`;
     bootUI();
