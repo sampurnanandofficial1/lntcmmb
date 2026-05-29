@@ -4,10 +4,11 @@
     "source": "Internal: HEX_-_Economics.xlsx + Ownership_Rental_vs_lease_TIPL.xlsx (May 2026) | OEM official websites",
     "last_updated": "2026-05-27",
     "internal_data_flag": "HEX + TIPL files are single source of truth for Komatsu PC205/PC210 economics",
-    "note": "For OEMs without official India-specific pricing, price_inr_L is marked N/A. Fuel data from official OEM brochures/websites only."
+    "note": "For OEMs without official India-specific pricing, price_inr_L is marked N/A. Fuel data from official OEM brochures/websites only.",
+    "section6_source": "LT_CE_Strategy_v4_Balanced.docx + Final Thesis Section 6"
   },
   "komatsu": {
-    "_source": "HEX_-_Economics.xlsx (Internal, May 2026) — AUTHORITATIVE",
+    "_source": "HEX_-_Economics.xlsx (Internal, May 2026) \u2014 AUTHORITATIVE",
     "model_india": "PC210-10M0",
     "operating_weight_kg": 21600,
     "engine_hp": 155,
@@ -37,12 +38,12 @@
     "oo_cost_per_cum_3500hrs": 24.03,
     "diesel_price_per_litre": 94,
     "diesel_note": "HSD Rs 94/L (Internal HEX file, May 2026)",
-    "resale_5yr_pct": "N/A — Not in HEX/TIPL files",
+    "resale_5yr_pct": "N/A \u2014 Not in HEX/TIPL files",
     "warranty": "2 years / 4,000 hours",
     "telematics": "KOMTRAX (free, cloud-based, standard)",
-    "service_india": "L&T CMMB — 72-hour uptime guarantee",
+    "service_india": "L&T CMMB \u2014 72-hour uptime guarantee",
     "pc205_data": {
-      "_source": "Ownership_Rental_vs_lease_TIPL.xlsx (Internal, May 2026) — AUTHORITATIVE",
+      "_source": "Ownership_Rental_vs_lease_TIPL.xlsx (Internal, May 2026) \u2014 AUTHORITATIVE",
       "model": "PC205-10M0",
       "purchase_price_L": 68.0,
       "own_monthly_outgo_250hrs": 298550,
@@ -54,36 +55,36 @@
     }
   },
   "cat": {
-    "_source": "Official: cat.com/en_IN — 320D3 and 320D3 GC product pages",
+    "_source": "Official: cat.com/en_IN \u2014 320D3 and 320D3 GC product pages",
     "model_india": "320D3 / 320D3 GC",
     "operating_weight_kg": 19800,
     "engine_hp": 123,
-    "engine_hp_note": "320D3 GC: 123 hp (92 kW), Net Power ISO 9249 — cat.com official",
+    "engine_hp_note": "320D3 GC: 123 hp (92 kW), Net Power ISO 9249 \u2014 cat.com official",
     "bucket_capacity_m3": 1.19,
-    "bucket_note": "1.19 m3 standard — cat.com official",
+    "bucket_note": "1.19 m3 standard \u2014 cat.com official",
     "fuel_consumption_lph": "11-13",
-    "fuel_consumption_note": "320D3 GC: as low as 11 L/hr; 320D3: 11-13 L/hr in earthmoving — cat.com/en_IN official",
-    "fuel_economy_vs_prev": "Up to 10% less fuel vs previous 320D3 model — cat.com official",
+    "fuel_consumption_note": "320D3 GC: as low as 11 L/hr; 320D3: 11-13 L/hr in earthmoving \u2014 cat.com/en_IN official",
+    "fuel_economy_vs_prev": "Up to 10% less fuel vs previous 320D3 model \u2014 cat.com official",
     "purchase_price_L": "N/A",
     "price_note": "Pricing not published officially. EMI indicative: Rs 1,16,399/month for 320D3 GC (cat.com promotion, no longer current)",
     "telematics": "VisionLink (paid subscription)",
-    "telematics_note": "VisionLink requires subscription — fuel tracking optional add-on",
+    "telematics_note": "VisionLink requires subscription \u2014 fuel tracking optional add-on",
     "warranty": "1 year standard (India)",
     "service_india": "GMMCO / Gainwell (Cat dealers India)",
-    "resale_5yr_pct": "N/A — Not published officially",
-    "maintenance_note": "Up to 20% lower maintenance vs previous generation (320D3 GC) — cat.com official",
-    "dgms_compliance": "Optional ROPS available for DGMS compliance — cat.com official"
+    "resale_5yr_pct": "N/A \u2014 Not published officially",
+    "maintenance_note": "Up to 20% lower maintenance vs previous generation (320D3 GC) \u2014 cat.com official",
+    "dgms_compliance": "Optional ROPS available for DGMS compliance \u2014 cat.com official"
   },
   "tata_hitachi": {
-    "_source": "Official: tatahitachi.co.in — EX 215LC Prime, EX 215LC-SLR Prime, ZAXIS 220LC Ultra pages",
+    "_source": "Official: tatahitachi.co.in \u2014 EX 215LC Prime, EX 215LC-SLR Prime, ZAXIS 220LC Ultra pages",
     "model_india": "EX 215LC Prime / EX 215LC-SLR Prime / ZAXIS 220LC Ultra",
     "operating_weight_kg": {
-      "ex215lc_prime": "N/A — not published on tatahitachi.co.in product page",
+      "ex215lc_prime": "N/A \u2014 not published on tatahitachi.co.in product page",
       "zaxis_220lc_ultra": 21700
     },
     "engine_hp": {
       "zaxis_220lc_ultra": 168,
-      "ex215lc_prime": "N/A — not published"
+      "ex215lc_prime": "N/A \u2014 not published"
     },
     "bucket_capacity_m3": {
       "zaxis_220lc_ultra": "0.9 - 1.7",
@@ -92,48 +93,48 @@
     "fuel_consumption_lph": "N/A",
     "fuel_consumption_note": "Fuel consumption not published on official tatahitachi.co.in product pages. Claims: 'high fuel efficiency' without specific values.",
     "hydraulic_service_interval_hrs": 4500,
-    "hydraulic_service_note": "4,500 hr hydraulic oil change interval — tatahitachi.co.in official",
+    "hydraulic_service_note": "4,500 hr hydraulic oil change interval \u2014 tatahitachi.co.in official",
     "hydraulic_filter_interval_hrs": 1500,
     "purchase_price_L": "N/A",
     "price_note": "Pricing not published on tatahitachi.co.in",
     "telematics": "ConSite (Hitachi telematics system)",
-    "warranty": "N/A — Not published on official website",
+    "warranty": "N/A \u2014 Not published on official website",
     "service_india": "Tata Hitachi dealer network (India-based)",
     "resale_5yr_pct": "N/A",
     "made_in_india": true,
-    "india_note": "Manufactured in India (Dharwad, Karnataka) — tatahitachi.co.in"
+    "india_note": "Manufactured in India (Dharwad, Karnataka) \u2014 tatahitachi.co.in"
   },
   "jcb": {
-    "_source": "Official: jcb.com/en-IN — NXT 225LC M, NXT 215LC, 220X, JS225LC eco+ pages",
+    "_source": "Official: jcb.com/en-IN \u2014 NXT 225LC M, NXT 215LC, 220X, JS225LC eco+ pages",
     "model_india": "NXT 225LC M / NXT 215LC (Made in India)",
     "operating_weight_kg": 22200,
-    "operating_weight_note": "JCB NXT 225LC M: 22,200 kg — jcb.com/en-IN official",
+    "operating_weight_note": "JCB NXT 225LC M: 22,200 kg \u2014 jcb.com/en-IN official",
     "engine_hp": {
       "nxt_225lcm": 170,
       "220x": 173,
-      "note": "NXT 225LC M: 170 hp ecoMAX | 220X: 129 kW (173 hp) — jcb.com official"
+      "note": "NXT 225LC M: 170 hp ecoMAX | 220X: 129 kW (173 hp) \u2014 jcb.com official"
     },
     "bucket_capacity_m3": 1.2,
-    "bucket_note": "JCB NXT 225LC M: 1.2 m3 HD bucket — jcb.com/en-IN official",
+    "bucket_note": "JCB NXT 225LC M: 1.2 m3 HD bucket \u2014 jcb.com/en-IN official",
     "fuel_consumption_lph": "N/A",
     "fuel_consumption_note": "Fuel consumption L/hr not published on jcb.com product pages. JCB India Oct 2024 press release: 'fuel-efficient tracked excavator' with 14% improvement and Rs 2.90 lakh/year savings estimate vs previous model.",
-    "fuel_saving_vs_prev": "14% vs previous generation — jcb.com/en-IN news Oct 2024",
+    "fuel_saving_vs_prev": "14% vs previous generation \u2014 jcb.com/en-IN news Oct 2024",
     "annual_fuel_saving_estimate": "Rs 2,90,000/year (JCB India press release Oct 2024)",
     "telematics": "JCB LiveLink 4.0 (standard on NXT series)",
-    "telematics_note": "JCB LiveLink 4.0: machine health, maintenance, security 24x7 — jcb.com/en-IN official",
+    "telematics_note": "JCB LiveLink 4.0: machine health, maintenance, security 24x7 \u2014 jcb.com/en-IN official",
     "purchase_price_L": "N/A",
     "price_note": "Pricing not published on jcb.com",
-    "warranty": "N/A — Not published on official India pages",
+    "warranty": "N/A \u2014 Not published on official India pages",
     "service_india": "JCB India dealer network (Ballabhgarh manufacturing)",
     "made_in_india": true,
-    "india_note": "Made in India (Ballabhgarh, Haryana) — jcb.com official",
-    "power_modes": "IntelliControl: 3 power modes + 10 working modes — jcb.com/en-IN official",
+    "india_note": "Made in India (Ballabhgarh, Haryana) \u2014 jcb.com official",
+    "power_modes": "IntelliControl: 3 power modes + 10 working modes \u2014 jcb.com/en-IN official",
     "noise_level_db": 67,
-    "noise_note": "67 dB(A) in-cab — jcb.com/en-GB 220X official",
+    "noise_note": "67 dB(A) in-cab \u2014 jcb.com/en-GB 220X official",
     "resale_5yr_pct": "N/A"
   },
   "hyundai": {
-    "_source": "Official: hyundai-ce.com / HCE India — HX220A L product pages",
+    "_source": "Official: hyundai-ce.com / HCE India \u2014 HX220A L product pages",
     "model_india": "HX220A L",
     "operating_weight_kg": "N/A",
     "operating_weight_note": "HX220A L weight not published on HCE official India pages at time of data collection",
@@ -163,11 +164,11 @@
     "note": "Limited India-specific technical data on official Kobelco India website."
   },
   "volvo": {
-    "_source": "Official: volvoce.com — EC220E product page",
+    "_source": "Official: volvoce.com \u2014 EC220E product page",
     "model_india": "EC220E",
     "operating_weight_kg": 22400,
     "engine_hp": 168,
-    "engine_note": "Volvo D6J: 168 hp, Stage V — volvoce.com official",
+    "engine_note": "Volvo D6J: 168 hp, Stage V \u2014 volvoce.com official",
     "bucket_capacity_m3": "0.9 - 1.4",
     "fuel_consumption_lph": "N/A",
     "fuel_consumption_note": "Fuel consumption not published in L/hr on official volvoce.com product pages",
@@ -177,14 +178,14 @@
     "warranty": "N/A",
     "service_india": "Volvo CE India dealer network",
     "resale_5yr_pct": "N/A",
-    "note": "Volvo EC220E India presence — CareTrack telematics standard. Official pricing and fuel figures not published."
+    "note": "Volvo EC220E India presence \u2014 CareTrack telematics standard. Official pricing and fuel figures not published."
   },
   "sany": {
     "_source": "Official: sanyindia.in / sany.com product pages",
     "model_india": "SY215C / SY215H",
     "operating_weight_kg": 21500,
     "engine_hp": 118,
-    "engine_note": "SY215C: Mitsubishi 4M50, 118 kW (158 hp) — SANY official specs",
+    "engine_note": "SY215C: Mitsubishi 4M50, 118 kW (158 hp) \u2014 SANY official specs",
     "bucket_capacity_m3": 0.5,
     "fuel_consumption_lph": "N/A",
     "fuel_consumption_note": "Fuel consumption in L/hr not published on official SANY India product pages. Claims '10% fuel saving vs previous generation' only.",
@@ -195,10 +196,10 @@
     "warranty": "N/A",
     "service_india": "SANY India dealer network",
     "resale_5yr_pct": "N/A",
-    "note": "All India-specific pricing, fuel, and TCO data marked N/A — not available on official OEM sources."
+    "note": "All India-specific pricing, fuel, and TCO data marked N/A \u2014 not available on official OEM sources."
   },
   "liebherr": {
-    "_source": "Official: liebherr.com — R 920 / R 922 product pages",
+    "_source": "Official: liebherr.com \u2014 R 920 / R 922 product pages",
     "model_india": "R 920 / R 922",
     "operating_weight_kg": 21000,
     "engine_hp": 156,
@@ -212,7 +213,7 @@
     "note": "Liebherr is premium segment. India presence limited. Official fuel and pricing data not available."
   },
   "doosan_develon": {
-    "_source": "Official: develon.com — DX210A-7 product pages (formerly Doosan)",
+    "_source": "Official: develon.com \u2014 DX210A-7 product pages (formerly Doosan)",
     "model_india": "DX210A-7 (Develon, rebranded from Doosan 2023)",
     "operating_weight_kg": 21400,
     "engine_hp": 147,
@@ -226,7 +227,7 @@
     "note": "Formerly Doosan, now Develon. Limited India-specific data on official website."
   },
   "xcmg": {
-    "_source": "Official: xcmg.com — XE215CA product page",
+    "_source": "Official: xcmg.com \u2014 XE215CA product page",
     "model_india": "XE215CA",
     "operating_weight_kg": 21700,
     "engine_hp": 123,
@@ -247,8 +248,166 @@
     "komatsu_ownership_threshold_hrs": 2800,
     "ownership_threshold_note": "Ownership rational above 2,800-3,000 productive hrs/yr (Internal TIPL analysis)",
     "amc_rate_komatsu": 280,
-    "amc_note": "L&T CMMB AMC rate Rs 280/hr — internal data",
+    "amc_note": "L&T CMMB AMC rate Rs 280/hr \u2014 internal data",
     "diesel_hsd_per_litre": 94,
     "diesel_note": "HSD Rs 94/L (Internal HEX file, May 2026)"
+  },
+  "section6_classifications": {
+    "_source": "LT_CE_Strategy_v4_Balanced.docx Section 6 \u2014 Authoritative",
+    "market_segments": {
+      "premium": {
+        "price_band": ">Rs 70L",
+        "vol_share": "15%",
+        "tiers": "Tier 1"
+      },
+      "mid_premium": {
+        "price_band": "Rs 40-70L",
+        "vol_share": "15%",
+        "tiers": "Tier 2"
+      },
+      "economy": {
+        "price_band": "<Rs 40L",
+        "vol_share": "70%",
+        "tiers": "Tier 3-4"
+      }
+    },
+    "contractor_tiers": {
+      "tier1": {
+        "revenue_cr": ">1000",
+        "count": "50-100",
+        "fleet": "100-10000+",
+        "top_driver": "Uptime SLA 85-90%",
+        "l_t_strategy": "PROTECT & DEEPEN"
+      },
+      "tier2": {
+        "revenue_cr": "100-1000",
+        "count": "2000-5000",
+        "fleet": "10-50",
+        "top_driver": "TCO + Financing terms",
+        "l_t_strategy": "BUILD via EaaS"
+      },
+      "tier3": {
+        "revenue_cr": "10-100",
+        "count": "20000-50000",
+        "fleet": "1-10",
+        "top_driver": "Purchase price / EMI",
+        "l_t_strategy": "CERTIFIED USED + PC35"
+      },
+      "tier4": {
+        "revenue_cr": "<10",
+        "count": "150000+",
+        "fleet": "1",
+        "top_driver": "Lowest price",
+        "l_t_strategy": "NO PATHWAY (no BHL)"
+      }
+    },
+    "decision_driver_weights": {
+      "purchase_price_emi": {
+        "premium": 3,
+        "mid_premium": 8,
+        "economy": 10,
+        "l_t_position": "WEAKNESS"
+      },
+      "tco_5yr": {
+        "premium": 9,
+        "mid_premium": 7,
+        "economy": 4,
+        "l_t_position": "STRENGTH"
+      },
+      "telematics_digital": {
+        "premium": 9,
+        "mid_premium": 6,
+        "economy": 2,
+        "l_t_position": "STRENGTH"
+      },
+      "service_network": {
+        "premium": 7,
+        "mid_premium": 9,
+        "economy": 8,
+        "l_t_position": "WEAKNESS"
+      },
+      "resale_value": {
+        "premium": 6,
+        "mid_premium": 9,
+        "economy": 4,
+        "l_t_position": "STRENGTH"
+      },
+      "financing_flexibility": {
+        "premium": 4,
+        "mid_premium": 9,
+        "economy": 10,
+        "l_t_position": "OPPORTUNITY"
+      },
+      "brand_reputation": {
+        "premium": 8,
+        "mid_premium": 7,
+        "economy": 5,
+        "l_t_position": "STRENGTH Tier1 / Neutral Tier3"
+      },
+      "operator_comfort": {
+        "premium": 5,
+        "mid_premium": 7,
+        "economy": 6,
+        "l_t_position": "STRENGTH (KomfortCab)"
+      },
+      "dealer_proximity": {
+        "premium": 4,
+        "mid_premium": 8,
+        "economy": 9,
+        "l_t_position": "WEAKNESS Tier2/3"
+      },
+      "attachment_availability": {
+        "premium": 6,
+        "mid_premium": 7,
+        "economy": 4,
+        "l_t_position": "MODERATE"
+      },
+      "parts_availability": {
+        "premium": 8,
+        "mid_premium": 8,
+        "economy": 7,
+        "l_t_position": "MODERATE (Nagpur depot)"
+      },
+      "warranty_terms": {
+        "premium": 5,
+        "mid_premium": 7,
+        "economy": 6,
+        "l_t_position": "STANDARD 2yr/4000hr"
+      },
+      "amc_fmc_mcp": {
+        "premium": 8,
+        "mid_premium": 6,
+        "economy": 3,
+        "l_t_position": "STRENGTH (FMC/CC/GPC/CMC/SSA)"
+      }
+    },
+    "pitch_openers_by_segment": {
+      "premium": "KOMTRAX reduces unplanned downtime 15-20% across your fleet \u2014 releasing Rs X Cr annually",
+      "mid_premium": "Over 5 years, Komatsu's lower TCO saves Rs X L per machine vs competitor",
+      "economy": "Your single machine cannot afford to break. Komatsu Care fixed-cost plan protects your EMI"
+    },
+    "customer_economics_sec65": {
+      "own_pc205_3yr": {
+        "monthly_rs": 298550,
+        "annual_rs": 3475500,
+        "tax_benefit_rs": 840535
+      },
+      "rental_250hrs": {
+        "monthly_rs": 294000,
+        "annual_rs": 2956800,
+        "tax_benefit_rs": 739200
+      },
+      "lease_2yr_pc205": {
+        "monthly_rs": 267546,
+        "annual_rs": 3210552,
+        "tax_benefit_rs": 1021488
+      },
+      "pc210_high_util_6000hrs": {
+        "oo_per_hr": 1907.58,
+        "production_cum_hr": 80,
+        "cost_per_cum": 23.84,
+        "emi_monthly": 141675
+      }
+    }
   }
 }
