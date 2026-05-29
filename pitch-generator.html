@@ -220,22 +220,23 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
     </div>
   </div>
   <div class="fgrp">
-    <label class="flabel">What Matters Most to the Customer <span style="font-size:9.5px;color:var(--gray);font-weight:400">(select all that apply)</span></label>
+    <label class="flabel">Key Decision Drivers <span style="font-size:9.5px;color:var(--gray);font-weight:400">(Sec 6.4 weights — select all)</span></label>
     <div class="chip-row" id="cg-pain">
-      <span class="chip on"  data-v="purchase_price"      onclick="chipMulti(this)">Purchase Price / EMI</span>
-      <span class="chip on"  data-v="tco_5yr"             onclick="chipMulti(this)">TCO over 5 Years</span>
-      <span class="chip"     data-v="fuel_efficiency"     onclick="chipMulti(this)">Fuel Efficiency</span>
-      <span class="chip"     data-v="uptime_reliability"  onclick="chipMulti(this)">Uptime & Reliability</span>
-      <span class="chip"     data-v="service_network"     onclick="chipMulti(this)">Service Network</span>
-      <span class="chip"     data-v="parts_availability"  onclick="chipMulti(this)">Parts Availability</span>
-      <span class="chip"     data-v="resale_value"        onclick="chipMulti(this)">Resale Value</span>
-      <span class="chip"     data-v="financing_terms"     onclick="chipMulti(this)">Financing Terms</span>
-      <span class="chip"     data-v="telematics"          onclick="chipMulti(this)">Telematics / IoT</span>
-      <span class="chip"     data-v="operator_comfort"    onclick="chipMulti(this)">Operator Comfort</span>
-      <span class="chip"     data-v="brand_reputation"    onclick="chipMulti(this)">Brand Reputation</span>
-      <span class="chip"     data-v="warranty_terms"      onclick="chipMulti(this)">Warranty Terms</span>
-      <span class="chip"     data-v="attachment_options"  onclick="chipMulti(this)">Attachment Options</span>
-      <span class="chip"     data-v="amc_fmc"             onclick="chipMulti(this)">AMC / FMC Support</span>
+      <!-- Ordered by Sec 6.4 decision-driver weights (avg across Premium/Mid/Economy) -->
+      <span class="chip on"  data-v="purchase_price"      onclick="chipMulti(this)">Purchase Price / EMI  <small style="opacity:.6">3/8/10</small></span>
+      <span class="chip on"  data-v="tco_5yr"             onclick="chipMulti(this)">TCO over 5 Years  <small style="opacity:.6">9/7/4</small></span>
+      <span class="chip"     data-v="financing_terms"     onclick="chipMulti(this)">Financing / EMI Terms  <small style="opacity:.6">4/9/10</small></span>
+      <span class="chip"     data-v="service_network"     onclick="chipMulti(this)">Service Network  <small style="opacity:.6">7/9/8</small></span>
+      <span class="chip"     data-v="resale_value"        onclick="chipMulti(this)">Resale Value  <small style="opacity:.6">6/9/4</small></span>
+      <span class="chip"     data-v="brand_reputation"    onclick="chipMulti(this)">Brand Reputation  <small style="opacity:.6">8/7/5</small></span>
+      <span class="chip"     data-v="parts_availability"  onclick="chipMulti(this)">Parts Availability  <small style="opacity:.6">8/8/7</small></span>
+      <span class="chip"     data-v="uptime_reliability"  onclick="chipMulti(this)">Uptime & Reliability  <small style="opacity:.6">7/6/5</small></span>
+      <span class="chip"     data-v="telematics"          onclick="chipMulti(this)">Telematics / KOMTRAX  <small style="opacity:.6">9/6/2</small></span>
+      <span class="chip"     data-v="amc_fmc"             onclick="chipMulti(this)">AMC / FMC / MCP  <small style="opacity:.6">8/6/3</small></span>
+      <span class="chip"     data-v="operator_comfort"    onclick="chipMulti(this)">Operator Comfort  <small style="opacity:.6">5/7/6</small></span>
+      <span class="chip"     data-v="dealer_proximity"    onclick="chipMulti(this)">Dealer Proximity  <small style="opacity:.6">4/8/9</small></span>
+      <span class="chip"     data-v="attachment_options"  onclick="chipMulti(this)">Attachment Availability  <small style="opacity:.6">6/7/4</small></span>
+      <span class="chip"     data-v="warranty_terms"      onclick="chipMulti(this)">Warranty Terms  <small style="opacity:.6">5/7/6</small></span>
     </div>
   </div>
   <div class="sec-head">Usage Parameters</div>
@@ -251,12 +252,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
   <div class="fgrp">
     <label class="flabel">Fleet Size (existing machines)</label>
     <select class="fselect" id="fleet-size">
-      <option value="0">0 machines (First-time buyer)</option>
-      <option value="1">1 machine</option>
-      <option value="3" selected>2 – 5 machines</option>
-      <option value="10">6 – 15 machines</option>
-      <option value="25">16 – 30 machines</option>
-      <option value="50">30+ machines</option>
+      <option value="0">0 machines — First-time buyer (Tier 4)</option>
+      <option value="1">1 machine (Tier 4 micro-operator)</option>
+      <option value="3" selected>2–5 machines (Tier 3 MSME)</option>
+      <option value="10">6–15 machines (Tier 3)</option>
+      <option value="25">16–50 machines (Tier 2)</option>
+      <option value="100">51–100 machines (Tier 2 large)</option>
+      <option value="500">100+ machines (Tier 1 EPC / PSU)</option>
     </select>
   </div>
   <div class="fgrp">
@@ -884,6 +886,40 @@ LANGUAGE STYLE:
 • English: Professional, conversational, use Rs values from internal data
 • Hindi: Respectful "aap" form, start with "Namaste", keep KOMTRAX/TCO/AMC/EMI in English
 • Regional languages: Keep KOMTRAX, TCO, AMC, EMI, Rs in English; translate rest
+
+SECTION 6 CLASSIFICATION DATA (LT_CE_Strategy_v4 — AUTHORITATIVE):
+
+MARKET SEGMENTS (6.1):
+  Premium   >Rs 70L:    PC210, CAT320, Volvo — 15% volume — TIER 1 accounts
+  Mid-Prem  Rs40-70L:   Tata Hitachi, JCB, Hyundai, Kobelco — 15% volume — TIER 2
+  Economy   <Rs 40L:    SANY, XCMG, LiuGong, used machines — 70% volume — TIER 3-4
+
+TIER PROFILES (6.1):
+  TIER 1 >Rs1,000Cr/yr | 50-100 companies | 100-10,000+ machines | #1 driver: Uptime SLA 85-90%
+  TIER 2 Rs100-1,000Cr | 2,000-5,000 cos  | 10-50 machines       | #1 driver: TCO + Financing
+  TIER 3 Rs10-100Cr    | 20,000-50,000    | 1-10 machines        | #1 driver: Purchase price/EMI
+  TIER 4 <Rs10Cr       | 150,000+         | 1 machine            | #1 driver: Lowest price
+
+DECISION-DRIVER WEIGHTS (6.4, scale 1-10):
+  Purchase Price:   Premium=3, Mid=8, Economy=10  → L&T WEAKNESS vs SANY
+  TCO 5yr:          Premium=9, Mid=7, Economy=4   → L&T STRENGTH (Rs2,025/hr)
+  Telematics:       Premium=9, Mid=6, Economy=2   → L&T STRENGTH (KOMTRAX free)
+  Service Network:  Premium=7, Mid=9, Economy=8   → L&T WEAKNESS (115 vs 700+ JCB)
+  Resale Value:     Premium=6, Mid=9, Economy=4   → L&T STRENGTH (45-55% vs 30-35%)
+  Financing:        Premium=4, Mid=9, Economy=10  → L&T OPPORTUNITY (L&T Finance)
+  Brand:            Premium=8, Mid=7, Economy=5   → STRENGTH Tier1; neutral Tier3
+  AMC/FMC/MCP:      Premium=8, Mid=6, Economy=3   → STRENGTH (FMC/CC/GPC/CMC/SSA)
+  Dealer Proximity: Premium=4, Mid=8, Economy=9   → WEAKNESS Tier2/3 towns
+
+PITCH OPENER by segment fear (6.3):
+  Premium:    'KOMTRAX reduces unplanned downtime 15-20% — releasing Rs X Cr annually'
+  Mid-Premium:'Over 5 years, Komatsu TCO saves Rs X L per machine vs competitor'
+  Economy:    'Your single machine cannot afford to break. Komatsu Care protects your EMI'
+
+CUSTOMER ECONOMICS (6.5 — Internal):
+  Own PC205 3yr: Rs2,98,550/month | Tax benefit: Rs8,40,535/yr
+  Lease 2yr PC205: Rs2,67,546/month | Tax benefit: Rs10,21,488/yr
+  Rental 250hrs/mth: Rs2,94,000/month | Tax benefit: Rs7,39,200/yr
 
 GOLDEN RULES:
 • Always reference the Rs 2,025/hr or Rs 1,922/hr total O&O number
