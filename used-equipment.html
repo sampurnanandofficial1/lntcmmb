@@ -1510,6 +1510,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   renderIntel();
   initCharts();
   calcValuation();
+  calcCustomerVal();
   calcExportCost();
   updateKPIs();
   document.getElementById('ue-last-update').textContent = 'Updated ' + new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}) + ' IST';
@@ -1743,6 +1744,8 @@ function estimateValue(m) {
 function switchEngine(type) {
   document.getElementById('engine-team').style.display = type === 'team' ? 'block' : 'none';
   document.getElementById('engine-customer').style.display = type === 'customer' ? 'block' : 'none';
+  if (type === 'customer') calcCustomerVal();
+  if (type === 'team') calcValuation();
   document.getElementById('eng-tab-team').style.background = type === 'team' ? 'var(--navy)' : '#E2E8F0';
   document.getElementById('eng-tab-team').style.color = type === 'team' ? '#fff' : 'var(--navy)';
   document.getElementById('eng-tab-customer').style.background = type === 'customer' ? 'var(--navy)' : '#E2E8F0';
