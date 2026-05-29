@@ -175,10 +175,10 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 .ue-rate-unit{font-size:9.5px;color:var(--gray)}
 
 /* ── VALUATION ENGINE ── */
-.ue-val-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.ue-form-group{display:flex;flex-direction:column;gap:4px}
-.ue-form-label{font-size:11px;font-weight:600;color:var(--navy)}
-.ue-form-input{padding:7px 10px;border:1px solid var(--br);border-radius:6px;font-size:12px}
+.ue-val-form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ue-form-group{display:flex;flex-direction:column;gap:3px}
+.ue-form-label{font-size:11px;font-weight:600;color:var(--navy)}font-size:11px;
+.ue-form-input{padding:7px 10px;border:1px solid var(--br);border-radius:6px;font-size:11px}
 .ue-form-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,91,154,.1)}
 .ue-val-result{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:10px;padding:16px;color:#fff}
 .ue-val-price-label{font-size:11px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px}
@@ -632,7 +632,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
       <div class="ue-grid-2">
         <div class="ue-card">
           <div class="ue-card-head">🔢 KOMTRAX Valuation Engine — PC200 / PC205 / PC210</div>
-          <div class="ue-card-body">
+          <div class="ue-card-body" style="overflow-y:auto;max-height:580px">
             <div class="ue-val-form">
               <div class="ue-form-group">
                 <label class="ue-form-label">Machine Model</label>
@@ -682,7 +682,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
                   <option value="poor">Poor (&lt;30%) — deduct ₹12–25L</option>
                 </select>
               </div>
-              <div class="ue-form-group">
+              <div class="ue-form-group" style="grid-column:1/-1">
                 <label class="ue-form-label">Type of Work / Application</label>
                 <select class="ue-form-input" id="v-worktype" onchange="calcValuation()">
                   <option value="real_estate">🏗️ Foundation / Real Estate (soft soil, low hrs) — Best value retention</option>
@@ -696,7 +696,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
                   <option value="coal_mining">⛏️ Coal OB Removal — SECL/MCL (blasted rock, 3,500–5,000 hrs/yr)</option>
                   <option value="iron_ore">🔩 Iron Ore / Metal Mining (hardest rock, highest abrasion)</option>
                 </select>
-                <div id="worktype-info" style="margin-top:5px;font-size:10px;color:var(--gray);line-height:1.5"></div>
+                <div id="worktype-info" style="margin-top:3px;font-size:10px;color:var(--gray);line-height:1.5"></div>
               </div>
             </div>
             <button class="ue-calc-btn" onclick="calcValuation()">📊 Calculate Valuation</button>
