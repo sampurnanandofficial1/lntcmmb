@@ -1,11 +1,12 @@
 {
   "hosting": {
+    "site": "lntcmmb-dashboards",
     "public": ".",
     "ignore": [
       "firebase.json","**/.*","scripts/**",".github/**",
       ".devcontainer/**","**/*.py","**/*.sh","**/*.md",
       "sa_export.b64","DEPLOY.md","sync-to-firebase.sh",
-      "setup-runner.sh","setup-firebase.sh","deploy.sh"
+      "setup-runner.sh","setup-firebase.sh","deploy.sh","watch-and-deploy.sh"
     ],
     "headers": [
       {
