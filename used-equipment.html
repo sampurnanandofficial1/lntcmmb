@@ -629,194 +629,461 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 
     <!-- ══════════════ VALUATION PANEL ══════════════ -->
     <div class="ue-panel" id="panel-valuation">
-      <div class="ue-grid-2">
-        <div class="ue-card">
-          <div class="ue-card-head">🔢 KOMTRAX Valuation Engine — PC200 / PC205 / PC210</div>
-          <div class="ue-card-body" style="overflow-y:auto;max-height:580px">
-            <div class="ue-val-form">
-              <div class="ue-form-group">
-                <label class="ue-form-label">Machine Model</label>
-                <select class="ue-form-input" id="v-model" onchange="calcValuation()">
-                  <option value="PC210">Komatsu PC210-10 (21 ton)</option>
-                  <option value="PC205">Komatsu PC205-7 (20 ton)</option>
-                  <option value="PC200">Komatsu PC200-8 (20 ton)</option>
-                </select>
-              </div>
-              <div class="ue-form-group">
-                <label class="ue-form-label">Year of Manufacture</label>
-                <select class="ue-form-input" id="v-year" onchange="calcValuation()">
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                  <option value="2021">2021</option>
-                  <option value="2020" selected>2020</option>
-                  <option value="2019">2019</option>
-                  <option value="2018">2018</option>
-                  <option value="2017">2017</option>
-                  <option value="2016">2016</option>
-                  <option value="2015">2015</option>
-                </select>
-              </div>
-              <div class="ue-form-group">
-                <label class="ue-form-label">Total Operating Hours</label>
-                <input type="number" class="ue-form-input" id="v-hours" value="4500" min="0" max="20000" onchange="calcValuation()" oninput="calcValuation()">
-              </div>
-              <div class="ue-form-group">
-                <label class="ue-form-label">Idle % (KOMTRAX)</label>
-                <input type="number" class="ue-form-input" id="v-idle" value="18" min="0" max="100" placeholder="0–100%" onchange="calcValuation()" oninput="calcValuation()">
-              </div>
-              <div class="ue-form-group">
-                <label class="ue-form-label">Major Faults (KOMTRAX)</label>
-                <select class="ue-form-input" id="v-faults" onchange="calcValuation()">
-                  <option value="0">0 — Clean record</option>
-                  <option value="1">1–2 — Minor</option>
-                  <option value="3">3–5 — Moderate</option>
-                  <option value="6">6+ — Heavy use</option>
-                </select>
-              </div>
-              <div class="ue-form-group">
-                <label class="ue-form-label">Undercarriage Condition</label>
-                <select class="ue-form-input" id="v-undercarriage" onchange="calcValuation()">
-                  <option value="excellent">Excellent (&gt;70% remaining)</option>
-                  <option value="good">Good (50–70%)</option>
-                  <option value="fair">Fair (30–50%)</option>
-                  <option value="poor">Poor (&lt;30%) — deduct ₹12–25L</option>
-                </select>
-              </div>
-              <div class="ue-form-group" style="grid-column:1/-1">
-                <label class="ue-form-label">Type of Work / Application</label>
-                <select class="ue-form-input" id="v-worktype" onchange="calcValuation()">
-                  <option value="real_estate">🏗️ Foundation / Real Estate (soft soil, low hrs) — Best value retention</option>
-                  <option value="irrigation">🌊 Irrigation / Canals / Dams (wet-clay, moderate)</option>
-                  <option value="highway_epc" selected>🛣️ Highway / Road EPC (soil cut &amp; load, 2,000–2,800 hrs/yr)</option>
-                  <option value="urban_metro">🚇 Metro / Urban Infra (mixed, breaker use)</option>
-                  <option value="industrial">🏭 Industrial / Pipeline (mixed soil, moderate hrs)</option>
-                  <option value="ports">⚓ Ports / Airports (salt-air corrosion risk)</option>
-                  <option value="rental">🔄 Rental Fleet (multi-operator, variable care)</option>
-                  <option value="limestone_quarry">🪨 Limestone / Quarry / Cement (medium-hard rock, abrasive)</option>
-                  <option value="coal_mining">⛏️ Coal OB Removal — SECL/MCL (blasted rock, 3,500–5,000 hrs/yr)</option>
-                  <option value="iron_ore">🔩 Iron Ore / Metal Mining (hardest rock, highest abrasion)</option>
-                </select>
-                <div id="worktype-info" style="margin-top:3px;font-size:10px;color:var(--gray);line-height:1.5"></div>
-              </div>
+
+  <!-- ═══ TAB SWITCHER ═══════════════════════════════════════════════════ -->
+  <div style="display:flex;gap:8px;margin-bottom:14px">
+    <button id="eng-tab-team" onclick="switchEngine('team')"
+      style="flex:1;padding:9px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">
+      🏢 L&T Sales Team Engine
+    </button>
+    <button id="eng-tab-customer" onclick="switchEngine('customer')"
+      style="flex:1;padding:9px;background:#E2E8F0;color:var(--navy);border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">
+      👤 Customer Self-Assessment
+    </button>
+  </div>
+
+  <!-- ═══ TEAM ENGINE ═══════════════════════════════════════════════════ -->
+  <div id="engine-team">
+    <div class="ue-grid-2">
+      <!-- LEFT: INPUTS -->
+      <div class="ue-card">
+        <div class="ue-card-head">🔢 L&T Sales Team Valuation Engine — PC200 / PC205 / PC210</div>
+        <div class="ue-card-body" style="overflow-y:auto;max-height:640px">
+          <div class="ue-val-form">
+
+            <!-- MACHINE IDENTITY -->
+            <div style="grid-column:1/-1;font-size:10.5px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:5px 8px;border-radius:5px;margin-bottom:2px">
+              🔩 Machine Identity
             </div>
-            <button class="ue-calc-btn" onclick="calcValuation()">📊 Calculate Valuation</button>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Model</label>
+              <select class="ue-form-input" id="v-model" onchange="calcValuation()">
+                <option value="PC210">PC210-10M0 (21T, ₹72–76L new)</option>
+                <option value="PC205">PC205-10M0 (20T, ₹68L new)</option>
+                <option value="PC200">PC200-8M0 (20T, ₹65L est.)</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Year of Manufacture</label>
+              <select class="ue-form-input" id="v-year" onchange="calcValuation()">
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020" selected>2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Total Operating Hours</label>
+              <input type="number" class="ue-form-input" id="v-hours" value="4500" min="0" max="25000"
+                onchange="calcValuation()" oninput="calcValuation()"
+                style="font-size:13px;font-weight:700;color:var(--navy)">
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Idle % (KOMTRAX)</label>
+              <input type="number" class="ue-form-input" id="v-idle" value="20" min="0" max="70"
+                placeholder="20–40% typical" onchange="calcValuation()" oninput="calcValuation()">
+            </div>
+
+            <!-- CONDITION PARAMETERS -->
+            <div style="grid-column:1/-1;font-size:10.5px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:5px 8px;border-radius:5px;margin:4px 0 2px">
+              🔧 Condition Parameters
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Undercarriage Remaining</label>
+              <select class="ue-form-input" id="v-undercarriage" onchange="calcValuation()">
+                <option value="excellent">Excellent — >70% (saves ₹15–25L vs replacement)</option>
+                <option value="good" selected>Good — 50–70%</option>
+                <option value="fair">Fair — 30–50% (partial deduct)</option>
+                <option value="poor">Poor — &lt;30% (full deduct ₹15–25L)</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Engine Condition</label>
+              <select class="ue-form-input" id="v-engine" onchange="calcValuation()">
+                <option value="excellent">Excellent — clean oil, minimal blow-by</option>
+                <option value="good" selected>Good — normal wear markers</option>
+                <option value="fair">Fair — elevated wear metals in oil analysis</option>
+                <option value="poor">Poor — smoke, blow-by, overhaul needed</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Hydraulic System</label>
+              <select class="ue-form-input" id="v-hydraulic" onchange="calcValuation()">
+                <option value="excellent">Excellent — clean oil, full cycle speed</option>
+                <option value="good" selected>Good — minor seal wear, no leaks</option>
+                <option value="fair">Fair — slow cycles, minor leaks</option>
+                <option value="poor">Poor — major leaks / sluggish (−20%+)</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Structural Condition</label>
+              <select class="ue-form-input" id="v-structure" onchange="calcValuation()">
+                <option value="excellent">Excellent — no cracks, original paint</option>
+                <option value="good" selected>Good — minor dents, surface rust only</option>
+                <option value="fair">Fair — weld repairs, cosmetic damage</option>
+                <option value="poor">Poor — frame cracks / major structural damage</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">KOMTRAX Fault History</label>
+              <select class="ue-form-input" id="v-faults" onchange="calcValuation()">
+                <option value="0">Clean — 0 major faults</option>
+                <option value="1">Minor — 1–2 faults (sensor/wiring)</option>
+                <option value="3">Moderate — 3–5 faults (mix)</option>
+                <option value="6">Heavy — 6+ recurring powertrain/hydraulic faults</option>
+              </select>
+            </div>
+
+            <!-- SERVICE & DOCUMENTATION -->
+            <div style="grid-column:1/-1;font-size:10.5px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:5px 8px;border-radius:5px;margin:4px 0 2px">
+              📋 Service History & Documentation
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Service Records</label>
+              <select class="ue-form-input" id="v-service" onchange="calcValuation()">
+                <option value="full_oem">Full OEM records + L&T MCP/AMC history</option>
+                <option value="partial" selected>Partial — some records available</option>
+                <option value="none">No records — local mechanic only</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">MCP-5 / Warranty Status</label>
+              <select class="ue-form-input" id="v-warranty" onchange="calcValuation()">
+                <option value="active">Active MCP-5 (≤12,500 hrs, ≤5yr) — transferable</option>
+                <option value="expired" selected>Expired / none</option>
+                <option value="extended">Extended warranty purchased</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Previous Owners</label>
+              <select class="ue-form-input" id="v-owners" onchange="calcValuation()">
+                <option value="1" selected>Single owner (original)</option>
+                <option value="2">2 owners</option>
+                <option value="3">3+ owners</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Documentation</label>
+              <select class="ue-form-input" id="v-docs" onchange="calcValuation()">
+                <option value="complete">Complete — Invoice, Form 22, RC, NOC/Form 35, Insurance</option>
+                <option value="partial" selected>Partial — some documents missing</option>
+                <option value="none">Minimal / no clear title</option>
+              </select>
+            </div>
+
+            <!-- APPLICATION & ATTACHMENTS -->
+            <div style="grid-column:1/-1;font-size:10.5px;font-weight:700;color:var(--navy);background:#F1F5F9;padding:5px 8px;border-radius:5px;margin:4px 0 2px">
+              ⚙️ Application & Attachments
+            </div>
+            <div class="ue-form-group" style="grid-column:1/-1">
+              <label class="ue-form-label">Type of Work / Application</label>
+              <select class="ue-form-input" id="v-worktype" onchange="calcValuation()">
+                <option value="real_estate">🏗️ Foundation / Real Estate (soft soil, 800–1,500 hrs/yr)</option>
+                <option value="irrigation">🌊 Irrigation / Canals / Dams (wet clay, moderate)</option>
+                <option value="highway_epc" selected>🛣️ Highway / Road EPC (soil cut, 2,000–2,800 hrs/yr)</option>
+                <option value="urban_metro">🚇 Metro / Urban Infra (breaker use, mixed ground)</option>
+                <option value="industrial">🏭 Industrial / Pipeline (mixed soil)</option>
+                <option value="ports">⚓ Ports / Airports (salt-air corrosion risk)</option>
+                <option value="rental">🔄 Rental Fleet (multi-operator, variable care)</option>
+                <option value="limestone_quarry">🪨 Limestone / Quarry / Cement (medium-hard, abrasive)</option>
+                <option value="coal_mining">⛏️ Coal OB Removal — SECL/MCL (3,500–5,000 hrs/yr)</option>
+                <option value="iron_ore">🔩 Iron Ore / Metal Mining (hardest rock, max abrasion)</option>
+              </select>
+              <div id="worktype-info" style="margin-top:3px;font-size:10px;color:var(--gray);line-height:1.5"></div>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Attachments</label>
+              <select class="ue-form-input" id="v-attachments" onchange="calcValuation()">
+                <option value="none">Standard bucket only</option>
+                <option value="bucket_good" selected>Bucket + good condition (sharp teeth, wear plates)</option>
+                <option value="coupler">Quick coupler + bucket</option>
+                <option value="breaker">Hydraulic breaker / hammer included</option>
+                <option value="full_set">Full set (coupler + bucket + breaker/thumb)</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Region / Location</label>
+              <select class="ue-form-input" id="v-region" onchange="calcValuation()">
+                <option value="south" selected>South India (32% CE demand share)</option>
+                <option value="mining_belt">Mining Belt — CG/OD/JH (strong demand)</option>
+                <option value="north">North India (UP/HR/RJ/PB)</option>
+                <option value="west">West India (MH/GJ)</option>
+                <option value="east">East India (WB/AS)</option>
+                <option value="coastal">Coastal (corrosion risk)</option>
+              </select>
+            </div>
           </div>
-        </div>
-        <div>
-          <div class="ue-val-result" id="val-result-card">
-            <div class="ue-val-price-label">Recommended Export Price</div>
-            <div class="ue-val-price" id="val-export-price">₹ —</div>
-            <div class="ue-val-range" id="val-export-range">Enter machine details to calculate</div>
-            <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)">
-              <div class="ue-val-price-label">Domestic SAMIL Price</div>
-              <div style="font-size:22px;font-weight:700;margin:2px 0" id="val-domestic-price">₹ —</div>
-            </div>
-            <div class="ue-val-breakdown" id="val-breakdown">
-              <div class="ue-val-factor">
-                <div class="ue-val-factor-label">Machine Grade</div>
-                <div class="ue-val-factor-val" id="vf-grade">—</div>
-              </div>
-              <div class="ue-val-factor">
-                <div class="ue-val-factor-label">Life Remaining</div>
-                <div class="ue-val-factor-val" id="vf-life">—</div>
-              </div>
-              <div class="ue-val-factor">
-                <div class="ue-val-factor-label">Idle Penalty</div>
-                <div class="ue-val-factor-val" id="vf-idle">—</div>
-              </div>
-              <div class="ue-val-factor">
-                <div class="ue-val-factor-label">KOMTRAX Premium</div>
-                <div class="ue-val-factor-val" id="vf-komtrax">—</div>
-              </div>
-              <div class="ue-val-factor">
-                <div class="ue-val-factor-label">Work Type Adj.</div>
-                <div class="ue-val-factor-val" id="vf-worktype">—</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="ue-card" style="margin-top:12px">
-            <div class="ue-card-head">📐 Valuation Methodology</div>
-            <div class="ue-card-body" style="font-size:11.5px;color:#334155;line-height:1.8">
-              <!-- ══ METHODOLOGY — FULLY SOURCED ══════════════════════════════════ -->
-              <div style="font-size:11.5px;color:#334155;line-height:1.9">
-
-              <div style="font-weight:700;font-size:12px;color:var(--navy);margin-bottom:4px">1. Base Price</div>
-              <strong>₹70.28L</strong> all-in (incl. GST+TCS) for PC210-10M0
-              <span style="font-size:9px;background:#D1FAE5;color:#065F46;padding:1px 5px;border-radius:4px;margin-left:4px">Internal HEX file, May 2026 — authoritative</span><br>
-
-              <div style="font-weight:700;font-size:12px;color:var(--navy);margin:8px 0 4px">2. Depreciation Schedule (declining balance)</div>
-              <table style="width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:4px">
-                <tr style="background:#F1F5F9"><th style="padding:3px 6px;text-align:left">Year</th><th>Annual Loss</th><th>Residual</th><th>Data Source</th></tr>
-                <tr><td style="padding:2px 6px">1</td><td style="text-align:center"><strong>−20%</strong></td><td style="text-align:center">80%</td><td style="font-size:9.5px;color:#64748B">HEA auction data; Five Star Equipment; CONEXPO</td></tr>
-                <tr style="background:#F8FAFC"><td style="padding:2px 6px">2</td><td style="text-align:center">−12%</td><td style="text-align:center">68%</td><td style="font-size:9.5px;color:#64748B">Sandhills: "32% lost in years 1–3" → CONEXPO-CON/AGG</td></tr>
-                <tr><td style="padding:2px 6px">3</td><td style="text-align:center">−10%</td><td style="text-align:center">58%</td><td style="font-size:9.5px;color:#64748B">Sandhills model; EquipmentWatch auction calibration</td></tr>
-                <tr style="background:#F8FAFC"><td style="padding:2px 6px">4</td><td style="text-align:center">−8%</td><td style="text-align:center">50%</td><td style="font-size:9.5px;color:#64748B">HEA: "45–70% after 5 years" for well-kept models</td></tr>
-                <tr><td style="padding:2px 6px">5</td><td style="text-align:center">−7%</td><td style="text-align:center">43%</td><td style="font-size:9.5px;color:#64748B">EquipmentWatch HRV: Komatsu 54.2% (best-in-class 5yr)</td></tr>
-                <tr style="background:#F8FAFC"><td style="padding:2px 6px">6</td><td style="text-align:center">−6%</td><td style="text-align:center">37%</td><td style="font-size:9.5px;color:#64748B">Sandhills: "45% at year 7" — declining-balance taper</td></tr>
-                <tr><td style="padding:2px 6px">7</td><td style="text-align:center">−5%</td><td style="text-align:center">32%</td><td style="font-size:9.5px;color:#64748B">Sandhills CONEXPO model verified</td></tr>
-                <tr style="background:#F8FAFC"><td style="padding:2px 6px">8+</td><td style="text-align:center">−4%</td><td style="text-align:center">28%</td><td style="font-size:9.5px;color:#64748B">HEA: 30–35% at yr10; taper continues</td></tr>
-              </table>
-              <div style="font-size:10px;color:#64748B">
-                📌 Sources:
-                <a href="https://www.conexpoconagg.com/news/construction-equipment-life-cycle-costs-using-data" target="_blank" style="color:#2563EB">Sandhills/CONEXPO-CON/AGG 2020</a> ·
-                <a href="https://heavyequipmentappraisal.com/equipment-value-guides/excavator-price/" target="_blank" style="color:#2563EB">Heavy Equipment Appraisal (3,382 auction sales, 2025)</a> ·
-                <a href="https://equipmentwatch.com/awards/highest-retained-value-awards/" target="_blank" style="color:#2563EB">EquipmentWatch HRV Awards</a> ·
-                <a href="https://fivestarequipment.com/do-excavators-hold-their-value-a-guide-for-buyers/" target="_blank" style="color:#2563EB">Five Star Equipment</a>
-              </div>
-
-              <div style="font-weight:700;font-size:12px;color:var(--navy);margin:10px 0 4px">3. Work Type Application Multiplier</div>
-              <table style="width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:4px">
-                <tr style="background:#F1F5F9"><th style="padding:3px 6px;text-align:left">Application</th><th>Multiplier</th><th>Basis</th></tr>
-                <tr><td style="padding:2px 6px">Foundation / Real Estate</td><td style="text-align:center;color:#16A34A"><strong>+12%</strong></td><td style="font-size:9.5px;color:#64748B">Soft soil; 800–1,500 hrs/yr; minimal UC wear</td></tr>
-                <tr style="background:#F8FAFC"><td style="padding:2px 6px">Irrigation / Canals</td><td style="text-align:center;color:#16A34A">+6%</td><td style="font-size:9.5px;color:#64748B">Wet clay; low abrasion; moderate hrs</td></tr>
-                <tr><td style="padding:2px 6px">Highway / Road EPC</td><td style="text-align:center">Baseline</td><td style="font-size:9.5px;color:#64748B">Standard soil cut+load; 2,000–2,800 hrs/yr</td></tr>
-                <tr style="background:#F8FAFC"><td style="padding:2px 6px">Urban / Metro</td><td style="text-align:center;color:#D97706">−4%</td><td style="font-size:9.5px;color:#64748B">Hammer/breaker accelerates hydraulic+structural wear</td></tr>
-                <tr><td style="padding:2px 6px">Industrial / Pipeline</td><td style="text-align:center;color:#D97706">−3%</td><td style="font-size:9.5px;color:#64748B">Near-baseline mixed conditions</td></tr>
-                <tr style="background:#F8FAFC"><td style="padding:2px 6px">Ports / Airports</td><td style="text-align:center;color:#D97706">−7%</td><td style="font-size:9.5px;color:#64748B">Salt-air corrosion; insurer haircut (Al Marwan / Ocean Footprint)</td></tr>
-                <tr><td style="padding:2px 6px">Rental Fleet</td><td style="text-align:center;color:#D97706">−9%</td><td style="font-size:9.5px;color:#64748B">Multi-operator inconsistency; IT Act 30% WDV for hire-use assets</td></tr>
-                <tr style="background:#F8FAFC"><td style="padding:2px 6px">Limestone / Quarry</td><td style="text-align:center;color:#DC2626">−14%</td><td style="font-size:9.5px;color:#64748B">Medium-hard abrasive rock; continuous dust; UC wear accelerated</td></tr>
-                <tr><td style="padding:2px 6px">Coal OB Removal</td><td style="text-align:center;color:#DC2626">−18%</td><td style="font-size:9.5px;color:#64748B">Blasted rock; 3,500–5,000 hrs/yr; Co.Act 2013 NESD 8yr life</td></tr>
-                <tr style="background:#FFF1F2"><td style="padding:2px 6px">Iron Ore / Metal Mining</td><td style="text-align:center;color:#DC2626"><strong>−24%</strong></td><td style="font-size:9.5px;color:#64748B">Hardest rock; highest abrasion class; fastest value loss</td></tr>
-              </table>
-              <div style="font-size:10px;color:#64748B">
-                📌 Sources:
-                <a href="https://www.fridayparts.com/blog/undercarriage-for-excavator" target="_blank" style="color:#2563EB">FridayParts — Undercarriage Life Data</a> ·
-                <a href="https://equipmentwatch.com/resource/residual-values-solution/" target="_blank" style="color:#2563EB">EquipmentWatch Condition Tiers</a> ·
-                <a href="https://upload.indiacode.nic.in/schedulefile?aid=AC_CEN_22_29_00008_201318_1517807327856&rid=9" target="_blank" style="color:#2563EB">Companies Act 2013 Sch.II (MCA)</a> ·
-                <a href="https://www.indiafilings.com/learn/depreciation-rate-furniture-plant-machinery" target="_blank" style="color:#2563EB">IT Act S.32 WDV rates</a>
-              </div>
-
-              <div style="font-weight:700;font-size:12px;color:var(--navy);margin:10px 0 4px">4. Other Adjustments</div>
-              <strong>Hours adj.:</strong> −0.003%/hr above 2,000 hr baseline
-              <span style="font-size:9.5px;color:#64748B">| Source: HEA — "3–7% per 1,000 hrs above average"</span><br>
-              <strong>Idle penalty:</strong> −0.3% per idle-% point above 15%
-              <span style="font-size:9.5px;color:#64748B">| KOMTRAX benchmark: avg productive idle ≤15%</span><br>
-              <strong>Fault penalty:</strong> −2% per major KOMTRAX fault (cap −12%)<br>
-              <strong>Undercarriage:</strong> Poor = −8% | Fair = −4% | Good = 0% | Excellent = +2%
-              <span style="font-size:9.5px;color:#64748B">| Poor UC = ₹12–25L deduction per HEA appraiser data</span><br>
-              <strong>KOMTRAX premium:</strong> Clean electronic history = +8% on export price
-              <span style="font-size:9.5px;color:#64748B">| LT_CE_Strategy v4 Sec 8.2 — certified +10–20%</span><br>
-              <strong>Export uplift:</strong> +18% (Grade A) / +12% (Grade B) over domestic
-              <span style="font-size:9.5px;color:#64748B">| LT_CE_Strategy v4 Sec 8.1 — Africa/SE Asia premium</span><br>
-              <strong>Useful life:</strong> 15,000 hrs PC210 economic life
-              <span style="font-size:9.5px;color:#64748B">| Companies Act 2013 Sch.II: 9yr earth-moving equipment</span>
-
-              </div>
-            </div>
-          </div>
+          <button class="ue-calc-btn" onclick="calcValuation()">📊 Calculate Full Valuation</button>
         </div>
       </div>
 
-      <div class="ue-card">
-        <div class="ue-card-head">📊 PC210 Depreciation Curve — Market vs Formula</div>
-        <div class="ue-card-body">
-          <div class="ue-chart-wrap"><canvas id="depreciation-chart"></canvas></div>
+      <!-- RIGHT: RESULTS -->
+      <div>
+        <div class="ue-val-result" id="val-result-card">
+          <div class="ue-val-price-label">📤 Export Price (Africa / SE Asia)</div>
+          <div class="ue-val-price" id="val-export-price">₹ —</div>
+          <div class="ue-val-range" id="val-export-range">Enter details to calculate</div>
+
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.25)">
+            <div class="ue-val-price-label">🏪 Domestic Fair Market Value</div>
+            <div style="font-size:22px;font-weight:700;margin:2px 0" id="val-domestic-price">₹ —</div>
+            <div style="font-size:10px;opacity:.8" id="val-domestic-range">SAMIL / iQuippo market</div>
+          </div>
+
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.25)">
+            <div class="ue-val-price-label">🔻 Floor Price (Scrap + Rebuild basis)</div>
+            <div style="font-size:18px;font-weight:700;margin:2px 0" id="val-floor-price">₹ —</div>
+            <div style="font-size:10px;opacity:.8" id="val-floor-label">Minimum acceptable / wholesale</div>
+          </div>
+        </div>
+
+        <!-- FACTOR BREAKDOWN -->
+        <div class="ue-val-breakdown" id="val-breakdown" style="margin-top:12px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:12px">
+          <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:8px">📊 Valuation Breakdown</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Grade</div><div class="ue-val-factor-val" id="vf-grade">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Age × Hours</div><div class="ue-val-factor-val" id="vf-life">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Engine</div><div class="ue-val-factor-val" id="vf-engine">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Hydraulics</div><div class="ue-val-factor-val" id="vf-hydraulic">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Undercarriage</div><div class="ue-val-factor-val" id="vf-uc">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Structure</div><div class="ue-val-factor-val" id="vf-structure">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Service Records</div><div class="ue-val-factor-val" id="vf-service">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Idle Penalty</div><div class="ue-val-factor-val" id="vf-idle">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Work Type</div><div class="ue-val-factor-val" id="vf-worktype">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Attachments</div><div class="ue-val-factor-val" id="vf-attach">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">Docs / Owners</div><div class="ue-val-factor-val" id="vf-docs">—</div></div>
+            <div class="ue-val-factor"><div class="ue-val-factor-label">KOMTRAX / MCP</div><div class="ue-val-factor-val" id="vf-komtrax">—</div></div>
+          </div>
+          <div id="val-recommendation" style="margin-top:10px;padding:8px 10px;border-radius:7px;font-size:11px;font-weight:600;display:none"></div>
+        </div>
+
+        <!-- QUICK TIPS -->
+        <div style="margin-top:10px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 12px;font-size:10.5px;color:#92400E">
+          <div style="font-weight:700;margin-bottom:4px">💡 Value Improvement Tips</div>
+          <div id="val-tips">Fill in the form to see personalised tips.</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════════════ INTEL PANEL ══════════════ -->
+    <!-- METHODOLOGY -->
+    <div class="ue-grid-2" style="margin-top:14px">
+      <div class="ue-card">
+        <div class="ue-card-head">📐 Valuation Methodology — All Parameters & Sources</div>
+        <div class="ue-card-body" style="font-size:11px;color:#334155;line-height:1.8;overflow-y:auto;max-height:520px">
+
+          <div style="font-weight:700;font-size:11.5px;color:var(--navy);margin-bottom:4px">Step 1 — Base Value (Age + Hours)</div>
+          <strong>Depreciation Schedule</strong> — Declining balance, market-calibrated:
+          <table style="width:100%;border-collapse:collapse;font-size:10px;margin:4px 0 6px">
+            <tr style="background:#F1F5F9"><th style="padding:2px 5px;text-align:left">Year</th><th>Annual Loss</th><th>Residual</th><th>Source</th></tr>
+            <tr><td style="padding:2px 5px">1</td><td style="text-align:center"><b>−20%</b></td><td style="text-align:center">80%</td><td style="color:#64748B">HEA auctions; Five Star; CONEXPO</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">2</td><td style="text-align:center">−12%</td><td style="text-align:center">68%</td><td style="color:#64748B">Sandhills: "32% lost yrs 1–3"</td></tr>
+            <tr><td style="padding:2px 5px">3</td><td style="text-align:center">−10%</td><td style="text-align:center">58%</td><td style="color:#64748B">Sandhills model</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">4</td><td style="text-align:center">−8%</td><td style="text-align:center">50%</td><td style="color:#64748B">HEA 3-5yr band</td></tr>
+            <tr><td style="padding:2px 5px">5</td><td style="text-align:center">−7%</td><td style="text-align:center">43%</td><td style="color:#64748B">EW HRV: Komatsu 54.2% best-in-class</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">6</td><td style="text-align:center">−6%</td><td style="text-align:center">37%</td><td style="color:#64748B">Sandhills: 45% at yr7</td></tr>
+            <tr><td style="padding:2px 5px">7</td><td style="text-align:center">−5%</td><td style="text-align:center">32%</td><td style="color:#64748B">Sandhills model verified</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">8+</td><td style="text-align:center">−4%</td><td style="text-align:center">28%→</td><td style="color:#64748B">HEA: 30–35% at yr10</td></tr>
+          </table>
+          <strong>Hours adjustment:</strong> −5% per 1,000 hrs above 2,000-hr baseline (range 3–7%; default 5%)
+          <span style="font-size:9.5px;color:#64748B"> | Source: Heavy Equipment Appraisal</span><br>
+          <strong>Hours sweet spot for resale: 1,000–3,000 hrs.</strong> Red flags: >8,000 hrs (overhaul decision point); >12,000 hrs (flat-tail / export tier).<br>
+
+          <div style="font-weight:700;font-size:11.5px;color:var(--navy);margin:8px 0 3px">Step 2 — Condition Multipliers</div>
+          <strong>Undercarriage:</strong> Full UC replacement cost PC210 = ₹15–25L (India, OEM quality). Deduct full cost if <30% remaining; pro-rate above.
+          <span style="font-size:9.5px;color:#64748B"> | Source: IndiaMART / Sevenstar / Quipli</span><br>
+          <strong>Engine:</strong> Oil analysis wear metals (KOWA program) + blow-by test. High iron/silicon = 30–40% shorter projected life at same meter hours.
+          <span style="font-size:9.5px;color:#64748B"> | Source: MEVAS; Huaying Machinery</span><br>
+          <strong>Hydraulics:</strong> Leaks or sluggish cycles = −20%+ (Quipli). Contaminated fluid = add repair + decontamination cost.
+          <span style="font-size:9.5px;color:#64748B"> | Source: Quipli; Plant &amp; Equipment</span><br>
+          <strong>Structure:</strong> Frame cracks / major weld repairs = pass/fail gate. Cosmetics ±5–10%.
+          <span style="font-size:9.5px;color:#64748B"> | Source: Boleo; Quipli</span><br>
+          <strong>KOMTRAX idle:</strong> &lt;25% = good; 25–40% = normal; >40% = high idle penalty. Normal idle for 36T excavator ~34–40% (AEM).
+          <span style="font-size:9.5px;color:#64748B"> | Source: AEM telematics report</span><br>
+          <strong>Fault history:</strong> Recurring powertrain/hydraulic codes = −8–12%; isolated sensor codes = minor.
+          <span style="font-size:9.5px;color:#64748B"> | Source: FairTrade Machinery; Komatsu fault-code library</span>
+
+          <div style="font-weight:700;font-size:11.5px;color:var(--navy);margin:8px 0 3px">Step 3 — Service &amp; Documentation</div>
+          <strong>Full OEM records + MCP:</strong> +8% (verified care reduces buyer risk, supports higher ask).
+          <span style="font-size:9.5px;color:#64748B"> | Source: L&T Annual Review 2025; L&amp;T MCP-5 program</span><br>
+          <strong>MCP-5 warranty active:</strong> +5–8% (transferable 5yr/12,500hr powertrain warranty on PC205/PC210-10M0).
+          <span style="font-size:9.5px;color:#64748B"> | Source: Komatsu India / L&T Feb 2024</span><br>
+          <strong>Documentation complete:</strong> Form 22, RC book, original invoice, NOC/Form 35 (hypothecation clearance), valid insurance = +3%. Encumbered title = −5 to −10%+ or sale blocked.
+          <span style="font-size:9.5px;color:#64748B"> | Source: Tata Capital; TaxGuru GST-on-CE guide</span><br>
+          <strong>Single owner:</strong> +3% vs 2-owner; 3+ owners −5%.
+          <span style="font-size:9.5px;color:#64748B"> | Source: Jumbobee; Niboka machinery guide</span>
+
+          <div style="font-weight:700;font-size:11.5px;color:var(--navy);margin:8px 0 3px">Step 4 — Work Type Application Multiplier</div>
+          <table style="width:100%;border-collapse:collapse;font-size:10px;margin:3px 0">
+            <tr style="background:#F1F5F9"><th style="padding:2px 5px;text-align:left">Application</th><th>Multiplier</th><th>Basis</th></tr>
+            <tr><td style="padding:2px 5px">Foundation / Real Estate</td><td style="text-align:center;color:#16A34A"><b>+12%</b></td><td style="color:#64748B">Soft soil, min. UC wear, 800–1,500 hrs/yr</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">Irrigation / Canals</td><td style="text-align:center;color:#16A34A">+6%</td><td style="color:#64748B">Wet clay, low abrasion</td></tr>
+            <tr><td style="padding:2px 5px">Highway / Road EPC</td><td style="text-align:center">Baseline</td><td style="color:#64748B">Standard 2,000–2,800 hrs/yr</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">Urban / Metro</td><td style="text-align:center;color:#D97706">−4%</td><td style="color:#64748B">Breaker use → hydraulic &amp; structural wear</td></tr>
+            <tr><td style="padding:2px 5px">Industrial / Pipeline</td><td style="text-align:center;color:#D97706">−3%</td><td style="color:#64748B">Near-baseline mixed</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">Ports / Airports</td><td style="text-align:center;color:#D97706">−7%</td><td style="color:#64748B">Salt-air corrosion (Al Marwan; Ocean Footprint)</td></tr>
+            <tr><td style="padding:2px 5px">Rental Fleet</td><td style="text-align:center;color:#D97706">−9%</td><td style="color:#64748B">Multi-operator; IT Act 30% WDV hire-use</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">Limestone / Quarry</td><td style="text-align:center;color:#DC2626">−14%</td><td style="color:#64748B">Medium-hard abrasive; continuous dust</td></tr>
+            <tr><td style="padding:2px 5px">Coal OB Removal</td><td style="text-align:center;color:#DC2626">−18%</td><td style="color:#64748B">3,500–5,000 hrs/yr; Co.Act 2013 NESD 8yr</td></tr>
+            <tr style="background:#FFF1F2"><td style="padding:2px 5px">Iron Ore / Metal Mining</td><td style="text-align:center;color:#DC2626"><b>−24%</b></td><td style="color:#64748B">Hardest rock; fastest value-loss class</td></tr>
+          </table>
+          <div style="font-size:9.5px;color:#64748B">Sources: <a href="https://www.fridayparts.com/blog/undercarriage-for-excavator" target="_blank" style="color:#2563EB">FridayParts UC Life</a> · <a href="https://equipmentwatch.com/resource/residual-values-solution/" target="_blank" style="color:#2563EB">EquipmentWatch</a> · <a href="https://upload.indiacode.nic.in/schedulefile?aid=AC_CEN_22_29_00008_201318_1517807327856&rid=9" target="_blank" style="color:#2563EB">Co.Act 2013 Sch.II</a></div>
+
+          <div style="font-weight:700;font-size:11.5px;color:var(--navy);margin:8px 0 3px">Step 5 — Attachments, Region, Certification</div>
+          <strong>Attachments:</strong> Add 40–70% of attachment resale value (appraiser rule). Quick coupler adds ₹1–2L; hydraulic breaker +₹2–4L; full set +₹4–8L.
+          <span style="font-size:9.5px;color:#64748B"> | Source: Heavy Equipment Appraisal; JumBobee</span><br>
+          <strong>Region:</strong> South India leads with 32% CE share. Mining-belt machines command strong demand. Coastal machines get a corrosion haircut.
+          <span style="font-size:9.5px;color:#64748B"> | Source: Mordor Intelligence India CE Market 2025</span><br>
+          <strong>Export uplift:</strong> Grade A +18% / Grade B +12% over domestic (Africa/SE Asia).
+          <span style="font-size:9.5px;color:#64748B"> | Source: LT_CE_Strategy v4 Sec 8.1</span><br>
+          <strong>Warranty remaining:</strong> Active MCP-5 = +6%; extended warranty = +4%.
+          <span style="font-size:9.5px;color:#64748B"> | Source: Machinery Scope; Boom &amp; Bucket</span>
+
+          <div style="font-weight:700;font-size:11.5px;color:var(--navy);margin:8px 0 3px">📚 All Primary Sources</div>
+          <div style="font-size:10px;line-height:2">
+            <a href="https://www.conexpoconagg.com/news/construction-equipment-life-cycle-costs-using-data" target="_blank" style="color:#2563EB">Sandhills Global / CONEXPO-CON/AGG 2020 — Crawler Excavator Life Cycle</a><br>
+            <a href="https://heavyequipmentappraisal.com/equipment-value-guides/excavator-price/" target="_blank" style="color:#2563EB">Heavy Equipment Appraisal — IronIndex 3,382 Auction Sales 2025</a><br>
+            <a href="https://equipmentwatch.com/awards/highest-retained-value-awards/" target="_blank" style="color:#2563EB">EquipmentWatch Highest Retained Value Awards — Komatsu 54.2% at 5yr</a><br>
+            <a href="https://equipmentwatch.com/resource/residual-values-solution/" target="_blank" style="color:#2563EB">EquipmentWatch Residual Values Tool</a><br>
+            <a href="https://fivestarequipment.com/do-excavators-hold-their-value-a-guide-for-buyers/" target="_blank" style="color:#2563EB">Five Star Equipment — Excavator Value Guide</a><br>
+            <a href="https://www.fridayparts.com/blog/undercarriage-for-excavator" target="_blank" style="color:#2563EB">FridayParts — Undercarriage Life &amp; Cost Data</a><br>
+            <a href="https://quipli.com/resources/how-much-does-an-excavator-cost/" target="_blank" style="color:#2563EB">Quipli — Excavator Cost &amp; Resale Guide 2026</a><br>
+            <a href="https://jumbobee.com/blog/price-used-heavy-equipment/" target="_blank" style="color:#2563EB">JumBobee — Pricing Used Heavy Equipment</a><br>
+            <a href="https://huayingmachinery.com/used-excavator-evaluation-low-hour-misleading/" target="_blank" style="color:#2563EB">Huaying Machinery — Used Excavator Evaluation Guide</a><br>
+            <a href="https://www.mordorintelligence.com/industry-reports/india-construction-equipment-market" target="_blank" style="color:#2563EB">Mordor Intelligence — India CE Market 2025 (South India 32% share)</a><br>
+            <a href="https://www.outlookbusiness.com/industry/construction-equipment-sales-dip-2-pc-in-fy26-despite-32-pc-export-surge-icema" target="_blank" style="color:#2563EB">ICEMA FY26 — CE Sales −2%, Exports +31.5% (Outlook Business)</a><br>
+            <a href="https://www.manufacturingtodayindia.com/komatsu-india-and-lt-unveil-groundbreaking-machine-care-program-mcp-5-for-enhanced-excavator-performance" target="_blank" style="color:#2563EB">L&T + Komatsu MCP-5 Program — Manufacturing Today India</a><br>
+            <a href="https://annualreview.larsentoubro.com/construction-and-mining-machinery.html" target="_blank" style="color:#2563EB">L&T Annual Review 2025 — 50,000 Komatsu machines, 100K MCP services</a><br>
+            <a href="https://upload.indiacode.nic.in/schedulefile?aid=AC_CEN_22_29_00008_201318_1517807327856&rid=9" target="_blank" style="color:#2563EB">Companies Act 2013 Schedule II (MCA) — Earth-moving equipment 9yr</a><br>
+            <a href="https://taxguru.in/goods-and-service-tax/construction-equipment-vehicles-eligible-input-tax-credit-pre-amended-gst-laws.html" target="_blank" style="color:#2563EB">TaxGuru — GST 28% on CE, ITC rules, Section 18(6) CGST</a><br>
+            <a href="https://machineryscope.com/equipment-extended-warranty-faq/" target="_blank" style="color:#2563EB">Machinery Scope — Warranty Extension Resale Uplift</a><br>
+            <a href="https://www.machinerytrader.com/listings/for-sale/komatsu/pc210/construction-equipment" target="_blank" style="color:#2563EB">MachineryTrader — Live PC210 Listings (340+ units)</a><br>
+            <a href="https://www.rbauction.com/cp/excavators" target="_blank" style="color:#2563EB">Ritchie Bros / IronPlanet — Excavator Auction Results</a><br>
+            <a href="https://www.samil.in" target="_blank" style="color:#2563EB">SAMIL (Shriram Automall) — India Used CE Auctions</a><br>
+            <a href="https://www.iquippo.com" target="_blank" style="color:#2563EB">iQuippo (Srei) — India Used Equipment Marketplace</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: DEPRECIATION CHART -->
+      <div>
+        <div class="ue-card">
+          <div class="ue-card-head">📊 PC210 Residual Value Curve — Market Data</div>
+          <div class="ue-card-body"><div class="ue-chart-wrap"><canvas id="depreciation-chart"></canvas></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CUSTOMER ENGINE ═══════════════════════════════════════════════ -->
+  <div id="engine-customer" style="display:none">
+    <div class="ue-grid-2">
+      <div class="ue-card">
+        <div class="ue-card-head">👤 Customer Self-Assessment — Know Your Machine's Value</div>
+        <div class="ue-card-body" style="overflow-y:auto;max-height:580px">
+          <div style="font-size:11px;color:#475569;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:7px;padding:8px 10px;margin-bottom:10px;line-height:1.6">
+            💡 <strong>How to use:</strong> Answer these simple questions to get an estimated resale range for your Komatsu excavator. This is a guide — for a firm offer, contact your nearest L&T CMMB dealer.
+          </div>
+          <div class="ue-val-form">
+            <div class="ue-form-group">
+              <label class="ue-form-label">Machine Model</label>
+              <select class="ue-form-input" id="cv-model" onchange="calcCustomerVal()">
+                <option value="PC210">Komatsu PC210 (21 ton)</option>
+                <option value="PC205">Komatsu PC205 (20 ton)</option>
+                <option value="PC200">Komatsu PC200 (20 ton)</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Year of Purchase</label>
+              <select class="ue-form-input" id="cv-year" onchange="calcCustomerVal()">
+                <option value="2024">2024</option><option value="2023">2023</option>
+                <option value="2022">2022</option><option value="2021">2021</option>
+                <option value="2020" selected>2020</option><option value="2019">2019</option>
+                <option value="2018">2018</option><option value="2017">2017</option>
+                <option value="2016">2016</option><option value="2015">2015</option>
+                <option value="2014">2014</option><option value="2013">2013</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Hours on Meter</label>
+              <input type="number" class="ue-form-input" id="cv-hours" value="4000" min="0" max="25000"
+                onchange="calcCustomerVal()" oninput="calcCustomerVal()">
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Overall Condition</label>
+              <select class="ue-form-input" id="cv-condition" onchange="calcCustomerVal()">
+                <option value="excellent">Excellent — all systems working perfectly, no damage</option>
+                <option value="good" selected>Good — normal wear, serviced regularly</option>
+                <option value="fair">Fair — some repairs needed, visible wear</option>
+                <option value="poor">Poor — major repairs required</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Service Records Available?</label>
+              <select class="ue-form-input" id="cv-service" onchange="calcCustomerVal()">
+                <option value="yes">Yes — complete service history with L&T / dealer</option>
+                <option value="partial" selected>Partial — some records</option>
+                <option value="no">No records</option>
+              </select>
+            </div>
+            <div class="ue-form-group">
+              <label class="ue-form-label">Type of Work Done</label>
+              <select class="ue-form-input" id="cv-work" onchange="calcCustomerVal()">
+                <option value="light">Light (real estate, irrigation, general)</option>
+                <option value="medium" selected>Medium (highways, urban, industrial)</option>
+                <option value="heavy">Heavy (mining, quarry, OB removal)</option>
+              </select>
+            </div>
+            <div class="ue-form-group" style="grid-column:1/-1">
+              <label class="ue-form-label">All Papers Available? (Form 22, RC, NOC)</label>
+              <select class="ue-form-input" id="cv-docs" onchange="calcCustomerVal()">
+                <option value="yes" selected>Yes — all documents clear</option>
+                <option value="partial">Partial — some missing</option>
+                <option value="no">No / loan not cleared</option>
+              </select>
+            </div>
+          </div>
+          <button class="ue-calc-btn" onclick="calcCustomerVal()">💰 Estimate My Machine's Value</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="ue-val-result" id="cval-result-card">
+          <div class="ue-val-price-label">📈 Best Case — Export / Premium Buyer</div>
+          <div class="ue-val-price" id="cval-high">₹ —</div>
+          <div class="ue-val-range" id="cval-high-note">Fill form to estimate</div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.25)">
+            <div class="ue-val-price-label">📊 Expected Range — Market Value</div>
+            <div style="font-size:22px;font-weight:700;margin:2px 0" id="cval-mid">₹ — to ₹ —</div>
+          </div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.25)">
+            <div class="ue-val-price-label">📉 Floor — Minimum / As-Is</div>
+            <div style="font-size:18px;font-weight:700;margin:2px 0" id="cval-low">₹ —</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:12px;font-size:11px;color:#166534">
+          <div style="font-weight:700;margin-bottom:6px">✅ To Maximise Your Resale Price</div>
+          <div id="cval-tips">Fill in the form to see personalised tips.</div>
+        </div>
+
+        <div style="margin-top:10px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 12px;font-size:10.5px;color:#1E40AF">
+          <div style="font-weight:700;margin-bottom:4px">📞 Get a Firm Offer from L&T CMMB</div>
+          For an official valuation and buyback offer, contact your nearest L&T CMMB branch or call the L&T customer care line. Our team uses KOMTRAX data and physical inspection to give you the best price.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
     <div class="ue-panel" id="panel-intel">
       <div class="ue-grid-2">
         <div>
@@ -1442,73 +1709,241 @@ function estimateValue(m) {
   };
 }
 
-function calcValuation() {
-  const model = document.getElementById('v-model')?.value || 'PC210-10';
-  const year  = parseInt(document.getElementById('v-year')?.value || '2020');
-  const hours = parseInt(document.getElementById('v-hours')?.value || '4500');
-  const idle  = parseInt(document.getElementById('v-idle')?.value || '18');
-  const faults= parseInt(document.getElementById('v-faults')?.value || '0');
-  const uc    = document.getElementById('v-undercarriage')?.value || 'good';
 
-  const m = {model, year, hours, idle, faults};
-  let v = estimateValue(m);
-
-  // ── Work type application multiplier ────────────────────────────────────
-  // Source: EquipmentWatch condition tiers + FridayParts undercarriage life data
-  // Multiplier captures: utilisation intensity + abrasion + corrosion risk
-  // Ref: equipmentwatch.com/resource/residual-values-solution/
-  //      fridayparts.com/blog/undercarriage-for-excavator
-  const workType = document.getElementById('v-worktype')?.value || 'highway_epc';
-  const WORK_MULT = {
-    real_estate:     1.12,  // Soft soil, 800-1,500 hrs/yr — best retention
-    irrigation:      1.06,  // Wet/clay, low abrasion
-    highway_epc:     1.00,  // Baseline (soil cut+load, 2,000-2,800 hrs/yr)
-    urban_metro:     0.96,  // Breaker/hammer use accelerates hydraulic & structural wear
-    industrial:      0.97,  // Near-baseline mixed conditions
-    ports:           0.93,  // Salt-air corrosion risk; insurers apply haircut
-    rental:          0.91,  // Multi-operator inconsistency; IT Act 30% WDV for hire-use
-    limestone_quarry:0.86,  // Medium-hard rock, continuous abrasive dust
-    coal_mining:     0.82,  // Blasted rock, 3,500-5,000 hrs/yr, Co.Act NESD 8yr life
-    iron_ore:        0.76   // Hardest rock, highest abrasion — fastest value loss
-  };
-  const wMult = WORK_MULT[workType] || 1.0;
-
-  // Undercarriage adjustment
-  const ucAdj = {excellent:1.02, good:1.0, fair:0.96, poor:0.92};
-  v.domestic = Math.round(v.domestic * ucAdj[uc] * wMult * 10) / 10;
-  v.export   = Math.round(v.export   * ucAdj[uc] * wMult * 10) / 10;
-
-  // Show work-type info label
-  const WORK_INFO = {
-    real_estate:     '✅ Light duty — best value retention. Multiplier: +12% vs baseline.',
-    irrigation:      '✅ Low abrasion, wet clay. Multiplier: +6% vs baseline.',
-    highway_epc:     '⚪ Baseline — standard soil cut & load operations.',
-    urban_metro:     '⚠️ Hammer/breaker use accelerates hydraulic wear. −4% vs baseline.',
-    industrial:      '⚪ Near-baseline mixed conditions. −3% vs baseline.',
-    ports:           '⚠️ Salt-air corrosion risk — document anti-corrosion treatment. −7%.',
-    rental:          '⚠️ Multi-operator use. IT Act: 30% WDV for hire-use assets. −9%.',
-    limestone_quarry:'🔴 Medium-hard rock, abrasive dust. −14% vs baseline.',
-    coal_mining:     '🔴 Hard rock + multi-shift (3,500–5,000 hrs/yr). Co.Act: 8yr NESD life. −18%.',
-    iron_ore:        '🔴 Hardest rock, highest abrasion. Fastest value loss class. −24%.'
-  };
-  const infoEl = document.getElementById('worktype-info');
-  if(infoEl) infoEl.textContent = WORK_INFO[workType] || '';
-
-  // Update UI
-  const exportEl = document.getElementById('val-export-price');
-  const domEl    = document.getElementById('val-domestic-price');
-  const rangeEl  = document.getElementById('val-export-range');
-  if (exportEl) exportEl.textContent = `₹${v.export}L`;
-  if (domEl)    domEl.textContent    = `₹${v.domestic}L`;
-  if (rangeEl)  rangeEl.textContent  = `Range ₹${Math.round(v.export*0.9)}L – ₹${Math.round(v.export*1.1)}L (±10%)`;
-
-  document.getElementById('vf-grade').textContent       = `Grade ${v.grade}`;
-  document.getElementById('vf-life').textContent        = `${Math.max(0,v.lifeRemaining)}% remaining`;
-  document.getElementById('vf-idle').textContent        = v.idlePenalty > 0 ? `-${v.idlePenalty}%` : 'None';
-  document.getElementById('vf-komtrax').textContent     = v.komtraxPremium > 0 ? `+${v.komtraxPremium}% ✅` : 'Not applied';
-  const wEl = document.getElementById('vf-worktype');
-  if(wEl) wEl.textContent = `${(wMult*100-100>=0?'+':'') + Math.round((wMult-1)*100)}% (${workType.replace(/_/g,' ')})`;
+// ══════════════════════════════════════════════════════════════════════════
+// ENGINE SWITCHER
+// ══════════════════════════════════════════════════════════════════════════
+function switchEngine(type) {
+  document.getElementById('engine-team').style.display = type === 'team' ? 'block' : 'none';
+  document.getElementById('engine-customer').style.display = type === 'customer' ? 'block' : 'none';
+  document.getElementById('eng-tab-team').style.background = type === 'team' ? 'var(--navy)' : '#E2E8F0';
+  document.getElementById('eng-tab-team').style.color = type === 'team' ? '#fff' : 'var(--navy)';
+  document.getElementById('eng-tab-customer').style.background = type === 'customer' ? 'var(--navy)' : '#E2E8F0';
+  document.getElementById('eng-tab-customer').style.color = type === 'customer' ? '#fff' : 'var(--navy)';
 }
+
+// ══════════════════════════════════════════════════════════════════════════
+// TEAM ENGINE — Full 15-parameter valuation
+// ══════════════════════════════════════════════════════════════════════════
+function calcValuation() {
+  const model  = document.getElementById('v-model')?.value || 'PC210';
+  const year   = parseInt(document.getElementById('v-year')?.value || '2020');
+  const hours  = parseInt(document.getElementById('v-hours')?.value || '4500');
+  const idle   = parseInt(document.getElementById('v-idle')?.value || '20');
+  const faults = parseInt(document.getElementById('v-faults')?.value || '0');
+  const uc     = document.getElementById('v-undercarriage')?.value || 'good';
+  const engine = document.getElementById('v-engine')?.value || 'good';
+  const hyd    = document.getElementById('v-hydraulic')?.value || 'good';
+  const struct = document.getElementById('v-structure')?.value || 'good';
+  const svc    = document.getElementById('v-service')?.value || 'partial';
+  const warranty = document.getElementById('v-warranty')?.value || 'expired';
+  const owners = parseInt(document.getElementById('v-owners')?.value || '1');
+  const docs   = document.getElementById('v-docs')?.value || 'partial';
+  const work   = document.getElementById('v-worktype')?.value || 'highway_epc';
+  const attach = document.getElementById('v-attachments')?.value || 'bucket_good';
+  const region = document.getElementById('v-region')?.value || 'south';
+
+  const BASE_PRICES = {PC210:72.0, PC205:68.0, PC200:65.0};
+  const baseNew = BASE_PRICES[model] || 72.0;
+  const CURR_YEAR = 2026;
+  const age = Math.max(0, CURR_YEAR - year);
+
+  // ── Step 1: Age-based residual (declining balance) ─────────────────────
+  const DEPR = [0, 20, 12, 10, 8, 7, 6, 5, 4]; // % of original lost each year
+  let residual = 100;
+  for (let i = 1; i <= Math.min(age, DEPR.length - 1); i++) residual -= DEPR[i];
+  if (age > DEPR.length - 1) {
+    const extra = age - (DEPR.length - 1);
+    residual -= extra * 4; // 4%/yr taper after yr8
+  }
+  residual = Math.max(residual, 8);
+  let base = baseNew * residual / 100;
+
+  // ── Step 2: Hours adjustment ───────────────────────────────────────────
+  // Sweet spot: 1,000-3,000 hrs. -5% per 1,000 hrs above 2,000-hr baseline.
+  const hoursAdj = hours > 2000 ? Math.min((hours - 2000) / 1000 * 5, 35) : 0;
+  // Bonus for very low hours
+  const lowHrsBonus = hours < 1000 ? 8 : hours < 2000 ? 4 : 0;
+  base = base * (1 - hoursAdj / 100) * (1 + lowHrsBonus / 100);
+
+  // ── Step 3: Condition multipliers ─────────────────────────────────────
+  const ENGINE_MULT  = {excellent:1.08, good:1.0, fair:0.88, poor:0.72};
+  const HYD_MULT     = {excellent:1.06, good:1.0, fair:0.86, poor:0.78};
+  const STRUCT_MULT  = {excellent:1.05, good:1.0, fair:0.93, poor:0.80};
+  const UC_ADJ       = {excellent:0,    good:0,   fair:-4,   poor:-15}; // Rs lakh deduction
+  base = base * ENGINE_MULT[engine] * HYD_MULT[hyd] * STRUCT_MULT[struct];
+
+  // Undercarriage: deduct replacement cost when poor/fair
+  base += UC_ADJ[uc];
+
+  // ── Step 4: Idle penalty / KOMTRAX ────────────────────────────────────
+  const idlePenalty = idle > 40 ? (idle - 40) * 0.3 : 0;
+  const faultPenalty = [0, 2, 5, 10][Math.min(faults, 3)];
+  base = base * (1 - (idlePenalty + faultPenalty) / 100);
+
+  // ── Step 5: Service records & documentation ────────────────────────────
+  const SVC_MULT  = {full_oem:1.08, partial:1.0, none:0.88};
+  const WARR_MULT = {active:1.06, expired:1.0, extended:1.04};
+  const DOCS_MULT = {complete:1.03, partial:1.0, none:0.92};
+  const OWNER_MULT = owners === 1 ? 1.03 : owners === 2 ? 1.0 : 0.95;
+  base = base * SVC_MULT[svc] * WARR_MULT[warranty] * DOCS_MULT[docs] * OWNER_MULT;
+
+  // ── Step 6: Work type multiplier ──────────────────────────────────────
+  const WORK_MULT = {
+    real_estate:1.12, irrigation:1.06, highway_epc:1.0,
+    urban_metro:0.96, industrial:0.97, ports:0.93,
+    rental:0.91, limestone_quarry:0.86, coal_mining:0.82, iron_ore:0.76
+  };
+  base = base * (WORK_MULT[work] || 1.0);
+
+  // ── Step 7: Attachments ────────────────────────────────────────────────
+  const ATTACH_ADD = {none:0, bucket_good:0.5, coupler:1.5, breaker:3.0, full_set:5.5};
+  base += (ATTACH_ADD[attach] || 0);
+
+  // ── Step 8: Region modifier ────────────────────────────────────────────
+  const REGION_MULT = {south:1.04, mining_belt:1.05, north:1.0, west:1.02, east:0.97, coastal:0.93};
+  base = base * (REGION_MULT[region] || 1.0);
+
+  // ── Compute 3 price tiers ──────────────────────────────────────────────
+  const domestic = Math.round(base * 10) / 10;
+  const exportPr = Math.round(domestic * (engine === 'poor' || hyd === 'poor' ? 1.08 : 1.18) * 10) / 10;
+  const floor    = Math.round(domestic * 0.72 * 10) / 10;  // 28% below fair value = wholesale/scrap-rebuild
+
+  // Grade
+  const pct = (domestic / baseNew) * 100;
+  const grade = pct > 75 ? 'A' : pct > 55 ? 'B' : pct > 35 ? 'C' : 'D';
+
+  // ── Update UI ──────────────────────────────────────────────────────────
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+  set('val-export-price', `₹${exportPr}L`);
+  set('val-export-range',  `Range ₹${Math.round(exportPr*0.9)}L – ₹${Math.round(exportPr*1.1)}L`);
+  set('val-domestic-price', `₹${domestic}L`);
+  set('val-domestic-range', `Range ₹${Math.round(domestic*0.92)}L – ₹${Math.round(domestic*1.08)}L`);
+  set('val-floor-price', `₹${floor}L`);
+  set('val-floor-label', 'Wholesale / scrap+rebuild basis');
+
+  set('vf-grade',    `Grade ${grade} (${Math.round(pct)}% of new)`);
+  set('vf-life',     `Age ${age}yr | ${hours.toLocaleString()} hrs`);
+  set('vf-engine',   ENGINE_MULT[engine] !== 1 ? `${engine} (×${ENGINE_MULT[engine]})` : 'Good (baseline)');
+  set('vf-hydraulic', HYD_MULT[hyd] !== 1 ? `${hyd} (×${HYD_MULT[hyd]})` : 'Good (baseline)');
+  set('vf-uc',       uc === 'poor' ? 'Poor (−₹15L deducted)' : uc === 'fair' ? 'Fair (−₹4L)' : `${uc} (no deduct)`);
+  set('vf-structure', STRUCT_MULT[struct] !== 1 ? `${struct} (×${STRUCT_MULT[struct]})` : 'Good (baseline)');
+  set('vf-service',  `${svc.replace('_',' ')} (×${SVC_MULT[svc]})`);
+  set('vf-idle',     idlePenalty > 0 ? `${idle}% idle (−${idlePenalty.toFixed(1)}%)` : `${idle}% idle (ok)`);
+  set('vf-worktype', `${work.replace(/_/g,' ')} (×${WORK_MULT[work] || 1})`);
+  set('vf-attach',   attach === 'none' ? 'Std bucket only' : `+₹${ATTACH_ADD[attach]}L`);
+  set('vf-docs',     `${docs} | ${owners} owner${owners>1?'s':''}`);
+  set('vf-komtrax',  `Faults: ${faults} | Warr: ${warranty}`);
+
+  // Work type info
+  const WORK_INFO = {
+    real_estate:'✅ Light duty — best value retention. +12% vs baseline.',
+    irrigation:'✅ Low abrasion, wet clay. +6% vs baseline.',
+    highway_epc:'⚪ Baseline — standard soil cut & load operations.',
+    urban_metro:'⚠️ Breaker/hammer use accelerates hydraulic & structural wear. −4%.',
+    industrial:'⚪ Near-baseline mixed. −3%.',
+    ports:'⚠️ Salt-air corrosion risk — document anti-corrosion treatment. −7%.',
+    rental:'⚠️ Multi-operator use. IT Act: 30% WDV for hire-use assets. −9%.',
+    limestone_quarry:'🔴 Medium-hard rock, abrasive dust. −14% vs baseline.',
+    coal_mining:'🔴 Hard rock + multi-shift (3,500–5,000 hrs/yr). −18%.',
+    iron_ore:'🔴 Hardest rock class. Fastest value loss. −24%.'
+  };
+  const wEl = document.getElementById('worktype-info');
+  if(wEl) wEl.textContent = WORK_INFO[work] || '';
+
+  // Recommendation banner
+  const rec = document.getElementById('val-recommendation');
+  if (rec) {
+    if (grade === 'A') {
+      rec.style.background = '#D1FAE5'; rec.style.color = '#065F46'; rec.style.display = 'block';
+      rec.textContent = '✅ Grade A machine — strong export candidate. Consider L&T Certified Used programme to maximise price.';
+    } else if (grade === 'D' || engine === 'poor' || hyd === 'poor') {
+      rec.style.background = '#FEE2E2'; rec.style.color = '#991B1B'; rec.style.display = 'block';
+      rec.textContent = '⚠️ Major mechanical issues detected. Consider repair-before-sale or market as project/parts machine.';
+    } else {
+      rec.style.display = 'none';
+    }
+  }
+
+  // Tips
+  const tips = [];
+  if (uc === 'poor' || uc === 'fair') tips.push('🔧 Replace undercarriage (cost ₹15–25L) to unlock ₹15–25L more in asking price');
+  if (svc === 'none') tips.push('📋 Gather any available service records — documented history adds 8% to value');
+  if (warranty === 'expired' && age < 5) tips.push('🛡️ Check if MCP-5 warranty is still active — it adds 6% and helps sell faster');
+  if (idle > 40) tips.push(`⏱️ Your idle ${idle}% is high — buyers will discount for engine hours vs productive hours`);
+  if (docs !== 'complete') tips.push('📄 Clear hypothecation (Form 35 / NOC) and gather Form 22 + RC — incomplete docs reduce price 5–10%');
+  if (attach === 'none') tips.push('🪣 A well-maintained bucket with sharp teeth adds ₹0.5–1.5L to the price');
+  if (owners > 1) tips.push('👤 Multi-owner history reduces buyer confidence — strong service records can offset this');
+  if (region === 'coastal' && struct !== 'excellent') tips.push('🌊 Coastal machine — buyers will inspect for corrosion; document anti-rust treatment history');
+  const tipsEl = document.getElementById('val-tips');
+  if (tipsEl) tipsEl.innerHTML = tips.length ? tips.map(t=>`<div style="margin-bottom:4px">${t}</div>`).join('') : '✅ Machine is well-positioned for resale.';
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// CUSTOMER ENGINE — Simplified 7-input assessment
+// ══════════════════════════════════════════════════════════════════════════
+function calcCustomerVal() {
+  const model     = document.getElementById('cv-model')?.value || 'PC210';
+  const year      = parseInt(document.getElementById('cv-year')?.value || '2020');
+  const hours     = parseInt(document.getElementById('cv-hours')?.value || '4000');
+  const condition = document.getElementById('cv-condition')?.value || 'good';
+  const service   = document.getElementById('cv-service')?.value || 'partial';
+  const work      = document.getElementById('cv-work')?.value || 'medium';
+  const docs      = document.getElementById('cv-docs')?.value || 'yes';
+
+  const BASE_PRICES = {PC210:72.0, PC205:68.0, PC200:65.0};
+  const baseNew = BASE_PRICES[model] || 72.0;
+  const age = Math.max(0, 2026 - year);
+
+  // Age residual
+  const DEPR = [0, 20, 12, 10, 8, 7, 6, 5, 4];
+  let res = 100;
+  for (let i = 1; i <= Math.min(age, DEPR.length - 1); i++) res -= DEPR[i];
+  if (age > DEPR.length - 1) res -= (age - (DEPR.length - 1)) * 4;
+  res = Math.max(res, 8);
+
+  // Hours
+  const hAdj = hours > 2000 ? Math.min((hours - 2000) / 1000 * 5, 35) : 0;
+  let base = baseNew * res / 100 * (1 - hAdj / 100);
+
+  // Condition
+  const COND = {excellent:1.12, good:1.0, fair:0.85, poor:0.70};
+  base *= COND[condition];
+
+  // Service
+  const SVC  = {yes:1.06, partial:1.0, no:0.90};
+  base *= SVC[service];
+
+  // Work type (simplified)
+  const WORK = {light:1.08, medium:1.0, heavy:0.83};
+  base *= WORK[work];
+
+  // Docs
+  const DOCS = {yes:1.03, partial:1.0, no:0.88};
+  base *= DOCS[docs];
+
+  const mid  = Math.round(base * 10) / 10;
+  const high = Math.round(mid * 1.18 * 10) / 10;
+  const low  = Math.round(mid * 0.75 * 10) / 10;
+
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+  set('cval-high', `₹${high}L`);
+  set('cval-high-note', 'If sold to export buyer (Africa / SE Asia via L&T CMMB)');
+  set('cval-mid', `₹${Math.round(mid*0.92)}L – ₹${Math.round(mid*1.08)}L`);
+  set('cval-low', `₹${low}L`);
+
+  // Tips
+  const tips = [];
+  if (condition === 'fair' || condition === 'poor') tips.push('🔧 Fix major mechanical issues before selling — you\'ll recover the cost in a higher price');
+  if (service !== 'yes') tips.push('📋 Gather service records from the dealer — documented history can add ₹2–5L to your price');
+  if (docs !== 'yes') tips.push('📄 Clear your loan (get NOC/Form 35) before selling — unpaid hypothecation can reduce price or block the sale');
+  if (work === 'heavy') tips.push('⛏️ Mining machines sell at a discount domestically — consider export route via L&T CMMB for better price');
+  if (hours > 8000) tips.push('⏱️ High hours machine — get an engine + hydraulic health check done before selling to reassure buyers');
+  const tipsEl = document.getElementById('cval-tips');
+  if (tipsEl) tipsEl.innerHTML = tips.length ? tips.map(t=>`<div style="margin-bottom:4px">${t}</div>`).join('') : '✅ Your machine looks well-positioned for resale. Contact L&T CMMB for a firm offer.';
+}
+
+// Auto-calculate on load
 
 // ════════════════════════════════════════════════════
 // EXPORT COST CALC
