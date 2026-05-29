@@ -813,6 +813,42 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
                   <option value="coastal">Coastal (corrosion risk)</option>
                 </select>
               </div>
+
+              <hr style="border:none;border-top:1px solid #E2E8F0;margin:2px 0">
+              <div style="font-size:9.5px;font-weight:700;color:var(--navy);background:#FEF3C7;padding:3px 7px;border-radius:4px;margin-bottom:2px">📡 KOMTRAX / ESR Data (optional — improves accuracy)</div>
+
+              <div class="ue-form-group">
+                <label class="ue-form-label">Breaker Attachment Usage %</label>
+                <input type="number" class="ue-form-input" id="v-breaker-pct"
+                  value="0" min="0" max="100" placeholder="0 = no breaker"
+                  onchange="calcValuation()" oninput="calcValuation()"
+                  style="border-color:#F59E0B">
+                <div style="font-size:9px;color:#64748B;margin-top:1px">From KOMTRAX ESR: ATT Hours Breaker ÷ Actual Working Hours × 100</div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+                <div class="ue-form-group">
+                  <label class="ue-form-label">P-mode %</label>
+                  <input type="number" class="ue-form-input" id="v-pmode"
+                    value="70" min="0" max="100"
+                    onchange="calcValuation()" oninput="calcValuation()">
+                </div>
+                <div class="ue-form-group">
+                  <label class="ue-form-label">E-mode %</label>
+                  <input type="number" class="ue-form-input" id="v-emode"
+                    value="30" min="0" max="100"
+                    onchange="calcValuation()" oninput="calcValuation()">
+                </div>
+              </div>
+
+              <div class="ue-form-group">
+                <label class="ue-form-label">Avg Fuel Consumption (L/hr)</label>
+                <input type="number" class="ue-form-input" id="v-fuel-avg"
+                  value="14" min="5" max="30" step="0.5"
+                  onchange="calcValuation()" oninput="calcValuation()">
+                <div style="font-size:9px;color:#64748B;margin-top:1px">PC210 spec: 13 L/hr. From KOMTRAX ESR "Avg. Fuel Consumption"</div>
+              </div>
+
               <button class="ue-calc-btn" onclick="calcValuation()">📊 Calculate Valuation</button>
             </div>
           </div>
@@ -853,6 +889,10 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             <div class="ue-val-factor"><div class="ue-val-factor-label">Warranty</div><div class="ue-val-factor-val" id="vf-komtrax">—</div></div>
           </div>
           <div id="val-recommendation" style="margin-top:8px;padding:7px 9px;border-radius:6px;font-size:10.5px;font-weight:600;display:none"></div>
+        </div>
+        <div style="background:#F0F9FF;border:1px solid #BAE6FD;border-radius:8px;padding:9px 11px">
+          <div style="font-size:10.5px;font-weight:700;color:#0369A1;margin-bottom:5px">📡 KOMTRAX Intelligence Flags</div>
+          <div id="val-komtrax-flags" style="font-size:10.5px">Flags appear after calculation.</div>
         </div>
         <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:9px 11px;font-size:10.5px;color:#92400E">
           <div style="font-weight:700;margin-bottom:4px">💡 Improvement Tips</div>
@@ -1717,65 +1757,105 @@ function switchEngine(type) {
 // TEAM ENGINE — Full 15-parameter valuation
 // ══════════════════════════════════════════════════════════════════════════
 function calcValuation() {
-  const model  = document.getElementById('v-model')?.value || 'PC210';
-  const year   = parseInt(document.getElementById('v-year')?.value || '2020');
-  const hours  = parseInt(document.getElementById('v-hours')?.value || '4500');
-  const idle   = parseInt(document.getElementById('v-idle')?.value || '20');
-  const faults = parseInt(document.getElementById('v-faults')?.value || '0');
-  const uc     = document.getElementById('v-undercarriage')?.value || 'good';
-  const engine = document.getElementById('v-engine')?.value || 'good';
-  const hyd    = document.getElementById('v-hydraulic')?.value || 'good';
-  const struct = document.getElementById('v-structure')?.value || 'good';
-  const svc    = document.getElementById('v-service')?.value || 'partial';
+  const model    = document.getElementById('v-model')?.value || 'PC210';
+  const year     = parseInt(document.getElementById('v-year')?.value || '2020');
+  const hours    = parseInt(document.getElementById('v-hours')?.value || '4500');
+  const idle     = parseInt(document.getElementById('v-idle')?.value || '20');
+  const faults   = parseInt(document.getElementById('v-faults')?.value || '0');
+  const uc       = document.getElementById('v-undercarriage')?.value || 'good';
+  const engine   = document.getElementById('v-engine')?.value || 'good';
+  const hyd      = document.getElementById('v-hydraulic')?.value || 'good';
+  const struct   = document.getElementById('v-structure')?.value || 'good';
+  const svc      = document.getElementById('v-service')?.value || 'partial';
   const warranty = document.getElementById('v-warranty')?.value || 'expired';
-  const owners = parseInt(document.getElementById('v-owners')?.value || '1');
-  const docs   = document.getElementById('v-docs')?.value || 'partial';
-  const work   = document.getElementById('v-worktype')?.value || 'highway_epc';
-  const attach = document.getElementById('v-attachments')?.value || 'bucket_good';
-  const region = document.getElementById('v-region')?.value || 'south';
+  const owners   = parseInt(document.getElementById('v-owners')?.value || '1');
+  const docs     = document.getElementById('v-docs')?.value || 'partial';
+  const work     = document.getElementById('v-worktype')?.value || 'highway_epc';
+  const attach   = document.getElementById('v-attachments')?.value || 'bucket_good';
+  const region   = document.getElementById('v-region')?.value || 'south';
+  const pmode    = parseInt(document.getElementById('v-pmode')?.value || '70');
+  const emode    = parseInt(document.getElementById('v-emode')?.value || '30');
+  const fuelAvg  = parseFloat(document.getElementById('v-fuel-avg')?.value || '14');
+  const breakerPct = parseInt(document.getElementById('v-breaker-pct')?.value || '0');
 
   const BASE_PRICES = {PC210:72.0, PC205:68.0, PC200:65.0};
-  const baseNew = BASE_PRICES[model] || 72.0;
+  const baseNew  = BASE_PRICES[model] || 72.0;
   const CURR_YEAR = 2026;
   const age = Math.max(0, CURR_YEAR - year);
+  const hrsPerYear = age > 0 ? hours / age : hours;
 
-  // ── Step 1: Age-based residual (declining balance) ─────────────────────
-  const DEPR = [0, 20, 12, 10, 8, 7, 6, 5, 4]; // % of original lost each year
+  // ── Step 1: Age residual (declining balance, market-sourced) ──────────
+  // Source: Sandhills/CONEXPO 2020 | EquipmentWatch HRV | HEA 3,382 auctions
+  const DEPR = [0, 20, 12, 10, 8, 7, 6, 5, 4];
   let residual = 100;
   for (let i = 1; i <= Math.min(age, DEPR.length - 1); i++) residual -= DEPR[i];
-  if (age > DEPR.length - 1) {
-    const extra = age - (DEPR.length - 1);
-    residual -= extra * 4; // 4%/yr taper after yr8
-  }
+  if (age > DEPR.length - 1) residual -= (age - (DEPR.length - 1)) * 4;
   residual = Math.max(residual, 8);
   let base = baseNew * residual / 100;
 
-  // ── Step 2: Hours adjustment ───────────────────────────────────────────
-  // Sweet spot: 1,000-3,000 hrs. -5% per 1,000 hrs above 2,000-hr baseline.
-  const hoursAdj = hours > 2000 ? Math.min((hours - 2000) / 1000 * 5, 35) : 0;
-  // Bonus for very low hours
-  const lowHrsBonus = hours < 1000 ? 8 : hours < 2000 ? 4 : 0;
-  base = base * (1 - hoursAdj / 100) * (1 + lowHrsBonus / 100);
+  // ── Step 2: Hours — FLAG only, NO price deduction ─────────────────────
+  // Appropriate usage = 3,000 hrs/year. Hours show condition, not penalise value.
+  // Source: Komatsu service manual; Companies Act 2013 Sch.II 9yr life
+  const HRS_YEAR = 3000; // appropriate annual usage
+  let hrsFlag = '';
+  let hrsFlagColor = '';
+  if (hrsPerYear < 1000) {
+    hrsFlag = `⚠️ LOW UTILISATION (${Math.round(hrsPerYear)} hrs/yr vs 3,000 norm) — inspect for: long idle periods, seal dry-rot, battery discharge, rubber degradation, coolant stagnation`;
+    hrsFlagColor = '#D97706'; // amber
+  } else if (hrsPerYear > 5000) {
+    hrsFlag = `🔴 VERY HIGH USAGE (${Math.round(hrsPerYear)} hrs/yr vs 3,000 norm) — inspect: engine overhaul status, hydraulic pump flow test, undercarriage wear rate, structural fatigue`;
+    hrsFlagColor = '#DC2626';
+  } else if (hrsPerYear > 3500) {
+    hrsFlag = `⚠️ HIGH USAGE (${Math.round(hrsPerYear)} hrs/yr) — confirm overhaul history and undercarriage %`;
+    hrsFlagColor = '#D97706';
+  } else {
+    hrsFlag = `✅ Normal usage (${Math.round(hrsPerYear)} hrs/yr — within 3,000 hr/yr norm)`;
+    hrsFlagColor = '#16A34A';
+  }
+  // Low-hour bonus for excellent condition machines (low hrs = less wear)
+  const lowHrsBonus = hours < 2000 ? 5 : hours < 4000 ? 2 : 0;
+  base = base * (1 + lowHrsBonus / 100);
 
   // ── Step 3: Condition multipliers ─────────────────────────────────────
-  const ENGINE_MULT  = {excellent:1.08, good:1.0, fair:0.88, poor:0.72};
-  const HYD_MULT     = {excellent:1.06, good:1.0, fair:0.86, poor:0.78};
-  const STRUCT_MULT  = {excellent:1.05, good:1.0, fair:0.93, poor:0.80};
-  const UC_ADJ       = {excellent:0,    good:0,   fair:-4,   poor:-15}; // Rs lakh deduction
+  const ENGINE_MULT = {excellent:1.08, good:1.0, fair:0.88, poor:0.72};
+  const HYD_MULT    = {excellent:1.06, good:1.0, fair:0.86, poor:0.78};
+  const STRUCT_MULT = {excellent:1.05, good:1.0, fair:0.93, poor:0.80};
+  const UC_ADJ      = {excellent:0, good:0, fair:-4, poor:-15}; // Rs lakh
   base = base * ENGINE_MULT[engine] * HYD_MULT[hyd] * STRUCT_MULT[struct];
-
-  // Undercarriage: deduct replacement cost when poor/fair
   base += UC_ADJ[uc];
 
-  // ── Step 4: Idle penalty / KOMTRAX ────────────────────────────────────
-  const idlePenalty = idle > 40 ? (idle - 40) * 0.3 : 0;
+  // ── Step 4: Idle — CORRECTED LOGIC ────────────────────────────────────
+  // High idle = machine standing, NOT being pushed hard = LESS mechanical wear.
+  // Penalise only VERY LOW idle (machine over-worked, no rest) or
+  // long-idle event records (engine running needlessly = fuel waste).
+  // Source: AEM telematics data; industry average idle 30-40% for 36T excavator
+  // KOMTRAX ESR: "It is effective for fuel efficiency to decrease idle hours and travel hrs"
+  //   → fuel efficiency concern, NOT a wear concern for valuation.
+  let idleAdj = 0;
+  let idleFlag = '';
+  if (idle < 10) {
+    idleAdj = -3; // Very low idle — machine pushed continuously, higher wear risk
+    idleFlag = '⚠️ Very low idle (<10%) — machine operated near-continuously; verify engine temp records';
+  } else if (idle >= 10 && idle <= 40) {
+    idleAdj = 0;
+    idleFlag = `✅ Normal idle (${idle}%) — within 10–40% healthy range`;
+  } else if (idle > 40 && idle <= 60) {
+    idleAdj = 2; // Mild positive — less stress per operating hour
+    idleFlag = `ℹ️ High idle (${idle}%) — less mechanical wear per hour; check for productivity concerns`;
+  } else {
+    idleAdj = 3; // Very high idle = very low actual work = lowest wear
+    idleFlag = `ℹ️ Very high idle (${idle}%) — minimal mechanical wear; verify not left running unattended`;
+  }
+  base = base * (1 + idleAdj / 100);
+
+  // Fault penalty still applies
   const faultPenalty = [0, 2, 5, 10][Math.min(faults, 3)];
-  base = base * (1 - (idlePenalty + faultPenalty) / 100);
+  base = base * (1 - faultPenalty / 100);
 
   // ── Step 5: Service records & documentation ────────────────────────────
-  const SVC_MULT  = {full_oem:1.08, partial:1.0, none:0.88};
-  const WARR_MULT = {active:1.06, expired:1.0, extended:1.04};
-  const DOCS_MULT = {complete:1.03, partial:1.0, none:0.92};
+  const SVC_MULT   = {full_oem:1.08, partial:1.0, none:0.88};
+  const WARR_MULT  = {active:1.06, expired:1.0, extended:1.04};
+  const DOCS_MULT  = {complete:1.03, partial:1.0, none:0.92};
   const OWNER_MULT = owners === 1 ? 1.03 : owners === 2 ? 1.0 : 0.95;
   base = base * SVC_MULT[svc] * WARR_MULT[warranty] * DOCS_MULT[docs] * OWNER_MULT;
 
@@ -1787,70 +1867,155 @@ function calcValuation() {
   };
   base = base * (WORK_MULT[work] || 1.0);
 
-  // ── Step 7: Attachments ────────────────────────────────────────────────
-  const ATTACH_ADD = {none:0, bucket_good:0.5, coupler:1.5, breaker:3.0, full_set:5.5};
-  base += (ATTACH_ADD[attach] || 0);
+  // ── Step 7: Breaker attachment penalty (NEW — from KOMTRAX ATT hrs) ───
+  // Source: Heavy Equipment Appraisal; FridayParts undercarriage/hydraulic life data
+  // Breaker use drives: hydraulic contamination, cylinder stress, frame fatigue,
+  // front attachment (boom/arm) stress cracks, higher UC wear
+  let breakerPenalty = 0;
+  let breakerFlag = '';
+  let breakerColor = '';
+  if (breakerPct >= 60) {
+    breakerPenalty = 50;
+    breakerFlag = `🔴 RED FLAG: Breaker used ${breakerPct}% of time (>60% threshold) — severe penalty. Inspect: hydraulic contamination, boom/arm stress cracks, front attachment pins, cylinder rods, frame welds`;
+    breakerColor = '#DC2626';
+  } else if (breakerPct >= 30) {
+    breakerPenalty = 35;
+    breakerFlag = `⚠️ Heavy breaker use (${breakerPct}% — 30–60% range) — significant penalty. Inspect: hydraulic system, front attachment, cylinder rods`;
+    breakerColor = '#D97706';
+  } else if (breakerPct > 0) {
+    breakerPenalty = 25;
+    breakerFlag = `⚠️ Moderate breaker use (${breakerPct}% — under 30%) — standard penalty applied. Check hydraulic system and front attachment`;
+    breakerColor = '#D97706';
+  } else {
+    breakerFlag = '✅ No breaker use reported — no attachment penalty';
+    breakerColor = '#16A34A';
+  }
+  base = base * (1 - breakerPenalty / 100);
 
-  // ── Step 8: Region modifier ────────────────────────────────────────────
+  // Other attachments add-back
+  const ATTACH_ADD = {none:0, bucket_good:0.5, coupler:1.5, full_set:3.0};
+  if (attach !== 'breaker') base += (ATTACH_ADD[attach] || 0);
+
+  // ── Step 8: KOMTRAX Operating Mode (NEW — from ESR report) ────────────
+  // P-mode (Power) = higher fuel consumption, more engine stress
+  // E-mode (Economy) = lower RPM, less wear, better residual
+  // Source: Komatsu ESR Report; KOMTRAX KOWA data
+  // Benchmark: >50% E-mode = positive; >80% P-mode = negative
+  let modeAdj = 0;
+  let modeFlag = '';
+  if (emode >= 50) {
+    modeAdj = 4;
+    modeFlag = `✅ Good E-mode discipline (${emode}% economy mode) — lower engine stress, better fuel economy`;
+  } else if (emode >= 25) {
+    modeAdj = 2;
+    modeFlag = `ℹ️ Partial E-mode usage (${emode}%) — moderate engine efficiency`;
+  } else if (pmode >= 90) {
+    modeAdj = -5;
+    modeFlag = `⚠️ Almost always P-mode (${pmode}% power mode, ${emode}% E-mode) — higher fuel burn & engine stress. KOMTRAX recommends E-mode. Check engine wear indicators.`;
+  } else {
+    modeAdj = -2;
+    modeFlag = `ℹ️ Mostly P-mode (${pmode}%) — monitor fuel consumption trend`;
+  }
+  base = base * (1 + modeAdj / 100);
+
+  // ── Step 9: Fuel consumption vs spec (NEW — from ESR avg fuel data) ───
+  // PC210 spec: 13 L/hr in standard operation (HEX file)
+  // Higher avg fuel = engine wear / hard running / pump inefficiency
+  let fuelAdj = 0;
+  let fuelFlag = '';
+  const FUEL_SPEC = {PC210:13, PC205:12.5, PC200:12};
+  const fuelSpec  = FUEL_SPEC[model] || 13;
+  const fuelDelta = fuelAvg - fuelSpec;
+  if (fuelAvg <= 0) {
+    fuelFlag = 'ℹ️ Fuel consumption data not entered';
+  } else if (fuelDelta <= 1) {
+    fuelAdj = 3;
+    fuelFlag = `✅ Fuel consumption ${fuelAvg} L/hr — at or near spec (${fuelSpec} L/hr). Engine in good health.`;
+  } else if (fuelDelta <= 3) {
+    fuelAdj = 0;
+    fuelFlag = `ℹ️ Fuel consumption ${fuelAvg} L/hr (${fuelDelta.toFixed(1)} L/hr above spec ${fuelSpec}). Normal variance — monitor trend.`;
+  } else if (fuelDelta <= 5) {
+    fuelAdj = -3;
+    fuelFlag = `⚠️ Elevated fuel consumption ${fuelAvg} L/hr (${fuelDelta.toFixed(1)} L/hr above spec). Check: injector wear, air filter, turbo condition, hydraulic back-pressure.`;
+  } else {
+    fuelAdj = -7;
+    fuelFlag = `🔴 High fuel consumption ${fuelAvg} L/hr (${fuelDelta.toFixed(1)} L/hr above spec ${fuelSpec}). Significant engine/hydraulic wear indicator. Oil analysis strongly recommended before purchase.`;
+  }
+  base = base * (1 + fuelAdj / 100);
+
+  // ── Step 10: Region modifier ───────────────────────────────────────────
   const REGION_MULT = {south:1.04, mining_belt:1.05, north:1.0, west:1.02, east:0.97, coastal:0.93};
   base = base * (REGION_MULT[region] || 1.0);
 
   // ── Compute 3 price tiers ──────────────────────────────────────────────
-  const domestic = Math.round(base * 10) / 10;
+  const domestic = Math.round(Math.max(base, baseNew * 0.05) * 10) / 10;
   const exportPr = Math.round(domestic * (engine === 'poor' || hyd === 'poor' ? 1.08 : 1.18) * 10) / 10;
-  const floor    = Math.round(domestic * 0.72 * 10) / 10;  // 28% below fair value = wholesale/scrap-rebuild
-
-  // Grade
-  const pct = (domestic / baseNew) * 100;
-  const grade = pct > 75 ? 'A' : pct > 55 ? 'B' : pct > 35 ? 'C' : 'D';
+  const floor    = Math.round(domestic * 0.72 * 10) / 10;
+  const pct      = (domestic / baseNew) * 100;
+  const grade    = pct > 75 ? 'A' : pct > 55 ? 'B' : pct > 35 ? 'C' : 'D';
 
   // ── Update UI ──────────────────────────────────────────────────────────
   const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
-  set('val-export-price', `₹${exportPr}L`);
-  set('val-export-range',  `Range ₹${Math.round(exportPr*0.9)}L – ₹${Math.round(exportPr*1.1)}L`);
+  const setHTML = (id, v) => { const el = document.getElementById(id); if(el) el.innerHTML = v; };
+
+  set('val-export-price',   `₹${exportPr}L`);
+  set('val-export-range',   `Range ₹${Math.round(exportPr*0.9)}L – ₹${Math.round(exportPr*1.1)}L`);
   set('val-domestic-price', `₹${domestic}L`);
   set('val-domestic-range', `Range ₹${Math.round(domestic*0.92)}L – ₹${Math.round(domestic*1.08)}L`);
-  set('val-floor-price', `₹${floor}L`);
-  set('val-floor-label', 'Wholesale / scrap+rebuild basis');
+  set('val-floor-price',    `₹${floor}L`);
 
   set('vf-grade',    `Grade ${grade} (${Math.round(pct)}% of new)`);
-  set('vf-life',     `Age ${age}yr | ${hours.toLocaleString()} hrs`);
-  set('vf-engine',   ENGINE_MULT[engine] !== 1 ? `${engine} (×${ENGINE_MULT[engine]})` : 'Good (baseline)');
-  set('vf-hydraulic', HYD_MULT[hyd] !== 1 ? `${hyd} (×${HYD_MULT[hyd]})` : 'Good (baseline)');
-  set('vf-uc',       uc === 'poor' ? 'Poor (−₹15L deducted)' : uc === 'fair' ? 'Fair (−₹4L)' : `${uc} (no deduct)`);
-  set('vf-structure', STRUCT_MULT[struct] !== 1 ? `${struct} (×${STRUCT_MULT[struct]})` : 'Good (baseline)');
+  set('vf-life',     `Age ${age}yr | ${hours.toLocaleString()} hrs (${Math.round(hrsPerYear)}/yr)`);
+  set('vf-engine',   ENGINE_MULT[engine] !== 1 ? `${engine} (×${ENGINE_MULT[engine]})` : 'Good');
+  set('vf-hydraulic', HYD_MULT[hyd] !== 1 ? `${hyd} (×${HYD_MULT[hyd]})` : 'Good');
+  set('vf-uc',       uc === 'poor' ? 'Poor (−₹15L)' : uc === 'fair' ? 'Fair (−₹4L)' : `${uc}`);
+  set('vf-structure', STRUCT_MULT[struct] !== 1 ? `${struct} (×${STRUCT_MULT[struct]})` : 'Good');
   set('vf-service',  `${svc.replace('_',' ')} (×${SVC_MULT[svc]})`);
-  set('vf-idle',     idlePenalty > 0 ? `${idle}% idle (−${idlePenalty.toFixed(1)}%)` : `${idle}% idle (ok)`);
-  set('vf-worktype', `${work.replace(/_/g,' ')} (×${WORK_MULT[work] || 1})`);
-  set('vf-attach',   attach === 'none' ? 'Std bucket only' : `+₹${ATTACH_ADD[attach]}L`);
+  set('vf-idle',     `${idle}% idle — ${idleAdj >= 0 ? '+'+idleAdj : idleAdj}%`);
+  set('vf-worktype', `${work.replace(/_/g,' ')} (×${WORK_MULT[work]||1})`);
+  set('vf-attach',   breakerPct > 0 ? `Breaker ${breakerPct}% (−${breakerPenalty}%)` : attach.replace(/_/g,' '));
   set('vf-docs',     `${docs} | ${owners} owner${owners>1?'s':''}`);
-  set('vf-komtrax',  `Faults: ${faults} | Warr: ${warranty}`);
+  set('vf-komtrax',  `P${pmode}%/E${emode}% | Fuel ${fuelAvg}L/hr`);
 
   // Work type info
   const WORK_INFO = {
-    real_estate:'✅ Light duty — best value retention. +12% vs baseline.',
-    irrigation:'✅ Low abrasion, wet clay. +6% vs baseline.',
-    highway_epc:'⚪ Baseline — standard soil cut & load operations.',
-    urban_metro:'⚠️ Breaker/hammer use accelerates hydraulic & structural wear. −4%.',
-    industrial:'⚪ Near-baseline mixed. −3%.',
-    ports:'⚠️ Salt-air corrosion risk — document anti-corrosion treatment. −7%.',
-    rental:'⚠️ Multi-operator use. IT Act: 30% WDV for hire-use assets. −9%.',
-    limestone_quarry:'🔴 Medium-hard rock, abrasive dust. −14% vs baseline.',
-    coal_mining:'🔴 Hard rock + multi-shift (3,500–5,000 hrs/yr). −18%.',
-    iron_ore:'🔴 Hardest rock class. Fastest value loss. −24%.'
+    real_estate:'✅ Light duty +12%', irrigation:'✅ Low abrasion +6%',
+    highway_epc:'⚪ Baseline', urban_metro:'⚠️ Breaker use −4%',
+    industrial:'⚪ Near-baseline −3%', ports:'⚠️ Salt-air −7%',
+    rental:'⚠️ Multi-operator −9%', limestone_quarry:'🔴 Abrasive rock −14%',
+    coal_mining:'🔴 Hard rock −18%', iron_ore:'🔴 Max abrasion −24%'
   };
   const wEl = document.getElementById('worktype-info');
   if(wEl) wEl.textContent = WORK_INFO[work] || '';
 
-  // Recommendation banner
+  // ── KOMTRAX FLAGS PANEL ───────────────────────────────────────────────
+  const flagsEl = document.getElementById('val-komtrax-flags');
+  if (flagsEl) {
+    const flags = [
+      { text: hrsFlag, color: hrsFlagColor },
+      { text: idleFlag, color: idleFlag.startsWith('✅') ? '#16A34A' : idleFlag.startsWith('🔴') ? '#DC2626' : '#D97706' },
+      { text: breakerFlag, color: breakerColor },
+      { text: modeFlag, color: modeFlag.startsWith('✅') ? '#16A34A' : modeFlag.startsWith('⚠️') || modeFlag.startsWith('🔴') ? '#DC2626' : '#475569' },
+      { text: fuelFlag, color: fuelFlag.startsWith('✅') ? '#16A34A' : fuelFlag.startsWith('🔴') ? '#DC2626' : fuelFlag.startsWith('⚠️') ? '#D97706' : '#475569' },
+    ];
+    flagsEl.innerHTML = flags.map(f =>
+      `<div style="padding:5px 8px;margin-bottom:4px;border-radius:5px;font-size:10.5px;line-height:1.5;
+        background:${f.color}15;border-left:3px solid ${f.color};color:#1E293B">${f.text}</div>`
+    ).join('');
+  }
+
+  // Recommendation
   const rec = document.getElementById('val-recommendation');
   if (rec) {
-    if (grade === 'A') {
-      rec.style.background = '#D1FAE5'; rec.style.color = '#065F46'; rec.style.display = 'block';
-      rec.textContent = '✅ Grade A machine — strong export candidate. Consider L&T Certified Used programme to maximise price.';
+    if (breakerPct >= 60) {
+      rec.style.cssText = 'display:block;background:#FEE2E2;color:#991B1B;padding:8px 10px;border-radius:6px;font-size:10.5px;margin-top:8px';
+      rec.textContent = '🔴 RED FLAG: Heavy breaker use (≥60%). Mandatory inspection before any offer.';
+    } else if (grade === 'A' && breakerPct === 0) {
+      rec.style.cssText = 'display:block;background:#D1FAE5;color:#065F46;padding:8px 10px;border-radius:6px;font-size:10.5px;margin-top:8px';
+      rec.textContent = '✅ Grade A machine — strong export candidate. Consider L&T Certified Used.';
     } else if (grade === 'D' || engine === 'poor' || hyd === 'poor') {
-      rec.style.background = '#FEE2E2'; rec.style.color = '#991B1B'; rec.style.display = 'block';
-      rec.textContent = '⚠️ Major mechanical issues detected. Consider repair-before-sale or market as project/parts machine.';
+      rec.style.cssText = 'display:block;background:#FEE2E2;color:#991B1B;padding:8px 10px;border-radius:6px;font-size:10.5px;margin-top:8px';
+      rec.textContent = '⚠️ Major mechanical issues. Repair before sale or price as project/parts machine.';
     } else {
       rec.style.display = 'none';
     }
@@ -1858,16 +2023,18 @@ function calcValuation() {
 
   // Tips
   const tips = [];
-  if (uc === 'poor' || uc === 'fair') tips.push('🔧 Replace undercarriage (cost ₹15–25L) to unlock ₹15–25L more in asking price');
-  if (svc === 'none') tips.push('📋 Gather any available service records — documented history adds 8% to value');
-  if (warranty === 'expired' && age < 5) tips.push('🛡️ Check if MCP-5 warranty is still active — it adds 6% and helps sell faster');
-  if (idle > 40) tips.push(`⏱️ Your idle ${idle}% is high — buyers will discount for engine hours vs productive hours`);
-  if (docs !== 'complete') tips.push('📄 Clear hypothecation (Form 35 / NOC) and gather Form 22 + RC — incomplete docs reduce price 5–10%');
-  if (attach === 'none') tips.push('🪣 A well-maintained bucket with sharp teeth adds ₹0.5–1.5L to the price');
-  if (owners > 1) tips.push('👤 Multi-owner history reduces buyer confidence — strong service records can offset this');
-  if (region === 'coastal' && struct !== 'excellent') tips.push('🌊 Coastal machine — buyers will inspect for corrosion; document anti-rust treatment history');
+  if (breakerPct >= 30) tips.push(`🔴 Breaker used ${breakerPct}% — inspect hydraulic system and front attachment before any offer`);
+  if (uc === 'poor' || uc === 'fair') tips.push('🔧 Replace undercarriage (₹15–25L cost) to recover ₹15–25L in asking price');
+  if (svc === 'none') tips.push('📋 Gather any service records — full OEM history adds 8%');
+  if (pmode >= 90) tips.push(`⚠️ Always in P-mode (${pmode}%) — request KOWA oil analysis to verify engine wear`);
+  if (fuelAvg > fuelSpec + 3) tips.push(`⛽ Fuel consumption ${fuelAvg} L/hr exceeds spec — check injectors and air filter`);
+  if (hrsPerYear < 1000 && age > 0) tips.push(`🟡 Under-used machine (${Math.round(hrsPerYear)} hrs/yr) — check seals, battery, coolant condition`);
+  if (docs !== 'complete') tips.push('📄 Clear hypothecation (Form 35/NOC) — incomplete docs reduce price 5–10%');
+  if (warranty === 'expired' && age < 5) tips.push('🛡️ Check if MCP-5 warranty is still active — adds 6%');
   const tipsEl = document.getElementById('val-tips');
-  if (tipsEl) tipsEl.innerHTML = tips.length ? tips.map(t=>`<div style="margin-bottom:4px">${t}</div>`).join('') : '✅ Machine is well-positioned for resale.';
+  if (tipsEl) tipsEl.innerHTML = tips.length
+    ? tips.map(t=>`<div style="margin-bottom:4px">${t}</div>`).join('')
+    : '✅ Machine well-positioned for resale.';
 }
 
 // ══════════════════════════════════════════════════════════════════════════
