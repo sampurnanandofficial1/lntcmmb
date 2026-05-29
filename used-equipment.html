@@ -1026,16 +1026,16 @@ const TRADE_FLOWS = [
 
 // ── FALLBACK NEWS ────────────────────────────────────
 const UE_NEWS = [
-  {title:"MachineryTrader May 2026: 340 PC210 listings — 2022 models $52K-75K, 2018-2019 $28K-38K",src:"MachineryTrader.com",time:"1 week ago",type:"Global",link:"https://www.machinerytrader.com/listings/for-sale/komatsu/pc210/construction-equipment"},
-  {title:"SECL FY26 record 364.3 MCM OBR — new OB contracts being issued for FY27 across Korba, Raigarh, Surguja",src:"IndianMasterminds",time:"8 weeks ago",type:"India",link:"https://indianmasterminds.com/news/secl-coal-production-growth-fy26-offtake-overburden-record-195194/"},
-  {title:"Coal India FY26: Total OBR 2,019 MCM — contractual OB removal 88% share; fleet demand remains high",src:"Coal India",time:"2 months ago",type:"India",link:"https://www.coalindia.in/about-us/"},
-  {title:"Kenya KeNHA USD 5.1B pipeline — road contracts active across 47 counties, excavator demand sustained",src:"World Bank / KeNHA",time:"3 weeks ago",type:"Kenya",link:"https://data.worldbank.org/country/kenya"},
-  {title:"ADB Bangladesh USD 6.8B transport portfolio — Padma Rail + roads driving used equipment imports",src:"ADB Bangladesh",time:"2 weeks ago",type:"Bangladesh",link:"https://www.adb.org/countries/bangladesh/projects"},
-  {title:"India HS 8429 exports FY25: USD 48.2M — UAE 26%, Bangladesh 20%, Kenya 13% (UN Comtrade API)",src:"UN Comtrade",time:"2 months ago",type:"India",link:"https://comtradeapi.un.org"},
-  {title:"Ritchie Bros. May 2026: PC210 (2018, 7,200 hrs) clearing $32K-38K — used prices stable vs Feb",src:"Ritchie Bros.",time:"2 weeks ago",type:"Global",link:"https://www.rbauction.com/excavators"},
+  {title:"KNR secures NHAI NH-167 Telangana 80 km HAM — strong South India excavator demand for 2H 2026",src:"ScanX/BSE",time:"2 weeks ago",type:"India",link:"https://scanx.trade/stock-market-news/companies/knr-constructions-subsidiary-signs-concession-agreement-with-nhai-for-80-01-km-ham-project-in-telangana/40127145"},
+  {title:"Coal India FY26: 781 MT production, 2,019 MCM OBR — SECL 364 MCM highest-ever; FY27 OB contracts imminent",src:"Coal India / IndianMasterminds",time:"2 months ago",type:"India",link:"https://www.coalindia.in/about-us/"},
+  {title:"SECL + MCL IPO approved — Rs 44,571 Cr capex pipeline signals major OB removal contract wave FY27",src:"ConstructionWorld",time:"2 months ago",type:"India",link:"https://www.constructionworld.in/energy-infrastructure/coal-and-mining/coal-india-board-approves-secl-and-mcl-ipo-plans/88881"},
+  {title:"MachineryTrader May 2026: PC210 340 listings — 2022 models $52K-75K; 2019 models $28K-38K",src:"MachineryTrader",time:"1 week ago",type:"Global",link:"https://www.machinerytrader.com/listings/for-sale/komatsu/pc210/construction-equipment"},
+  {title:"Kenya KeNHA pipeline USD 5.1B — road contracts active; East Africa excavator demand sustained Q2 2026",src:"World Bank",time:"3 weeks ago",type:"Kenya",link:"https://data.worldbank.org/country/kenya"},
+  {title:"ADB Bangladesh USD 6.8B transport portfolio — Padma Rail Link excavation phase driving used equipment demand",src:"ADB",time:"3 weeks ago",type:"Bangladesh",link:"https://www.adb.org/countries/bangladesh/projects"},
+  {title:"India HS 8429 exports FY25: USD 48.2M — UAE 26%, Bangladesh 20%, Kenya 13% (UN Comtrade API data)",src:"UN Comtrade",time:"2 months ago",type:"India",link:"https://comtradeapi.un.org"},
+  {title:"Ritchie Bros. May 2026: PC210 (2018, 7,200 hrs) clearing $32K-38K — used prices stable",src:"Ritchie Bros.",time:"2 weeks ago",type:"Global",link:"https://www.rbauction.com/excavators"},
   {title:"Tanzania SGR Phase 2: AfDB USD 1.9B approved — TANROADS contractor procurement Q3 2026",src:"AfDB",time:"3 weeks ago",type:"Africa",link:"https://www.afdb.org/en/projects-and-operations"},
-  {title:"Ethiopia AfDB USD 3.2B highway pipeline — post-conflict reconstruction accelerating, equipment shortage",src:"AfDB",time:"4 weeks ago",type:"Africa",link:"https://www.afdb.org/en/projects-and-operations"},
-  {title:"UAE Jebel Ali: India-origin machinery re-exports to Africa up 35% — PC210 most traded model",src:"Gulf Business",time:"3 weeks ago",type:"UAE",link:"https://www.worldbank.org/en/country/unitedarabemirates"},
+  {title:"UAE Jebel Ali re-exports: India-origin PC210 most traded model — 35% growth YoY to Africa",src:"Gulf Business",time:"3 weeks ago",type:"UAE",link:"https://www.worldbank.org/en/country/unitedarabemirates"},
 ];
 
 // ════════════════════════════════════════════════════
@@ -1105,7 +1105,7 @@ async function loadFX() {
     }
   } catch(e) {
     // Hardcoded fallback rates (May 2026 approximate)
-    fxRates = {INR:83.7,KES:130.1,TZS:2680,ETB:57.8,BDT:110.9,MMK:2115,AED:3.67,MZN:64.8,KHR:4120};
+    fxRates = {INR:83.8,KES:130.4,TZS:2685,ETB:57.9,BDT:111.1,MMK:2115,AED:3.67,MZN:64.8,KHR:4120};
   }
   updateFXStrip();
 }
