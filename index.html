@@ -917,6 +917,20 @@ const OEMS=["CAT","TH","KOM","KOB","VOL","JCB","HYU","SANY","XCMG","LIU","CASE"]
 const ONAME={CAT:"CAT",TH:"Tata Hitachi",KOM:"Komatsu",KOB:"Kobelco",VOL:"Volvo",JCB:"JCB",HYU:"Hyundai",SANY:"SANY",XCMG:"XCMG",LIU:"LiuGong",CASE:"CASE"};
 const OCOL={CAT:"#F59E0B",TH:"#DC2626",KOM:"#1B3A6B",KOB:"#7C3AED",VOL:"#2563EB",JCB:"#D97706",HYU:"#0284C7",SANY:"#16A34A",XCMG:"#EA580C",LIU:"#9333EA",CASE:"#64748B"};
 const MONTHS=["Dec-25","Jan-26","Feb-26","Mar-26"];
+
+// ── NULL-SAFE Chart.js wrapper (permanent crash prevention) ──────────────
+// Prevents "new Chart(null,...)" TypeError no matter what canvas IDs change.
+(function(){
+  const _C = Chart;
+  function SafeChart(el, cfg){
+    if(!el){ console.warn('[TIV] Chart skipped — canvas not in DOM'); return {destroy:function(){},update:function(){}}; }
+    return new _C(el, cfg);
+  }
+  SafeChart.defaults  = _C.defaults;
+  SafeChart.register  = _C.register;
+  SafeChart.unregister= _C.unregister;
+  window.Chart = SafeChart;
+})();
 let charts={}, uploadedData=null;
 
 // COMPUTE
@@ -983,9 +997,7 @@ function applyFilters(){
 }
 
 function rebuildCharts(m='all',r='all'){
-  buildShareChart('h-share-chart',m,r,true);
   buildShareChart('n-share-chart',m,r,false);
-  buildTIVTrendChart();
   buildMomentumChart();
   buildVolChart();
   buildRegionalChart();
@@ -998,10 +1010,11 @@ function rebuildCharts(m='all',r='all'){
 }
 
 // CHART HELPERS
-function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+function destroyChart(id){if(charts[id]){try{charts[id].destroy();}catch(e){}delete charts[id];}}
 const dark={color:'#475569',borderColor:'#E2E8F0',grid:{color:'rgba(0,0,0,.05)'}};
 
 function buildShareChart(canvasId,m,r,small){
+  if(!document.getElementById(canvasId)){console.warn('[TIV] canvas missing:',canvasId);return;}
   destroyChart(canvasId);
   const oems=computeOEMs(m,r);const total=tot(oems);
   const sorted=Object.entries(oems).sort((a,b)=>b[1]-a[1]);
@@ -1016,6 +1029,7 @@ function buildShareChart(canvasId,m,r,small){
 }
 
 function buildTIVTrendChart(){
+  if(!document.getElementById('h-tiv-chart'))return; // canvas removed
   destroyChart('h-tiv-chart');
   const monthly=MONTHS.map(m=>{const o=computeOEMs(m,'all');return tot(o);});
   const komMonthly=MONTHS.map(m=>{const o=computeOEMs(m,'all');return o.KOM;});
@@ -1271,9 +1285,7 @@ window.addEventListener('load',()=>{
   setTimeout(()=>{buildPremiumCharts();},100);
   Chart.defaults.font.family='Inter';
   Chart.defaults.color='#64748B';
-  buildShareChart('h-share-chart','all','all',true);
   buildShareChart('n-share-chart','all','all',false);
-  buildTIVTrendChart();
   buildMomentumChart();
   buildVolChart();
   buildRegionalChart();
