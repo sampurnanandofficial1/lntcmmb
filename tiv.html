@@ -295,6 +295,12 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
   <button class="tab" onclick="switchTab('patterns')" id="t-patterns">
     <i class="fa fa-lightbulb"></i> Key Patterns
   </button>
+  <button class="tab" onclick="switchTab('oem_heatmap')" id="t-oem_heatmap">
+    <i class="fa fa-th"></i> OEM Heatmap
+  </button>
+  <button class="tab" onclick="switchTab('premium')" id="t-premium">
+    <i class="fa fa-star"></i> Premium View
+  </button>
   <div class="tab-divider"></div>
   <button class="tab" onclick="switchTab('data')" id="t-data">
     <i class="fa fa-upload"></i> Data Upload
@@ -711,6 +717,146 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
   <div id="toast-msg" style="font-size:11px;color:#64748B"></div></div>
 </div>
 
+<!-- ══ PREMIUM SEGMENT SECTION ══════════════════════════════════════════ -->
+<section class="section" id="sec-premium">
+  <div style="max-width:1300px;margin:0 auto">
+    <div class="sec-head">
+      <div>
+        <div class="sec-title">⭐ Premium Segment — Komatsu's Real Playing Field</div>
+        <div class="sec-sub">Komatsu · CAT · Kobelco · Volvo only — excl. mass-market & Chinese OEMs</div>
+      </div>
+      <span class="sec-badge">Komatsu = #1 in Premium Tier · 30.7% share</span>
+    </div>
+    <div style="background:linear-gradient(135deg,#EFF6FF,#F0FDF4);border:1px solid #BFDBFE;border-left:4px solid #1B3A6B;border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:20px;font-size:12px;color:#1E293B;line-height:1.8">
+      <strong style="font-size:13px;color:#1B3A6B;display:block;margin-bottom:5px">📌 Why compare within the Premium segment only?</strong>
+      The 11-OEM overall market includes mass-market OEMs (Tata Hitachi, JCB, Hyundai, SANY, XCMG, LiuGong, CASE) operating at ₹34–65L targeting Tier 3–4 price-sensitive contractors. Komatsu (₹72–76L), CAT, Kobelco, and Volvo all compete for <strong>Tier 1–2 contractors who prioritise uptime, TCO, and telematics over purchase price.</strong> Within this premium sub-market, <strong>Komatsu is the clear #1 leader.</strong>
+      <span style="font-size:10px;color:#64748B;display:block;margin-top:5px">Sources: LT_CE_Strategy_v4 Sec 3.3 · Equipment India PC210-10M0 milestone · L&T Annual Review 2025 · ICEMA FY25</span>
+    </div>
+    <div class="g5">
+      <div class="kpi" style="border-top:3px solid #1B3A6B">
+        <div style="font-size:20px;margin-bottom:8px">🏆</div>
+        <div class="kpi-val" style="color:#1B3A6B">30.7<span class="unit">%</span></div>
+        <div class="kpi-label">Komatsu share of Premium tier</div>
+        <div class="kpi-delta up">▲ #1 ahead of CAT, Kobelco, Volvo</div>
+      </div>
+      <div class="kpi" style="border-top:3px solid #16A34A">
+        <div style="font-size:20px;margin-bottom:8px">📈</div>
+        <div class="kpi-val" style="color:#16A34A">+27.3<span class="unit">%</span></div>
+        <div class="kpi-label">Komatsu unit growth Q4 Dec→Mar</div>
+        <div class="kpi-delta up">Tracks industry perfectly</div>
+      </div>
+      <div class="kpi" style="border-top:3px solid #F59E0B">
+        <div style="font-size:20px;margin-bottom:8px">#1</div>
+        <div class="kpi-val" style="color:#D97706;font-size:26px">Leader</div>
+        <div class="kpi-label">Rank within 4-OEM premium segment</div>
+        <div class="kpi-delta up">Ahead of CAT · Kobelco · Volvo</div>
+      </div>
+      <div class="kpi" style="border-top:3px solid #7C3AED">
+        <div style="font-size:20px;margin-bottom:8px">📊</div>
+        <div class="kpi-val" style="color:#7C3AED">22.3<span class="unit">%</span></div>
+        <div class="kpi-label">Premium tier of total market</div>
+        <div class="kpi-delta flat">Growing as CEV-V raises floor prices</div>
+      </div>
+      <div class="kpi" style="border-top:3px solid #0284C7">
+        <div style="font-size:20px;margin-bottom:8px">💰</div>
+        <div class="kpi-val" style="color:#0284C7">₹27L</div>
+        <div class="kpi-label">TCO advantage vs SANY / 8,000 hrs</div>
+        <div class="kpi-delta up">Fuel+maintenance+residual value</div>
+      </div>
+    </div>
+    <div class="g2 gap-top">
+      <div class="card">
+        <div class="card-head"><div class="card-title"><i class="fa fa-chart-pie" style="color:#1B3A6B"></i>Premium Tier Share — Q4 (Komatsu vs CAT vs Kobelco vs Volvo)</div><div class="card-badge">2,682 premium units Q4</div></div>
+        <div class="card-body">
+          <div class="ch h240"><canvas id="prem-pie-chart"></canvas></div>
+          <div class="inference">
+            <div class="inf-title">Premium Leadership</div>
+            <div class="inf-body">Komatsu holds <strong>30.7%</strong> of premium — 8pp ahead of #2 CAT. Within the segment where technology, uptime and TCO decide deals, <strong>Komatsu wins more often than any peer.</strong> CEV-V is narrowing the price gap to mass-market OEMs, driving premiumisation of the market.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title"><i class="fa fa-chart-line" style="color:#16A34A"></i>Premium OEM Monthly Trend — Units Dec→Mar</div><div class="card-badge">Premium 4 OEMs</div></div>
+        <div class="card-body">
+          <div class="ch h240"><canvas id="prem-trend-chart"></canvas></div>
+          <div class="inference">
+            <div class="inf-title">Komatsu vs Premium Peers</div>
+            <div class="inf-body">Komatsu <strong>183→233 units (+27.3%)</strong>. CAT only +18.5%. <strong>Volvo collapsed −50%.</strong> Komatsu gained relative share within the premium tier Dec→Mar — the only premium OEM tracking industry growth.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card gap-top">
+      <div class="card-head"><div class="card-title"><i class="fa fa-layer-group" style="color:#F59E0B"></i>India Excavator Market — 3-Tier Architecture</div><div class="card-badge">Source: LT_CE_Strategy_v4 · ICEMA FY25</div></div>
+      <div class="card-body">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead><tr style="background:#F8FAFC">
+            <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">Segment</th>
+            <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">OEMs</th>
+            <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">Price Band</th>
+            <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">FY25 Units</th>
+            <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">Mkt Share</th>
+            <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">L&amp;T Position</th>
+          </tr></thead>
+          <tbody>
+            <tr style="background:#EFF6FF;border-bottom:1px solid #DBEAFE">
+              <td style="padding:10px 12px;font-weight:700;color:#1B3A6B">⭐ PREMIUM</td>
+              <td style="padding:10px 12px;text-align:center"><span style="background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;font-size:10.5px;font-weight:600">Komatsu · CAT · Kobelco · Volvo</span></td>
+              <td style="padding:10px 12px;text-align:center;font-weight:700;color:#1B3A6B">₹68–85L</td>
+              <td style="padding:10px 12px;text-align:center;font-weight:700;color:#1B3A6B">~7,900</td>
+              <td style="padding:10px 12px;text-align:center"><span style="background:#DBEAFE;color:#1D4ED8;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:700">22.3%</span></td>
+              <td style="padding:10px 12px;font-weight:700;color:#16A34A">✅ #1 — 30.7% of tier</td>
+            </tr>
+            <tr style="border-bottom:1px solid #F1F5F9">
+              <td style="padding:10px 12px;font-weight:600;color:#475569">MID-PREMIUM</td>
+              <td style="padding:10px 12px;text-align:center"><span style="background:#F1F5F9;color:#475569;padding:2px 9px;border-radius:4px;font-size:10.5px">Tata Hitachi · Hyundai · JCB</span></td>
+              <td style="padding:10px 12px;text-align:center;color:#475569">₹50–68L</td>
+              <td style="padding:10px 12px;text-align:center;color:#475569">~17,000</td>
+              <td style="padding:10px 12px;text-align:center"><span style="background:#F1F5F9;color:#64748B;padding:3px 10px;border-radius:20px;font-size:11.5px">47.5%</span></td>
+              <td style="padding:10px 12px;color:#D97706">⚠️ Not primary segment</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;color:#94A3B8">ECONOMY</td>
+              <td style="padding:10px 12px;text-align:center"><span style="background:#FEF9EE;color:#92400E;padding:2px 9px;border-radius:4px;font-size:10.5px">SANY · XCMG · LiuGong · CASE</span></td>
+              <td style="padding:10px 12px;text-align:center;color:#94A3B8">₹34–55L</td>
+              <td style="padding:10px 12px;text-align:center;color:#94A3B8">~10,900</td>
+              <td style="padding:10px 12px;text-align:center"><span style="background:#FEF9EE;color:#92400E;padding:3px 10px;border-radius:20px;font-size:11.5px">30.2%</span></td>
+              <td style="padding:10px 12px;color:#94A3B8">— Not L&T's market</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="g3 gap-top">
+      <div class="pat hl"><div class="pat-num">Premium Position 1</div><div class="pat-title">30.7% of Premium Tier</div><div class="pat-body">Within ₹68–85L OEMs only, Komatsu leads with <strong>30.7% share</strong> — 8pp ahead of #2 CAT (26.8%). The premium tier = 22.3% of national TIV. <strong>This is the correct benchmark for L&T-Komatsu.</strong></div></div>
+      <div class="pat"><div class="pat-num">Premium Position 2</div><div class="pat-title">₹27L TCO Advantage</div><div class="pat-body">vs SANY SY215 over 8,000 hrs: <strong>fuel saving ₹8–10L</strong> (10% better) + <strong>maintenance ₹4–6L</strong> (KOMTRAX cuts 40% breakdowns) + <strong>residual ₹12–18L</strong> (40–60% vs 20–30%). Total: <strong>₹27L TCO advantage.</strong></div></div>
+      <div class="pat"><div class="pat-num">Premium Position 3</div><div class="pat-title">CEV-V Premiumisation</div><div class="pat-body">CEV Stage V raised economy OEM prices <strong>12–15%</strong> — narrowing the gap to premium. CRISIL: <strong>35–40% Tier 2 deferral</strong> + gradual upward shift. <strong>Komatsu benefits most</strong> from premiumisation of India's CE market.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OEM FULL HEATMAP SECTION ═════════════════════════════════════════ -->
+<section class="section" id="sec-oem_heatmap">
+  <div style="max-width:1300px;margin:0 auto">
+    <div class="sec-head">
+      <div><div class="sec-title">OEM Full Heatmap — All 11 OEMs × All States</div>
+      <div class="sec-sub">Share % of state TIV for each OEM · Q4 Dec 2025–Mar 2026 cumulative · Darker = higher concentration</div></div>
+      <span class="sec-badge">11 OEMs · 17 States</span>
+    </div>
+    <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11.5px;color:#92400E">
+      📌 <strong>How to read:</strong> Each row = one state. Each cell = OEM's % of that state's total volume. Rows sum to ~100%. Navy blue = Komatsu stronghold. Deep red = Tata Hitachi dominance.
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-title"><i class="fa fa-th" style="color:#1B3A6B"></i>Complete State × OEM Matrix — Q4 Cumulative</div><div class="card-badge">11 OEMs · Dec 2025–Mar 2026</div></div>
+      <div class="card-body" style="overflow-x:auto;padding:12px"><table class="hm" id="full-heatmap-tbl" style="min-width:900px"></table></div>
+    </div>
+    <div class="g2 gap-top">
+      <div class="card"><div class="card-head"><div class="card-title"><i class="fa fa-chart-bar" style="color:#1B3A6B"></i>Komatsu Strongholds — Top States</div></div><div class="card-body"><div class="ch h200"><canvas id="hm-kom-chart"></canvas></div></div></div>
+      <div class="card"><div class="card-head"><div class="card-title"><i class="fa fa-chart-bar" style="color:#DC2626"></i>Tata Hitachi Strongholds</div></div><div class="card-body"><div class="ch h200"><canvas id="hm-th-chart"></canvas></div></div></div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="foot-l"><strong>L&T CMMB · TIV Intelligence Hub</strong> · IIM Lucknow MBA Internship · May 2026 · <strong>Data cut-off: 31 March 2026</strong></div>
   <div class="foot-r">Internal use only · Do not cite OEM volumes externally without ICEMA permission · v7.1</div>
@@ -764,6 +910,9 @@ function switchTab(id){
   document.querySelectorAll('.story-step').forEach(s=>s.classList.remove('active'));
   const storyMap={national:0,momentum:1,regional:2,statewise:3,patterns:4};
   if(storyMap[id]!==undefined) document.querySelectorAll('.story-step')[storyMap[id]]?.classList.add('active');
+  // Lazy-build premium & heatmap on first open
+  if(id==='premium'&&!charts['prem-pie-chart'])buildPremiumCharts();
+  if(id==='oem_heatmap'&&!document.getElementById('full-heatmap-tbl').innerHTML)buildFullOEMHeatmap();
 }
 
 // FILTERS
@@ -1058,8 +1207,7 @@ function applyData(){
   toast('✅','Data Applied',`"${monthName}" added to all charts!`);
 }
 function dlTemplate(){
-  const csv=['Region,State,CAT,Tata Hitachi,Komatsu,Kobelco,Volvo,JCB,Hyundai,SANY,XCMG,LiuGong,CASE,Total','North,Jammu,1,1,2,3,1,7,6,0,0,0,0,21','North,Punjab,2,11,2,8,2,8,12,10,8,2,0,65','Guwahati-NE,North East,3,13,18,7,9,20,25,18,8,2,1,124','East,West Bengal & Sikkim,5,46,12,21,11,38,20,14,17,5,0,189','East,Jharkhand,4,41,4,1,14,17,22,4,0,2,0,109','East,Odisha,10,37,0,16,10,21,34,10,14,1,0,153','Central India,MP,27,22,8,10,13,24,17,0,1,5,0,127','Central India,Chhattisgarh,4,11,7,6,1,7,10,5,1,1,0,53','West,Rajasthan,11,55,13,24,18,45,34,32,16,16,3,267','West,Gujarat,12,69,13,5,18,50,69,41,36,18,2,333','West,Maharashtra & Goa,53,61,27,16,24,59,61,27,12,6,0,346','South,Karnataka,11,61,49,9,7,56,49,16,5,4,0,267','South,Telangana,8,67,8,8,12,31,4,19,9,6,0,172'].join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='LT_CMMB_TIV_Template.csv';a.click();
+  const a=document.createElement('a');a.href='LT_CMMB_TIV_Template.csv';a.download='LT_CMMB_TIV_Template.csv';a.click();
 }
 
 // INIT
@@ -1091,6 +1239,100 @@ window.addEventListener('load',()=>{
     if(el){el.style.background='rgba(255,255,255,.15)';el.style.borderColor='rgba(255,255,255,.3)';el.style.color='#fff';}
   }
 })();
+
+
+// ── PREMIUM CHARTS ────────────────────────────────────────────────────────
+function buildPremiumCharts(){
+  const PREM=["KOM","CAT","KOB","VOL"];
+  const PN={KOM:"Komatsu",CAT:"CAT",KOB:"Kobelco",VOL:"Volvo"};
+  const PC={KOM:"#1B3A6B",CAT:"#F59E0B",KOB:"#7C3AED",VOL:"#2563EB"};
+  const pt={};PREM.forEach(o=>pt[o]=0);
+  MONTHS.forEach(m=>Object.values(TIV[m]).forEach(reg=>Object.values(reg).forEach(st=>PREM.forEach(o=>pt[o]+=(st[o]||0)))));
+  const ptot=Object.values(pt).reduce((a,b)=>a+b,0);
+  destroyChart('prem-pie-chart');
+  charts['prem-pie-chart']=new Chart(document.getElementById('prem-pie-chart'),{
+    type:'doughnut',
+    data:{labels:PREM.map(o=>PN[o]),datasets:[{data:PREM.map(o=>pt[o]),backgroundColor:PREM.map(o=>PC[o]),borderWidth:3,borderColor:'#fff',hoverOffset:10}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+      plugins:{legend:{position:'right',labels:{font:{size:11},color:'#475569',boxWidth:12,padding:10,
+        generateLabels:c=>c.data.labels.map((l,i)=>({text:`${l}  ${(100*c.data.datasets[0].data[i]/ptot).toFixed(1)}%`,fillStyle:c.data.datasets[0].backgroundColor[i],strokeStyle:'transparent',lineWidth:0,index:i}))}},
+        tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw} units (${(100*ctx.raw/ptot).toFixed(1)}%)`}}}}
+  });
+  destroyChart('prem-trend-chart');
+  charts['prem-trend-chart']=new Chart(document.getElementById('prem-trend-chart'),{
+    type:'line',
+    data:{labels:MONTHS,datasets:PREM.map(o=>({label:PN[o],data:MONTHS.map(m=>computeOEMs(m,'all')[o]||0),borderColor:PC[o],backgroundColor:PC[o]+'18',borderWidth:o==='KOM'?3:1.5,pointRadius:o==='KOM'?5:3,tension:.4,fill:false}))},
+    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{color:'#64748B'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}
+  });
+}
+
+// ── FULL OEM HEATMAP ──────────────────────────────────────────────────────
+function buildFullOEMHeatmap(){
+  const ASTS=[
+    {k:'Gujarat',n:'Gujarat'},{k:'Maharashtra',n:'Maharashtra'},{k:'Karnataka',n:'Karnataka'},
+    {k:'Rajasthan',n:'Rajasthan'},{k:'WB Sikkim',n:'WB & Sikkim'},{k:'Odisha',n:'Odisha'},
+    {k:'AP',n:'Andhra Pradesh'},{k:'Telangana',n:'Telangana'},{k:'TN',n:'Tamil Nadu'},
+    {k:'Delhi NCR',n:'Delhi NCR'},{k:'UP',n:'Uttar Pradesh'},{k:'Jharkhand',n:'Jharkhand'},
+    {k:'MP',n:'Madhya Pradesh'},{k:'Chhattisgarh',n:'Chhattisgarh'},{k:'Bihar',n:'Bihar'},
+    {k:'NE',n:'NE States'},{k:'Punjab',n:'Punjab'}
+  ];
+  const HM11=["TH","JCB","HYU","SANY","KOM","CAT","KOB","XCMG","LIU","VOL","CASE"];
+  const HN={TH:"Tata Hitachi",JCB:"JCB",HYU:"Hyundai",SANY:"SANY",KOM:"Komatsu",CAT:"CAT",KOB:"Kobelco",XCMG:"XCMG",LIU:"LiuGong",VOL:"Volvo",CASE:"CASE"};
+  const sd={};ASTS.forEach(s=>sd[s.k]={});
+  const matchState=(state,tk)=>{
+    const sl=state.toLowerCase();
+    if(tk==='Gujarat')return sl.includes('ujarat');
+    if(tk==='Maharashtra')return sl.includes('aharashtra');
+    if(tk==='Karnataka')return sl.includes('arnataka');
+    if(tk==='Rajasthan')return sl.includes('ajasthan');
+    if(tk==='WB Sikkim')return sl.includes('bengal')||sl.includes('wb sikkim');
+    if(tk==='Odisha')return sl.includes('disha')||sl.includes('rris');
+    if(tk==='AP')return sl.includes('andhra');
+    if(tk==='Telangana')return sl.includes('elangana');
+    if(tk==='TN')return sl.includes('amilnadu');
+    if(tk==='Delhi NCR')return sl.includes('delhi');
+    if(tk==='UP')return sl.includes('uttar');
+    if(tk==='Jharkhand')return sl.includes('jharkhand');
+    if(tk==='MP')return sl.includes('madhya')||sl.includes(' mp');
+    if(tk==='Chhattisgarh')return sl.includes('chattis')||sl.includes('chhattis');
+    if(tk==='Bihar')return sl.includes('bihar');
+    if(tk==='NE')return sl.includes('north east');
+    if(tk==='Punjab')return sl.includes('punjab');
+    return false;
+  };
+  MONTHS.forEach(m=>Object.values(TIV[m]).forEach(reg=>Object.entries(reg).forEach(([state,data])=>{
+    const mk=ASTS.find(t=>matchState(state,t.k));
+    if(mk) OEMS.forEach(o=>sd[mk.k][o]=(sd[mk.k][o]||0)+(data[o]||0));
+  })));
+  const tbl=document.getElementById('full-heatmap-tbl');
+  if(!tbl)return;
+  let html=`<tr><th class="st">State</th>${HM11.map(o=>`<th style="min-width:70px">${HN[o]}</th>`).join('')}<th>Total</th></tr>`;
+  ASTS.forEach(s=>{
+    const rt=OEMS.reduce((a,o)=>a+(sd[s.k][o]||0),0);
+    if(!rt)return;
+    html+=`<tr><td class="st">${s.n}</td>`;
+    HM11.forEach(o=>{
+      const v=sd[s.k][o]||0,p=rt>0?(100*v/rt):0;
+      let bg,tc;
+      if(o==='KOM'){bg=p>20?'#1B3A6B':p>12?'#2563EB':p>6?'#93C5FD':'#DBEAFE';tc=p>12?'#fff':'#1E40AF';}
+      else if(o==='TH'){bg=p>30?'#991B1B':p>20?'#DC2626':p>12?'#FCA5A5':'#FEF2F2';tc=p>20?'#fff':p>10?'#991B1B':'#64748B';}
+      else if(o==='JCB'){bg=p>25?'#92400E':p>15?'#D97706':p>8?'#FDE68A':'#FFFBEB';tc=p>15?'#fff':'#92400E';}
+      else if(o==='HYU'){bg=p>25?'#0C4A6E':p>15?'#0284C7':p>8?'#BAE6FD':'#F0F9FF';tc=p>15?'#fff':'#0C4A6E';}
+      else if(o==='SANY'){bg=p>20?'#14532D':p>12?'#16A34A':p>6?'#BBF7D0':'#F0FDF4';tc=p>12?'#fff':'#14532D';}
+      else{bg=p>15?'#4B5563':p>8?'#9CA3AF':'#F9FAFB';tc=p>12?'#fff':'#475569';}
+      html+=`<td><span class="hm-cell" style="background:${bg};color:${tc}">${p>0?p.toFixed(1)+'%':'—'}</span></td>`;
+    });
+    html+=`<td style="font-weight:600;color:#1B3A6B;font-size:10.5px">${rt}</td></tr>`;
+  });
+  tbl.innerHTML=html;
+  // Bar charts
+  const stateShares=(oem)=>ASTS.map(s=>{const rt=OEMS.reduce((a,o)=>a+(sd[s.k][o]||0),0);return{n:s.n,p:rt>0?parseFloat((100*(sd[s.k][oem]||0)/rt).toFixed(1)):0};}).filter(d=>d.p>0).sort((a,b)=>b.p-a.p).slice(0,8);
+  const kd=stateShares('KOM'),td=stateShares('TH');
+  destroyChart('hm-kom-chart');
+  charts['hm-kom-chart']=new Chart(document.getElementById('hm-kom-chart'),{type:'bar',data:{labels:kd.map(d=>d.n),datasets:[{label:'Komatsu %',data:kd.map(d=>d.p),backgroundColor:kd.map(d=>d.p>10?'#1B3A6B':'#93C5FD'),borderRadius:5},{label:'National 6.85%',data:Array(kd.length).fill(6.85),type:'line',borderColor:'#F59E0B',borderDash:[4,4],pointRadius:0,borderWidth:1.5,fill:false}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,max:25,ticks:{callback:v=>v+'%',color:'#64748B'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}});
+  destroyChart('hm-th-chart');
+  charts['hm-th-chart']=new Chart(document.getElementById('hm-th-chart'),{type:'bar',data:{labels:td.map(d=>d.n),datasets:[{label:'Tata Hitachi %',data:td.map(d=>d.p),backgroundColor:td.map(d=>d.p>25?'#DC2626':'#FCA5A5'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#64748B'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}});
+}
 </script>
 </body>
 </html>
