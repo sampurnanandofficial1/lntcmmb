@@ -219,7 +219,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
   position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;border:1px solid transparent}
 .plat-card:hover{transform:translateY(-4px)}
 .plat-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;
-  background:linear-gradient(135deg,rgba(255,255,255,.05),transparent)}
+  background:linear-gradient(135deg,rgba(0,0,0,.05),transparent)}
 .plat-card:hover::before{opacity:1}
 .plat-1{background:linear-gradient(135deg,#0D2A6E,#1C4ED8);border-color:rgba(99,148,255,.3);box-shadow:0 4px 30px rgba(28,78,216,.3)}
 .plat-2{background:linear-gradient(135deg,#064E3B,#059669);border-color:rgba(16,185,129,.3);box-shadow:0 4px 30px rgba(5,150,105,.3)}
@@ -1035,6 +1035,13 @@ function applyFilters(){
 function rebuildCharts(m='all',r='all'){
   buildShareChart('h-share-chart',m,r,true);
   buildShareChart('n-share-chart',m,r,false);
+  buildTIVTrendChart();
+  buildMomentumChart();
+  buildVolChart();
+  buildRegionalChart();
+  buildRadarChart();
+  buildStateChart();
+  buildHeatmap();
   buildOEMTable('n-oem-tbl',m,r);
   buildOEMTable('p-oem-tbl','all','all');
   if(tivMap&&mapInited)renderTIVMap();
@@ -1042,7 +1049,7 @@ function rebuildCharts(m='all',r='all'){
 
 // CHART HELPERS
 function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
-const dark={color:'#94A3B8',borderColor:'#1E3A5F',grid:{color:'rgba(255,255,255,.05)'}};
+const dark={color:'#475569',borderColor:'#E2E8F0',grid:{color:'rgba(0,0,0,.05)'}};
 
 function buildShareChart(canvasId,m,r,small){
   destroyChart(canvasId);
@@ -1050,9 +1057,9 @@ function buildShareChart(canvasId,m,r,small){
   const sorted=Object.entries(oems).sort((a,b)=>b[1]-a[1]);
   charts[canvasId]=new Chart(document.getElementById(canvasId),{
     type:'doughnut',
-    data:{labels:sorted.map(([k])=>ONAME[k]),datasets:[{data:sorted.map(([,v])=>v),backgroundColor:sorted.map(([k])=>OCOL[k]),borderWidth:2,borderColor:'#0B1A35',hoverOffset:8}]},
+    data:{labels:sorted.map(([k])=>ONAME[k]),datasets:[{data:sorted.map(([,v])=>v),backgroundColor:sorted.map(([k])=>OCOL[k]),borderWidth:2,borderColor:'#FFFFFF',hoverOffset:8}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
-      plugins:{legend:{position:small?'right':'bottom',labels:{font:{size:10},color:'#94A3B8',boxWidth:10,padding:8,
+      plugins:{legend:{position:small?'right':'bottom',labels:{font:{size:10},color:'#374151',boxWidth:10,padding:8,
         generateLabels:c=>c.data.labels.map((l,i)=>({text:`${l} ${(100*c.data.datasets[0].data[i]/total).toFixed(1)}%`,fillStyle:c.data.datasets[0].backgroundColor[i],strokeStyle:'transparent',lineWidth:0,index:i}))}},
         tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw} units (${(100*ctx.raw/total).toFixed(2)}%)`}}}}
   });
@@ -1068,8 +1075,8 @@ function buildTIVTrendChart(){
       {label:'Total Industry',data:monthly,backgroundColor:'rgba(28,78,216,.08)',borderColor:'rgba(28,78,216,.5)',borderWidth:1,borderRadius:5},
       {label:'Komatsu',data:komMonthly,backgroundColor:'rgba(27,58,107,.15)',borderColor:'#22D3EE',borderWidth:2,borderRadius:5}
     ]},
-    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{color:'#94A3B8'}}},
-      plugins:{legend:{labels:{color:'#94A3B8',font:{size:10},boxWidth:10}},tooltip:{callbacks:{}}}}
+    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{color:'#374151'}}},
+      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}},tooltip:{callbacks:{}}}}
   });
 }
 
@@ -1085,8 +1092,8 @@ function buildMomentumChart(){
       borderWidth:o==='KOM'?3:1.5,pointRadius:o==='KOM'?5:3,tension:.4,fill:false
     }))},
     options:{responsive:true,maintainAspectRatio:false,
-      scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#94A3B8'},title:{display:true,text:'Share %',color:'#64748B',font:{size:10}}}},
-      plugins:{legend:{labels:{color:'#94A3B8',font:{size:10},boxWidth:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}%`}}}}
+      scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#374151'},title:{display:true,text:'Share %',color:'#64748B',font:{size:10}}}},
+      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}%`}}}}
   });
 }
 
@@ -1100,8 +1107,8 @@ function buildVolChart(){
       data:MONTHS.map(m=>{const oe=computeOEMs(m,'all');return oe[o]||0;}),
       backgroundColor:OCOL[o]+'80',borderColor:OCOL[o],borderWidth:1,borderRadius:3
     }))},
-    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,stacked:true,grid:{display:false}},y:{...dark,stacked:true,ticks:{color:'#94A3B8'}}},
-      plugins:{legend:{labels:{color:'#94A3B8',font:{size:10},boxWidth:10}}}}
+    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,stacked:true,grid:{display:false}},y:{...dark,stacked:true,ticks:{color:'#374151'}}},
+      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}}}}
   });
 }
 
@@ -1122,8 +1129,8 @@ function buildRegionalChart(){
       {label:'National Avg 6.85%',data:Array(7).fill(6.85),type:'line',borderColor:'#F59E0B',borderDash:[4,4],pointRadius:0,borderWidth:1.5,fill:false}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
-      scales:{x:{...dark,grid:{display:false}},y:{...dark,min:0,max:16,ticks:{callback:v=>v+'%',color:'#94A3B8'}}},
-      plugins:{legend:{labels:{color:'#94A3B8',font:{size:10},boxWidth:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}${ctx.raw!==6.85?'%':''}`}}}}
+      scales:{x:{...dark,grid:{display:false}},y:{...dark,min:0,max:16,ticks:{callback:v=>v+'%',color:'#374151'}}},
+      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}${ctx.raw!==6.85?'%':''}`}}}}
   });
 }
 
@@ -1139,7 +1146,7 @@ function buildRadarChart(){
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       scales:{r:{ticks:{backdropColor:'#FFFFFF',color:'#64748B',font:{size:9}},grid:{color:'rgba(0,0,0,.07)'},pointLabels:{color:'#475569',font:{size:10}},angleLines:{color:'rgba(0,0,0,.08)'}}},
-      plugins:{legend:{labels:{color:'#94A3B8',font:{size:10},boxWidth:10}}}}
+      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}}}}
   });
 }
 
@@ -1162,8 +1169,8 @@ function buildStateChart(){
       {label:'National 6.85%',data:Array(10).fill(6.85),type:'line',borderColor:'#F59E0B',borderDash:[4,4],pointRadius:0,borderWidth:1.5,fill:false}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
-      scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#94A3B8'}}},
-      plugins:{legend:{labels:{color:'#94A3B8',font:{size:10},boxWidth:10}}}}
+      scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#374151'}}},
+      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}}}}
   });
 }
 
