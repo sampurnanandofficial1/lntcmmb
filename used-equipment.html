@@ -65,8 +65,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
   letter-spacing:.5px;color:var(--gray);font-weight:700}
 .ue-filter-group{padding:0 10px 10px}
 .ue-filter-label{font-size:11px;font-weight:600;color:var(--navy);margin-bottom:4px}
-.ue-filter-select{width:100%;font-size:11px;padding:5px 8px;border:1px solid var(--br);
-  border-radius:5px;background:#fff;color:#0F172A}
+.ue-filter-select{width:100%;font-size:11px;padding:5px 8px;border:1.5px solid #CBD5E1;
+  border-radius:6px;background:#fff;color:#0F172A}
 .ue-filter-btn{width:100%;margin:3px 0;padding:6px 10px;border:none;background:var(--ltblue);
   color:var(--navy);font-size:11px;font-weight:600;border-radius:5px;cursor:pointer;
   text-align:left;transition:background .15s}
@@ -111,13 +111,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 }
 .ue-machine-card:hover{box-shadow:0 4px 20px rgba(0,63,114,.15)}
 .ue-machine-card.grade-a{border-left-color:#059669}
-.ue-machine-card.grade-b{border-left-color:#D97706}
+.ue-machine-card.grade-b{border-left-color:#B45309}
 .ue-machine-card.grade-c{border-left-color:#DC2626}
 .ue-mcard-head{padding:10px 12px;background:var(--ltblue);display:flex;justify-content:space-between;align-items:center}
 .ue-mcard-id{font-size:13px;font-weight:700;color:var(--navy)}
 .ue-grade-badge{font-size:11px;font-weight:800;padding:2px 8px;border-radius:12px}
 .grade-a-badge{background:#D1FAE5;color:#065F46}
-.grade-b-badge{background:#FEF3C7;color:#D97706}
+.grade-b-badge{background:#FEF3C7;color:#B45309}
 .grade-c-badge{background:#FEE2E2;color:#DC2626}
 .ue-mcard-body{padding:10px 12px}
 .ue-mcard-row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;border-bottom:1px solid #F1F5F9}
@@ -150,7 +150,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 .ue-market-sub{font-size:10.5px;color:var(--gray)}
 .ue-priority{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:8px}
 .prio-high{background:#D1FAE5;color:#065F46}
-.prio-med{background:#FEF3C7;color:#D97706}
+.prio-med{background:#FEF3C7;color:#B45309}
 .ue-market-metrics{padding:8px 14px;display:grid;grid-template-columns:1fr 1fr;gap:4px}
 .ue-metric{background:#F8FAFC;border-radius:6px;padding:6px 8px}
 .ue-metric-label{font-size:9.5px;color:var(--gray);text-transform:uppercase;letter-spacing:.3px}
@@ -299,6 +299,48 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 .pn-sep{width:1px;height:14px;background:rgba(255,255,255,.15);margin:0 2px;flex-shrink:0}
 .pn-right{flex:1;text-align:right;font-size:9.5px;font-weight:600;
   color:rgba(255,255,255,.25);letter-spacing:.8px}
+
+
+/* ════════ SHARED DESIGN TOKENS — L&T CMMB Platform ════════ */
+/* Page bg, cards, text, borders */
+body { background: #F0F4F8; color: #1E293B; }
+
+/* Inputs + selects — unified */
+select, input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]), textarea {
+  background: #FFFFFF !important;
+  color: #1E293B !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  padding: 6px 10px !important;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+}
+select:focus, input:focus, textarea:focus {
+  border-color: #1B3A6B !important;
+  box-shadow: 0 0 0 2px rgba(27,58,107,.1) !important;
+}
+input::placeholder, textarea::placeholder { color: #94A3B8; }
+input[type=checkbox], input[type=radio] { accent-color: #1B3A6B; }
+
+/* Radio buttons — custom styled labels */
+.fdater + label, input[type=radio] + label { color: #374151; font-size: 12px; cursor: pointer; }
+
+/* ── STATUS PILLS ── */
+.pill-ok, .status-ok   { background:#D1FAE5 !important; color:#065F46 !important; border:1px solid #6EE7B7 !important; }
+.pill-warn, .status-warn { background:#FEF3C7 !important; color:#92400E !important; border:1px solid #FDE68A !important; }
+.pill-err, .status-err { background:#FEE2E2 !important; color:#991B1B !important; border:1px solid #FCA5A5 !important; }
+.pill-info { background:#DBEAFE !important; color:#1D4ED8 !important; border:1px solid #93C5FD !important; }
+
+/* ── AMBER/ORANGE — always dark shade on light bg ── */
+/* #F59E0B as TEXT is invalid (2.4:1 ratio) — must be #D97706 or #92400E */
+
+/* ── CODE BLOCKS ── */
+pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetBrains"] {
+  background: #1E293B !important;
+  color: #7DD3FC !important;
+  border: 1px solid #334155 !important;
+}
 
 </style>
 
@@ -500,9 +542,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
           <div style="font-size:11px;color:#065F46;font-weight:600;margin-top:3px">Target: USD 42,000–58,000</div>
         </div>
         <div style="background:#FEF3C7;border-radius:6px;padding:8px 14px;flex:1;min-width:180px">
-          <div style="font-size:10px;color:#D97706;font-weight:700;text-transform:uppercase">Grade B — Export Viable</div>
-          <div style="font-size:11.5px;color:#D97706;margin-top:2px">Age 5–8 yrs · Hours 5,000–8,000</div>
-          <div style="font-size:11px;color:#D97706;font-weight:600;margin-top:3px">Target: USD 22,000–38,000</div>
+          <div style="font-size:10px;color:#92400E;font-weight:700;text-transform:uppercase">Grade B — Export Viable</div>
+          <div style="font-size:11.5px;color:#92400E;margin-top:2px">Age 5–8 yrs · Hours 5,000–8,000</div>
+          <div style="font-size:11px;color:#92400E;font-weight:600;margin-top:3px">Target: USD 22,000–38,000</div>
         </div>
         <div style="background:#FEE2E2;border-radius:6px;padding:8px 14px;flex:1;min-width:180px">
           <div style="font-size:10px;color:#DC2626;font-weight:700;text-transform:uppercase">Grade C — Domestic / SAMIL</div>
@@ -680,9 +722,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
                 <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>Certificate of Origin (FIEO / Chamber)</span></div>
                 <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>Bill of Lading (shipping line)</span></div>
                 <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>FSSAI / Phytosanitary (if required by destination)</span></div>
-                <div style="display:flex;gap:8px;align-items:center"><span style="color:#D97706">⚠️</span><span>Used Goods Export Permit (DGFT — machines &gt;10 yrs old)</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#B45309">⚠️</span><span>Used Goods Export Permit (DGFT — machines &gt;10 yrs old)</span></div>
                 <div style="display:flex;gap:8px;align-items:center"><span style="color:#059669">✅</span><span>Insurance Certificate (Marine Cargo)</span></div>
-                <div style="display:flex;gap:8px;align-items:center"><span style="color:#D97706">⚠️</span><span>Pre-shipment Inspection Certificate (required by Kenya, Tanzania)</span></div>
+                <div style="display:flex;gap:8px;align-items:center"><span style="color:#B45309">⚠️</span><span>Pre-shipment Inspection Certificate (required by Kenya, Tanzania)</span></div>
               </div>
             </div>
           </div>
@@ -1019,10 +1061,10 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             <tr><td style="padding:2px 5px">Foundation / Real Estate</td><td style="text-align:center;color:#16A34A"><b>+12%</b></td><td style="color:#64748B">Soft soil, min. UC wear, 800–1,500 hrs/yr</td></tr>
             <tr style="background:#F8FAFC"><td style="padding:2px 5px">Irrigation / Canals</td><td style="text-align:center;color:#16A34A">+6%</td><td style="color:#64748B">Wet clay, low abrasion</td></tr>
             <tr><td style="padding:2px 5px">Highway / Road EPC</td><td style="text-align:center">Baseline</td><td style="color:#64748B">Standard 2,000–2,800 hrs/yr</td></tr>
-            <tr style="background:#F8FAFC"><td style="padding:2px 5px">Urban / Metro</td><td style="text-align:center;color:#D97706">−4%</td><td style="color:#64748B">Breaker use → hydraulic &amp; structural wear</td></tr>
-            <tr><td style="padding:2px 5px">Industrial / Pipeline</td><td style="text-align:center;color:#D97706">−3%</td><td style="color:#64748B">Near-baseline mixed</td></tr>
-            <tr style="background:#F8FAFC"><td style="padding:2px 5px">Ports / Airports</td><td style="text-align:center;color:#D97706">−7%</td><td style="color:#64748B">Salt-air corrosion (Al Marwan; Ocean Footprint)</td></tr>
-            <tr><td style="padding:2px 5px">Rental Fleet</td><td style="text-align:center;color:#D97706">−9%</td><td style="color:#64748B">Multi-operator; IT Act 30% WDV hire-use</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">Urban / Metro</td><td style="text-align:center;color:#B45309">−4%</td><td style="color:#64748B">Breaker use → hydraulic &amp; structural wear</td></tr>
+            <tr><td style="padding:2px 5px">Industrial / Pipeline</td><td style="text-align:center;color:#B45309">−3%</td><td style="color:#64748B">Near-baseline mixed</td></tr>
+            <tr style="background:#F8FAFC"><td style="padding:2px 5px">Ports / Airports</td><td style="text-align:center;color:#B45309">−7%</td><td style="color:#64748B">Salt-air corrosion (Al Marwan; Ocean Footprint)</td></tr>
+            <tr><td style="padding:2px 5px">Rental Fleet</td><td style="text-align:center;color:#B45309">−9%</td><td style="color:#64748B">Multi-operator; IT Act 30% WDV hire-use</td></tr>
             <tr style="background:#F8FAFC"><td style="padding:2px 5px">Limestone / Quarry</td><td style="text-align:center;color:#DC2626">−14%</td><td style="color:#64748B">Medium-hard abrasive; continuous dust</td></tr>
             <tr><td style="padding:2px 5px">Coal OB Removal</td><td style="text-align:center;color:#DC2626">−18%</td><td style="color:#64748B">3,500–5,000 hrs/yr; Co.Act 2013 NESD 8yr</td></tr>
             <tr style="background:#FFF1F2"><td style="padding:2px 5px">Iron Ore / Metal Mining</td><td style="text-align:center;color:#DC2626"><b>−24%</b></td><td style="color:#64748B">Hardest rock; fastest value-loss class</td></tr>
@@ -1197,11 +1239,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
                 </div>
                 <div style="background:var(--ltamber);border-radius:6px;padding:8px 10px">
                   <div style="font-weight:700;color:var(--amber)">🟡 Tanzania — GROWING</div>
-                  <div style="color:#D97706;margin-top:2px">SGR Phase 2 (USD 1.9B) + TANROADS highway programme. Equipment demand rising. AfDB active.</div>
+                  <div style="color:#B45309;margin-top:2px">SGR Phase 2 (USD 1.9B) + TANROADS highway programme. Equipment demand rising. AfDB active.</div>
                 </div>
                 <div style="background:var(--ltamber);border-radius:6px;padding:8px 10px">
                   <div style="font-weight:700;color:var(--amber)">🟡 UAE — RE-EXPORTERS</div>
-                  <div style="color:#D97706;margin-top:2px">Dubai-based traders re-export to Africa & South Asia. Higher per-unit realisation. Well-established trade infrastructure.</div>
+                  <div style="color:#B45309;margin-top:2px">Dubai-based traders re-export to Africa & South Asia. Higher per-unit realisation. Well-established trade infrastructure.</div>
                 </div>
                 <div style="background:var(--ltblue);border-radius:6px;padding:8px 10px">
                   <div style="font-weight:700;color:var(--navy)">🔵 Ethiopia — MONITORING</div>
@@ -1248,7 +1290,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
             ★★★ High Priority
           </button>
           <button onclick="filterMapByPriority('med')"
-            style="padding:5px 12px;background:#FEF3C7;color:#D97706;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer">
+            style="padding:5px 12px;background:#FEF3C7;color:#B45309;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer">
             ★★ Medium
           </button>
         </div>
