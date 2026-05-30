@@ -38,14 +38,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .nright{display:flex;align-items:center;gap:8px}
 .nclock{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--accent);
   background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);padding:4px 10px;border-radius:6px}
-.nbtn{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);
+.nbtn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);
   width:30px;height:30px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s}
-.nbtn:hover{background:rgba(255,255,255,.12);color:var(--white)}
+.nbtn:hover{background:rgba(255,255,255,.2);color:#fff}
 
 /* ── TAB BAR (Storyboard Navigation) ─────────────────────── */
 #tabs{background:#FFFFFF;border-bottom:1px solid #E2E8F0;display:flex;padding:0 22px;align-items:flex-end;position:sticky;top:54px;z-index:2000}
 .tab{padding:11px 16px;border:none;background:transparent;font-size:12px;font-weight:500;
-  color:#64748B;cursor:pointer;border-bottom:2px solid transparent;
+  color:#475569;cursor:pointer;border-bottom:2px solid transparent;
   transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap;letter-spacing:.1px;font-family:'Inter',sans-serif}
 .tab:hover{color:#1B3A6B;background:#F8FAFC}
 .tab.active{color:#1B3A6B;border-bottom-color:#1B3A6B;font-weight:700}
@@ -103,7 +103,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .kpi-val .unit{font-size:15px;font-weight:600;color:var(--muted);margin-left:2px}
 .kpi-label{font-size:10.5px;color:#374151;font-weight:500;margin-bottom:8px}
 .kpi-delta{font-size:11px;font-weight:600;display:flex;align-items:center;gap:4px}
-.kpi-delta.up{color:#10B981}.kpi-delta.down{color:#EF4444}.kpi-delta.flat{color:#B45309}
+.kpi-delta.up{color:#059669;font-weight:600}.kpi-delta.down{color:#DC2626;font-weight:600}.kpi-delta.flat{color:#B45309}
 .kpi-accent{border-top:2px solid var(--accent2)}
 .kpi-accent .kpi-val{color:var(--accent2)}
 .kpi-gold{border-top:2px solid var(--accent)}
@@ -212,14 +212,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .ubtn{background:var(--blue);color:#fff;border:none;padding:8px 20px;border-radius:7px;font-size:12px;
   font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
 .ubtn:hover{background:#2563EB}
-.ubtn.sec{background:rgba(255,255,255,.07);border:1px solid var(--border);margin-left:8px}
-.ubtn.sec:hover{background:rgba(255,255,255,.12)}
+.ubtn.sec{background:#FFFFFF;color:#1B3A6B;border:1.5px solid #CBD5E1;margin-left:8px}
+.ubtn.sec:hover{background:#F1F5F9;border-color:#94A3B8}
 .upload-prev{display:none;margin-top:14px;text-align:left}
 .up-status{font-size:11.5px;font-weight:600;padding:6px 12px;border-radius:6px;margin-bottom:10px;display:inline-block}
-.up-ok{background:rgba(16,185,129,.12);color:#10B981;border:1px solid rgba(16,185,129,.2)}
-.up-err{background:rgba(239,68,68,.12);color:#EF4444;border:1px solid rgba(239,68,68,.2)}
+.up-ok{background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7;font-weight:600}
+.up-err{background:#FEE2E2;color:#991B1B;border:1px solid #FCA5A5;font-weight:600}
 .prev-tbl{width:100%;border-collapse:collapse;font-size:11px}
-.prev-tbl th{background:#F1F5F9;padding:6px 8px;text-align:left;font-size:9.5px;font-weight:600;color:#64748B}
+.prev-tbl th{background:#F1F5F9;padding:6px 8px;text-align:left;font-size:9.5px;font-weight:600;color:#374151}
 .prev-tbl td{padding:6px 8px;border-bottom:1px solid #F1F5F9;color:#1E293B}
 
 /* ── SOURCE GRID ──────────────────────────────────────────── */
@@ -731,24 +731,24 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
       </div>
       <div class="card">
         <div class="card-head"><div class="card-title"><i class="fa fa-info-circle" style="color:var(--accent)"></i>Format Guide & Template</div></div>
-        <div class="card-body" style="font-size:11.5px;color:var(--muted);line-height:1.8">
-          <div style="font-weight:700;color:var(--white);margin-bottom:8px">Required Columns (exact order):</div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;background:rgba(0,0,0,.3);
-            padding:10px;border-radius:7px;color:var(--accent2);margin-bottom:14px;border:1px solid var(--border)">
+        <div class="card-body" style="font-size:11.5px;color:#374151;line-height:1.8">
+          <div style="font-weight:700;color:#1B3A6B;margin-bottom:8px">Required Columns (exact order):</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#1E293B;
+            padding:10px;border-radius:7px;color:#7DD3FC;margin-bottom:14px;border:1px solid #334155">
             Region, State, CAT, Tata Hitachi, Komatsu,<br>
             Kobelco, Volvo, JCB, Hyundai, SANY,<br>XCMG, LiuGong, CASE, Total
           </div>
-          <div style="font-weight:700;color:var(--white);margin-bottom:6px">Valid Regions:</div>
+          <div style="font-weight:700;color:#1B3A6B;margin-bottom:6px">Valid Regions:</div>
           <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px">
-            <span style="font-size:10.5px;background:rgba(28,78,216,.15);color:#60A5FA;padding:2px 9px;border-radius:4px;border:1px solid rgba(28,78,216,.3)">North</span>
-            <span style="font-size:10.5px;background:rgba(28,78,216,.15);color:#60A5FA;padding:2px 9px;border-radius:4px;border:1px solid rgba(28,78,216,.3)">Delhi NCR</span>
-            <span style="font-size:10.5px;background:rgba(28,78,216,.15);color:#60A5FA;padding:2px 9px;border-radius:4px;border:1px solid rgba(28,78,216,.3)">Guwahati-NE</span>
-            <span style="font-size:10.5px;background:rgba(28,78,216,.15);color:#60A5FA;padding:2px 9px;border-radius:4px;border:1px solid rgba(28,78,216,.3)">East</span>
-            <span style="font-size:10.5px;background:rgba(28,78,216,.15);color:#60A5FA;padding:2px 9px;border-radius:4px;border:1px solid rgba(28,78,216,.3)">Central India</span>
-            <span style="font-size:10.5px;background:rgba(28,78,216,.15);color:#60A5FA;padding:2px 9px;border-radius:4px;border:1px solid rgba(28,78,216,.3)">West</span>
-            <span style="font-size:10.5px;background:rgba(28,78,216,.15);color:#60A5FA;padding:2px 9px;border-radius:4px;border:1px solid rgba(28,78,216,.3)">South</span>
+            <span style="font-size:10.5px;background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;border:1px solid #93C5FD">North</span>
+            <span style="font-size:10.5px;background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;border:1px solid #93C5FD">Delhi NCR</span>
+            <span style="font-size:10.5px;background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;border:1px solid #93C5FD">Guwahati-NE</span>
+            <span style="font-size:10.5px;background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;border:1px solid #93C5FD">East</span>
+            <span style="font-size:10.5px;background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;border:1px solid #93C5FD">Central India</span>
+            <span style="font-size:10.5px;background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;border:1px solid #93C5FD">West</span>
+            <span style="font-size:10.5px;background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;border:1px solid #93C5FD">South</span>
           </div>
-          <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:7px;padding:11px;font-size:11px;color:#FCD34D">
+          <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:7px;padding:11px;font-size:11px;color:#92400E">
             <strong>💡 Flexible:</strong> Missing OEM values → 0. New months auto-added to timeline. Corrections overwrite existing data. Total column is optional — auto-computed.
           </div>
         </div>
@@ -1369,7 +1369,7 @@ function buildFullOEMHeatmap(){
       else if(o==='HYU'){bg=p>25?'#0C4A6E':p>15?'#0284C7':p>8?'#BAE6FD':'#F0F9FF';tc=p>15?'#fff':'#0C4A6E';}
       else if(o==='SANY'){bg=p>20?'#14532D':p>12?'#16A34A':p>6?'#BBF7D0':'#F0FDF4';tc=p>12?'#fff':'#14532D';}
       else{bg=p>15?'#4B5563':p>8?'#9CA3AF':'#F9FAFB';tc=p>12?'#fff':'#475569';}
-      html+=`<td><span class="hm-cell" style="background:${bg};color:${p>0?tc:'#9CA3AF'}">${p>0?p.toFixed(1)+'%':'—'}</span></td>`;
+      html+=`<td><span class="hm-cell" style="background:${bg};color:${p>0?tc:'#6B7280'}">${p>0?p.toFixed(1)+'%':'—'}</span></td>`;
     });
     html+=`<td style="font-weight:600;color:#1B3A6B;font-size:10.5px">${rt}</td></tr>`;
   });
