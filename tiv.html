@@ -107,7 +107,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .kpi-accent{border-top:2px solid var(--accent2)}
 .kpi-accent .kpi-val{color:var(--accent2)}
 .kpi-gold{border-top:2px solid var(--accent)}
-.kpi-gold .kpi-val{color:var(--accent)}
+.kpi-gold .kpi-val{color:#D97706}
 .kpi-green{border-top:2px solid #10B981}
 .kpi-green .kpi-val{color:#10B981}
 .kpi-purple{border-top:2px solid var(--purple)}
@@ -289,6 +289,48 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 .pn-sep{width:1px;height:14px;background:rgba(255,255,255,.15);margin:0 2px;flex-shrink:0}
 .pn-right{flex:1;text-align:right;font-size:9.5px;font-weight:600;
   color:rgba(255,255,255,.25);letter-spacing:.8px}
+
+
+/* ════════ SHARED DESIGN TOKENS — L&T CMMB Platform ════════ */
+/* Page bg, cards, text, borders */
+body { background: #F0F4F8; color: #1E293B; }
+
+/* Inputs + selects — unified */
+select, input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]), textarea {
+  background: #FFFFFF !important;
+  color: #1E293B !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  padding: 6px 10px !important;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+}
+select:focus, input:focus, textarea:focus {
+  border-color: #1B3A6B !important;
+  box-shadow: 0 0 0 2px rgba(27,58,107,.1) !important;
+}
+input::placeholder, textarea::placeholder { color: #94A3B8; }
+input[type=checkbox], input[type=radio] { accent-color: #1B3A6B; }
+
+/* Radio buttons — custom styled labels */
+.fdater + label, input[type=radio] + label { color: #374151; font-size: 12px; cursor: pointer; }
+
+/* ── STATUS PILLS ── */
+.pill-ok, .status-ok   { background:#D1FAE5 !important; color:#065F46 !important; border:1px solid #6EE7B7 !important; }
+.pill-warn, .status-warn { background:#FEF3C7 !important; color:#92400E !important; border:1px solid #FDE68A !important; }
+.pill-err, .status-err { background:#FEE2E2 !important; color:#991B1B !important; border:1px solid #FCA5A5 !important; }
+.pill-info { background:#DBEAFE !important; color:#1D4ED8 !important; border:1px solid #93C5FD !important; }
+
+/* ── AMBER/ORANGE — always dark shade on light bg ── */
+/* #F59E0B as TEXT is invalid (2.4:1 ratio) — must be #D97706 or #92400E */
+
+/* ── CODE BLOCKS ── */
+pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetBrains"] {
+  background: #1E293B !important;
+  color: #7DD3FC !important;
+  border: 1px solid #334155 !important;
+}
 
 </style>
 </head>
@@ -796,7 +838,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
       </div>
       <div class="kpi" style="border-top:3px solid #F59E0B">
         <div style="font-size:20px;margin-bottom:8px">#1</div>
-        <div class="kpi-val" style="color:#D97706;font-size:26px">Leader</div>
+        <div class="kpi-val" style="color:#B45309;font-size:26px;font-weight:700">Leader</div>
         <div class="kpi-label">Rank within 4-OEM premium segment</div>
         <div class="kpi-delta up">Ahead of CAT · Kobelco · Volvo</div>
       </div>
@@ -892,7 +934,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
       <div class="sec-sub">Share % of state TIV for each OEM · Q4 Dec 2025–Mar 2026 cumulative · Darker = higher concentration</div></div>
       <span class="sec-badge">11 OEMs · 17 States</span>
     </div>
-    <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11.5px;color:#92400E">
+    <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11.5px;color:#78350F;font-weight:500">
       📌 <strong>How to read:</strong> Each row = one state. Each cell = OEM's % of that state's total volume. Rows sum to ~100%. Navy blue = Komatsu stronghold. Deep red = Tata Hitachi dominance.
     </div>
     <div class="card">
