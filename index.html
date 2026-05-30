@@ -9,6 +9,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
+/* ════ NAV GUARD — never overridden ════
+   platform-nav and unified-nav are always at top of page, full width,
+   with highest z-index. No other CSS should touch these IDs. */
+#platform-nav {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 4000 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+#unified-nav {
+  position: sticky !important;
+  top: 36px !important;   /* height of platform-nav */
+  z-index: 3999 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
 :root{
   --navy:#1B3A6B;--blue:#2563EB;--accent:#F59E0B;--accent2:#0369A1;
   --green:#16A34A;--red:#DC2626;--purple:#7C3AED;--orange:#EA580C;
