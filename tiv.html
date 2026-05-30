@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L&T CMMB — Strategy Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --navy:#1B3A6B; --gold:#F59E0B; --blue:#2563EB;
+  --slate:#475569; --lt:#F8FAFC; --white:#FFFFFF;
+  --green:#16A34A; --red:#DC2626; --amber:#D97706;
+  --border:#E2E8F0; --card:#FFFFFF;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 32px rgba(27,58,107,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#F0F4F8;color:#1E293B;font-size:14px}
+
+/* ── TOP HEADER ──────────────────────────────────────────── */
+.header{background:var(--navy);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.header-brand{display:flex;align-items:center;gap:14px}
+.header-logo{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:15px;font-weight:700;color:var(--navy)}
+.header-title{font-size:13px;font-weight:600;color:#fff;letter-spacing:.3px}
+.header-sub{font-size:10.5px;color:rgba(255,255,255,.55);margin-top:1px}
+.header-right{display:flex;align-items:center;gap:8px}
+.header-tag{font-size:10px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border:1px solid rgba(255,255,255,.15);border-radius:20px}
+.header-ist{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);padding:3px 10px;background:rgba(245,158,11,.1);border-radius:20px}
+
+/* ── HERO SECTION ────────────────────────────────────────── */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#0F2447 50%,#1B3A6B 100%);padding:48px 32px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(37,99,235,.15) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hero-grid{display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:center;max-width:1200px;margin:0 auto;position:relative}
+.hero-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.hero-eyebrow-line{width:28px;height:2px;background:var(--gold)}
+.hero-eyebrow-text{font-size:10.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+.hero-h1{font-family:'DM Serif Display',serif;font-size:38px;line-height:1.18;color:#fff;margin-bottom:10px}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-desc{font-size:13.5px;color:rgba(255,255,255,.68);line-height:1.7;max-width:520px;margin-bottom:24px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.hero-chip{font-size:11px;font-weight:500;color:rgba(255,255,255,.7);padding:4px 12px;border:1px solid rgba(255,255,255,.15);border-radius:20px;background:rgba(255,255,255,.05)}
+.hero-kpi-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px;backdrop-filter:blur(10px)}
+.hero-kpi-title{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:14px}
+.hero-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hero-kpi{background:rgba(255,255,255,.05);border-radius:9px;padding:11px 13px}
+.hero-kpi-val{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1}
+.hero-kpi-val span{font-size:13px;color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:600}
+.hero-kpi-lbl{font-size:10px;color:rgba(255,255,255,.45);margin-top:3px}
+.hero-kpi.highlight .hero-kpi-val{color:var(--gold)}
+
+/* ── NAV CARDS ───────────────────────────────────────────── */
+.nav-strip{padding:24px 32px 0;max-width:1200px;margin:0 auto}
+.nav-strip h2{font-size:10.5px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--slate);margin-bottom:14px}
+.nav-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.nav-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;cursor:pointer;text-decoration:none;transition:all .2s;position:relative;overflow:hidden;display:block}
+.nav-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:transparent}
+.nav-card:hover::before{transform:scaleX(1)}
+.nav-card-icon{font-size:22px;margin-bottom:10px}
+.nav-card-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.nav-card-desc{font-size:11px;color:var(--slate);line-height:1.5}
+.nav-card-arrow{position:absolute;top:16px;right:16px;font-size:14px;color:var(--border);transition:all .2s}
+.nav-card:hover .nav-card-arrow{color:var(--accent);transform:translateX(3px)}
+.nav-card[data-accent="blue"]{ --accent:var(--blue)}
+.nav-card[data-accent="green"]{--accent:var(--green)}
+.nav-card[data-accent="amber"]{--accent:var(--amber)}
+.nav-card[data-accent="red"]  {--accent:var(--red)}
+
+/* ── MAIN CONTENT GRID ───────────────────────────────────── */
+.content{padding:24px 32px 32px;max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.section-label{font-size:10.5px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--slate);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── KPI ROW ─────────────────────────────────────────────── */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:16px 18px;box-shadow:var(--shadow)}
+.kpi-card-val{font-family:'DM Serif Display',serif;font-size:28px;color:var(--navy);line-height:1;margin-bottom:4px}
+.kpi-card-val .unit{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--slate)}
+.kpi-card-lbl{font-size:10.5px;color:var(--slate);font-weight:500}
+.kpi-card-delta{font-size:10.5px;font-weight:600;margin-top:5px;display:flex;align-items:center;gap:3px}
+.kpi-card-delta.up{color:var(--green)}
+.kpi-card-delta.down{color:var(--red)}
+.kpi-card-delta.flat{color:var(--amber)}
+.kpi-card.accent{background:var(--navy);border-color:transparent}
+.kpi-card.accent .kpi-card-val{color:#fff}
+.kpi-card.accent .kpi-card-val .unit{color:var(--gold)}
+.kpi-card.accent .kpi-card-lbl{color:rgba(255,255,255,.55)}
+.kpi-card.accent .kpi-card-delta{color:var(--gold)}
+
+/* ── ANALYSIS GRID ───────────────────────────────────────── */
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.analysis-grid.triple{grid-template-columns:1fr 1fr 1fr}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.card-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-head-title{font-size:12px;font-weight:700;color:var(--navy)}
+.card-head-badge{font-size:10px;font-weight:600;color:var(--slate);background:#F1F5F9;padding:2px 8px;border-radius:20px}
+.card-body{padding:16px 18px}
+.chart-wrap{position:relative;height:180px}
+.chart-wrap.tall{height:220px}
+
+/* ── OEM TABLE ───────────────────────────────────────────── */
+.oem-table{width:100%;border-collapse:collapse;font-size:11.5px}
+.oem-table th{text-align:left;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--slate);padding:6px 10px;border-bottom:2px solid var(--border)}
+.oem-table td{padding:7px 10px;border-bottom:1px solid #F1F5F9;vertical-align:middle}
+.oem-table tr:last-child td{border:none}
+.oem-table tr.komatsu-row td{background:#EFF6FF}
+.rank-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:10px;font-weight:700;background:#F1F5F9;color:var(--slate)}
+.rank-badge.top{background:var(--navy);color:#fff}
+.rank-badge.komatsu{background:var(--gold);color:var(--navy)}
+.share-bar-bg{background:#F1F5F9;border-radius:4px;height:6px;width:100%;overflow:hidden}
+.share-bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
+.delta-pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;display:inline-block}
+.delta-pill.up{background:#D1FAE5;color:#065F46}
+.delta-pill.down{background:#FEE2E2;color:#991B1B}
+.delta-pill.flat{background:#FEF3C7;color:#92400E}
+
+/* ── PATTERN CARDS ───────────────────────────────────────── */
+.patterns-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pattern-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:16px;box-shadow:var(--shadow)}
+.pattern-num{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate);margin-bottom:6px}
+.pattern-title{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.pattern-body{font-size:11px;color:var(--slate);line-height:1.6}
+.pattern-card.highlight{border-color:var(--gold);background:linear-gradient(135deg,#FFFBEB,#FFFFFF)}
+
+/* ── HEATMAP ─────────────────────────────────────────────── */
+.heatmap-wrap{overflow-x:auto}
+.heatmap{border-collapse:collapse;font-size:10.5px;width:100%}
+.heatmap th{padding:6px 8px;text-align:center;font-size:9.5px;font-weight:600;color:var(--slate);border-bottom:1px solid var(--border)}
+.heatmap th.state-col{text-align:left;min-width:100px}
+.heatmap td{padding:5px 8px;text-align:center;border-bottom:1px solid #F8FAFC;font-weight:500}
+.heatmap td.state-name{text-align:left;font-weight:600;color:var(--navy)}
+.hm-cell{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600;min-width:34px;text-align:center}
+
+/* ── DATA UPLOAD ─────────────────────────────────────────── */
+.upload-panel{background:var(--card);border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;transition:all .2s}
+.upload-panel:hover,.upload-panel.drag-over{border-color:var(--blue);background:#EFF6FF}
+.upload-panel-icon{font-size:32px;margin-bottom:8px}
+.upload-panel-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.upload-panel-desc{font-size:11.5px;color:var(--slate);margin-bottom:14px;line-height:1.5}
+.upload-btn{background:var(--navy);color:#fff;border:none;padding:8px 20px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s}
+.upload-btn:hover{background:#0F2447}
+.upload-btn.secondary{background:#EFF6FF;color:var(--navy);margin-left:8px}
+.upload-btn.secondary:hover{background:#DBEAFE}
+.upload-preview{margin-top:14px;display:none}
+.upload-preview table{width:100%;border-collapse:collapse;font-size:11px}
+.upload-preview th{background:#F1F5F9;padding:5px 8px;text-align:left;font-size:10px;font-weight:600;color:var(--slate)}
+.upload-preview td{padding:5px 8px;border-bottom:1px solid var(--border)}
+.upload-status{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;margin-top:10px;justify-content:center}
+.upload-status.success{color:var(--green)}
+.upload-status.error{color:var(--red)}
+
+/* ── SOURCES ─────────────────────────────────────────────── */
+.sources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.source-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:#F8FAFC;border-radius:8px}
+.source-num{font-size:9px;font-weight:700;color:var(--slate);background:var(--border);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.source-title{font-size:11px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.source-link{font-size:10.5px;color:var(--blue);text-decoration:none;word-break:break-all}
+.source-link:hover{text-decoration:underline}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer{background:var(--navy);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.footer-left{font-size:11px;color:rgba(255,255,255,.4)}
+.footer-left strong{color:rgba(255,255,255,.7)}
+.footer-right{font-size:10px;color:rgba(255,255,255,.3)}
+
+/* ── FILTERS BAR ─────────────────────────────────────────── */
+.filters-bar{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.filter-group{display:flex;align-items:center;gap:7px}
+.filter-label{font-size:10.5px;font-weight:600;color:var(--slate)}
+.filter-select{font-size:11.5px;padding:5px 10px;border:1.5px solid var(--border);border-radius:7px;background:#fff;color:var(--navy);font-family:inherit;cursor:pointer}
+.filter-select:focus{border-color:var(--blue);outline:none}
+.filter-sep{width:1px;height:22px;background:var(--border)}
+
+/* ── SCROLL ANIMATION ────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .45s ease both}
+.fade-up-1{animation-delay:.05s}.fade-up-2{animation-delay:.1s}.fade-up-3{animation-delay:.15s}
+.fade-up-4{animation-delay:.2s}.fade-up-5{animation-delay:.25s}
+
+/* ── INFERENCE PANEL ─────────────────────────────────────── */
+.inference{background:linear-gradient(135deg,#EFF6FF,#F0FDF4);border:1px solid #BFDBFE;border-radius:10px;padding:14px 16px;margin-top:12px}
+.inference-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin-bottom:6px}
+.inference-body{font-size:11px;color:#334155;line-height:1.7}
+.inference-body strong{color:var(--navy)}
+
+/* ── STORYBOARD ──────────────────────────────────────────── */
+.storyboard{display:flex;align-items:center;gap:0;overflow:hidden;border-radius:11px;border:1px solid var(--border)}
+.sb-step{flex:1;padding:12px 16px;text-align:center;background:var(--card);cursor:pointer;transition:all .2s;position:relative}
+.sb-step:not(:last-child)::after{content:'›';position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--border);z-index:1}
+.sb-step:hover,.sb-step.active{background:var(--navy)}
+.sb-step:hover .sb-step-num,.sb-step.active .sb-step-num{color:var(--gold)}
+.sb-step:hover .sb-step-title,.sb-step.active .sb-step-title{color:#fff}
+.sb-step-num{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--slate);margin-bottom:3px}
+.sb-step-title{font-size:11.5px;font-weight:600;color:var(--navy)}
+
+/* responsive */
+@media(max-width:900px){
+  .nav-cards{grid-template-columns:repeat(2,1fr)}
+  .kpi-row{grid-template-columns:repeat(3,1fr)}
+  .analysis-grid{grid-template-columns:1fr}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-kpi-box{display:none}
+  .patterns-grid{grid-template-columns:1fr 1fr}
+  .sources-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-brand">
+    <div class="header-logo">L&T</div>
+    <div>
+      <div class="header-title">L&T CMMB · Strategy Intelligence Platform</div>
+      <div class="header-sub">Indian Excavator TIV · Dec 2025 – Mar 2026 · 11 OEMs × 7 Regions × 24 States</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="header-tag">Internal Use Only</span>
+    <span class="header-ist" id="ist-clock">—</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <div class="hero-eyebrow-text">TIV Intelligence Dashboard · Q4 FY26</div>
+      </div>
+      <h1 class="hero-h1">India's Excavator Market<br><em>Decoded for L&T-Komatsu</em></h1>
+      <p class="hero-desc">Total Industry Volume tracking across 11 OEMs, 7 regions and 24 states. Strategy-grade analysis from national share to state-level battlefields — built for L&T CMMB's competitive positioning.</p>
+      <div class="hero-chips">
+        <span class="hero-chip">📊 12,004 units tracked Q4</span>
+        <span class="hero-chip">🏆 Komatsu: Premium Tier Leader</span>
+        <span class="hero-chip">+27.4% industry growth Dec→Mar</span>
+        <span class="hero-chip">Source: Internal L&T-CMMB TIV + ICEMA</span>
+      </div>
+    </div>
+    <div class="hero-kpi-box fade-up">
+      <div class="hero-kpi-title">Q4 SNAPSHOT · DEC 2025 – MAR 2026</div>
+      <div class="hero-kpi-grid">
+        <div class="hero-kpi"><div class="hero-kpi-val">12,004</div><div class="hero-kpi-lbl">Total Industry Units</div></div>
+        <div class="hero-kpi highlight"><div class="hero-kpi-val">822 <span>#5</span></div><div class="hero-kpi-lbl">Komatsu Units · Rank</div></div>
+        <div class="hero-kpi highlight"><div class="hero-kpi-val">6.85<span>%</span></div><div class="hero-kpi-lbl">Komatsu Share</div></div>
+        <div class="hero-kpi"><div class="hero-kpi-val">22.3<span>%</span></div><div class="hero-kpi-lbl">Premium Tier Size</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAVIGATION CARDS -->
+<div class="nav-strip">
+  <div class="section-label">Quick Navigation — All Platforms</div>
+  <div class="nav-cards">
+    <a class="nav-card fade-up fade-up-1" href="https://lntcmmb-dashboards.web.app/" target="_blank" data-accent="blue">
+      <div class="nav-card-icon">📋</div>
+      <div class="nav-card-title">Contract Intelligence</div>
+      <div class="nav-card-desc">109 active contracts · 52 contractors · HOT/WARM/COOL scoring · 13 news sources 3× daily</div>
+      <div class="nav-card-arrow">→</div>
+    </a>
+    <a class="nav-card fade-up fade-up-2" href="https://lntcmmb-dashboards.web.app/used-equipment.html" target="_blank" data-accent="green">
+      <div class="nav-card-icon">🏗️</div>
+      <div class="nav-card-title">Used Equipment</div>
+      <div class="nav-card-desc">Dual valuation engine · 15-param KOMTRAX · 8 export markets · Depreciation research</div>
+      <div class="nav-card-arrow">→</div>
+    </a>
+    <a class="nav-card fade-up fade-up-3" href="https://lntcmmb-dashboards.web.app/pitch-generator.html" target="_blank" data-accent="amber">
+      <div class="nav-card-icon">🤖</div>
+      <div class="nav-card-title">AI Pitch Generator</div>
+      <div class="nav-card-desc">Claude Sonnet 4.6 · Section 6 aligned · 8 pitch types · 9 OEM competitors · WhatsApp send</div>
+      <div class="nav-card-arrow">→</div>
+    </a>
+    <a class="nav-card fade-up fade-up-4" href="https://sampurnanandofficial1.github.io/lnt_equipcare/" target="_blank" data-accent="red">
+      <div class="nav-card-icon">⚙️</div>
+      <div class="nav-card-title">L&T EquipCare</div>
+      <div class="nav-card-desc">Customer-facing service portal · AMC / FMC booking · KOMTRAX telematics · Parts request</div>
+      <div class="nav-card-arrow">→</div>
+    </a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- STORYBOARD -->
+  <div class="fade-up">
+    <div class="section-label">Analysis Storyboard — Click to Jump</div>
+    <div class="storyboard" id="storyboard">
+      <div class="sb-step active" onclick="scrollTo('analysis1')"><div class="sb-step-num">Analysis 1</div><div class="sb-step-title">National Position</div></div>
+      <div class="sb-step" onclick="scrollTo('analysis2')"><div class="sb-step-num">Analysis 2</div><div class="sb-step-title">Temporal Momentum</div></div>
+      <div class="sb-step" onclick="scrollTo('analysis3')"><div class="sb-step-num">Analysis 3</div><div class="sb-step-title">Regional Distribution</div></div>
+      <div class="sb-step" onclick="scrollTo('analysis4')"><div class="sb-step-num">Analysis 4</div><div class="sb-step-title">State Deep-Dive</div></div>
+      <div class="sb-step" onclick="scrollTo('analysis5')"><div class="sb-step-num">Analysis 5</div><div class="sb-step-title">Key Patterns</div></div>
+      <div class="sb-step" onclick="scrollTo('reference')"><div class="sb-step-num">Reference</div><div class="sb-step-title">OEM Summary</div></div>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters-bar fade-up">
+    <div class="filter-group">
+      <span class="filter-label">Month</span>
+      <select class="filter-select" id="f-month" onchange="applyFilters()">
+        <option value="all">Dec-25 – Mar-26 (Q4)</option>
+        <option value="Dec-25">December 2025</option>
+        <option value="Jan-26">January 2026</option>
+        <option value="Feb-26">February 2026</option>
+        <option value="Mar-26">March 2026</option>
+      </select>
+    </div>
+    <div class="filter-sep"></div>
+    <div class="filter-group">
+      <span class="filter-label">Region</span>
+      <select class="filter-select" id="f-region" onchange="applyFilters()">
+        <option value="all">All India</option>
+        <option value="North">North</option>
+        <option value="Delhi NCR">Delhi NCR</option>
+        <option value="Guwahati-NE">Guwahati-NE</option>
+        <option value="East">East</option>
+        <option value="Central India">Central India</option>
+        <option value="West">West</option>
+        <option value="South">South</option>
+      </select>
+    </div>
+    <div class="filter-sep"></div>
+    <div style="font-size:11px;color:var(--slate)">
+      Showing: <strong id="filter-summary">Q4 · All India · 12,004 units</strong>
+    </div>
+  </div>
+
+  <!-- KPI ROW -->
+  <div id="analysis1">
+    <div class="section-label">Analysis 1 · National Position · OEM Market Share — Q4 Cumulative</div>
+    <div class="kpi-row fade-up">
+      <div class="kpi-card accent">
+        <div class="kpi-card-val" id="kpi-tiv">12,004</div>
+        <div class="kpi-card-lbl">Total Industry Volume</div>
+        <div class="kpi-card-delta flat" id="kpi-tiv-delta">Dec: 2,613 → Mar: 3,330</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-val" id="kpi-kom">822 <span class="unit">#5</span></div>
+        <div class="kpi-card-lbl">Komatsu Units · Rank</div>
+        <div class="kpi-card-delta up" id="kpi-kom-delta">▲ +27.3% Dec→Mar</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-val" id="kpi-share">6.85<span class="unit">%</span></div>
+        <div class="kpi-card-lbl">Komatsu Share</div>
+        <div class="kpi-card-delta flat">−0.01pp Dec→Mar (holds share)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-val" id="kpi-top1">Tata Hitachi</div>
+        <div class="kpi-card-lbl">#1 OEM · Q4 Share</div>
+        <div class="kpi-card-delta down">20.97% · −1.59pp Dec→Mar</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-val" id="kpi-premium">22.3<span class="unit">%</span></div>
+        <div class="kpi-card-lbl">Premium Tier (KOM+CAT+KOB+VOL)</div>
+        <div class="kpi-card-delta up">Komatsu = 30.7% within premium</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSIS 1+2: Share Pie + Monthly Trend -->
+  <div class="analysis-grid fade-up">
+    <div class="card">
+      <div class="card-head"><div class="card-head-title">OEM Market Share — Q4 Cumulative %</div><div class="card-head-badge" id="pie-badge">All India · Q4</div></div>
+      <div class="card-body"><div class="chart-wrap"><canvas id="shareChart"></canvas></div>
+        <div class="inference">
+          <div class="inference-title">L&T Strategic Inference</div>
+          <div class="inference-body">Top 4 (TH+JCB+HYU+SANY) = <strong>68.0%</strong> of TIV. Premium tier = <strong>22.3%</strong> (KOM+CAT+KOB+VOL). <strong>Komatsu leads the premium sub-market at 30.7%</strong> — the strategic question is growing the premium tier itself, not entering it. Komatsu is <strong>0.74× SANY, 0.36× Hyundai, 0.33× JCB</strong> on absolute volume.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="analysis2">
+      <div class="card-head"><div class="card-head-title">Monthly Share % — Top 6 OEMs (Dec→Mar)</div><div class="card-head-badge">Temporal Momentum</div></div>
+      <div class="card-body"><div class="chart-wrap tall"><canvas id="momentumChart"></canvas></div>
+        <div class="inference">
+          <div class="inference-title">L&T Strategic Inference</div>
+          <div class="inference-body">Industry TIV grew <strong>+27.4%</strong> Dec→Mar. <strong>SANY: +65.6% growth, share +2.57pp</strong>. <strong>Hyundai: +47.9%, share +2.50pp</strong>. <strong>Komatsu: +27.3% ≈ industry</strong> — defending share without gaining. SANY growing <strong>2.4× faster</strong> than Komatsu. Gap to #4 narrowing because SANY accelerates, not because Komatsu does.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSIS 3: Regional -->
+  <div id="analysis3" class="card fade-up">
+    <div class="card-head"><div class="card-head-title">Analysis 3 · Regional Distribution — Komatsu Over/Under-Index vs National 6.85%</div><div class="card-head-badge">Region × OEM Share %</div></div>
+    <div class="card-body">
+      <div class="chart-wrap"><canvas id="regionalChart"></canvas></div>
+      <div class="inference" style="margin-top:12px">
+        <div class="inference-title">L&T Strategic Inference — Komatsu Mirror-Image Geography vs Peers</div>
+        <div class="inference-body">
+          <strong>West+South = 56.2% of industry</strong> (West 29.6% + South 26.6%). Komatsu is <strong>South-tilted +6.77pp vs industry</strong>; West under-weighted −5.02pp. SANY: 1.21× West-weighted. Tata Hitachi: 1.23× South-weighted. JCB: mirrors industry (most balanced).<br>
+          Komatsu over-index: <strong>South +1.74pp (8.59%)</strong> · NE +5.91pp (12.76%). Under-index: Delhi NCR −1.93pp · West −1.16pp · East −0.97pp.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSIS 4: Heatmap + State Deep Dive -->
+  <div id="analysis4" class="card fade-up">
+    <div class="card-head"><div class="card-head-title">Analysis 4 · State × OEM Intensity Heatmap — Share % of State TIV (Top 10 States, Q4)</div><div class="card-head-badge">State-Level Deep-Dive</div></div>
+    <div class="card-body">
+      <div class="heatmap-wrap">
+        <table class="heatmap" id="heatmap-table"></table>
+      </div>
+      <div class="inference" style="margin-top:12px">
+        <div class="inference-title">L&T Strategic Inference — Komatsu Stronghold Signature</div>
+        <div class="inference-body">
+          Komatsu over-indexes in: <strong>Karnataka 17.0%</strong> (2.48× national) · <strong>NE States 12.8%</strong> (1.86×) · <strong>WB&Sikkim 10.6%</strong> (1.55×). Under-indexed: <strong>AP 2.45%</strong> (0.36×) · Odisha 3.65% · TN 3.69% · Gujarat 4.15%.<br>
+          <strong>Gujarat = 10.4% of national TIV</strong> (industry #1 state). Komatsu only 4.15% there — Hyundai 20.4%, Tata 19.6% dominate. <strong>Each 1pp share gain in Gujarat = +0.10pp national share.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYSIS 5: Patterns -->
+  <div id="analysis5">
+    <div class="section-label">Analysis 5 · Key Patterns — What the Numbers Reveal</div>
+    <div class="patterns-grid fade-up">
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 1</div>
+        <div class="pattern-title">Concentration</div>
+        <div class="pattern-body">Top 4 OEMs (TH+JCB+HYU+SANY) = <strong>68.0%</strong>. Premium tier (KOM+CAT+KOB+VOL) = <strong>22.3%</strong>. Komatsu already holds <strong>30.7%</strong> of the premium sub-market — the de facto premium leader. Strategic question: grow the premium tier, not enter it.</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 2</div>
+        <div class="pattern-title">Growth Vectors</div>
+        <div class="pattern-body">In a +27.4% market, share is moving — 3 of top 5 are swapping share. <strong>SANY: +2.57pp · Hyundai: +2.50pp</strong>. Tata Hitachi losing −1.59pp. <strong>Komatsu: flat 7.0% (−0.01pp)</strong> — only top-5 tracking industry growth exactly. Defending share, not gaining it.</div>
+      </div>
+      <div class="pattern-card highlight">
+        <div class="pattern-num">Pattern 3 — Highlight</div>
+        <div class="pattern-title">Geographic Identity</div>
+        <div class="pattern-body">Komatsu is <strong>1.51× more state-concentrated</strong> than industry — different geography from peers. Top 3 states = 40.4% of Komatsu vs 30.3% industry. Mining/coal/aggregate economies over-index. Highway/infra states favour price-led OEMs.</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 4</div>
+        <div class="pattern-title">Stronghold Signature</div>
+        <div class="pattern-body">Every state where Komatsu over-indexes ≥1.5× national is a mining/coal/aggregate economy: <strong>Karnataka 2.48× · NE States 1.86× · WB&Sikkim 1.55×</strong>. Near-zero overlap with highway/infra megaproject corridors.</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 5</div>
+        <div class="pattern-title">Volume vs Value</div>
+        <div class="pattern-body">Gujarat = industry #1 state (10.4% of TIV). Komatsu only #6 there (4.15%). Gap to leader = <strong>16.2pp</strong>. Closing this gap would lift national share by <strong>+1.7pp</strong> — a structural move worth more than incremental wins in current strongholds.</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num">Strategic Takeaway</div>
+        <div class="pattern-title">The Play Forward</div>
+        <div class="pattern-body">Deepen mining/aggregate strongholds where Komatsu already over-indexes 1.55–2.48×. Alternatively, compete in highway/infra geographies where <strong>SANY (+2.57pp) and Hyundai (+2.50pp)</strong> are absorbing growth at the expense of the share-bleeding leader (Tata Hitachi, −1.59pp).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OEM SUMMARY TABLE -->
+  <div id="reference" class="card fade-up">
+    <div class="card-head"><div class="card-head-title">Reference · OEM TIV Summary — Monthly Volume + Q4 Cumulative + Dec→Mar Movement</div><div class="card-head-badge">Source: Internal L&T-CMMB TIV Tracking</div></div>
+    <div class="card-body">
+      <table class="oem-table" id="oem-summary-table"></table>
+    </div>
+  </div>
+
+  <!-- DATA UPLOAD -->
+  <div>
+    <div class="section-label">Data Management — Upload New TIV Data</div>
+    <div class="analysis-grid">
+      <div class="card fade-up">
+        <div class="card-head"><div class="card-head-title">📤 Upload Monthly TIV Data</div><div class="card-head-badge">Flexible CSV/Excel Format</div></div>
+        <div class="card-body">
+          <div class="upload-panel" id="upload-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+            <div class="upload-panel-icon">📊</div>
+            <div class="upload-panel-title">Drop your monthly TIV file here</div>
+            <div class="upload-panel-desc">Accepts CSV files in the standard L&T-CMMB format<br>Columns: Region, State, CAT, Tata Hitachi, Komatsu, Kobelco, Volvo, JCB, Hyundai, SANY, XCMG, LiuGong, CASE, Total</div>
+            <input type="file" id="file-input" accept=".csv,.xlsx" style="display:none" onchange="handleFileSelect(event)">
+            <button class="upload-btn" onclick="document.getElementById('file-input').click()">Choose File</button>
+            <button class="upload-btn secondary" onclick="downloadTemplate()">⬇ Download Template</button>
+          </div>
+          <div class="upload-preview" id="upload-preview">
+            <div class="upload-status success" id="upload-status"></div>
+            <div style="margin-top:10px;overflow-x:auto;max-height:180px;overflow-y:auto"><table id="preview-table"></table></div>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="upload-btn" onclick="applyUploadedData()">✅ Apply to Dashboard</button>
+              <button class="upload-btn secondary" onclick="clearUpload()">✕ Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card fade-up fade-up-2">
+        <div class="card-head"><div class="card-head-title">📋 Template & Format Guide</div><div class="card-head-badge">Raw Data Format</div></div>
+        <div class="card-body" style="font-size:11.5px;color:var(--slate);line-height:1.8">
+          <div style="font-weight:700;color:var(--navy);margin-bottom:8px">Required Columns (in order):</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;background:#F8FAFC;padding:10px;border-radius:7px;margin-bottom:12px;color:#334155">
+            Region, State, CAT, Tata Hitachi, Komatsu, Kobelco,<br>Volvo, JCB, Hyundai, SANY, XCMG, LiuGong, CASE, Total
+          </div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:6px">Regions:</div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px">
+            <span style="font-size:10.5px;background:#EFF6FF;color:var(--navy);padding:2px 8px;border-radius:4px">North</span>
+            <span style="font-size:10.5px;background:#EFF6FF;color:var(--navy);padding:2px 8px;border-radius:4px">Delhi NCR</span>
+            <span style="font-size:10.5px;background:#EFF6FF;color:var(--navy);padding:2px 8px;border-radius:4px">Guwahati-NE</span>
+            <span style="font-size:10.5px;background:#EFF6FF;color:var(--navy);padding:2px 8px;border-radius:4px">East</span>
+            <span style="font-size:10.5px;background:#EFF6FF;color:var(--navy);padding:2px 8px;border-radius:4px">Central India</span>
+            <span style="font-size:10.5px;background:#EFF6FF;color:var(--navy);padding:2px 8px;border-radius:4px">West</span>
+            <span style="font-size:10.5px;background:#EFF6FF;color:var(--navy);padding:2px 8px;border-radius:4px">South</span>
+          </div>
+          <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:7px;padding:10px;font-size:11px;color:#92400E">
+            <strong>💡 Flexible upload:</strong> The system accepts partial data — any missing OEM values default to 0. New months are automatically added to the timeline. Corrections to existing months replace the previous values. Leave Total blank — it is auto-computed.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="fade-up">
+    <div class="section-label">Sources & Methodology — All Citations</div>
+    <div class="sources-grid" id="sources-grid"></div>
+  </div>
+
+</div><!-- /content -->
+
+<footer class="footer">
+  <div class="footer-left"><strong>L&T CMMB · Strategy Intelligence Platform</strong> · IIM Lucknow MBA Internship Project · May 2026</div>
+  <div class="footer-right">Data cut-off: 31 March 2026 · Internal use only · Do not cite OEM volumes externally without ICEMA permission</div>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════════
+// DATA STORE
+// ════════════════════════════════════════════════════════
+const TIV = {
+  "Dec-25":{"North":{"Jammu":{"CAT":1,"TH":1,"KOM":2,"KOB":3,"VOL":1,"JCB":7,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":2,"TH":11,"KOM":2,"KOB":8,"VOL":2,"JCB":8,"HYU":12,"SANY":10,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":0,"TH":1,"KOM":1,"KOB":3,"VOL":0,"JCB":5,"HYU":5,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":1,"TH":1,"KOM":4,"KOB":10,"VOL":2,"JCB":9,"HYU":8,"SANY":2,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":15,"TH":19,"KOM":9,"KOB":8,"VOL":13,"JCB":43,"HYU":8,"SANY":10,"XCMG":13,"LIU":7,"CASE":2},"UK W.UP":{"CAT":1,"TH":2,"KOM":1,"KOB":1,"VOL":1,"JCB":2,"HYU":4,"SANY":1,"XCMG":7,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":7,"TH":27,"KOM":5,"KOB":1,"VOL":3,"JCB":15,"HYU":18,"SANY":9,"XCMG":6,"LIU":5,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":3,"TH":13,"KOM":18,"KOB":7,"VOL":9,"JCB":20,"HYU":25,"SANY":18,"XCMG":8,"LIU":2,"CASE":1}},"East":{"WB Sikkim":{"CAT":5,"TH":46,"KOM":12,"KOB":21,"VOL":11,"JCB":38,"HYU":20,"SANY":14,"XCMG":17,"LIU":5,"CASE":0},"Jharkhand":{"CAT":4,"TH":41,"KOM":4,"KOB":1,"VOL":14,"JCB":17,"HYU":22,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Odisha":{"CAT":10,"TH":37,"KOM":0,"KOB":16,"VOL":10,"JCB":21,"HYU":34,"SANY":10,"XCMG":14,"LIU":1,"CASE":0},"Bihar":{"CAT":3,"TH":20,"KOM":0,"KOB":5,"VOL":6,"JCB":18,"HYU":1,"SANY":2,"XCMG":1,"LIU":2,"CASE":0}},"Central India":{"MP":{"CAT":27,"TH":22,"KOM":8,"KOB":10,"VOL":13,"JCB":24,"HYU":17,"SANY":0,"XCMG":1,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":4,"TH":11,"KOM":7,"KOB":6,"VOL":1,"JCB":7,"HYU":10,"SANY":5,"XCMG":1,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":11,"TH":55,"KOM":13,"KOB":24,"VOL":18,"JCB":45,"HYU":34,"SANY":32,"XCMG":16,"LIU":16,"CASE":3},"Gujarat":{"CAT":12,"TH":69,"KOM":13,"KOB":5,"VOL":18,"JCB":50,"HYU":69,"SANY":41,"XCMG":36,"LIU":18,"CASE":2},"Maharashtra":{"CAT":53,"TH":61,"KOM":27,"KOB":16,"VOL":24,"JCB":59,"HYU":61,"SANY":27,"XCMG":12,"LIU":6,"CASE":0}},"South":{"Karnataka":{"CAT":11,"TH":61,"KOM":49,"KOB":9,"VOL":7,"JCB":56,"HYU":49,"SANY":16,"XCMG":5,"LIU":4,"CASE":0},"AP":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Telangana":{"CAT":8,"TH":67,"KOM":8,"KOB":8,"VOL":12,"JCB":31,"HYU":4,"SANY":19,"XCMG":9,"LIU":6,"CASE":0},"TN":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":1}}},
+  "Jan-26":{"North":{"Jammu":{"CAT":6,"TH":1,"KOM":4,"KOB":2,"VOL":12,"JCB":6,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":2,"TH":8,"KOM":6,"KOB":5,"VOL":2,"JCB":5,"HYU":10,"SANY":10,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":0,"TH":0,"KOM":1,"KOB":1,"VOL":0,"JCB":10,"HYU":7,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":2,"TH":1,"KOM":4,"KOB":4,"VOL":1,"JCB":9,"HYU":9,"SANY":2,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":9,"TH":17,"KOM":9,"KOB":3,"VOL":7,"JCB":43,"HYU":34,"SANY":10,"XCMG":13,"LIU":7,"CASE":2},"UK W.UP":{"CAT":1,"TH":4,"KOM":1,"KOB":1,"VOL":0,"JCB":2,"HYU":2,"SANY":1,"XCMG":7,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":8,"TH":22,"KOM":5,"KOB":0,"VOL":1,"JCB":19,"HYU":15,"SANY":11,"XCMG":0,"LIU":1,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":3,"TH":15,"KOM":12,"KOB":4,"VOL":7,"JCB":22,"HYU":30,"SANY":14,"XCMG":2,"LIU":2,"CASE":0}},"East":{"WB Sikkim":{"CAT":7,"TH":44,"KOM":19,"KOB":18,"VOL":11,"JCB":39,"HYU":31,"SANY":8,"XCMG":17,"LIU":7,"CASE":1},"Jharkhand":{"CAT":7,"TH":33,"KOM":5,"KOB":1,"VOL":4,"JCB":19,"HYU":22,"SANY":10,"XCMG":0,"LIU":0,"CASE":0},"Odisha":{"CAT":9,"TH":41,"KOM":6,"KOB":16,"VOL":10,"JCB":40,"HYU":39,"SANY":13,"XCMG":14,"LIU":10,"CASE":0},"Bihar":{"CAT":0,"TH":16,"KOM":0,"KOB":3,"VOL":0,"JCB":17,"HYU":7,"SANY":0,"XCMG":1,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":14,"TH":36,"KOM":7,"KOB":9,"VOL":4,"JCB":18,"HYU":39,"SANY":29,"XCMG":4,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":6,"TH":23,"KOM":11,"KOB":6,"VOL":3,"JCB":14,"HYU":17,"SANY":7,"XCMG":8,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":10,"TH":33,"KOM":13,"KOB":24,"VOL":9,"JCB":45,"HYU":51,"SANY":32,"XCMG":20,"LIU":21,"CASE":1},"Gujarat":{"CAT":9,"TH":59,"KOM":13,"KOB":5,"VOL":6,"JCB":50,"HYU":63,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":22,"TH":69,"KOM":23,"KOB":38,"VOL":7,"JCB":59,"HYU":69,"SANY":27,"XCMG":12,"LIU":6,"CASE":0}},"South":{"Karnataka":{"CAT":9,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":16,"XCMG":5,"LIU":4,"CASE":0},"AP":{"CAT":9,"TH":61,"KOM":5,"KOB":25,"VOL":4,"JCB":55,"HYU":57,"SANY":0,"XCMG":0,"LIU":9,"CASE":1},"Telangana":{"CAT":6,"TH":49,"KOM":4,"KOB":13,"VOL":7,"JCB":32,"HYU":12,"SANY":22,"XCMG":4,"LIU":6,"CASE":0},"TN":{"CAT":6,"TH":59,"KOM":9,"KOB":0,"VOL":0,"JCB":53,"HYU":59,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":1,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}}},
+  "Feb-26":{"North":{"Jammu":{"CAT":4,"TH":0,"KOM":1,"KOB":2,"VOL":1,"JCB":7,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":5,"TH":9,"KOM":6,"KOB":6,"VOL":0,"JCB":8,"HYU":9,"SANY":7,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":3,"TH":1,"KOM":1,"KOB":5,"VOL":0,"JCB":8,"HYU":5,"SANY":0,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":4,"TH":2,"KOM":3,"KOB":2,"VOL":1,"JCB":3,"HYU":6,"SANY":4,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":9,"TH":12,"KOM":8,"KOB":11,"VOL":8,"JCB":32,"HYU":33,"SANY":10,"XCMG":9,"LIU":7,"CASE":1},"UK W.UP":{"CAT":1,"TH":13,"KOM":0,"KOB":0,"VOL":2,"JCB":4,"HYU":4,"SANY":1,"XCMG":2,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":9,"TH":22,"KOM":2,"KOB":3,"VOL":2,"JCB":19,"HYU":12,"SANY":11,"XCMG":1,"LIU":2,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":4,"TH":11,"KOM":12,"KOB":4,"VOL":5,"JCB":22,"HYU":30,"SANY":14,"XCMG":2,"LIU":2,"CASE":0}},"East":{"WB Sikkim":{"CAT":7,"TH":38,"KOM":19,"KOB":18,"VOL":9,"JCB":39,"HYU":31,"SANY":8,"XCMG":19,"LIU":19,"CASE":1},"Jharkhand":{"CAT":5,"TH":32,"KOM":5,"KOB":1,"VOL":3,"JCB":16,"HYU":22,"SANY":10,"XCMG":3,"LIU":2,"CASE":0},"Odisha":{"CAT":14,"TH":32,"KOM":6,"KOB":12,"VOL":9,"JCB":40,"HYU":39,"SANY":13,"XCMG":8,"LIU":20,"CASE":0},"Bihar":{"CAT":1,"TH":16,"KOM":0,"KOB":3,"VOL":0,"JCB":17,"HYU":7,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":9,"TH":36,"KOM":7,"KOB":6,"VOL":4,"JCB":18,"HYU":39,"SANY":29,"XCMG":4,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":4,"TH":23,"KOM":9,"KOB":1,"VOL":3,"JCB":14,"HYU":17,"SANY":7,"XCMG":2,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":13,"TH":43,"KOM":17,"KOB":20,"VOL":8,"JCB":54,"HYU":48,"SANY":32,"XCMG":20,"LIU":21,"CASE":0},"Gujarat":{"CAT":15,"TH":59,"KOM":13,"KOB":5,"VOL":6,"JCB":50,"HYU":63,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":35,"TH":55,"KOM":19,"KOB":18,"VOL":7,"JCB":41,"HYU":45,"SANY":26,"XCMG":14,"LIU":9,"CASE":0}},"South":{"Karnataka":{"CAT":12,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":16,"XCMG":5,"LIU":4,"CASE":1},"AP":{"CAT":5,"TH":55,"KOM":6,"KOB":21,"VOL":4,"JCB":49,"HYU":51,"SANY":0,"XCMG":0,"LIU":9,"CASE":1},"Telangana":{"CAT":9,"TH":31,"KOM":4,"KOB":15,"VOL":6,"JCB":25,"HYU":18,"SANY":29,"XCMG":4,"LIU":2,"CASE":0},"TN":{"CAT":12,"TH":59,"KOM":7,"KOB":0,"VOL":0,"JCB":49,"HYU":59,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":5,"TH":11,"KOM":2,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}}},
+  "Mar-26":{"North":{"Jammu":{"CAT":2,"TH":0,"KOM":1,"KOB":1,"VOL":1,"JCB":7,"HYU":4,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":7,"TH":16,"KOM":3,"KOB":8,"VOL":1,"JCB":18,"HYU":10,"SANY":6,"XCMG":7,"LIU":7,"CASE":0},"Himachal":{"CAT":1,"TH":4,"KOM":1,"KOB":6,"VOL":0,"JCB":6,"HYU":5,"SANY":2,"XCMG":0,"LIU":3,"CASE":1},"Haryana":{"CAT":1,"TH":3,"KOM":1,"KOB":3,"VOL":0,"JCB":3,"HYU":9,"SANY":1,"XCMG":2,"LIU":9,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":18,"TH":19,"KOM":7,"KOB":7,"VOL":4,"JCB":52,"HYU":23,"SANY":19,"XCMG":16,"LIU":7,"CASE":1},"UK W.UP":{"CAT":1,"TH":8,"KOM":0,"KOB":1,"VOL":2,"JCB":4,"HYU":5,"SANY":2,"XCMG":1,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":7,"TH":23,"KOM":6,"KOB":6,"VOL":2,"JCB":20,"HYU":17,"SANY":17,"XCMG":5,"LIU":5,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":1,"TH":10,"KOM":14,"KOB":2,"VOL":2,"JCB":23,"HYU":24,"SANY":14,"XCMG":7,"LIU":1,"CASE":0}},"East":{"WB Sikkim":{"CAT":5,"TH":34,"KOM":35,"KOB":30,"VOL":9,"JCB":25,"HYU":39,"SANY":9,"XCMG":10,"LIU":9,"CASE":0},"Jharkhand":{"CAT":6,"TH":31,"KOM":2,"KOB":0,"VOL":3,"JCB":29,"HYU":20,"SANY":10,"XCMG":4,"LIU":8,"CASE":0},"Odisha":{"CAT":6,"TH":78,"KOM":17,"KOB":24,"VOL":6,"JCB":40,"HYU":44,"SANY":14,"XCMG":12,"LIU":9,"CASE":0},"Bihar":{"CAT":5,"TH":22,"KOM":1,"KOB":4,"VOL":0,"JCB":20,"HYU":7,"SANY":3,"XCMG":0,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":20,"TH":34,"KOM":7,"KOB":11,"VOL":6,"JCB":14,"HYU":28,"SANY":21,"XCMG":2,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":9,"TH":16,"KOM":9,"KOB":4,"VOL":4,"JCB":13,"HYU":12,"SANY":14,"XCMG":5,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":12,"TH":63,"KOM":17,"KOB":20,"VOL":6,"JCB":54,"HYU":61,"SANY":32,"XCMG":20,"LIU":21,"CASE":0},"Gujarat":{"CAT":15,"TH":59,"KOM":13,"KOB":5,"VOL":3,"JCB":59,"HYU":61,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":39,"TH":12,"KOM":21,"KOB":18,"VOL":16,"JCB":39,"HYU":43,"SANY":26,"XCMG":22,"LIU":9,"CASE":0}},"South":{"Karnataka":{"CAT":12,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":27,"XCMG":23,"LIU":4,"CASE":0},"AP":{"CAT":12,"TH":55,"KOM":6,"KOB":21,"VOL":4,"JCB":49,"HYU":51,"SANY":39,"XCMG":21,"LIU":9,"CASE":0},"Telangana":{"CAT":15,"TH":43,"KOM":12,"KOB":11,"VOL":4,"JCB":25,"HYU":17,"SANY":37,"XCMG":1,"LIU":3,"CASE":0},"TN":{"CAT":12,"TH":59,"KOM":7,"KOB":0,"VOL":0,"JCB":49,"HYU":59,"SANY":37,"XCMG":19,"LIU":9,"CASE":0},"Kerala":{"CAT":5,"TH":11,"KOM":2,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":8,"LIU":0,"CASE":0}}}
+};
+
+const OEMS = ["CAT","TH","KOM","KOB","VOL","JCB","HYU","SANY","XCMG","LIU","CASE"];
+const OEM_NAME = {CAT:"CAT",TH:"Tata Hitachi",KOM:"Komatsu",KOB:"Kobelco",VOL:"Volvo",JCB:"JCB",HYU:"Hyundai",SANY:"SANY",XCMG:"XCMG",LIU:"LiuGong",CASE:"CASE"};
+const OEM_COLOR = {CAT:"#F59E0B",TH:"#DC2626",KOM:"#1B3A6B",KOB:"#7C3AED",VOL:"#2563EB",JCB:"#D97706",HYU:"#0891B2",SANY:"#16A34A",XCMG:"#EA580C",LIU:"#9333EA",CASE:"#64748B"};
+const MONTHS = ["Dec-25","Jan-26","Feb-26","Mar-26"];
+
+let charts = {};
+
+// ── COMPUTE ─────────────────────────────────────────────
+function computeOEMs(monthFilter='all', regionFilter='all') {
+  const result = {};
+  OEMS.forEach(o => result[o] = 0);
+  const ms = monthFilter === 'all' ? MONTHS : [monthFilter];
+  ms.forEach(m => {
+    const regions = regionFilter === 'all' ? Object.keys(TIV[m]) : [regionFilter];
+    regions.forEach(r => {
+      if (!TIV[m][r]) return;
+      Object.values(TIV[m][r]).forEach(stateData => {
+        OEMS.forEach(o => result[o] += (stateData[o]||0));
+      });
+    });
+  });
+  return result;
+}
+
+function computeTotal(monthFilter='all', regionFilter='all') {
+  const oems = computeOEMs(monthFilter, regionFilter);
+  return Object.values(oems).reduce((a,b)=>a+b, 0);
+}
+
+// ── IST CLOCK ────────────────────────────────────────────
+function updateClock() {
+  const ist = new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('ist-clock').textContent = ist + ' IST';
+}
+setInterval(updateClock, 1000); updateClock();
+
+// ── FILTERS ──────────────────────────────────────────────
+function applyFilters() {
+  const m = document.getElementById('f-month').value;
+  const r = document.getElementById('f-region').value;
+  const total = computeTotal(m, r);
+  const oems = computeOEMs(m, r);
+  const kom = oems.KOM;
+  const share = total > 0 ? (100*kom/total).toFixed(2) : '0.00';
+  document.getElementById('filter-summary').textContent =
+    `${m==='all'?'Q4':m} · ${r==='all'?'All India':r} · ${total.toLocaleString()} units`;
+  document.getElementById('kpi-tiv').textContent = total.toLocaleString();
+  const rank = Object.entries(oems).sort((a,b)=>b[1]-a[1]).findIndex(([k])=>k==='KOM') + 1;
+  document.getElementById('kpi-kom').innerHTML = `${kom} <span class="unit">#${rank}</span>`;
+  document.getElementById('kpi-share').innerHTML = `${share}<span class="unit">%</span>`;
+  document.getElementById('pie-badge').textContent = `${r==='all'?'All India':r} · ${m==='all'?'Q4':m}`;
+  updateShareChart(m, r);
+  updateOEMTable(m, r);
+}
+
+// ── SHARE PIE CHART ──────────────────────────────────────
+function updateShareChart(m='all', r='all') {
+  const oems = computeOEMs(m, r);
+  const total = Object.values(oems).reduce((a,b)=>a+b,0);
+  const sorted = Object.entries(oems).sort((a,b)=>b[1]-a[1]);
+  if (charts.share) charts.share.destroy();
+  charts.share = new Chart(document.getElementById('shareChart'), {
+    type: 'doughnut',
+    data: {
+      labels: sorted.map(([k])=>OEM_NAME[k]),
+      datasets:[{
+        data: sorted.map(([,v])=>v),
+        backgroundColor: sorted.map(([k])=>OEM_COLOR[k]),
+        borderWidth: 2, borderColor:'#fff',
+        hoverOffset: 6
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'60%',
+      plugins:{
+        legend:{position:'right',labels:{font:{size:10,family:'DM Sans'},boxWidth:10,padding:8,
+          generateLabels:chart=>chart.data.labels.map((l,i)=>({
+            text:`${l} ${(100*chart.data.datasets[0].data[i]/total).toFixed(1)}%`,
+            fillStyle:chart.data.datasets[0].backgroundColor[i],
+            strokeStyle:'#fff',lineWidth:1,index:i
+          }))
+        }},
+        tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw} units (${(100*ctx.raw/total).toFixed(2)}%)`}}
+      }
+    }
+  });
+}
+
+// ── MOMENTUM CHART ───────────────────────────────────────
+function buildMomentumChart() {
+  const topOEMs = ["TH","JCB","HYU","SANY","KOM","CAT"];
+  const datasets = topOEMs.map(o => ({
+    label: OEM_NAME[o],
+    data: MONTHS.map(m => {
+      let tot = 0, total = 0;
+      Object.values(TIV[m]).forEach(region => Object.values(region).forEach(state => {
+        OEMS.forEach(oe => total += (state[oe]||0));
+        tot += (state[o]||0);
+      }));
+      return total > 0 ? parseFloat((100*tot/total).toFixed(2)) : 0;
+    }),
+    borderColor: OEM_COLOR[o],
+    backgroundColor: OEM_COLOR[o]+'22',
+    borderWidth: o === 'KOM' ? 3 : 1.5,
+    pointRadius: o === 'KOM' ? 5 : 3,
+    tension: 0.4,
+    fill: false,
+    borderDash: o === 'KOM' ? [] : undefined,
+  }));
+  charts.momentum = new Chart(document.getElementById('momentumChart'), {
+    type: 'line', data: { labels: MONTHS, datasets },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      scales:{
+        y:{title:{display:true,text:'Share %',font:{size:10}},ticks:{callback:v=>v+'%'}},
+        x:{grid:{display:false}}
+      },
+      plugins:{
+        legend:{labels:{font:{size:10,family:'DM Sans'},boxWidth:10}},
+        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}%`}}
+      }
+    }
+  });
+}
+
+// ── REGIONAL CHART ───────────────────────────────────────
+function buildRegionalChart() {
+  const REGIONS = ["North","Delhi NCR","Guwahati-NE","East","Central India","West","South"];
+  const REGION_LABEL = {"North":"North","Delhi NCR":"Delhi NCR","Guwahati-NE":"NE","East":"East","Central India":"Central","West":"West","South":"South"};
+  const oem_data = {}, total_data = {};
+  REGIONS.forEach(r => {
+    let industryTot = 0, komTot = 0;
+    MONTHS.forEach(m => {
+      if (!TIV[m][r]) return;
+      Object.values(TIV[m][r]).forEach(st => {
+        OEMS.forEach(o => industryTot += (st[o]||0));
+        komTot += (st.KOM||0);
+      });
+    });
+    total_data[r] = industryTot; oem_data[r] = komTot;
+  });
+  const allIndustry = Object.values(total_data).reduce((a,b)=>a+b,0);
+  const allKom = Object.values(oem_data).reduce((a,b)=>a+b,0);
+
+  charts.regional = new Chart(document.getElementById('regionalChart'), {
+    type: 'bar',
+    data: {
+      labels: REGIONS.map(r => REGION_LABEL[r]),
+      datasets:[
+        {label:'Industry Share %', data:REGIONS.map(r=>parseFloat((100*total_data[r]/allIndustry).toFixed(1))), backgroundColor:'#CBD5E1', borderRadius:4},
+        {label:'Komatsu Share % (of state TIV)', data:REGIONS.map(r=>total_data[r]>0?parseFloat((100*oem_data[r]/total_data[r]).toFixed(1)):0), backgroundColor:REGIONS.map(r=>{const s=total_data[r]>0?(100*oem_data[r]/total_data[r]):0; return s>8.5?'#1B3A6B':s>6?'#2563EB':'#93C5FD';}), borderRadius:4},
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      scales:{
+        x:{grid:{display:false}},
+        y:{title:{display:true,text:'%',font:{size:10}},ticks:{callback:v=>v+'%'}}
+      },
+      plugins:{
+        legend:{labels:{font:{size:10},boxWidth:10}},
+        annotation:{annotations:{line1:{type:'line',yMin:6.85,yMax:6.85,borderColor:'#F59E0B',borderWidth:1.5,borderDash:[4,4],label:{display:true,content:'National 6.85%',position:'end',font:{size:9},color:'#F59E0B'}}}}
+      }
+    }
+  });
+}
+
+// ── HEATMAP ──────────────────────────────────────────────
+function buildHeatmap() {
+  const TOP_STATES = ["Gujarat","Maharashtra","Karnataka","Rajasthan","WB Sikkim","Odisha","AP","Telangana","TN","Delhi NCR"];
+  const STATE_LABEL = {"Gujarat":"Gujarat","Maharashtra":"Maharashtra & Goa","Karnataka":"Karnataka","Rajasthan":"Rajasthan","WB Sikkim":"WB & Sikkim","Odisha":"Odisha","AP":"Andhra Pradesh","Telangana":"Telangana","TN":"Tamil Nadu","Delhi NCR":"Delhi NCR"};
+  const HM_OEMS = ["TH","JCB","HYU","SANY","KOM","CAT","KOB","XCMG","LIU","VOL"];
+
+  // Compute Q4 state × OEM
+  const stateOEM = {};
+  TOP_STATES.forEach(s => { stateOEM[s] = {}; OEMS.forEach(o => stateOEM[s][o] = 0); });
+  MONTHS.forEach(m => Object.values(TIV[m]).forEach(region => Object.entries(region).forEach(([state,data]) => {
+    const key = TOP_STATES.find(s => state.includes(s.replace(' & Goa','').replace(' Sikkim','').replace(' ','').toLowerCase().slice(0,5)));
+    const match = TOP_STATES.find(ts => {
+      const sl = state.toLowerCase();
+      if(ts === 'Gujarat' && sl.includes('gujarat')) return true;
+      if(ts === 'Maharashtra' && sl.includes('maharashtra')) return true;
+      if(ts === 'Karnataka' && (sl.includes('karnataka')||sl==='karnataka')) return true;
+      if(ts === 'Rajasthan' && sl.includes('rajasthan')) return true;
+      if(ts === 'WB Sikkim' && sl.includes('bengal')) return true;
+      if(ts === 'Odisha' && (sl.includes('odisha')||sl.includes('orrisa'))) return true;
+      if(ts === 'AP' && sl.includes('andhra')) return true;
+      if(ts === 'Telangana' && sl.includes('telangana')) return true;
+      if(ts === 'TN' && sl.includes('tamilnadu')) return true;
+      if(ts === 'Delhi NCR' && sl.includes('delhi')) return true;
+      return false;
+    });
+    if(match) OEMS.forEach(o => stateOEM[match][o] += (data[o]||0));
+  })));
+
+  // Build table
+  const tbl = document.getElementById('heatmap-table');
+  let html = '<tr><th class="state-col">State</th>' + HM_OEMS.map(o=>`<th>${OEM_NAME[o]}</th>`).join('') + '<th>Total</th></tr>';
+  TOP_STATES.forEach(s => {
+    const rowTotal = HM_OEMS.reduce((a,o)=>a+(stateOEM[s][o]||0),0);
+    if(rowTotal === 0) return;
+    html += `<tr${s==='Karnataka'||s==='WB Sikkim'?'':''}>`;
+    html += `<td class="state-name">${STATE_LABEL[s]}</td>`;
+    HM_OEMS.forEach(o => {
+      const v = stateOEM[s][o]||0;
+      const pct = rowTotal > 0 ? (100*v/rowTotal) : 0;
+      const bg = o==='KOM' ? (pct>15?'#1B3A6B':pct>8?'#2563EB':pct>4?'#93C5FD':'#DBEAFE') :
+                            (pct>20?'#7F1D1D':pct>15?'#DC2626':pct>10?'#FCA5A5':pct>5?'#FEE2E2':'#F8FAFC');
+      const tc = (o==='KOM'&&pct>8)||pct>15?'#fff':'#1E293B';
+      html += `<td><span class="hm-cell" style="background:${bg};color:${tc}">${pct.toFixed(1)}%</span></td>`;
+    });
+    html += `<td style="font-weight:700;color:var(--navy)">${rowTotal}</td></tr>`;
+  });
+  tbl.innerHTML = html;
+}
+
+// ── OEM SUMMARY TABLE ─────────────────────────────────────
+function updateOEMTable(m='all', r='all') {
+  const oems = computeOEMs(m, r);
+  const total = Object.values(oems).reduce((a,b)=>a+b,0);
+  const decOems = computeOEMs('Dec-25', r);
+  const marOems = computeOEMs('Mar-26', r);
+  const decTot = Object.values(decOems).reduce((a,b)=>a+b,0);
+  const marTot = Object.values(marOems).reduce((a,b)=>a+b,0);
+  const monthly = {};
+  MONTHS.forEach(mo => { monthly[mo] = computeOEMs(mo, r); });
+  const sorted = Object.entries(oems).sort((a,b)=>b[1]-a[1]);
+  let html = `<tr><th>#</th><th>OEM</th><th>Dec-25</th><th>Jan-26</th><th>Feb-26</th><th>Mar-26</th><th>Q4 Units</th><th>Q4 Share</th><th>Dec→Mar Δ%</th></tr>`;
+  sorted.forEach(([o,v], i) => {
+    const share = total > 0 ? (100*v/total).toFixed(2) : '0.00';
+    const decS = decTot>0?(100*decOems[o]/decTot):0;
+    const marS = marTot>0?(100*marOems[o]/marTot):0;
+    const delta = marS - decS;
+    const deltaStr = delta >= 0 ? `+${delta.toFixed(2)}pp` : `${delta.toFixed(2)}pp`;
+    const deltaClass = delta > 0.5 ? 'up' : delta < -0.5 ? 'down' : 'flat';
+    const isKom = o === 'KOM';
+    html += `<tr${isKom?' class="komatsu-row"':''}>`;
+    html += `<td><span class="rank-badge${i===0?' top':isKom?' komatsu':''}">${i+1}</span></td>`;
+    html += `<td style="font-weight:${isKom?'700':'400'};color:${isKom?'var(--navy)':'inherit'}">${OEM_NAME[o]}</td>`;
+    MONTHS.forEach(mo => html += `<td>${monthly[mo][o]||0}</td>`);
+    html += `<td style="font-weight:700">${v}</td>`;
+    html += `<td><div class="share-bar-bg" style="margin-bottom:2px"><div class="share-bar-fill" style="width:${Math.min(parseFloat(share)*3,100)}%;background:${OEM_COLOR[o]}"></div></div><span style="font-size:10.5px">${share}%</span></td>`;
+    html += `<td><span class="delta-pill ${deltaClass}">${deltaStr}</span></td>`;
+    html += '</tr>';
+  });
+  document.getElementById('oem-summary-table').innerHTML = html;
+}
+
+// ── SOURCES ───────────────────────────────────────────────
+const SOURCES = [
+  {n:1,title:'ICEMA Annual Sales Report FY25',url:'https://www.i-cema.in/wp-content/uploads/2025/06/ICEMA-Press-Release_Annual-Sales-Report-FY25_28May25.pdf'},
+  {n:2,title:'CRISIL CE Volume Growth 2-4% FY26',url:'https://www.crisilratings.com/en/home/newsroom/press-releases/2025/11/construction-equipment-volume-growth-tepid-at-2-4-percent-on-slow-demand.html'},
+  {n:3,title:'L&T Annual Review 2024-25 — CMMB',url:'https://annualreview.larsentoubro.com/construction-and-mining-machinery.html'},
+  {n:4,title:'L&T PC210-10M0 Class Leader — Equipment India',url:'https://equipmentindia.com/construction-machinery-news/top-equipment-news/webexclusive/L-T-records-highest-sales-of-Komatsu-PC210-10M0-machine-in-short-time/126964'},
+  {n:5,title:'Union Budget FY26 — ₹11.21L Cr Capex — PIB',url:'https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2098353'},
+  {n:6,title:'Bharatmala Phase-I: 21,783 km built — ConstructionWorld',url:'https://www.constructionworld.in/transport-infrastructure/highways-and-roads-infrastructure/bharatmala-pariyojana-sees-over-21-700-km-roads-built/85614'},
+  {n:7,title:'India Coal Target 1.5BT by FY30 — Business Standard',url:'https://www.business-standard.com/industry/news/domestic-coal-production-likely-to-grow-6-7-pc-annually-over-next-few-years-kishan-reddy-126030901044_1.html'},
+  {n:8,title:'McKinsey: Aftermarket 25% EBIT vs 10% New Equipment',url:'https://www.mckinsey.com/~/media/mckinsey/industries/advanced%20electronics/our%20insights/why-aftermarket-and-service-are-vital-to-oems-and-how-to-excel/why-aftermarket-and-service-are-vital-to-oems-and-how-to-excel-vf.pdf'},
+  {n:9,title:'KOMTRAX Remote Monitoring — Komatsu Global',url:'https://www.komatsu.com/en-za/services/remote-monitoring/komtrax'},
+  {n:10,title:'Tata Hitachi MD: JV Share ~24% — Business Standard',url:'https://www.business-standard.com/companies/news/atmanirbharta-has-been-part-of-our-culture-tata-hitachi-md-sandeep-singh-124070201007_1.html'},
+  {n:11,title:'SANY India — #2 in Indian Excavators',url:'https://www.sany.in/about-us/'},
+  {n:12,title:'DieselNet — India CEV Stage IV/V Standards',url:'https://dieselnet.com/standards/in/nonroad.php'},
+];
+document.getElementById('sources-grid').innerHTML = SOURCES.map(s => `
+  <div class="source-item">
+    <div class="source-num">${s.n}</div>
+    <div>
+      <div class="source-title">${s.title}</div>
+      <a href="${s.url}" target="_blank" class="source-link">${s.url.replace('https://','').slice(0,55)}${s.url.length>60?'…':''}</a>
+    </div>
+  </div>`).join('');
+
+// ── SCROLL HELPER ─────────────────────────────────────────
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.sb-step').forEach(s=>s.classList.remove('active'));
+  const steps = ['analysis1','analysis2','analysis3','analysis4','analysis5','reference'];
+  const idx = steps.indexOf(id);
+  if(idx>=0) document.querySelectorAll('.sb-step')[idx]?.classList.add('active');
+}
+
+// ── FILE UPLOAD ───────────────────────────────────────────
+let uploadedData = null;
+function handleDragOver(e){e.preventDefault();document.getElementById('upload-zone').classList.add('drag-over')}
+function handleDragLeave(e){document.getElementById('upload-zone').classList.remove('drag-over')}
+function handleDrop(e){
+  e.preventDefault();document.getElementById('upload-zone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if(file) processFile(file);
+}
+function handleFileSelect(e){const file = e.target.files[0]; if(file) processFile(file);}
+function processFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = e.target.result;
+    const lines = text.split('\n').filter(l=>l.trim());
+    if(lines.length < 2){showUploadError('File appears empty or unreadable.'); return;}
+    const headers = lines[0].split(',').map(h=>h.trim());
+    const required = ['Region','State','Komatsu'];
+    const missing = required.filter(r=>!headers.some(h=>h.toLowerCase()===r.toLowerCase()));
+    if(missing.length){showUploadError(`Missing columns: ${missing.join(', ')}`); return;}
+    // Parse data
+    const rows = lines.slice(1).map(l => {
+      const vals = l.split(',');
+      const obj = {};
+      headers.forEach((h,i) => obj[h.trim()] = vals[i]?.trim()||'0');
+      return obj;
+    }).filter(r => r.State && r.State !== 'Total');
+    uploadedData = {headers, rows};
+    showUploadPreview(rows.slice(0,5), headers);
+  };
+  reader.onerror = () => showUploadError('Could not read file.');
+  reader.readAsText(file);
+}
+function showUploadPreview(rows, headers) {
+  const preview = document.getElementById('upload-preview');
+  const tbl = document.getElementById('preview-table');
+  const status = document.getElementById('upload-status');
+  status.className = 'upload-status success';
+  status.innerHTML = `✅ File parsed — ${uploadedData.rows.length} state rows detected. Preview below (first 5 rows):`;
+  let html = `<tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr>`;
+  rows.forEach(r => html += `<tr>${headers.map(h=>`<td>${r[h]||''}</td>`).join('')}</tr>`);
+  tbl.innerHTML = html;
+  preview.style.display = 'block';
+}
+function showUploadError(msg) {
+  const status = document.getElementById('upload-status');
+  status.className = 'upload-status error'; status.textContent = '❌ ' + msg;
+  document.getElementById('upload-preview').style.display = 'block';
+}
+function clearUpload() {
+  uploadedData = null;
+  document.getElementById('upload-preview').style.display = 'none';
+  document.getElementById('file-input').value = '';
+}
+function applyUploadedData() {
+  if(!uploadedData){alert('No data to apply.');return;}
+  const monthName = prompt('Enter the month label for this data (e.g. Apr-26, May-26):');
+  if(!monthName){return;}
+  // Build TIV structure from CSV
+  const newMonth = {};
+  uploadedData.rows.forEach(row => {
+    const region = row.Region || 'Other';
+    const state = row.State || 'Unknown';
+    if(!newMonth[region]) newMonth[region] = {};
+    newMonth[region][state] = {};
+    const colMap = {CAT:['CAT','Cat'],TH:['Tata Hitachi','TH','TATA HITACHI'],KOM:['Komatsu','KOM'],KOB:['Kobelco','KOB'],VOL:['Volvo','VOL'],JCB:['JCB'],HYU:['Hyundai','HYU'],SANY:['SANY'],XCMG:['XCMG'],LIU:['LiuGong','Liyugong','LIU'],CASE:['CASE']};
+    OEMS.forEach(o => {
+      const aliases = colMap[o] || [o];
+      const col = aliases.find(a => uploadedData.headers.some(h=>h.toLowerCase()===a.toLowerCase()));
+      const hdr = col ? uploadedData.headers.find(h=>h.toLowerCase()===col.toLowerCase()) : null;
+      newMonth[region][state][o] = hdr ? parseInt(row[hdr]||'0')||0 : 0;
+    });
+  });
+  TIV[monthName] = newMonth;
+  if(!MONTHS.includes(monthName)) MONTHS.push(monthName);
+  // Update month selector
+  const sel = document.getElementById('f-month');
+  if(![...sel.options].some(o=>o.value===monthName)){
+    const opt = document.createElement('option');
+    opt.value = monthName; opt.textContent = monthName;
+    sel.appendChild(opt);
+  }
+  applyFilters();
+  clearUpload();
+  alert(`✅ Data for "${monthName}" applied to all charts and tables!`);
+}
+function downloadTemplate() {
+  const header = 'Region,State,CAT,Tata Hitachi,Komatsu,Kobelco,Volvo,JCB,Hyundai,SANY,XCMG,LiuGong,CASE,Total';
+  const sampleRows = [
+    'North,Jammu,1,1,2,3,1,7,6,0,0,0,0,21',
+    'North,Punjab,2,11,2,8,2,8,12,10,8,2,0,65',
+    'North,Himachal,0,1,1,3,0,5,5,4,0,2,0,21',
+    'North,Haryana,1,1,4,10,2,9,8,2,2,4,0,43',
+    'Delhi NCR,Delhi NCR,15,19,9,8,13,43,8,10,13,7,2,147',
+    'Guwahati-NE,North East,3,13,18,7,9,20,25,18,8,2,1,124',
+    'East,West Bengal & Sikkim,5,46,12,21,11,38,20,14,17,5,0,189',
+    'East,Jharkhand,4,41,4,1,14,17,22,4,0,2,0,109',
+    'East,Odisha,10,37,0,16,10,21,34,10,14,1,0,153',
+    'East,Bihar,3,20,0,5,6,18,1,2,1,2,0,58',
+    'Central India,Madhya Pradesh,27,22,8,10,13,24,17,0,1,5,0,127',
+    'Central India,Chhattisgarh,4,11,7,6,1,7,10,5,1,1,0,53',
+    'West,Rajasthan,11,55,13,24,18,45,34,32,16,16,3,267',
+    'West,Gujarat,12,69,13,5,18,50,69,41,36,18,2,333',
+    'West,Maharashtra & Goa,53,61,27,16,24,59,61,27,12,6,0,346',
+    'South,Karnataka,11,61,49,9,7,56,49,16,5,4,0,267',
+    'South,Andhra Pradesh,0,0,0,0,0,0,0,0,0,0,0,0',
+    'South,Telangana,8,67,8,8,12,31,4,19,9,6,0,172',
+    'South,Tamil Nadu,0,0,0,0,0,0,0,0,0,0,0,0',
+    'South,Kerala,0,0,0,0,0,0,0,0,0,0,1,1',
+  ];
+  const csv = [header, ...sampleRows].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'LT_CMMB_TIV_Template.csv';
+  a.click();
+}
+
+// ── INIT ──────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  updateShareChart();
+  buildMomentumChart();
+  buildRegionalChart();
+  buildHeatmap();
+  updateOEMTable();
+});
+</script>
+</body>
+</html>
