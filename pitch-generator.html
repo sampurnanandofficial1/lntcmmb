@@ -107,12 +107,15 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:#0F172A
 </head>
 <body>
 
-<div id="platform-nav" style="background:#0F2447;padding:4px 20px;display:flex;align-items:center;gap:4px;font-size:11px;flex-wrap:wrap">
-  <a href="tiv.html" style="color:rgba(255,255,255,.75);text-decoration:none;padding:4px 11px;border-radius:4px;border:1px solid rgba(255,255,255,.2);font-weight:600;margin-right:4px">🏠 TIV Home</a>
-  <a href="index.html" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 11px;border-radius:4px">📋 Contracts</a>
-  <a href="used-equipment.html" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 11px;border-radius:4px">🏗️ Used Equipment</a>
-  <a href="pitch-generator.html" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 11px;border-radius:4px">🤖 AI Pitch</a>
-  <a href="https://sampurnanandofficial1.github.io/lnt_equipcare/" target="_blank" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 11px;border-radius:4px">⚙️ EquipCare ↗</a>
+
+<div id="platform-nav" style="background:#1B3A6B;padding:5px 20px;display:flex;align-items:center;gap:4px;font-size:11px;border-bottom:1px solid rgba(255,255,255,.1)">
+  <a href="index.html" id="pn-tiv" style="color:rgba(255,255,255,.9);text-decoration:none;padding:4px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.25);font-weight:600;margin-right:4px;background:rgba(255,255,255,.08)">🏠 TIV Home</a>
+  <a href="contracts.html" id="pn-contracts" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;border-radius:4px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 Contracts</a>
+  <a href="used-equipment.html" id="pn-ue" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;border-radius:4px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏗️ Used Equipment</a>
+  <a href="pitch-generator.html" id="pn-pitch" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;border-radius:4px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🤖 AI Pitch</a>
+  <a href="https://sampurnanandofficial1.github.io/lnt_equipcare/" target="_blank" id="pn-equipcare" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;border-radius:4px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">⚙️ EquipCare ↗</a>
+  <div style="flex:1"></div>
+  <span style="font-size:9.5px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.8px">L&T CMMB INTELLIGENCE PLATFORM</span>
 </div>
 <div class="pg-header">
   <div class="pg-logo">
@@ -998,6 +1001,19 @@ window.addEventListener('DOMContentLoaded',function(){
   loadTCOFromFirestore();
   loadWANumber();
 });
+</script>
+<script>
+// Highlight current page in platform-nav
+(function(){
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const map = {'index.html':'pn-tiv','contracts.html':'pn-contracts',
+    'used-equipment.html':'pn-ue','pitch-generator.html':'pn-pitch'};
+  const id = map[path];
+  if(id){
+    const el = document.getElementById(id);
+    if(el){el.style.background='rgba(255,255,255,.15)';el.style.borderColor='rgba(255,255,255,.3)';el.style.color='#fff';}
+  }
+})();
 </script>
 </body>
 </html>
