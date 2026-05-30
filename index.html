@@ -90,22 +90,8 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:13px;min-height:100vh;
   background-image:radial-gradient(ellipse 120% 80% at 50% -5%,rgba(37,99,235,.04) 0%,transparent 60%)}
 
-/* ── TOP NAV ──────────────────────────────────────────────── */
-
-.nbrand{display:flex;align-items:center;gap:12px}
-
-
-
-
-.dlive{width:6px;height:6px;border-radius:50%;background:#10B981;animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,.4)}50%{opacity:.7;box-shadow:0 0 0 4px rgba(16,185,129,0)}}
-.nright{display:flex;align-items:center;gap:8px}
-
-
-
-
 /* ── TAB BAR (Storyboard Navigation) ─────────────────────── */
-#tabs{background:#FFFFFF;border-bottom:1px solid #E2E8F0;display:flex;padding:0 22px;align-items:flex-end;position:sticky;top:54px;z-index:2000}
+#tabs{background:#FFFFFF;border-bottom:1px solid #E2E8F0;display:flex;padding:0 22px;align-items:flex-end;position:sticky;top:92px;z-index:2000}
 .tab{padding:11px 16px;border:none;background:transparent;font-size:12px;font-weight:500;
   color:#64748B;cursor:pointer;border-bottom:2px solid transparent;
   transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap;letter-spacing:.1px;font-family:'Inter',sans-serif}
@@ -359,25 +345,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 
 <!-- ══ TOP NAV ══════════════════════════════════════════════ -->
 
-<nav id="nav">
-  <div class="nbrand">
-    <div class="nlogo">L&T</div>
-    <div>
-      <div class="ntitle">TIV Intelligence Hub · CMMB Strategy</div>
-      <div class="nsub">Indian Excavator Market · 11 OEMs · 7 Regions · 24 States · Dec 2025 – Mar 2026</div>
-    </div>
-  </div>
-  <div style="display:flex;align-items:center;gap:10px">
-    <div class="nlive"><div class="dlive"></div><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:500">Internal Intelligence Platform</span></div>
-  </div>
-  <div class="nright">
-    <div class="nclock" id="ist-clock">—</div>
-    
-    
-    <div style="font-size:10px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.05);
-      border:1px solid var(--border);padding:4px 10px;border-radius:5px">INTERNAL USE ONLY</div>
-  </div>
-</nav>
+
 
 <!-- ══ TAB BAR — STORYBOARD ═════════════════════════════════ -->
 <div id="tabs">
