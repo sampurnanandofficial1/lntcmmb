@@ -982,7 +982,7 @@ function computeOEMs(m='all',r='all'){
 function tot(o){return Object.values(o).reduce((a,b)=>a+b,0);}
 
 // CLOCK
-function tick(){document.getElementById('ist-clock').textContent=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'})+' IST';}
+function tick(){const _c=document.getElementById('un-clock')||document.getElementById('ist-clock');if(_c)_c.textContent=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'})+' IST';}
 setInterval(tick,1000);tick();
 
 // TOAST
@@ -1256,7 +1256,7 @@ const SOURCES=[
   {n:11,title:'Kobelco India 20,000th Excavator Roll-out',url:'https://www.constructionworld.in/heavy-construction-equipment/kobelco-india-rolls-out-20000th-excavator-expands-rd-in-sri-city/70838'},
   {n:12,title:'DieselNet India CEV Stage IV/V Standards',url:'https://dieselnet.com/standards/in/nonroad.php'},
 ];
-document.getElementById('src-grid').innerHTML=SOURCES.map(s=>`
+const _sg=document.getElementById('src-grid');if(_sg)_sg.innerHTML=SOURCES.map(s=>`
   <div class="src-item">
     <div class="src-n">${s.n}</div>
     <div><div class="src-title">${s.title}</div><a href="${s.url}" target="_blank" class="src-link">${s.url.replace('https://','').slice(0,55)}${s.url.length>60?'…':''}</a></div>
