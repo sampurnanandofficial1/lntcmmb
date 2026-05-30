@@ -332,7 +332,54 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
   border: 1px solid #334155 !important;
 }
 
+
+/* ── TIV INDIA MAP ────────────────────────────────────── */
+#tiv-map { height: 520px; border-radius: 8px; overflow: hidden; z-index: 1; }
+.map-toolbar {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 10px 14px; background: #F8FAFC;
+  border-bottom: 1px solid var(--border);
+}
+.mbtn {
+  padding: 5px 13px; border: 1.5px solid var(--border-med);
+  background: #fff; color: #374151; border-radius: 6px;
+  font-size: 11.5px; font-weight: 600; cursor: pointer;
+  transition: all .15s; display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Inter', sans-serif;
+}
+.mbtn:hover { background: #F1F5F9; }
+.mbtn.active { background: #1B3A6B; color: #fff; border-color: #1B3A6B; }
+.oem-selector {
+  display: flex; gap: 5px; flex-wrap: wrap;
+  padding: 8px 14px; background: #fff;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+.oem-chip {
+  padding: 4px 11px; border: 1.5px solid var(--border-med);
+  border-radius: 20px; font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all .15s; background: #fff;
+  color: #374151; font-family: 'Inter', sans-serif;
+}
+.oem-chip:hover { opacity: .85; }
+.oem-chip.active { color: #fff !important; border-color: transparent; }
+.map-stat { font-size: 11px; color: #374151; margin-left: auto; }
+.map-stat strong { color: #1B3A6B; }
+/* Popup styling */
+.tiv-popup .ppt { font-weight: 700; color: #1B3A6B; font-size: 12.5px; margin-bottom: 7px; line-height: 1.4; }
+.tiv-popup .ppr { display: flex; justify-content: space-between; font-size: 11px; color: #475569; margin-bottom: 3px; padding: 2px 0; border-bottom: 1px solid #F1F5F9; }
+.tiv-popup .ppv { font-weight: 600; color: #1E293B; }
+/* Leaflet popup overrides */
+.leaflet-popup-content-wrapper { border-radius: 10px !important; box-shadow: 0 8px 24px rgba(0,0,0,.15) !important; padding: 0 !important; }
+.leaflet-popup-content { margin: 14px !important; }
+
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 </head>
 <body>
 
@@ -367,7 +414,7 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
 
 <!-- ══ TAB BAR — STORYBOARD ═════════════════════════════════ -->
 <div id="tabs">
-  <button class="tab active" onclick="switchTab('home')" id="t-home">
+  <button class="tab" onclick="switchTab('home')" id="t-home">
     <i class="fa fa-home"></i> Hub Overview
   </button>
   <div class="tab-divider"></div>
@@ -386,8 +433,8 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
   <button class="tab" onclick="switchTab('patterns')" id="t-patterns">
     <i class="fa fa-lightbulb"></i> Key Patterns
   </button>
-  <button class="tab" onclick="switchTab('oem_heatmap')" id="t-oem_heatmap">
-    <i class="fa fa-th"></i> OEM Heatmap
+  <button class="tab active" onclick="switchTab('oem_heatmap')" id="t-oem_heatmap">
+    <i class="fa fa-map-marked-alt"></i> India Map
   </button>
   <button class="tab" onclick="switchTab('premium')" id="t-premium">
     <i class="fa fa-star"></i> Premium View
@@ -427,7 +474,7 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
 <!-- ══════════════════════════════════════════════════════════
      TAB 1 — HUB OVERVIEW (Homepage)
 ══════════════════════════════════════════════════════════ -->
-<section class="section active" id="sec-home">
+<section class="section" id="sec-home">
   <div style="max-width:1300px;margin:0 auto">
 
     <!-- Platform Cards -->
@@ -926,520 +973,56 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
   </div>
 </section>
 
-<!-- ══ OEM FULL HEATMAP SECTION ═════════════════════════════════════════ -->
-<section class="section" id="sec-oem_heatmap">
+<!-- ══ INDIA TIV MAP SECTION ══════════════════════════════════════════ -->
+<section class="section active" id="sec-oem_heatmap">
   <div style="max-width:1300px;margin:0 auto">
+
     <div class="sec-head">
-      <div><div class="sec-title">OEM Full Heatmap — All 11 OEMs × All States</div>
-      <div class="sec-sub">Share % of state TIV for each OEM · Q4 Dec 2025–Mar 2026 cumulative · Darker = higher concentration</div></div>
-      <span class="sec-badge">11 OEMs · 17 States</span>
+      <div>
+        <div class="sec-title"><i class="fa fa-map-marked-alt" style="color:#1B3A6B;margin-right:8px"></i>India TIV Map — State-level Excavator Sales</div>
+        <div class="sec-sub">Select OEM · toggle view: Markers · Clusters · Heatmap · Choropleth · Q4 Dec 2025–Mar 2026</div>
+      </div>
+      <span class="sec-badge" id="map-badge">Komatsu · Q4 · All India</span>
     </div>
-    <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11.5px;color:#78350F;font-weight:500">
-      📌 <strong>How to read:</strong> Each row = one state. Each cell = OEM's % of that state's total volume. Rows sum to ~100%. Navy blue = Komatsu stronghold. Deep red = Tata Hitachi dominance.
+
+    <!-- OEM Selector -->
+    <div class="oem-selector">
+      <span style="font-size:11px;font-weight:700;color:#374151;margin-right:4px">OEM:</span>
+      <span class="oem-chip active" data-oem="KOM" style="background:#1B3A6B" onclick="selectMapOEM('KOM',this)">🏗️ Komatsu</span>
+      <span class="oem-chip" data-oem="TH"  onclick="selectMapOEM('TH',this)">Tata Hitachi</span>
+      <span class="oem-chip" data-oem="JCB" onclick="selectMapOEM('JCB',this)">JCB</span>
+      <span class="oem-chip" data-oem="HYU" onclick="selectMapOEM('HYU',this)">Hyundai</span>
+      <span class="oem-chip" data-oem="SANY" onclick="selectMapOEM('SANY',this)">SANY</span>
+      <span class="oem-chip" data-oem="CAT" onclick="selectMapOEM('CAT',this)">CAT</span>
+      <span class="oem-chip" data-oem="KOB" onclick="selectMapOEM('KOB',this)">Kobelco</span>
+      <span class="oem-chip" data-oem="XCMG" onclick="selectMapOEM('XCMG',this)">XCMG</span>
+      <span class="oem-chip" data-oem="VOL" onclick="selectMapOEM('VOL',this)">Volvo</span>
+      <span class="oem-chip" data-oem="ALL" onclick="selectMapOEM('ALL',this)">All OEMs</span>
+      <span class="map-stat">Showing: <strong id="map-units-lbl">822 units</strong> across <strong id="map-states-lbl">17 states</strong></span>
     </div>
-    <div class="card">
-      <div class="card-head"><div class="card-title"><i class="fa fa-th" style="color:#1B3A6B"></i>Complete State × OEM Matrix — Q4 Cumulative</div><div class="card-badge">11 OEMs · Dec 2025–Mar 2026</div></div>
-      <div class="card-body" style="overflow-x:auto;padding:12px"><table class="hm" id="full-heatmap-tbl" style="min-width:900px"></table></div>
+
+    <!-- Map toolbar -->
+    <div class="map-toolbar">
+      <button class="mbtn active" id="tiv-bmark" onclick="tivTogL('markers')"><i class="fa fa-map-marker-alt"></i> Markers</button>
+      <button class="mbtn" id="tiv-bclust" onclick="tivTogL('clusters')"><i class="fa fa-circle"></i> Clusters</button>
+      <button class="mbtn" id="tiv-bheat" onclick="tivTogL('heat')"><i class="fa fa-fire"></i> Heatmap</button>
+      <div style="flex:1"></div>
+      <span style="font-size:10.5px;color:#64748B"><i class="fa fa-info-circle"></i> Marker size = volume · Click for state details</span>
     </div>
-    <div class="g2 gap-top">
-      <div class="card"><div class="card-head"><div class="card-title"><i class="fa fa-chart-bar" style="color:#1B3A6B"></i>Komatsu Strongholds — Top States</div></div><div class="card-body"><div class="ch h200"><canvas id="hm-kom-chart"></canvas></div></div></div>
-      <div class="card"><div class="card-head"><div class="card-title"><i class="fa fa-chart-bar" style="color:#DC2626"></i>Tata Hitachi Strongholds</div></div><div class="card-body"><div class="ch h200"><canvas id="hm-th-chart"></canvas></div></div></div>
+
+    <!-- Map container -->
+    <div id="tiv-map"></div>
+
+    <!-- State summary table below map -->
+    <div class="card gap-top">
+      <div class="card-head">
+        <div class="card-title"><i class="fa fa-table" style="color:#1B3A6B"></i> State-wise Volume — Selected OEM</div>
+        <div class="card-badge" id="map-table-badge">Komatsu · Q4</div>
+      </div>
+      <div class="card-body" style="padding:10px;overflow-x:auto">
+        <table class="hm" id="map-state-table"></table>
+      </div>
     </div>
+
   </div>
 </section>
-
-<footer>
-  <div class="foot-l"><strong>L&T CMMB · TIV Intelligence Hub</strong> · IIM Lucknow MBA Internship · May 2026 · <strong>Data cut-off: 31 March 2026</strong></div>
-  <div class="foot-r">Internal use only · Do not cite OEM volumes externally without ICEMA permission · v7.1</div>
-</footer>
-
-<script>
-// ════════════════════════════════════════════════════════
-// TIV DATA
-// ════════════════════════════════════════════════════════
-const TIV={"Dec-25":{"North":{"Jammu":{"CAT":1,"TH":1,"KOM":2,"KOB":3,"VOL":1,"JCB":7,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":2,"TH":11,"KOM":2,"KOB":8,"VOL":2,"JCB":8,"HYU":12,"SANY":10,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":0,"TH":1,"KOM":1,"KOB":3,"VOL":0,"JCB":5,"HYU":5,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":1,"TH":1,"KOM":4,"KOB":10,"VOL":2,"JCB":9,"HYU":8,"SANY":2,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":15,"TH":19,"KOM":9,"KOB":8,"VOL":13,"JCB":43,"HYU":8,"SANY":10,"XCMG":13,"LIU":7,"CASE":2},"UK W.UP":{"CAT":1,"TH":2,"KOM":1,"KOB":1,"VOL":1,"JCB":2,"HYU":4,"SANY":1,"XCMG":7,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":7,"TH":27,"KOM":5,"KOB":1,"VOL":3,"JCB":15,"HYU":18,"SANY":9,"XCMG":6,"LIU":5,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":3,"TH":13,"KOM":18,"KOB":7,"VOL":9,"JCB":20,"HYU":25,"SANY":18,"XCMG":8,"LIU":2,"CASE":1}},"East":{"WB Sikkim":{"CAT":5,"TH":46,"KOM":12,"KOB":21,"VOL":11,"JCB":38,"HYU":20,"SANY":14,"XCMG":17,"LIU":5,"CASE":0},"Jharkhand":{"CAT":4,"TH":41,"KOM":4,"KOB":1,"VOL":14,"JCB":17,"HYU":22,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Odisha":{"CAT":10,"TH":37,"KOM":0,"KOB":16,"VOL":10,"JCB":21,"HYU":34,"SANY":10,"XCMG":14,"LIU":1,"CASE":0},"Bihar":{"CAT":3,"TH":20,"KOM":0,"KOB":5,"VOL":6,"JCB":18,"HYU":1,"SANY":2,"XCMG":1,"LIU":2,"CASE":0}},"Central India":{"MP":{"CAT":27,"TH":22,"KOM":8,"KOB":10,"VOL":13,"JCB":24,"HYU":17,"SANY":0,"XCMG":1,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":4,"TH":11,"KOM":7,"KOB":6,"VOL":1,"JCB":7,"HYU":10,"SANY":5,"XCMG":1,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":11,"TH":55,"KOM":13,"KOB":24,"VOL":18,"JCB":45,"HYU":34,"SANY":32,"XCMG":16,"LIU":16,"CASE":3},"Gujarat":{"CAT":12,"TH":69,"KOM":13,"KOB":5,"VOL":18,"JCB":50,"HYU":69,"SANY":41,"XCMG":36,"LIU":18,"CASE":2},"Maharashtra":{"CAT":53,"TH":61,"KOM":27,"KOB":16,"VOL":24,"JCB":59,"HYU":61,"SANY":27,"XCMG":12,"LIU":6,"CASE":0}},"South":{"Karnataka":{"CAT":11,"TH":61,"KOM":49,"KOB":9,"VOL":7,"JCB":56,"HYU":49,"SANY":16,"XCMG":5,"LIU":4,"CASE":0},"AP":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Telangana":{"CAT":8,"TH":67,"KOM":8,"KOB":8,"VOL":12,"JCB":31,"HYU":4,"SANY":19,"XCMG":9,"LIU":6,"CASE":0},"TN":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":1}}},"Jan-26":{"North":{"Jammu":{"CAT":6,"TH":1,"KOM":4,"KOB":2,"VOL":12,"JCB":6,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":2,"TH":8,"KOM":6,"KOB":5,"VOL":2,"JCB":5,"HYU":10,"SANY":10,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":0,"TH":0,"KOM":1,"KOB":1,"VOL":0,"JCB":10,"HYU":7,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":2,"TH":1,"KOM":4,"KOB":4,"VOL":1,"JCB":9,"HYU":9,"SANY":2,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":9,"TH":17,"KOM":9,"KOB":3,"VOL":7,"JCB":43,"HYU":34,"SANY":10,"XCMG":13,"LIU":7,"CASE":2},"UK W.UP":{"CAT":1,"TH":4,"KOM":1,"KOB":1,"VOL":0,"JCB":2,"HYU":2,"SANY":1,"XCMG":7,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":8,"TH":22,"KOM":5,"KOB":0,"VOL":1,"JCB":19,"HYU":15,"SANY":11,"XCMG":0,"LIU":1,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":3,"TH":15,"KOM":12,"KOB":4,"VOL":7,"JCB":22,"HYU":30,"SANY":14,"XCMG":2,"LIU":2,"CASE":0}},"East":{"WB Sikkim":{"CAT":7,"TH":44,"KOM":19,"KOB":18,"VOL":11,"JCB":39,"HYU":31,"SANY":8,"XCMG":17,"LIU":7,"CASE":1},"Jharkhand":{"CAT":7,"TH":33,"KOM":5,"KOB":1,"VOL":4,"JCB":19,"HYU":22,"SANY":10,"XCMG":0,"LIU":0,"CASE":0},"Odisha":{"CAT":9,"TH":41,"KOM":6,"KOB":16,"VOL":10,"JCB":40,"HYU":39,"SANY":13,"XCMG":14,"LIU":10,"CASE":0},"Bihar":{"CAT":0,"TH":16,"KOM":0,"KOB":3,"VOL":0,"JCB":17,"HYU":7,"SANY":0,"XCMG":1,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":14,"TH":36,"KOM":7,"KOB":9,"VOL":4,"JCB":18,"HYU":39,"SANY":29,"XCMG":4,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":6,"TH":23,"KOM":11,"KOB":6,"VOL":3,"JCB":14,"HYU":17,"SANY":7,"XCMG":8,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":10,"TH":33,"KOM":13,"KOB":24,"VOL":9,"JCB":45,"HYU":51,"SANY":32,"XCMG":20,"LIU":21,"CASE":1},"Gujarat":{"CAT":9,"TH":59,"KOM":13,"KOB":5,"VOL":6,"JCB":50,"HYU":63,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":22,"TH":69,"KOM":23,"KOB":38,"VOL":7,"JCB":59,"HYU":69,"SANY":27,"XCMG":12,"LIU":6,"CASE":0}},"South":{"Karnataka":{"CAT":9,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":16,"XCMG":5,"LIU":4,"CASE":0},"AP":{"CAT":9,"TH":61,"KOM":5,"KOB":25,"VOL":4,"JCB":55,"HYU":57,"SANY":0,"XCMG":0,"LIU":9,"CASE":1},"Telangana":{"CAT":6,"TH":49,"KOM":4,"KOB":13,"VOL":7,"JCB":32,"HYU":12,"SANY":22,"XCMG":4,"LIU":6,"CASE":0},"TN":{"CAT":6,"TH":59,"KOM":9,"KOB":0,"VOL":0,"JCB":53,"HYU":59,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":1,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}}},"Feb-26":{"North":{"Jammu":{"CAT":4,"TH":0,"KOM":1,"KOB":2,"VOL":1,"JCB":7,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":5,"TH":9,"KOM":6,"KOB":6,"VOL":0,"JCB":8,"HYU":9,"SANY":7,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":3,"TH":1,"KOM":1,"KOB":5,"VOL":0,"JCB":8,"HYU":5,"SANY":0,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":4,"TH":2,"KOM":3,"KOB":2,"VOL":1,"JCB":3,"HYU":6,"SANY":4,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":9,"TH":12,"KOM":8,"KOB":11,"VOL":8,"JCB":32,"HYU":33,"SANY":10,"XCMG":9,"LIU":7,"CASE":1},"UK W.UP":{"CAT":1,"TH":13,"KOM":0,"KOB":0,"VOL":2,"JCB":4,"HYU":4,"SANY":1,"XCMG":2,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":9,"TH":22,"KOM":2,"KOB":3,"VOL":2,"JCB":19,"HYU":12,"SANY":11,"XCMG":1,"LIU":2,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":4,"TH":11,"KOM":12,"KOB":4,"VOL":5,"JCB":22,"HYU":30,"SANY":14,"XCMG":2,"LIU":2,"CASE":0}},"East":{"WB Sikkim":{"CAT":7,"TH":38,"KOM":19,"KOB":18,"VOL":9,"JCB":39,"HYU":31,"SANY":8,"XCMG":19,"LIU":19,"CASE":1},"Jharkhand":{"CAT":5,"TH":32,"KOM":5,"KOB":1,"VOL":3,"JCB":16,"HYU":22,"SANY":10,"XCMG":3,"LIU":2,"CASE":0},"Odisha":{"CAT":14,"TH":32,"KOM":6,"KOB":12,"VOL":9,"JCB":40,"HYU":39,"SANY":13,"XCMG":8,"LIU":20,"CASE":0},"Bihar":{"CAT":1,"TH":16,"KOM":0,"KOB":3,"VOL":0,"JCB":17,"HYU":7,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":9,"TH":36,"KOM":7,"KOB":6,"VOL":4,"JCB":18,"HYU":39,"SANY":29,"XCMG":4,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":4,"TH":23,"KOM":9,"KOB":1,"VOL":3,"JCB":14,"HYU":17,"SANY":7,"XCMG":2,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":13,"TH":43,"KOM":17,"KOB":20,"VOL":8,"JCB":54,"HYU":48,"SANY":32,"XCMG":20,"LIU":21,"CASE":0},"Gujarat":{"CAT":15,"TH":59,"KOM":13,"KOB":5,"VOL":6,"JCB":50,"HYU":63,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":35,"TH":55,"KOM":19,"KOB":18,"VOL":7,"JCB":41,"HYU":45,"SANY":26,"XCMG":14,"LIU":9,"CASE":0}},"South":{"Karnataka":{"CAT":12,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":16,"XCMG":5,"LIU":4,"CASE":1},"AP":{"CAT":5,"TH":55,"KOM":6,"KOB":21,"VOL":4,"JCB":49,"HYU":51,"SANY":0,"XCMG":0,"LIU":9,"CASE":1},"Telangana":{"CAT":9,"TH":31,"KOM":4,"KOB":15,"VOL":6,"JCB":25,"HYU":18,"SANY":29,"XCMG":4,"LIU":2,"CASE":0},"TN":{"CAT":12,"TH":59,"KOM":7,"KOB":0,"VOL":0,"JCB":49,"HYU":59,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":5,"TH":11,"KOM":2,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}}},"Mar-26":{"North":{"Jammu":{"CAT":2,"TH":0,"KOM":1,"KOB":1,"VOL":1,"JCB":7,"HYU":4,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":7,"TH":16,"KOM":3,"KOB":8,"VOL":1,"JCB":18,"HYU":10,"SANY":6,"XCMG":7,"LIU":7,"CASE":0},"Himachal":{"CAT":1,"TH":4,"KOM":1,"KOB":6,"VOL":0,"JCB":6,"HYU":5,"SANY":2,"XCMG":0,"LIU":3,"CASE":1},"Haryana":{"CAT":1,"TH":3,"KOM":1,"KOB":3,"VOL":0,"JCB":3,"HYU":9,"SANY":1,"XCMG":2,"LIU":9,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":18,"TH":19,"KOM":7,"KOB":7,"VOL":4,"JCB":52,"HYU":23,"SANY":19,"XCMG":16,"LIU":7,"CASE":1},"UK W.UP":{"CAT":1,"TH":8,"KOM":0,"KOB":1,"VOL":2,"JCB":4,"HYU":5,"SANY":2,"XCMG":1,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":7,"TH":23,"KOM":6,"KOB":6,"VOL":2,"JCB":20,"HYU":17,"SANY":17,"XCMG":5,"LIU":5,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":1,"TH":10,"KOM":14,"KOB":2,"VOL":2,"JCB":23,"HYU":24,"SANY":14,"XCMG":7,"LIU":1,"CASE":0}},"East":{"WB Sikkim":{"CAT":5,"TH":34,"KOM":35,"KOB":30,"VOL":9,"JCB":25,"HYU":39,"SANY":9,"XCMG":10,"LIU":9,"CASE":0},"Jharkhand":{"CAT":6,"TH":31,"KOM":2,"KOB":0,"VOL":3,"JCB":29,"HYU":20,"SANY":10,"XCMG":4,"LIU":8,"CASE":0},"Odisha":{"CAT":6,"TH":78,"KOM":17,"KOB":24,"VOL":6,"JCB":40,"HYU":44,"SANY":14,"XCMG":12,"LIU":9,"CASE":0},"Bihar":{"CAT":5,"TH":22,"KOM":1,"KOB":4,"VOL":0,"JCB":20,"HYU":7,"SANY":3,"XCMG":0,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":20,"TH":34,"KOM":7,"KOB":11,"VOL":6,"JCB":14,"HYU":28,"SANY":21,"XCMG":2,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":9,"TH":16,"KOM":9,"KOB":4,"VOL":4,"JCB":13,"HYU":12,"SANY":14,"XCMG":5,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":12,"TH":63,"KOM":17,"KOB":20,"VOL":6,"JCB":54,"HYU":61,"SANY":32,"XCMG":20,"LIU":21,"CASE":0},"Gujarat":{"CAT":15,"TH":59,"KOM":13,"KOB":5,"VOL":3,"JCB":59,"HYU":61,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":39,"TH":12,"KOM":21,"KOB":18,"VOL":16,"JCB":39,"HYU":43,"SANY":26,"XCMG":22,"LIU":9,"CASE":0}},"South":{"Karnataka":{"CAT":12,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":27,"XCMG":23,"LIU":4,"CASE":0},"AP":{"CAT":12,"TH":55,"KOM":6,"KOB":21,"VOL":4,"JCB":49,"HYU":51,"SANY":39,"XCMG":21,"LIU":9,"CASE":0},"Telangana":{"CAT":15,"TH":43,"KOM":12,"KOB":11,"VOL":4,"JCB":25,"HYU":17,"SANY":37,"XCMG":1,"LIU":3,"CASE":0},"TN":{"CAT":12,"TH":59,"KOM":7,"KOB":0,"VOL":0,"JCB":49,"HYU":59,"SANY":37,"XCMG":19,"LIU":9,"CASE":0},"Kerala":{"CAT":5,"TH":11,"KOM":2,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":8,"LIU":0,"CASE":0}}}};
-
-const OEMS=["CAT","TH","KOM","KOB","VOL","JCB","HYU","SANY","XCMG","LIU","CASE"];
-const ONAME={CAT:"CAT",TH:"Tata Hitachi",KOM:"Komatsu",KOB:"Kobelco",VOL:"Volvo",JCB:"JCB",HYU:"Hyundai",SANY:"SANY",XCMG:"XCMG",LIU:"LiuGong",CASE:"CASE"};
-const OCOL={CAT:"#F59E0B",TH:"#DC2626",KOM:"#1B3A6B",KOB:"#7C3AED",VOL:"#2563EB",JCB:"#D97706",HYU:"#0284C7",SANY:"#16A34A",XCMG:"#EA580C",LIU:"#9333EA",CASE:"#64748B"};
-const MONTHS=["Dec-25","Jan-26","Feb-26","Mar-26"];
-let charts={}, uploadedData=null;
-
-// COMPUTE
-function computeOEMs(m='all',r='all'){
-  const res={};OEMS.forEach(o=>res[o]=0);
-  const ms=m==='all'?MONTHS:[m];
-  ms.forEach(mo=>{
-    const regs=r==='all'?Object.keys(TIV[mo]):[r];
-    regs.forEach(rk=>{if(!TIV[mo][rk])return;Object.values(TIV[mo][rk]).forEach(st=>OEMS.forEach(o=>res[o]+=(st[o]||0)));});
-  });
-  return res;
-}
-function tot(o){return Object.values(o).reduce((a,b)=>a+b,0);}
-
-// CLOCK
-function tick(){document.getElementById('un-clock').textContent=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'})+' IST';}
-setInterval(tick,1000);tick();
-
-// TOAST
-function toast(icon,title,msg){
-  const t=document.getElementById('toast');
-  document.getElementById('toast-icon').textContent=icon;
-  document.getElementById('toast-title').textContent=title;
-  document.getElementById('toast-msg').textContent=msg;
-  t.style.transform='translateX(0)';
-  setTimeout(()=>t.style.transform='translateX(120%)',3000);
-}
-
-// TAB SWITCH
-function switchTab(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('sec-'+id)?.classList.add('active');
-  document.getElementById('t-'+id)?.classList.add('active');
-  // also update storyboard
-  document.querySelectorAll('.story-step').forEach(s=>s.classList.remove('active'));
-  const storyMap={national:0,momentum:1,regional:2,statewise:3,patterns:4};
-  if(storyMap[id]!==undefined) document.querySelectorAll('.story-step')[storyMap[id]]?.classList.add('active');
-  // Lazy-build premium & heatmap on first open
-  if(id==='premium'&&!charts['prem-pie-chart'])buildPremiumCharts();
-  if(id==='oem_heatmap'&&!document.getElementById('full-heatmap-tbl').innerHTML)buildFullOEMHeatmap();
-}
-
-// FILTERS
-function applyFilters(){
-  const m=document.getElementById('f-month').value;
-  const r=document.getElementById('f-region').value;
-  const oems=computeOEMs(m,r);
-  const total=tot(oems);
-  const kom=oems.KOM;
-  const sh=(100*kom/total).toFixed(2);
-  document.getElementById('fstat-txt').textContent=`${m==='all'?'Q4':m} · ${r==='all'?'All India':r} · ${total.toLocaleString()} units`;
-  // Update KPIs
-  ['h-tiv','n-tiv'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=total.toLocaleString();});
-  ['h-kom','n-kom'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=kom;});
-  const rank=Object.entries(oems).sort((a,b)=>b[1]-a[1]).findIndex(([k])=>k==='KOM')+1;
-  ['h-share','n-sh'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=`${sh}<span class="unit">%</span>`;});
-  const nRank=document.getElementById('n-rank');if(nRank)nRank.textContent=`#${rank}`;
-  const natB=document.getElementById('nat-badge');if(natB)natB.textContent=`${r==='all'?'All India':r} · ${m==='all'?'Q4':m}`;
-  const hPB=document.getElementById('h-pie-badge');if(hPB)hPB.textContent=`${r==='all'?'All India':r}`;
-  rebuildCharts(m,r);
-}
-
-function rebuildCharts(m='all',r='all'){
-  buildShareChart('h-share-chart',m,r,true);
-  buildShareChart('n-share-chart',m,r,false);
-  buildOEMTable('n-oem-tbl',m,r);
-  buildOEMTable('p-oem-tbl','all','all');
-}
-
-// CHART HELPERS
-function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
-const dark={color:'#94A3B8',borderColor:'#1E3A5F',grid:{color:'rgba(255,255,255,.05)'}};
-
-function buildShareChart(canvasId,m,r,small){
-  destroyChart(canvasId);
-  const oems=computeOEMs(m,r);const total=tot(oems);
-  const sorted=Object.entries(oems).sort((a,b)=>b[1]-a[1]);
-  charts[canvasId]=new Chart(document.getElementById(canvasId),{
-    type:'doughnut',
-    data:{labels:sorted.map(([k])=>ONAME[k]),datasets:[{data:sorted.map(([,v])=>v),backgroundColor:sorted.map(([k])=>OCOL[k]),borderWidth:2,borderColor:'#0B1A35',hoverOffset:8}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
-      plugins:{legend:{position:small?'right':'bottom',labels:{font:{size:10},color:'#94A3B8',boxWidth:10,padding:8,
-        generateLabels:c=>c.data.labels.map((l,i)=>({text:`${l} ${(100*c.data.datasets[0].data[i]/total).toFixed(1)}%`,fillStyle:c.data.datasets[0].backgroundColor[i],strokeStyle:'transparent',lineWidth:0,index:i}))}},
-        tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw} units (${(100*ctx.raw/total).toFixed(2)}%)`}}}}
-  });
-}
-
-function buildTIVTrendChart(){
-  destroyChart('h-tiv-chart');
-  const monthly=MONTHS.map(m=>{const o=computeOEMs(m,'all');return tot(o);});
-  const komMonthly=MONTHS.map(m=>{const o=computeOEMs(m,'all');return o.KOM;});
-  charts['h-tiv-chart']=new Chart(document.getElementById('h-tiv-chart'),{
-    type:'bar',
-    data:{labels:MONTHS,datasets:[
-      {label:'Total Industry',data:monthly,backgroundColor:'rgba(28,78,216,.08)',borderColor:'rgba(28,78,216,.5)',borderWidth:1,borderRadius:5},
-      {label:'Komatsu',data:komMonthly,backgroundColor:'rgba(27,58,107,.15)',borderColor:'#22D3EE',borderWidth:2,borderRadius:5}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{color:'#475569'}}},
-      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}},tooltip:{callbacks:{}}}}
-  });
-}
-
-function buildMomentumChart(){
-  destroyChart('m-share-chart');
-  const topOEMs=["TH","JCB","HYU","SANY","KOM","CAT"];
-  charts['m-share-chart']=new Chart(document.getElementById('m-share-chart'),{
-    type:'line',
-    data:{labels:MONTHS,datasets:topOEMs.map(o=>({
-      label:ONAME[o],
-      data:MONTHS.map(m=>{const oe=computeOEMs(m,'all');const t=tot(oe);return t>0?parseFloat((100*oe[o]/t).toFixed(2)):0;}),
-      borderColor:o==='KOM'?'#1B3A6B':OCOL[o],backgroundColor:o==='KOM'?'rgba(27,58,107,.1)':OCOL[o]+'18',
-      borderWidth:o==='KOM'?3:1.5,pointRadius:o==='KOM'?5:3,tension:.4,fill:false
-    }))},
-    options:{responsive:true,maintainAspectRatio:false,
-      scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#475569'},title:{display:true,text:'Share %',color:'#374151',font:{size:10}}}},
-      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}%`}}}}
-  });
-}
-
-function buildVolChart(){
-  destroyChart('m-vol-chart');
-  const topOEMs=["TH","JCB","HYU","SANY","KOM"];
-  charts['m-vol-chart']=new Chart(document.getElementById('m-vol-chart'),{
-    type:'bar',
-    data:{labels:MONTHS,datasets:topOEMs.map(o=>({
-      label:ONAME[o],
-      data:MONTHS.map(m=>{const oe=computeOEMs(m,'all');return oe[o]||0;}),
-      backgroundColor:OCOL[o]+'80',borderColor:OCOL[o],borderWidth:1,borderRadius:3
-    }))},
-    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,stacked:true,grid:{display:false}},y:{...dark,stacked:true,ticks:{color:'#475569'}}},
-      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}}}}
-  });
-}
-
-function buildRegionalChart(){
-  destroyChart('r-bar-chart');
-  const REGS=["North","Delhi NCR","Guwahati-NE","East","Central India","West","South"];
-  const RLAB={North:"North","Delhi NCR":"Delhi NCR","Guwahati-NE":"NE",East:"East","Central India":"Central",West:"West",South:"South"};
-  const natShare=6.85;
-  const komShares=REGS.map(reg=>{
-    let kt=0,tt=0;
-    MONTHS.forEach(m=>{if(!TIV[m][reg])return;Object.values(TIV[m][reg]).forEach(st=>{OEMS.forEach(o=>tt+=(st[o]||0));kt+=(st.KOM||0);});});
-    return tt>0?parseFloat((100*kt/tt).toFixed(2)):0;
-  });
-  charts['r-bar-chart']=new Chart(document.getElementById('r-bar-chart'),{
-    type:'bar',
-    data:{labels:REGS.map(r=>RLAB[r]),datasets:[
-      {label:'Komatsu Share %',data:komShares,backgroundColor:komShares.map(s=>s>8.5?'#1B3A6B':s>6?'#3B82F6':'#CBD5E1'),borderRadius:5},
-      {label:'National Avg 6.85%',data:Array(7).fill(6.85),type:'line',borderColor:'#F59E0B',borderDash:[4,4],pointRadius:0,borderWidth:1.5,fill:false}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      scales:{x:{...dark,grid:{display:false}},y:{...dark,min:0,max:16,ticks:{callback:v=>v+'%',color:'#475569'}}},
-      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}${ctx.raw!==6.85?'%':''}`}}}}
-  });
-}
-
-function buildRadarChart(){
-  destroyChart('r-radar-chart');
-  const REGS=["North","Delhi NCR","Guwahati-NE","East","Central India","West","South"];
-  const getShare=(oem,region)=>{let kt=0,tt=0;MONTHS.forEach(m=>{if(!TIV[m][region])return;Object.values(TIV[m][region]).forEach(st=>{OEMS.forEach(o=>tt+=(st[o]||0));kt+=(st[oem]||0);});});return tt>0?(100*kt/tt):0;};
-  charts['r-radar-chart']=new Chart(document.getElementById('r-radar-chart'),{
-    type:'radar',
-    data:{labels:REGS.map(r=>r.replace('Guwahati-','').replace('Central ','C.')),datasets:[
-      {label:'Komatsu %',data:REGS.map(r=>parseFloat(getShare('KOM',r).toFixed(2))),borderColor:'#1B3A6B',backgroundColor:'rgba(27,58,107,.08)',pointBackgroundColor:'#1B3A6B',pointRadius:4},
-      {label:'Industry Avg 6.85%',data:Array(7).fill(6.85),borderColor:'#F59E0B',borderDash:[3,3],pointRadius:0,fill:false,backgroundColor:'transparent'}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      scales:{r:{ticks:{backdropColor:'#FFFFFF',color:'#64748B',font:{size:9}},grid:{color:'rgba(0,0,0,.07)'},pointLabels:{color:'#475569',font:{size:10}},angleLines:{color:'rgba(0,0,0,.08)'}}},
-      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}}}}
-  });
-}
-
-function buildStateChart(){
-  destroyChart('s-state-chart');
-  const TOP_STATES=[{k:'Karnataka',n:'Karnataka'},{k:'WB Sikkim',n:'WB & Sikkim'},{k:'North East',n:'NE States'},{k:'Odisha',n:'Odisha'},{k:'Jharkhand',n:'Jharkhand'},{k:'Maharashtra',n:'Maharashtra'},{k:'Rajasthan',n:'Rajasthan'},{k:'Telangana',n:'Telangana'},{k:'Gujarat',n:'Gujarat'},{k:'Delhi NCR',n:'Delhi NCR'}];
-  const getStateShare=(sk)=>{
-    let kt=0,tt=0;
-    MONTHS.forEach(m=>Object.values(TIV[m]).forEach(reg=>Object.entries(reg).forEach(([state,data])=>{
-      const matches=sk==='WB Sikkim'?state.includes('bengal')||state.includes('WB'):sk==='North East'?state.includes('East'):sk==='Odisha'?state.includes('disha')||state.includes('Orris'):sk==='Delhi NCR'?state.includes('Delhi'):sk==='Gujarat'?state.includes('ujarat'):sk==='Maharashtra'?state.includes('aharashtra'):sk==='Karnataka'?state.includes('ARNATAKA')||state.toLowerCase().includes('karnataka'):sk==='Telangana'?state.includes('elangana'):sk==='Jharkhand'?state.includes('harkhand'):sk==='Rajasthan'?state.includes('ajasthan'):false;
-      if(matches){OEMS.forEach(o=>tt+=(data[o]||0));kt+=(data.KOM||0);}
-    })));
-    return tt>0?(100*kt/tt):0;
-  };
-  const shares=TOP_STATES.map(s=>parseFloat(getStateShare(s.k).toFixed(2)));
-  charts['s-state-chart']=new Chart(document.getElementById('s-state-chart'),{
-    type:'bar',
-    data:{labels:TOP_STATES.map(s=>s.n),datasets:[
-      {label:'Komatsu Share %',data:shares,backgroundColor:shares.map(s=>s>10?'#1B3A6B':s>6.85?'#2563EB':s>4?'#F97316':'#DC2626'),borderRadius:5},
-      {label:'National 6.85%',data:Array(10).fill(6.85),type:'line',borderColor:'#F59E0B',borderDash:[4,4],pointRadius:0,borderWidth:1.5,fill:false}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#475569'}}},
-      plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}}}}
-  });
-}
-
-// OEM TABLE
-function buildOEMTable(tbId,m='all',r='all'){
-  const oems=computeOEMs(m,r);const total=tot(oems);
-  const decO=computeOEMs('Dec-25',r);const marO=computeOEMs('Mar-26',r);
-  const decT=tot(decO);const marT=tot(marO);
-  const monthly={};MONTHS.forEach(mo=>monthly[mo]=computeOEMs(mo,r));
-  const sorted=Object.entries(oems).sort((a,b)=>b[1]-a[1]);
-  const tbl=document.getElementById(tbId);if(!tbl)return;
-  let html=`<tr><th>#</th><th>OEM</th><th>Dec-25</th><th>Jan-26</th><th>Feb-26</th><th>Mar-26</th><th>Q4 Total</th><th>Q4 Share</th><th>Dec→Mar Δ</th></tr>`;
-  sorted.forEach(([o,v],i)=>{
-    const sh=(100*v/total).toFixed(2);
-    const dS=decT>0?(100*decO[o]/decT):0;const mS=marT>0?(100*marO[o]/marT):0;
-    const d=mS-dS;const ds=d>=0?`+${d.toFixed(2)}pp`:`${d.toFixed(2)}pp`;
-    const dc=d>0.5?'dpill-up':d<-0.5?'dpill-dn':'dpill-fl';
-    const isK=o==='KOM';
-    const rnkCls=i===0?'rnk-top':isK?'rnk-kom':'rnk-std';
-    html+=`<tr${isK?' class="kom-row"':''}>`;
-    html+=`<td><span class="rnk ${rnkCls}">${i+1}</span></td>`;
-    html+=`<td style="font-weight:${isK?700:400};color:${isK?'#22D3EE':'inherit'}">${ONAME[o]}</td>`;
-    MONTHS.forEach(mo=>html+=`<td>${monthly[mo][o]||0}</td>`);
-    html+=`<td style="font-weight:700;color:var(--white)">${v}</td>`;
-    html+=`<td><div class="bar-bg"><div class="bar-fill" style="width:${Math.min(parseFloat(sh)*3,100)}%;background:${OCOL[o]}"></div></div><span style="font-size:10px">${sh}%</span></td>`;
-    html+=`<td><span class="dpill ${dc}">${ds}</span></td>`;
-    html+=`</tr>`;
-  });
-  tbl.innerHTML=html;
-}
-
-// HEATMAP
-function buildHeatmap(){
-  const TOP=[{k:'Gujarat',n:'Gujarat'},{k:'Maharashtra',n:'Maharashtra'},{k:'Karnataka',n:'Karnataka'},{k:'Rajasthan',n:'Rajasthan'},{k:'WB Sikkim',n:'WB & Sikkim'},{k:'Odisha',n:'Odisha'},{k:'AP',n:'Andhra Pradesh'},{k:'Telangana',n:'Telangana'},{k:'TN',n:'Tamil Nadu'},{k:'Delhi NCR',n:'Delhi NCR'}];
-  const HM_OEMS=["TH","JCB","HYU","SANY","KOM","CAT","KOB","XCMG","LIU","VOL"];
-  const stO={};TOP.forEach(s=>stO[s.k]={});
-  MONTHS.forEach(m=>Object.values(TIV[m]).forEach(reg=>Object.entries(reg).forEach(([state,data])=>{
-    const mk=TOP.find(t=>{const sl=state.toLowerCase();
-      if(t.k==='Gujarat'&&sl.includes('ujarat'))return true;
-      if(t.k==='Maharashtra'&&sl.includes('aharashtra'))return true;
-      if(t.k==='Karnataka'&&(sl.includes('karnataka')||sl.includes('ARNATAKA')))return true;
-      if(t.k==='Rajasthan'&&sl.includes('ajasthan'))return true;
-      if(t.k==='WB Sikkim'&&(sl.includes('bengal')||sl.includes('wb')))return true;
-      if(t.k==='Odisha'&&(sl.includes('disha')||sl.includes('rris')))return true;
-      if(t.k==='AP'&&sl.includes('andhra'))return true;
-      if(t.k==='Telangana'&&sl.includes('elangana'))return true;
-      if(t.k==='TN'&&sl.includes('amilnadu'))return true;
-      if(t.k==='Delhi NCR'&&sl.includes('delhi'))return true;
-      return false;
-    });
-    if(mk) OEMS.forEach(o=>stO[mk.k][o]=(stO[mk.k][o]||0)+(data[o]||0));
-  })));
-  const tbl=document.getElementById('heatmap-tbl');
-  let html=`<tr><th class="st">State</th>${HM_OEMS.map(o=>`<th>${ONAME[o]}</th>`).join('')}<th>Total</th></tr>`;
-  TOP.forEach(s=>{
-    const rowTot=HM_OEMS.reduce((a,o)=>a+(stO[s.k][o]||0),0);
-    if(!rowTot)return;
-    html+=`<tr><td class="st">${s.n}</td>`;
-    HM_OEMS.forEach(o=>{
-      const v=stO[s.k][o]||0,p=rowTot>0?(100*v/rowTot):0;
-      let bg,tc;
-      if(o==='KOM'){bg=p>15?'#1B3A6B':p>8?'#2563EB':p>4?'#93C5FD':'#DBEAFE';tc=p>10?'#FFFFFF':'#1E40AF';}
-      else{bg=p>20?'rgba(239,68,68,.7)':p>15?'rgba(239,68,68,.45)':p>10?'rgba(239,68,68,.25)':p>5?'rgba(239,68,68,.1)':'rgba(255,255,255,.04)';tc=p>15?'#fff':p>8?'#FCA5A5':'#64748B';}
-      html+=`<td><span class="hm-cell" style="background:${bg};color:${tc}">${p.toFixed(1)}%</span></td>`;
-    });
-    html+=`<td style="font-weight:700;color:var(--white)">${rowTot}</td></tr>`;
-  });
-  tbl.innerHTML=html;
-}
-
-// SOURCES
-const SOURCES=[
-  {n:1,title:'ICEMA Annual Sales Report FY25',url:'https://www.i-cema.in/wp-content/uploads/2025/06/ICEMA-Press-Release_Annual-Sales-Report-FY25_28May25.pdf'},
-  {n:2,title:'CRISIL CE Growth 2-4% FY26',url:'https://www.crisilratings.com/en/home/newsroom/press-releases/2025/11/construction-equipment-volume-growth-tepid-at-2-4-percent-on-slow-demand.html'},
-  {n:3,title:'L&T Annual Review 2024-25 (CMMB)',url:'https://annualreview.larsentoubro.com/construction-and-mining-machinery.html'},
-  {n:4,title:'L&T PC210-10M0 Class Leader — Equipment India',url:'https://equipmentindia.com/construction-machinery-news/top-equipment-news/webexclusive/L-T-records-highest-sales-of-Komatsu-PC210-10M0-machine-in-short-time/126964'},
-  {n:5,title:'Union Budget FY26 — ₹11.21L Cr Capex — PIB',url:'https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2098353'},
-  {n:6,title:'Bharatmala Phase-I 21,783 km built',url:'https://www.constructionworld.in/transport-infrastructure/highways-and-roads-infrastructure/bharatmala-pariyojana-sees-over-21-700-km-roads-built/85614'},
-  {n:7,title:'India Coal 1.5BT Target FY30',url:'https://www.business-standard.com/industry/news/domestic-coal-production-likely-to-grow-6-7-pc-annually-over-next-few-years-kishan-reddy-126030901044_1.html'},
-  {n:8,title:'McKinsey Aftermarket 25% EBIT vs 10% New Equipment',url:'https://www.mckinsey.com/~/media/mckinsey/industries/advanced%20electronics/our%20insights/why-aftermarket-and-service-are-vital-to-oems-and-how-to-excel/why-aftermarket-and-service-are-vital-to-oems-and-how-to-excel-vf.pdf'},
-  {n:9,title:'KOMTRAX Remote Monitoring — Komatsu Global',url:'https://www.komatsu.com/en-za/services/remote-monitoring/komtrax'},
-  {n:10,title:'SANY India — #2 Indian Excavators',url:'https://www.sany.in/about-us/'},
-  {n:11,title:'Kobelco India 20,000th Excavator Roll-out',url:'https://www.constructionworld.in/heavy-construction-equipment/kobelco-india-rolls-out-20000th-excavator-expands-rd-in-sri-city/70838'},
-  {n:12,title:'DieselNet India CEV Stage IV/V Standards',url:'https://dieselnet.com/standards/in/nonroad.php'},
-];
-document.getElementById('src-grid').innerHTML=SOURCES.map(s=>`
-  <div class="src-item">
-    <div class="src-n">${s.n}</div>
-    <div><div class="src-title">${s.title}</div><a href="${s.url}" target="_blank" class="src-link">${s.url.replace('https://','').slice(0,55)}${s.url.length>60?'…':''}</a></div>
-  </div>`).join('');
-
-// UPLOAD
-function openFilePicker(){document.getElementById('file-input').click();}
-function handleDragOver(e){e.preventDefault();document.getElementById('upload-zone').classList.add('drag');}
-function handleDragLeave(){document.getElementById('upload-zone').classList.remove('drag');}
-function handleDrop(e){e.preventDefault();document.getElementById('upload-zone').classList.remove('drag');if(e.dataTransfer.files[0])parseCSV(e.dataTransfer.files[0]);}
-function handleFile(e){if(e.target.files[0])parseCSV(e.target.files[0]);}
-function parseCSV(file){
-  const r=new FileReader();
-  r.onload=e=>{
-    const lines=e.target.result.split('\n').filter(l=>l.trim());
-    if(lines.length<2){showErr('File appears empty.');return;}
-    const hdr=lines[0].split(',').map(h=>h.trim());
-    const rows=lines.slice(1).map(l=>{const v=l.split(',');const o={};hdr.forEach((h,i)=>o[h.trim()]=v[i]?.trim()||'0');return o;}).filter(r=>r.State&&r.State!=='Total');
-    uploadedData={hdr,rows};showPrev(rows.slice(0,5),hdr);
-  };
-  r.readAsText(file);
-}
-function showPrev(rows,hdr){
-  const p=document.getElementById('upload-prev');const s=document.getElementById('up-status');
-  s.className='up-status up-ok';s.textContent=`✅ ${uploadedData.rows.length} state rows detected — preview below`;
-  document.getElementById('prev-tbl').innerHTML=`<tr>${hdr.map(h=>`<th>${h}</th>`).join('')}</tr>`+rows.map(r=>`<tr>${hdr.map(h=>`<td>${r[h]||''}</td>`).join('')}</tr>`).join('');
-  p.style.display='block';
-}
-function showErr(msg){document.getElementById('up-status').className='up-status up-err';document.getElementById('up-status').textContent='❌ '+msg;document.getElementById('upload-prev').style.display='block';}
-function clearUp(){uploadedData=null;document.getElementById('upload-prev').style.display='none';document.getElementById('file-input').value='';}
-function applyData(){
-  if(!uploadedData){return;}
-  const monthName=prompt('Enter month label (e.g. Apr-26, May-26):');
-  if(!monthName)return;
-  const newM={};
-  const colMap={CAT:['CAT','Cat'],TH:['Tata Hitachi','TH','TATA HITACHI'],KOM:['Komatsu','KOM'],KOB:['Kobelco','KOB'],VOL:['Volvo','VOL'],JCB:['JCB'],HYU:['Hyundai','HYU'],SANY:['SANY'],XCMG:['XCMG'],LIU:['LiuGong','Liyugong','LIU'],CASE:['CASE']};
-  uploadedData.rows.forEach(row=>{
-    const reg=row.Region||'Other';const st=row.State||'?';
-    if(!newM[reg])newM[reg]={};
-    newM[reg][st]={};
-    OEMS.forEach(o=>{
-      const aliases=colMap[o]||[o];
-      const col=aliases.find(a=>uploadedData.hdr.some(h=>h.toLowerCase()===a.toLowerCase()));
-      const h=col?uploadedData.hdr.find(h=>h.toLowerCase()===col.toLowerCase()):null;
-      newM[reg][st][o]=h?parseInt(row[h]||'0')||0:0;
-    });
-  });
-  TIV[monthName]=newM;
-  if(!MONTHS.includes(monthName))MONTHS.push(monthName);
-  const sel=document.getElementById('f-month');
-  if(![...sel.options].some(o=>o.value===monthName)){const opt=document.createElement('option');opt.value=monthName;opt.textContent=monthName;sel.appendChild(opt);}
-  applyFilters();clearUp();
-  toast('✅','Data Applied',`"${monthName}" added to all charts!`);
-}
-function dlTemplate(){
-  const a=document.createElement('a');a.href='LT_CMMB_TIV_Template.csv';a.download='LT_CMMB_TIV_Template.csv';a.click();
-}
-
-// INIT
-window.addEventListener('load',()=>{
-  Chart.defaults.font.family='Inter';
-  Chart.defaults.color='#64748B';
-  buildShareChart('h-share-chart','all','all',true);
-  buildShareChart('n-share-chart','all','all',false);
-  buildTIVTrendChart();
-  buildMomentumChart();
-  buildVolChart();
-  buildRegionalChart();
-  buildRadarChart();
-  buildStateChart();
-  buildHeatmap();
-  buildOEMTable('n-oem-tbl','all','all');
-  buildOEMTable('p-oem-tbl','all','all');
-});
-</script>
-<script>
-// Highlight current page in platform-nav
-(function(){
-  const path = window.location.pathname.split('/').pop() || 'index.html';
-  const map = {'index.html':'pn-tiv','contracts.html':'pn-contracts',
-    'used-equipment.html':'pn-ue','pitch-generator.html':'pn-pitch'};
-  const id = map[path];
-  if(id){
-    const el = document.getElementById(id);
-    if(el){el.style.background='rgba(255,255,255,.15)';el.style.borderColor='rgba(255,255,255,.3)';el.style.color='#fff';}
-  }
-})();
-
-
-// ── PREMIUM CHARTS ────────────────────────────────────────────────────────
-function buildPremiumCharts(){
-  const PREM=["KOM","CAT","KOB","VOL"];
-  const PN={KOM:"Komatsu",CAT:"CAT",KOB:"Kobelco",VOL:"Volvo"};
-  const PC={KOM:"#1B3A6B",CAT:"#F59E0B",KOB:"#7C3AED",VOL:"#2563EB"};
-  const pt={};PREM.forEach(o=>pt[o]=0);
-  MONTHS.forEach(m=>Object.values(TIV[m]).forEach(reg=>Object.values(reg).forEach(st=>PREM.forEach(o=>pt[o]+=(st[o]||0)))));
-  const ptot=Object.values(pt).reduce((a,b)=>a+b,0);
-  destroyChart('prem-pie-chart');
-  charts['prem-pie-chart']=new Chart(document.getElementById('prem-pie-chart'),{
-    type:'doughnut',
-    data:{labels:PREM.map(o=>PN[o]),datasets:[{data:PREM.map(o=>pt[o]),backgroundColor:PREM.map(o=>PC[o]),borderWidth:3,borderColor:'#fff',hoverOffset:10}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
-      plugins:{legend:{position:'right',labels:{font:{size:11},color:'#475569',boxWidth:12,padding:10,
-        generateLabels:c=>c.data.labels.map((l,i)=>({text:`${l}  ${(100*c.data.datasets[0].data[i]/ptot).toFixed(1)}%`,fillStyle:c.data.datasets[0].backgroundColor[i],strokeStyle:'transparent',lineWidth:0,index:i}))}},
-        tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw} units (${(100*ctx.raw/ptot).toFixed(1)}%)`}}}}
-  });
-  destroyChart('prem-trend-chart');
-  charts['prem-trend-chart']=new Chart(document.getElementById('prem-trend-chart'),{
-    type:'line',
-    data:{labels:MONTHS,datasets:PREM.map(o=>({label:PN[o],data:MONTHS.map(m=>computeOEMs(m,'all')[o]||0),borderColor:PC[o],backgroundColor:PC[o]+'18',borderWidth:o==='KOM'?3:1.5,pointRadius:o==='KOM'?5:3,tension:.4,fill:false}))},
-    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{color:'#64748B'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}
-  });
-}
-
-// ── FULL OEM HEATMAP ──────────────────────────────────────────────────────
-function buildFullOEMHeatmap(){
-  const ASTS=[
-    {k:'Gujarat',n:'Gujarat'},{k:'Maharashtra',n:'Maharashtra'},{k:'Karnataka',n:'Karnataka'},
-    {k:'Rajasthan',n:'Rajasthan'},{k:'WB Sikkim',n:'WB & Sikkim'},{k:'Odisha',n:'Odisha'},
-    {k:'AP',n:'Andhra Pradesh'},{k:'Telangana',n:'Telangana'},{k:'TN',n:'Tamil Nadu'},
-    {k:'Delhi NCR',n:'Delhi NCR'},{k:'UP',n:'Uttar Pradesh'},{k:'Jharkhand',n:'Jharkhand'},
-    {k:'MP',n:'Madhya Pradesh'},{k:'Chhattisgarh',n:'Chhattisgarh'},{k:'Bihar',n:'Bihar'},
-    {k:'NE',n:'NE States'},{k:'Punjab',n:'Punjab'}
-  ];
-  const HM11=["TH","JCB","HYU","SANY","KOM","CAT","KOB","XCMG","LIU","VOL","CASE"];
-  const HN={TH:"Tata Hitachi",JCB:"JCB",HYU:"Hyundai",SANY:"SANY",KOM:"Komatsu",CAT:"CAT",KOB:"Kobelco",XCMG:"XCMG",LIU:"LiuGong",VOL:"Volvo",CASE:"CASE"};
-  const sd={};ASTS.forEach(s=>sd[s.k]={});
-  const matchState=(state,tk)=>{
-    const sl=state.toLowerCase();
-    if(tk==='Gujarat')return sl.includes('ujarat');
-    if(tk==='Maharashtra')return sl.includes('aharashtra');
-    if(tk==='Karnataka')return sl.includes('arnataka');
-    if(tk==='Rajasthan')return sl.includes('ajasthan');
-    if(tk==='WB Sikkim')return sl.includes('bengal')||sl.includes('wb sikkim');
-    if(tk==='Odisha')return sl.includes('disha')||sl.includes('rris');
-    if(tk==='AP')return sl.includes('andhra');
-    if(tk==='Telangana')return sl.includes('elangana');
-    if(tk==='TN')return sl.includes('amilnadu');
-    if(tk==='Delhi NCR')return sl.includes('delhi');
-    if(tk==='UP')return sl.includes('uttar');
-    if(tk==='Jharkhand')return sl.includes('jharkhand');
-    if(tk==='MP')return sl.includes('madhya')||sl.includes(' mp');
-    if(tk==='Chhattisgarh')return sl.includes('chattis')||sl.includes('chhattis');
-    if(tk==='Bihar')return sl.includes('bihar');
-    if(tk==='NE')return sl.includes('north east');
-    if(tk==='Punjab')return sl.includes('punjab');
-    return false;
-  };
-  MONTHS.forEach(m=>Object.values(TIV[m]).forEach(reg=>Object.entries(reg).forEach(([state,data])=>{
-    const mk=ASTS.find(t=>matchState(state,t.k));
-    if(mk) OEMS.forEach(o=>sd[mk.k][o]=(sd[mk.k][o]||0)+(data[o]||0));
-  })));
-  const tbl=document.getElementById('full-heatmap-tbl');
-  if(!tbl)return;
-  let html=`<tr><th class="st">State</th>${HM11.map(o=>`<th style="min-width:70px">${HN[o]}</th>`).join('')}<th>Total</th></tr>`;
-  ASTS.forEach(s=>{
-    const rt=OEMS.reduce((a,o)=>a+(sd[s.k][o]||0),0);
-    if(!rt)return;
-    html+=`<tr><td class="st">${s.n}</td>`;
-    HM11.forEach(o=>{
-      const v=sd[s.k][o]||0,p=rt>0?(100*v/rt):0;
-      let bg,tc;
-      if(o==='KOM'){bg=p>20?'#1B3A6B':p>12?'#2563EB':p>6?'#93C5FD':'#DBEAFE';tc=p>12?'#fff':'#1E40AF';}
-      else if(o==='TH'){bg=p>30?'#991B1B':p>20?'#DC2626':p>12?'#FCA5A5':'#FEF2F2';tc=p>20?'#fff':p>10?'#991B1B':'#64748B';}
-      else if(o==='JCB'){bg=p>25?'#92400E':p>15?'#D97706':p>8?'#FDE68A':'#FFFBEB';tc=p>15?'#fff':'#92400E';}
-      else if(o==='HYU'){bg=p>25?'#0C4A6E':p>15?'#0284C7':p>8?'#BAE6FD':'#F0F9FF';tc=p>15?'#fff':'#0C4A6E';}
-      else if(o==='SANY'){bg=p>20?'#14532D':p>12?'#16A34A':p>6?'#BBF7D0':'#F0FDF4';tc=p>12?'#fff':'#14532D';}
-      else{bg=p>15?'#4B5563':p>8?'#9CA3AF':'#F9FAFB';tc=p>12?'#fff':'#475569';}
-      html+=`<td><span class="hm-cell" style="background:${bg};color:${p>0?tc:'#6B7280'}">${p>0?p.toFixed(1)+'%':'—'}</span></td>`;
-    });
-    html+=`<td style="font-weight:600;color:#1B3A6B;font-size:10.5px">${rt}</td></tr>`;
-  });
-  tbl.innerHTML=html;
-  // Bar charts
-  const stateShares=(oem)=>ASTS.map(s=>{const rt=OEMS.reduce((a,o)=>a+(sd[s.k][o]||0),0);return{n:s.n,p:rt>0?parseFloat((100*(sd[s.k][oem]||0)/rt).toFixed(1)):0};}).filter(d=>d.p>0).sort((a,b)=>b.p-a.p).slice(0,8);
-  const kd=stateShares('KOM'),td=stateShares('TH');
-  destroyChart('hm-kom-chart');
-  charts['hm-kom-chart']=new Chart(document.getElementById('hm-kom-chart'),{type:'bar',data:{labels:kd.map(d=>d.n),datasets:[{label:'Komatsu %',data:kd.map(d=>d.p),backgroundColor:kd.map(d=>d.p>10?'#1B3A6B':'#93C5FD'),borderRadius:5},{label:'National 6.85%',data:Array(kd.length).fill(6.85),type:'line',borderColor:'#F59E0B',borderDash:[4,4],pointRadius:0,borderWidth:1.5,fill:false}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,max:25,ticks:{callback:v=>v+'%',color:'#64748B'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}});
-  destroyChart('hm-th-chart');
-  charts['hm-th-chart']=new Chart(document.getElementById('hm-th-chart'),{type:'bar',data:{labels:td.map(d=>d.n),datasets:[{label:'Tata Hitachi %',data:td.map(d=>d.p),backgroundColor:td.map(d=>d.p>25?'#DC2626':'#FCA5A5'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#64748B'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}});
-}
-</script>
-<script>
-(function(){
-  // Clock
-  function tick(){
-    var el=document.getElementById('un-clock');
-    if(el) el.textContent=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'})+' IST';
-  }
-  setInterval(tick,1000); tick();
-  // Highlight active platform-nav link
-  var path=(window.location.pathname.split('/').pop()||'index.html');
-  var map={'index.html':'pn-tiv','tiv.html':'pn-tiv','contracts.html':'pn-contracts',
-    'used-equipment.html':'pn-ue','pitch-generator.html':'pn-pitch'};
-  var el=document.getElementById(map[path]||'pn-tiv');
-  if(el) el.classList.add('active');
-})();
-</script>
-</body>
-</html>
