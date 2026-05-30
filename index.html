@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>L&T CMMB · TIV Intelligence Hub</title>
+<title>L&T CMMB · total excavator sales Intelligence Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -55,7 +55,7 @@
 .un-live-txt{font-family:'Inter',sans-serif;font-size:11px;
   color:rgba(255,255,255,.8);font-weight:500}
 .un-clock{font-family:'JetBrains Mono','Courier New',monospace;font-size:11.5px;
-  color:#D97706;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);
+  color:#B45309;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);
   padding:4px 11px;border-radius:6px}
 .un-badge{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.45);
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
@@ -93,7 +93,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 /* ── TAB BAR (Storyboard Navigation) ─────────────────────── */
 #tabs{background:#FFFFFF;border-bottom:1px solid #E2E8F0;display:flex;padding:0 22px;align-items:flex-end;position:sticky;top:92px;z-index:2000}
 .tab{padding:11px 16px;border:none;background:transparent;font-size:12px;font-weight:500;
-  color:#64748B;cursor:pointer;border-bottom:2px solid transparent;
+  color:#475569;cursor:pointer;border-bottom:2px solid transparent;
   transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap;letter-spacing:.1px;font-family:'Inter',sans-serif}
 .tab:hover{color:#1B3A6B;background:#F8FAFC}
 .tab.active{color:#1B3A6B;border-bottom-color:#1B3A6B;font-weight:700}
@@ -118,7 +118,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 /* ── SECTION HEADINGS ─────────────────────────────────────── */
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .sec-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#1B3A6B}
-.sec-sub{font-size:11px;color:#64748B;margin-top:2px}
+.sec-sub{font-size:11px;color:#475569;margin-top:2px}
 .sec-badge{font-size:10px;font-weight:600;color:#1B3A6B;background:#EFF6FF;
   border:1px solid #BFDBFE;padding:3px 10px;border-radius:20px}
 
@@ -199,7 +199,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .hm th{padding:7px 8px;text-align:center;font-size:9.5px;font-weight:600;
   color:#64748B;border-bottom:2px solid #E2E8F0;background:#F8FAFC}
 .hm th.st{text-align:left;min-width:110px}
-.hm td{padding:6px 8px;text-align:center;border-bottom:1px solid #F1F5F9}
+.hm td{padding:6px 8px;text-align:center;border-bottom:1px solid #F1F5F9;color:#1E293B}
 .hm td.st{text-align:left;font-weight:600;color:#1B3A6B;font-size:11.5px}
 .hm-cell{display:inline-block;padding:2px 7px;border-radius:5px;font-size:10.5px;font-weight:600;min-width:38px;text-align:center}
 
@@ -211,7 +211,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .pat-body{font-size:11.5px;color:#475569;line-height:1.7}
 .pat-body strong{color:#1E293B}
 .pat.hl{border-color:rgba(245,158,11,.4);background:linear-gradient(135deg,#FFFBEB,#FFFFFF)}
-.pat.hl .pat-num{color:#D97706}
+.pat.hl .pat-num{color:#B45309}
 
 /* ── PLATFORM CARDS (Homepage) ────────────────────────────── */
 .plat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
@@ -303,6 +303,37 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 .tiv-pp-row{display:flex;justify-content:space-between;font-size:11px;color:#475569;margin-bottom:3px;padding:3px 0;border-bottom:1px solid #F1F5F9}
 .tiv-pp-val{font-weight:700;color:#1E293B}
 
+
+/* ── AI INSIGHTS ── */
+.ai-insight-btn{
+  display:inline-flex;align-items:center;gap:6px;padding:5px 13px;
+  background:linear-gradient(135deg,#1B3A6B,#2563EB);color:#fff;
+  border:none;border-radius:6px;font-size:11px;font-weight:600;
+  cursor:pointer;transition:opacity .15s;font-family:'Inter',sans-serif;
+}
+.ai-insight-btn:hover{opacity:.85}
+.ai-insight-btn:disabled{opacity:.5;cursor:default}
+.ai-insight-box{
+  margin-top:12px;background:#EFF6FF;border:1px solid #BFDBFE;
+  border-left:4px solid #2563EB;border-radius:0 8px 8px 0;
+  padding:12px 14px;font-size:11.5px;color:#1E293B;line-height:1.8;
+  display:none;
+}
+.ai-insight-box.visible{display:block}
+.ai-insight-box .ai-tag{
+  font-size:9.5px;font-weight:700;color:#2563EB;
+  text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;
+  display:flex;align-items:center;gap:5px;
+}
+.ai-loading{
+  display:flex;align-items:center;gap:8px;color:#64748B;font-size:12px;
+}
+.ai-spinner{width:14px;height:14px;border:2px solid #E2E8F0;border-top-color:#2563EB;
+  border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+te(360deg)}}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
@@ -316,7 +347,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
      platform-nav → unified-nav must always be the first two elements after <body>
      Identical structure across all 4 dashboards. -->
 <div id="platform-nav">
-  <a href="index.html"           class="pn-link" id="pn-tiv">🏠 TIV Home</a>
+  <a href="index.html"           class="pn-link" id="pn-tiv">🏠 total excavator sales Home</a>
   <div class="pn-sep"></div>
   <a href="contracts.html"       class="pn-link" id="pn-contracts">📋 Contracts</a>
   <a href="used-equipment.html"  class="pn-link" id="pn-ue">🏗️ Used Equipment</a>
@@ -330,7 +361,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
     <div class="un-divider"></div>
     <div class="un-titles">
       <div class="un-title">TIV Intelligence Hub</div>
-      <div class="un-sub">Indian Excavator Market · 11 OEMs · 7 Regions · 24 States · Dec 2025–Mar 2026</div>
+      <div class="un-sub">Indian Excavator Market · 11 brands · 7 Regions · 24 States · Dec 2025–Mar 2026</div>
     </div>
   </div>
   <div class="un-live">
@@ -349,34 +380,28 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 
 <!-- ══ TAB BAR — STORYBOARD ═════════════════════════════════ -->
 <div id="tabs">
-  <button class="tab" onclick="switchTab('home')" id="t-home">
-    <i class="fa fa-home"></i> Hub Overview
+  <button class="tab active" onclick="switchTab('dashboard')" id="t-dashboard">
+    <i class="fa fa-tachometer-alt"></i> Dashboard
   </button>
   <div class="tab-divider"></div>
   <button class="tab" onclick="switchTab('national')" id="t-national">
-    <i class="fa fa-chart-pie"></i> National Position
+    <i class="fa fa-chart-pie"></i> Market Share
   </button>
   <button class="tab" onclick="switchTab('momentum')" id="t-momentum">
-    <i class="fa fa-chart-line"></i> Momentum
+    <i class="fa fa-chart-line"></i> Growth Trends
   </button>
   <button class="tab" onclick="switchTab('regional')" id="t-regional">
-    <i class="fa fa-map-marked-alt"></i> Regional
+    <i class="fa fa-map-marked-alt"></i> Region-wise
   </button>
   <button class="tab" onclick="switchTab('statewise')" id="t-statewise">
-    <i class="fa fa-table"></i> State Deep-Dive
+    <i class="fa fa-table"></i> State-wise
   </button>
   <button class="tab" onclick="switchTab('patterns')" id="t-patterns">
-    <i class="fa fa-lightbulb"></i> Key Patterns
-  </button>
-  <button class="tab active" onclick="switchTab('oem_heatmap')" id="t-oem_heatmap">
-    <i class="fa fa-map-marked-alt"></i> India Map
-  </button>
-  <button class="tab" onclick="switchTab('premium')" id="t-premium">
-    <i class="fa fa-star"></i> Premium View
+    <i class="fa fa-lightbulb"></i> Key Insights
   </button>
   <div class="tab-divider"></div>
   <button class="tab" onclick="switchTab('data')" id="t-data">
-    <i class="fa fa-upload"></i> Data Upload
+    <i class="fa fa-upload"></i> Upload Data
   </button>
 </div>
 
@@ -384,7 +409,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 <div id="filterbar">
   <span class="flabel">Month</span>
   <select class="fsel" id="f-month" onchange="applyFilters()">
-    <option value="all">Q4 Total (Dec–Mar)</option>
+    <option value="all">Q4 Total — Dec 2025 to Mar 2026</option>
     <option value="Dec-25">December 2025</option>
     <option value="Jan-26">January 2026</option>
     <option value="Feb-26">February 2026</option>
@@ -409,153 +434,195 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 <!-- ══════════════════════════════════════════════════════════
      TAB 1 — HUB OVERVIEW (Homepage)
 ══════════════════════════════════════════════════════════ -->
-<section class="section" id="sec-home">
-  <div style="max-width:1300px;margin:0 auto">
 
-    <!-- Platform Cards -->
-    <div class="sec-head"><div><div class="sec-title">Platform Navigation</div><div class="sec-sub">All strategy tools — click to launch</div></div><span class="sec-badge">5 Platforms Active</span></div>
-    <div class="plat-grid">
-      <a class="plat-card plat-1" href="contracts.html">
-        <div class="plat-arrow">↗</div>
-        <div class="plat-icon">📋</div>
-        <div class="plat-title">Contract Intelligence</div>
-        <div class="plat-desc">Live tracking of active EPC/HAM/Mining contracts across India — machine placement intelligence for the Komatsu sales team.</div>
-        <div class="plat-stats">
-          <div class="plat-stat"><strong>109</strong> Active Contracts</div>
-          <div class="plat-stat"><strong>HOT=71</strong> WARM=27 COOL=11</div>
-          <div class="plat-stat"><strong>52</strong> Contractors Tracked</div>
-          <div class="plat-stat"><strong>13</strong> Live News Sources</div>
-        </div>
-      </a>
-      <a class="plat-card plat-2" href="used-equipment.html">
-        <div class="plat-arrow">↗</div>
-        <div class="plat-icon">🏗️</div>
-        <div class="plat-title">Used Equipment</div>
-        <div class="plat-desc">Dual-engine valuation tool for PC200/205/210 class. KOMTRAX-powered appraisals with 8 export market channels.</div>
-        <div class="plat-stats">
-          <div class="plat-stat"><strong>15-param</strong> Team Valuation Engine</div>
-          <div class="plat-stat"><strong>3 Price Tiers:</strong> Export / Domestic / Floor</div>
-          <div class="plat-stat"><strong>8</strong> Export Markets</div>
-          <div class="plat-stat"><strong>KOMTRAX ESR</strong> Integrated</div>
-        </div>
-      </a>
-      <a class="plat-card plat-3" href="pitch-generator.html">
-        <div class="plat-arrow">↗</div>
-        <div class="plat-icon">🤖</div>
-        <div class="plat-title">AI Pitch Generator</div>
-        <div class="plat-desc">Claude Sonnet 4.6 powered TCO-driven sales pitch generator — Section 6 aligned for all customer tiers and work segments.</div>
-        <div class="plat-stats">
-          <div class="plat-stat"><strong>8</strong> Pitch Types</div>
-          <div class="plat-stat"><strong>9</strong> OEM Competitors</div>
-          <div class="plat-stat"><strong>4 Tiers</strong> + PSU/Mining/Rental</div>
-          <div class="plat-stat"><strong>WhatsApp</strong> Send Ready</div>
-        </div>
-      </a>
-      <a class="plat-card plat-4" href="https://sampurnanandofficial1.github.io/lnt_equipcare/" target="_blank">
-        <div class="plat-arrow">↗</div>
-        <div class="plat-icon">⚙️</div>
-        <div class="plat-title">L&T EquipCare</div>
-        <div class="plat-desc">Customer-facing service portal — AMC/FMC booking, KOMTRAX telematics, parts request and service scheduling.</div>
-        <div class="plat-stats">
-          <div class="plat-stat"><strong>MCP-5</strong> Warranty Claims</div>
-          <div class="plat-stat"><strong>KOMTRAX</strong> Health Monitoring</div>
-          <div class="plat-stat"><strong>FMC / CMC / SSA</strong> Contracts</div>
-          <div class="plat-stat">🌐 Customer-Facing Platform</div>
-        </div>
-      </a>
-    </div>
-
-    <!-- TIV Storyboard -->
-    <div class="story-wrap">
-      <div class="story-title">📊 TIV Analysis Storyboard — Click to explore each analysis</div>
-      <div class="story-flow">
-        <div class="story-step active" onclick="switchTab('national')">
-          <div class="ss-n">Analysis 1</div>
-          <div class="ss-t">National Position</div>
-          <div class="ss-n" style="margin-top:4px;font-size:9px">Who holds what share?</div>
-          <span class="ss-arr">›</span>
-        </div>
-        <div class="story-step" onclick="switchTab('momentum')">
-          <div class="ss-n">Analysis 2</div>
-          <div class="ss-t">Momentum</div>
-          <div class="ss-n" style="margin-top:4px;font-size:9px">Who is gaining/losing?</div>
-          <span class="ss-arr">›</span>
-        </div>
-        <div class="story-step" onclick="switchTab('regional')">
-          <div class="ss-n">Analysis 3</div>
-          <div class="ss-t">Regional</div>
-          <div class="ss-n" style="margin-top:4px;font-size:9px">Where does Komatsu play?</div>
-          <span class="ss-arr">›</span>
-        </div>
-        <div class="story-step" onclick="switchTab('statewise')">
-          <div class="ss-n">Analysis 4</div>
-          <div class="ss-t">State Deep-Dive</div>
-          <div class="ss-n" style="margin-top:4px;font-size:9px">Which states, which OEMs?</div>
-          <span class="ss-arr">›</span>
-        </div>
-        <div class="story-step" onclick="switchTab('patterns')">
-          <div class="ss-n">Analysis 5</div>
-          <div class="ss-t">Key Patterns</div>
-          <div class="ss-n" style="margin-top:4px;font-size:9px">What does it all mean?</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- KPI Row -->
-    <div class="g5">
-      <div class="kpi kpi-accent">
-        <div class="kpi-icon">📦</div>
-        <div class="kpi-val" id="h-tiv">12,004</div>
-        <div class="kpi-label">Total Industry Volume Q4</div>
-        <div class="kpi-delta flat">Dec 2,613 → Mar 3,330 (+27.4%)</div>
-      </div>
-      <div class="kpi kpi-gold">
-        <div class="kpi-icon">🏆</div>
-        <div class="kpi-val" id="h-kom">822 <span class="unit">#5</span></div>
-        <div class="kpi-label">Komatsu Units · Q4 Rank</div>
-        <div class="kpi-delta up">▲ +27.3% Dec→Mar</div>
-      </div>
-      <div class="kpi kpi-gold">
-        <div class="kpi-icon">📊</div>
-        <div class="kpi-val" id="h-share">6.85<span class="unit">%</span></div>
-        <div class="kpi-label">Komatsu Market Share</div>
-        <div class="kpi-delta flat">−0.01pp Dec→Mar (holds share)</div>
-      </div>
-      <div class="kpi kpi-purple">
-        <div class="kpi-icon">⭐</div>
-        <div class="kpi-val">22.3<span class="unit">%</span></div>
-        <div class="kpi-label">Premium Tier (KOM+CAT+KOB+VOL)</div>
-        <div class="kpi-delta up">Komatsu = 30.7% within premium</div>
-      </div>
-      <div class="kpi kpi-red">
-        <div class="kpi-icon">🎯</div>
-        <div class="kpi-val">Tata<span class="unit" style="font-size:12px"> #1</span></div>
-        <div class="kpi-label">Market Leader (Q4)</div>
-        <div class="kpi-delta down">▼ −1.59pp share Dec→Mar</div>
-      </div>
-    </div>
-
-    <!-- Mini Charts Row -->
-    <div class="g2 gap-top">
-      <div class="card">
-        <div class="card-head"><div class="card-title"><i class="fa fa-chart-pie" style="color:var(--accent2)"></i>Q4 OEM Share Snapshot</div><div class="card-badge" id="h-pie-badge">All India</div></div>
-        <div class="card-body"><div class="ch h220"><canvas id="h-share-chart"></canvas></div></div>
-      </div>
-      <div class="card">
-        <div class="card-head"><div class="card-title"><i class="fa fa-chart-line" style="color:var(--green)"></i>Monthly TIV Growth — All OEMs</div><div class="card-badge">Dec→Mar Trend</div></div>
-        <div class="card-body"><div class="ch h220"><canvas id="h-tiv-chart"></canvas></div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ══════════════════════════════════════════════════════════
      TAB 2 — NATIONAL POSITION
 ══════════════════════════════════════════════════════════ -->
+<section class="section active" id="sec-dashboard">
+  <!-- ── PART 1: KPI SUMMARY ROW ─────────────────────────────── -->
+  <div style="max-width:1300px;margin:0 auto">
+    <div class="sec-head">
+      <div>
+        <div class="sec-title">📊 Komatsu Excavator Sales Dashboard</div>
+        <div class="sec-sub">Premium segment focus: Komatsu · CAT · Kobelco · Volvo &nbsp;·&nbsp; India market · Dec 2025–Mar 2026 (Q4 FY25)</div>
+      </div>
+      <span class="sec-badge" id="dash-badge">All India · Q4 FY25</span>
+    </div>
+
+    <!-- KPI Row — premium-only figures lead -->
+    <div class="g5">
+      <div class="kpi kpi-accent">
+        <div class="kpi-icon">🏆</div>
+        <div class="kpi-val" style="color:#1B3A6B">30.7<span class="unit">%</span></div>
+        <div class="kpi-label">Komatsu share in Premium segment</div>
+        <div class="kpi-delta up">▲ #1 among premium brands</div>
+      </div>
+      <div class="kpi kpi-green">
+        <div class="kpi-icon">📦</div>
+        <div class="kpi-val" id="h-kom">822</div>
+        <div class="kpi-label">Komatsu units sold · Q4</div>
+        <div class="kpi-delta up">▲ +27.3% Dec → Mar</div>
+      </div>
+      <div class="kpi kpi-gold">
+        <div class="kpi-icon">📈</div>
+        <div class="kpi-val" id="h-share">6.85<span class="unit">%</span></div>
+        <div class="kpi-label">Komatsu share of total market</div>
+        <div class="kpi-delta flat" id="h-share-delta">Stable · tracking market growth</div>
+      </div>
+      <div class="kpi kpi-purple">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-val">22.3<span class="unit">%</span></div>
+        <div class="kpi-label">Premium segment share of total market</div>
+        <div class="kpi-delta up">Growing as prices rise post emission norms</div>
+      </div>
+      <div class="kpi kpi-accent">
+        <div class="kpi-icon">🏭</div>
+        <div class="kpi-val" id="h-tiv">12,004</div>
+        <div class="kpi-label">Total excavators sold · Q4 (all brands)</div>
+        <div class="kpi-delta flat">Dec 2,613 → Mar 3,330 (+27.4%)</div>
+      </div>
+    </div>
+
+    <!-- Premium comparison banner -->
+    <div style="background:linear-gradient(135deg,#EFF6FF,#F0FDF4);border:1px solid #BFDBFE;border-left:4px solid #1B3A6B;border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:12px;color:#1E293B;line-height:1.8">
+      <strong style="font-size:13px;color:#1B3A6B;display:block;margin-bottom:5px">📌 Why we compare within the Premium segment only</strong>
+      The total market includes mass-market brands (Tata Hitachi, JCB, Hyundai, SANY etc.) priced at ₹34–65 Lakh, targeting small price-sensitive contractors.
+      Komatsu (₹72–76L), CAT, Kobelco and Volvo compete for <strong>Tier 1–2 contractors who value uptime, technology and total cost of ownership</strong> — not just purchase price.
+      Within this premium sub-market, <strong>Komatsu is the clear #1 leader at 30.7% share.</strong>
+    </div>
+
+    <!-- Two charts side by side -->
+    <div class="g2 gap-top">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><i class="fa fa-chart-pie" style="color:#1B3A6B"></i> Premium Brand Comparison — Q4 Sales Share</div>
+          <div class="card-badge">Komatsu · CAT · Kobelco · Volvo</div>
+        </div>
+        <div class="card-body">
+          <div class="ch h240"><canvas id="prem-pie-chart"></canvas></div>
+          <div class="inference" id="inf-premium_segment_lead">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <div class="inf-title">Premium Segment Leadership</div>
+    <button class="ai-insight-btn" onclick="refreshInsight('inf-premium_segment_lead',this)" title="Refresh with AI">
+      <i class="fa fa-robot"></i> AI Insight
+    </button>
+  </div>
+  <div class="inf-body" id="inf-premium_segment_lead-body">Komatsu holds <strong>30.7%</strong> of the premium segment — 8 percentage points ahead of CAT at #2. Among premium brands, Komatsu wins most deals. BS-V Emission Norms (CEV Stage V) emission norms have narrowed the price gap between premium and mass-market brands, benefiting Komatsu.</div>
+  <div class="ai-insight-box" id="inf-premium_segment_lead-ai"></div>
+</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><i class="fa fa-chart-line" style="color:#16A34A"></i> Premium Brand Monthly Trend — Units Sold</div>
+          <div class="card-badge">Dec 2025 → Mar 2026</div>
+        </div>
+        <div class="card-body">
+          <div class="ch h240"><canvas id="prem-trend-chart"></canvas></div>
+          <div class="inference" id="inf-komatsu_vs_premium_p">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <div class="inf-title">Komatsu vs Premium Peers</div>
+    <button class="ai-insight-btn" onclick="refreshInsight('inf-komatsu_vs_premium_p',this)" title="Refresh with AI">
+      <i class="fa fa-robot"></i> AI Insight
+    </button>
+  </div>
+  <div class="inf-body" id="inf-komatsu_vs_premium_p-body">Komatsu grew <strong>183 → 233 units (+27.3%)</strong> — the only premium brand keeping pace with overall market growth. CAT grew slower (+18.5%). Volvo fell 50%. Komatsu is gaining relative ground within the premium tier every month.</div>
+  <div class="ai-insight-box" id="inf-komatsu_vs_premium_p-ai"></div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- India Map -->
+    <div class="card gap-top">
+      <div class="card-head">
+        <div class="sec-title" style="font-size:14px"><i class="fa fa-map-marked-alt" style="color:#1B3A6B;margin-right:8px"></i>India Sales Map — Where are excavators being sold?</div>
+        <span class="sec-badge" id="map-badge">Komatsu · Q4</span>
+      </div>
+      <div class="oem-selector">
+        <span style="font-size:11px;font-weight:700;color:#374151;margin-right:6px">Select Brand:</span>
+        <span class="oem-chip active" data-oem="KOM" style="background:#1B3A6B;color:#fff;border-color:#1B3A6B" onclick="selectMapOEM('KOM',this)">🏗️ Komatsu</span>
+        <span class="oem-chip" data-oem="CAT" onclick="selectMapOEM('CAT',this)">CAT</span>
+        <span class="oem-chip" data-oem="KOB" onclick="selectMapOEM('KOB',this)">Kobelco</span>
+        <span class="oem-chip" data-oem="VOL" onclick="selectMapOEM('VOL',this)">Volvo</span>
+        <span class="oem-chip" data-oem="PREM" onclick="selectMapOEM('PREM',this)">⭐ All Premium</span>
+        <div style="width:1px;height:16px;background:#E2E8F0;margin:0 6px"></div>
+        <span style="font-size:10px;color:#94A3B8;font-style:italic;align-self:center">For context:</span>
+        <span class="oem-chip" data-oem="TH" onclick="selectMapOEM('TH',this)" style="opacity:.65">Tata Hitachi</span>
+        <span class="oem-chip" data-oem="SANY" onclick="selectMapOEM('SANY',this)" style="opacity:.65">SANY</span>
+        <span class="oem-chip" data-oem="ALL" onclick="selectMapOEM('ALL',this)" style="opacity:.65">All 11 Brands</span>
+        <span class="map-stat">Showing: <strong id="map-units-lbl">822 units</strong> · <strong id="map-states-lbl">17 states</strong></span>
+      </div>
+      <div class="map-toolbar">
+        <button class="mbtn active" id="tiv-bmark" onclick="tivTogL('markers')"><i class="fa fa-map-marker-alt"></i> Bubbles</button>
+        <button class="mbtn" id="tiv-bclust" onclick="tivTogL('clusters')"><i class="fa fa-circle"></i> Clusters</button>
+        <button class="mbtn" id="tiv-bheat" onclick="tivTogL('heat')"><i class="fa fa-fire"></i> Heatmap</button>
+        <div style="flex:1"></div>
+        <span style="font-size:10.5px;color:#64748B"><i class="fa fa-info-circle"></i>&nbsp;Bubble size = sales volume &nbsp;·&nbsp; Click a state for details</span>
+      </div>
+      <div id="tiv-map" style="height:480px;overflow:hidden;z-index:1;background:#F0F4F8"></div>
+    </div>
+
+    <!-- State table -->
+    <div class="card gap-top">
+      <div class="card-head">
+        <div class="card-title"><i class="fa fa-table" style="color:#1B3A6B"></i> State-wise Sales Volume</div>
+        <div class="card-badge" id="map-table-badge">Komatsu · Q4</div>
+      </div>
+      <div class="card-body" style="padding:10px;overflow-x:auto">
+        <table class="hm" id="map-state-table"></table>
+      </div>
+    </div>
+
+    <!-- Platform cards -->
+    <div style="margin-top:20px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#64748B;margin-bottom:12px">Other Tools in this Platform</div>
+      <div class="plat-grid">
+        <a class="plat-card plat-1" href="contracts.html">
+          <div class="plat-arrow">↗</div><div class="plat-icon">📋</div>
+          <div class="plat-title">Contract Intelligence</div>
+          <div class="plat-desc">Live tracking of active construction &amp; mining contracts across India — know which sites are under procurement and plan sales visits accordingly.</div>
+          <div class="plat-stats">
+            <div class="plat-stat"><strong>109</strong> Active Contracts</div>
+            <div class="plat-stat"><strong>71 Hot</strong> · 27 Warm · 11 Cool</div>
+          </div>
+        </a>
+        <a class="plat-card plat-2" href="used-equipment.html">
+          <div class="plat-arrow">↗</div><div class="plat-icon">🏗️</div>
+          <div class="plat-title">Used Equipment</div>
+          <div class="plat-desc">Valuation tool for used Komatsu PC200/205/210 excavators — price for resale, export or buyback with 15-parameter condition scoring.</div>
+          <div class="plat-stats">
+            <div class="plat-stat"><strong>3 Price tiers:</strong> Export / Domestic / Floor</div>
+            <div class="plat-stat"><strong>8</strong> Export Market Channels</div>
+          </div>
+        </a>
+        <a class="plat-card plat-3" href="pitch-generator.html">
+          <div class="plat-arrow">↗</div><div class="plat-icon">🤖</div>
+          <div class="plat-title">AI Sales Pitch Generator</div>
+          <div class="plat-desc">Generates customised sales pitches for different customer types — comparing Komatsu's total ownership cost vs competitors.</div>
+          <div class="plat-stats">
+            <div class="plat-stat"><strong>8</strong> Pitch Types</div>
+            <div class="plat-stat"><strong>9</strong> Competitor Brands</div>
+          </div>
+        </a>
+        <a class="plat-card plat-4" href="https://sampurnanandofficial1.github.io/lnt_equipcare/" target="_blank">
+          <div class="plat-arrow">↗</div><div class="plat-icon">⚙️</div>
+          <div class="plat-title">EquipCare Portal</div>
+          <div class="plat-desc">Customer-facing service portal — annual maintenance bookings, telematics monitoring, spare parts requests and service scheduling.</div>
+          <div class="plat-stats">
+            <div class="plat-stat">Annual &amp; Full Maintenance Contracts</div>
+            <div class="plat-stat">KOMTRAX Health Monitoring</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="section" id="sec-national">
   <div style="max-width:1300px;margin:0 auto">
     <div class="sec-head">
-      <div><div class="sec-title">Analysis 1 · National Position</div><div class="sec-sub">OEM market share — Q4 cumulative (% of industry) · 11 OEMs tracked</div></div>
+      <div><div class="sec-title">Market Share — All Brands</div><div class="sec-sub">OEM market share — Q4 cumulative (Dec 2025–Mar 2026) (% of total market) · 11 excavator brands tracked</div></div>
       <span class="sec-badge" id="nat-badge">All India · Q4</span>
     </div>
     <div class="g5">
@@ -570,10 +637,16 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
         <div class="card-head"><div class="card-title"><i class="fa fa-chart-pie" style="color:var(--accent2)"></i>OEM Market Share — Q4 Cumulative</div></div>
         <div class="card-body">
           <div class="ch h260"><canvas id="n-share-chart"></canvas></div>
-          <div class="inference">
-            <div class="inf-title">L&T Strategic Inference — Concentration</div>
-            <div class="inf-body"><strong>Top 4 (TH+JCB+HYU+SANY) = 68.0%</strong> of TIV. Premium tier (KOM+CAT+KOB+VOL) = <strong>22.3%</strong>. <strong>Komatsu leads the premium sub-market at 30.7%</strong>. The strategic question is growing the premium tier itself, not entering it. Komatsu is 0.74× SANY, 0.36× Hyundai.</div>
-          </div>
+          <div class="inference" id="inf-what_this_means_for_">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <div class="inf-title">What This Means for L&T — Concentration</div>
+    <button class="ai-insight-btn" onclick="refreshInsight('inf-what_this_means_for_',this)" title="Refresh with AI">
+      <i class="fa fa-robot"></i> AI Insight
+    </button>
+  </div>
+  <div class="inf-body" id="inf-what_this_means_for_-body"><strong>Top 4 (Tata Hitachi + JCB + Hyundai + SANY) = 68.0%</strong> of total market. Premium tier (Komatsu + CAT + Kobelco + Volvo) = <strong>22.3%</strong>. <strong>Komatsu leads the premium sub-market at 30.7%</strong>. The strategic question is growing the premium tier itself, not entering it. Komatsu is 0.74× SANY, 0.36× Hyundai.</div>
+  <div class="ai-insight-box" id="inf-what_this_means_for_-ai"></div>
+</div>
         </div>
       </div>
       <div class="card">
@@ -592,8 +665,11 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 <section class="section" id="sec-momentum">
   <div style="max-width:1300px;margin:0 auto">
     <div class="sec-head">
-      <div><div class="sec-title">Analysis 2 · Temporal Momentum</div><div class="sec-sub">Monthly share % evolution — Dec 2025 to Mar 2026 — who is gaining, who is bleeding</div></div>
+      <div><div class="sec-title">Growth Trends — Month by Month</div><div class="sec-sub">Monthly share % evolution — Dec 2025 to Mar 2026 — which brands are growing, which are losing share</div></div>
       <span class="sec-badge">Industry +27.4% Dec→Mar</span>
+      <button class="ai-insight-btn" onclick="regenAllInsights()" id="regen-btn">
+        <i class="fa fa-robot"></i> Regenerate All Insights with AI
+      </button>
     </div>
     <div class="g4">
       <div class="kpi kpi-green"><div class="kpi-icon">📈</div><div class="kpi-val">+2.57<span class="unit">pp</span></div><div class="kpi-label">SANY share gain Dec→Mar</div><div class="kpi-delta up">8.6% → 11.1% (+65.6% growth)</div></div>
@@ -606,20 +682,32 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
         <div class="card-head"><div class="card-title"><i class="fa fa-chart-line" style="color:var(--accent2)"></i>Monthly Share % — Top 6 OEMs</div><div class="card-badge">Dec-25 → Mar-26</div></div>
         <div class="card-body">
           <div class="ch h260"><canvas id="m-share-chart"></canvas></div>
-          <div class="inference">
-            <div class="inf-title">L&T Strategic Inference — Share War</div>
-            <div class="inf-body">In a +27.4% market, share is being redistributed. <strong>SANY growing 2.4× faster than Komatsu.</strong> Komatsu is defending share without gaining it — the only top-5 OEM tracking industry growth exactly. SANY and Hyundai are absorbing Tata Hitachi's bleeding share.</div>
-          </div>
+          <div class="inference" id="inf-what_this_means_for_">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <div class="inf-title">What This Means for L&T — Share War</div>
+    <button class="ai-insight-btn" onclick="refreshInsight('inf-what_this_means_for_',this)" title="Refresh with AI">
+      <i class="fa fa-robot"></i> AI Insight
+    </button>
+  </div>
+  <div class="inf-body" id="inf-what_this_means_for_-body">In a +27.4% market, share is being redistributed. <strong>SANY growing 2.4× faster than Komatsu.</strong> Komatsu is defending share without gaining it — the only top-5 OEM tracking industry growth exactly. SANY and Hyundai are absorbing Tata Hitachi's bleeding share.</div>
+  <div class="ai-insight-box" id="inf-what_this_means_for_-ai"></div>
+</div>
         </div>
       </div>
       <div class="card">
         <div class="card-head"><div class="card-title"><i class="fa fa-chart-bar" style="color:var(--green)"></i>Monthly Volume — All OEMs</div><div class="card-badge">Absolute Units Dec→Mar</div></div>
         <div class="card-body">
           <div class="ch h260"><canvas id="m-vol-chart"></canvas></div>
-          <div class="inference">
-            <div class="inf-title">Volume Context</div>
-            <div class="inf-body">Industry grew from <strong>2,613 units (Dec) to 3,330 (Mar)</strong> — +717 units / +27.4%. Pre-summer construction season driving demand. Komatsu: <strong>183 → 233 units</strong> over same period.</div>
-          </div>
+          <div class="inference" id="inf-volume_context">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <div class="inf-title">Volume Context</div>
+    <button class="ai-insight-btn" onclick="refreshInsight('inf-volume_context',this)" title="Refresh with AI">
+      <i class="fa fa-robot"></i> AI Insight
+    </button>
+  </div>
+  <div class="inf-body" id="inf-volume_context-body">Industry grew from <strong>2,613 units (Dec) to 3,330 (Mar)</strong> — +717 units / +27.4%. Pre-summer construction season driving demand. Komatsu: <strong>183 → 233 units</strong> over same period.</div>
+  <div class="ai-insight-box" id="inf-volume_context-ai"></div>
+</div>
         </div>
       </div>
     </div>
@@ -632,11 +720,11 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 <section class="section" id="sec-regional">
   <div style="max-width:1300px;margin:0 auto">
     <div class="sec-head">
-      <div><div class="sec-title">Analysis 3 · Regional Distribution</div><div class="sec-sub">Region-wise share % — Komatsu vs peers vs industry · Over/Under-index vs national 6.85%</div></div>
+      <div><div class="sec-title">Region-wise Sales Distribution</div><div class="sec-sub">Region-wise share % — Komatsu vs peers vs industry · above/below the national average of 6.85%</div></div>
       <span class="sec-badge">West+South = 56.2% of Industry</span>
     </div>
     <div class="g4">
-      <div class="kpi kpi-green"><div class="kpi-icon">🟢</div><div class="kpi-val">+6.77<span class="unit">pp</span></div><div class="kpi-label">South over-index vs industry</div><div class="kpi-delta up">8.59% share in South (26.6% of TIV)</div></div>
+      <div class="kpi kpi-green"><div class="kpi-icon">🟢</div><div class="kpi-val">+6.77<span class="unit">pp</span></div><div class="kpi-label">South over-index vs industry</div><div class="kpi-delta up">8.59% share in South (26.6% of total market)</div></div>
       <div class="kpi kpi-green"><div class="kpi-icon">🟢</div><div class="kpi-val">+5.91<span class="unit">pp</span></div><div class="kpi-label">NE over-index</div><div class="kpi-delta up">12.76% share in Guwahati-NE</div></div>
       <div class="kpi kpi-red"><div class="kpi-icon">🔴</div><div class="kpi-val">−5.02<span class="unit">pp</span></div><div class="kpi-label">West under-index</div><div class="kpi-delta down">Only 5.69% share vs 6.85% national</div></div>
       <div class="kpi kpi-red"><div class="kpi-icon">🔴</div><div class="kpi-val">−1.93<span class="unit">pp</span></div><div class="kpi-label">Delhi NCR under-index</div><div class="kpi-delta down">4.92% share in India's biggest market</div></div>
@@ -646,20 +734,32 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
         <div class="card-head"><div class="card-title"><i class="fa fa-chart-bar" style="color:var(--accent2)"></i>Komatsu Share by Region vs National Average</div></div>
         <div class="card-body">
           <div class="ch h260"><canvas id="r-bar-chart"></canvas></div>
-          <div class="inference">
-            <div class="inf-title">L&T Strategic Inference — Mirror-Image Geography</div>
-            <div class="inf-body"><strong>Komatsu is South-tilted vs peers.</strong> SANY: 35.9% from West (1.21× West-weighted). Tata Hitachi: 32.7% from South. JCB mirrors industry (most balanced). <strong>Komatsu 33.3% from South</strong> — mining/aggregate economies where premium machines win.</div>
-          </div>
+          <div class="inference" id="inf-what_this_means_for_">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <div class="inf-title">What This Means for L&T — Mirror-Image Geography</div>
+    <button class="ai-insight-btn" onclick="refreshInsight('inf-what_this_means_for_',this)" title="Refresh with AI">
+      <i class="fa fa-robot"></i> AI Insight
+    </button>
+  </div>
+  <div class="inf-body" id="inf-what_this_means_for_-body"><strong>Komatsu is South-tilted vs peers.</strong> SANY: 35.9% from West (1.21× West-weighted). Tata Hitachi: 32.7% from South. JCB mirrors industry (most balanced). <strong>Komatsu 33.3% from South</strong> — mining/aggregate economies where premium machines win.</div>
+  <div class="ai-insight-box" id="inf-what_this_means_for_-ai"></div>
+</div>
         </div>
       </div>
       <div class="card">
         <div class="card-head"><div class="card-title"><i class="fa fa-bullseye" style="color:var(--orange)"></i>Region Share % — Komatsu vs Industry</div></div>
         <div class="card-body">
           <div class="ch h260"><canvas id="r-radar-chart"></canvas></div>
-          <div class="inference">
-            <div class="inf-title">Geographic Gap Analysis</div>
-            <div class="inf-body">Komatsu is <strong>1.51× more state-concentrated than industry</strong>. The radar shows exactly where Komatsu is above/below the national 6.85% baseline. South and NE are the strongholds; West is the largest missed opportunity.</div>
-          </div>
+          <div class="inference" id="inf-geographic_gap_analy">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <div class="inf-title">Geographic Gap Analysis</div>
+    <button class="ai-insight-btn" onclick="refreshInsight('inf-geographic_gap_analy',this)" title="Refresh with AI">
+      <i class="fa fa-robot"></i> AI Insight
+    </button>
+  </div>
+  <div class="inf-body" id="inf-geographic_gap_analy-body">Komatsu is <strong>1.51× more state-concentrated than industry</strong>. The radar shows exactly where Komatsu is above/below the national 6.85% baseline. South and NE are the strongholds; West is the largest missed opportunity.</div>
+  <div class="ai-insight-box" id="inf-geographic_gap_analy-ai"></div>
+</div>
         </div>
       </div>
     </div>
@@ -672,7 +772,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 <section class="section" id="sec-statewise">
   <div style="max-width:1300px;margin:0 auto">
     <div class="sec-head">
-      <div><div class="sec-title">Analysis 4 · State Deep-Dive</div><div class="sec-sub">State × OEM intensity heatmap — share % of state TIV · Komatsu stronghold vs gap analysis</div></div>
+      <div><div class="sec-title">State-wise Deep Dive</div><div class="sec-sub">State × OEM intensity heatmap — share % of state sales · Komatsu stronghold vs gap analysis</div></div>
       <span class="sec-badge">Top 10 States · Q4 Cumulative</span>
     </div>
     <div class="g4">
@@ -682,7 +782,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
       <div class="kpi kpi-red"><div class="kpi-icon">⚠️</div><div class="kpi-val">2.45<span class="unit">%</span></div><div class="kpi-label">AP (0.36× national)</div><div class="kpi-delta down">Most under-indexed state</div></div>
     </div>
     <div class="card gap-top">
-      <div class="card-head"><div class="card-title"><i class="fa fa-th" style="color:var(--accent2)"></i>State × OEM Intensity Heatmap — Share % of State TIV (Top 10 States)</div><div class="card-badge">Darker = Higher Share</div></div>
+      <div class="card-head"><div class="card-title"><i class="fa fa-th" style="color:var(--accent2)"></i>State × OEM Intensity Heatmap — Share % of State total excavator sales (Top 10 States)</div><div class="card-badge">Darker = Higher Share</div></div>
       <div class="card-body" style="overflow-x:auto">
         <table class="hm" id="heatmap-tbl"></table>
       </div>
@@ -699,20 +799,26 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 ══════════════════════════════════════════════════════════ -->
 <section class="section" id="sec-patterns">
   <div style="max-width:1300px;margin:0 auto">
+    <!-- API key input (stored in sessionStorage, never sent anywhere except Claude AI) -->
+    <div id="ai-key-bar" style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:11px;font-weight:700;color:#374151"><i class="fa fa-key" style="color:#1B3A6B"></i> Claude AI Key:</span>
+      <input type="password" id="ai-key-inp" placeholder="sk-ant-api03-..." style="flex:1;min-width:220px;max-width:340px;font-size:11px;padding:5px 10px;border:1.5px solid #CBD5E1;border-radius:5px;font-family:monospace" oninput="sessionStorage.setItem('ai_key',this.value)">
+      <span style="font-size:10px;color:#64748B">Your key stays in this browser session only — never stored elsewhere.</span>
+    </div>
     <div class="sec-head">
-      <div><div class="sec-title">Analysis 5 · Key Patterns & Strategic Synthesis</div><div class="sec-sub">What the Top 5 OEM numbers reveal about Komatsu's competitive position</div></div>
+      <div><div class="sec-title">Key Insights & Strategic Analysis</div><div class="sec-sub">What the Top 5 OEM numbers reveal about Komatsu's competitive position</div></div>
     </div>
     <div class="g3">
-      <div class="pat"><div class="pat-num">Pattern 1</div><div class="pat-title">Concentration</div><div class="pat-body">Top 4 OEMs (TH+JCB+HYU+SANY) = <strong>68.0%</strong> of TIV. Premium tier where Komatsu competes = <strong>22.3%</strong>. Komatsu already holds <strong>30.7%</strong> of the premium sub-market — the de facto premium leader. Strategic question: grow the premium tier, not enter it.</div></div>
-      <div class="pat"><div class="pat-num">Pattern 2</div><div class="pat-title">Growth Vectors</div><div class="pat-body">In a +27.4% market, share is moving. <strong>SANY: +2.57pp (+65.6% growth). Hyundai: +2.50pp (+47.9%)</strong>. Tata Hitachi bleeding −1.59pp. <strong>Komatsu: flat (−0.01pp) at exactly industry growth rate</strong> — the only top-5 OEM neither gaining nor losing share.</div></div>
+      <div class="pat"><div class="pat-num">Pattern 1</div><div class="pat-title">Concentration</div><div class="pat-body">Top 4 OEMs (Tata Hitachi + JCB + Hyundai + SANY) = <strong>68.0%</strong> of total market. Premium tier where Komatsu competes = <strong>22.3%</strong>. Komatsu already holds <strong>30.7%</strong> of the premium sub-market — the de facto premium leader. Strategic question: grow the premium tier, not enter it.</div></div>
+      <div class="pat"><div class="pat-num">Pattern 2</div><div class="pat-title">Growth Vectors</div><div class="pat-body">In a +27.4% market, share is moving. <strong>SANY: +2.57 percentage points (+65.6% growth). Hyundai: +2.50 percentage points (+47.9%)</strong>. Tata Hitachi bleeding −1.59 percentage points. <strong>Komatsu: flat (−0.01 percentage points) at exactly industry growth rate</strong> — the only top-5 OEM neither gaining nor losing share.</div></div>
       <div class="pat hl"><div class="pat-num">Pattern 3 — Key Insight</div><div class="pat-title">Geographic Identity</div><div class="pat-body">Komatsu is <strong>1.51× more state-concentrated than industry</strong>. Top 3 states = 40.4% of Komatsu volume vs 30.3% for industry. Every state where Komatsu over-indexes ≥1.5× national is a <strong>mining/coal/aggregate economy</strong>. Highway/infra states favour price-led OEMs.</div></div>
       <div class="pat"><div class="pat-num">Pattern 4</div><div class="pat-title">Stronghold Signature</div><div class="pat-body"><strong>Karnataka 2.48×</strong> national · <strong>NE States 1.86×</strong> · <strong>WB&Sikkim 1.55×</strong>. Zero overlap with NHAI highway mega-projects. Komatsu is a mining/aggregate-economy OEM competing in a market dominated by highway/infra demand.</div></div>
-      <div class="pat"><div class="pat-num">Pattern 5</div><div class="pat-title">Volume vs Value Gap</div><div class="pat-body"><strong>Gujarat = 10.4% of national TIV</strong> (India's #1 state). Komatsu only 4.15% there — Hyundai 20.4%, Tata 19.6% dominate. Gap to leader = <strong>16.2pp</strong>. Closing this gap = <strong>+1.7pp national share</strong> — a structural move worth more than deepening current strongholds.</div></div>
-      <div class="pat hl"><div class="pat-num">Strategic Takeaway</div><div class="pat-title">The Play Forward</div><div class="pat-body">Two paths: <strong>(A) Deepen mining strongholds</strong> where Komatsu over-indexes 1.55–2.48× — lower competitive intensity, sustainable. <strong>(B) Contest highway/infra geographies</strong> where SANY (+2.57pp) and Hyundai (+2.50pp) are absorbing Tata Hitachi's declining share — higher volume but price-led competition. Both are valid; only <strong>(A) plays to Komatsu's premium identity</strong>.</div></div>
+      <div class="pat"><div class="pat-num">Pattern 5</div><div class="pat-title">Volume vs Value Gap</div><div class="pat-body"><strong>Gujarat = 10.4% of national TIV</strong> (India's #1 state). Komatsu only 4.15% there — Hyundai 20.4%, Tata 19.6% dominate. Gap to leader = <strong>16.2pp</strong>. Closing this gap = <strong>+1.7 percentage points national share</strong> — a structural move worth more than deepening current strongholds.</div></div>
+      <div class="pat hl"><div class="pat-num">Strategic Takeaway</div><div class="pat-title">The Play Forward</div><div class="pat-body">Two paths: <strong>(A) Deepen mining strongholds</strong> where Komatsu over-indexes 1.55–2.48× — lower competitive intensity, sustainable. <strong>(B) Contest highway/infra geographies</strong> where SANY (+2.57 percentage points) and Hyundai (+2.50 percentage points) are absorbing Tata Hitachi's declining share — higher volume but price-led competition. Both are valid; only <strong>(A) plays to Komatsu's premium identity</strong>.</div></div>
     </div>
     <!-- OEM Full Table -->
     <div class="card gap-top">
-      <div class="card-head"><div class="card-title"><i class="fa fa-table" style="color:var(--muted)"></i>Reference · Full OEM TIV Summary — Monthly + Q4 + Dec→Mar Movement</div><div class="card-badge">Source: Internal L&T-CMMB TIV Tracking</div></div>
+      <div class="card-head"><div class="card-title"><i class="fa fa-table" style="color:var(--muted)"></i>Reference · Full OEM total excavator sales Summary — Monthly + Q4 + Dec→Mar Movement</div><div class="card-badge">Source: Internal L&T-CMMB total excavator sales Tracking</div></div>
       <div class="card-body" style="padding:10px"><table class="oem-tbl" id="p-oem-tbl"></table></div>
     </div>
     <!-- Sources -->
@@ -729,16 +835,16 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 <section class="section" id="sec-data">
   <div style="max-width:900px;margin:0 auto">
     <div class="sec-head">
-      <div><div class="sec-title">Data Management · Upload New TIV Data</div><div class="sec-sub">Add or correct monthly TIV data — all charts update live</div></div>
+      <div><div class="sec-title">Data Management · Upload New total excavator sales Data</div><div class="sec-sub">Add or correct monthly total excavator sales data — all charts update live</div></div>
     </div>
     <div class="g2">
       <div class="card">
-        <div class="card-head"><div class="card-title"><i class="fa fa-upload" style="color:var(--accent2)"></i>Upload Monthly TIV File</div><div class="card-badge">CSV Format</div></div>
+        <div class="card-head"><div class="card-title"><i class="fa fa-upload" style="color:var(--accent2)"></i>Upload Monthly total excavator sales File</div><div class="card-badge">CSV Format</div></div>
         <div class="card-body">
           <div class="upload-zone" id="upload-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
             <div class="upload-icon">📊</div>
             <div class="upload-title">Drop CSV file here or click to browse</div>
-            <div class="upload-desc">Standard L&T-CMMB TIV format<br>Region · State · 11 OEMs · Total</div>
+            <div class="upload-desc">Standard L&T-CMMB total excavator sales format<br>Region · State · 11 brands · Total</div>
             <input type="file" id="file-input" accept=".csv" style="display:none" onchange="handleFile(event)">
             <button class="ubtn" onclick="openFilePicker()"><i class="fa fa-folder-open"></i> Choose File</button>
             <button class="ubtn sec" onclick="dlTemplate()"><i class="fa fa-download"></i> Download Template</button>
@@ -791,175 +897,19 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 </div>
 
 <!-- ══ PREMIUM SEGMENT SECTION ══════════════════════════════════════════ -->
-<section class="section" id="sec-premium">
-  <div style="max-width:1300px;margin:0 auto">
-    <div class="sec-head">
-      <div>
-        <div class="sec-title">⭐ Premium Segment — Komatsu's Real Playing Field</div>
-        <div class="sec-sub">Komatsu · CAT · Kobelco · Volvo only — excl. mass-market & Chinese OEMs</div>
-      </div>
-      <span class="sec-badge">Komatsu = #1 in Premium Tier · 30.7% share</span>
-    </div>
-    <div style="background:linear-gradient(135deg,#EFF6FF,#F0FDF4);border:1px solid #BFDBFE;border-left:4px solid #1B3A6B;border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:20px;font-size:12px;color:#1E293B;line-height:1.8">
-      <strong style="font-size:13px;color:#1B3A6B;display:block;margin-bottom:5px">📌 Why compare within the Premium segment only?</strong>
-      The 11-OEM overall market includes mass-market OEMs (Tata Hitachi, JCB, Hyundai, SANY, XCMG, LiuGong, CASE) operating at ₹34–65L targeting Tier 3–4 price-sensitive contractors. Komatsu (₹72–76L), CAT, Kobelco, and Volvo all compete for <strong>Tier 1–2 contractors who prioritise uptime, TCO, and telematics over purchase price.</strong> Within this premium sub-market, <strong>Komatsu is the clear #1 leader.</strong>
-      <span style="font-size:10px;color:#64748B;display:block;margin-top:5px">Sources: LT_CE_Strategy_v4 Sec 3.3 · Equipment India PC210-10M0 milestone · L&T Annual Review 2025 · ICEMA FY25</span>
-    </div>
-    <div class="g5">
-      <div class="kpi" style="border-top:3px solid #1B3A6B">
-        <div style="font-size:20px;margin-bottom:8px">🏆</div>
-        <div class="kpi-val" style="color:#1B3A6B">30.7<span class="unit">%</span></div>
-        <div class="kpi-label">Komatsu share of Premium tier</div>
-        <div class="kpi-delta up">▲ #1 ahead of CAT, Kobelco, Volvo</div>
-      </div>
-      <div class="kpi" style="border-top:3px solid #16A34A">
-        <div style="font-size:20px;margin-bottom:8px">📈</div>
-        <div class="kpi-val" style="color:#16A34A">+27.3<span class="unit">%</span></div>
-        <div class="kpi-label">Komatsu unit growth Q4 Dec→Mar</div>
-        <div class="kpi-delta up">Tracks industry perfectly</div>
-      </div>
-      <div class="kpi" style="border-top:3px solid #F59E0B">
-        <div style="font-size:20px;margin-bottom:8px">#1</div>
-        <div class="kpi-val" style="color:#D97706;font-size:26px">Leader</div>
-        <div class="kpi-label">Rank within 4-OEM premium segment</div>
-        <div class="kpi-delta up">Ahead of CAT · Kobelco · Volvo</div>
-      </div>
-      <div class="kpi" style="border-top:3px solid #7C3AED">
-        <div style="font-size:20px;margin-bottom:8px">📊</div>
-        <div class="kpi-val" style="color:#7C3AED">22.3<span class="unit">%</span></div>
-        <div class="kpi-label">Premium tier of total market</div>
-        <div class="kpi-delta flat">Growing as CEV-V raises floor prices</div>
-      </div>
-      <div class="kpi" style="border-top:3px solid #0284C7">
-        <div style="font-size:20px;margin-bottom:8px">💰</div>
-        <div class="kpi-val" style="color:#0284C7">₹27L</div>
-        <div class="kpi-label">TCO advantage vs SANY / 8,000 hrs</div>
-        <div class="kpi-delta up">Fuel+maintenance+residual value</div>
-      </div>
-    </div>
-    <div class="g2 gap-top">
-      <div class="card">
-        <div class="card-head"><div class="card-title"><i class="fa fa-chart-pie" style="color:#1B3A6B"></i>Premium Tier Share — Q4 (Komatsu vs CAT vs Kobelco vs Volvo)</div><div class="card-badge">2,682 premium units Q4</div></div>
-        <div class="card-body">
-          <div class="ch h240"><canvas id="prem-pie-chart"></canvas></div>
-          <div class="inference">
-            <div class="inf-title">Premium Leadership</div>
-            <div class="inf-body">Komatsu holds <strong>30.7%</strong> of premium — 8pp ahead of #2 CAT. Within the segment where technology, uptime and TCO decide deals, <strong>Komatsu wins more often than any peer.</strong> CEV-V is narrowing the price gap to mass-market OEMs, driving premiumisation of the market.</div>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-head"><div class="card-title"><i class="fa fa-chart-line" style="color:#16A34A"></i>Premium OEM Monthly Trend — Units Dec→Mar</div><div class="card-badge">Premium 4 OEMs</div></div>
-        <div class="card-body">
-          <div class="ch h240"><canvas id="prem-trend-chart"></canvas></div>
-          <div class="inference">
-            <div class="inf-title">Komatsu vs Premium Peers</div>
-            <div class="inf-body">Komatsu <strong>183→233 units (+27.3%)</strong>. CAT only +18.5%. <strong>Volvo collapsed −50%.</strong> Komatsu gained relative share within the premium tier Dec→Mar — the only premium OEM tracking industry growth.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card gap-top">
-      <div class="card-head"><div class="card-title"><i class="fa fa-layer-group" style="color:#F59E0B"></i>India Excavator Market — 3-Tier Architecture</div><div class="card-badge">Source: LT_CE_Strategy_v4 · ICEMA FY25</div></div>
-      <div class="card-body">
-        <table style="width:100%;border-collapse:collapse;font-size:12px">
-          <thead><tr style="background:#F8FAFC">
-            <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">Segment</th>
-            <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">OEMs</th>
-            <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">Price Band</th>
-            <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">FY25 Units</th>
-            <th style="padding:10px 12px;text-align:center;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">Mkt Share</th>
-            <th style="padding:10px 12px;text-align:left;font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;border-bottom:2px solid #E2E8F0">L&amp;T Position</th>
-          </tr></thead>
-          <tbody>
-            <tr style="background:#EFF6FF;border-bottom:1px solid #DBEAFE">
-              <td style="padding:10px 12px;font-weight:700;color:#1B3A6B">⭐ PREMIUM</td>
-              <td style="padding:10px 12px;text-align:center"><span style="background:#DBEAFE;color:#1D4ED8;padding:2px 9px;border-radius:4px;font-size:10.5px;font-weight:600">Komatsu · CAT · Kobelco · Volvo</span></td>
-              <td style="padding:10px 12px;text-align:center;font-weight:700;color:#1B3A6B">₹68–85L</td>
-              <td style="padding:10px 12px;text-align:center;font-weight:700;color:#1B3A6B">~7,900</td>
-              <td style="padding:10px 12px;text-align:center"><span style="background:#DBEAFE;color:#1D4ED8;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:700">22.3%</span></td>
-              <td style="padding:10px 12px;font-weight:700;color:#16A34A">✅ #1 — 30.7% of tier</td>
-            </tr>
-            <tr style="border-bottom:1px solid #F1F5F9">
-              <td style="padding:10px 12px;font-weight:600;color:#475569">MID-PREMIUM</td>
-              <td style="padding:10px 12px;text-align:center"><span style="background:#F1F5F9;color:#475569;padding:2px 9px;border-radius:4px;font-size:10.5px">Tata Hitachi · Hyundai · JCB</span></td>
-              <td style="padding:10px 12px;text-align:center;color:#475569">₹50–68L</td>
-              <td style="padding:10px 12px;text-align:center;color:#475569">~17,000</td>
-              <td style="padding:10px 12px;text-align:center"><span style="background:#F1F5F9;color:#64748B;padding:3px 10px;border-radius:20px;font-size:11.5px">47.5%</span></td>
-              <td style="padding:10px 12px;color:#D97706">⚠️ Not primary segment</td>
-            </tr>
-            <tr>
-              <td style="padding:10px 12px;color:#94A3B8">ECONOMY</td>
-              <td style="padding:10px 12px;text-align:center"><span style="background:#FEF9EE;color:#92400E;padding:2px 9px;border-radius:4px;font-size:10.5px">SANY · XCMG · LiuGong · CASE</span></td>
-              <td style="padding:10px 12px;text-align:center;color:#94A3B8">₹34–55L</td>
-              <td style="padding:10px 12px;text-align:center;color:#94A3B8">~10,900</td>
-              <td style="padding:10px 12px;text-align:center"><span style="background:#FEF9EE;color:#92400E;padding:3px 10px;border-radius:20px;font-size:11.5px">30.2%</span></td>
-              <td style="padding:10px 12px;color:#94A3B8">— Not L&T's market</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="g3 gap-top">
-      <div class="pat hl"><div class="pat-num">Premium Position 1</div><div class="pat-title">30.7% of Premium Tier</div><div class="pat-body">Within ₹68–85L OEMs only, Komatsu leads with <strong>30.7% share</strong> — 8pp ahead of #2 CAT (26.8%). The premium tier = 22.3% of national TIV. <strong>This is the correct benchmark for L&T-Komatsu.</strong></div></div>
-      <div class="pat"><div class="pat-num">Premium Position 2</div><div class="pat-title">₹27L TCO Advantage</div><div class="pat-body">vs SANY SY215 over 8,000 hrs: <strong>fuel saving ₹8–10L</strong> (10% better) + <strong>maintenance ₹4–6L</strong> (KOMTRAX cuts 40% breakdowns) + <strong>residual ₹12–18L</strong> (40–60% vs 20–30%). Total: <strong>₹27L TCO advantage.</strong></div></div>
-      <div class="pat"><div class="pat-num">Premium Position 3</div><div class="pat-title">CEV-V Premiumisation</div><div class="pat-body">CEV Stage V raised economy OEM prices <strong>12–15%</strong> — narrowing the gap to premium. CRISIL: <strong>35–40% Tier 2 deferral</strong> + gradual upward shift. <strong>Komatsu benefits most</strong> from premiumisation of India's CE market.</div></div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ══ OEM FULL HEATMAP SECTION ═════════════════════════════════════════ -->
-<section class="section active" id="sec-oem_heatmap">
-  <div style="max-width:1300px;margin:0 auto">
-    <div class="sec-head">
-      <div>
-        <div class="sec-title"><i class="fa fa-map-marked-alt" style="color:#1B3A6B;margin-right:8px"></i>India TIV Map — Premium Excavator Sales by State</div>
-        <div class="sec-sub">Premium OEMs: Komatsu · CAT · Kobelco · Volvo · Toggle views · Q4 Dec 2025–Mar 2026</div>
-      </div>
-      <span class="sec-badge" id="map-badge">Komatsu · Q4 · All India</span>
-    </div>
-    <div class="oem-selector">
-      <span style="font-size:11px;font-weight:700;color:#374151;margin-right:6px">Select OEM:</span>
-      <span class="oem-chip active" data-oem="KOM" style="background:#1B3A6B;color:#fff;border-color:#1B3A6B" onclick="selectMapOEM('KOM',this)">🏗️ Komatsu</span>
-      <span class="oem-chip" data-oem="CAT" onclick="selectMapOEM('CAT',this)">CAT</span>
-      <span class="oem-chip" data-oem="KOB" onclick="selectMapOEM('KOB',this)">Kobelco</span>
-      <span class="oem-chip" data-oem="VOL" onclick="selectMapOEM('VOL',this)">Volvo</span>
-      <span class="oem-chip" data-oem="PREM" onclick="selectMapOEM('PREM',this)">⭐ All Premium</span>
-      <div style="width:1px;height:16px;background:#E2E8F0;margin:0 6px"></div>
-      <span style="font-size:10px;color:#94A3B8;font-style:italic;align-self:center">Context only:</span>
-      <span class="oem-chip" data-oem="TH" onclick="selectMapOEM('TH',this)" style="opacity:.65">Tata Hitachi</span>
-      <span class="oem-chip" data-oem="SANY" onclick="selectMapOEM('SANY',this)" style="opacity:.65">SANY</span>
-      <span class="oem-chip" data-oem="ALL" onclick="selectMapOEM('ALL',this)" style="opacity:.65">All 11 OEMs</span>
-      <span class="map-stat">Showing: <strong id="map-units-lbl">822 units</strong> · <strong id="map-states-lbl">17 states</strong></span>
-    </div>
-    <div class="map-toolbar">
-      <button class="mbtn active" id="tiv-bmark" onclick="tivTogL('markers')"><i class="fa fa-map-marker-alt"></i> Markers</button>
-      <button class="mbtn" id="tiv-bclust" onclick="tivTogL('clusters')"><i class="fa fa-circle"></i> Clusters</button>
-      <button class="mbtn" id="tiv-bheat" onclick="tivTogL('heat')"><i class="fa fa-fire"></i> Heatmap</button>
-      <div style="flex:1"></div>
-      <span style="font-size:10.5px;color:#64748B"><i class="fa fa-info-circle"></i>&nbsp;Bubble size = volume &nbsp;·&nbsp; Click state for details</span>
-    </div>
-    <div id="tiv-map" style="height:520px;border-radius:0 0 8px 8px;overflow:hidden;z-index:1;background:#F0F4F8"></div>
-    <div class="card gap-top">
-      <div class="card-head">
-        <div class="card-title"><i class="fa fa-table" style="color:#1B3A6B"></i>&nbsp;State-wise Volume — Selected OEM</div>
-        <div class="card-badge" id="map-table-badge">Komatsu · Q4</div>
-      </div>
-      <div class="card-body" style="padding:10px;overflow-x:auto">
-        <table class="hm" id="map-state-table"></table>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <footer>
-  <div class="foot-l"><strong>L&T CMMB · TIV Intelligence Hub</strong> · IIM Lucknow MBA Internship · May 2026 · <strong>Data cut-off: 31 March 2026</strong></div>
+  <div class="foot-l"><strong>L&T CMMB · total excavator sales Intelligence Hub</strong> · IIM Lucknow MBA Internship · May 2026 · <strong>Data cut-off: 31 March 2026</strong></div>
   <div class="foot-r">Internal use only · Do not cite OEM volumes externally without ICEMA permission · v7.1</div>
 </footer>
 
 <script>
 // ════════════════════════════════════════════════════════
-// TIV DATA
+// total excavator sales DATA
 // ════════════════════════════════════════════════════════
 const TIV={"Dec-25":{"North":{"Jammu":{"CAT":1,"TH":1,"KOM":2,"KOB":3,"VOL":1,"JCB":7,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":2,"TH":11,"KOM":2,"KOB":8,"VOL":2,"JCB":8,"HYU":12,"SANY":10,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":0,"TH":1,"KOM":1,"KOB":3,"VOL":0,"JCB":5,"HYU":5,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":1,"TH":1,"KOM":4,"KOB":10,"VOL":2,"JCB":9,"HYU":8,"SANY":2,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":15,"TH":19,"KOM":9,"KOB":8,"VOL":13,"JCB":43,"HYU":8,"SANY":10,"XCMG":13,"LIU":7,"CASE":2},"UK W.UP":{"CAT":1,"TH":2,"KOM":1,"KOB":1,"VOL":1,"JCB":2,"HYU":4,"SANY":1,"XCMG":7,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":7,"TH":27,"KOM":5,"KOB":1,"VOL":3,"JCB":15,"HYU":18,"SANY":9,"XCMG":6,"LIU":5,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":3,"TH":13,"KOM":18,"KOB":7,"VOL":9,"JCB":20,"HYU":25,"SANY":18,"XCMG":8,"LIU":2,"CASE":1}},"East":{"WB Sikkim":{"CAT":5,"TH":46,"KOM":12,"KOB":21,"VOL":11,"JCB":38,"HYU":20,"SANY":14,"XCMG":17,"LIU":5,"CASE":0},"Jharkhand":{"CAT":4,"TH":41,"KOM":4,"KOB":1,"VOL":14,"JCB":17,"HYU":22,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Odisha":{"CAT":10,"TH":37,"KOM":0,"KOB":16,"VOL":10,"JCB":21,"HYU":34,"SANY":10,"XCMG":14,"LIU":1,"CASE":0},"Bihar":{"CAT":3,"TH":20,"KOM":0,"KOB":5,"VOL":6,"JCB":18,"HYU":1,"SANY":2,"XCMG":1,"LIU":2,"CASE":0}},"Central India":{"MP":{"CAT":27,"TH":22,"KOM":8,"KOB":10,"VOL":13,"JCB":24,"HYU":17,"SANY":0,"XCMG":1,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":4,"TH":11,"KOM":7,"KOB":6,"VOL":1,"JCB":7,"HYU":10,"SANY":5,"XCMG":1,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":11,"TH":55,"KOM":13,"KOB":24,"VOL":18,"JCB":45,"HYU":34,"SANY":32,"XCMG":16,"LIU":16,"CASE":3},"Gujarat":{"CAT":12,"TH":69,"KOM":13,"KOB":5,"VOL":18,"JCB":50,"HYU":69,"SANY":41,"XCMG":36,"LIU":18,"CASE":2},"Maharashtra":{"CAT":53,"TH":61,"KOM":27,"KOB":16,"VOL":24,"JCB":59,"HYU":61,"SANY":27,"XCMG":12,"LIU":6,"CASE":0}},"South":{"Karnataka":{"CAT":11,"TH":61,"KOM":49,"KOB":9,"VOL":7,"JCB":56,"HYU":49,"SANY":16,"XCMG":5,"LIU":4,"CASE":0},"AP":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Telangana":{"CAT":8,"TH":67,"KOM":8,"KOB":8,"VOL":12,"JCB":31,"HYU":4,"SANY":19,"XCMG":9,"LIU":6,"CASE":0},"TN":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":0,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":1}}},"Jan-26":{"North":{"Jammu":{"CAT":6,"TH":1,"KOM":4,"KOB":2,"VOL":12,"JCB":6,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":2,"TH":8,"KOM":6,"KOB":5,"VOL":2,"JCB":5,"HYU":10,"SANY":10,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":0,"TH":0,"KOM":1,"KOB":1,"VOL":0,"JCB":10,"HYU":7,"SANY":4,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":2,"TH":1,"KOM":4,"KOB":4,"VOL":1,"JCB":9,"HYU":9,"SANY":2,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":9,"TH":17,"KOM":9,"KOB":3,"VOL":7,"JCB":43,"HYU":34,"SANY":10,"XCMG":13,"LIU":7,"CASE":2},"UK W.UP":{"CAT":1,"TH":4,"KOM":1,"KOB":1,"VOL":0,"JCB":2,"HYU":2,"SANY":1,"XCMG":7,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":8,"TH":22,"KOM":5,"KOB":0,"VOL":1,"JCB":19,"HYU":15,"SANY":11,"XCMG":0,"LIU":1,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":3,"TH":15,"KOM":12,"KOB":4,"VOL":7,"JCB":22,"HYU":30,"SANY":14,"XCMG":2,"LIU":2,"CASE":0}},"East":{"WB Sikkim":{"CAT":7,"TH":44,"KOM":19,"KOB":18,"VOL":11,"JCB":39,"HYU":31,"SANY":8,"XCMG":17,"LIU":7,"CASE":1},"Jharkhand":{"CAT":7,"TH":33,"KOM":5,"KOB":1,"VOL":4,"JCB":19,"HYU":22,"SANY":10,"XCMG":0,"LIU":0,"CASE":0},"Odisha":{"CAT":9,"TH":41,"KOM":6,"KOB":16,"VOL":10,"JCB":40,"HYU":39,"SANY":13,"XCMG":14,"LIU":10,"CASE":0},"Bihar":{"CAT":0,"TH":16,"KOM":0,"KOB":3,"VOL":0,"JCB":17,"HYU":7,"SANY":0,"XCMG":1,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":14,"TH":36,"KOM":7,"KOB":9,"VOL":4,"JCB":18,"HYU":39,"SANY":29,"XCMG":4,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":6,"TH":23,"KOM":11,"KOB":6,"VOL":3,"JCB":14,"HYU":17,"SANY":7,"XCMG":8,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":10,"TH":33,"KOM":13,"KOB":24,"VOL":9,"JCB":45,"HYU":51,"SANY":32,"XCMG":20,"LIU":21,"CASE":1},"Gujarat":{"CAT":9,"TH":59,"KOM":13,"KOB":5,"VOL":6,"JCB":50,"HYU":63,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":22,"TH":69,"KOM":23,"KOB":38,"VOL":7,"JCB":59,"HYU":69,"SANY":27,"XCMG":12,"LIU":6,"CASE":0}},"South":{"Karnataka":{"CAT":9,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":16,"XCMG":5,"LIU":4,"CASE":0},"AP":{"CAT":9,"TH":61,"KOM":5,"KOB":25,"VOL":4,"JCB":55,"HYU":57,"SANY":0,"XCMG":0,"LIU":9,"CASE":1},"Telangana":{"CAT":6,"TH":49,"KOM":4,"KOB":13,"VOL":7,"JCB":32,"HYU":12,"SANY":22,"XCMG":4,"LIU":6,"CASE":0},"TN":{"CAT":6,"TH":59,"KOM":9,"KOB":0,"VOL":0,"JCB":53,"HYU":59,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":1,"TH":0,"KOM":0,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}}},"Feb-26":{"North":{"Jammu":{"CAT":4,"TH":0,"KOM":1,"KOB":2,"VOL":1,"JCB":7,"HYU":6,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":5,"TH":9,"KOM":6,"KOB":6,"VOL":0,"JCB":8,"HYU":9,"SANY":7,"XCMG":8,"LIU":2,"CASE":0},"Himachal":{"CAT":3,"TH":1,"KOM":1,"KOB":5,"VOL":0,"JCB":8,"HYU":5,"SANY":0,"XCMG":0,"LIU":2,"CASE":0},"Haryana":{"CAT":4,"TH":2,"KOM":3,"KOB":2,"VOL":1,"JCB":3,"HYU":6,"SANY":4,"XCMG":2,"LIU":4,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":9,"TH":12,"KOM":8,"KOB":11,"VOL":8,"JCB":32,"HYU":33,"SANY":10,"XCMG":9,"LIU":7,"CASE":1},"UK W.UP":{"CAT":1,"TH":13,"KOM":0,"KOB":0,"VOL":2,"JCB":4,"HYU":4,"SANY":1,"XCMG":2,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":9,"TH":22,"KOM":2,"KOB":3,"VOL":2,"JCB":19,"HYU":12,"SANY":11,"XCMG":1,"LIU":2,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":4,"TH":11,"KOM":12,"KOB":4,"VOL":5,"JCB":22,"HYU":30,"SANY":14,"XCMG":2,"LIU":2,"CASE":0}},"East":{"WB Sikkim":{"CAT":7,"TH":38,"KOM":19,"KOB":18,"VOL":9,"JCB":39,"HYU":31,"SANY":8,"XCMG":19,"LIU":19,"CASE":1},"Jharkhand":{"CAT":5,"TH":32,"KOM":5,"KOB":1,"VOL":3,"JCB":16,"HYU":22,"SANY":10,"XCMG":3,"LIU":2,"CASE":0},"Odisha":{"CAT":14,"TH":32,"KOM":6,"KOB":12,"VOL":9,"JCB":40,"HYU":39,"SANY":13,"XCMG":8,"LIU":20,"CASE":0},"Bihar":{"CAT":1,"TH":16,"KOM":0,"KOB":3,"VOL":0,"JCB":17,"HYU":7,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":9,"TH":36,"KOM":7,"KOB":6,"VOL":4,"JCB":18,"HYU":39,"SANY":29,"XCMG":4,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":4,"TH":23,"KOM":9,"KOB":1,"VOL":3,"JCB":14,"HYU":17,"SANY":7,"XCMG":2,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":13,"TH":43,"KOM":17,"KOB":20,"VOL":8,"JCB":54,"HYU":48,"SANY":32,"XCMG":20,"LIU":21,"CASE":0},"Gujarat":{"CAT":15,"TH":59,"KOM":13,"KOB":5,"VOL":6,"JCB":50,"HYU":63,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":35,"TH":55,"KOM":19,"KOB":18,"VOL":7,"JCB":41,"HYU":45,"SANY":26,"XCMG":14,"LIU":9,"CASE":0}},"South":{"Karnataka":{"CAT":12,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":16,"XCMG":5,"LIU":4,"CASE":1},"AP":{"CAT":5,"TH":55,"KOM":6,"KOB":21,"VOL":4,"JCB":49,"HYU":51,"SANY":0,"XCMG":0,"LIU":9,"CASE":1},"Telangana":{"CAT":9,"TH":31,"KOM":4,"KOB":15,"VOL":6,"JCB":25,"HYU":18,"SANY":29,"XCMG":4,"LIU":2,"CASE":0},"TN":{"CAT":12,"TH":59,"KOM":7,"KOB":0,"VOL":0,"JCB":49,"HYU":59,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Kerala":{"CAT":5,"TH":11,"KOM":2,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":0,"LIU":0,"CASE":0}}},"Mar-26":{"North":{"Jammu":{"CAT":2,"TH":0,"KOM":1,"KOB":1,"VOL":1,"JCB":7,"HYU":4,"SANY":0,"XCMG":0,"LIU":0,"CASE":0},"Punjab":{"CAT":7,"TH":16,"KOM":3,"KOB":8,"VOL":1,"JCB":18,"HYU":10,"SANY":6,"XCMG":7,"LIU":7,"CASE":0},"Himachal":{"CAT":1,"TH":4,"KOM":1,"KOB":6,"VOL":0,"JCB":6,"HYU":5,"SANY":2,"XCMG":0,"LIU":3,"CASE":1},"Haryana":{"CAT":1,"TH":3,"KOM":1,"KOB":3,"VOL":0,"JCB":3,"HYU":9,"SANY":1,"XCMG":2,"LIU":9,"CASE":0}},"Delhi NCR":{"Delhi NCR":{"CAT":18,"TH":19,"KOM":7,"KOB":7,"VOL":4,"JCB":52,"HYU":23,"SANY":19,"XCMG":16,"LIU":7,"CASE":1},"UK W.UP":{"CAT":1,"TH":8,"KOM":0,"KOB":1,"VOL":2,"JCB":4,"HYU":5,"SANY":2,"XCMG":1,"LIU":1,"CASE":0},"Uttar Pradesh":{"CAT":7,"TH":23,"KOM":6,"KOB":6,"VOL":2,"JCB":20,"HYU":17,"SANY":17,"XCMG":5,"LIU":5,"CASE":0}},"Guwahati-NE":{"North East":{"CAT":1,"TH":10,"KOM":14,"KOB":2,"VOL":2,"JCB":23,"HYU":24,"SANY":14,"XCMG":7,"LIU":1,"CASE":0}},"East":{"WB Sikkim":{"CAT":5,"TH":34,"KOM":35,"KOB":30,"VOL":9,"JCB":25,"HYU":39,"SANY":9,"XCMG":10,"LIU":9,"CASE":0},"Jharkhand":{"CAT":6,"TH":31,"KOM":2,"KOB":0,"VOL":3,"JCB":29,"HYU":20,"SANY":10,"XCMG":4,"LIU":8,"CASE":0},"Odisha":{"CAT":6,"TH":78,"KOM":17,"KOB":24,"VOL":6,"JCB":40,"HYU":44,"SANY":14,"XCMG":12,"LIU":9,"CASE":0},"Bihar":{"CAT":5,"TH":22,"KOM":1,"KOB":4,"VOL":0,"JCB":20,"HYU":7,"SANY":3,"XCMG":0,"LIU":0,"CASE":0}},"Central India":{"MP":{"CAT":20,"TH":34,"KOM":7,"KOB":11,"VOL":6,"JCB":14,"HYU":28,"SANY":21,"XCMG":2,"LIU":5,"CASE":0},"Chhattisgarh":{"CAT":9,"TH":16,"KOM":9,"KOB":4,"VOL":4,"JCB":13,"HYU":12,"SANY":14,"XCMG":5,"LIU":1,"CASE":0}},"West":{"Rajasthan":{"CAT":12,"TH":63,"KOM":17,"KOB":20,"VOL":6,"JCB":54,"HYU":61,"SANY":32,"XCMG":20,"LIU":21,"CASE":0},"Gujarat":{"CAT":15,"TH":59,"KOM":13,"KOB":5,"VOL":3,"JCB":59,"HYU":61,"SANY":41,"XCMG":36,"LIU":18,"CASE":1},"Maharashtra":{"CAT":39,"TH":12,"KOM":21,"KOB":18,"VOL":16,"JCB":39,"HYU":43,"SANY":26,"XCMG":22,"LIU":9,"CASE":0}},"South":{"Karnataka":{"CAT":12,"TH":67,"KOM":51,"KOB":9,"VOL":9,"JCB":62,"HYU":63,"SANY":27,"XCMG":23,"LIU":4,"CASE":0},"AP":{"CAT":12,"TH":55,"KOM":6,"KOB":21,"VOL":4,"JCB":49,"HYU":51,"SANY":39,"XCMG":21,"LIU":9,"CASE":0},"Telangana":{"CAT":15,"TH":43,"KOM":12,"KOB":11,"VOL":4,"JCB":25,"HYU":17,"SANY":37,"XCMG":1,"LIU":3,"CASE":0},"TN":{"CAT":12,"TH":59,"KOM":7,"KOB":0,"VOL":0,"JCB":49,"HYU":59,"SANY":37,"XCMG":19,"LIU":9,"CASE":0},"Kerala":{"CAT":5,"TH":11,"KOM":2,"KOB":0,"VOL":0,"JCB":0,"HYU":0,"SANY":0,"XCMG":8,"LIU":0,"CASE":0}}}};
 
@@ -1006,9 +956,9 @@ function switchTab(id){
   const storyMap={national:0,momentum:1,regional:2,statewise:3,patterns:4};
   if(storyMap[id]!==undefined) document.querySelectorAll('.story-step')[storyMap[id]]?.classList.add('active');
   // Lazy-build premium & heatmap on first open
-  if(id==='premium'&&!charts['prem-pie-chart'])buildPremiumCharts();
-  if(id==='oem_heatmap'){
+  if(id==='dashboard'){
     setTimeout(()=>{initTIVMap();if(tivMap){tivMap.invalidateSize();renderTIVMap();}},80);
+    if(!charts['prem-pie-chart'])buildPremiumCharts();
   }
 }
 
@@ -1092,7 +1042,7 @@ function buildMomentumChart(){
       borderWidth:o==='KOM'?3:1.5,pointRadius:o==='KOM'?5:3,tension:.4,fill:false
     }))},
     options:{responsive:true,maintainAspectRatio:false,
-      scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#374151'},title:{display:true,text:'Share %',color:'#64748B',font:{size:10}}}},
+      scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#374151'},title:{display:true,text:'Share %',color:'#475569',font:{size:10}}}},
       plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)}%`}}}}
   });
 }
@@ -1145,7 +1095,7 @@ function buildRadarChart(){
       {label:'Industry Avg 6.85%',data:Array(7).fill(6.85),borderColor:'#F59E0B',borderDash:[3,3],pointRadius:0,fill:false,backgroundColor:'transparent'}
     ]},
     options:{responsive:true,maintainAspectRatio:false,
-      scales:{r:{ticks:{backdropColor:'#FFFFFF',color:'#64748B',font:{size:9}},grid:{color:'rgba(0,0,0,.07)'},pointLabels:{color:'#475569',font:{size:10}},angleLines:{color:'rgba(0,0,0,.08)'}}},
+      scales:{r:{ticks:{backdropColor:'#FFFFFF',color:'#475569',font:{size:9}},grid:{color:'rgba(0,0,0,.07)'},pointLabels:{color:'#475569',font:{size:10}},angleLines:{color:'rgba(0,0,0,.08)'}}},
       plugins:{legend:{labels:{color:'#374151',font:{size:10},boxWidth:10}}}}
   });
 }
@@ -1317,7 +1267,8 @@ function dlTemplate(){
 
 // INIT
 window.addEventListener('load',()=>{
-  setTimeout(()=>{initTIVMap();},200);
+  setTimeout(()=>{initTIVMap();},150);
+  setTimeout(()=>{buildPremiumCharts();},100);
   Chart.defaults.font.family='Inter';
   Chart.defaults.color='#64748B';
   buildShareChart('h-share-chart','all','all',true);
@@ -1368,7 +1319,7 @@ function buildPremiumCharts(){
   charts['prem-trend-chart']=new Chart(document.getElementById('prem-trend-chart'),{
     type:'line',
     data:{labels:MONTHS,datasets:PREM.map(o=>({label:PN[o],data:MONTHS.map(m=>computeOEMs(m,'all')[o]||0),borderColor:PC[o],backgroundColor:PC[o]+'18',borderWidth:o==='KOM'?3:1.5,pointRadius:o==='KOM'?5:3,tension:.4,fill:false}))},
-    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{color:'#64748B'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}
+    options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{color:'#475569'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}
   });
 }
 
@@ -1440,11 +1391,11 @@ function buildFullOEMHeatmap(){
   charts['hm-th-chart']=new Chart(document.getElementById('hm-th-chart'),{type:'bar',data:{labels:td.map(d=>d.n),datasets:[{label:'Tata Hitachi %',data:td.map(d=>d.p),backgroundColor:td.map(d=>d.p>25?'#DC2626':'#FCA5A5'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{...dark,grid:{display:false}},y:{...dark,ticks:{callback:v=>v+'%',color:'#64748B'}}},plugins:{legend:{labels:{color:'#475569',font:{size:10},boxWidth:10}}}}});
 }
 
-// ════════════════════════════ TIV INDIA MAP ════════════════════════════
+// ════════════════════════════ total excavator sales INDIA MAP ════════════════════════════
 const STLL={'Jammu':[32.72,74.86],'Punjab':[31.14,75.34],'Himachal':[31.10,77.17],'Haryana':[29.05,76.08],'Delhi NCR':[28.65,77.23],'UK W.UP':[30.07,79.01],'Uttar Pradesh':[26.84,80.94],'North East':[26.14,91.74],'WB Sikkim':[22.98,87.85],'Jharkhand':[23.61,85.28],'Odisha':[20.94,85.09],'Bihar':[25.09,85.31],'MP':[23.47,77.94],'Chhattisgarh':[21.27,81.86],'Rajasthan':[27.02,74.21],'Gujarat':[22.25,71.19],'Maharashtra':[19.75,75.71],'Karnataka':[15.31,75.71],'AP':[15.91,79.73],'Telangana':[17.36,78.47],'TN':[11.12,78.65],'Kerala':[10.85,76.27]};
 const STFULL={'Jammu':'J&K / Ladakh','Punjab':'Punjab','Himachal':'Himachal Pradesh','Haryana':'Haryana','Delhi NCR':'Delhi NCR','UK W.UP':'Uttarakhand & W.UP','Uttar Pradesh':'Uttar Pradesh','North East':'NE States','WB Sikkim':'West Bengal & Sikkim','Jharkhand':'Jharkhand','Odisha':'Odisha','Bihar':'Bihar','MP':'Madhya Pradesh','Chhattisgarh':'Chhattisgarh','Rajasthan':'Rajasthan','Gujarat':'Gujarat','Maharashtra':'Maharashtra & Goa','Karnataka':'Karnataka','AP':'Andhra Pradesh','Telangana':'Telangana','TN':'Tamil Nadu','Kerala':'Kerala'};
 const MAPCOL={KOM:'#1B3A6B',CAT:'#F59E0B',KOB:'#7C3AED',VOL:'#2563EB',TH:'#DC2626',JCB:'#D97706',HYU:'#0284C7',SANY:'#16A34A',XCMG:'#EA580C',LIU:'#9333EA',CASE:'#64748B',PREM:'#1B3A6B',ALL:'#475569'};
-const MAPNM={KOM:'Komatsu',CAT:'CAT',KOB:'Kobelco',VOL:'Volvo',TH:'Tata Hitachi',JCB:'JCB',HYU:'Hyundai',SANY:'SANY',XCMG:'XCMG',LIU:'LiuGong',CASE:'CASE',PREM:'All Premium',ALL:'All 11 OEMs'};
+const MAPNM={KOM:'Komatsu',CAT:'CAT',KOB:'Kobelco',VOL:'Volvo',TH:'Tata Hitachi',JCB:'JCB',HYU:'Hyundai',SANY:'SANY',XCMG:'XCMG',LIU:'LiuGong',CASE:'CASE',PREM:'All Premium',ALL:'All 11 brands'};
 const PREMOEMS=['KOM','CAT','KOB','VOL'];
 let tivMap=null,tivMgrp=null,tivCgrp=null,tivHL=null,mapOEM='KOM',mapInited=false;
 
@@ -1569,6 +1520,109 @@ function tivTogL(t){
   else if(t==='heat'){if(tivMap.hasLayer(tivHL)){tivMap.removeLayer(tivHL);document.getElementById('tiv-bheat').classList.remove('active');}else{tivMap.addLayer(tivHL);document.getElementById('tiv-bheat').classList.add('active');}}
 }
 // ═══════════════════════════════════════════════════════════════════════
+
+// ════════════════════════════════════════════════════════
+// AI DYNAMIC INSIGHTS
+// ════════════════════════════════════════════════════════
+function getAIKey(){
+  return sessionStorage.getItem('ai_key') ||
+         document.getElementById('ai-key-inp')?.value || '';
+}
+
+function buildInsightContext(){
+  // Build a compact data summary for the AI
+  const q4 = computeOEMs('all','all');
+  const tot4 = tot(q4);
+  const premOEMs = ['KOM','CAT','KOB','VOL'];
+  const premTotal = premOEMs.reduce((s,o)=>s+(q4[o]||0),0);
+  const komPremShare = premTotal>0?((q4.KOM/premTotal)*100).toFixed(1):0;
+  const monthlyKom = MONTHS.map(m=>computeOEMs(m,'all').KOM);
+  const monthlyTot = MONTHS.map(m=>tot(computeOEMs(m,'all')));
+  return `You are a management consultant analyst for L&T Construction & Mining Machinery Business (L&T CMMB), the exclusive distributor of Komatsu excavators in India.
+
+KEY DATA (Q4 FY25 — Dec 2025 to Mar 2026):
+- Total India excavator market: ${tot4.toLocaleString()} units
+- Komatsu units: ${q4.KOM} | Share of total market: ${(100*q4.KOM/tot4).toFixed(2)}%
+- Premium segment (Komatsu+CAT+Kobelco+Volvo): ${premTotal} units = ${(100*premTotal/tot4).toFixed(1)}% of market
+- Komatsu share within premium segment: ${komPremShare}%
+- Monthly Komatsu units: Dec=${monthlyKom[0]}, Jan=${monthlyKom[1]}, Feb=${monthlyKom[2]}, Mar=${monthlyKom[3]}
+- Monthly total market: Dec=${monthlyTot[0]}, Jan=${monthlyTot[1]}, Feb=${monthlyTot[2]}, Mar=${monthlyTot[3]}
+- Top brand shares: Tata Hitachi ${(100*q4.TH/tot4).toFixed(1)}%, JCB ${(100*q4.JCB/tot4).toFixed(1)}%, Hyundai ${(100*q4.HYU/tot4).toFixed(1)}%, SANY ${(100*q4.SANY/tot4).toFixed(1)}%
+- Komatsu rank in total market: #${Object.entries(q4).sort((a,b)=>b[1]-a[1]).findIndex(([k])=>k==='KOM')+1} of 11 brands
+- L&T is a pure distributor — cannot change Komatsu product portfolio, only Sales, Service & Parts strategy
+
+IMPORTANT: Write insights in plain English. No industry jargon. Keep it short (2-3 sentences). Be specific and actionable for L&T sales team.`;
+}
+
+async function refreshInsight(panelId, btn){
+  const key = getAIKey();
+  if(!key){ 
+    switchTab('patterns');
+    setTimeout(()=>document.getElementById('ai-key-inp')?.focus(), 300);
+    toast('🔑','API Key Required','Please enter your Claude AI key in the Key Insights tab');
+    return;
+  }
+  const aiBox = document.getElementById(panelId+'-ai');
+  const bodyEl = document.getElementById(panelId+'-body');
+  if(!aiBox) return;
+  
+  const titleEl = document.querySelector('#'+panelId+' .inf-title');
+  const existingText = bodyEl?.textContent || '';
+  const sectionTitle = titleEl?.textContent || panelId;
+  
+  btn.disabled = true;
+  btn.innerHTML = '<div class="ai-spinner"></div> Thinking...';
+  aiBox.innerHTML = '<div class="ai-loading"><div class="ai-spinner"></div> Claude AI is analysing the data...</div>';
+  aiBox.classList.add('visible');
+  
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json',
+        'x-api-key':key,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:300,
+        system: buildInsightContext(),
+        messages:[{role:'user',content:`Generate a fresh insight for the section titled "${sectionTitle}". Current insight: "${existingText}". Provide a 2-3 sentence updated analysis based on the data provided. Be specific, practical and mention exact numbers. Write for a senior L&T sales manager.`}]
+      })
+    });
+    const data = await res.json();
+    if(data.content?.[0]?.text){
+      aiBox.innerHTML = '<div class="ai-tag"><i class="fa fa-robot"></i> AI Analysis</div>' + 
+                        '<div>'+data.content[0].text+'</div>';
+    } else {
+      aiBox.innerHTML = '<span style="color:#DC2626">Error: '+JSON.stringify(data.error||data)+'</span>';
+    }
+  } catch(e){
+    aiBox.innerHTML = '<span style="color:#DC2626">Connection error: '+e.message+'</span>';
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa fa-robot"></i> AI Insight';
+}
+
+async function regenAllInsights(){
+  const key = getAIKey();
+  if(!key){ toast('🔑','API Key Required','Please enter your Claude AI key above'); return; }
+  const btn = document.getElementById('regen-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="ai-spinner"></div> Generating all insights...';
+  
+  const allBtns = document.querySelectorAll('.ai-insight-btn:not(#regen-btn)');
+  for(const b of allBtns){
+    const panelId = b.closest('[id]')?.id;
+    if(panelId) await refreshInsight(panelId, b);
+    await new Promise(r=>setTimeout(r,400)); // small delay between calls
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa fa-robot"></i> Regenerate All Insights with AI';
+  toast('✅','Done','All insights updated with fresh AI analysis');
+}
+
 </script>
 </body>
 </html>
