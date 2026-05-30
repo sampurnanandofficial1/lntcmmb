@@ -23,15 +23,10 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 }
 
 /* ── HEADER ── */
-.ue-header{
-  background:linear-gradient(135deg,#003F72 0%,#005B9A 60%,#0369A1 100%);
-  padding:0 20px;display:flex;align-items:center;justify-content:space-between;
-  height:56px;box-shadow:0 2px 8px rgba(0,0,0,.3);flex-shrink:0;position:sticky;top:0;z-index:100
-}
-.ue-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.ue-logo-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
-  border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px}
-.ue-logo-title{font-size:14px;font-weight:700;color:#fff;white-space:nowrap}
+/* ue-header removed */
+
+
+
 .ue-header-right{display:flex;align-items:center;gap:10px}
 .ue-back-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
   color:#fff;font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;cursor:pointer;
@@ -255,6 +250,56 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
   .ue-market-grid,.ue-machine-grid{grid-template-columns:1fr}
   .ue-rate-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ── UNIFIED L&T NAV BAR ───────────────────────────────────────── */
+#unified-nav{
+  background:linear-gradient(180deg,#1B3A6B 0%,#0F2547 100%);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  padding:0 22px;height:56px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:3000;
+  box-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+.un-brand{display:flex;align-items:center;gap:14px}
+.un-logo{height:30px;width:auto;display:block;flex-shrink:0}
+.un-divider{width:1px;height:28px;background:rgba(255,255,255,.2);flex-shrink:0}
+.un-titles{display:flex;flex-direction:column;justify-content:center}
+.un-title{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#fff;
+  letter-spacing:.1px;line-height:1.3}
+.un-sub{font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,.5);
+  letter-spacing:.2px;line-height:1.3;margin-top:1px}
+.un-right{display:flex;align-items:center;gap:8px}
+.un-live{display:flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);
+  border:1px solid rgba(16,185,129,.25);border-radius:20px;padding:3px 11px}
+.un-live-dot{width:6px;height:6px;border-radius:50%;background:#10B981;
+  animation:un-pulse 1.5s infinite}
+@keyframes un-pulse{
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,.4)}
+  50%{opacity:.7;box-shadow:0 0 0 4px rgba(16,185,129,0)}
+}
+.un-live-txt{font-family:'Inter',sans-serif;font-size:11px;
+  color:rgba(255,255,255,.8);font-weight:500}
+.un-clock{font-family:'JetBrains Mono','Courier New',monospace;font-size:11.5px;
+  color:#F59E0B;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);
+  padding:4px 11px;border-radius:6px}
+.un-badge{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.45);
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  padding:3px 10px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+/* ── PLATFORM NAV STRIP (below unified nav) ─────────────────────── */
+#platform-nav{
+  background:#0F2547;padding:5px 22px;display:flex;align-items:center;
+  gap:3px;font-size:11px;border-bottom:1px solid rgba(255,255,255,.08);
+  flex-wrap:wrap;
+}
+.pn-link{color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;
+  border-radius:4px;font-family:'Inter',sans-serif;font-weight:500;
+  transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.pn-link:hover{color:#fff;background:rgba(255,255,255,.1)}
+.pn-link.active{color:#fff;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);font-weight:600}
+.pn-sep{width:1px;height:14px;background:rgba(255,255,255,.15);margin:0 2px;flex-shrink:0}
+.pn-right{flex:1;text-align:right;font-size:9.5px;font-weight:600;
+  color:rgba(255,255,255,.25);letter-spacing:.8px}
+
 </style>
 
 <!-- Leaflet World Map -->
@@ -286,28 +331,37 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 
 </head>
 <body>
-
-
-<div id="platform-nav" style="background:#1B3A6B;padding:5px 20px;display:flex;align-items:center;gap:4px;font-size:11px;border-bottom:1px solid rgba(255,255,255,.1)">
-  <a href="index.html" id="pn-tiv" style="color:rgba(255,255,255,.9);text-decoration:none;padding:4px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.25);font-weight:600;margin-right:4px;background:rgba(255,255,255,.08)">🏠 TIV Home</a>
-  <a href="contracts.html" id="pn-contracts" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;border-radius:4px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 Contracts</a>
-  <a href="used-equipment.html" id="pn-ue" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;border-radius:4px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏗️ Used Equipment</a>
-  <a href="pitch-generator.html" id="pn-pitch" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;border-radius:4px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🤖 AI Pitch</a>
-  <a href="https://sampurnanandofficial1.github.io/lnt_equipcare/" target="_blank" id="pn-equipcare" style="color:rgba(255,255,255,.6);text-decoration:none;padding:4px 12px;border-radius:4px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">⚙️ EquipCare ↗</a>
-  <div style="flex:1"></div>
-  <span style="font-size:9.5px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.8px">L&T CMMB INTELLIGENCE PLATFORM</span>
-</div>
-<!-- HEADER -->
-<div class="ue-header">
-  <a class="ue-logo" href="index.html">
-    <div class="ue-logo-badge">L&T CMMB</div>
-    <div class="ue-logo-title">⚙️ Used Equipment — Export Intelligence Dashboard</div>
-  </a>
-  <div class="ue-header-right">
-    <span class="ue-last-update" id="ue-last-update">Loading...</span>
-    <a href="index.html" class="ue-back-btn"><i class="fa fa-arrow-left"></i> Main Dashboard</a>
+<nav id="unified-nav">
+  <div class="un-brand">
+    <img src="data:image/png;base64,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" alt="Larsen &amp; Toubro" class="un-logo">
+    <div class="un-divider"></div>
+    <div class="un-titles">
+      <div class="un-title">Used Equipment — Export &amp; Valuation Intelligence</div>
+      <div class="un-sub">Komatsu PC200/205/210 · Dual Valuation Engine · 8 Export Markets · KOMTRAX Integrated</div>
+    </div>
   </div>
+  <div class="un-live">
+    <div class="un-live-dot"></div>
+    <span class="un-live-txt">Internal Intelligence Platform</span>
+  </div>
+  <div class="un-right">
+    <div class="un-clock" id="un-clock">—</div>
+    <div class="un-badge">Internal Use Only</div>
+  </div>
+</nav>
+<div id="platform-nav">
+  <a href="index.html"           class="pn-link" id="pn-tiv">🏠 TIV Home</a>
+  <div class="pn-sep"></div>
+  <a href="contracts.html"       class="pn-link" id="pn-contracts">📋 Contracts</a>
+  <a href="used-equipment.html"  class="pn-link" id="pn-ue">🏗️ Used Equipment</a>
+  <a href="pitch-generator.html" class="pn-link" id="pn-pitch">🤖 AI Pitch</a>
+  <a href="https://sampurnanandofficial1.github.io/lnt_equipcare/" target="_blank" class="pn-link" id="pn-equipcare">⚙️ EquipCare ↗</a>
+  <div class="pn-right">L&T CMMB STRATEGY INTELLIGENCE PLATFORM</div>
 </div>
+
+
+
+
 
 <!-- FX STRIP -->
 <div class="ue-fx-strip" id="ue-fx-strip">
@@ -2875,6 +2929,22 @@ function renderMapMarketStrip() {
     const el = document.getElementById(id);
     if(el){el.style.background='rgba(255,255,255,.15)';el.style.borderColor='rgba(255,255,255,.3)';el.style.color='#fff';}
   }
+})();
+</script>
+<script>
+(function(){
+  // Clock
+  function tick(){
+    var el=document.getElementById('un-clock');
+    if(el) el.textContent=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'})+' IST';
+  }
+  setInterval(tick,1000); tick();
+  // Highlight active platform-nav link
+  var path=(window.location.pathname.split('/').pop()||'index.html');
+  var map={'index.html':'pn-tiv','tiv.html':'pn-tiv','contracts.html':'pn-contracts',
+    'used-equipment.html':'pn-ue','pitch-generator.html':'pn-pitch'};
+  var el=document.getElementById(map[path]||'pn-tiv');
+  if(el) el.classList.add('active');
 })();
 </script>
 </body>
