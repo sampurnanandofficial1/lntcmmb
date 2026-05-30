@@ -1,0 +1,34 @@
+L&T CMMB TIV Data Template — Monthly OEM-wise Crawler Excavator Units
+Instructions: Fill one row per state. Leave Total blank (auto-computed). Save as CSV. Upload at TIV Dashboard > Data Upload tab.
+Region,State,Month,CAT,Tata Hitachi,Komatsu,Kobelco,Volvo,JCB,Hyundai,SANY,XCMG,LiuGong,CASE,Total
+North,Jammu,Apr-26,,,,,,,,,,,
+North,Punjab,Apr-26,,,,,,,,,,,
+North,Himachal Pradesh,Apr-26,,,,,,,,,,,
+North,Haryana,Apr-26,,,,,,,,,,,
+Delhi NCR,Delhi / Noida / Gurugram / Faridabad,Apr-26,,,,,,,,,,,
+Delhi NCR,Uttarakhand & West UP,Apr-26,,,,,,,,,,,
+Delhi NCR,Uttar Pradesh (Central & East),Apr-26,,,,,,,,,,,
+Guwahati-NE,North East States,Apr-26,,,,,,,,,,,
+East,West Bengal & Sikkim,Apr-26,,,,,,,,,,,
+East,Jharkhand,Apr-26,,,,,,,,,,,
+East,Odisha,Apr-26,,,,,,,,,,,
+East,Bihar,Apr-26,,,,,,,,,,,
+Central India,Madhya Pradesh,Apr-26,,,,,,,,,,,
+Central India,Chhattisgarh,Apr-26,,,,,,,,,,,
+West,Rajasthan,Apr-26,,,,,,,,,,,
+West,Gujarat,Apr-26,,,,,,,,,,,
+West,Maharashtra & Goa,Apr-26,,,,,,,,,,,
+South,Karnataka,Apr-26,,,,,,,,,,,
+South,Andhra Pradesh,Apr-26,,,,,,,,,,,
+South,Telangana,Apr-26,,,,,,,,,,,
+South,Tamil Nadu,Apr-26,,,,,,,,,,,
+South,Kerala,Apr-26,,,,,,,,,,,
+REFERENCE DATA (do not edit below this line)
+Regions,Valid values: North | Delhi NCR | Guwahati-NE | East | Central India | West | South
+Month format,Use: Jan-26 / Feb-26 / Mar-26 / Apr-26 / May-26 etc.
+Column order,Must match exactly: Region State Month CAT Tata-Hitachi Komatsu Kobelco Volvo JCB Hyundai SANY XCMG LiuGong CASE Total
+Missing values,Leave blank — system treats blank as 0
+Total column,Leave blank — auto-computed by dashboard
+New states,Add new rows for any state not listed above
+Corrections,To correct past data re-upload same month — dashboard overwrites
+Source,L&T CMMB Internal TIV Tracking | Data cut-off: last working day of each month
