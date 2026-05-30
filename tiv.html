@@ -661,7 +661,7 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
             <div class="upload-title">Drop CSV file here or click to browse</div>
             <div class="upload-desc">Standard L&T-CMMB TIV format<br>Region · State · 11 OEMs · Total</div>
             <input type="file" id="file-input" accept=".csv" style="display:none" onchange="handleFile(event)">
-            <button class="ubtn" onclick="document.getElementById('file-input').click()"><i class="fa fa-folder-open"></i> Choose File</button>
+            <button class="ubtn" onclick="openFilePicker()"><i class="fa fa-folder-open"></i> Choose File</button>
             <button class="ubtn sec" onclick="dlTemplate()"><i class="fa fa-download"></i> Download Template</button>
           </div>
           <div class="upload-prev" id="upload-prev">
@@ -1009,6 +1009,7 @@ document.getElementById('src-grid').innerHTML=SOURCES.map(s=>`
   </div>`).join('');
 
 // UPLOAD
+function openFilePicker(){document.getElementById('file-input').click();}
 function handleDragOver(e){e.preventDefault();document.getElementById('upload-zone').classList.add('drag');}
 function handleDragLeave(){document.getElementById('upload-zone').classList.remove('drag');}
 function handleDrop(e){e.preventDefault();document.getElementById('upload-zone').classList.remove('drag');if(e.dataTransfer.files[0])parseCSV(e.dataTransfer.files[0]);}
