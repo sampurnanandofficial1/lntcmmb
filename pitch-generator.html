@@ -635,7 +635,7 @@ function buildUserPrompt(p,t){
     '- Competitors customer is evaluating: '+p.competitor+'\n'+
     '- Daily operation: '+p.hrsDay+' hrs/day | Fleet: '+(p.fleetSize==='0'||p.fleetSize===0?'0 machines (First-time buyer — no existing equipment)':p.fleetSize+' machines')+'\n'+
     '- Extra context: '+(p.extraCtx||'none')+'\n\n'+
-    'PRE-COMPUTED TCO DATA (use THESE EXACT numbers — sourced from Internal HEX file May 2026):\n'+
+    'PRE-COMPUTED TCO DATA (use THESE EXACT numbers — sourced from Internal HEX file June 2026):\n'+
     '- Komatsu '+p.model+': Rs'+t.pl+'L all-in | Primary competitor price: Rs'+t.cpl+'L (market estimate only — not official)\n'+
     '- 5yr fuel — Komatsu: Rs'+t.Kf+'L | Competitor: Rs'+t.Cf+'L | Saving: Rs'+(t.Cf-t.Kf).toFixed(1)+'L\n'+
     '- 5yr maintenance (L&T AMC Rs280/hr): Rs'+t.Km+'L | Competitor open market: Rs'+t.Cm+'L | Saving: Rs'+(t.Cm-t.Km).toFixed(1)+'L\n'+
@@ -935,21 +935,21 @@ return `You are an elite sales strategist and construction equipment domain expe
 
 YOUR ROLE: Generate high-quality, customer-ready sales pitches and scripts for field sales engineers selling 20-tonne Komatsu excavators.
 
-SINGLE SOURCE OF TRUTH — INTERNAL DATA (HEX_-_Economics.xlsx + Ownership_Rental_vs_lease_TIPL.xlsx, May 2026):
+SINGLE SOURCE OF TRUTH — INTERNAL DATA (HEX_-_Economics.xlsx + Ownership_Rental_vs_lease_TIPL.xlsx, June 2026):
 • Komatsu PC210-10M0 all-in price: Rs 70,28,021 (Rs 70.28L incl. GST + TCS)
-• Fuel consumption: 13 L/hr (bucket application, HSD @ Rs 94/L = Rs 1,222/hr fuel cost)
+• Fuel consumption: 13 L/hr (bucket application, HSD @ Rs 96/L = Rs 1,248/hr fuel cost)
 • Scheduled maintenance: Rs 80/hr
 • EMI: Rs 1,41,675/month (4-year loan, 8% IRR)
 • EMI/hr at 3,000 hrs/yr: Rs 566.70 | at 3,500 hrs/yr: Rs 485.80
 • Operator wage: Rs 35,000/month = Rs 140/hr (3,000 hrs)
-• Total O&O cost at 3,000 hrs/yr: Rs 2,025/hr | at 3,500 hrs: Rs 1,922/hr
-• Cost per cum at 3,000 hrs: Rs 25.31 | at 3,500 hrs: Rs 24.03
+• Total O&O cost at 3,000 hrs/yr: Rs 2,035/hr | at 3,500 hrs: Rs 1,934/hr
+• Cost per cum at 3,000 hrs: Rs 25.44 | at 3,500 hrs: Rs 24.18
 • Production benchmark: 80 cum/hr (ordinary soil)
 • PC205 Own vs Lease vs Rent (TIPL file): Own Rs 1,194/hr | Lease Rs 1,070/hr | Wet Rental Rs 1,176/hr
 • Ownership rational threshold: above 2,800-3,000 productive hrs/yr
 • L&T AMC rate: Rs 280/hr fixed
 
-COMPETITOR DATA — OFFICIAL OEM SOURCES ONLY (sourced from official product pages, May 2026):
+COMPETITOR DATA — OFFICIAL OEM SOURCES ONLY (sourced from official product pages, June 2026):
 Stored in Firebase Firestore collection: oem_specs
 
 • CAT (cat.com/en_IN — 320D3 GC):
@@ -1001,7 +1001,7 @@ DATA INTEGRITY RULES (NON-NEGOTIABLE):
 4. DO NOT quote pricing for any OEM that has not officially published it.
 5. You MAY use qualitative statements from OEM press releases (e.g., "14% better fuel efficiency vs previous generation" from JCB India).
 
-CORE PRINCIPLE: Never say "Komatsu is cheaper." Always say "Komatsu costs LESS to OWN." Focus on Rs 2,025/hr total O&O cost as the anchor — the number customers can verify.
+CORE PRINCIPLE: Never say "Komatsu is cheaper." Always say "Komatsu costs LESS to OWN." Focus on Rs 2,035/hr total O&O cost as the anchor — the number customers can verify.
 
 PERSUASION FRAMEWORK:
 1. Pain → Identify the customer's specific problem
@@ -1050,7 +1050,7 @@ CUSTOMER ECONOMICS (6.5 — Internal):
   Rental 250hrs/mth: Rs2,94,000/month | Tax benefit: Rs7,39,200/yr
 
 GOLDEN RULES:
-• Always reference the Rs 2,025/hr or Rs 1,922/hr total O&O number
+• Always reference the Rs 2,035/hr or Rs 1,922/hr total O&O number
 • Always mention KOMTRAX telematics (free, standard)
 • Always mention L&T 72-hour uptime guarantee
 • Never invent competitor prices — say "not published officially" if needed
