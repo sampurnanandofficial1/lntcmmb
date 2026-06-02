@@ -1679,8 +1679,8 @@ async function loadFX() {
       fxRates = d.conversion_rates || {};
     }
   } catch(e) {
-    // Hardcoded fallback rates (May 2026 approximate)
-    fxRates = {INR:83.7,KES:130.1,TZS:2680,ETB:57.8,BDT:110.9,MMK:2115,AED:3.67,MZN:64.8,KHR:4120};
+    // Hardcoded fallback rates (June 2026 — INR from Investing.com June 1, 2026)
+    fxRates = {INR:94.85,KES:129.5,TZS:2620,ETB:58.2,BDT:109.8,MMK:2098,AED:3.67,MZN:63.9,KHR:4120};
   }
   updateFXStrip();
 }
@@ -2248,7 +2248,7 @@ function calcExportCost() {
   const dest      = document.getElementById('calc-dest')?.value || 'Mombasa';
   const priceL    = parseFloat(document.getElementById('calc-price')?.value || '32');
   const komtrax   = document.getElementById('calc-komtrax')?.value || 'clean';
-  const inrToUSD  = 1 / (fxRates.INR || 83.5);
+  const inrToUSD  = 1 / (fxRates.INR || 94.85);
 
   const freight   = FREIGHT_COSTS[dest] || FREIGHT_COSTS['Mombasa'];
   const freightUSD = freight.fcl40;
@@ -2277,7 +2277,7 @@ function calcExportCost() {
 function renderPricingTable() {
   const tbody = document.getElementById('pricing-table-body');
   if (!tbody) return;
-  const inr = fxRates.INR || 83.5;
+  const inr = fxRates.INR || 94.85;
   tbody.innerHTML = PRICING_DATA.map((p, i) => {
     const usdParts = p.priceUSD ? p.priceUSD.split('–').map(x => parseInt(x.replace(/,/g,''))) : null;
     const priceDisp = usdParts ? `$${p.priceUSD}` : 'India Only';
@@ -2782,7 +2782,7 @@ function getOriginIcon() {
 }
 
 function buildPopup(m) {
-  const inrRate = fxRates.INR || 83.5;
+  const inrRate = fxRates.INR || 94.85;
   const fcl = m.fcl40;
   const usdLow  = parseInt(fcl.replace('$','').split('–')[0].replace(/,/g,''));
   const inrLow  = (usdLow / inrRate / 100000).toFixed(1);
