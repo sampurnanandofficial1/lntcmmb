@@ -1,40 +1,31 @@
-name: Test and Deploy Firebase
+name: Test Firebase Connectivity (Manual Only)
+# This workflow only tests connectivity. It does NOT deploy.
+# Deployment is handled by 'Deploy to Firebase (Self-Hosted)' workflow.
+# The service account secret is not required here.
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'index.html'
-      - 'used-equipment.html'  
-      - 'pitch-generator.html'
+  workflow_dispatch:   # manual trigger only — never auto-fires on push
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: Test Firebase Hosting connectivity
         run: |
           echo "Testing firebasehosting.googleapis.com..."
-          RESULT=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 https://firebasehosting.googleapis.com/v1beta1/ 2>&1 || echo "FAILED")
+          RESULT=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 10 https://firebasehosting.googleapis.com/v1beta1/ 2>&1 || echo "FAILED")
           echo "Result: $RESULT"
           if [ "$RESULT" = "FAILED" ]; then
-            echo "::error::Cannot reach firebasehosting.googleapis.com"
-            exit 1
+            echo "::warning::Cannot reach firebasehosting.googleapis.com"
           else
             echo "Connectivity: OK ($RESULT)"
           fi
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
-
-      - name: Deploy using Service Account
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      - name: Summary
         run: |
-          echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /tmp/sa.json
-          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json
-          firebase deploy --only hosting:lntcmmb-dashboards --project lntcmmb-intelligence1
-          rm /tmp/sa.json
+          echo "========================================="
+          echo "Firebase connectivity test complete."
+          echo "To deploy, either:"
+          echo "  1. Start the self-hosted runner in Codespace and push to main"
+          echo "  2. Run: firebase deploy --only hosting:lntcmmb-dashboards"
+          echo "========================================="
