@@ -1567,12 +1567,7 @@ IMPORTANT: Write insights in plain English. No industry jargon. Keep it short (2
 
 async function refreshInsight(panelId, btn){
   const key = getAIKey();
-  if(!key){ 
-    switchTab('patterns');
-    setTimeout(()=>document.getElementById('ai-key-inp')?.focus(), 300);
-    toast('🔑','API Key Required','Please enter your Claude AI key in the Key Insights tab');
-    return;
-  }
+  
   const aiBox = document.getElementById(panelId+'-ai');
   const bodyEl = document.getElementById(panelId+'-body');
   if(!aiBox) return;
