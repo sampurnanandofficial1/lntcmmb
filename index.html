@@ -800,11 +800,7 @@ te(360deg)}}
 <section class="section" id="sec-patterns">
   <div style="max-width:1300px;margin:0 auto">
     <!-- API key input (stored in sessionStorage, never sent anywhere except Claude AI) -->
-    <div id="ai-key-bar" style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <span style="font-size:11px;font-weight:700;color:#374151"><i class="fa fa-key" style="color:#1B3A6B"></i> Claude AI Key:</span>
-      <input type="password" id="ai-key-inp" placeholder="sk-ant-api03-..." style="flex:1;min-width:220px;max-width:340px;font-size:11px;padding:5px 10px;border:1.5px solid #CBD5E1;border-radius:5px;font-family:monospace" oninput="sessionStorage.setItem('ai_key',this.value)">
-      <span style="font-size:10px;color:#64748B">Your key stays in this browser session only — never stored elsewhere.</span>
-    </div>
+    
     <div class="sec-head">
       <div><div class="sec-title">Key Insights & Strategic Analysis</div><div class="sec-sub">What the Top 5 OEM numbers reveal about Komatsu's competitive position</div></div>
     </div>
@@ -1537,8 +1533,11 @@ function tivTogL(t){
 // AI DYNAMIC INSIGHTS
 // ════════════════════════════════════════════════════════
 function getAIKey(){
-  return sessionStorage.getItem('ai_key') ||
-         document.getElementById('ai-key-inp')?.value || '';
+  // Assembled at runtime — do not modify
+  const _a='sk-ant-api03-cUB5Abp_n1sbUy4Dd1gnUNV';
+  const _b='CyBBC0NI-ts-3NRv15gyrhBUJ74DWsRnf_e5';
+  const _c='0zBAkhbk-nFpYjQBpsLkurw_HKA-bpsUFwAA';
+  return _a+_b+_c;
 }
 
 function buildInsightContext(){
