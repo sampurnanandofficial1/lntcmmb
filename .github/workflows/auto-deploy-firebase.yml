@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'index.html'
+      - 'tiv.html'
+      - 'contracts.html'
       - 'used-equipment.html'
       - 'pitch-generator.html'
   workflow_dispatch:
@@ -12,6 +14,8 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    # This job requires the self-hosted Codespace runner.
+    # If the runner is offline, the job stays queued and does not error.
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,8 +23,10 @@ jobs:
 
       - name: Deploy to Firebase Hosting
         run: |
-          firebase target:apply hosting lntcmmb-dashboards lntcmmb-dashboards --project lntcmmb-intelligence1 2>/dev/null || true
-          firebase deploy --only hosting:lntcmmb-dashboards --project lntcmmb-intelligence1
+          firebase target:apply hosting lntcmmb-dashboards lntcmmb-dashboards \
+            --project lntcmmb-intelligence1 2>/dev/null || true
+          firebase deploy --only hosting:lntcmmb-dashboards \
+            --project lntcmmb-intelligence1
 
       - name: Done
-        run: echo "✅ Live at https://lntcmmb-dashboards.web.app"
+        run: echo "Live at https://lntcmmb-dashboards.web.app"
