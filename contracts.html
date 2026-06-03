@@ -725,7 +725,7 @@ function daysOldLabel(publishedDate) {
 document.addEventListener('DOMContentLoaded', () => {
   initTicker();
   startClock();
-  initMap();
+  try { initMap(); } catch(e) { console.warn('[Contracts] initMap failed:', e.message); }
   loadAllData();
   setTimeout(() => initNotifs(), 2000); // Init dynamic notifications
 });
@@ -797,25 +797,25 @@ async function loadAllData() {
     if (CONTR.length === 0) CONTR = FALLBACK_CONTR;
 
     const src = cSnap.empty ? 'embedded cache' : `Firestore + local merge (${CD.length} contracts)`;
-    bootUI();
+    try { bootUI(); } catch(e2) { showLoading(false); console.error('[Contracts] bootUI error:', e2.message); }
     toast('✅', 'Data Loaded', `${CD.length} contracts · ${CONTR.length} contractors — ${src}`);
   } catch(err) {
     console.warn('Firestore error, using embedded data:', err.message);
     CD    = FALLBACK_CD;
     CONTR = FALLBACK_CONTR;
-    bootUI();
+    try { bootUI(); } catch(e2) { showLoading(false); console.error('[Contracts] bootUI error:', e2.message); }
     toast('⚡', 'Loaded from Cache', `${CD.length} contracts · ${CONTR.length} contractors`);
   }
 }
 
 function bootUI() {
+  showLoading(false);  // Hide overlay immediately — prevent infinite spinner
   // Default: show only HOT leads (< 30 days) on load
   FC = CD.filter(c => daysOld(c.publishedDate) <= 30);
   AF.dateRange = 'hot';
   document.querySelectorAll('.ftype:checked').forEach(c  => AF.types.push(c.value));
   document.querySelectorAll('.fstage:checked').forEach(c => AF.stages.push(c.value));
   document.querySelectorAll('.flead:checked').forEach(c  => AF.leads.push(c.value));
-  showLoading(false);
   renderCards();
   renderMarkers();
   renderContractors();
@@ -1197,6 +1197,7 @@ function initMap(){
 
 
 function renderMarkers(){
+  if(!mgrp||!cgrp){return;}  // map not initialised yet
   mgrp.clearLayers();cgrp.clearLayers();
   const pts=[];
   FC.forEach(c=>{
