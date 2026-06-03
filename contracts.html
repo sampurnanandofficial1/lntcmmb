@@ -1169,26 +1169,13 @@ function initTicker(){
   const el=document.getElementById('tcon2');
   if(!el)return;
   // Build ticker from HOT contracts (last 30 days) — always current
-  function buildTicker(){
-    if(!CD||CD.length===0) return;
-    const hot=CD.filter(c=>daysOld(c.publishedDate)<=30);
-    const items=hot.map(c=>{
-      const cat=c.stage==='Awarded'?'taw':c.mining?'tmi':c.stage==='Tender Live'?'tnew':'tal';
-      const label=c.stage==='Awarded'?'AWARDED':c.mining?'MINING':c.stage==='Tender Live'?'TENDER LIVE':'UPCOMING';
-      return `<span class="titem"><span class="tbadge ${cat}">${label}</span>${c.name} — ₹${c.value.toLocaleString('en-IN')} Cr — ${c.state} — ~${c.machines} excavators<span style="color:rgba(255,255,255,.25);margin:0 4px">|</span></span>`;
-    });
-    const all=[...items,...items]; // duplicate for seamless loop
-    el.innerHTML=all.join('');
-  }
+  
   // Build immediately if data is available, else wait
   if(CD&&CD.length>0) buildTicker();
   else setTimeout(buildTicker,3000);
 }
 
-function startClock(){
-  const u=()=>{const n=new Date();const s=Math.floor(n.getTime()/1000);const ist=new Date((s+19800)*1000);document.getElementById('un-clock').textContent=ist.toUTCString().split(' ')[4]+' IST'};
-  u();setInterval(u,1000);
-}
+
 
 // ===================== MAP =====================
 function initMap(){
@@ -1206,8 +1193,8 @@ function initMap(){
   leg.addTo(map);
 }
 
-function mcolor(ls){return ls==='Very High'?'#DC2626':ls==='High'?'#D97706':ls==='Medium'?'#2563EB':'#6B7280'}
-function ticon(t){const m={Highways:'🛣️',Mining:'⛏️',Railways:'🚂',Metro:'🚇',Irrigation:'💧',Ports:'⚓','Smart City':'🏙️',Industrial:'🏭'};return m[t]||'📋'}
+
+
 
 function renderMarkers(){
   mgrp.clearLayers();cgrp.clearLayers();
@@ -1230,11 +1217,7 @@ function renderMarkers(){
   document.getElementById('mcount').textContent=FC.length+' projects';
 }
 
-function togL(t){
-  if(t==='markers'){map.hasLayer(mgrp)?map.removeLayer(mgrp):map.addLayer(mgrp);document.getElementById('bmark').classList.toggle('active');}
-  else if(t==='heat'){map.hasLayer(hlayer)?map.removeLayer(hlayer):map.addLayer(hlayer);document.getElementById('bheat').classList.toggle('active');}
-  else if(t==='clusters'){map.hasLayer(cgrp)?map.removeLayer(cgrp):map.addLayer(cgrp);document.getElementById('bclust').classList.toggle('active');}
-}
+
 
 // ===================== FILTERS =====================
 function applyF(){
@@ -1306,48 +1289,14 @@ function resetF(){
   renderCards();renderMarkers();
 }
 
-function updR(el){const v=parseInt(el.value);document.getElementById('rvd').textContent=v>0?'Min ₹'+v.toLocaleString('en-IN')+' Cr':'No minimum'}
 
-function quickF(t){
-  resetF();
-  if(t==='hipri'){
-    document.querySelector('.fdater[value="hot"]').checked=true;
-    AF.dateRange='hot';
-    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && ['Very High','High'].includes(effectiveLeadScore(c)));
-  } else if(t==='mining'){
-    document.querySelector('.fdater[value="all"]').checked=true;
-    AF.dateRange='all';
-    FC=CD.filter(c=>c.mining);
-  } else if(t==='awarded'){
-    document.querySelector('.fdater[value="all"]').checked=true;
-    AF.dateRange='all';
-    FC=CD.filter(c=>c.stage==='Awarded');
-  } else if(t==='highways'){
-    document.querySelector('.fdater[value="all"]').checked=true;
-    AF.dateRange='all';
-    FC=CD.filter(c=>c.type==='Highways');
-  } else if(t==='today'){
-    document.querySelector('.fdater[value="hot"]').checked=true;
-    AF.dateRange='hot';
-    FC=CD.filter(c=>daysOld(c.publishedDate)<=7);
-  } else if(t==='excavator'){
-    document.querySelector('.fdater[value="hot"]').checked=true;
-    AF.dateRange='hot';
-    FC=CD.filter(c=>daysOld(c.publishedDate)<=30 && calcExcScore(c)>=80);
-  } else if(t==='all'){
-    document.querySelector('.fdater[value="all"]').checked=true;
-    AF.dateRange='all';
-    FC=[...CD];
-  }
-  document.getElementById('ccount').textContent=FC.length;
-  renderCards();renderMarkers();
-  switchTab('contracts');
-}
 
-function setStateF(s){document.getElementById('fstate').value=s;applyF();switchTab('contracts');}
+
+
+
 
 // ===================== RENDER CARDS =====================
-function stClass(s){return s==='Awarded'?'awarded':s==='Tender Live'?'live':s==='Under Execution'?'exec':'upcoming'}
+
 
 function renderCards(){
   const el=document.getElementById('clist');
@@ -1408,13 +1357,7 @@ function renderCards(){
   }).join('');
 }
 
-function setView(v){
-  view=v;
-  document.getElementById('vcards').classList.toggle('active',v==='cards');
-  document.getElementById('vtable').classList.toggle('active',v==='table');
-  document.getElementById('clist').style.display=v==='cards'?'grid':'none';
-  document.getElementById('tblwrap').style.display=v==='table'?'block':'none';
-}
+
 
 // ===================== MODAL =====================
 function openMod(id){
@@ -1749,101 +1692,17 @@ function initCharts(){
 const NICONS={highways:'🛣️',mining:'⛏️',railways:'🚂',irrigation:'💧',corporate:'🏢',smartcity:'🏙️'};
 const NCOLS={highways:'#003F72',mining:'#7C3AED',railways:'#0D9488',irrigation:'#0284C7',corporate:'#005B9A',smartcity:'#D97706'};
 
-function renderNews(items){
-  const el=document.getElementById('newslist');
-  if(!items||!items.length){el.innerHTML='<div class="loading">No intelligence items available</div>';return;}
-  
-  // Separate news from datasets
-  const news    = items.filter(n=>!n.isDataset);
-  const datasets= items.filter(n=>n.isDataset);
-  
-  const NICONS={highways:'🛣️',mining:'⛏️',railways:'🚂',irrigation:'💧',corporate:'🏢',
-                smartcity:'🏙️',metro:'🚇',ports:'⚓'};
-  const NCOLS={highways:'#003F72',mining:'#7C3AED',railways:'#0D9488',irrigation:'#0284C7',
-               corporate:'#005B9A',smartcity:'#D97706',metro:'#1D4ED8',ports:'#0F766E'};
 
-  let html = '';
-
-  // Dataset widgets (if any)
-  if(datasets.length > 0){
-    html += `<div style="padding:10px 0 6px;font-size:11px;font-weight:700;color:#4B5563;text-transform:uppercase;letter-spacing:.4px">
-      📊 Live Government Datasets (data.gov.in OGD API)
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-bottom:14px">
-      ${datasets.map(d=>`
-        <a href="${d.link}" target="_blank" style="text-decoration:none">
-          <div style="background:#fff;border:1px solid #BFDBFE;border-left:3px solid #003F72;border-radius:8px;padding:10px;transition:box-shadow .2s" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
-            <div style="font-size:11.5px;font-weight:700;color:#003F72;margin-bottom:4px;line-height:1.3">${d.title.replace('[data.gov.in] ','')}</div>
-            <div style="font-size:10.5px;color:#4B5563;margin-bottom:5px;line-height:1.4">${d.desc.substring(0,80)}...</div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <span style="font-size:9.5px;background:#EFF6FF;color:#003F72;padding:2px 6px;border-radius:3px;font-weight:600">GoI OGD API</span>
-              <span style="font-size:9.5px;color:#4B5563">${d.time}</span>
-            </div>
-          </div>
-        </a>`).join('')}
-    </div>`;
-  }
-
-  // News items header
-  if(news.length > 0){
-    html += `<div style="padding:6px 0 6px;font-size:11px;font-weight:700;color:#4B5563;text-transform:uppercase;letter-spacing:.4px">
-      📰 Live Infrastructure Intelligence Feed
-    </div>`;
-  }
-
-  // News cards
-  html += news.map(n=>{
-    const link = smartNewsLink(n.title, n.link);
-    const isSearch = link.includes('google.com/search');
-    const isNSE    = n.source_label === 'NSE Announcements';
-    const isWB     = n.source_label === 'World Bank';
-    const linkBadge = isNSE  ? '<span style="background:#D1FAE5;color:#065F46;padding:1px 6px;border-radius:3px;font-size:9.5px;font-weight:700;flex-shrink:0">📈 NSE</span>' :
-                      isWB   ? '<span style="background:#DBEAFE;color:#1E40AF;padding:1px 6px;border-radius:3px;font-size:9.5px;font-weight:700;flex-shrink:0">🌐 WB</span>' :
-                      isSearch? '<span style="background:#FEF3C7;color:#92400E;padding:1px 6px;border-radius:3px;font-size:9.5px;font-weight:700;flex-shrink:0">🔍 Search</span>'
-                              : '<span style="background:#D1FAE5;color:#065F46;padding:1px 6px;border-radius:3px;font-size:9.5px;font-weight:700;flex-shrink:0">🔗 Direct</span>';
-    return `<div class="ncard" onclick="window.open('${link}','_blank')">
-      <div class="nico" style="background:${NCOLS[n.type]||'#003F72'}">${NICONS[n.type]||'📰'}</div>
-      <div style="flex:1">
-        <div class="ntit">${n.title}</div>
-        <div class="ndes">${n.desc||''}</div>
-        <div class="nsrc" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-          <span style="font-weight:600;color:var(--b)">${n.src||n.source_label}</span>
-          <div style="width:3px;height:3px;background:var(--mu);border-radius:50%"></div>
-          <span>${n.time}</span>
-          <span style="margin-left:auto;display:flex;align-items:center;gap:5px">
-            ${linkBadge}
-            <a href="${link}" target="_blank" onclick="event.stopPropagation()"
-               style="color:var(--b);font-size:10px;font-weight:600;text-decoration:none">
-              ${isSearch?'Search →':'Read →'}
-            </a>
-          </span>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-
-  el.innerHTML = html || '<div class="loading">No items found — refreshing...</div>';
-}
 
 
 
 
 
 // ===================== TABS =====================
-function switchTab(t){
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+t));
-  if(t==='news')    fetchNews();
-  if(t==='map'&&map)setTimeout(()=>map.invalidateSize(),100);
-}
+
 
 // ===================== TOAST =====================
-function toast(icon,title,body,dur=4500){
-  const c=document.getElementById('tcon');
-  const d=document.createElement('div');d.className='toast';
-  d.innerHTML=`<div style="font-size:16px">${icon}</div><div><div style="font-weight:700;font-size:11.5px">${title}</div><div style="font-size:10.5px;color:#4B5563;margin-top:1px">${body}</div></div><button onclick="this.parentElement.remove()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:#4B5563;font-size:14px;padding:2px">✕</button>`;
-  c.appendChild(d);setTimeout(()=>d.remove(),dur);
-}
+
 
 // ===================== NOTIFICATIONS =====================
 
@@ -2180,25 +2039,7 @@ function filterNotifs(cat) {
 
 
 
-function initTicker(){
-  const el=document.getElementById('tcon2');
-  if(!el)return;
-  // Build ticker from HOT contracts (last 30 days) — always current
-  function buildTicker(){
-    if(!CD||CD.length===0) return;
-    const hot=CD.filter(c=>daysOld(c.publishedDate)<=30);
-    const items=hot.map(c=>{
-      const cat=c.stage==='Awarded'?'taw':c.mining?'tmi':c.stage==='Tender Live'?'tnew':'tal';
-      const label=c.stage==='Awarded'?'AWARDED':c.mining?'MINING':c.stage==='Tender Live'?'TENDER LIVE':'UPCOMING';
-      return `<span class="titem"><span class="tbadge ${cat}">${label}</span>${c.name} — ₹${c.value.toLocaleString('en-IN')} Cr — ${c.state} — ~${c.machines} excavators<span style="color:rgba(255,255,255,.25);margin:0 4px">|</span></span>`;
-    });
-    const all=[...items,...items]; // duplicate for seamless loop
-    el.innerHTML=all.join('');
-  }
-  // Build immediately if data is available, else wait
-  if(CD&&CD.length>0) buildTicker();
-  else setTimeout(buildTicker,3000);
-}
+
 
 function startClock(){
   const u=()=>{const n=new Date();const s=Math.floor(n.getTime()/1000);const ist=new Date((s+19800)*1000);document.getElementById('un-clock').textContent=ist.toUTCString().split(' ')[4]+' IST'};
@@ -2277,71 +2118,7 @@ function setView(v){
 
 
 // ===================== CONTRACTORS =====================
-function renderContractors(){
-  const q=(document.getElementById('csearch')?.value||'').toLowerCase();
-  const el=document.getElementById('contlist');
-  const list=CONTR.filter(c=>!q||c.name.toLowerCase().includes(q)||c.specialty.toLowerCase().includes(q)||c.hq.toLowerCase().includes(q));
-  el.innerHTML=list.map(c=>`<div class="ccard" style="cursor:default">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-      <div>
-        <div class="cname">${c.name}</div>
-        <div style="font-size:11px;color:#4B5563">${c.type}</div>
-      </div>
-      
-    </div>
-    <div class="csts">
-      <div class="sbox"><div class="sv">${c.projects}</div><div class="sl">Projects</div></div>
-      <div class="sbox"><div class="sv" style="font-size:12px">₹${(c.totalValue/1000).toFixed(0)}K Cr</div><div class="sl">Value</div></div>
-      <div class="sbox"><div class="sv">${c.machines}</div><div class="sl">Machines</div></div>
-    </div>
-    <div style="margin-top:10px;font-size:11px;color:#374151"><strong>Specialty:</strong> ${c.specialty}</div>
-    <div class="ctags" style="margin-top:6px">${c.states.map(s=>`<span class="chip">📍 ${s}</span>`).join('')}</div>
-    <!-- CONTACT SECTION -->
-    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--br)">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--b);margin-bottom:7px">📞 Contact Intelligence</div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        <div style="font-size:11px;color:#374151;display:flex;align-items:flex-start;gap:6px">
-          <span style="color:var(--b);font-size:11px;flex-shrink:0">🏢</span>
-          <span>${c.hq}</span>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:var(--b);flex-shrink:0">📱</span>
-          <a href="tel:${c.phone}" style="color:var(--b);font-weight:600;text-decoration:none">${c.phone}</a>
-          <span style="color:var(--br)">|</span>
-          <a href="tel:${c.altPhone}" style="color:#374151;text-decoration:none">${c.altPhone}</a>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:var(--b);flex-shrink:0">📧</span>
-          <a href="mailto:${c.email}" style="color:var(--b);text-decoration:none">${c.email}</a>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:var(--ok);flex-shrink:0">🎯</span>
-          <span><strong>Proc. Contact:</strong> <a href="mailto:${c.procEmail}" style="color:var(--ok);font-weight:600;text-decoration:none">${c.procEmail}</a></span>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:#4B5563;flex-shrink:0">👤</span>
-          <span>${c.contact}</span>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:#4B5563;flex-shrink:0">🔧</span>
-          <span>${c.procContact}</span>
-        </div>
-      </div>
-      <div style="display:flex;gap:6px;margin-top:8px">
-        <a href="tel:${c.phone}" style="flex:1;padding:6px;background:var(--b);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-phone" style="font-size:10px"></i> Call
-        </a>
-        <a href="mailto:${c.procEmail}" style="flex:1;padding:6px;background:var(--ok);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-envelope" style="font-size:10px"></i> Email
-        </a>
-        <a href="https://${c.website}" target="_blank" style="flex:1;padding:6px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-external-link-alt" style="font-size:10px"></i> Web
-        </a>
-      </div>
-    </div>
-    <div style="margin-top:8px;font-size:11px;color:#4B5563">Order Book: <strong style="color:var(--b)">₹${c.orderBook.toLocaleString('en-IN')} Cr</strong></div>
-  </div>`).join('');
-}
+
 
 // ===================== CHARTS =====================
 
