@@ -1529,69 +1529,83 @@ function openMod(id){
 function closeMod(e){if(!e||e.target===document.getElementById('mover'))document.getElementById('mover').classList.remove('open');}
 // ===================== CONTRACTORS =====================
 function renderContractors(){
+  const STATE_NAMES={MH:'Maharashtra',DL:'Delhi',KA:'Karnataka',TN:'Tamil Nadu',
+    AP:'Andhra Pradesh',GJ:'Gujarat',RJ:'Rajasthan',MP:'Madhya Pradesh',UP:'Uttar Pradesh',
+    OD:'Odisha',WB:'West Bengal',HR:'Haryana',PB:'Punjab',CG:'Chhattisgarh',
+    JH:'Jharkhand',TG:'Telangana',KL:'Kerala',UK:'Uttarakhand',HP:'Himachal Pradesh',
+    BR:'Bihar',AS:'Assam',NE:'North East',GE:'General'};
   const q=(document.getElementById('csearch')?.value||'').toLowerCase();
   const el=document.getElementById('contlist');
-  const list=CONTR.filter(c=>!q||c.name.toLowerCase().includes(q)||c.specialty.toLowerCase().includes(q)||c.hq.toLowerCase().includes(q));
-  el.innerHTML=list.map(c=>`<div class="ccard" style="cursor:default">
+  if(!el)return;
+  const list=CONTR.filter(c=>!q||
+    (c.name||'').toLowerCase().includes(q)||
+    (c.specialty||'').toLowerCase().includes(q)||
+    (c.hq||c.type||'').toLowerCase().includes(q));
+  el.innerHTML=list.map(c=>{
+    const phone     = c.phone      || '';
+    const altPhone  = c.altPhone   || '';
+    const email     = c.email      || '';
+    const procEmail = c.procEmail  || '';
+    const contact   = c.contact    || c.name + ' — Procurement Team';
+    const procCont  = c.procContact|| 'Equipment Procurement Manager';
+    const hq        = c.hq        || (c.states&&c.states[0]?STATE_NAMES[c.states[0]]||c.states[0]:'India');
+    const website   = c.website   || 'www.google.com/search?q='+encodeURIComponent(c.name);
+    const stateChips=(c.states||[]).slice(0,6).map(s=>`<span class="chip">📍 ${STATE_NAMES[s]||s}</span>`).join('');
+    const orderBook = typeof c.orderBook==='number'?c.orderBook.toLocaleString('en-IN')+'&nbsp;Cr':'—';
+    const totalVal  = typeof c.totalValue==='number'?(c.totalValue/1000).toFixed(0)+'K Cr':'—';
+    return `<div class="ccard" style="cursor:default">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
       <div>
         <div class="cname">${c.name}</div>
-        <div style="font-size:11px;color:#4B5563">${c.type}</div>
+        <div style="font-size:11px;color:#4B5563">${c.type||'Contractor'}${c.tier?' &nbsp;·&nbsp; Tier '+c.tier:''}</div>
       </div>
-
+      ${c.tier?`<span style="background:${c.tier===1?'#003087':c.tier===2?'#0E7490':'#6B7280'};color:#fff;border-radius:12px;padding:3px 10px;font-size:10px;font-weight:700">T${c.tier}</span>`:''}
     </div>
     <div class="csts">
-      <div class="sbox"><div class="sv">${c.projects}</div><div class="sl">Projects</div></div>
-      <div class="sbox"><div class="sv" style="font-size:12px">₹${(c.totalValue/1000).toFixed(0)}K Cr</div><div class="sl">Value</div></div>
-      <div class="sbox"><div class="sv">${c.machines}</div><div class="sl">Machines</div></div>
+      <div class="sbox"><div class="sv">${c.projects||'—'}</div><div class="sl">Projects</div></div>
+      <div class="sbox"><div class="sv" style="font-size:12px">&#8377;${totalVal}</div><div class="sl">Pipeline</div></div>
+      <div class="sbox"><div class="sv">${c.machines||'—'}</div><div class="sl">Machines</div></div>
     </div>
-    <div style="margin-top:10px;font-size:11px;color:#374151"><strong>Specialty:</strong> ${c.specialty}</div>
-    <div class="ctags" style="margin-top:6px">${c.states.map(s=>`<span class="chip">📍 ${s}</span>`).join('')}</div>
-    <!-- CONTACT SECTION -->
+    <div style="margin-top:10px;font-size:11px;color:#374151"><strong>Specialty:</strong> ${c.specialty||'General Construction'}</div>
+    ${stateChips?`<div class="ctags" style="margin-top:6px">${stateChips}</div>`:''}
     <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--br)">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--b);margin-bottom:7px">📞 Contact Intelligence</div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--b);margin-bottom:7px">&#128222; Contact Intelligence</div>
       <div style="display:flex;flex-direction:column;gap:5px">
         <div style="font-size:11px;color:#374151;display:flex;align-items:flex-start;gap:6px">
-          <span style="color:var(--b);font-size:11px;flex-shrink:0">🏢</span>
-          <span>${c.hq}</span>
+          <span style="color:var(--b);font-size:11px;flex-shrink:0">&#127970;</span>
+          <span>${hq}</span>
+        </div>
+        ${phone?`<div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
+          <span style="color:var(--b);flex-shrink:0">&#128241;</span>
+          <a href="tel:${phone}" style="color:var(--b);font-weight:600;text-decoration:none">${phone}</a>
+          ${altPhone?`<span style="color:var(--br)">|</span><a href="tel:${altPhone}" style="color:#374151;text-decoration:none">${altPhone}</a>`:''}
+        </div>`:''}
+        ${email?`<div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
+          <span style="color:var(--b);flex-shrink:0">&#128231;</span>
+          <a href="mailto:${email}" style="color:var(--b);text-decoration:none">${email}</a>
+        </div>`:''}
+        ${procEmail?`<div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
+          <span style="color:var(--ok);flex-shrink:0">&#127919;</span>
+          <span><strong>Proc:</strong> <a href="mailto:${procEmail}" style="color:var(--ok);font-weight:600;text-decoration:none">${procEmail}</a></span>
+        </div>`:''}
+        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
+          <span style="color:#4B5563;flex-shrink:0">&#128100;</span>
+          <span>${contact}</span>
         </div>
         <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:var(--b);flex-shrink:0">📱</span>
-          <a href="tel:${c.phone}" style="color:var(--b);font-weight:600;text-decoration:none">${c.phone}</a>
-          <span style="color:var(--br)">|</span>
-          <a href="tel:${c.altPhone}" style="color:#374151;text-decoration:none">${c.altPhone}</a>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:var(--b);flex-shrink:0">📧</span>
-          <a href="mailto:${c.email}" style="color:var(--b);text-decoration:none">${c.email}</a>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:var(--ok);flex-shrink:0">🎯</span>
-          <span><strong>Proc. Contact:</strong> <a href="mailto:${c.procEmail}" style="color:var(--ok);font-weight:600;text-decoration:none">${c.procEmail}</a></span>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:#4B5563;flex-shrink:0">👤</span>
-          <span>${c.contact}</span>
-        </div>
-        <div style="font-size:11px;color:#374151;display:flex;align-items:center;gap:6px">
-          <span style="color:#4B5563;flex-shrink:0">🔧</span>
-          <span>${c.procContact}</span>
+          <span style="color:#4B5563;flex-shrink:0">&#128295;</span>
+          <span>${procCont}</span>
         </div>
       </div>
       <div style="display:flex;gap:6px;margin-top:8px">
-        <a href="tel:${c.phone}" style="flex:1;padding:6px;background:var(--b);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-phone" style="font-size:10px"></i> Call
-        </a>
-        <a href="mailto:${c.procEmail}" style="flex:1;padding:6px;background:var(--ok);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-envelope" style="font-size:10px"></i> Email
-        </a>
-        <a href="https://${c.website}" target="_blank" style="flex:1;padding:6px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">
-          <i class="fa fa-external-link-alt" style="font-size:10px"></i> Web
-        </a>
+        ${phone?`<a href="tel:${phone}" style="flex:1;padding:6px;background:var(--b);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center">&#128222; Call</a>`:'<span style="flex:1;padding:6px;background:#E5E7EB;color:#9CA3AF;border-radius:5px;font-size:11px;text-align:center">No phone</span>'}
+        ${procEmail?`<a href="mailto:${procEmail}" style="flex:1;padding:6px;background:var(--ok);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center">&#128231; Email</a>`:`<a href="mailto:${email||''}" style="flex:1;padding:6px;background:var(--ok);color:#fff;border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center">&#128231; Email</a>`}
+        <a href="https://${website}" target="_blank" style="flex:1;padding:6px;background:transparent;border:1px solid var(--br);color:var(--b);border-radius:5px;font-size:11px;font-weight:600;text-decoration:none;text-align:center">&#128279; Search</a>
       </div>
     </div>
-    <div style="margin-top:8px;font-size:11px;color:#4B5563">Order Book: <strong style="color:var(--b)">₹${c.orderBook.toLocaleString('en-IN')} Cr</strong></div>
-  </div>`).join('');
+    <div style="margin-top:8px;font-size:11px;color:#4B5563">Order Book: <strong style="color:var(--b)">&#8377;${orderBook}</strong></div>
+  </div>`;
+  }).join('');
 }
 
 // ===================== CHARTS =====================
