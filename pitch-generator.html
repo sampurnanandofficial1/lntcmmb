@@ -216,6 +216,212 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
 </style>
 </head>
 <body>
+<style id="ltauth-style">
+#ltauth-overlay{
+  position:fixed;inset:0;z-index:999999;
+  background:linear-gradient(135deg,#001f4d 0%,#003087 60%,#002065 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Inter',system-ui,sans-serif;
+}
+#ltauth-card{
+  background:#ffffff;border-radius:16px;padding:44px 48px 40px;
+  width:400px;max-width:92vw;box-shadow:0 32px 80px rgba(0,0,0,.45);
+  position:relative;overflow:hidden;
+}
+#ltauth-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,#003087,#FFA800);
+}
+.ltauth-logo{
+  display:flex;align-items:center;gap:12px;margin-bottom:24px;
+}
+.ltauth-logo-badge{
+  width:44px;height:44px;background:#003087;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:900;color:#FFA800;flex-shrink:0;
+}
+.ltauth-logo-text{font-size:13px;color:#475569;line-height:1.4;}
+.ltauth-logo-text strong{display:block;font-size:15px;color:#003087;font-weight:700;}
+.ltauth-title{
+  font-size:22px;font-weight:800;color:#1E293B;margin-bottom:4px;
+}
+.ltauth-sub{
+  font-size:13px;color:#64748B;margin-bottom:28px;
+}
+.ltauth-label{
+  font-size:12px;font-weight:600;color:#475569;
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block;
+}
+.ltauth-input{
+  width:100%;padding:12px 14px;border:1.5px solid #E2E8F0;border-radius:8px;
+  font-size:15px;color:#1E293B;background:#F8FAFC;
+  outline:none;transition:border-color .15s,box-shadow .15s;
+  box-sizing:border-box;
+}
+.ltauth-input:focus{
+  border-color:#003087;box-shadow:0 0 0 3px rgba(0,48,135,.12);background:#fff;
+}
+.ltauth-field{margin-bottom:18px;}
+.ltauth-btn{
+  width:100%;padding:14px;background:#003087;color:#fff;
+  border:none;border-radius:8px;font-size:15px;font-weight:700;
+  cursor:pointer;margin-top:8px;transition:background .15s,transform .1s;
+  letter-spacing:.3px;
+}
+.ltauth-btn:hover{background:#002065;}
+.ltauth-btn:active{transform:scale(.98);}
+.ltauth-btn:disabled{background:#94A3B8;cursor:not-allowed;transform:none;}
+.ltauth-error{
+  background:#FEE2E2;border:1px solid #FECACA;border-radius:8px;
+  padding:10px 14px;font-size:13px;color:#991B1B;margin-top:12px;
+  display:none;text-align:center;
+}
+.ltauth-footer{
+  font-size:11px;color:#94A3B8;text-align:center;margin-top:20px;
+}
+#ltauth-overlay.ltauth-hide{
+  animation:ltauth-fadeout .3s ease forwards;
+}
+@keyframes ltauth-fadeout{
+  to{opacity:0;pointer-events:none;}
+}
+.ltauth-spinner{
+  display:inline-block;width:16px;height:16px;
+  border:2px solid rgba(255,255,255,.4);
+  border-top-color:#fff;border-radius:50%;
+  animation:ltauth-spin .6s linear infinite;vertical-align:middle;margin-right:6px;
+}
+@keyframes ltauth-spin{to{transform:rotate(360deg);}}
+.ltauth-logout{
+  position:fixed;bottom:18px;right:18px;z-index:99998;
+  background:#003087;color:#fff;border:none;border-radius:8px;
+  padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;
+  font-family:inherit;opacity:.85;transition:opacity .15s;
+  display:none;
+}
+.ltauth-logout:hover{opacity:1;}
+</style>
+<script>
+(function(){
+  var _LS='ltcmmb_auth_v1';
+  var _EXP=30; // days
+  // djb2 hash
+  function _h(s){
+    var h=5381,i=0;
+    for(;i<s.length;i++)h=(((h<<5)+h)+s.charCodeAt(i))>>>0;
+    return h.toString(16).padStart(8,'0');
+  }
+  // Credential hashes (plaintext never stored)
+  var _C={u:'0c376ac4',p:'c08cb671'};
+  
+  function _check(){
+    try{
+      var a=JSON.parse(localStorage.getItem(_LS));
+      if(!a||!a.t||!a.e)return false;
+      if(Date.now()>a.e){localStorage.removeItem(_LS);return false;}
+      return a.t==='ok';
+    }catch(e){return false;}
+  }
+  
+  function _save(){
+    localStorage.setItem(_LS,JSON.stringify({t:'ok',e:Date.now()+_EXP*86400000}));
+  }
+  
+  window.ltLogout=function(){
+    localStorage.removeItem(_LS);
+    sessionStorage.clear();
+    window.location.reload();
+  };
+  
+  // Already authenticated – show logout button and return
+  if(_check()){
+    document.addEventListener('DOMContentLoaded',function(){
+      var lb=document.createElement('button');
+      lb.className='ltauth-logout';
+      lb.textContent='⎋  Log Out';
+      lb.style.display='block';
+      lb.onclick=window.ltLogout;
+      document.body.appendChild(lb);
+    });
+    return;
+  }
+  
+  // Block page render until authenticated
+  document.addEventListener('DOMContentLoaded',function(){
+    var ov=document.getElementById('ltauth-overlay');
+    if(!ov)return;
+    var inp_u=document.getElementById('ltauth-u');
+    var inp_p=document.getElementById('ltauth-p');
+    var btn  =document.getElementById('ltauth-submit');
+    var err  =document.getElementById('ltauth-err');
+    
+    function attempt(){
+      var u=(inp_u.value||'').toLowerCase().trim();
+      var p=(inp_p.value||'');
+      if(!u||!p){err.textContent='Please enter both User ID and password.';err.style.display='block';return;}
+      btn.disabled=true;
+      btn.innerHTML='<span class="ltauth-spinner"></span>Signing in…';
+      setTimeout(function(){
+        if(_h(u)===_C.u&&_h(p)===_C.p){
+          _save();
+          ov.classList.add('ltauth-hide');
+          setTimeout(function(){
+            ov.style.display='none';
+            var lb=document.createElement('button');
+            lb.className='ltauth-logout';
+            lb.textContent='⎋  Log Out';
+            lb.style.display='block';
+            lb.onclick=window.ltLogout;
+            document.body.appendChild(lb);
+          },320);
+        }else{
+          btn.disabled=false;
+          btn.textContent='Sign In';
+          err.textContent='Incorrect User ID or password. Please try again.';
+          err.style.display='block';
+          inp_p.value='';
+          inp_p.focus();
+        }
+      },400);
+    }
+    
+    btn.addEventListener('click',attempt);
+    [inp_u,inp_p].forEach(function(el){
+      el.addEventListener('keydown',function(e){if(e.key==='Enter')attempt();});
+    });
+    inp_u.focus();
+  });
+})();
+</script>
+<div id="ltauth-overlay">
+  <div id="ltauth-card">
+    <div class="ltauth-logo">
+      <div class="ltauth-logo-badge">L&amp;T</div>
+      <div class="ltauth-logo-text">
+        <strong>Larsen &amp; Toubro</strong>
+        Construction &amp; Mining Machinery Business
+      </div>
+    </div>
+    <div class="ltauth-title">Strategy Intelligence Platform</div>
+    <div class="ltauth-sub">AI Pitch Generator &nbsp;—&nbsp; Restricted Access</div>
+    <div class="ltauth-field">
+      <label class="ltauth-label" for="ltauth-u">User ID</label>
+      <input id="ltauth-u" class="ltauth-input" type="text"
+             placeholder="Enter your User ID" autocomplete="username" spellcheck="false"/>
+    </div>
+    <div class="ltauth-field">
+      <label class="ltauth-label" for="ltauth-p">Password</label>
+      <input id="ltauth-p" class="ltauth-input" type="password"
+             placeholder="Enter your password" autocomplete="current-password"/>
+    </div>
+    <button id="ltauth-submit" class="ltauth-btn">Sign In</button>
+    <div id="ltauth-err" class="ltauth-error"></div>
+    <div class="ltauth-footer">
+      L&amp;T CMMB Central Strategy Department &nbsp;·&nbsp; Internal Use Only
+    </div>
+  </div>
+</div>
+
 <div id="platform-nav">
   <a href="index.html"           class="pn-link" id="pn-tiv">🏠 TIV Home</a>
   <div class="pn-sep"></div>
