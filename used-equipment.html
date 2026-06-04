@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style id="_ag">html{visibility:hidden!important}</style>
-<script>
-(function(){
-  var LS='ltcmmb_auth_v1';
-  try{
-    var a=JSON.parse(localStorage.getItem(LS));
-    if(a&&a.t==='ok'&&a.e&&Date.now()<a.e){
-      // Authenticated — reveal page
-      var s=document.getElementById('_ag');
-      if(s)s.parentNode.removeChild(s);
-      return;
-    }
-  }catch(e){}
-  // Not authenticated — redirect to login
-  try{localStorage.removeItem(LS);}catch(e){}
-  window.location.replace('login.html?r='+encodeURIComponent(window.location.href));
-})();
-</script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L&T CMMB | Used Equipment Export Intelligence</title>
@@ -61,8 +42,6 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 
 /* ── HEADER ── */
 /* ue-header removed */
-
-
 
 .ue-header-right{display:flex;align-items:center;gap:10px}
 .ue-back-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
@@ -337,7 +316,6 @@ body{font-family:'Inter',system-ui,sans-serif;background:#F0F4F8;color:#0F172A;m
 .pn-right{flex:1;text-align:right;font-size:9.5px;font-weight:600;
   color:rgba(255,255,255,.25);letter-spacing:.8px}
 
-
 /* ════════ SHARED DESIGN TOKENS — L&T CMMB Platform ════════ */
 /* Page bg, cards, text, borders */
 body { background: #F0F4F8; color: #1E293B; }
@@ -412,23 +390,13 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
 <body>
 
 </div>
-    <div class="ltauth-title">Strategy Intelligence Platform</div>
-    <div class="ltauth-sub">Used Equipment Valuation &nbsp;—&nbsp; Restricted Access</div>
-    <div class="ltauth-field">
-      <label class="ltauth-label" for="ltauth-u">User ID</label>
-      <input id="ltauth-u" class="ltauth-input" type="text"
-             placeholder="Enter your User ID" autocomplete="username" spellcheck="false"/>
-    </div>
-    <div class="ltauth-field">
-      <label class="ltauth-label" for="ltauth-p">Password</label>
-      <input id="ltauth-p" class="ltauth-input" type="password"
-             placeholder="Enter your password" autocomplete="current-password"/>
-    </div>
-    <button id="ltauth-submit" class="ltauth-btn">Sign In</button>
-    <div id="ltauth-err" class="ltauth-error"></div>
-    <div class="ltauth-footer">
-      L&amp;T CMMB Central Strategy Department &nbsp;·&nbsp; Internal Use Only
-    </div>
+    
+    
+    
+    
+    
+    
+    
   </div>
 </div>
 
@@ -459,11 +427,6 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
     <div class="un-badge">Internal Use Only</div>
   </div>
 </nav>
-
-
-
-
-
 
 <!-- FX STRIP -->
 <div class="ue-fx-strip" id="ue-fx-strip">
@@ -1073,7 +1036,6 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
         <div class="ue-card-head">📐 Valuation Methodology — All Parameters &amp; Sources</div>
         <div class="ue-card-body" style="font-size:11px;color:#334155;line-height:1.8;overflow-y:auto;max-height:520px">
 
-
           <div style="font-weight:700;font-size:11.5px;color:var(--navy);margin-bottom:4px">Step 1 — Base Value (Age + Hours)</div>
           <strong>Depreciation Schedule</strong> — Declining balance, market-calibrated:
           <table style="width:100%;border-collapse:collapse;font-size:10px;margin:4px 0 6px">
@@ -1328,7 +1290,6 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
         </div>
       </div>
     </div>
-
 
     <!-- ══════════════ WORLD MAP PANEL ══════════════ -->
     <div class="ue-panel" id="panel-worldmap">
@@ -1901,7 +1862,6 @@ function estimateValue(m) {
     komtraxPremium: faults === 0 && idle < 20 ? 8 : 0,
   };
 }
-
 
 // ══════════════════════════════════════════════════════════════════════════
 // ENGINE SWITCHER
@@ -2643,7 +2603,6 @@ function hideUETT() {
   if (ov) ov.style.display = 'none';
 }
 document.addEventListener('keydown', e => { if (e.key==='Escape') hideUETT(); });
-
 
 // ════════════════════════════════════════════════════
 // WORLD MAP — Leaflet + CARTO tiles

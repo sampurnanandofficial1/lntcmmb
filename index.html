@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style id="_ag">html{visibility:hidden!important}</style>
-<script>
-(function(){
-  var LS='ltcmmb_auth_v1';
-  try{
-    var a=JSON.parse(localStorage.getItem(LS));
-    if(a&&a.t==='ok'&&a.e&&Date.now()<a.e){
-      // Authenticated — reveal page
-      var s=document.getElementById('_ag');
-      if(s)s.parentNode.removeChild(s);
-      return;
-    }
-  }catch(e){}
-  // Not authenticated — redirect to login
-  try{localStorage.removeItem(LS);}catch(e){}
-  window.location.replace('login.html?r='+encodeURIComponent(window.location.href));
-})();
-</script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>L&T CMMB · total excavator sales Intelligence Hub</title>
@@ -94,7 +75,6 @@
 .pn-sep{width:1px;height:14px;background:rgba(255,255,255,.15);margin:0 2px;flex-shrink:0}
 .pn-right{flex:1;text-align:right;font-size:9.5px;font-weight:600;
   color:rgba(255,255,255,.25);letter-spacing:.8px}
-
 
 :root{
   --navy:#1B3A6B;--blue:#2563EB;--accent:#F59E0B;--accent2:#0369A1;
@@ -322,7 +302,6 @@ footer{background:#1B3A6B;border-top:1px solid rgba(255,255,255,.1);padding:14px
 .tiv-pp-row{display:flex;justify-content:space-between;font-size:11px;color:#475569;margin-bottom:3px;padding:3px 0;border-bottom:1px solid #F1F5F9}
 .tiv-pp-val{font-weight:700;color:#1E293B}
 
-
 /* ── AI INSIGHTS ── */
 .ai-insight-btn{
   display:inline-flex;align-items:center;gap:6px;padding:5px 13px;
@@ -364,23 +343,13 @@ te(360deg)}}
 <body>
 
 </div>
-    <div class="ltauth-title">Strategy Intelligence Platform</div>
-    <div class="ltauth-sub">TIV Intelligence Hub &nbsp;—&nbsp; Restricted Access</div>
-    <div class="ltauth-field">
-      <label class="ltauth-label" for="ltauth-u">User ID</label>
-      <input id="ltauth-u" class="ltauth-input" type="text"
-             placeholder="Enter your User ID" autocomplete="username" spellcheck="false"/>
-    </div>
-    <div class="ltauth-field">
-      <label class="ltauth-label" for="ltauth-p">Password</label>
-      <input id="ltauth-p" class="ltauth-input" type="password"
-             placeholder="Enter your password" autocomplete="current-password"/>
-    </div>
-    <button id="ltauth-submit" class="ltauth-btn">Sign In</button>
-    <div id="ltauth-err" class="ltauth-error"></div>
-    <div class="ltauth-footer">
-      L&amp;T CMMB Central Strategy Department &nbsp;·&nbsp; Internal Use Only
-    </div>
+    
+    
+    
+    
+    
+    
+    
   </div>
 </div>
 
@@ -416,8 +385,6 @@ te(360deg)}}
 </nav>
 
 <!-- ══ TOP NAV ══════════════════════════════════════════════ -->
-
-
 
 <!-- ══ TAB BAR — STORYBOARD ═════════════════════════════════ -->
 <div id="tabs">
@@ -475,7 +442,6 @@ te(360deg)}}
 <!-- ══════════════════════════════════════════════════════════
      TAB 1 — HUB OVERVIEW (Homepage)
 ══════════════════════════════════════════════════════════ -->
-
 
 <!-- ══════════════════════════════════════════════════════════
      TAB 2 — NATIONAL POSITION
@@ -935,9 +901,7 @@ te(360deg)}}
 
 <!-- ══ PREMIUM SEGMENT SECTION ══════════════════════════════════════════ -->
 
-
 <!-- ══ OEM FULL HEATMAP SECTION ═════════════════════════════════════════ -->
-
 
 <footer>
   <div class="foot-l"><strong>L&T CMMB · total excavator sales Intelligence Hub</strong> · IIM Lucknow MBA Internship · May 2026 · <strong>Data cut-off: 31 March 2026</strong></div>
@@ -1345,7 +1309,6 @@ window.addEventListener('load',()=>{
     if(el){el.style.background='rgba(255,255,255,.15)';el.style.borderColor='rgba(255,255,255,.3)';el.style.color='#fff';}
   }
 })();
-
 
 // ── PREMIUM CHARTS ────────────────────────────────────────────────────────
 function buildPremiumCharts(){

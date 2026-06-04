@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style id="_ag">html{visibility:hidden!important}</style>
-<script>
-(function(){
-  var LS='ltcmmb_auth_v1';
-  try{
-    var a=JSON.parse(localStorage.getItem(LS));
-    if(a&&a.t==='ok'&&a.e&&Date.now()<a.e){
-      // Authenticated — reveal page
-      var s=document.getElementById('_ag');
-      if(s)s.parentNode.removeChild(s);
-      return;
-    }
-  }catch(e){}
-  // Not authenticated — redirect to login
-  try{localStorage.removeItem(LS);}catch(e){}
-  window.location.replace('login.html?r='+encodeURIComponent(window.location.href));
-})();
-</script>
-
 <meta charset="UTF-8">
 <meta name="cache-version" content="2026-05-29">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -249,7 +230,6 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .pn-right{flex:1;text-align:right;font-size:9.5px;font-weight:600;
   color:rgba(255,255,255,.25);letter-spacing:.8px}
 
-
 /* ════════ SHARED DESIGN TOKENS — L&T CMMB Platform ════════ */
 /* Page bg, cards, text, borders */
 body { background: #F0F4F8; color: #1E293B; }
@@ -296,23 +276,13 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
 <body>
 
 </div>
-    <div class="ltauth-title">Strategy Intelligence Platform</div>
-    <div class="ltauth-sub">Contract Intelligence &nbsp;—&nbsp; Restricted Access</div>
-    <div class="ltauth-field">
-      <label class="ltauth-label" for="ltauth-u">User ID</label>
-      <input id="ltauth-u" class="ltauth-input" type="text"
-             placeholder="Enter your User ID" autocomplete="username" spellcheck="false"/>
-    </div>
-    <div class="ltauth-field">
-      <label class="ltauth-label" for="ltauth-p">Password</label>
-      <input id="ltauth-p" class="ltauth-input" type="password"
-             placeholder="Enter your password" autocomplete="current-password"/>
-    </div>
-    <button id="ltauth-submit" class="ltauth-btn">Sign In</button>
-    <div id="ltauth-err" class="ltauth-error"></div>
-    <div class="ltauth-footer">
-      L&amp;T CMMB Central Strategy Department &nbsp;·&nbsp; Internal Use Only
-    </div>
+    
+    
+    
+    
+    
+    
+    
   </div>
 </div>
 
@@ -343,11 +313,6 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
     <div class="un-badge">Internal Use Only</div>
   </div>
 </nav>
-
-
-
-
-
 
 <!-- NOTIFICATION PANEL -->
 <div id="notif-panel" style="position:fixed;top:56px;right:0;width:400px;max-width:100vw;background:#fff;box-shadow:-4px 0 20px rgba(0,0,0,.18);z-index:1999;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;max-height:calc(100vh - 56px);border-left:1px solid var(--br)">
@@ -534,7 +499,6 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
   </div>
 </div>
 </div>
-
 
 <!-- MODAL -->
 <div id="mover" onclick="closeMod(event)">
@@ -926,7 +890,6 @@ async function loadNewsCacheOrFallback() {
   } catch(e) { console.warn('Cache fallback failed:', e.message); }
   renderNews(FALLBACK_NEWS);
 }
-
 
 async function fetchNewsFromRSS() {
   const el = document.getElementById('newslist');
@@ -1767,7 +1730,6 @@ function initCharts(){
   });
 }
 
-
 // ===================== NEWS =====================
 const NICONS={highways:'🛣️',mining:'⛏️',railways:'🚂',irrigation:'💧',corporate:'🏢',smartcity:'🏙️'};
 const NCOLS={highways:'#003F72',mining:'#7C3AED',railways:'#0D9488',irrigation:'#0284C7',corporate:'#005B9A',smartcity:'#D97706'};
@@ -1848,10 +1810,6 @@ function renderNews(items){
   el.innerHTML = html || '<div class="loading">No items found — refreshing...</div>';
 }
 
-
-
-
-
 // ===================== TABS =====================
 function switchTab(t){
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
@@ -1869,8 +1827,6 @@ function toast(icon,title,body,dur=4500){
 }
 
 // ===================== NOTIFICATIONS =====================
-
-
 
 // ===================== SCORE EXPLANATIONS =====================
 
@@ -1994,7 +1950,6 @@ function leadScoreExplain(c) {
     ).join('') + note;
 }
 
-
 // ===================== TOOLTIP ENGINE =====================
 // Overlay approach: transparent full-screen div catches any outside click
 
@@ -2027,7 +1982,6 @@ function hideTT() {
   if (tt) tt.style.display = 'none';
   if (ov) ov.style.display = 'none';
 }
-
 
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') hideTT(); });
 document.addEventListener('scroll',  hideTT, true);
@@ -2199,10 +2153,6 @@ function filterNotifs(cat) {
   renderNotifs();
 }
 
-
-
-
-
 function initTicker(){
   const el=document.getElementById('tcon2');
   if(!el)return;
@@ -2229,7 +2179,6 @@ function startClock(){
 }
 
 // ===================== MAP =====================
-
 
 function mcolor(ls){return ls==='Very High'?'#DC2626':ls==='High'?'#D97706':ls==='Medium'?'#2563EB':'#6B7280'}
 function ticon(t){const m={Highways:'🛣️',Mining:'⛏️',Railways:'🚂',Metro:'🚇',Irrigation:'💧',Ports:'⚓','Smart City':'🏙️',Industrial:'🏭'};return m[t]||'📋'}
@@ -2263,9 +2212,6 @@ function togL(t){
 }
 
 // ===================== FILTERS =====================
-
-
-
 
 function updR(el){const v=parseInt(el.value);document.getElementById('rvd').textContent=v>0?'Min ₹'+v.toLocaleString('en-IN')+' Cr':'No minimum'}
 
@@ -2310,8 +2256,6 @@ function setStateF(s){document.getElementById('fstate').value=s;applyF();switchT
 // ===================== RENDER CARDS =====================
 function stClass(s){return s==='Awarded'?'awarded':s==='Tender Live'?'live':s==='Under Execution'?'exec':'upcoming'}
 
-
-
 function setView(v){
   view=v;
   document.getElementById('vcards').classList.toggle('active',v==='cards');
@@ -2319,7 +2263,6 @@ function setView(v){
   document.getElementById('clist').style.display=v==='cards'?'grid':'none';
   document.getElementById('tblwrap').style.display=v==='table'?'block':'none';
 }
-
 
 // ===================== CONTRACTORS =====================
 function renderContractors(){
@@ -2377,7 +2320,6 @@ function renderContractors(){
 
 // ===================== CHARTS =====================
 
-
 // ===================== NEWS =====================
 
 function renderNews(items){
@@ -2391,9 +2333,6 @@ function renderNews(items){
     </div>
   </div>`).join('');
 }
-
-
-
 
 // ===================== TABS =====================
 function switchTab(t){
@@ -2412,10 +2351,6 @@ function toast(icon,title,body,dur=4500){
 }
 
 // ===================== NOTIFICATIONS =====================
-
-
-
-
 
 function syncData(){
   const btn=document.getElementById('syncbtn');
