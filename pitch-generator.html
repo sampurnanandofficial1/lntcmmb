@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/* ltauth-guard */
+(function(){
+  var LS='ltcmmb_auth_v1';
+  document.documentElement.style.visibility='hidden';
+  try{
+    var a=JSON.parse(localStorage.getItem(LS));
+    if(a&&a.t==='ok'&&a.e&&Date.now()<a.e){
+      document.documentElement.style.visibility='visible';
+      return;
+    }
+  }catch(e){}
+  localStorage.removeItem(LS);
+  window.location.replace('login.html?r='+encodeURIComponent(window.location.pathname+window.location.search));
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="deploy-test" content="auto-deploy-1779945730">
 <meta name="deploy-version" content="v4.1-20260528-0517">
@@ -252,6 +267,7 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
   <div class="un-right">
     <div class="un-clock" id="un-clock">—</div>
     <div class="un-badge">Internal Use Only</div>
+    <button id="lt-logout-btn" onclick="(function(){localStorage.removeItem('ltcmmb_auth_v1');window.location.replace('login.html');})()" title="Log Out" style="background:transparent;border:1px solid rgba(255,168,0,0.5);color:#FFA800;font-size:12px;font-weight:600;padding:4px 12px;border-radius:4px;cursor:pointer;letter-spacing:0.04em;margin-left:10px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='#FFA800';this.style.color='#1B2A4A';" onmouseout="this.style.background='transparent';this.style.color='#FFA800';">&#9211; Log Out</button>
   </div>
 </nav>
 
