@@ -514,8 +514,8 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
     var ov=document.getElementById('ltauth-overlay');
     if(!ov)return;
     if(ok()){
-      /* Already authenticated — keep overlay hidden, add logout */
-      ov.style.display='none';
+      /* Already authenticated — remove overlay from DOM, add logout */
+      if(ov.parentNode)ov.parentNode.removeChild(ov);
       addLogout();
       return;
     }
@@ -539,7 +539,7 @@ pre, code, .code-block, .lt-code, [style*="font-family:'Courier"], [style*="JetB
         if(h(uv)===C.u&&h(pv)===C.p){
           save();
           ov.classList.add('ltauth-out');
-          setTimeout(function(){ov.style.display='none';addLogout();},300);
+          setTimeout(function(){if(ov.parentNode)ov.parentNode.removeChild(ov);addLogout();},300);
         }else{
           btn.disabled=false;btn.textContent='Sign In';
           err.textContent='Incorrect User ID or password.';
