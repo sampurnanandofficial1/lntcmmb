@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-06-18T18:15:05.335126+05:30",
+  "last_updated": "2026-06-18T23:46:02.602130+05:30",
   "news_count": 50,
-  "total_found": 84,
+  "total_found": 101,
   "ba_tenders": 0,
   "sources_active": 9,
   "keys_active": [
@@ -11,5 +11,5 @@
     "GNEWS",
     "MEDIASTACK"
   ],
-  "weather_sites": 9
+  "weather_sites": 10
 }
