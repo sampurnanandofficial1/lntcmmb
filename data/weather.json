@@ -3,80 +3,80 @@
     "site": "Korba CG",
     "lat": 22.342,
     "lon": 82.689,
-    "temp": "35.2°C",
-    "condition": "☀️ Clear",
+    "temp": "30.5°C",
+    "condition": "⛅ Overcast",
     "precip_3d_mm": 24.9,
     "type": "mining",
-    "updated": "2026-06-23T05:46:25.789172+00:00"
+    "updated": "2026-06-23T10:47:23.325965+00:00"
   },
   {
     "site": "Nagpur MH",
     "lat": 21.159,
     "lon": 79.088,
-    "temp": "34.9°C",
-    "condition": "☀️ Clear",
+    "temp": "32.0°C",
+    "condition": "⚠️ FLOOD RISK",
     "precip_3d_mm": 26.3,
     "type": "highways",
-    "updated": "2026-06-23T05:46:25.789172+00:00"
+    "updated": "2026-06-23T10:47:23.325965+00:00"
   },
   {
     "site": "Dhanbad JH",
     "lat": 23.795,
     "lon": 86.439,
-    "temp": "34.4°C",
-    "condition": "⚠️ FLOOD RISK",
+    "temp": "34.5°C",
+    "condition": "☀️ Clear",
     "precip_3d_mm": 0.7,
     "type": "mining",
-    "updated": "2026-06-23T05:46:25.789172+00:00"
+    "updated": "2026-06-23T10:47:23.325965+00:00"
   },
   {
     "site": "Keonjhar OD",
     "lat": 21.628,
     "lon": 85.581,
-    "temp": "32.5°C",
+    "temp": "29.1°C",
     "condition": "⚠️ FLOOD RISK",
     "precip_3d_mm": 22.6,
     "type": "mining",
-    "updated": "2026-06-23T05:46:25.789172+00:00"
+    "updated": "2026-06-23T10:47:23.325965+00:00"
   },
   {
     "site": "Vizag AP",
     "lat": 17.686,
     "lon": 83.218,
-    "temp": "33.0°C",
+    "temp": "31.3°C",
     "condition": "⛅ Overcast",
     "precip_3d_mm": 8.2,
     "type": "ports",
-    "updated": "2026-06-23T05:46:25.789172+00:00"
+    "updated": "2026-06-23T10:47:23.325965+00:00"
   },
   {
     "site": "Imphal MN",
     "lat": 24.817,
     "lon": 93.942,
-    "temp": "28.6°C",
+    "temp": "25.8°C",
     "condition": "⛅ Overcast",
     "precip_3d_mm": 21.1,
     "type": "highways",
-    "updated": "2026-06-23T05:46:25.789172+00:00"
+    "updated": "2026-06-23T10:47:23.325965+00:00"
   },
   {
     "site": "Dibrugarh AS",
     "lat": 27.483,
     "lon": 94.912,
-    "temp": "29.9°C",
+    "temp": "31.0°C",
     "condition": "☀️ Clear",
     "precip_3d_mm": 78.0,
     "type": "railways",
-    "updated": "2026-06-23T05:46:25.789172+00:00"
+    "updated": "2026-06-23T10:47:23.325965+00:00"
   },
   {
     "site": "Barmer RJ",
     "lat": 25.745,
     "lon": 71.388,
-    "temp": "34.3°C",
+    "temp": "38.3°C",
     "condition": "☀️ Clear",
     "precip_3d_mm": 0.0,
     "type": "highways",
-    "updated": "2026-06-23T05:46:25.789172+00:00"
+    "updated": "2026-06-23T10:47:23.325965+00:00"
   }
 ]
