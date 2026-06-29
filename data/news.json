@@ -1,29 +1,49 @@
 [
   {
-    "title": "NHAI Highway Awards Hit 7-Year Low as Land Acquisition Delays Persist; NHAI Shifts Focus to Debt Repayment: Nuvama - Autocar Professional",
-    "desc": "NHAI Highway Awards Hit 7-Year Low as Land Acquisition Delays Persist; NHAI Shifts Focus to Debt Repayment: Nuvama    Autocar Professional",
-    "src": "NHAI",
-    "time": "22h ago",
-    "link": "https://www.google.com/search?q=NHAI%20Highway%20Awards%20Hit%207Year%20Low%20as%20Land%20Acquisition%20Delays%20Persist%20NHAI%20Shifts%20Focus%20to",
-    "type": "highways",
-    "fetchedAt": "2026-06-28T13:44:56+00:00",
-    "ageDays": 0
-  },
-  {
     "title": "Texmaco Rail EPC orders total Rs. 10.20 crore - Railway Supply",
     "desc": "Texmaco Rail EPC orders total Rs. 10.20 crore    Railway Supply",
     "src": "IR",
-    "time": "4h ago",
+    "time": "8h ago",
     "link": "https://www.google.com/search?q=Texmaco%20Rail%20EPC%20orders%20total%20Rs%201020%20crore%20%20Railway%20Supply",
     "type": "railways",
     "fetchedAt": "2026-06-29T08:14:16+00:00",
     "ageDays": 0
   },
   {
+    "title": "Stock Alert: Aurobindo Pharma, Likhitha Infra, Vikran Engineering, Ashoka Buildcon, Bajaj Healthcare",
+    "desc": "Aurobindo Pharma announced that the United States Food and Drug Administration (USFDA) had completed an inspection at its wholly owned subsidiary, Auroactive Pharma, located in And",
+    "src": "business-standard",
+    "time": "13h ago",
+    "link": "https://www.business-standard.com/markets/capital-market-news/stock-alert-aurobindo-pharma-likhitha-infra-vikran-engineering-ashoka-buildcon-bajaj-healthcare-126062900115_1.html",
+    "type": "highways",
+    "fetchedAt": "2026-06-29T03:34:51+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Top stocks in news: HDFC Bank, Turtlemint, Kotak Bank, DRL, Adani Ports, ONGC, Waaree, telcos",
+    "desc": "Stocks like HDFC Bank, Turtlemint, Kotak Mahindra Bank, Dr Reddy's Labs, Adani Ports, ONGC, Waaree Energies, Adani Green, Auro Pharma, telcos and more will be in the spotlight on J",
+    "src": "businesstoday",
+    "time": "14h ago",
+    "link": "https://www.businesstoday.in/markets/stocks/story/top-stocks-in-news-hdfc-bank-turtlemint-kotak-bank-drl-adani-ports-ongc-waaree-telcos-539589-2026-06-29",
+    "type": "highways",
+    "fetchedAt": "2026-06-29T01:45:40+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Watch out these two dozen stocks in today’s trade",
+    "desc": "Persistent Systems, Hexaware, HDFC Bank, Kotak Bank, Adani Green, Waaree Energies, Transrail Lightning, Astral, Pricol, Alembic, Aurobindo, Amber Group, Strides, Vikram stocks to b",
+    "src": "thehindubusinessline",
+    "time": "15h ago",
+    "link": "https://www.thehindubusinessline.com/markets/watch-out-these-two-dozen-stocks-in-todays-trade/article71159867.ece",
+    "type": "highways",
+    "fetchedAt": "2026-06-29T01:10:41+00:00",
+    "ageDays": 0
+  },
+  {
     "title": "Defence, Data Centres And Healthcare Drive India's SME Growth Story",
     "desc": "Brokerage projects earnings recovery from FY27 as rising investor participation, growing financial savings and robust capital market activity support long-term growth, even as regu",
     "src": "businessworld",
-    "time": "12h ago",
+    "time": "16h ago",
     "link": "https://www.businessworld.in/article/defence-data-centres-and-healthcare-drive-india-s-sme-growth-story-612502",
     "type": "highways",
     "fetchedAt": "2026-06-29T00:00:00+00:00",
@@ -36,7 +56,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/nhai-wins-rs-1202-crore-arbitration-award-in-karnataka-highway-dispute-secures-another-relief-in-assam-project",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +66,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/chris-woods-big-warning-the-specific-risk-that-will-finally-trigger-the-end-of-ai-trade/articleshow/132031234.cms",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +76,7 @@
     "time": "Recent",
     "link": "https://www.businesstoday.in/latest/trends/story/everything-belongs-to-everyone-finnish-founder-says-bengalurus-chaos-offers-what-finland-lacks-539324-2026-06-26",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +86,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/suzlon-bags-400-mw-wind-energy-order-from-tata-power-renewable-energy-for-andhra-pradesh-project",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +96,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/tamil-nadu-minister-ctr-nirmal-kumar-releases-white-paper-on-electricity-board/articleshow/131987852.cms",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +106,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/story/jaishankar-calls-for-closer-india-south-korea-ties-in-defence-ship-building-health-ptag-2933835-2026-06-25",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +116,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/citywide-safety-crackdown-on-coaching-centres/articleshow/131974334.cms",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-rebound-chip-wreck-ahead-critical-micron-earnings",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/business/story/sebi-looks-to-widen-direct-trading-access-retail-investors-could-benefit-2932692-2026-06-23",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/as-brahmos-export-talks-gain-momentum-which-indian-defence-companies-stand-to-gain-bdl-bel-hal-premier-explosives-nibe-paras-defence-11674919",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/kirloskar-oil-engines-shares-extend-gains-to-second-day-heres-whats-driving-the-rally-11674403",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -146,17 +166,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/kirloskar-oil-engines-shares-up-36-in-2-days-should-you-buy-or-sell/articleshow/131926639.cms",
     "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Yotta ramps up AI push with additional $6 billion investment",
-    "desc": "Yotta Data Services is injecting a massive $6 billion into expanding its AI infrastructure, significantly boosting its Nvidia GPU deployment. The company is increasing its Nvidia B",
-    "src": "SECTIONS Yotta ramps up AI push",
-    "time": "Recent",
-    "link": "https://economictimes.indiatimes.com/news/india/yotta-ramps-up-ai-push-with-additional-6-billion-investment/articleshow/131909744.cms",
-    "type": "highways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +176,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/alstom-gets-107-mn-loco-maintenance-contract-renewal-from-railways-126062700002_1.html",
     "type": "railways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +186,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/business/india-business/why-india-making-its-own-bullet-trains-is-a-big-deal-explained/articleshow/132012753.cms",
     "type": "railways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
   },
   {
@@ -186,8 +196,18 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/economy/foreign-trade/india-to-resume-train-coach-exports-to-bangladesh-first-shipment-since-sheikh-hasinas-ouster-likely-in-july/articleshow/131949394.cms",
     "type": "railways",
-    "fetchedAt": "2026-06-29T12:15:50.263572+00:00",
+    "fetchedAt": "2026-06-29T16:44:21.210591+00:00",
     "ageDays": 0
+  },
+  {
+    "title": "NHAI Highway Awards Hit 7-Year Low as Land Acquisition Delays Persist; NHAI Shifts Focus to Debt Repayment: Nuvama - Autocar Professional",
+    "desc": "NHAI Highway Awards Hit 7-Year Low as Land Acquisition Delays Persist; NHAI Shifts Focus to Debt Repayment: Nuvama    Autocar Professional",
+    "src": "NHAI",
+    "time": "1d ago",
+    "link": "https://www.google.com/search?q=NHAI%20Highway%20Awards%20Hit%207Year%20Low%20as%20Land%20Acquisition%20Delays%20Persist%20NHAI%20Shifts%20Focus%20to",
+    "type": "highways",
+    "fetchedAt": "2026-06-28T13:44:56+00:00",
+    "ageDays": 1
   },
   {
     "title": "Asian Energy Wins Rs 187.6 Crore Gujarat Power EPC Contract - Machine Maker",
@@ -208,16 +228,6 @@
     "type": "railways",
     "fetchedAt": "2026-06-26T11:39:46+00:00",
     "ageDays": 3
-  },
-  {
-    "title": "Indian state-run mining giant NMDC Limited formally awarded a major in - Shanghai Metals Market",
-    "desc": "Indian state-run mining giant NMDC Limited formally awarded a major in    Shanghai Metals Market",
-    "src": "NMDC",
-    "time": "4d ago",
-    "link": "https://www.google.com/search?q=Indian%20staterun%20mining%20giant%20NMDC%20Limited%20formally%20awarded%20a%20major%20in%20%20Shanghai%20Metals%20Mar",
-    "type": "mining",
-    "fetchedAt": "2026-06-25T09:06:47+00:00",
-    "ageDays": 4
   },
   {
     "title": "Union Minister Sarbananda Sonowal lauds Mumbai Port Authority’s Legacy and Future Vision on its 154th Foundation Day - PIB",
@@ -260,31 +270,21 @@
     "ageDays": 7
   },
   {
-    "title": "BJP accuses State govt. of suppressing truth behind alleged Singareni coal scam - The Hindu",
-    "desc": "BJP accuses State govt. of suppressing truth behind alleged Singareni coal scam    The Hindu",
-    "src": "SCCL",
-    "time": "8d ago",
-    "link": "https://www.google.com/search?q=BJP%20accuses%20State%20govt%20of%20suppressing%20truth%20behind%20alleged%20Singareni%20coal%20scam%20%20The%20Hindu",
-    "type": "mining",
-    "fetchedAt": "2026-06-20T14:02:31+00:00",
-    "ageDays": 8
-  },
-  {
-    "title": "Coal Transportation in Singareni is Highly Secure: SCCL management - Hindudayashankar",
-    "desc": "Coal Transportation in Singareni is Highly Secure: SCCL management    Hindudayashankar",
-    "src": "SCCL",
-    "time": "8d ago",
-    "link": "https://www.google.com/search?q=Coal%20Transportation%20in%20Singareni%20is%20Highly%20Secure%20SCCL%20management%20%20Hindudayashankar",
-    "type": "mining",
-    "fetchedAt": "2026-06-21T07:00:00+00:00",
-    "ageDays": 8
-  },
-  {
     "title": "RVNL bags ₹2,977 crore NMDC contract for 10 MTPA ore-handling facility at Vizag - ET Infra",
     "desc": "RVNL bags ₹2,977 crore NMDC contract for 10 MTPA ore-handling facility at Vizag    ET Infra",
     "src": "NMDC",
     "time": "9d ago",
     "link": "https://www.google.com/search?q=RVNL%20bags%202977%20crore%20NMDC%20contract%20for%2010%20MTPA%20orehandling%20facility%20at%20Vizag%20%20ET%20Infra",
+    "type": "mining",
+    "fetchedAt": "2026-06-20T07:00:00+00:00",
+    "ageDays": 9
+  },
+  {
+    "title": "BJP accuses State govt. of suppressing truth behind alleged Singareni coal scam - The Hindu",
+    "desc": "BJP accuses State govt. of suppressing truth behind alleged Singareni coal scam    The Hindu",
+    "src": "SCCL",
+    "time": "9d ago",
+    "link": "https://www.google.com/search?q=BJP%20accuses%20State%20govt%20of%20suppressing%20truth%20behind%20alleged%20Singareni%20coal%20scam%20%20The%20Hindu",
     "type": "mining",
     "fetchedAt": "2026-06-20T07:00:00+00:00",
     "ageDays": 9
@@ -313,11 +313,11 @@
     "title": "Globe Civil Projects Limited Announces Promoter Share Purchase",
     "desc": "New Delhi [India], June 17: Globe Civil Projects Limited (BSE: 544424 | NSE: GLOBECIVIL), an integrated EPC company engaged in executing institutional, infrastructure, and commerci",
     "src": "The Tribune",
-    "time": "11d ago",
+    "time": "12d ago",
     "link": "https://www.tribuneindia.com/news/business/globe-civil-projects-limited-announces-promoter-share-purchase/",
     "type": "highways",
     "fetchedAt": "2026-06-17T12:48:12+00:00",
-    "ageDays": 11
+    "ageDays": 12
   },
   {
     "title": "Karnataka Infrastructure Firm S.S. Alur Construction Expands into Airport Development, Eyes Larger EPC Projects",
@@ -350,26 +350,6 @@
     "ageDays": 13
   },
   {
-    "title": "Highbar Technocrat Drives Digital Transformation in India's EPC and Real Estate Sectors",
-    "desc": "Highbar Technocrat Limited, a leading provider of technology solutions in India's engineering and infrastructure industries, marks a new momentum phase. With strategic SAP Connect ",
-    "src": "Devdiscourse",
-    "time": "13d ago",
-    "link": "https://www.devdiscourse.com/article/business/3935312-highbar-technocrat-drives-digital-transformation-in-indias-epc-and-real-estate-sectors",
-    "type": "highways",
-    "fetchedAt": "2026-06-15T14:49:56+00:00",
-    "ageDays": 13
-  },
-  {
-    "title": "Highbar Technocrat Accelerates Growth with New Project Wins, Successful Go",
-    "desc": "Mumbai (Maharashtra) [India], June 15: Highbar Technocrat Limited, one of the leading technology solutions providers for the Engineering, Construction & Operations (EC&O), EPC, Inf",
-    "src": "The Tribune",
-    "time": "13d ago",
-    "link": "https://www.tribuneindia.com/news/business/highbar-technocrat-accelerates-growth-with-new-project-wins-successful-go-lives-and-flagship-sap-connect-day-events-across-india/",
-    "type": "highways",
-    "fetchedAt": "2026-06-15T14:48:11+00:00",
-    "ageDays": 13
-  },
-  {
     "title": "India's iron ore EC capacity rises over 10% in FY'26, utilisation drops on surging mining costs - BigMint",
     "desc": "India's iron ore EC capacity rises over 10% in FY'26, utilisation drops on surging mining costs    BigMint",
     "src": "Iron Ore",
@@ -377,6 +357,26 @@
     "link": "https://www.google.com/search?q=Indias%20iron%20ore%20EC%20capacity%20rises%20over%2010%20in%20FY26%20utilisation%20drops%20on%20surging%20mining%20cost",
     "type": "mining",
     "fetchedAt": "2026-06-15T10:12:47+00:00",
+    "ageDays": 14
+  },
+  {
+    "title": "Highbar Technocrat Drives Digital Transformation in India's EPC and Real Estate Sectors",
+    "desc": "Highbar Technocrat Limited, a leading provider of technology solutions in India's engineering and infrastructure industries, marks a new momentum phase. With strategic SAP Connect ",
+    "src": "Devdiscourse",
+    "time": "14d ago",
+    "link": "https://www.devdiscourse.com/article/business/3935312-highbar-technocrat-drives-digital-transformation-in-indias-epc-and-real-estate-sectors",
+    "type": "highways",
+    "fetchedAt": "2026-06-15T14:49:56+00:00",
+    "ageDays": 14
+  },
+  {
+    "title": "Highbar Technocrat Accelerates Growth with New Project Wins, Successful Go",
+    "desc": "Mumbai (Maharashtra) [India], June 15: Highbar Technocrat Limited, one of the leading technology solutions providers for the Engineering, Construction & Operations (EC&O), EPC, Inf",
+    "src": "The Tribune",
+    "time": "14d ago",
+    "link": "https://www.tribuneindia.com/news/business/highbar-technocrat-accelerates-growth-with-new-project-wins-successful-go-lives-and-flagship-sap-connect-day-events-across-india/",
+    "type": "highways",
+    "fetchedAt": "2026-06-15T14:48:11+00:00",
     "ageDays": 14
   },
   {
@@ -388,16 +388,6 @@
     "type": "highways",
     "fetchedAt": "2026-06-15T08:33:37+00:00",
     "ageDays": 14
-  },
-  {
-    "title": "India’s National Highway Network Expands to 1.46 Lakh Km as Expressway Connectivity Accelerates - The Policy Edge",
-    "desc": "India’s National Highway Network Expands to 1.46 Lakh Km as Expressway Connectivity Accelerates    The Policy Edge",
-    "src": "MoRTH",
-    "time": "15d ago",
-    "link": "https://www.google.com/search?q=Indias%20National%20Highway%20Network%20Expands%20to%20146%20Lakh%20Km%20as%20Expressway%20Connectivity%20Accelera",
-    "type": "highways",
-    "fetchedAt": "2026-06-14T12:04:43+00:00",
-    "ageDays": 15
   },
   {
     "title": "Colombo Port City and the Diminishing Scope of Sri Lankan Policy Autonomy - South Asian Voices",
@@ -420,8 +410,8 @@
     "ageDays": 18
   },
   {
-    "title": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years - DD India",
-    "desc": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years    DD India",
+    "title": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years - DD News",
+    "desc": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years    DD News",
     "src": "Jal Jeevan",
     "time": "19d ago",
     "link": "https://www.google.com/search?q=Infrastructure%20push%20How%20Indias%20transport%20housing%20energy%20and%20digital%20networks%20expanded%20over",
@@ -436,16 +426,6 @@
     "time": "20d ago",
     "link": "https://www.google.com/search?q=Santiago%20Metro%20Line%207%20Reaches%20Key%20Tunnelling%20Milestone%20%20RailwayNews",
     "type": "metro",
-    "fetchedAt": "2026-06-09T07:00:00+00:00",
-    "ageDays": 20
-  },
-  {
-    "title": "Afcons awarded landmark breakwater project for Vadhvan Port - Indian Infrastructure Magazine",
-    "desc": "Afcons awarded landmark breakwater project for Vadhvan Port    Indian Infrastructure Magazine",
-    "src": "Infra 2026",
-    "time": "20d ago",
-    "link": "https://www.google.com/search?q=Afcons%20awarded%20landmark%20breakwater%20project%20for%20Vadhvan%20Port%20%20Indian%20Infrastructure%20Magazin",
-    "type": "highways",
     "fetchedAt": "2026-06-09T07:00:00+00:00",
     "ageDays": 20
   },
@@ -490,13 +470,33 @@
     "ageDays": 23
   },
   {
-    "title": "ICF to supply trains for future ‘world-class suburban rail network’ in Bengaluru - Railway Gazette International",
-    "desc": "ICF to supply trains for future ‘world-class suburban rail network’ in Bengaluru    Railway Gazette International",
-    "src": "IR",
-    "time": "24d ago",
-    "link": "https://www.google.com/search?q=ICF%20to%20supply%20trains%20for%20future%20worldclass%20suburban%20rail%20network%20in%20Bengaluru%20%20Railway%20Gaz",
-    "type": "railways",
-    "fetchedAt": "2026-06-05T07:00:00+00:00",
-    "ageDays": 24
+    "title": "Innovision bags toll collection contract from NHAI - Business Standard",
+    "desc": "Innovision bags toll collection contract from NHAI    Business Standard",
+    "src": "NHAI",
+    "time": "25d ago",
+    "link": "https://www.google.com/search?q=Innovision%20bags%20toll%20collection%20contract%20from%20NHAI%20%20Business%20Standard",
+    "type": "highways",
+    "fetchedAt": "2026-06-04T07:00:00+00:00",
+    "ageDays": 25
+  },
+  {
+    "title": "Indian companies Secure Major Energy and Infrastructure Contracts in Sri Lanka - News On AIR",
+    "desc": "Indian companies Secure Major Energy and Infrastructure Contracts in Sri Lanka    News On AIR",
+    "src": "Infra 2026",
+    "time": "26d ago",
+    "link": "https://www.google.com/search?q=Indian%20companies%20Secure%20Major%20Energy%20and%20Infrastructure%20Contracts%20in%20Sri%20Lanka%20%20News%20On%20AI",
+    "type": "highways",
+    "fetchedAt": "2026-06-03T07:00:00+00:00",
+    "ageDays": 26
+  },
+  {
+    "title": "Srinibas Pradhan Constructions Limited Reports Strong H2 & FY26 Performance; H2 EBITDA and PAT Margins Expand by 481 Bps and 346 Bps",
+    "desc": "Bhubaneswar (Odisha) [India], June 3: Srinibas Pradhan Constructions Limited (SPCON) (NSE: SPCON), one of the leading infrastructure-focused EPC company engaged in roads & highways",
+    "src": "The Tribune",
+    "time": "26d ago",
+    "link": "https://www.tribuneindia.com/news/business/srinibas-pradhan-constructions-limited-reports-strong-h2-fy26-performance-h2-ebitda-and-pat-margins-expand-by-481-bps-and-346-bps/",
+    "type": "highways",
+    "fetchedAt": "2026-06-03T09:15:29+00:00",
+    "ageDays": 26
   }
 ]
