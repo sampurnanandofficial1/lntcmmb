@@ -1,39 +1,29 @@
 [
   {
-    "title": "NHAI wins Rs 1,202-crore arbitration award in Karnataka highway dispute - The Indian Express",
-    "desc": "NHAI wins Rs 1,202-crore arbitration award in Karnataka highway dispute    The Indian Express",
-    "src": "NHAI",
-    "time": "19h ago",
-    "link": "https://www.google.com/search?q=NHAI%20wins%20Rs%201202crore%20arbitration%20award%20in%20Karnataka%20highway%20dispute%20%20The%20Indian%20Express",
-    "type": "highways",
-    "fetchedAt": "2026-06-30T10:33:20+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "L&T Secures Major Infrastructure Contract in Maharashtra - Machine Maker",
-    "desc": "L&T Secures Major Infrastructure Contract in Maharashtra    Machine Maker",
-    "src": "Infra 2026",
-    "time": "7h ago",
-    "link": "https://www.google.com/search?q=LT%20Secures%20Major%20Infrastructure%20Contract%20in%20Maharashtra%20%20Machine%20Maker",
-    "type": "highways",
-    "fetchedAt": "2026-06-30T22:17:38+00:00",
-    "ageDays": 0
-  },
-  {
     "title": "NHAI identifies 35 illegal access cuts on Dwarka Expressway for closure",
     "desc": "GMDA and the district administration have been asked to assist, while regular patrolling will prevent fresh unauthorised openings.",
     "src": "hindustantimes",
-    "time": "12h ago",
+    "time": "17h ago",
     "link": "https://www.hindustantimes.com/cities/gurugram-news/nhai-identifies-35-illegal-access-cuts-on-dwarka-expressway-for-closure-101782840451777.html",
     "type": "highways",
     "fetchedAt": "2026-06-30T17:27:31+00:00",
     "ageDays": 0
   },
   {
+    "title": "4 Stocks in Defence, Power Infra, and Battery Chemicals Creating Billion-Dollar Opportunities",
+    "desc": "Synopsis: Four Small-cap Indian companies operating in defence electronics, power infrastructure, battery chemicals, and electronics manufacturing are quietly scaling up capabiliti",
+    "src": "incbusiness_in",
+    "time": "12h ago",
+    "link": "https://incbusiness.in/stocks/4-stocks-in-defence-power-infra-and-battery-chemicals-creating-billion-dollar-opportunities/",
+    "type": "highways",
+    "fetchedAt": "2026-06-30T22:00:36+00:00",
+    "ageDays": 0
+  },
+  {
     "title": "Transformers & Rectifiers Stock Jumps 7% After Rs 1,000 Crore Power Grid Order",
     "desc": "Transformer Sector Surge: Transformers & Rectifiers Secures Record ₹1,000+ Crore Order from Power Grid Shares of Transformers & Rectifiers (India) Limited (TARIL) experienced an im",
     "src": "sharemarket",
-    "time": "15h ago",
+    "time": "20h ago",
     "link": "https://www.sharemarket.org.in/transformers-rectifiers-stock-jumps-7-after-rs-1000-crore-power-grid-order/",
     "type": "highways",
     "fetchedAt": "2026-06-30T14:39:34+00:00",
@@ -43,7 +33,7 @@
     "title": "Ahmedabad-based Transformers and Rectifiers bags over ₹1,000 cr order from Power Grid Corporation",
     "desc": "The Ahmedabad-headquartered company said the contract will be executed over the next 30 months, in line with the terms and conditions stipulated in the letter of award.",
     "src": "thehindubusinessline",
-    "time": "17h ago",
+    "time": "22h ago",
     "link": "https://www.thehindubusinessline.com/companies/ahmedabad-based-transformers-and-rectifiers-bags-over-1000-cr-order-from-power-grid-corporation/article71165653.ece",
     "type": "highways",
     "fetchedAt": "2026-06-30T12:20:31+00:00",
@@ -56,7 +46,17 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/nhai-wins-rs-1202-crore-arbitration-award-in-karnataka-highway-dispute-secures-another-relief-in-assam-project",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Delhi Gymkhana Club served show cause notice in eviction proceedings; asked to explain why it should not be evicted by July 7",
+    "desc": "The Union Government has escalated eviction proceedings against the Delhi Gymkhana Club, issuing a show cause notice under the Public Premises Act. The government alleges the club ",
+    "src": "",
+    "time": "Recent",
+    "link": "https://economictimes.indiatimes.com/news/india/delhi-gymkhana-club-faces-eviction-government-issues-show-cause-notice-over-unauthorized-occupancy/articleshow/132111595.cms",
+    "type": "highways",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +66,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/indias-kalpataru-projects-wins-rs-2957-crore-orders-marks-big-middle-east-debut-with-maiden-water-project",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +76,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/chris-woods-big-warning-the-specific-risk-that-will-finally-trigger-the-end-of-ai-trade/articleshow/132031234.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +86,7 @@
     "time": "Recent",
     "link": "https://www.businesstoday.in/latest/trends/story/everything-belongs-to-everyone-finnish-founder-says-bengalurus-chaos-offers-what-finland-lacks-539324-2026-06-26",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +96,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/suzlon-bags-400-mw-wind-energy-order-from-tata-power-renewable-energy-for-andhra-pradesh-project",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +106,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/tamil-nadu-minister-ctr-nirmal-kumar-releases-white-paper-on-electricity-board/articleshow/131987852.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +116,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/story/jaishankar-calls-for-closer-india-south-korea-ties-in-defence-ship-building-health-ptag-2933835-2026-06-25",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +126,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/citywide-safety-crackdown-on-coaching-centres/articleshow/131974334.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-rebound-chip-wreck-ahead-critical-micron-earnings",
     "type": "highways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/alstom-gets-107-mn-loco-maintenance-contract-renewal-from-railways-126062700002_1.html",
     "type": "railways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
   },
   {
@@ -156,28 +156,8 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/business/india-business/why-india-making-its-own-bullet-trains-is-a-big-deal-explained/articleshow/132012753.cms",
     "type": "railways",
-    "fetchedAt": "2026-07-01T06:07:30.437784+00:00",
+    "fetchedAt": "2026-07-01T10:55:01.701770+00:00",
     "ageDays": 0
-  },
-  {
-    "title": "Texmaco Rail EPC orders total Rs. 10.20 crore - Railway Supply",
-    "desc": "Texmaco Rail EPC orders total Rs. 10.20 crore    Railway Supply",
-    "src": "IR",
-    "time": "1d ago",
-    "link": "https://www.google.com/search?q=Texmaco%20Rail%20EPC%20orders%20total%20Rs%201020%20crore%20%20Railway%20Supply",
-    "type": "railways",
-    "fetchedAt": "2026-06-29T08:14:16+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "NHAI cuts debt by 43% but highway project awards hit seven-year low",
-    "desc": "NHAI’s deleveraging push and tighter project norms take highway awards to seven-year low",
-    "src": "thehindubusinessline",
-    "time": "1d ago",
-    "link": "https://www.thehindubusinessline.com/economy/logistics/nhai-cuts-debt-by-43-but-highway-project-awards-hit-seven-year-low/article71158967.ece",
-    "type": "highways",
-    "fetchedAt": "2026-06-29T07:08:01+00:00",
-    "ageDays": 1
   },
   {
     "title": "Waaree Energies’ US arm bags 236.22 MW solar module supply order",
@@ -250,106 +230,6 @@
     "ageDays": 1
   },
   {
-    "title": "Sterling and Wilson Renewable Energy secures $560 mn solar project in Egypt",
-    "desc": "The company, in a joint venture with Hassan Allam Construction, will develop a 1,000 MW solar project with a 600 MWh battery energy storage system in Egypt",
-    "src": "business-standard",
-    "time": "1d ago",
-    "link": "https://www.business-standard.com/companies/news/sterling-and-wilson-renewable-energy-secures-560-mn-solar-project-in-egypt-126062901068_1.html",
-    "type": "highways",
-    "fetchedAt": "2026-06-29T14:50:53+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "NHAI Highway Awards Hit 7-Year Low as Land Acquisition Delays Persist; NHAI Shifts Focus to Debt Repayment: Nuvama - Autocar Professional",
-    "desc": "NHAI Highway Awards Hit 7-Year Low as Land Acquisition Delays Persist; NHAI Shifts Focus to Debt Repayment: Nuvama    Autocar Professional",
-    "src": "NHAI",
-    "time": "2d ago",
-    "link": "https://www.google.com/search?q=NHAI%20Highway%20Awards%20Hit%207Year%20Low%20as%20Land%20Acquisition%20Delays%20Persist%20NHAI%20Shifts%20Focus%20to",
-    "type": "highways",
-    "fetchedAt": "2026-06-28T13:44:56+00:00",
-    "ageDays": 2
-  },
-  {
-    "title": "RVNL Secures Rs 9,679.3 Million EPC Contract From East Coast Railway - Construction World",
-    "desc": "RVNL Secures Rs 9,679.3 Million EPC Contract From East Coast Railway    Construction World",
-    "src": "RVNL",
-    "time": "4d ago",
-    "link": "https://www.google.com/search?q=RVNL%20Secures%20Rs%2096793%20Million%20EPC%20Contract%20From%20East%20Coast%20Railway%20%20Construction%20World",
-    "type": "railways",
-    "fetchedAt": "2026-06-26T11:39:46+00:00",
-    "ageDays": 4
-  },
-  {
-    "title": "Indian state-run mining giant NMDC Limited formally awarded a major in - SMM Metal",
-    "desc": "Indian state-run mining giant NMDC Limited formally awarded a major in    SMM Metal",
-    "src": "NMDC",
-    "time": "5d ago",
-    "link": "https://www.google.com/search?q=Indian%20staterun%20mining%20giant%20NMDC%20Limited%20formally%20awarded%20a%20major%20in%20%20SMM%20Metal",
-    "type": "mining",
-    "fetchedAt": "2026-06-25T09:36:22+00:00",
-    "ageDays": 5
-  },
-  {
-    "title": "Union Minister Sarbananda Sonowal lauds Mumbai Port Authority’s Legacy and Future Vision on its 154th Foundation Day - PIB",
-    "desc": "Union Minister Sarbananda Sonowal lauds Mumbai Port Authority’s Legacy and Future Vision on its 154th Foundation Day    PIB",
-    "src": "Ports",
-    "time": "5d ago",
-    "link": "https://www.google.com/search?q=Union%20Minister%20Sarbananda%20Sonowal%20lauds%20Mumbai%20Port%20Authoritys%20Legacy%20and%20Future%20Vision%20on",
-    "type": "ports",
-    "fetchedAt": "2026-06-25T11:43:00+00:00",
-    "ageDays": 5
-  },
-  {
-    "title": "Coal Transportation in Singareni is Highly Secure: SCCL management - Hindudayashankar",
-    "desc": "Coal Transportation in Singareni is Highly Secure: SCCL management    Hindudayashankar",
-    "src": "SCCL",
-    "time": "9d ago",
-    "link": "https://www.google.com/search?q=Coal%20Transportation%20in%20Singareni%20is%20Highly%20Secure%20SCCL%20management%20%20Hindudayashankar",
-    "type": "mining",
-    "fetchedAt": "2026-06-21T07:00:00+00:00",
-    "ageDays": 9
-  },
-  {
-    "title": "RVNL bags ₹2,977 crore NMDC contract for 10 MTPA ore-handling facility at Vizag - ET Infra",
-    "desc": "RVNL bags ₹2,977 crore NMDC contract for 10 MTPA ore-handling facility at Vizag    ET Infra",
-    "src": "NMDC",
-    "time": "10d ago",
-    "link": "https://www.google.com/search?q=RVNL%20bags%202977%20crore%20NMDC%20contract%20for%2010%20MTPA%20orehandling%20facility%20at%20Vizag%20%20ET%20Infra",
-    "type": "mining",
-    "fetchedAt": "2026-06-20T07:00:00+00:00",
-    "ageDays": 10
-  },
-  {
-    "title": "BJP accuses State govt. of suppressing truth behind alleged Singareni coal scam - The Hindu",
-    "desc": "BJP accuses State govt. of suppressing truth behind alleged Singareni coal scam    The Hindu",
-    "src": "SCCL",
-    "time": "10d ago",
-    "link": "https://www.google.com/search?q=BJP%20accuses%20State%20govt%20of%20suppressing%20truth%20behind%20alleged%20Singareni%20coal%20scam%20%20The%20Hindu",
-    "type": "mining",
-    "fetchedAt": "2026-06-20T07:00:00+00:00",
-    "ageDays": 10
-  },
-  {
-    "title": "PNC Infratech incorporates SPV for NHAI highway project in UP - scanx.trade",
-    "desc": "PNC Infratech incorporates SPV for NHAI highway project in UP    scanx.trade",
-    "src": "NHAI EPC",
-    "time": "12d ago",
-    "link": "https://www.google.com/search?q=PNC%20Infratech%20incorporates%20SPV%20for%20NHAI%20highway%20project%20in%20UP%20%20scanxtrade",
-    "type": "highways",
-    "fetchedAt": "2026-06-18T07:00:00+00:00",
-    "ageDays": 12
-  },
-  {
-    "title": "DEME to execute capital deepening works for Ramayapatnam Port in India - DredgeWire",
-    "desc": "DEME to execute capital deepening works for Ramayapatnam Port in India    DredgeWire",
-    "src": "Ports",
-    "time": "13d ago",
-    "link": "https://www.google.com/search?q=DEME%20to%20execute%20capital%20deepening%20works%20for%20Ramayapatnam%20Port%20in%20India%20%20DredgeWire",
-    "type": "ports",
-    "fetchedAt": "2026-06-17T22:30:19+00:00",
-    "ageDays": 13
-  },
-  {
     "title": "Globe Civil Projects Limited Announces Promoter Share Purchase",
     "desc": "New Delhi [India], June 17: Globe Civil Projects Limited (BSE: 544424 | NSE: GLOBECIVIL), an integrated EPC company engaged in executing institutional, infrastructure, and commerci",
     "src": "The Tribune",
@@ -370,43 +250,13 @@
     "ageDays": 13
   },
   {
-    "title": "Minister Kishan Reddy Flags Rs 1600-Crore Coal Scam, Writes To Revanth Reddy - NDTV",
-    "desc": "Minister Kishan Reddy Flags Rs 1600-Crore Coal Scam, Writes To Revanth Reddy    NDTV",
-    "src": "SCCL",
-    "time": "14d ago",
-    "link": "https://www.google.com/search?q=Minister%20Kishan%20Reddy%20Flags%20Rs%201600Crore%20Coal%20Scam%20Writes%20To%20Revanth%20Reddy%20%20NDTV",
-    "type": "mining",
-    "fetchedAt": "2026-06-16T07:00:00+00:00",
-    "ageDays": 14
-  },
-  {
-    "title": "KNR Joint Venture Wins Rs 33,611.1 Million Coal Contract in Chhattisgarh - Construction World",
-    "desc": "KNR Joint Venture Wins Rs 33,611.1 Million Coal Contract in Chhattisgarh    Construction World",
-    "src": "Mining",
-    "time": "14d ago",
-    "link": "https://www.google.com/search?q=KNR%20Joint%20Venture%20Wins%20Rs%20336111%20Million%20Coal%20Contract%20in%20Chhattisgarh%20%20Construction%20World",
-    "type": "mining",
-    "fetchedAt": "2026-06-16T07:00:00+00:00",
-    "ageDays": 14
-  },
-  {
     "title": "Ducon Infratechnologies Approves Rights Issue of up to ₹25 Crore",
     "desc": "Mumbai (Maharashtra) [India], June 16: Ducon Infratechnologies Limited (NSE- DUCON | BSE- 534674 | INE741L01018), a global diversified technology EPC company delivering engineering",
     "src": "The Tribune",
-    "time": "14d ago",
+    "time": "15d ago",
     "link": "https://www.tribuneindia.com/news/business/ducon-infratechnologies-approves-rights-issue-of-up-to-%e2%82%b925-crore/",
     "type": "highways",
     "fetchedAt": "2026-06-16T06:38:10+00:00",
-    "ageDays": 14
-  },
-  {
-    "title": "India's iron ore EC capacity rises over 10% in FY'26, utilisation drops on surging mining costs - BigMint",
-    "desc": "India's iron ore EC capacity rises over 10% in FY'26, utilisation drops on surging mining costs    BigMint",
-    "src": "Iron Ore",
-    "time": "15d ago",
-    "link": "https://www.google.com/search?q=Indias%20iron%20ore%20EC%20capacity%20rises%20over%2010%20in%20FY26%20utilisation%20drops%20on%20surging%20mining%20cost",
-    "type": "mining",
-    "fetchedAt": "2026-06-15T10:12:47+00:00",
     "ageDays": 15
   },
   {
@@ -433,70 +283,50 @@
     "title": "SEPC Bags Massive Rs 673 Crore SAIL Expansion Project; Reinforces Position in Industrial Infrastructure",
     "desc": "Chennai (Tamil Nadu) [India], June 15: SEPC Limited (NSE: SEPC | BSE: 532945), a leading EPC company with proven expertise in industrial infrastructure, process plants, water and w",
     "src": "The Tribune",
-    "time": "15d ago",
+    "time": "16d ago",
     "link": "https://www.tribuneindia.com/news/business/sepc-bags-massive-rs-673-crore-sail-expansion-project-reinforces-position-in-industrial-infrastructure/",
     "type": "highways",
     "fetchedAt": "2026-06-15T08:33:37+00:00",
-    "ageDays": 15
-  },
-  {
-    "title": "India’s National Highway Network Expands to 1.46 Lakh Km as Expressway Connectivity Accelerates - The Policy Edge",
-    "desc": "India’s National Highway Network Expands to 1.46 Lakh Km as Expressway Connectivity Accelerates    The Policy Edge",
-    "src": "MoRTH",
-    "time": "16d ago",
-    "link": "https://www.google.com/search?q=Indias%20National%20Highway%20Network%20Expands%20to%20146%20Lakh%20Km%20as%20Expressway%20Connectivity%20Accelera",
-    "type": "highways",
-    "fetchedAt": "2026-06-14T12:04:43+00:00",
     "ageDays": 16
   },
   {
-    "title": "Eternia Awards Power Infrastructure Contract for 30 MW Solar Project in Poland - SolarQuarter",
-    "desc": "Eternia Awards Power Infrastructure Contract for 30 MW Solar Project in Poland    SolarQuarter",
-    "src": "Infra 2026",
-    "time": "17d ago",
-    "link": "https://www.google.com/search?q=Eternia%20Awards%20Power%20Infrastructure%20Contract%20for%2030%20MW%20Solar%20Project%20in%20Poland%20%20SolarQuart",
+    "title": "Srinibas Pradhan Constructions Limited Reports Strong H2 & FY26 Performance; H2 EBITDA and PAT Margins Expand by 481 Bps and 346 Bps",
+    "desc": "Bhubaneswar (Odisha) [India], June 3: Srinibas Pradhan Constructions Limited (SPCON) (NSE: SPCON), one of the leading infrastructure-focused EPC company engaged in roads & highways",
+    "src": "The Tribune",
+    "time": "28d ago",
+    "link": "https://www.tribuneindia.com/news/business/srinibas-pradhan-constructions-limited-reports-strong-h2-fy26-performance-h2-ebitda-and-pat-margins-expand-by-481-bps-and-346-bps/",
     "type": "highways",
-    "fetchedAt": "2026-06-13T07:00:00+00:00",
-    "ageDays": 17
+    "fetchedAt": "2026-06-03T09:15:29+00:00",
+    "ageDays": 28
   },
   {
-    "title": "Colombo Port City and the Diminishing Scope of Sri Lankan Policy Autonomy - South Asian Voices",
-    "desc": "Colombo Port City and the Diminishing Scope of Sri Lankan Policy Autonomy    South Asian Voices",
-    "src": "Ports",
-    "time": "18d ago",
-    "link": "https://www.google.com/search?q=Colombo%20Port%20City%20and%20the%20Diminishing%20Scope%20of%20Sri%20Lankan%20Policy%20Autonomy%20%20South%20Asian%20Voi",
-    "type": "ports",
-    "fetchedAt": "2026-06-12T07:00:00+00:00",
-    "ageDays": 18
-  },
-  {
-    "title": "PNC Infratech subsidiary receives PCOD for Kanpur Lucknow Expressway - scanx.trade",
-    "desc": "PNC Infratech subsidiary receives PCOD for Kanpur Lucknow Expressway    scanx.trade",
-    "src": "NHAI EPC",
-    "time": "19d ago",
-    "link": "https://www.google.com/search?q=PNC%20Infratech%20subsidiary%20receives%20PCOD%20for%20Kanpur%20Lucknow%20Expressway%20%20scanxtrade",
+    "title": "OVAL Projects Engineering Limited Achieves FY26 Revenue of INR 153.14 Crore with Net Profit growth of 59%",
+    "desc": "Mumbai (Maharashtra) [India], June 3: OVAL Projects Engineering Limited (BSE - SME: 544498), is a leading EPC and O&M infrastructure services provider primarily catering to the Oil",
+    "src": "The Tribune",
+    "time": "28d ago",
+    "link": "https://www.tribuneindia.com/news/business/oval-projects-engineering-limited-achieves-fy26-revenue-of-inr-153-14-crore-with-net-profit-growth-of-59/",
     "type": "highways",
-    "fetchedAt": "2026-06-11T07:00:00+00:00",
-    "ageDays": 19
+    "fetchedAt": "2026-06-03T06:50:26+00:00",
+    "ageDays": 28
   },
   {
-    "title": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years - DD News",
-    "desc": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years    DD News",
-    "src": "Jal Jeevan",
-    "time": "20d ago",
-    "link": "https://www.google.com/search?q=Infrastructure%20push%20How%20Indias%20transport%20housing%20energy%20and%20digital%20networks%20expanded%20over",
-    "type": "irrigation",
-    "fetchedAt": "2026-06-10T07:00:00+00:00",
-    "ageDays": 20
+    "title": "RMC Switchgears reports FY26 Consolidated Revenue of Rs 401.59 crore, up 26.40% YoY",
+    "desc": "Jaipur (Rajasthan) [India], June 1: RMC Switchgears Limited (NSE: RMC, BSE: 540358), a Jaipur-based power infrastructure, engineering, and EPC solutions company, has announced its ",
+    "src": "The Tribune",
+    "time": "29d ago",
+    "link": "https://www.tribuneindia.com/news/business/rmc-switchgears-reports-fy26-consolidated-revenue-of-rs-401-59-crore-up-26-40-yoy/",
+    "type": "highways",
+    "fetchedAt": "2026-06-01T12:55:35+00:00",
+    "ageDays": 29
   },
   {
-    "title": "Afcons Infrastructure Wins ₹5,301 Crore Vadhvan Port Contract for Breakwater Construction Works - sahi.com",
-    "desc": "Afcons Infrastructure Wins ₹5,301 Crore Vadhvan Port Contract for Breakwater Construction Works    sahi.com",
-    "src": "Infra Order",
-    "time": "20d ago",
-    "link": "https://www.google.com/search?q=Afcons%20Infrastructure%20Wins%205301%20Crore%20Vadhvan%20Port%20Contract%20for%20Breakwater%20Construction%20Wo",
-    "type": "corporate",
-    "fetchedAt": "2026-06-10T07:00:00+00:00",
-    "ageDays": 20
+    "title": "Univastu India Limited Delivers 42.16% Revenue Growth and 65.55% Rise in Net Profit in FY26",
+    "desc": "Integrated EPC and infrastructure company caps a landmark year with broad-based execution across civil, structural, and specialised construction verticals, including metro rail ele",
+    "src": "The Tribune",
+    "time": "30d ago",
+    "link": "https://www.tribuneindia.com/news/business/univastu-india-limited-delivers-42-16-revenue-growth-and-65-55-rise-in-net-profit-in-fy26-2-2/",
+    "type": "highways",
+    "fetchedAt": "2026-06-01T06:47:43+00:00",
+    "ageDays": 30
   }
 ]
