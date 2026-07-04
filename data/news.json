@@ -3,7 +3,7 @@
     "title": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH - News On AIR",
     "desc": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH    News On AIR",
     "src": "MoRTH",
-    "time": "2h ago",
+    "time": "15h ago",
     "link": "https://www.google.com/search?q=BarabankiBahraich%20Highway%20to%20play%20transformative%20role%20in%20strengthening%20trade%20ties%20between",
     "type": "highways",
     "fetchedAt": "2026-07-03T13:26:56+00:00",
@@ -13,30 +13,20 @@
     "title": "Three workers injured as sidewall collapses in SCCL’s SRP-3 coal mine in Mancherial - The Hindu",
     "desc": "Three workers injured as sidewall collapses in SCCL’s SRP-3 coal mine in Mancherial    The Hindu",
     "src": "SCCL",
-    "time": "9h ago",
+    "time": "23h ago",
     "link": "https://www.google.com/search?q=Three%20workers%20injured%20as%20sidewall%20collapses%20in%20SCCLs%20SRP3%20coal%20mine%20in%20Mancherial%20%20The%20Hin",
     "type": "mining",
     "fetchedAt": "2026-07-03T06:23:41+00:00",
     "ageDays": 0
   },
   {
-    "title": "India’s Captive and Commercial Coal Production Rises 14.9% to 17.88 MT in June - Sarkaritel.com",
-    "desc": "India’s Captive and Commercial Coal Production Rises 14.9% to 17.88 MT in June    Sarkaritel.com",
-    "src": "Coal Block",
-    "time": "23h ago",
-    "link": "https://www.google.com/search?q=Indias%20Captive%20and%20Commercial%20Coal%20Production%20Rises%20149%20to%201788%20MT%20in%20June%20%20Sarkaritelcom",
-    "type": "mining",
-    "fetchedAt": "2026-07-02T16:30:44+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Deepak Builders wins Rs 548.70 crore EPC order from HSIIDC - scanx.trade",
-    "desc": "Deepak Builders wins Rs 548.70 crore EPC order from HSIIDC    scanx.trade",
-    "src": "Infra Order",
-    "time": "9h ago",
-    "link": "https://www.google.com/search?q=Deepak%20Builders%20wins%20Rs%2054870%20crore%20EPC%20order%20from%20HSIIDC%20%20scanxtrade",
-    "type": "corporate",
-    "fetchedAt": "2026-07-03T05:52:27+00:00",
+    "title": "Relief for Namma Metro commuters as BMRCL plans to induct three Green Line trains by August",
+    "desc": "Daily commuters on Bengaluru’s Namma Metro can expect some respite from overcrowded trains, with the Bangalore Metro Rail Corporation Limited (BMRCL) preparing to introduce three s",
+    "src": "thehindu",
+    "time": "14h ago",
+    "link": "https://www.thehindu.com/news/national/karnataka/relief-for-namma-metro-commuters-as-bmrcl-plans-to-induct-three-green-line-trains-by-august/article71179066.ece",
+    "type": "railways",
+    "fetchedAt": "2026-07-03T14:37:12+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +36,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/nhai-wins-rs-1202-crore-arbitration-award-in-karnataka-highway-dispute-secures-another-relief-in-assam-project",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +46,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/business/coal-india-wins-rs-2-831-crore-contract-for-600-mw-solar-project-in-up-11714525",
     "type": "mining",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +56,27 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/renewables/coal-india-bags-rs-2831-crore-600-mw-solar-plant-deal-in-up/articleshow/132115154.cms",
     "type": "mining",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "First Made-In-India Export-Import Shipping Container Rolled Out For Maersk Under Maritime Self-Reliance Push",
+    "desc": "India unveiled its first domestically manufactured export-import shipping container yesterday (3 July), marking a significant step towards maritime se",
+    "src": "Swarajya Staff",
+    "time": "Recent",
+    "link": "https://swarajyamag.com/infrastructure/first-made-in-india-export-import-shipping-container-rolled-out-for-maersk-under-maritime-self-reliance-push",
+    "type": "highways",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Sonowal unveils first Made in India EXIM shipping container, Maersk orders 1,000 of them",
+    "desc": "NEW DELHI: In a move aimed at reducing India’s dependence on other countries for export-import (EXIM) containers due to any global disruption, shipping minister Sarbananda Sonowal ",
+    "src": "Dipak K Dash",
+    "time": "Recent",
+    "link": "https://timesofindia.indiatimes.com/india/sonowal-unveils-first-made-in-india-exim-shipping-container-maersk-orders-1000-of-them/articleshow/132167634.cms",
+    "type": "highways",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +86,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/india-permits-four-china-linked-power-equipment-firms-to-bid-for-key-projects-report",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +96,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/magazines/panache/as-ai-reshapes-ecommerce-hostinger-launches-a-new-platform-for-small-businesses/articleshow/132157409.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +106,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/indl-goods/svs/engineering/meil-to-pump-in-rs-40000-crore-capex-in-3-years-eyes-rs-2-lakh-crore-topline-in-5-years/articleshow/132153850.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +116,7 @@
     "time": "Recent",
     "link": "https://www.thestar.com.my/news/world/2026/07/03/cossacks-volunteers-help-keep-order-at-petrol-stations-in-russian-black-sea-resort",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/cities/delhi/video/delhi-ev-reality-check-heres-what-india-todays-ground-reality-check-found-out-2939180-2026-07-02",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-edge-sliding-chips-spark-another-korea-crash-payrolls-deck",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +146,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/blogs/voices/preparing-our-cities-for-growth-and-climate-change/",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +156,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/delhi-gymkhana-club-faces-eviction-government-issues-show-cause-notice-over-unauthorized-occupancy/articleshow/132111595.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.businesstoday.in/bt-tv/whats-hot/video/japan-pm-sanae-takaichi-in-delhi-why-this-summit-will-reshape-asias-defence-energy-future-540176-2026-07-01",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +176,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/indias-kalpataru-projects-wins-rs-2957-crore-orders-marks-big-middle-east-debut-with-maiden-water-project",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +186,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/kpil-bags-new-orders-worth-2-957-crore-enters-west-asia-water-market-126063000206_1.html",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
@@ -186,37 +196,37 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/chris-woods-big-warning-the-specific-risk-that-will-finally-trigger-the-end-of-ai-trade/articleshow/132031234.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
+    "fetchedAt": "2026-07-04T05:25:41.871279+00:00",
     "ageDays": 0
   },
   {
-    "title": "Alstom gets €107 mn loco maintenance contract renewal from Railways",
-    "desc": "The five-year contract covers maintenance of 250 WAG-12B locomotives at Alstom's Nagpur depot under a renewed agreement with its joint venture with Indian Railways",
-    "src": "Business Standard; Dhruvaksh Saha",
-    "time": "Recent",
-    "link": "https://www.business-standard.com/companies/news/alstom-gets-107-mn-loco-maintenance-contract-renewal-from-railways-126062700002_1.html",
-    "type": "railways",
-    "fetchedAt": "2026-07-03T15:32:19.053368+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Colonel Parikshit Mehra: Tunnel troubleshooter Telangana turned to in crisis - The Times of India",
-    "desc": "Colonel Parikshit Mehra: Tunnel troubleshooter Telangana turned to in crisis    The Times of India",
-    "src": "BRO",
-    "time": "1d ago",
-    "link": "https://www.google.com/search?q=Colonel%20Parikshit%20Mehra%20Tunnel%20troubleshooter%20Telangana%20turned%20to%20in%20crisis%20%20The%20Times%20of",
+    "title": "Photonics Watertech Limited has Filed DRHP with Emerge platform of NSE Emerge on June 30, 2026",
+    "desc": "Gandhinagar (Gujarat) [India], July 3: Photonics Watertech Limited is engaged in providing end-to-end services in (i) LED-based lighting solutions; (ii) Solar EPC; (iii) Water Infr",
+    "src": "NewsX",
+    "time": "18h ago",
+    "link": "https://www.newsx.com/business/photonics-watertech-limited-has-filed-drhp-with-emerge-platform-of-nse-emerge-on-june-30-2026-244177/",
     "type": "highways",
-    "fetchedAt": "2026-07-02T07:42:00+00:00",
-    "ageDays": 1
+    "fetchedAt": "2026-07-03T11:03:07+00:00",
+    "ageDays": 0
   },
   {
-    "title": "Coal India SWMA e-auction premium rises 42% in Jun 2026 - scanx.trade",
-    "desc": "Coal India SWMA e-auction premium rises 42% in Jun 2026    scanx.trade",
-    "src": "CIL Subs",
+    "title": "Deepak Builders wins Rs 548.70 crore EPC order from HSIIDC",
+    "desc": "Deepak Builders & Engineers India Limited has received a Letter of Acceptance from Haryana State Industrial & Infrastructure Development Corporation Limited (HSIIDC) for an EPC pro",
+    "src": "scanx.trade",
+    "time": "23h ago",
+    "link": "https://scanx.trade/stock-market-news/companies/deepak-builders-engineers-india-secures-order-valued-at-5-49-billion-rupees/44602159",
+    "type": "highways",
+    "fetchedAt": "2026-07-03T05:33:40+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "India’s Captive and Commercial Coal Production Rises 14.9% to 17.88 MT in June - Sarkaritel.com",
+    "desc": "India’s Captive and Commercial Coal Production Rises 14.9% to 17.88 MT in June    Sarkaritel.com",
+    "src": "Coal Block",
     "time": "1d ago",
-    "link": "https://www.google.com/search?q=Coal%20India%20SWMA%20eauction%20premium%20rises%2042%20in%20Jun%202026%20%20scanxtrade",
+    "link": "https://www.google.com/search?q=Indias%20Captive%20and%20Commercial%20Coal%20Production%20Rises%20149%20to%201788%20MT%20in%20June%20%20Sarkaritelcom",
     "type": "mining",
-    "fetchedAt": "2026-07-01T18:47:50+00:00",
+    "fetchedAt": "2026-07-02T16:30:44+00:00",
     "ageDays": 1
   },
   {
@@ -240,16 +250,6 @@
     "ageDays": 1
   },
   {
-    "title": "Centre Approves Use of Insurance Surety Bonds to Promote Ease of Doing Business in Coal Sector - Hindusthan Samachar English",
-    "desc": "Centre Approves Use of Insurance Surety Bonds to Promote Ease of Doing Business in Coal Sector    Hindusthan Samachar English",
-    "src": "Coal Block",
-    "time": "1d ago",
-    "link": "https://www.google.com/search?q=Centre%20Approves%20Use%20of%20Insurance%20Surety%20Bonds%20to%20Promote%20Ease%20of%20Doing%20Business%20in%20Coal%20Se",
-    "type": "mining",
-    "fetchedAt": "2026-07-02T13:04:53+00:00",
-    "ageDays": 1
-  },
-  {
     "title": "Coal Ministry Allows Insurance Surety Bonds for Coal Blocks - Devdiscourse",
     "desc": "Coal Ministry Allows Insurance Surety Bonds for Coal Blocks    Devdiscourse",
     "src": "Coal Block",
@@ -257,16 +257,6 @@
     "link": "https://www.google.com/search?q=Coal%20Ministry%20Allows%20Insurance%20Surety%20Bonds%20for%20Coal%20Blocks%20%20Devdiscourse",
     "type": "mining",
     "fetchedAt": "2026-07-02T13:49:48+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "Artefact Projects Awarded ₹3.15 Cr Consultancy Project",
-    "desc": "Artefact Projects Ltd has received a Letter of Award for consultancy services for the Operation and Maintenance of a two-lane road section on NH 544H in Tamil Nadu. The project inv",
-    "src": "stockwatch",
-    "time": "1d ago",
-    "link": "https://www.stockwatch.live/in/news/artefact-projects-awarded-315-cr-consultancy-project-06ecfdd9-3928-4eaa-b796-07ae68f0be40",
-    "type": "highways",
-    "fetchedAt": "2026-07-02T00:00:00+00:00",
     "ageDays": 1
   },
   {
@@ -290,34 +280,24 @@
     "ageDays": 1
   },
   {
-    "title": "High voltage power conductor demand surges as load increases; local firms gear up with tech tie-ups",
-    "desc": "Demand for high voltage conductors in India surges as electricity consumption rises, prompting local firms to strengthen tech collaborations.",
-    "src": "thehindu",
-    "time": "1d ago",
-    "link": "https://www.thehindu.com/business/Industry/high-voltage-power-conductor-demand-surges-as-load-increases-local-firms-gear-up-with-tech-tie-ups/article71169857.ece",
-    "type": "highways",
-    "fetchedAt": "2026-07-02T00:37:18+00:00",
-    "ageDays": 1
+    "title": "Coal India SWMA e-auction premium rises 42% in Jun 2026 - scanx.trade",
+    "desc": "Coal India SWMA e-auction premium rises 42% in Jun 2026    scanx.trade",
+    "src": "CIL Subs",
+    "time": "2d ago",
+    "link": "https://www.google.com/search?q=Coal%20India%20SWMA%20eauction%20premium%20rises%2042%20in%20Jun%202026%20%20scanxtrade",
+    "type": "mining",
+    "fetchedAt": "2026-07-01T18:47:50+00:00",
+    "ageDays": 2
   },
   {
-    "title": "Stocks to Watch Today, July 2: Tata Tech, Coal India, JSW Infra, Lupin, Bharti Airtel and others",
-    "desc": "Stocks to Watch Today, July 2: Several stocks are likely to remain in focus today, driven by strong quarterly business updates, major project wins, fundraising, strategic partnersh",
-    "src": "etnownews",
-    "time": "1d ago",
-    "link": "https://www.etnownews.com/markets/stocks-to-watch-today-july-2-tata-tech-coal-india-jsw-infra-lupin-bharti-airtel-and-others-article-154837537",
+    "title": "NHAI secures Rs 1,202 crore arbitral award in Karnataka highway project - The Indian Express",
+    "desc": "NHAI secures Rs 1,202 crore arbitral award in Karnataka highway project    The Indian Express",
+    "src": "NHAI",
+    "time": "3d ago",
+    "link": "https://www.google.com/search?q=NHAI%20secures%20Rs%201202%20crore%20arbitral%20award%20in%20Karnataka%20highway%20project%20%20The%20Indian%20Express",
     "type": "highways",
-    "fetchedAt": "2026-07-02T00:09:11+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "156% in 3 months? The real story behind this multibagger started years earlier.",
-    "desc": "A 20% upper circuit on April 30, a fresh 52-week high on July 1 at Rs 1,363.75, and a five-year return of 1,542%. The three-month move was earnings-led. The five-year return tells ",
-    "src": "financialexpress",
-    "time": "1d ago",
-    "link": "https://www.financialexpress.com/market/stock-insights/156-in-3-months-the-real-story-behind-this-multibagger-started-years-earlier/4281217/",
-    "type": "highways",
-    "fetchedAt": "2026-07-02T00:00:00+00:00",
-    "ageDays": 1
+    "fetchedAt": "2026-06-30T10:33:20+00:00",
+    "ageDays": 3
   },
   {
     "title": "Texmaco Rail EPC orders total Rs. 10.20 crore - Railway Supply",
@@ -433,20 +413,10 @@
     "title": "DEME to execute capital deepening works for Ramayapatnam Port in India - DredgeWire",
     "desc": "DEME to execute capital deepening works for Ramayapatnam Port in India    DredgeWire",
     "src": "Ports",
-    "time": "15d ago",
+    "time": "16d ago",
     "link": "https://www.google.com/search?q=DEME%20to%20execute%20capital%20deepening%20works%20for%20Ramayapatnam%20Port%20in%20India%20%20DredgeWire",
     "type": "ports",
     "fetchedAt": "2026-06-17T22:30:19+00:00",
-    "ageDays": 15
-  },
-  {
-    "title": "DEME wins contract worth up to €50m for dredging at India’s Ramayapatnam Port - PortNews IAA",
-    "desc": "DEME wins contract worth up to €50m for dredging at India’s Ramayapatnam Port    PortNews IAA",
-    "src": "Ports",
-    "time": "16d ago",
-    "link": "https://www.google.com/search?q=DEME%20wins%20contract%20worth%20up%20to%2050m%20for%20dredging%20at%20Indias%20Ramayapatnam%20Port%20%20PortNews%20IAA",
-    "type": "ports",
-    "fetchedAt": "2026-06-17T07:00:00+00:00",
     "ageDays": 16
   },
   {
@@ -490,6 +460,16 @@
     "ageDays": 17
   },
   {
+    "title": "Meghalaya Gets Rs 90,000 Crore Highway Boost, Shillong-Guwahati Corridor Among Key Projects - Northeast Live",
+    "desc": "Meghalaya Gets Rs 90,000 Crore Highway Boost, Shillong-Guwahati Corridor Among Key Projects    Northeast Live",
+    "src": "MoRTH",
+    "time": "18d ago",
+    "link": "https://www.google.com/search?q=Meghalaya%20Gets%20Rs%2090000%20Crore%20Highway%20Boost%20ShillongGuwahati%20Corridor%20Among%20Key%20Projects",
+    "type": "highways",
+    "fetchedAt": "2026-06-15T07:00:00+00:00",
+    "ageDays": 18
+  },
+  {
     "title": "Highbar Technocrat Drives Digital Transformation in India's EPC and Real Estate Sectors",
     "desc": "Highbar Technocrat Limited, a leading provider of technology solutions in India's engineering and infrastructure industries, marks a new momentum phase. With strategic SAP Connect ",
     "src": "Devdiscourse",
@@ -497,6 +477,26 @@
     "link": "https://www.devdiscourse.com/article/business/3935312-highbar-technocrat-drives-digital-transformation-in-indias-epc-and-real-estate-sectors",
     "type": "highways",
     "fetchedAt": "2026-06-15T14:49:56+00:00",
+    "ageDays": 18
+  },
+  {
+    "title": "Highbar Technocrat Accelerates Growth with New Project Wins, Successful Go",
+    "desc": "Mumbai (Maharashtra) [India], June 15: Highbar Technocrat Limited, one of the leading technology solutions providers for the Engineering, Construction & Operations (EC&O), EPC, Inf",
+    "src": "The Tribune",
+    "time": "18d ago",
+    "link": "https://www.tribuneindia.com/news/business/highbar-technocrat-accelerates-growth-with-new-project-wins-successful-go-lives-and-flagship-sap-connect-day-events-across-india/",
+    "type": "highways",
+    "fetchedAt": "2026-06-15T14:48:11+00:00",
+    "ageDays": 18
+  },
+  {
+    "title": "SEPC Bags Massive Rs 673 Crore SAIL Expansion Project; Reinforces Position in Industrial Infrastructure",
+    "desc": "Chennai (Tamil Nadu) [India], June 15: SEPC Limited (NSE: SEPC | BSE: 532945), a leading EPC company with proven expertise in industrial infrastructure, process plants, water and w",
+    "src": "The Tribune",
+    "time": "18d ago",
+    "link": "https://www.tribuneindia.com/news/business/sepc-bags-massive-rs-673-crore-sail-expansion-project-reinforces-position-in-industrial-infrastructure/",
+    "type": "highways",
+    "fetchedAt": "2026-06-15T08:33:37+00:00",
     "ageDays": 18
   }
 ]
