@@ -1,12 +1,62 @@
 [
   {
-    "title": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH - Newsonair",
-    "desc": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH    Newsonair",
+    "title": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH - News On AIR",
+    "desc": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH    News On AIR",
     "src": "MoRTH",
-    "time": "20h ago",
+    "time": "4h ago",
     "link": "https://www.google.com/search?q=BarabankiBahraich%20Highway%20to%20play%20transformative%20role%20in%20strengthening%20trade%20ties%20between",
     "type": "highways",
-    "fetchedAt": "2026-07-19T14:11:39+00:00",
+    "fetchedAt": "2026-07-20T10:34:02+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Telangana’s crown jewel or golden goose?",
+    "desc": "Hyderabad: The recent meeting of Union Minister of Coal and Mines G Kishan Reddy with workers of the Singareni Collieries Company Limited (SCCL), held as part of the ‘Singareni Bha",
+    "src": "thehansindia",
+    "time": "13h ago",
+    "link": "https://www.thehansindia.com/news/cities/hyderabad/telanganas-crown-jewel-or-golden-goose-1099217",
+    "type": "mining",
+    "fetchedAt": "2026-07-20T02:03:15+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Stock Market Today: All You Need To Know Before Going Into Trade On June 20",
+    "desc": "Stocks in the news, big brokerage calls of the day, complete trade setup and much more!",
+    "src": "ndtv",
+    "time": "14h ago",
+    "link": "https://www.ndtvprofit.com/markets/stock-market-today-all-you-need-to-know-before-going-into-trade-on-june-20-11793062",
+    "type": "highways",
+    "fetchedAt": "2026-07-20T00:30:01+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "L&T bags mega orders in metals and minerals business from public and private sector companies",
+    "desc": "Larsen & Toubro (L&T) on Monday said its Metals & Minerals (M&M) business has secured multiple mega orders from leading domestic public and private sector metals and mining compani",
+    "src": "aninews",
+    "time": "15h ago",
+    "link": "https://www.aninews.in/news/business/lampt-bags-mega-orders-in-metals-and-minerals-business-from-public-and-private-sector-companies20260720111535/",
+    "type": "highways",
+    "fetchedAt": "2026-07-20T00:00:00+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Western Nuclear Industry Bounces Back With Progress Across Small And Large Designs",
+    "desc": "Western Nuclear Industry Bounces Back With Progress Across Small And Large Designs After last month's report from Goldman Sachs on the ongoing global nuclear renaissance listed onl",
+    "src": "Tyler Durden",
+    "time": "Recent",
+    "link": "https://www.zerohedge.com/energy/western-nuclear-industry-bounces-back-progress-across-small-and-large-designs",
+    "type": "mining",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "AWS S3 Deep Dive — Objects, Encryption, Bucket Policies & Everything In Between",
+    "desc": "Part of my AWS learning journey — transitioning from Systems Engineer to Cloud/DevOps. This session goes deep into S3 — the most widely used AWS service and a guaranteed topic in e",
+    "src": "Tejas Shinkar",
+    "time": "Recent",
+    "link": "https://dev.to/tejas_shinkar/aws-s3-deep-dive-objects-encryption-bucket-policies-everything-in-between-3k8k",
+    "type": "highways",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -16,7 +66,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/l-and-t-wins-rs-10000-crore-orders-from-metals-mining-companies-126072000454_1.html",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +76,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/va-tech-wabag-shares-rise-4-after-securing-major-bengaluru-wastewater-treatment-order/articleshow/132507063.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +86,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/world/middle-east/us-iran-war-news-live-updates-iran-strikes-us-soldiers-kill-jordan-us-attack-strait-of-hormuz-deal-latest-updates/liveblog/132491349.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/education-today/story/bhopal-barkatullah-university-bed-colleges-probe-madhya-pradesh-india-today-expose-2951039-2026-07-18",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +106,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-tumble-latest-chinese-deepseek-moment-sparks-chip-meltdown",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +116,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/cci-dismisses-plea-jio-4500-companies-anti-competitive-conduct-126071700471_1.html",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/siemens-energy-poised-for-strong-growth-says-nuvama-as-it-initiates-coverage-with-buy-check-target-price-11782464",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +136,7 @@
     "time": "Recent",
     "link": "https://skift.com/2026/07/16/air-india-rebuilds-its-app-with-in-house-booking-payments-and-ai/",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/cracking-and-joining",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.dw.com/en/iran-threatens-regional-strikes-as-us-intensifies-attacks/live-77976690",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +166,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/govt-probing-into-building-plans-cleared-without-ifc-payment/articleshow/132422257.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +176,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-rise-after-blowout-asml-earnings-boost-tech-sentiment",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +186,7 @@
     "time": "Recent",
     "link": "https://indianexpress.com/article/explained/explained-law/delhi-high-court-lawyers-strike-pecuniary-jurisdiction-10787434/",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +196,7 @@
     "time": "Recent",
     "link": "https://www.news18.com/agency-feeds/tamil-nadu-cm-vijay-meets-kazakhstan-ambassador-azamat-yeskarayev-10211789.html",
     "type": "highways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
   },
   {
@@ -156,18 +206,8 @@
     "time": "Recent",
     "link": "https://www.news18.com/business/economy/indias-first-hydrogen-train-how-much-did-it-cost-a-look-at-numbers-behind-indias-green-rail-project-ws-l-10217966.html",
     "type": "railways",
-    "fetchedAt": "2026-07-20T10:26:02.875400+00:00",
+    "fetchedAt": "2026-07-20T15:25:53.596419+00:00",
     "ageDays": 0
-  },
-  {
-    "title": "Innovision wins ₹44.60 Cr NHAI order for toll collection - scanx.trade",
-    "desc": "Innovision wins ₹44.60 Cr NHAI order for toll collection    scanx.trade",
-    "src": "NHAI",
-    "time": "1d ago",
-    "link": "https://www.google.com/search?q=Innovision%20wins%204460%20Cr%20NHAI%20order%20for%20toll%20collection%20%20scanxtrade",
-    "type": "highways",
-    "fetchedAt": "2026-07-18T10:46:45+00:00",
-    "ageDays": 1
   },
   {
     "title": "The hidden supply chain behind India’s Rs 6.5 lakh crore nuclear push: 3 stocks to watch",
@@ -188,6 +228,16 @@
     "type": "highways",
     "fetchedAt": "2026-07-18T20:05:59+00:00",
     "ageDays": 1
+  },
+  {
+    "title": "Innovision wins ₹44.60 Cr NHAI order for toll collection - scanx.trade",
+    "desc": "Innovision wins ₹44.60 Cr NHAI order for toll collection    scanx.trade",
+    "src": "NHAI",
+    "time": "2d ago",
+    "link": "https://www.google.com/search?q=Innovision%20wins%204460%20Cr%20NHAI%20order%20for%20toll%20collection%20%20scanxtrade",
+    "type": "highways",
+    "fetchedAt": "2026-07-18T10:46:45+00:00",
+    "ageDays": 2
   },
   {
     "title": "India’s SASCI 2026 Mining Incentives for States Explained - Discovery Alert",
@@ -230,14 +280,14 @@
     "ageDays": 4
   },
   {
-    "title": "Siemens Awarded ₹263 Cr Electrification Contract For Rishikesh-Karnaprayag Rail Line - Metro Rail News",
-    "desc": "Siemens Awarded ₹263 Cr Electrification Contract For Rishikesh-Karnaprayag Rail Line    Metro Rail News",
-    "src": "IR",
-    "time": "6d ago",
-    "link": "https://www.google.com/search?q=Siemens%20Awarded%20263%20Cr%20Electrification%20Contract%20For%20RishikeshKarnaprayag%20Rail%20Line%20%20Metro",
-    "type": "railways",
-    "fetchedAt": "2026-07-13T12:31:52+00:00",
-    "ageDays": 6
+    "title": "India Iron Ore Output Up 17% in H1 2026 Driven by NMDC, OMC, and LMEL Expansion - News and Statistics - IndexBox",
+    "desc": "India Iron Ore Output Up 17% in H1 2026 Driven by NMDC, OMC, and LMEL Expansion - News and Statistics    IndexBox",
+    "src": "Iron Ore",
+    "time": "4d ago",
+    "link": "https://www.google.com/search?q=India%20Iron%20Ore%20Output%20Up%2017%20in%20H1%202026%20Driven%20by%20NMDC%20OMC%20and%20LMEL%20Expansion%20%20News%20and%20Sta",
+    "type": "mining",
+    "fetchedAt": "2026-07-16T08:21:00+00:00",
+    "ageDays": 4
   },
   {
     "title": "Comparing Coal & Iron Ore Is Like Apples & Oranges: Supreme Court Upholds Rule Barring Deduction Of... - Verdictum",
@@ -250,14 +300,14 @@
     "ageDays": 6
   },
   {
-    "title": "Sathlokhar Synergys E&C Global Limited Wins ₹74.85 Cr (Including GST) EPC Order; FY27 Order Book Stand at ₹1015.18 Cr (Excluding GST)",
-    "desc": "Chennai (Tamil Nadu) [India], July 13: Sathlokhar Synergys E&C Global Limited (NSE: SSEGL), one of the leading EPC players, providing end-to-end turnkey execution across design, ci",
-    "src": "The Tribune",
-    "time": "6d ago",
-    "link": "https://www.tribuneindia.com/news/business/sathlokhar-synergys-ec-global-limited-wins-%e2%82%b974-85-cr-including-gst-epc-order-fy27-order-book-stand-at-%e2%82%b91015-18-cr-excluding-gst/",
-    "type": "highways",
-    "fetchedAt": "2026-07-13T12:58:40+00:00",
-    "ageDays": 6
+    "title": "Siemens Awarded ₹263 Cr Electrification Contract For Rishikesh-Karnaprayag Rail Line - Metro Rail News",
+    "desc": "Siemens Awarded ₹263 Cr Electrification Contract For Rishikesh-Karnaprayag Rail Line    Metro Rail News",
+    "src": "IR",
+    "time": "7d ago",
+    "link": "https://www.google.com/search?q=Siemens%20Awarded%20263%20Cr%20Electrification%20Contract%20For%20RishikeshKarnaprayag%20Rail%20Line%20%20Metro",
+    "type": "railways",
+    "fetchedAt": "2026-07-13T12:31:52+00:00",
+    "ageDays": 7
   },
   {
     "title": "Siemens secures new ₹263 cr RVNL contract for Rishikesh–Karnaprayag rail electrification - CNBC TV18",
@@ -270,14 +320,14 @@
     "ageDays": 7
   },
   {
-    "title": "Five Singareni Mines Secure Prestigious 5-Star Rating at National Level - Hindudayashankar",
-    "desc": "Five Singareni Mines Secure Prestigious 5-Star Rating at National Level    Hindudayashankar",
-    "src": "SCCL",
-    "time": "9d ago",
-    "link": "https://www.google.com/search?q=Five%20Singareni%20Mines%20Secure%20Prestigious%205Star%20Rating%20at%20National%20Level%20%20Hindudayashankar",
-    "type": "mining",
-    "fetchedAt": "2026-07-10T11:42:08+00:00",
-    "ageDays": 9
+    "title": "Sathlokhar Synergys E&C Global Limited Wins ₹74.85 Cr (Including GST) EPC Order; FY27 Order Book Stand at ₹1015.18 Cr (Excluding GST)",
+    "desc": "Chennai (Tamil Nadu) [India], July 13: Sathlokhar Synergys E&C Global Limited (NSE: SSEGL), one of the leading EPC players, providing end-to-end turnkey execution across design, ci",
+    "src": "The Tribune",
+    "time": "7d ago",
+    "link": "https://www.tribuneindia.com/news/business/sathlokhar-synergys-ec-global-limited-wins-%e2%82%b974-85-cr-including-gst-epc-order-fy27-order-book-stand-at-%e2%82%b91015-18-cr-excluding-gst/",
+    "type": "highways",
+    "fetchedAt": "2026-07-13T12:58:40+00:00",
+    "ageDays": 7
   },
   {
     "title": "Sathlokhar Synergys E&C Global Limited Secures Rs 42.50 Cr (Including GST) Taj Vivanta EPC Project; FY27 Order Book at Rs 951.75 Cr (Excluding GST)",
@@ -288,6 +338,16 @@
     "type": "highways",
     "fetchedAt": "2026-07-11T04:43:18+00:00",
     "ageDays": 9
+  },
+  {
+    "title": "Five Singareni Mines Secure Prestigious 5-Star Rating at National Level - Hindudayashankar",
+    "desc": "Five Singareni Mines Secure Prestigious 5-Star Rating at National Level    Hindudayashankar",
+    "src": "SCCL",
+    "time": "10d ago",
+    "link": "https://www.google.com/search?q=Five%20Singareni%20Mines%20Secure%20Prestigious%205Star%20Rating%20at%20National%20Level%20%20Hindudayashankar",
+    "type": "mining",
+    "fetchedAt": "2026-07-10T11:42:08+00:00",
+    "ageDays": 10
   },
   {
     "title": "Based Avenir Through Rs 1,530 Crore Preferential Share Allotment",
@@ -330,16 +390,6 @@
     "ageDays": 12
   },
   {
-    "title": "Photonics Watertech Limited has Filed DRHP with Emerge platform of NSE Emerge on June 30, 2026",
-    "desc": "Gandhinagar (Gujarat) [India], July 3: Photonics Watertech Limited is engaged in providing end-to-end services in (i) LED-based lighting solutions; (ii) Solar EPC; (iii) Water Infr",
-    "src": "NewsX",
-    "time": "16d ago",
-    "link": "https://www.newsx.com/business/photonics-watertech-limited-has-filed-drhp-with-emerge-platform-of-nse-emerge-on-june-30-2026-244177/",
-    "type": "highways",
-    "fetchedAt": "2026-07-03T11:03:07+00:00",
-    "ageDays": 16
-  },
-  {
     "title": "India’s Captive and Commercial Coal Production Rises 14.9% to 17.88 MT in June - Sarkaritel.com",
     "desc": "India’s Captive and Commercial Coal Production Rises 14.9% to 17.88 MT in June    Sarkaritel.com",
     "src": "Coal Block",
@@ -347,6 +397,16 @@
     "link": "https://www.google.com/search?q=Indias%20Captive%20and%20Commercial%20Coal%20Production%20Rises%20149%20to%201788%20MT%20in%20June%20%20Sarkaritelcom",
     "type": "mining",
     "fetchedAt": "2026-07-02T16:30:44+00:00",
+    "ageDays": 17
+  },
+  {
+    "title": "Photonics Watertech Limited has Filed DRHP with Emerge platform of NSE Emerge on June 30, 2026",
+    "desc": "Gandhinagar (Gujarat) [India], July 3: Photonics Watertech Limited is engaged in providing end-to-end services in (i) LED-based lighting solutions; (ii) Solar EPC; (iii) Water Infr",
+    "src": "NewsX",
+    "time": "17d ago",
+    "link": "https://www.newsx.com/business/photonics-watertech-limited-has-filed-drhp-with-emerge-platform-of-nse-emerge-on-june-30-2026-244177/",
+    "type": "highways",
+    "fetchedAt": "2026-07-03T11:03:07+00:00",
     "ageDays": 17
   },
   {
@@ -390,6 +450,16 @@
     "ageDays": 20
   },
   {
+    "title": "NHAI Highway Awards Hit 7-Year Low as Land Acquisition Delays Persist; NHAI Shifts Focus to Debt Repayment: Nuvama - Autocar Professional",
+    "desc": "NHAI Highway Awards Hit 7-Year Low as Land Acquisition Delays Persist; NHAI Shifts Focus to Debt Repayment: Nuvama    Autocar Professional",
+    "src": "NHAI",
+    "time": "22d ago",
+    "link": "https://www.google.com/search?q=NHAI%20Highway%20Awards%20Hit%207Year%20Low%20as%20Land%20Acquisition%20Delays%20Persist%20NHAI%20Shifts%20Focus%20to",
+    "type": "highways",
+    "fetchedAt": "2026-06-28T13:46:11+00:00",
+    "ageDays": 22
+  },
+  {
     "title": "RVNL Secures Rs 9,679.3 Million EPC Contract From East Coast Railway - Construction World",
     "desc": "RVNL Secures Rs 9,679.3 Million EPC Contract From East Coast Railway    Construction World",
     "src": "RVNL",
@@ -428,75 +498,5 @@
     "type": "mining",
     "fetchedAt": "2026-06-23T07:00:00+00:00",
     "ageDays": 27
-  },
-  {
-    "title": "Gandak Canal System Dilapidated: Madhesh's Irrigation and Alternative 'Lifeline' Road in Crisis - Ekantipur",
-    "desc": "Gandak Canal System Dilapidated: Madhesh's Irrigation and Alternative 'Lifeline' Road in Crisis    Ekantipur",
-    "src": "Irrigation",
-    "time": "28d ago",
-    "link": "https://www.google.com/search?q=Gandak%20Canal%20System%20Dilapidated%20Madheshs%20Irrigation%20and%20Alternative%20Lifeline%20Road%20in%20Crisi",
-    "type": "irrigation",
-    "fetchedAt": "2026-06-22T07:00:00+00:00",
-    "ageDays": 28
-  },
-  {
-    "title": "RVNL bags ₹2,977 crore NMDC contract for 10 MTPA ore-handling facility at Vizag - ET Infra",
-    "desc": "RVNL bags ₹2,977 crore NMDC contract for 10 MTPA ore-handling facility at Vizag    ET Infra",
-    "src": "NMDC",
-    "time": "30d ago",
-    "link": "https://www.google.com/search?q=RVNL%20bags%202977%20crore%20NMDC%20contract%20for%2010%20MTPA%20orehandling%20facility%20at%20Vizag%20%20ET%20Infra",
-    "type": "mining",
-    "fetchedAt": "2026-06-20T07:00:00+00:00",
-    "ageDays": 30
-  },
-  {
-    "title": "RVNL bags ₹2,977 crore NMDC contract for Vizag blending yard - CNBC TV18",
-    "desc": "RVNL bags ₹2,977 crore NMDC contract for Vizag blending yard    CNBC TV18",
-    "src": "NMDC",
-    "time": "30d ago",
-    "link": "https://www.google.com/search?q=RVNL%20bags%202977%20crore%20NMDC%20contract%20for%20Vizag%20blending%20yard%20%20CNBC%20TV18",
-    "type": "mining",
-    "fetchedAt": "2026-06-20T07:00:00+00:00",
-    "ageDays": 30
-  },
-  {
-    "title": "BJP accuses State govt. of suppressing truth behind alleged Singareni coal scam - The Hindu",
-    "desc": "BJP accuses State govt. of suppressing truth behind alleged Singareni coal scam    The Hindu",
-    "src": "SCCL",
-    "time": "30d ago",
-    "link": "https://www.google.com/search?q=BJP%20accuses%20State%20govt%20of%20suppressing%20truth%20behind%20alleged%20Singareni%20coal%20scam%20%20The%20Hindu",
-    "type": "mining",
-    "fetchedAt": "2026-06-20T07:00:00+00:00",
-    "ageDays": 30
-  },
-  {
-    "title": "T BJP chief alleges cover-up in SCCL coal scam - The Times of India",
-    "desc": "T BJP chief alleges cover-up in SCCL coal scam    The Times of India",
-    "src": "SCCL",
-    "time": "30d ago",
-    "link": "https://www.google.com/search?q=T%20BJP%20chief%20alleges%20coverup%20in%20SCCL%20coal%20scam%20%20The%20Times%20of%20India",
-    "type": "mining",
-    "fetchedAt": "2026-06-20T07:00:00+00:00",
-    "ageDays": 30
-  },
-  {
-    "title": "PNC Infratech incorporates SPV for NHAI highway project in UP - scanx.trade",
-    "desc": "PNC Infratech incorporates SPV for NHAI highway project in UP    scanx.trade",
-    "src": "NHAI EPC",
-    "time": "32d ago",
-    "link": "https://www.google.com/search?q=PNC%20Infratech%20incorporates%20SPV%20for%20NHAI%20highway%20project%20in%20UP%20%20scanxtrade",
-    "type": "highways",
-    "fetchedAt": "2026-06-18T07:00:00+00:00",
-    "ageDays": 32
-  },
-  {
-    "title": "DEME awarded dredging contract at greenfield Indian port - Baird Maritime",
-    "desc": "DEME awarded dredging contract at greenfield Indian port    Baird Maritime",
-    "src": "Ports",
-    "time": "33d ago",
-    "link": "https://www.google.com/search?q=DEME%20awarded%20dredging%20contract%20at%20greenfield%20Indian%20port%20%20Baird%20Maritime",
-    "type": "ports",
-    "fetchedAt": "2026-06-17T07:00:00+00:00",
-    "ageDays": 33
   }
 ]
