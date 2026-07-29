@@ -1,22 +1,32 @@
 [
   {
-    "title": "RVNL secures ₹359 crore Letter of Acceptance from East Central Railway for EPC project",
-    "desc": "Shares of Rail Vikas Nigam Ltd ended at ₹221.25, down by ₹2.75, or 1.23%, on the BSE.",
-    "src": "cnbctv18",
-    "time": "20h ago",
-    "link": "https://www.cnbctv18.com/market/stocks/rvnl-share-price-wins-rs-359-crore-east-central-railway-order-for-sitamarhi-raxaul-section-doubling-work-19956012.htm",
-    "type": "highways",
-    "fetchedAt": "2026-07-28T13:57:45+00:00",
+    "title": "ECR Awards Rs 358.97 Crore Doubling Contract to RVNL - Construction World",
+    "desc": "ECR Awards Rs 358.97 Crore Doubling Contract to RVNL    Construction World",
+    "src": "RVNL",
+    "time": "9h ago",
+    "link": "https://www.google.com/search?q=ECR%20Awards%20Rs%2035897%20Crore%20Doubling%20Contract%20to%20RVNL%20%20Construction%20World",
+    "type": "railways",
+    "fetchedAt": "2026-07-29T06:17:35+00:00",
     "ageDays": 0
   },
   {
-    "title": "L&T and Hitachi Energy Seal 2 GW Offshore Wind FCA with TenneT, Advancing Europe’s 8 GW HVDC Renewable Integration",
-    "desc": "L&T announces the successful conclusion of the Framework Cooperation Agreement (FCA) for 2 GW offshore wind programme with TenneT. L&T, in consortium with Hitachi Energy, entered i",
-    "src": "indianweb2",
-    "time": "20h ago",
-    "link": "https://www.indianweb2.com/2026/07/l-and-hitachi-energy-seal-2gw-offshore.html",
+    "title": "Rail Vikas Nigam bags Rs 359-cr EPC order from East Central Railway",
+    "desc": "Rail Vikas Nigam (RVNL) has secured an Engineering, Procurement and Construction (EPC) contract worth Rs 358.97 crore from East Central Railway.",
+    "src": "business-standard",
+    "time": "12h ago",
+    "link": "https://www.business-standard.com/markets/capital-market-news/rail-vikas-nigam-bags-rs-359-cr-epc-order-from-east-central-railway-126072900118_1.html",
     "type": "highways",
-    "fetchedAt": "2026-07-28T13:39:58+00:00",
+    "fetchedAt": "2026-07-29T02:34:02+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Highway Infrastructure Limited Receives IVR BBB+/Stable Credit Rating from Infomerics",
+    "desc": "Indore (Madhya Pradesh) [India], July 29: Highway Infrastructure (\"HIL\"), an integrated infrastructure development and management company with strong capabilities across Toll Opera",
+    "src": "aninews",
+    "time": "15h ago",
+    "link": "https://www.aninews.in/news/business/highway-infrastructure-limited-receives-ivr-bbbstable-credit-rating-from-infomerics20260729112515/",
+    "type": "highways",
+    "fetchedAt": "2026-07-29T00:00:00+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +36,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/highway-infrastructure-bags-28-69-crore-toll-operations-contract-from-nhai-126072400459_1.html",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +46,27 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/nhai-strengthens-national-highway-project-supervision-with-higher-engineer-remuneration-and-revised-consultancy-guidelines",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "‘Nothing nice about NICE, farmers robbed’: Court on Bengaluru-Mysuru link project",
+    "desc": "The Karnataka High Court upheld the cancellation of decades-old land acquisition by the project proponent Nandi Infrastructure Corridor Enterprises, noting that farmers have been d",
+    "src": "Mustafa Plumber",
+    "time": "Recent",
+    "link": "https://indianexpress.com/article/cities/bangalore/karnataka-high-court-bengaluru-mysuru-nice-project-audit-10809212/",
+    "type": "highways",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "'We created mujahideens to bleed India. Now they have turned guns on us': Pak PM aide Rana Sanaullah video goes viral amid PoK elections",
+    "desc": "A Pakistani official admitted to training militants who have become a domestic issue. These armed groups are now causing significant problems within Pakistan's borders. Unrest is e",
+    "src": "Trending Desk",
+    "time": "Recent",
+    "link": "https://economictimes.indiatimes.com/news/new-updates/we-created-mujahideens-to-bleed-india-now-they-have-turned-guns-on-us-pak-pm-aide-rana-sanaullah-video-goes-viral-amid-pok-elections/articleshow/132710573.cms",
+    "type": "highways",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +76,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/geopolitical/russia-answers-drone-attacks-war-ukrainian-ports-maritime-shipping",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +86,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/telecom/telecom-news/indus-towers-africa-foray-on-track-operations-to-start-in-september-quarter/articleshow/132684870.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-slide-tech-rout-continues-kospi-halted-it-crashes-10",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +106,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/l-t-q1fy27-date-trading-window-earnings-call-and-other-details-11826684",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +116,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/geopolitical/how-total-surveillance-conquered-last-sanctuary-human-privacy",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-jump-brent-tumbles-below-90-fresh-round-iran-optimism",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +136,7 @@
     "time": "Recent",
     "link": "https://indianexpress.com/article/opinion/columns/tarique-rahman-india-narendra-modi-hasina-jinping-10805486/",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/business/top-quotes-from-fm-sitharaman-11824563",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +156,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/fssai-suspends-license-of-punjab-based-rehaan-healthcare-for-breach-of-norms-at-manufacturing-unit/articleshow/132606260.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.news18.com/india/we-compete-globally-not-with-other-states-karnataka-minister-mb-patil-at-rising-bharat-summit-ws-l-10231630.html",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +176,7 @@
     "time": "Recent",
     "link": "https://www.techtimes.com/articles/321468/20260724/india-silenced-student-protest-coverage-20-million-followers-no-order-no-law-named.htm",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +186,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/story/s-jaishankar-west-asia-conflict-dialogue-safe-international-waterways-east-asia-summit-ptag-2954652-2026-07-23",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +196,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/india/jaishankar-says-attacks-on-civilian-shipping-cannot-be-tolerated-calls-for-maritime-security-amid-middle-east-crisis/articleshow/132580162.cms",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +206,7 @@
     "time": "Recent",
     "link": "https://news.alphastreet.com/nokia-oyj-releases-q2-2026-financial-results/",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
@@ -186,38 +216,28 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/solar-major-waaree-makes-wind-energy-debut-with-2016-mw-order-to-suzlon",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
+    "fetchedAt": "2026-07-29T15:26:04.437913+00:00",
     "ageDays": 0
   },
   {
-    "title": "UBS Warns Trump's 100% Generic Drug Tariff Puts Indian Pharma \"On Notice\"; Goldman Flags Reshoring Winners",
-    "desc": "UBS Warns Trump's 100% Generic Drug Tariff Puts Indian Pharma \"On Notice\"; Goldman Flags Reshoring Winners President Trump will impose a 100% tariff on imported generic drugs start",
-    "src": "Tyler Durden",
-    "time": "Recent",
-    "link": "https://www.zerohedge.com/markets/ubs-trumps-100-generic-drug-tariff-puts-indian-pharma-notice-goldman-flags-reshoring",
+    "title": "RVNL secures ₹359 crore Letter of Acceptance from East Central Railway for EPC project",
+    "desc": "Shares of Rail Vikas Nigam Ltd ended at ₹221.25, down by ₹2.75, or 1.23%, on the BSE.",
+    "src": "cnbctv18",
+    "time": "1d ago",
+    "link": "https://www.cnbctv18.com/market/stocks/rvnl-share-price-wins-rs-359-crore-east-central-railway-order-for-sitamarhi-raxaul-section-doubling-work-19956012.htm",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
-    "ageDays": 0
+    "fetchedAt": "2026-07-28T13:57:45+00:00",
+    "ageDays": 1
   },
   {
-    "title": "Bajel Projects signs 500 kV transmission line pact with EETC in Cairo",
-    "desc": "Bajel Projects Ltd has signed an agreement with Egypt's EETC for transmission line projects. This agreement covers two sections of a 500 kV overhead transmission line. The combined",
-    "src": "SECTIONS Bajel Projects signs",
-    "time": "Recent",
-    "link": "https://economictimes.indiatimes.com/industry/energy/power/bajel-projects-signs-500-kv-transmission-line-pact-with-eetc-in-cairo/articleshow/132558096.cms",
+    "title": "L&T and Hitachi Energy Seal 2 GW Offshore Wind FCA with TenneT, Advancing Europe’s 8 GW HVDC Renewable Integration",
+    "desc": "L&T announces the successful conclusion of the Framework Cooperation Agreement (FCA) for 2 GW offshore wind programme with TenneT. L&T, in consortium with Hitachi Energy, entered i",
+    "src": "indianweb2",
+    "time": "1d ago",
+    "link": "https://www.indianweb2.com/2026/07/l-and-hitachi-energy-seal-2gw-offshore.html",
     "type": "highways",
-    "fetchedAt": "2026-07-29T10:11:43.001538+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Om Infra Secures L1 Position for ₹568.98 Crore complete turnkey EPC contract for Mohmela Sirpur Barrage Project in Chhattisgarh From Water Resources Department",
-    "desc": "New Delhi [India], July 28: Om Infra Limited has secured the L1 position for a major irrigation infrastructure project, as per data released by the Water Resources Department…",
-    "src": "NewsX",
-    "time": "21h ago",
-    "link": "https://www.newsx.com/business/om-infra-secures-l1-position-for-%e2%82%b9568-98-crore-complete-turnkey-epc-contract-for-mohmela-sirpur-barrage-project-in-chhattisgarh-from-water-resources-department-253729/",
-    "type": "highways",
-    "fetchedAt": "2026-07-28T13:02:09+00:00",
-    "ageDays": 0
+    "fetchedAt": "2026-07-28T13:39:58+00:00",
+    "ageDays": 1
   },
   {
     "title": "TKIL Industries secures order bookings of Rs 1,475.40 crore in Q1 FY27",
@@ -250,13 +270,13 @@
     "ageDays": 1
   },
   {
-    "title": "RVNL signs MoU with Engineers India for global infrastructure cooperation",
-    "desc": "Rail Vikas Nigam Limited and Engineers India Limited have entered into an MoU to collaborate on global infrastructure projects. The partnership aims to improve bidding capabilities",
-    "src": "scanx.trade",
+    "title": "Om Infra Secures L1 Position for ₹568.98 Crore complete turnkey EPC contract for Mohmela Sirpur Barrage Project in Chhattisgarh From Water Resources Department",
+    "desc": "New Delhi [India], July 28: Om Infra Limited has secured the L1 position for a major irrigation infrastructure project, as per data released by the Water Resources Department…",
+    "src": "NewsX",
     "time": "1d ago",
-    "link": "https://scanx.trade/stock-market-news/companies/rvnl-signs-mou-with-engineers-india-for-global-infrastructure-cooperation/46710521",
+    "link": "https://www.newsx.com/business/om-infra-secures-l1-position-for-%e2%82%b9568-98-crore-complete-turnkey-epc-contract-for-mohmela-sirpur-barrage-project-in-chhattisgarh-from-water-resources-department-253729/",
     "type": "highways",
-    "fetchedAt": "2026-07-27T15:08:58+00:00",
+    "fetchedAt": "2026-07-28T13:02:09+00:00",
     "ageDays": 1
   },
   {
@@ -270,6 +290,16 @@
     "ageDays": 2
   },
   {
+    "title": "RVNL signs MoU with Engineers India for global infrastructure cooperation",
+    "desc": "Rail Vikas Nigam Limited and Engineers India Limited have entered into an MoU to collaborate on global infrastructure projects. The partnership aims to improve bidding capabilities",
+    "src": "scanx.trade",
+    "time": "2d ago",
+    "link": "https://scanx.trade/stock-market-news/companies/rvnl-signs-mou-with-engineers-india-for-global-infrastructure-cooperation/46710521",
+    "type": "highways",
+    "fetchedAt": "2026-07-27T15:08:58+00:00",
+    "ageDays": 2
+  },
+  {
     "title": "RVNL Wins Rs 3,589.7 mn East Central Railway Doubling Contract - Construction World",
     "desc": "RVNL Wins Rs 3,589.7 mn East Central Railway Doubling Contract    Construction World",
     "src": "RVNL",
@@ -280,23 +310,23 @@
     "ageDays": 4
   },
   {
+    "title": "Highway Infrastructure Wins ₹28.69 Crore NHAI Toll Operations Contract in Tamil Nadu - sahi.com",
+    "desc": "Highway Infrastructure Wins ₹28.69 Crore NHAI Toll Operations Contract in Tamil Nadu    sahi.com",
+    "src": "NHAI",
+    "time": "5d ago",
+    "link": "https://www.google.com/search?q=Highway%20Infrastructure%20Wins%202869%20Crore%20NHAI%20Toll%20Operations%20Contract%20in%20Tamil%20Nadu%20%20sahico",
+    "type": "highways",
+    "fetchedAt": "2026-07-24T05:44:49+00:00",
+    "ageDays": 5
+  },
+  {
     "title": "Mesabi Metallics begins iron mining with electric Komatsu PC7000-11 - International Mining",
     "desc": "Mesabi Metallics begins iron mining with electric Komatsu PC7000-11    International Mining",
     "src": "Komatsu",
-    "time": "4d ago",
+    "time": "5d ago",
     "link": "https://www.google.com/search?q=Mesabi%20Metallics%20begins%20iron%20mining%20with%20electric%20Komatsu%20PC700011%20%20International%20Mining",
     "type": "corporate",
     "fetchedAt": "2026-07-24T14:15:43+00:00",
-    "ageDays": 4
-  },
-  {
-    "title": "Highway Infrastructure Wins ₹28.69 Crore NHAI Toll Operations Contract in Tamil Nadu - Sahi",
-    "desc": "Highway Infrastructure Wins ₹28.69 Crore NHAI Toll Operations Contract in Tamil Nadu    Sahi",
-    "src": "NHAI",
-    "time": "5d ago",
-    "link": "https://www.google.com/search?q=Highway%20Infrastructure%20Wins%202869%20Crore%20NHAI%20Toll%20Operations%20Contract%20in%20Tamil%20Nadu%20%20Sahi",
-    "type": "highways",
-    "fetchedAt": "2026-07-24T05:44:49+00:00",
     "ageDays": 5
   },
   {
@@ -340,11 +370,11 @@
     "ageDays": 12
   },
   {
-    "title": "Rajnath Singh praises BRO at infrastructure conclave - Awaz The Voice",
-    "desc": "Rajnath Singh praises BRO at infrastructure conclave    Awaz The Voice",
+    "title": "Rajnath Singh praises BRO at infrastructure conclave - awazthevoice.in",
+    "desc": "Rajnath Singh praises BRO at infrastructure conclave    awazthevoice.in",
     "src": "BRO",
     "time": "13d ago",
-    "link": "https://www.google.com/search?q=Rajnath%20Singh%20praises%20BRO%20at%20infrastructure%20conclave%20%20Awaz%20The%20Voice",
+    "link": "https://www.google.com/search?q=Rajnath%20Singh%20praises%20BRO%20at%20infrastructure%20conclave%20%20awazthevoicein",
     "type": "highways",
     "fetchedAt": "2026-07-16T07:00:00+00:00",
     "ageDays": 13
@@ -373,11 +403,11 @@
     "title": "Sathlokhar Synergys E&C Global Limited Wins ₹74.85 Cr (Including GST) EPC Order; FY27 Order Book Stand at ₹1015.18 Cr (Excluding GST)",
     "desc": "Chennai (Tamil Nadu) [India], July 13: Sathlokhar Synergys E&C Global Limited (NSE: SSEGL), one of the leading EPC players, providing end-to-end turnkey execution across design, ci",
     "src": "The Tribune",
-    "time": "15d ago",
+    "time": "16d ago",
     "link": "https://www.tribuneindia.com/news/business/sathlokhar-synergys-ec-global-limited-wins-%e2%82%b974-85-cr-including-gst-epc-order-fy27-order-book-stand-at-%e2%82%b91015-18-cr-excluding-gst/",
     "type": "highways",
     "fetchedAt": "2026-07-13T12:58:40+00:00",
-    "ageDays": 15
+    "ageDays": 16
   },
   {
     "title": "Coal Mines In India 2026, State Wise Top 10 List, Underground - Vajiram & Ravi",
@@ -405,6 +435,16 @@
     "src": "SCCL",
     "time": "19d ago",
     "link": "https://www.google.com/search?q=PM%20Modi%20ensured%20Tadicherla%20coal%20allocation%20to%20Singareni%20Collieries%20insists%20Kishan%20Reddy%20%20T",
+    "type": "mining",
+    "fetchedAt": "2026-07-10T07:00:00+00:00",
+    "ageDays": 19
+  },
+  {
+    "title": "Five Singareni Mines Awarded 5‑Star Rating - Deccan Chronicle",
+    "desc": "Five Singareni Mines Awarded 5‑Star Rating    Deccan Chronicle",
+    "src": "SCCL",
+    "time": "19d ago",
+    "link": "https://www.google.com/search?q=Five%20Singareni%20Mines%20Awarded%205Star%20Rating%20%20Deccan%20Chronicle",
     "type": "mining",
     "fetchedAt": "2026-07-10T07:00:00+00:00",
     "ageDays": 19
@@ -453,50 +493,10 @@
     "title": "Photonics Watertech Limited has Filed DRHP with Emerge platform of NSE Emerge on June 30, 2026",
     "desc": "Gandhinagar (Gujarat) [India], July 3: Photonics Watertech Limited is engaged in providing end-to-end services in (i) LED-based lighting solutions; (ii) Solar EPC; (iii) Water Infr",
     "src": "NewsX",
-    "time": "25d ago",
+    "time": "26d ago",
     "link": "https://www.newsx.com/business/photonics-watertech-limited-has-filed-drhp-with-emerge-platform-of-nse-emerge-on-june-30-2026-244177/",
     "type": "highways",
     "fetchedAt": "2026-07-03T11:03:07+00:00",
-    "ageDays": 25
-  },
-  {
-    "title": "Deepak Builders wins Rs 548.70 crore EPC order from HSIIDC",
-    "desc": "Deepak Builders & Engineers India Limited has received a Letter of Acceptance from Haryana State Industrial & Infrastructure Development Corporation Limited (HSIIDC) for an EPC pro",
-    "src": "scanx.trade",
-    "time": "26d ago",
-    "link": "https://scanx.trade/stock-market-news/companies/deepak-builders-engineers-india-secures-order-valued-at-5-49-billion-rupees/44602159",
-    "type": "highways",
-    "fetchedAt": "2026-07-03T05:33:40+00:00",
     "ageDays": 26
-  },
-  {
-    "title": "Monthly Production and Dispatch from Captive and Commercial Mines in June 2026 - PIB",
-    "desc": "Monthly Production and Dispatch from Captive and Commercial Mines in June 2026    PIB",
-    "src": "Coal Block",
-    "time": "27d ago",
-    "link": "https://www.google.com/search?q=Monthly%20Production%20and%20Dispatch%20from%20Captive%20and%20Commercial%20Mines%20in%20June%202026%20%20PIB",
-    "type": "mining",
-    "fetchedAt": "2026-07-02T07:00:00+00:00",
-    "ageDays": 27
-  },
-  {
-    "title": "Coal block allocatees now have option to produce insurance surety bonds - Business Standard",
-    "desc": "Coal block allocatees now have option to produce insurance surety bonds    Business Standard",
-    "src": "Coal Block",
-    "time": "27d ago",
-    "link": "https://www.google.com/search?q=Coal%20block%20allocatees%20now%20have%20option%20to%20produce%20insurance%20surety%20bonds%20%20Business%20Standard",
-    "type": "mining",
-    "fetchedAt": "2026-07-02T07:00:00+00:00",
-    "ageDays": 27
-  },
-  {
-    "title": "Coal India SWMA e-auction premium rises 42% in Jun 2026 - scanx.trade",
-    "desc": "Coal India SWMA e-auction premium rises 42% in Jun 2026    scanx.trade",
-    "src": "CIL Subs",
-    "time": "28d ago",
-    "link": "https://www.google.com/search?q=Coal%20India%20SWMA%20eauction%20premium%20rises%2042%20in%20Jun%202026%20%20scanxtrade",
-    "type": "mining",
-    "fetchedAt": "2026-07-01T07:00:00+00:00",
-    "ageDays": 28
   }
 ]
