@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-08-23T08:22:39.082663+05:30",
+  "last_updated": "2026-08-23T13:58:20.541095+05:30",
   "fx_currencies": 11,
   "trade_flows": 8,
   "mdb_projects": 13,
   "shipping_routes": 8,
-  "market_news": 15,
+  "market_news": 14,
   "tariffs_covered": 8,
   "version": "1.0"
 }
