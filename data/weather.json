@@ -3,90 +3,100 @@
     "site": "Korba CG",
     "lat": 22.342,
     "lon": 82.689,
-    "temp": "26.2°C",
+    "temp": "25.5°C",
     "condition": "⛅ Overcast",
     "precip_3d_mm": 53.6,
     "type": "mining",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   },
   {
     "site": "Nagpur MH",
     "lat": 21.159,
     "lon": 79.088,
-    "temp": "25.1°C",
-    "condition": "⚠️ FLOOD RISK",
+    "temp": "24.9°C",
+    "condition": "⛅ Overcast",
     "precip_3d_mm": 24.1,
     "type": "highways",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   },
   {
     "site": "Dhanbad JH",
     "lat": 23.795,
     "lon": 86.439,
-    "temp": "27.2°C",
+    "temp": "26.1°C",
     "condition": "⛅ Overcast",
     "precip_3d_mm": 66.4,
     "type": "mining",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   },
   {
     "site": "Keonjhar OD",
     "lat": 21.628,
     "lon": 85.581,
-    "temp": "24.6°C",
+    "temp": "24.3°C",
     "condition": "⛅ Overcast",
     "precip_3d_mm": 59.2,
     "type": "mining",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   },
   {
     "site": "Vizag AP",
     "lat": 17.686,
     "lon": 83.218,
-    "temp": "29.8°C",
+    "temp": "28.4°C",
     "condition": "⛅ Overcast",
     "precip_3d_mm": 6.6,
     "type": "ports",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   },
   {
     "site": "Imphal MN",
     "lat": 24.817,
     "lon": 93.942,
-    "temp": "26.0°C",
-    "condition": "☀️ Clear",
+    "temp": "24.0°C",
+    "condition": "⛅ Overcast",
     "precip_3d_mm": 29.0,
     "type": "highways",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   },
   {
     "site": "Dibrugarh AS",
     "lat": 27.483,
     "lon": 94.912,
-    "temp": "31.3°C",
-    "condition": "☀️ Clear",
+    "temp": "29.8°C",
+    "condition": "⛅ Overcast",
     "precip_3d_mm": 58.8,
     "type": "railways",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   },
   {
     "site": "Barmer RJ",
     "lat": 25.745,
     "lon": 71.388,
-    "temp": "32.6°C",
-    "condition": "⛅ Overcast",
+    "temp": "28.7°C",
+    "condition": "☀️ Clear",
     "precip_3d_mm": 0.1,
     "type": "highways",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   },
   {
     "site": "Jharsuguda OD",
     "lat": 21.856,
     "lon": 84.007,
-    "temp": "25.9°C",
-    "condition": "⚠️ FLOOD RISK",
+    "temp": "25.6°C",
+    "condition": "⛅ Overcast",
     "precip_3d_mm": 61.4,
     "type": "mining",
-    "updated": "2026-08-29T13:19:26.284739+00:00"
+    "updated": "2026-08-29T17:15:47.610696+00:00"
+  },
+  {
+    "site": "Hyderabad TS",
+    "lat": 17.385,
+    "lon": 78.486,
+    "temp": "24.0°C",
+    "condition": "⛅ Overcast",
+    "precip_3d_mm": 2.2,
+    "type": "metro",
+    "updated": "2026-08-29T17:15:47.610696+00:00"
   }
 ]
