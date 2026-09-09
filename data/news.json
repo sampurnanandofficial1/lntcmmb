@@ -1,29 +1,39 @@
 [
   {
-    "title": "Innovision wins ₹244 crore in NHAI toll-collection, maintenance contracts - CNBC TV18",
-    "desc": "Innovision wins ₹244 crore in NHAI toll-collection, maintenance contracts    CNBC TV18",
+    "title": "Innovision shares surge 18% on Rs 243.60 crore work orders from NHAI - economictimes.com",
+    "desc": "Innovision shares surge 18% on Rs 243.60 crore work orders from NHAI    economictimes.com",
     "src": "NHAI",
-    "time": "18h ago",
-    "link": "https://www.google.com/search?q=Innovision%20wins%20244%20crore%20in%20NHAI%20tollcollection%20maintenance%20contracts%20%20CNBC%20TV18",
+    "time": "7h ago",
+    "link": "https://www.google.com/search?q=Innovision%20shares%20surge%2018%20on%20Rs%2024360%20crore%20work%20orders%20from%20NHAI%20%20economictimescom",
     "type": "highways",
-    "fetchedAt": "2026-09-08T11:59:20+00:00",
+    "fetchedAt": "2026-09-09T05:22:00+00:00",
     "ageDays": 0
   },
   {
-    "title": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH - News On AIR",
-    "desc": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH    News On AIR",
-    "src": "MoRTH",
-    "time": "16h ago",
-    "link": "https://www.google.com/search?q=BarabankiBahraich%20Highway%20to%20play%20transformative%20role%20in%20strengthening%20trade%20ties%20between",
+    "title": "Steel Exchange India Partners NMDC for Iron Ore Supply - Rediff MoneyWiz",
+    "desc": "Steel Exchange India Partners NMDC for Iron Ore Supply    Rediff MoneyWiz",
+    "src": "NMDC",
+    "time": "4h ago",
+    "link": "https://www.google.com/search?q=Steel%20Exchange%20India%20Partners%20NMDC%20for%20Iron%20Ore%20Supply%20%20Rediff%20MoneyWiz",
+    "type": "mining",
+    "fetchedAt": "2026-09-09T07:39:02+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Innovision shares surge 18% on Rs 243.60 crore work orders from NHAI",
+    "desc": "Innovision shares surged 18% after the company secured two NHAI work orders worth Rs 243.60 crore for toll collection and facility maintenance at highway fee plazas in Madhya Prade",
+    "src": "economictimes_indiatimes",
+    "time": "12h ago",
+    "link": "https://economictimes.indiatimes.com/markets/innovision-shares-surge-18-on-rs-243-60-crore-work-orders-from-nhai/articleshow/133954194.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-08T14:22:31+00:00",
+    "fetchedAt": "2026-09-08T23:52:16+00:00",
     "ageDays": 0
   },
   {
     "title": "Stocks to Watch for September 9: Bank of Baroda, GE Shipping, Biocon and more",
     "desc": "From Bank of Baroda’s planned NSE OFS and Biocon’s block deal to fresh orders for Innovision, Enviro Infra and TCS, here are the stocks to track ahead of Wednesday’s trading sessio",
     "src": "cnbctv18",
-    "time": "16h ago",
+    "time": "22h ago",
     "link": "https://www.cnbctv18.com/photos/market/stocks-to-watch-for-september-9-bank-of-baroda-ge-shipping-biocon-share-price-19986754.htm",
     "type": "highways",
     "fetchedAt": "2026-09-08T14:25:25+00:00",
@@ -33,7 +43,7 @@
     "title": "Chennai-Bengaluru Expressway completion to be delayed by a year, likely to open in 2028",
     "desc": "Zipping past from Chennai to Bengaluru in three hours is likely to take at least a year longer, with the National Highways Authority of India (NHAI) floating fresh tenders to compl",
     "src": "deccanherald",
-    "time": "17h ago",
+    "time": "23h ago",
     "link": "https://www.deccanherald.com/india/tamil-nadu/chennai-bengaluru-expressway-completion-to-be-delayed-by-a-year-likely-to-open-in-2028-4139338",
     "type": "highways",
     "fetchedAt": "2026-09-08T13:25:42+00:00",
@@ -43,20 +53,10 @@
     "title": "Innovision Wins ₹24.53 Crore And ₹219.07 Crore NHAI Contracts, Three Madhya Pradesh Toll Plazas Covered",
     "desc": "Innovision has secured Rs 24.53 crore and Rs 219.07 crore NHAI contracts to operate and maintain three toll plazas in Madhya Pradesh.",
     "src": "freepressjournal",
-    "time": "18h ago",
+    "time": "23h ago",
     "link": "https://www.freepressjournal.in/business/innovision-wins-2453-crore-and-21907-crore-nhai-contracts-three-madhya-pradesh-toll-plazas-covered",
     "type": "highways",
     "fetchedAt": "2026-09-08T12:28:19+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Innovision wins ₹244 crore in NHAI toll-collection, maintenance contracts",
-    "desc": "Innovision Ltd. has secured two one-year contracts from the National Highways Authority of India for toll collection and facility maintenance at fee plazas in Madhya Pradesh.",
-    "src": "cnbctv18",
-    "time": "18h ago",
-    "link": "https://www.cnbctv18.com/business/companies/innovision-wins-rs244-crore-in-nhai-toll-collection-maintenance-contracts-19986733.htm",
-    "type": "highways",
-    "fetchedAt": "2026-09-08T11:59:20+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +66,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/nhai-terminates-arakkonam-kancheepuram-expressway-contract-floats-rs-633-crore-fresh-tender",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +76,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/bengaluru-chennai-expressway-gets-fresh-push-as-nhai-invites-rs-633-crore-bid-for-stalled-tamil-nadu-stretch",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +86,37 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/india/cil-offers-extra-fuel-57-plants-now-report-critically-low-stock/articleshow/133814003.cms",
     "type": "mining",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "BRICS by BRICS: India's journey from seeking reforms to shaping global order",
+    "desc": "India's BRICS engagement has shifted from seeking a voice to offering indigenous solutions. The nation now actively shapes global order with scalable innovations and partnerships. ",
+    "src": "SECTIONS BRICS by BRICS India's journey",
+    "time": "Recent",
+    "link": "https://economictimes.indiatimes.com/news/india/brics-by-brics-indias-journey-from-seeking-reforms-to-shaping-global-order/articleshow/133957861.cms",
+    "type": "highways",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "L&T bags offshore order of up to Rs 5,000 cr from ONGC for India's west coast development projects",
+    "desc": "Larsen & Toubro's energy hydrocarbon offshore business secured a large order from ONGC. This order involves developing offshore projects off India's west coast. The scope includes ",
+    "src": "SECTIONS L; T bags offshore order",
+    "time": "Recent",
+    "link": "https://economictimes.indiatimes.com/industry/indl-goods/svs/engineering/lt-secures-large-offshore-order-from-ongc-for-indias-west-coast-development-projects-5000-crores-larsen-toubro-share-price/articleshow/133952961.cms",
+    "type": "highways",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "ONGC hands L&T fresh work off India’s west coast - Splash247",
+    "desc": "L&T Energy Hydrocarbon Offshore (LTEH Offshore), the hydrocarbon business of Indian engineering conglomerate Larsen & Toubro, has secured more work on ONGC’s Ratna–I and NLM-14 pro",
+    "src": "Bojan Lepic",
+    "time": "Recent",
+    "link": "https://splash247.com/ongc-hands-lt-fresh-work-off-indias-west-coast/",
+    "type": "highways",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +126,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/brics-at-20-india-faces-test-of-balancing-geopolitical-divides-with-economic-goals/articleshow/133948413.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-fall-inflation-fears-mount-oil-set-top-100",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.news18.com/india/punjab-woos-uae-investors-at-dubai-summit-assures-seamless-clearances-and-full-support-ws-l-10315535.html",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +156,7 @@
     "time": "Recent",
     "link": "https://talkmarkets.com/article/india-warehousing-market-2031f-growth-drivers-outlook-318366",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/ai/soft-antichrist-ai-age",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +176,7 @@
     "time": "Recent",
     "link": "https://medium.com/coinmonks/indias-crypto-traders-are-moving-to-telegram-is-your-trading-bot-ready-ef0db2eb799c?source=rss----721b17443fd5---4",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +186,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/ceigall-india-share-price-jumps-nearly-3-after-receiving-loi-for-rs-5-300-crore-project-12000515",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +196,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/netweb-technologies-share-price-this-stock-created-over-rs-10-lakh-on-every-rs-1-lakh-invested-11996804",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +206,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/centre-says-it-wont-take-coercive-steps-against-gymkhana-club-till-next-hearing/articleshow/133743649.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -186,7 +216,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/india/neet-ug-nta-asks-aicte-to-map-govt-institutions-for-computer-based-exam-centres-11998789",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -196,7 +226,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/programme/democratic-newsroom/video/indias-78-gdp-debate-trust-deficit-economic-reality-and-job-quality-frvd-2986540-2026-09-03",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -206,7 +236,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/industry/news/ceigall-india-secures-5-300-cr-order-for-transmission-project-in-gujarat-126090301365_1.html",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -216,7 +246,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/no-coercive-action-for-now-against-delhi-gymkhana-club-centre-to-delhi-hc/articleshow/133732009.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -226,7 +256,7 @@
     "time": "Recent",
     "link": "https://www.investing.com/news/stock-market-news/jefferies-names-top-india-stock-picks-across-sectors-93CH-4886974",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -236,7 +266,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/india/video/ram-mandir-trust-gets-first-ceo-bombay-hc-orders-cbi-in-disha-case-nepal-floods-ytvd-2985828-2026-09-02",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -246,17 +276,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/lobsang-sangay-the-chinese-government-is-definitely-hiding-something-ytvd-2985789-2026-09-02",
     "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Beyond Theory: Why IntelliBI Sees Real Projects as Essential for India’s AI and Data Careers",
-    "desc": "India does not lack technology courses or ambitious professionals. It lacks enough opportunities for learners to turn information into judgement, execution and credible proof of wo",
-    "src": "Prakash Chand",
-    "time": "Recent",
-    "link": "https://www.dnaindia.com/insights/report-beyond-theory-why-intellibi-sees-real-projects-as-essential-for-india-s-ai-and-data-careers-3219672",
-    "type": "highways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
   },
   {
@@ -266,8 +286,28 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/transportation/railways/bullet-train-with-a-desi-makeover-next-year-your-journey-on-this-250-kmph-homegrown-train-will-come-with-features-that-could-completely-change-your-travel-experience/articleshow/133732272.cms",
     "type": "railways",
-    "fetchedAt": "2026-09-09T06:33:35.388304+00:00",
+    "fetchedAt": "2026-09-09T12:26:47.645932+00:00",
     "ageDays": 0
+  },
+  {
+    "title": "Innovision wins ₹244 crore in NHAI toll-collection, maintenance contracts - CNBC TV18",
+    "desc": "Innovision wins ₹244 crore in NHAI toll-collection, maintenance contracts    CNBC TV18",
+    "src": "NHAI",
+    "time": "1d ago",
+    "link": "https://www.google.com/search?q=Innovision%20wins%20244%20crore%20in%20NHAI%20tollcollection%20maintenance%20contracts%20%20CNBC%20TV18",
+    "type": "highways",
+    "fetchedAt": "2026-09-08T11:59:20+00:00",
+    "ageDays": 1
+  },
+  {
+    "title": "Innovision wins ₹244 crore in NHAI toll-collection, maintenance contracts",
+    "desc": "Innovision Ltd. has secured two one-year contracts from the National Highways Authority of India for toll collection and facility maintenance at fee plazas in Madhya Pradesh.",
+    "src": "cnbctv18",
+    "time": "1d ago",
+    "link": "https://www.cnbctv18.com/business/companies/innovision-wins-rs244-crore-in-nhai-toll-collection-maintenance-contracts-19986733.htm",
+    "type": "highways",
+    "fetchedAt": "2026-09-08T11:59:20+00:00",
+    "ageDays": 1
   },
   {
     "title": "Stock Market Today: All You Need To Know Before Going Into Trade On Sept 8",
@@ -290,26 +330,6 @@
     "ageDays": 1
   },
   {
-    "title": "RVNL bags Rs 903 crore contract for 1,320 MW Bihar power plant from SJVN",
-    "desc": "Rail Vikas Nigam (RVNL) has secured a Rs 903 crore contract from SJVN Thermal to construct permanent siding for the 1320 MW Buxar Thermal Power Project in Bihar, with a 36-month ex",
-    "src": "financialexpress",
-    "time": "1d ago",
-    "link": "https://www.financialexpress.com/business/industry-rvnl-bags-rs-903-crore-contract-for-1320-mw-bihar-power-plant-from-sjvn-4333426/",
-    "type": "railways",
-    "fetchedAt": "2026-09-07T07:03:18+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "NHIDCL Floats ₹14.37 Crore Tender for Emergency Maintenance of NH-102A in Manipur - smestreet.in",
-    "desc": "NHIDCL Floats ₹14.37 Crore Tender for Emergency Maintenance of NH-102A in Manipur    smestreet.in",
-    "src": "NHIDCL",
-    "time": "2d ago",
-    "link": "https://www.google.com/search?q=NHIDCL%20Floats%201437%20Crore%20Tender%20for%20Emergency%20Maintenance%20of%20NH102A%20in%20Manipur%20%20smestreeti",
-    "type": "highways",
-    "fetchedAt": "2026-09-06T11:25:07+00:00",
-    "ageDays": 2
-  },
-  {
     "title": "Coal India's Production and Dispatch Surge Amid Eased Monsoon Impact",
     "desc": "Coal India Ltd is seeing a significant uptick in production and coal supply as the monsoon's effects subside and mine conditions improve. The company's daily output and dispatches ",
     "src": "Devdiscourse",
@@ -330,84 +350,54 @@
     "ageDays": 6
   },
   {
-    "title": "Komatsu to boost supply of construction equipment to North America: CFO - Nikkei Asia",
-    "desc": "Komatsu to boost supply of construction equipment to North America: CFO    Nikkei Asia",
+    "title": "Komatsu to boost supply of construction equipment to North America: CFO - asia.nikkei.com",
+    "desc": "Komatsu to boost supply of construction equipment to North America: CFO    asia.nikkei.com",
     "src": "Komatsu",
     "time": "6d ago",
-    "link": "https://www.google.com/search?q=Komatsu%20to%20boost%20supply%20of%20construction%20equipment%20to%20North%20America%20CFO%20%20Nikkei%20Asia",
+    "link": "https://www.google.com/search?q=Komatsu%20to%20boost%20supply%20of%20construction%20equipment%20to%20North%20America%20CFO%20%20asianikkeicom",
     "type": "corporate",
     "fetchedAt": "2026-09-02T12:40:00+00:00",
     "ageDays": 6
   },
   {
-    "title": "Coal Mines In India 2026, State Wise Top 10 List, Underground - Vajiram & Ravi",
-    "desc": "Coal Mines In India 2026, State Wise Top 10 List, Underground    Vajiram & Ravi",
+    "title": "Coal Mines In India 2026, State Wise Top 10 List, Underground - vajiramandravi.com",
+    "desc": "Coal Mines In India 2026, State Wise Top 10 List, Underground    vajiramandravi.com",
     "src": "Coal Block",
-    "time": "7d ago",
-    "link": "https://www.google.com/search?q=Coal%20Mines%20In%20India%202026%20State%20Wise%20Top%2010%20List%20Underground%20%20Vajiram%20%20Ravi",
+    "time": "8d ago",
+    "link": "https://www.google.com/search?q=Coal%20Mines%20In%20India%202026%20State%20Wise%20Top%2010%20List%20Underground%20%20vajiramandravicom",
     "type": "mining",
     "fetchedAt": "2026-09-01T07:00:00+00:00",
-    "ageDays": 7
+    "ageDays": 8
   },
   {
     "title": "Hazoor Multi Projects Bags Rs. 193.85 Crore NHAI Contract For Toll Fee Collection In Tamil Nadu - outlookbusiness.com",
     "desc": "Hazoor Multi Projects Bags Rs. 193.85 Crore NHAI Contract For Toll Fee Collection In Tamil Nadu    outlookbusiness.com",
     "src": "NHAI",
-    "time": "13d ago",
+    "time": "14d ago",
     "link": "https://www.google.com/search?q=Hazoor%20Multi%20Projects%20Bags%20Rs%2019385%20Crore%20NHAI%20Contract%20For%20Toll%20Fee%20Collection%20In%20Tamil%20N",
     "type": "highways",
     "fetchedAt": "2026-08-26T07:00:00+00:00",
-    "ageDays": 13
+    "ageDays": 14
   },
   {
     "title": "Ceigall India bags four MoRTH road projects worth ₹2,150 crore in Arunachal Pradesh - smallcapspotlight.in",
     "desc": "Ceigall India bags four MoRTH road projects worth ₹2,150 crore in Arunachal Pradesh    smallcapspotlight.in",
     "src": "MoRTH",
-    "time": "13d ago",
+    "time": "14d ago",
     "link": "https://www.google.com/search?q=Ceigall%20India%20bags%20four%20MoRTH%20road%20projects%20worth%202150%20crore%20in%20Arunachal%20Pradesh%20%20smallca",
     "type": "highways",
     "fetchedAt": "2026-08-26T07:00:00+00:00",
-    "ageDays": 13
+    "ageDays": 14
   },
   {
     "title": "Ohio construction workers found a kitten trapped inside an excavator; now she has her own hard hat and a job working with them - The Times of India",
     "desc": "Ohio construction workers found a kitten trapped inside an excavator; now she has her own hard hat and a job working with them    The Times of India",
     "src": "Komatsu",
-    "time": "13d ago",
+    "time": "14d ago",
     "link": "https://www.google.com/search?q=Ohio%20construction%20workers%20found%20a%20kitten%20trapped%20inside%20an%20excavator%20now%20she%20has%20her%20own%20h",
     "type": "corporate",
     "fetchedAt": "2026-08-26T07:00:00+00:00",
-    "ageDays": 13
-  },
-  {
-    "title": "Innovision Secures ₹51.54 Crore NHAI Fee Plaza Operations Contract In Uttar Pradesh - Sahi",
-    "desc": "Innovision Secures ₹51.54 Crore NHAI Fee Plaza Operations Contract In Uttar Pradesh    Sahi",
-    "src": "NHAI",
-    "time": "15d ago",
-    "link": "https://www.google.com/search?q=Innovision%20Secures%205154%20Crore%20NHAI%20Fee%20Plaza%20Operations%20Contract%20In%20Uttar%20Pradesh%20%20Sahi",
-    "type": "highways",
-    "fetchedAt": "2026-08-24T07:00:00+00:00",
-    "ageDays": 15
-  },
-  {
-    "title": "Ceigall India Secures ₹704.7 Crore Frontier Highway Project In Arunachal Pradesh - Sahi",
-    "desc": "Ceigall India Secures ₹704.7 Crore Frontier Highway Project In Arunachal Pradesh    Sahi",
-    "src": "MoRTH",
-    "time": "15d ago",
-    "link": "https://www.google.com/search?q=Ceigall%20India%20Secures%207047%20Crore%20Frontier%20Highway%20Project%20In%20Arunachal%20Pradesh%20%20Sahi",
-    "type": "highways",
-    "fetchedAt": "2026-08-24T07:00:00+00:00",
-    "ageDays": 15
-  },
-  {
-    "title": "Ceigall India-led JV bags ₹705 crore Frontier Highway project in Arunachal Pradesh - CNBC TV18",
-    "desc": "Ceigall India-led JV bags ₹705 crore Frontier Highway project in Arunachal Pradesh    CNBC TV18",
-    "src": "Highway EPC",
-    "time": "15d ago",
-    "link": "https://www.google.com/search?q=Ceigall%20Indialed%20JV%20bags%20705%20crore%20Frontier%20Highway%20project%20in%20Arunachal%20Pradesh%20%20CNBC%20TV1",
-    "type": "highways",
-    "fetchedAt": "2026-08-24T07:00:00+00:00",
-    "ageDays": 15
+    "ageDays": 14
   },
   {
     "title": "Ceigall India shares rise 4% after winning Rs 705 crore Arunachal Pradesh Frontier Highway project",
@@ -420,83 +410,93 @@
     "ageDays": 15
   },
   {
+    "title": "Innovision Secures ₹51.54 Crore NHAI Fee Plaza Operations Contract In Uttar Pradesh - Sahi",
+    "desc": "Innovision Secures ₹51.54 Crore NHAI Fee Plaza Operations Contract In Uttar Pradesh    Sahi",
+    "src": "NHAI",
+    "time": "16d ago",
+    "link": "https://www.google.com/search?q=Innovision%20Secures%205154%20Crore%20NHAI%20Fee%20Plaza%20Operations%20Contract%20In%20Uttar%20Pradesh%20%20Sahi",
+    "type": "highways",
+    "fetchedAt": "2026-08-24T07:00:00+00:00",
+    "ageDays": 16
+  },
+  {
+    "title": "Ceigall India Secures ₹704.7 Crore Frontier Highway Project In Arunachal Pradesh - Sahi",
+    "desc": "Ceigall India Secures ₹704.7 Crore Frontier Highway Project In Arunachal Pradesh    Sahi",
+    "src": "MoRTH",
+    "time": "16d ago",
+    "link": "https://www.google.com/search?q=Ceigall%20India%20Secures%207047%20Crore%20Frontier%20Highway%20Project%20In%20Arunachal%20Pradesh%20%20Sahi",
+    "type": "highways",
+    "fetchedAt": "2026-08-24T07:00:00+00:00",
+    "ageDays": 16
+  },
+  {
+    "title": "Ceigall India-led JV bags ₹705 crore Frontier Highway project in Arunachal Pradesh - CNBC TV18",
+    "desc": "Ceigall India-led JV bags ₹705 crore Frontier Highway project in Arunachal Pradesh    CNBC TV18",
+    "src": "Highway EPC",
+    "time": "16d ago",
+    "link": "https://www.google.com/search?q=Ceigall%20Indialed%20JV%20bags%20705%20crore%20Frontier%20Highway%20project%20in%20Arunachal%20Pradesh%20%20CNBC%20TV1",
+    "type": "highways",
+    "fetchedAt": "2026-08-24T07:00:00+00:00",
+    "ageDays": 16
+  },
+  {
     "title": "Innovision Receives ₹51.54 Crore NHAI Award For Two Toll Plazas In Uttar Pradesh - Sahi",
     "desc": "Innovision Receives ₹51.54 Crore NHAI Award For Two Toll Plazas In Uttar Pradesh    Sahi",
     "src": "NHAI",
-    "time": "18d ago",
+    "time": "19d ago",
     "link": "https://www.google.com/search?q=Innovision%20Receives%205154%20Crore%20NHAI%20Award%20For%20Two%20Toll%20Plazas%20In%20Uttar%20Pradesh%20%20Sahi",
     "type": "highways",
     "fetchedAt": "2026-08-21T07:00:00+00:00",
-    "ageDays": 18
+    "ageDays": 19
   },
   {
     "title": "Top 3 Infrastructure Stocks in India 2026: IRB Infrastructure, KNR Constructions, PNC Infratech - Univest",
     "desc": "Top 3 Infrastructure Stocks in India 2026: IRB Infrastructure, KNR Constructions, PNC Infratech    Univest",
     "src": "HAM",
-    "time": "18d ago",
+    "time": "19d ago",
     "link": "https://www.google.com/search?q=Top%203%20Infrastructure%20Stocks%20in%20India%202026%20IRB%20Infrastructure%20KNR%20Constructions%20PNC%20Infrate",
     "type": "highways",
-    "fetchedAt": "2026-08-21T07:00:00+00:00",
-    "ageDays": 18
+    "fetchedAt": "2026-08-21T10:12:00+00:00",
+    "ageDays": 19
   },
   {
     "title": "4 Mining and Mineral Products Stocks with Strong Growth Plans in India (2026) - Univest",
     "desc": "4 Mining and Mineral Products Stocks with Strong Growth Plans in India (2026)    Univest",
     "src": "Coal Block",
-    "time": "19d ago",
+    "time": "20d ago",
     "link": "https://www.google.com/search?q=4%20Mining%20and%20Mineral%20Products%20Stocks%20with%20Strong%20Growth%20Plans%20in%20India%202026%20%20Univest",
     "type": "mining",
     "fetchedAt": "2026-08-20T07:00:00+00:00",
-    "ageDays": 19
+    "ageDays": 20
   },
   {
-    "title": "Celigall India JVs bags Rs 2,423-crore order for road construction on NH-913 in Arunachal Pradesh - mid-day.com",
-    "desc": "Celigall India JVs bags Rs 2,423-crore order for road construction on NH-913 in Arunachal Pradesh    mid-day.com",
+    "title": "Celigall India JVs bags Rs 2,423-crore order for road construction on NH-913 in Arunachal Pradesh - Mid-Day",
+    "desc": "Celigall India JVs bags Rs 2,423-crore order for road construction on NH-913 in Arunachal Pradesh    Mid-Day",
     "src": "Highway EPC",
-    "time": "19d ago",
+    "time": "20d ago",
     "link": "https://www.google.com/search?q=Celigall%20India%20JVs%20bags%20Rs%202423crore%20order%20for%20road%20construction%20on%20NH913%20in%20Arunachal%20Pra",
     "type": "highways",
     "fetchedAt": "2026-08-20T07:00:00+00:00",
-    "ageDays": 19
+    "ageDays": 20
   },
   {
     "title": "Phase Growth Led by EPC, Housing & GCC Projects",
     "desc": "MUMBAI, India, Aug. 20, 2026 /PRNewswire/ -- For Supreme Infrastructure India Limited, the next phase is beginning with something the company has built for decades: buildings. Whil",
     "src": "The Tribune",
-    "time": "19d ago",
+    "time": "20d ago",
     "link": "https://www.tribuneindia.com/news/business/supreme-infrastructure-targets-next-phase-growth-led-by-epc-housing-gcc-projects-2-2/",
     "type": "highways",
     "fetchedAt": "2026-08-20T08:53:21+00:00",
-    "ageDays": 19
+    "ageDays": 20
   },
   {
     "title": "Ceigall India bags ₹274 crore Arunachal Pradesh road project from MoRTH - CNBC TV18",
     "desc": "Ceigall India bags ₹274 crore Arunachal Pradesh road project from MoRTH    CNBC TV18",
     "src": "MoRTH",
-    "time": "20d ago",
+    "time": "21d ago",
     "link": "https://www.google.com/search?q=Ceigall%20India%20bags%20274%20crore%20Arunachal%20Pradesh%20road%20project%20from%20MoRTH%20%20CNBC%20TV18",
     "type": "highways",
     "fetchedAt": "2026-08-19T07:00:00+00:00",
-    "ageDays": 20
-  },
-  {
-    "title": "Magellanic Cloud's Order Momentum Accelerates with ₹8.90 Crore DFCCIL Win, Further Strengthening Growth Momentum - aninews.in",
-    "desc": "Magellanic Cloud's Order Momentum Accelerates with ₹8.90 Crore DFCCIL Win, Further Strengthening Growth Momentum    aninews.in",
-    "src": "DFCCIL",
-    "time": "20d ago",
-    "link": "https://www.google.com/search?q=Magellanic%20Clouds%20Order%20Momentum%20Accelerates%20with%20890%20Crore%20DFCCIL%20Win%20Further%20Strengtheni",
-    "type": "railways",
-    "fetchedAt": "2026-08-19T07:00:00+00:00",
-    "ageDays": 20
-  },
-  {
-    "title": "Provigil Surveillance bags OPEX contract from DFCCIL - Business Standard",
-    "desc": "Provigil Surveillance bags OPEX contract from DFCCIL    Business Standard",
-    "src": "DFCCIL",
-    "time": "21d ago",
-    "link": "https://www.google.com/search?q=Provigil%20Surveillance%20bags%20OPEX%20contract%20from%20DFCCIL%20%20Business%20Standard",
-    "type": "railways",
-    "fetchedAt": "2026-08-18T07:00:00+00:00",
     "ageDays": 21
   }
 ]
