@@ -1,12 +1,62 @@
 [
   {
-    "title": "Commercial Coal Block Auctions to Generate ₹55,000 Crore Investment, 490,000 Jobs - rediff.com",
-    "desc": "Commercial Coal Block Auctions to Generate ₹55,000 Crore Investment, 490,000 Jobs    rediff.com",
+    "title": "Volvo CE launches 65-tonne EC650 excavator at Bauma CONEXPO India 2026 - ET Manufacturing",
+    "desc": "Volvo CE launches 65-tonne EC650 excavator at Bauma CONEXPO India 2026    ET Manufacturing",
+    "src": "Mining",
+    "time": "5h ago",
+    "link": "https://www.google.com/search?q=Volvo%20CE%20launches%2065tonne%20EC650%20excavator%20at%20Bauma%20CONEXPO%20India%202026%20%20ET%20Manufacturing",
+    "type": "mining",
+    "fetchedAt": "2026-09-15T11:55:25+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Commercial Coal Block Auctions to Generate ₹55,000 Crore Investment, 490,000 Jobs - Rediff",
+    "desc": "Commercial Coal Block Auctions to Generate ₹55,000 Crore Investment, 490,000 Jobs    Rediff",
     "src": "Coal Block",
-    "time": "3h ago",
-    "link": "https://www.google.com/search?q=Commercial%20Coal%20Block%20Auctions%20to%20Generate%2055000%20Crore%20Investment%20490000%20Jobs%20%20rediffcom",
+    "time": "8h ago",
+    "link": "https://www.google.com/search?q=Commercial%20Coal%20Block%20Auctions%20to%20Generate%2055000%20Crore%20Investment%20490000%20Jobs%20%20Rediff",
     "type": "mining",
     "fetchedAt": "2026-09-15T09:26:59+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Volvo CE launches EC650 mining excavator at bauma CONEXPO INDIA 2026 - Manufacturing Today India",
+    "desc": "Volvo CE launches EC650 mining excavator at bauma CONEXPO INDIA 2026    Manufacturing Today India",
+    "src": "Komatsu",
+    "time": "4h ago",
+    "link": "https://www.google.com/search?q=Volvo%20CE%20launches%20EC650%20mining%20excavator%20at%20bauma%20CONEXPO%20INDIA%202026%20%20Manufacturing%20Today",
+    "type": "corporate",
+    "fetchedAt": "2026-09-15T13:37:08+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "KEC International, Coforge shares jump up to 5% - What's behind the surge",
+    "desc": "KEC International shares surged over 5% following new orders worth ₹1,303 crore, covering projects in India, the Middle East, and Americas. Coforge shares gained 2.4% after board c",
+    "src": "livemint",
+    "time": "12h ago",
+    "link": "https://www.livemint.com/market/stock-market-news/kec-international-coforge-shares-jump-up-to-5-whats-behind-the-surge-11789446308266.html",
+    "type": "highways",
+    "fetchedAt": "2026-09-15T04:44:32+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Stocks to watch: HDFC Bank, HFCL, Emami, Coforge, Solar Inds, Vodafone Idea",
+    "desc": "Stocks to watch today: Shares of Pranav Constructions will list on the exchanges today. According to grey market trends, the stock could debut at a 36 per cent premium.",
+    "src": "business-standard",
+    "time": "15h ago",
+    "link": "https://www.business-standard.com/markets/news/stocks-to-watch-september-15-hdfc-bank-hfcl-emami-coforge-solar-inds-vodafone-idea-126091500081_1.html",
+    "type": "highways",
+    "fetchedAt": "2026-09-15T02:40:41+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Stocks to watch, Sept 15: HDFC Bank, BSE, broking firms, HCL Tech, Deccan Gold Mines, CESC, Glenmark, BHEL, Patel Airtemp, Lenskart, Heidelberg, AU Small Fiance Bank, Gland Pharma",
+    "desc": "Key developments this week include HDFC Bank’s leadership transition, regulatory changes for brokerages, BHEL’s significant investments, strategic partnerships in technology and mi",
+    "src": "thehindubusinessline",
+    "time": "16h ago",
+    "link": "https://www.thehindubusinessline.com/markets/stocks-to-watch-sept-15-hdfc-bank-bse-broking-firms-hcl-tech-deccan-gold-mines-cesc-glenmark-bhel-patel-airtemp-lenskart-heidelberg-au-small-fiance-bank-gland-pharma/article71466536.ece",
+    "type": "railways",
+    "fetchedAt": "2026-09-15T01:26:27+00:00",
     "ageDays": 0
   },
   {
@@ -16,7 +66,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/free-flow-tolling-at-9-delhi-highway-entry-points-by-oct-end/articleshow/134246474.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +76,7 @@
     "time": "Recent",
     "link": "https://indianexpress.com/article/business/nhai-1033-helpline-upgrade-ai-real-time-location-ambulances-10877903/",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +86,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/nhai-tightens-highway-plantation-rules-links-project-completion-certificates-to-80-per-cent-plantation-and-90-per-cent-survival-rate",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/commodities/coal-nears-breakout-gulf-energy-shock-drives-utilities-back-dirty-fuel-ahead-winter",
     "type": "mining",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +106,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/geopolitical/brics-urges-maximum-restraint-us-iran-war-tests-unity-new-delhi-summit",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +116,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/lt-shares-slip-3-6-in-a-month-analysts-see-up-to-16-upside-on-record-order-book/articleshow/134249386.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-slide-tech-tumbles-fears-ai-slowdown-oil-jumps",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.spglobal.com/energy/en/news-research/latest-news/crude-oil/091426-brics-calls-for-cooperation-to-ensure-energy-security-recognizes-fossil-fuels-importance",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/delhi-declaration-adopted-at-20th-brics-summit-as-india-pushes-for-global-order-overhaul-ytvd-2993516-2026-09-13",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/west-asia-crisis-brics-payment-mechanism-shifting-global-order-discussed-ytvd-2993513-2026-09-13",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/masoud-pezeshkian-what-the-us-did-it-made-us-more-united-ytvd-2993351-2026-09-12",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +176,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/iran-denies-seeking-war-slams-us-israel-aggression-demands-end-to-sanctions-ytvd-2993347-2026-09-12",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +186,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/pm-modi-xi-jinping-talks-trade-imbalance-and-global-south-focus-ahead-of-18th-brics-summit-ytvd-2992863-2026-09-12",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +196,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/precious-metals/beijing-preps-currency-wars",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +206,7 @@
     "time": "Recent",
     "link": "https://www.livemint.com/industry/energy/india-data-centres-power-backup-gensets-electricity-supply-cummins-india-kirloskar-oil-engines-sterling-green-power-11789098449257.html",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +216,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/brics-economic-weight-global-choke-point-risks-and-energy-supply-security-ytvd-2992180-2026-09-11",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +226,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-slide-brent-tops-100-10y-yields-rise-above-481-ahead-expanded-treasury-buyback",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -186,7 +236,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/brics-by-brics-indias-journey-from-seeking-reforms-to-shaping-global-order/articleshow/133957861.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -196,7 +246,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/indl-goods/svs/engineering/lt-secures-large-offshore-order-from-ongc-for-indias-west-coast-development-projects-5000-crores-larsen-toubro-share-price/articleshow/133952961.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -206,7 +256,7 @@
     "time": "Recent",
     "link": "https://splash247.com/ongc-hands-lt-fresh-work-off-indias-west-coast/",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -216,7 +266,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/brics-at-20-india-faces-test-of-balancing-geopolitical-divides-with-economic-goals/articleshow/133948413.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
@@ -226,27 +276,17 @@
     "time": "Recent",
     "link": "https://www.dnaindia.com/india/report-lalu-yadav-rabri-devi-tejashwi-yadav-face-pmla-trial-in-irctc-case-what-delhi-court-ordered-3220234",
     "type": "railways",
-    "fetchedAt": "2026-09-15T12:50:58.402208+00:00",
+    "fetchedAt": "2026-09-15T17:42:34.734819+00:00",
     "ageDays": 0
   },
   {
-    "title": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH - newsonair.gov.in",
-    "desc": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH    newsonair.gov.in",
+    "title": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH - News On AIR",
+    "desc": "Barabanki-Bahraich Highway to play transformative role in strengthening trade ties between India, Nepal: MoRTH    News On AIR",
     "src": "MoRTH",
     "time": "1d ago",
     "link": "https://www.google.com/search?q=BarabankiBahraich%20Highway%20to%20play%20transformative%20role%20in%20strengthening%20trade%20ties%20between",
     "type": "highways",
     "fetchedAt": "2026-09-14T10:58:56+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "NHAI to start Sadahalli Junction underpass work soon in Bengaluru",
-    "desc": "NHAI to start Sadahalli Junction underpass work soon in Bengaluru",
-    "src": "toi",
-    "time": "1d ago",
-    "link": "https://timesofindia.indiatimes.com/city/bengaluru/nhai-to-start-sadahalli-junction-underpass-work-soon-in-bengaluru/articleshow/134207628.cms",
-    "type": "highways",
-    "fetchedAt": "2026-09-13T14:50:55+00:00",
     "ageDays": 1
   },
   {
@@ -330,16 +370,6 @@
     "ageDays": 1
   },
   {
-    "title": "Rajendra Mittal Vs. SEMAC Consultants Ltd. – NCLT, Chennai Bench",
-    "desc": "Login Access Default, Dispute, and Debt Resolution Laws Password Email OTP WhatsApp OTP Google Username or Email Password 👁 Remember [...]",
-    "src": "ibclaw_in",
-    "time": "1d ago",
-    "link": "https://ibclaw.in/rajendra-mittal-vs-semac-consultants-ltd-nclt-chennai-bench/",
-    "type": "highways",
-    "fetchedAt": "2026-09-13T20:46:00+00:00",
-    "ageDays": 1
-  },
-  {
     "title": "Hazoor Multi Projects wins ₹41.98 crore NHAI order for H. Pudhupatti plaza - scanx.trade",
     "desc": "Hazoor Multi Projects wins ₹41.98 crore NHAI order for H. Pudhupatti plaza    scanx.trade",
     "src": "NHAI",
@@ -363,11 +393,11 @@
     "title": "Innovision secures INR 219 crore NHAI contract for toll collection on Indore-Dewas highway - Prop News Time",
     "desc": "Innovision secures INR 219 crore NHAI contract for toll collection on Indore-Dewas highway    Prop News Time",
     "src": "NHAI",
-    "time": "3d ago",
+    "time": "4d ago",
     "link": "https://www.google.com/search?q=Innovision%20secures%20INR%20219%20crore%20NHAI%20contract%20for%20toll%20collection%20on%20IndoreDewas%20highway",
     "type": "highways",
     "fetchedAt": "2026-09-11T15:34:33+00:00",
-    "ageDays": 3
+    "ageDays": 4
   },
   {
     "title": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years - DD News",
@@ -433,11 +463,11 @@
     "title": "Coal India's Production and Dispatch Surge Amid Eased Monsoon Impact",
     "desc": "Coal India Ltd is seeing a significant uptick in production and coal supply as the monsoon's effects subside and mine conditions improve. The company's daily output and dispatches ",
     "src": "Devdiscourse",
-    "time": "9d ago",
+    "time": "10d ago",
     "link": "https://www.devdiscourse.com/article/business/3973141-coal-indias-production-and-dispatch-surge-amid-eased-monsoon-impact",
     "type": "mining",
     "fetchedAt": "2026-09-05T14:17:07+00:00",
-    "ageDays": 9
+    "ageDays": 10
   },
   {
     "title": "SECL CVO Himanshu Jain addresses DFCCIL session on public procurement and preventive vigilance - PSU Watch",
@@ -468,35 +498,5 @@
     "type": "highways",
     "fetchedAt": "2026-08-29T07:00:00+00:00",
     "ageDays": 17
-  },
-  {
-    "title": "Hazoor Multi Projects Bags Rs.193.85 Crore NHAI Contract for Toll Fee Collection in Tamil Nadu - Ahmedabad Mirror",
-    "desc": "Hazoor Multi Projects Bags Rs.193.85 Crore NHAI Contract for Toll Fee Collection in Tamil Nadu    Ahmedabad Mirror",
-    "src": "NHAI",
-    "time": "20d ago",
-    "link": "https://www.google.com/search?q=Hazoor%20Multi%20Projects%20Bags%20Rs19385%20Crore%20NHAI%20Contract%20for%20Toll%20Fee%20Collection%20in%20Tamil%20Na",
-    "type": "highways",
-    "fetchedAt": "2026-08-26T12:39:29+00:00",
-    "ageDays": 20
-  },
-  {
-    "title": "Ceigall India bags four MoRTH road projects worth ₹2,150 crore in Arunachal Pradesh - smallcapspotlight.in",
-    "desc": "Ceigall India bags four MoRTH road projects worth ₹2,150 crore in Arunachal Pradesh    smallcapspotlight.in",
-    "src": "MoRTH",
-    "time": "20d ago",
-    "link": "https://www.google.com/search?q=Ceigall%20India%20bags%20four%20MoRTH%20road%20projects%20worth%202150%20crore%20in%20Arunachal%20Pradesh%20%20smallca",
-    "type": "highways",
-    "fetchedAt": "2026-08-26T07:00:00+00:00",
-    "ageDays": 20
-  },
-  {
-    "title": "Ohio construction workers found a kitten trapped inside an excavator; now she has her own hard hat and a - The Times of India",
-    "desc": "Ohio construction workers found a kitten trapped inside an excavator; now she has her own hard hat and a    The Times of India",
-    "src": "Komatsu",
-    "time": "20d ago",
-    "link": "https://www.google.com/search?q=Ohio%20construction%20workers%20found%20a%20kitten%20trapped%20inside%20an%20excavator%20now%20she%20has%20her%20own%20h",
-    "type": "corporate",
-    "fetchedAt": "2026-08-26T07:00:00+00:00",
-    "ageDays": 20
   }
 ]
