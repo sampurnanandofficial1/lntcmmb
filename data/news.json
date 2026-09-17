@@ -1,12 +1,52 @@
 [
   {
-    "title": "Volvo CE Launches EC650 Mining Excavator at bauma CONEXPO INDIA - constructionworld.in",
-    "desc": "Volvo CE Launches EC650 Mining Excavator at bauma CONEXPO INDIA    constructionworld.in",
+    "title": "Volvo CE Launches EC650 Mining Excavator at bauma CONEXPO INDIA - Construction World",
+    "desc": "Volvo CE Launches EC650 Mining Excavator at bauma CONEXPO INDIA    Construction World",
     "src": "Mining",
-    "time": "11h ago",
-    "link": "https://www.google.com/search?q=Volvo%20CE%20Launches%20EC650%20Mining%20Excavator%20at%20bauma%20CONEXPO%20INDIA%20%20constructionworldin",
+    "time": "23h ago",
+    "link": "https://www.google.com/search?q=Volvo%20CE%20Launches%20EC650%20Mining%20Excavator%20at%20bauma%20CONEXPO%20INDIA%20%20Construction%20World",
     "type": "mining",
     "fetchedAt": "2026-09-16T06:36:58+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Highway Infra bags over ₹220 crore order for Gorakhpur Link Expressway",
+    "desc": "Highway Infrastructure has secured a ₹220.66 crore order from UPEIDA for toll collection and plaza operations on the Gorakhpur Link Expressway, with the contract running for two ye",
+    "src": "cnbctv18",
+    "time": "16h ago",
+    "link": "https://www.cnbctv18.com/business/companies/highway-infra-share-price-rs-220-crore-order-upeida-gorakhpur-link-expressway-19992115.htm",
+    "type": "highways",
+    "fetchedAt": "2026-09-16T13:53:07+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Top stocks in focus tomorrow: Investors must watch Infosys, Mazagon Dock shares on Thursday, 17 Sept | Triggers",
+    "desc": "Indian stock market investors are set to monitor several companies on September 17, including Fortis Healthcare, Mazagon Dock Shipbuilders, and Infosys, due to significant business",
+    "src": "livemint",
+    "time": "13h ago",
+    "link": "https://www.livemint.com/market/top-stocks-in-focus-tomorrow-investors-must-watch-infosys-mazagon-dock-shares-on-thursday-17-sept-triggers-11789574580431.html",
+    "type": "highways",
+    "fetchedAt": "2026-09-16T17:18:53+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Salasar wins ₹20 crore deal to supply 200 towers for BSNL’s 4G network in Rajasthan",
+    "desc": "Salasar Techno Engineering, an engineering, procurement and construction (EPC) company, has secured an order valued at ₹20.5 crore to supply 200 40-meter towers for Bharat Sanchar ",
+    "src": "telecomlive",
+    "time": "18h ago",
+    "link": "https://telecomlive.in/web/2026/09/16/salasar-wins-%E2%82%B920-crore-deal-to-supply-200-towers-for-bsnls-4g-network-in-rajasthan/",
+    "type": "highways",
+    "fetchedAt": "2026-09-16T11:54:25+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Salasar Techno Engineering to Supply 200 Towers for BSNL’s 4G Saturation Rollout in Rajasthan Circle",
+    "desc": "Salasar Techno Engineering Limited, a leading engineering, procurement and construction (EPC) player in India’s telecom, power transmission and infrastructure sectors, is executing",
+    "src": "cxotoday",
+    "time": "19h ago",
+    "link": "https://cxotoday.com/media-coverage/salasar-techno-engineering-to-supply-200-towers-for-bsnls-4g-saturation-rollout-in-rajasthan-circle/",
+    "type": "highways",
+    "fetchedAt": "2026-09-16T10:40:33+00:00",
     "ageDays": 0
   },
   {
@@ -16,7 +56,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/free-flow-tolling-at-9-delhi-highway-entry-points-by-oct-end/articleshow/134246474.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +66,7 @@
     "time": "Recent",
     "link": "https://indianexpress.com/article/business/nhai-1033-helpline-upgrade-ai-real-time-location-ambulances-10877903/",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +76,17 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/commodities/coal-nears-breakout-gulf-energy-shock-drives-utilities-back-dirty-fuel-ahead-winter",
     "type": "mining",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Centre seeks dismissal of pleas by members of Delhi Gymkhana Club | Delhi News - The Times of India",
+    "desc": "Delhi High Court to hear Sept 29 pleas by Delhi Gymkhana Club members challenging Centre’s lease termination and eviction; Centre seeks dismissal citing defence needs.",
+    "src": "Times News Network",
+    "time": "Recent",
+    "link": "https://timesofindia.indiatimes.com/city/delhi/centre-seeks-dismissal-of-pleas-by-members-of-delhi-gymkhana-club/articleshow/134294689.cms",
+    "type": "highways",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.globenewswire.com/news-release/2026/09/16/3363273/10669/en/bos-secures-1-2-million-order-from-a-european-defense-customer.html",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +106,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/geopolitical/brics-urges-maximum-restraint-us-iran-war-tests-unity-new-delhi-summit",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +116,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/lt-shares-slip-3-6-in-a-month-analysts-see-up-to-16-upside-on-record-order-book/articleshow/134249386.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-slide-tech-tumbles-fears-ai-slowdown-oil-jumps",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.spglobal.com/energy/en/news-research/latest-news/crude-oil/091426-brics-calls-for-cooperation-to-ensure-energy-security-recognizes-fossil-fuels-importance",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/delhi-declaration-adopted-at-20th-brics-summit-as-india-pushes-for-global-order-overhaul-ytvd-2993516-2026-09-13",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/west-asia-crisis-brics-payment-mechanism-shifting-global-order-discussed-ytvd-2993513-2026-09-13",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/masoud-pezeshkian-what-the-us-did-it-made-us-more-united-ytvd-2993351-2026-09-12",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +176,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/iran-denies-seeking-war-slams-us-israel-aggression-demands-end-to-sanctions-ytvd-2993347-2026-09-12",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +186,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/pm-modi-xi-jinping-talks-trade-imbalance-and-global-south-focus-ahead-of-18th-brics-summit-ytvd-2992863-2026-09-12",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +196,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/precious-metals/beijing-preps-currency-wars",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +206,7 @@
     "time": "Recent",
     "link": "https://www.livemint.com/industry/energy/india-data-centres-power-backup-gensets-electricity-supply-cummins-india-kirloskar-oil-engines-sterling-green-power-11789098449257.html",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +216,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/brics-economic-weight-global-choke-point-risks-and-energy-supply-security-ytvd-2992180-2026-09-11",
     "type": "highways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +226,7 @@
     "time": "Recent",
     "link": "https://www.dnaindia.com/india/report-lalu-yadav-rabri-devi-tejashwi-yadav-face-pmla-trial-in-irctc-case-what-delhi-court-ordered-3220234",
     "type": "railways",
-    "fetchedAt": "2026-09-16T17:39:55.478776+00:00",
+    "fetchedAt": "2026-09-17T06:34:06.798149+00:00",
     "ageDays": 0
   },
   {
@@ -250,56 +300,6 @@
     "ageDays": 1
   },
   {
-    "title": "KEC International Shares Gain on Rs 1,303 Crore Orders",
-    "desc": "Shares of KEC International Ltd gained more than 5% in early trade on September 15 after the infrastructure EPC company announced new orders worth Rs 1,303 crore across its busines",
-    "src": "equitypandit",
-    "time": "1d ago",
-    "link": "https://www.equitypandit.com/kec-international-shares-gain-on-rs-1303-crore-orders/",
-    "type": "highways",
-    "fetchedAt": "2026-09-15T05:48:00+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "KEC International rises after bagging orders worth Rs 1,303 crore",
-    "desc": "KEC International added 1.24% to Rs 411.50 after the company said that it has secured new orders of Rs 1,303 crore across various businesses.",
-    "src": "business-standard",
-    "time": "1d ago",
-    "link": "https://www.business-standard.com/markets/capital-market-news/kec-international-rises-after-bagging-orders-worth-rs-1-303-crore-126091500283_1.html",
-    "type": "highways",
-    "fetchedAt": "2026-09-15T05:46:19+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "KEC International, Coforge shares jump up to 5% - What's behind the surge",
-    "desc": "KEC International shares surged over 5% following new orders worth ₹1,303 crore, covering projects in India, the Middle East, and Americas. Coforge shares gained 2.4% after board c",
-    "src": "livemint",
-    "time": "1d ago",
-    "link": "https://www.livemint.com/market/stock-market-news/kec-international-coforge-shares-jump-up-to-5-whats-behind-the-surge-11789446308266.html",
-    "type": "highways",
-    "fetchedAt": "2026-09-15T04:44:32+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "Stocks to watch: HDFC Bank, HFCL, Emami, Coforge, Solar Inds, Vodafone Idea",
-    "desc": "Stocks to watch today: Shares of Pranav Constructions will list on the exchanges today. According to grey market trends, the stock could debut at a 36 per cent premium.",
-    "src": "business-standard",
-    "time": "1d ago",
-    "link": "https://www.business-standard.com/markets/news/stocks-to-watch-september-15-hdfc-bank-hfcl-emami-coforge-solar-inds-vodafone-idea-126091500081_1.html",
-    "type": "highways",
-    "fetchedAt": "2026-09-15T02:40:41+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "Stocks to watch, Sept 15: HDFC Bank, BSE, broking firms, HCL Tech, Deccan Gold Mines, CESC, Glenmark, BHEL, Patel Airtemp, Lenskart, Heidelberg, AU Small Fiance Bank, Gland Pharma",
-    "desc": "Key developments this week include HDFC Bank’s leadership transition, regulatory changes for brokerages, BHEL’s significant investments, strategic partnerships in technology and mi",
-    "src": "thehindubusinessline",
-    "time": "1d ago",
-    "link": "https://www.thehindubusinessline.com/markets/stocks-to-watch-sept-15-hdfc-bank-bse-broking-firms-hcl-tech-deccan-gold-mines-cesc-glenmark-bhel-patel-airtemp-lenskart-heidelberg-au-small-fiance-bank-gland-pharma/article71466536.ece",
-    "type": "railways",
-    "fetchedAt": "2026-09-15T01:26:27+00:00",
-    "ageDays": 1
-  },
-  {
     "title": "BHEL board okays Rs 65 crore investment in JV NTPC BHEL Power Projects",
     "desc": "The main objective of the JVC is to carry out EPC contracts for power plants and other infrastructure projects, as well as manufacture and supply of equipment in India and abroad.",
     "src": "Moneycontrol",
@@ -320,8 +320,8 @@
     "ageDays": 2
   },
   {
-    "title": "Innovision secures INR 219 crore NHAI contract for toll collection on Indore-Dewas highway - propnewstime.com",
-    "desc": "Innovision secures INR 219 crore NHAI contract for toll collection on Indore-Dewas highway    propnewstime.com",
+    "title": "Innovision secures INR 219 crore NHAI contract for toll collection on Indore-Dewas highway - Prop News Time",
+    "desc": "Innovision secures INR 219 crore NHAI contract for toll collection on Indore-Dewas highway    Prop News Time",
     "src": "NHAI",
     "time": "5d ago",
     "link": "https://www.google.com/search?q=Innovision%20secures%20INR%20219%20crore%20NHAI%20contract%20for%20toll%20collection%20on%20IndoreDewas%20highway",
@@ -333,20 +333,10 @@
     "title": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years - DD News",
     "desc": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years    DD News",
     "src": "Jal Jeevan",
-    "time": "5d ago",
+    "time": "6d ago",
     "link": "https://www.google.com/search?q=Infrastructure%20push%20How%20Indias%20transport%20housing%20energy%20and%20digital%20networks%20expanded%20over",
     "type": "irrigation",
     "fetchedAt": "2026-09-10T18:32:34+00:00",
-    "ageDays": 5
-  },
-  {
-    "title": "Chennai Port Authority seeks govt nod for ₹17,000 crore outer harbour project - infra.economictimes.indiatimes.com",
-    "desc": "Chennai Port Authority seeks govt nod for ₹17,000 crore outer harbour project    infra.economictimes.indiatimes.com",
-    "src": "Ports",
-    "time": "6d ago",
-    "link": "https://www.google.com/search?q=Chennai%20Port%20Authority%20seeks%20govt%20nod%20for%2017000%20crore%20outer%20harbour%20project%20%20infraeconomic",
-    "type": "ports",
-    "fetchedAt": "2026-09-10T02:44:20+00:00",
     "ageDays": 6
   },
   {
@@ -360,11 +350,21 @@
     "ageDays": 7
   },
   {
-    "title": "V O C Port Authority in a spot over award of PMC contract for outer harbour project - infra.economictimes.indiatimes.com",
-    "desc": "V O C Port Authority in a spot over award of PMC contract for outer harbour project    infra.economictimes.indiatimes.com",
+    "title": "Chennai Port Authority seeks govt nod for ₹17,000 crore outer harbour project - ET Infra",
+    "desc": "Chennai Port Authority seeks govt nod for ₹17,000 crore outer harbour project    ET Infra",
+    "src": "Ports",
+    "time": "7d ago",
+    "link": "https://www.google.com/search?q=Chennai%20Port%20Authority%20seeks%20govt%20nod%20for%2017000%20crore%20outer%20harbour%20project%20%20ET%20Infra",
+    "type": "ports",
+    "fetchedAt": "2026-09-10T02:44:20+00:00",
+    "ageDays": 7
+  },
+  {
+    "title": "V O C Port Authority in a spot over award of PMC contract for outer harbour project - ET Infra",
+    "desc": "V O C Port Authority in a spot over award of PMC contract for outer harbour project    ET Infra",
     "src": "Ports",
     "time": "8d ago",
-    "link": "https://www.google.com/search?q=V%20O%20C%20Port%20Authority%20in%20a%20spot%20over%20award%20of%20PMC%20contract%20for%20outer%20harbour%20project%20%20infra",
+    "link": "https://www.google.com/search?q=V%20O%20C%20Port%20Authority%20in%20a%20spot%20over%20award%20of%20PMC%20contract%20for%20outer%20harbour%20project%20%20ET%20In",
     "type": "ports",
     "fetchedAt": "2026-09-08T07:00:00+00:00",
     "ageDays": 8
@@ -410,13 +410,13 @@
     "ageDays": 18
   },
   {
-    "title": "Hazoor Multi Projects Bags Rs.193.85 Crore NHAI Contract for Toll Fee Collection in Tamil Nadu - Ahmedabad Mirror",
-    "desc": "Hazoor Multi Projects Bags Rs.193.85 Crore NHAI Contract for Toll Fee Collection in Tamil Nadu    Ahmedabad Mirror",
+    "title": "Hazoor Multi Projects Bags Rs. 193.85 Crore NHAI Contract For Toll Fee Collection In Tamil Nadu - outlookbusiness.com",
+    "desc": "Hazoor Multi Projects Bags Rs. 193.85 Crore NHAI Contract For Toll Fee Collection In Tamil Nadu    outlookbusiness.com",
     "src": "NHAI",
     "time": "21d ago",
-    "link": "https://www.google.com/search?q=Hazoor%20Multi%20Projects%20Bags%20Rs19385%20Crore%20NHAI%20Contract%20for%20Toll%20Fee%20Collection%20in%20Tamil%20Na",
+    "link": "https://www.google.com/search?q=Hazoor%20Multi%20Projects%20Bags%20Rs%2019385%20Crore%20NHAI%20Contract%20For%20Toll%20Fee%20Collection%20In%20Tamil%20N",
     "type": "highways",
-    "fetchedAt": "2026-08-26T12:39:29+00:00",
+    "fetchedAt": "2026-08-26T07:00:00+00:00",
     "ageDays": 21
   },
   {
@@ -450,16 +450,6 @@
     "ageDays": 21
   },
   {
-    "title": "Ceigall India shares rise 4% after winning Rs 705 crore Arunachal Pradesh Frontier Highway project",
-    "desc": "Ceigall India shares rose 4% after securing a ₹704.7 crore MoRTH contract for the Frontier Highway in Arunachal Pradesh. The EPC project, awarded jointly with Sushee Infra & Mining",
-    "src": "The Economic Times",
-    "time": "22d ago",
-    "link": "https://economictimes.indiatimes.com/markets/stocks/news/ceigall-india-shares-rise-4-after-winning-rs-705-crore-arunachal-pradesh-frontier-highway-project/articleshow/133492063.cms",
-    "type": "highways",
-    "fetchedAt": "2026-08-25T04:35:00+00:00",
-    "ageDays": 22
-  },
-  {
     "title": "Ceigall India Secures ₹704.7 Crore Frontier Highway Project In Arunachal Pradesh - Sahi",
     "desc": "Ceigall India Secures ₹704.7 Crore Frontier Highway Project In Arunachal Pradesh    Sahi",
     "src": "MoRTH",
@@ -480,6 +470,16 @@
     "ageDays": 23
   },
   {
+    "title": "Ceigall India shares rise 4% after winning Rs 705 crore Arunachal Pradesh Frontier Highway project",
+    "desc": "Ceigall India shares rose 4% after securing a ₹704.7 crore MoRTH contract for the Frontier Highway in Arunachal Pradesh. The EPC project, awarded jointly with Sushee Infra & Mining",
+    "src": "The Economic Times",
+    "time": "23d ago",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/news/ceigall-india-shares-rise-4-after-winning-rs-705-crore-arunachal-pradesh-frontier-highway-project/articleshow/133492063.cms",
+    "type": "highways",
+    "fetchedAt": "2026-08-25T04:35:00+00:00",
+    "ageDays": 23
+  },
+  {
     "title": "Innovision Receives ₹51.54 Crore NHAI Award For Two Toll Plazas In Uttar Pradesh - Sahi",
     "desc": "Innovision Receives ₹51.54 Crore NHAI Award For Two Toll Plazas In Uttar Pradesh    Sahi",
     "src": "NHAI",
@@ -490,12 +490,12 @@
     "ageDays": 26
   },
   {
-    "title": "₹8,585 cr Jewar Road project: Why Greater Noida could emerge as North India’s next growth hub - Business Today",
-    "desc": "₹8,585 cr Jewar Road project: Why Greater Noida could emerge as North India’s next growth hub    Business Today",
-    "src": "MoRTH",
+    "title": "4 Mining and Mineral Products Stocks with Strong Growth Plans in India (2026) - Univest",
+    "desc": "4 Mining and Mineral Products Stocks with Strong Growth Plans in India (2026)    Univest",
+    "src": "Coal Block",
     "time": "27d ago",
-    "link": "https://www.google.com/search?q=8585%20cr%20Jewar%20Road%20project%20Why%20Greater%20Noida%20could%20emerge%20as%20North%20Indias%20next%20growth%20hub",
-    "type": "highways",
+    "link": "https://www.google.com/search?q=4%20Mining%20and%20Mineral%20Products%20Stocks%20with%20Strong%20Growth%20Plans%20in%20India%202026%20%20Univest",
+    "type": "mining",
     "fetchedAt": "2026-08-20T07:00:00+00:00",
     "ageDays": 27
   }
