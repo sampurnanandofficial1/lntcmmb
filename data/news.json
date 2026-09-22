@@ -1,12 +1,22 @@
 [
   {
-    "title": "Lumino Industries Q1 Results | Net profit surges 32% as EPC revenue jumps 70%",
-    "desc": "Shares of Lumino Industries Ltd ended at ₹113.40, up by ₹1.63, or 1.46%, on the BSE.",
-    "src": "cnbctv18",
-    "time": "20h ago",
-    "link": "https://www.cnbctv18.com/market/stocks/lumino-industries-share-price-q1-results-net-profit-surges-32-as-epc-revenue-jumps-70-19995221.htm",
+    "title": "Pace Digitek shares surge 10.85%: Subsidiary wins Rs 488 crore BESS order from NTPC-GE JV",
+    "desc": "Pace Digitek's Lineage Power has secured a Rs 488.46 crore contract from NTPC GE Power Services for a 5.015 MWh battery energy storage system at Barh Thermal Plant, with a 12-year ",
+    "src": "financialexpress",
+    "time": "12h ago",
+    "link": "https://www.financialexpress.com/business/industry-pace-digitek-shares-surge-10-85-subsidiary-wins-rs-488-crore-bess-order-from-ntpc-ge-jv-4344465/",
     "type": "highways",
-    "fetchedAt": "2026-09-21T16:20:40+00:00",
+    "fetchedAt": "2026-09-22T05:15:30+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Watch out for these 12 stocks, including ONGC, GRSE, Nazara, Waaree in today’s trade",
+    "desc": "From ONGC’s deepwater gas strike and GRSE’s ₹2,896-crore shipyard plan to Waaree’s 2 GW solar order and Nazara’s ₹28-crore loan facility, these 12 stocks have reported developments",
+    "src": "thehindubusinessline",
+    "time": "15h ago",
+    "link": "https://www.thehindubusinessline.com/markets/watch-out-for-these-12-stocks-including-ongc-grse-nazara-waaree-in-todays-trade/article71493954.ece",
+    "type": "highways",
+    "fetchedAt": "2026-09-22T02:00:23+00:00",
     "ageDays": 0
   },
   {
@@ -16,7 +26,17 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/transportation/railways/first-ever-full-toll-suspension-expressway-develops-major-defects-weeks-after-opening-nhai-bans-concessionaire-for-3-years-seeks-rs-42-lakh-daily-compensation/articleshow/134311344.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "RBI amends valuation rules for InvIT, REIT units held by all-India financial institutions",
+    "desc": "The RBI has amended valuation norms for InvIT and REIT units held by all-India financial institutions, introducing separate provisions for quoted and unquoted units. Unquoted units",
+    "src": "SECTIONS RBI amends valuation rules; REIT units held by all-India financial institutions ET Online",
+    "time": "Recent",
+    "link": "https://economictimes.indiatimes.com/industry/services/property-/-cstruction/rbi-amends-valuation-rules-for-invit-reit-units-held-by-all-india-financial-institutions/articleshow/134413279.cms",
+    "type": "highways",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +46,7 @@
     "time": "Recent",
     "link": "https://www.moneycontrol.com/news/business/inox-india-bags-first-orbital-welding-order-to-work-on-piping-at-tata-electronics-dholera-chip-facility-14035292.html",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +56,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/waaree-energies-shares-gain-2-after-company-bags-2-gw-solar-module-order/articleshow/134402610.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +66,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/sports/other-sports/indias-first-largest-indoor-go-karting-track-is-coming-as-csml-bags-rs-24-crore-order/articleshow/134381646.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +76,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/defence/trumps-sons-linked-us-drone-firm-signs-india-deal-to-manufacture-anti-drone-systems-months-before-pakistan-deal/articleshow/134373632.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +86,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/strait-of-hormuz-closure-iran-sets-us-talks-conditions-west-asia-escalation-ytvd-2998843-2026-09-20",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.thehindubusinessline.com/info-tech/india-seeks-agile-regulatory-framework-to-speed-up-semiconductor-projects/article71484705.ece",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +106,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/industry/news/eil-expects-order-boost-as-gulf-seeks-to-bypass-strait-of-hormuz-126091900002_1.html",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +116,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/mumbai-ahmedabad-bullet-train-beml-bags-rs-5400-crore-order-from-nhsrcl-for-supply-maintenance-of-high-speed-rolling-stock-allied-works",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +126,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/defence/us-drone-company-backed-by-trumps-sons-signs-deal-with-pakistan-army-meets-gen-munir-in-rawalpindi/articleshow/134318805.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.weforum.org/stories/climate-action/heat-climate-critical-infrastructure/",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +146,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/indias-anti-ai-trade-hides-42-ai-enabler-stocks-that-rallied-60-already-goldman-sachs/articleshow/134309681.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.jpost.com/opinion/article-908663",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.thequint.com/brandstudio/partner-sn-subrahmanyan-lt-transformation",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +176,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/centre-seeks-dismissal-of-pleas-by-members-of-delhi-gymkhana-club/articleshow/134294689.cms",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
   },
   {
@@ -166,8 +186,18 @@
     "time": "Recent",
     "link": "https://www.globenewswire.com/news-release/2026/09/16/3363273/10669/en/bos-secures-1-2-million-order-from-a-european-defense-customer.html",
     "type": "highways",
-    "fetchedAt": "2026-09-22T12:47:12.814301+00:00",
+    "fetchedAt": "2026-09-22T17:40:40.142399+00:00",
     "ageDays": 0
+  },
+  {
+    "title": "Vadhvan Port HAM tender extended as DP World and NMDC-Boskalis JV submit bids for ₹22,323-crore offshore package - India Shipping News",
+    "desc": "Vadhvan Port HAM tender extended as DP World and NMDC-Boskalis JV submit bids for ₹22,323-crore offshore package    India Shipping News",
+    "src": "Ports",
+    "time": "1d ago",
+    "link": "https://www.google.com/search?q=Vadhvan%20Port%20HAM%20tender%20extended%20as%20DP%20World%20and%20NMDCBoskalis%20JV%20submit%20bids%20for%2022323cror",
+    "type": "ports",
+    "fetchedAt": "2026-09-21T04:05:13+00:00",
+    "ageDays": 1
   },
   {
     "title": "Bridge Construction Market Size, Share, Growth, Analysis, 2034",
@@ -177,6 +207,16 @@
     "link": "https://straitsresearch.com/report/bridge-construction-market",
     "type": "highways",
     "fetchedAt": "2026-09-21T00:00:00+00:00",
+    "ageDays": 1
+  },
+  {
+    "title": "Lumino Industries Q1 Results | Net profit surges 32% as EPC revenue jumps 70%",
+    "desc": "Shares of Lumino Industries Ltd ended at ₹113.40, up by ₹1.63, or 1.46%, on the BSE.",
+    "src": "cnbctv18",
+    "time": "1d ago",
+    "link": "https://www.cnbctv18.com/market/stocks/lumino-industries-share-price-q1-results-net-profit-surges-32-as-epc-revenue-jumps-70-19995221.htm",
+    "type": "highways",
+    "fetchedAt": "2026-09-21T16:20:40+00:00",
     "ageDays": 1
   },
   {
@@ -230,16 +270,6 @@
     "ageDays": 1
   },
   {
-    "title": "South West Pinnacle wins ₹5.89 Cr order from CMPDI for coal exploration - scanx.trade",
-    "desc": "South West Pinnacle wins ₹5.89 Cr order from CMPDI for coal exploration    scanx.trade",
-    "src": "CIL",
-    "time": "2d ago",
-    "link": "https://www.google.com/search?q=South%20West%20Pinnacle%20wins%20589%20Cr%20order%20from%20CMPDI%20for%20coal%20exploration%20%20scanxtrade",
-    "type": "mining",
-    "fetchedAt": "2026-09-20T05:42:46+00:00",
-    "ageDays": 2
-  },
-  {
     "title": "MoRTH Deploys Mobile Labs to Strengthen Quality Checks in National Highway Construction - Elets eGov",
     "desc": "MoRTH Deploys Mobile Labs to Strengthen Quality Checks in National Highway Construction    Elets eGov",
     "src": "MoRTH",
@@ -270,16 +300,6 @@
     "ageDays": 4
   },
   {
-    "title": "Govt Auctions 25 Coal Blocks in 16th Commercial Round - Rediff MoneyWiz",
-    "desc": "Govt Auctions 25 Coal Blocks in 16th Commercial Round    Rediff MoneyWiz",
-    "src": "Coal Block",
-    "time": "4d ago",
-    "link": "https://www.google.com/search?q=Govt%20Auctions%2025%20Coal%20Blocks%20in%2016th%20Commercial%20Round%20%20Rediff%20MoneyWiz",
-    "type": "mining",
-    "fetchedAt": "2026-09-17T13:19:31+00:00",
-    "ageDays": 4
-  },
-  {
     "title": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years - DD News",
     "desc": "Infrastructure push: How India’s transport, housing, energy and digital networks expanded over 12 years    DD News",
     "src": "Jal Jeevan",
@@ -300,14 +320,14 @@
     "ageDays": 5
   },
   {
-    "title": "Volvo CE launches EC650 mining excavator at bauma CONEXPO INDIA 2026 - Manufacturing Today India",
-    "desc": "Volvo CE launches EC650 mining excavator at bauma CONEXPO INDIA 2026    Manufacturing Today India",
-    "src": "Komatsu",
-    "time": "6d ago",
-    "link": "https://www.google.com/search?q=Volvo%20CE%20launches%20EC650%20mining%20excavator%20at%20bauma%20CONEXPO%20INDIA%202026%20%20Manufacturing%20Today",
-    "type": "corporate",
-    "fetchedAt": "2026-09-15T13:37:08+00:00",
-    "ageDays": 6
+    "title": "Govt Auctions 25 Coal Blocks in 16th Commercial Round - Rediff MoneyWiz",
+    "desc": "Govt Auctions 25 Coal Blocks in 16th Commercial Round    Rediff MoneyWiz",
+    "src": "Coal Block",
+    "time": "5d ago",
+    "link": "https://www.google.com/search?q=Govt%20Auctions%2025%20Coal%20Blocks%20in%2016th%20Commercial%20Round%20%20Rediff%20MoneyWiz",
+    "type": "mining",
+    "fetchedAt": "2026-09-17T13:19:31+00:00",
+    "ageDays": 5
   },
   {
     "title": "Volvo CE launches 65-tonne EC650 excavator at Bauma CONEXPO India 2026 - ET Manufacturing",
@@ -317,6 +337,16 @@
     "link": "https://www.google.com/search?q=Volvo%20CE%20launches%2065tonne%20EC650%20excavator%20at%20Bauma%20CONEXPO%20India%202026%20%20ET%20Manufacturing",
     "type": "mining",
     "fetchedAt": "2026-09-15T11:55:25+00:00",
+    "ageDays": 7
+  },
+  {
+    "title": "Volvo CE launches EC650 mining excavator at bauma CONEXPO INDIA 2026 - Manufacturing Today India",
+    "desc": "Volvo CE launches EC650 mining excavator at bauma CONEXPO INDIA 2026    Manufacturing Today India",
+    "src": "Komatsu",
+    "time": "7d ago",
+    "link": "https://www.google.com/search?q=Volvo%20CE%20launches%20EC650%20mining%20excavator%20at%20bauma%20CONEXPO%20INDIA%202026%20%20Manufacturing%20Today",
+    "type": "corporate",
+    "fetchedAt": "2026-09-15T13:37:08+00:00",
     "ageDays": 7
   },
   {
@@ -350,11 +380,11 @@
     "ageDays": 11
   },
   {
-    "title": "After two-year slowdown, national highway project awards fast-tracked - economictimes.com",
-    "desc": "After two-year slowdown, national highway project awards fast-tracked    economictimes.com",
+    "title": "After two-year slowdown, national highway project awards fast-tracked - The Economic Times",
+    "desc": "After two-year slowdown, national highway project awards fast-tracked    The Economic Times",
     "src": "NHAI EPC",
     "time": "13d ago",
-    "link": "https://www.google.com/search?q=After%20twoyear%20slowdown%20national%20highway%20project%20awards%20fasttracked%20%20economictimescom",
+    "link": "https://www.google.com/search?q=After%20twoyear%20slowdown%20national%20highway%20project%20awards%20fasttracked%20%20The%20Economic%20Times",
     "type": "highways",
     "fetchedAt": "2026-09-09T07:00:00+00:00",
     "ageDays": 13
@@ -383,11 +413,31 @@
     "title": "Coal India's Production and Dispatch Surge Amid Eased Monsoon Impact",
     "desc": "Coal India Ltd is seeing a significant uptick in production and coal supply as the monsoon's effects subside and mine conditions improve. The company's daily output and dispatches ",
     "src": "Devdiscourse",
-    "time": "16d ago",
+    "time": "17d ago",
     "link": "https://www.devdiscourse.com/article/business/3973141-coal-indias-production-and-dispatch-surge-amid-eased-monsoon-impact",
     "type": "mining",
     "fetchedAt": "2026-09-05T14:17:07+00:00",
-    "ageDays": 16
+    "ageDays": 17
+  },
+  {
+    "title": "Telangana Deputy CM Mallu Bhatti Vikramarka Bhatti for SCCL-Hutti Gold Mines joint venture - The New Indian Express",
+    "desc": "Telangana Deputy CM Mallu Bhatti Vikramarka Bhatti for SCCL-Hutti Gold Mines joint venture    The New Indian Express",
+    "src": "SCCL",
+    "time": "24d ago",
+    "link": "https://www.google.com/search?q=Telangana%20Deputy%20CM%20Mallu%20Bhatti%20Vikramarka%20Bhatti%20for%20SCCLHutti%20Gold%20Mines%20joint%20venture",
+    "type": "mining",
+    "fetchedAt": "2026-08-29T07:00:00+00:00",
+    "ageDays": 24
+  },
+  {
+    "title": "Ceigall India JV Wins Rs 7.047 Billion Frontier Highway Contract - Construction World",
+    "desc": "Ceigall India JV Wins Rs 7.047 Billion Frontier Highway Contract    Construction World",
+    "src": "Infra 2026",
+    "time": "25d ago",
+    "link": "https://www.google.com/search?q=Ceigall%20India%20JV%20Wins%20Rs%207047%20Billion%20Frontier%20Highway%20Contract%20%20Construction%20World",
+    "type": "highways",
+    "fetchedAt": "2026-08-28T07:00:00+00:00",
+    "ageDays": 25
   },
   {
     "title": "Explore critical mineral mining: Deputy Chief Minister Mallu Bhatti Vikramarka to SCCL - The New Indian Express",
@@ -405,6 +455,16 @@
     "src": "NHAI",
     "time": "27d ago",
     "link": "https://www.google.com/search?q=Hazoor%20Multi%20Projects%20Bags%20Rs%2019385%20Crore%20NHAI%20Contract%20For%20Toll%20Fee%20Collection%20In%20Tamil%20N",
+    "type": "highways",
+    "fetchedAt": "2026-08-26T07:00:00+00:00",
+    "ageDays": 27
+  },
+  {
+    "title": "Ceigall India bags four MoRTH road projects worth ₹2,150 crore in Arunachal Pradesh - smallcapspotlight.in",
+    "desc": "Ceigall India bags four MoRTH road projects worth ₹2,150 crore in Arunachal Pradesh    smallcapspotlight.in",
+    "src": "MoRTH",
+    "time": "27d ago",
+    "link": "https://www.google.com/search?q=Ceigall%20India%20bags%20four%20MoRTH%20road%20projects%20worth%202150%20crore%20in%20Arunachal%20Pradesh%20%20smallca",
     "type": "highways",
     "fetchedAt": "2026-08-26T07:00:00+00:00",
     "ageDays": 27
@@ -438,65 +498,5 @@
     "type": "highways",
     "fetchedAt": "2026-08-24T07:00:00+00:00",
     "ageDays": 29
-  },
-  {
-    "title": "Ceigall India Secures ₹704.7 Crore Frontier Highway Project In Arunachal Pradesh - Sahi",
-    "desc": "Ceigall India Secures ₹704.7 Crore Frontier Highway Project In Arunachal Pradesh    Sahi",
-    "src": "Highway EPC",
-    "time": "29d ago",
-    "link": "https://www.google.com/search?q=Ceigall%20India%20Secures%207047%20Crore%20Frontier%20Highway%20Project%20In%20Arunachal%20Pradesh%20%20Sahi",
-    "type": "highways",
-    "fetchedAt": "2026-08-24T07:00:00+00:00",
-    "ageDays": 29
-  },
-  {
-    "title": "Ceigall India rises after securing LoA for Rs 704 crore contract from Ministry of Road Transport - Business Standard",
-    "desc": "Ceigall India rises after securing LoA for Rs 704 crore contract from Ministry of Road Transport    Business Standard",
-    "src": "Highway EPC",
-    "time": "29d ago",
-    "link": "https://www.google.com/search?q=Ceigall%20India%20rises%20after%20securing%20LoA%20for%20Rs%20704%20crore%20contract%20from%20Ministry%20of%20Road%20Tra",
-    "type": "highways",
-    "fetchedAt": "2026-08-24T07:00:00+00:00",
-    "ageDays": 29
-  },
-  {
-    "title": "Ceigall India-led JV bags ₹705 crore Frontier Highway project in Arunachal Pradesh - CNBC TV18",
-    "desc": "Ceigall India-led JV bags ₹705 crore Frontier Highway project in Arunachal Pradesh    CNBC TV18",
-    "src": "Highway EPC",
-    "time": "29d ago",
-    "link": "https://www.google.com/search?q=Ceigall%20Indialed%20JV%20bags%20705%20crore%20Frontier%20Highway%20project%20in%20Arunachal%20Pradesh%20%20CNBC%20TV1",
-    "type": "highways",
-    "fetchedAt": "2026-08-24T07:00:00+00:00",
-    "ageDays": 29
-  },
-  {
-    "title": "Maldives' largest infra project advances with India's support after final segment of Thilamale Bridge is installed - The New Indian Express",
-    "desc": "Maldives' largest infra project advances with India's support after final segment of Thilamale Bridge is installed    The New Indian Express",
-    "src": "Infra 2026",
-    "time": "30d ago",
-    "link": "https://www.google.com/search?q=Maldives%20largest%20infra%20project%20advances%20with%20Indias%20support%20after%20final%20segment%20of%20Thilama",
-    "type": "highways",
-    "fetchedAt": "2026-08-23T07:00:00+00:00",
-    "ageDays": 30
-  },
-  {
-    "title": "Innovision Receives ₹51.54 Crore NHAI Award For Two Toll Plazas In Uttar Pradesh - Sahi",
-    "desc": "Innovision Receives ₹51.54 Crore NHAI Award For Two Toll Plazas In Uttar Pradesh    Sahi",
-    "src": "NHAI",
-    "time": "32d ago",
-    "link": "https://www.google.com/search?q=Innovision%20Receives%205154%20Crore%20NHAI%20Award%20For%20Two%20Toll%20Plazas%20In%20Uttar%20Pradesh%20%20Sahi",
-    "type": "highways",
-    "fetchedAt": "2026-08-21T07:00:00+00:00",
-    "ageDays": 32
-  },
-  {
-    "title": "Cabinet approves 4 Railway Projects worth ₹9,450 cr to add 410 Km of new Rail lines in 4 states - Metro Rail News",
-    "desc": "Cabinet approves 4 Railway Projects worth ₹9,450 cr to add 410 Km of new Rail lines in 4 states    Metro Rail News",
-    "src": "IR",
-    "time": "33d ago",
-    "link": "https://www.google.com/search?q=Cabinet%20approves%204%20Railway%20Projects%20worth%209450%20cr%20to%20add%20410%20Km%20of%20new%20Rail%20lines%20in%204%20sta",
-    "type": "railways",
-    "fetchedAt": "2026-08-20T07:00:00+00:00",
-    "ageDays": 33
   }
 ]
