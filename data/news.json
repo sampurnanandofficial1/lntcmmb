@@ -1,42 +1,62 @@
 [
   {
-    "title": "Coal India Share Price - Live NSE: COALINDIA Stock Price & Chart - Upstox",
-    "desc": "Coal India Share Price - Live NSE: COALINDIA Stock Price & Chart    Upstox",
-    "src": "CIL Subs",
-    "time": "18h ago",
-    "link": "https://www.google.com/search?q=Coal%20India%20Share%20Price%20%20Live%20NSE%20COALINDIA%20Stock%20Price%20%20Chart%20%20Upstox",
+    "title": "NMDC Iron Ore Production Jumps 23% to 27 MT in Apr-Sep - Rediff MoneyWiz",
+    "desc": "NMDC Iron Ore Production Jumps 23% to 27 MT in Apr-Sep    Rediff MoneyWiz",
+    "src": "NMDC",
+    "time": "1h ago",
+    "link": "https://www.google.com/search?q=NMDC%20Iron%20Ore%20Production%20Jumps%2023%20to%2027%20MT%20in%20AprSep%20%20Rediff%20MoneyWiz",
     "type": "mining",
-    "fetchedAt": "2026-09-30T12:47:25+00:00",
+    "fetchedAt": "2026-10-01T13:02:33+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Highway Infrastructure shares jump 9% after Rs 245 crore toll operations win from UP authority, NHAI",
+    "desc": "Highway Infrastructure shares jumped after the company secured toll operations orders worth Rs 254 crore from UPEIDA and NHAI. The key order, worth Rs 220.66 crore, involves toll c",
+    "src": "economictimes_indiatimes",
+    "time": "13h ago",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/news/highway-infrastructure-shares-jump-9-after-rs-245-crore-toll-operations-win-from-up-authority-nhai/articleshow/134610442.cms",
+    "type": "highways",
+    "fetchedAt": "2026-10-01T01:02:37+00:00",
     "ageDays": 0
   },
   {
     "title": "NHAI to inspect 17 highways awarded at 15% below estimates",
     "desc": "The National Highways Authority of India (NHAI) is set to implement special inspections on 17 highway projects that were awarded at least 15 per cent below the estimated costs. The",
     "src": "toi",
-    "time": "14h ago",
+    "time": "21h ago",
     "link": "https://timesofindia.indiatimes.com/india/nhai-to-inspect-17-highways-awarded-at-15-below-estimates/articleshow/134599299.cms",
     "type": "highways",
     "fetchedAt": "2026-09-30T16:58:49+00:00",
     "ageDays": 0
   },
   {
-    "title": "Cabinet Approves Rs 1.86 Lakh Crore Green Energy Corridor-III, Transmission Push To Evacuate 135 GW Of Renewable Power",
-    "desc": "Cabinet approves Rs 1.86 lakh crore Green Energy Corridor-III to transmit up to 135 GW of renewable power and build 50 GWh battery storage, with completion targeted for FY 2032-33.",
-    "src": "freepressjournal",
-    "time": "20h ago",
-    "link": "https://www.freepressjournal.in/business/cabinet-approves-rs-186-lakh-crore-green-energy-corridor-iii-transmission-push-to-evacuate-135-gw-of-renewable-power",
+    "title": "The next VA Tech Wabag? This smallcap’s Rs 6,700 cr order book is only the start",
+    "desc": "This company is trying to turn its water and wastewater business into a broader environmental infrastructure platform. Its order book has more than doubled to around Rs 6,700 crore",
+    "src": "financialexpress",
+    "time": "14h ago",
+    "link": "https://www.financialexpress.com/market/stock-insights/the-next-va-tech-wabag-this-smallcaps-rs-6700-cr-order-book-is-only-the-start/4350812/",
     "type": "highways",
-    "fetchedAt": "2026-09-30T11:01:12+00:00",
+    "fetchedAt": "2026-09-30T23:45:00+00:00",
     "ageDays": 0
   },
   {
-    "title": "Section 12(5) Ineligibility Cannot Retrospectively Invalidate Arbitrator Appointments Made Prior To 2015 Amendment: Delhi High Court",
-    "desc": "The Delhi High Court has held that the statutory ineligibility provisions introduced under Section 12(5) read with the Seventh Schedule of the Arbitration and Conciliation Act, 199",
-    "src": "lawtrend_in",
-    "time": "20h ago",
-    "link": "https://lawtrend.in/section-125-ineligibility-cannot-retrospectively-invalidate-arbitrator-appointments-made-prior-to-2015-amendment-delhi-high-court/",
-    "type": "railways",
-    "fetchedAt": "2026-09-30T11:00:24+00:00",
+    "title": "Futures Rise As 10Y Yields Pull Back From 24 Year High",
+    "desc": "Futures Rise As 10Y Yields Pull Back From 24 Year High The disconnect continues. With 10Y yields rising as high as 5.34% - a new 24 year high - before easing back US equities remai",
+    "src": "Tyler Durden",
+    "time": "Recent",
+    "link": "https://www.zerohedge.com/markets/stocks-rise-first-day-q4-10y-yields-pull-back-24-year-high",
+    "type": "highways",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "India's Rs 1.86 Lakh Crore-Green Energy Corridor To Trigger Order Supercycle For EPCs: JPMorgan's Top Picks",
+    "desc": "At Rs 1.86 lakh crore, GEC-3 represents nearly an eight-fold increase over the combined capex of the previous two phases, reflecting India's accelerating transition towards a 500 G",
+    "src": "Nikita Prasad",
+    "time": "Recent",
+    "link": "https://www.ndtvprofit.com/markets/indias-mega-rs-1-86-lakh-crore-green-energy-corridor-to-trigger-order-supercycle-for-epcs-transcos-jpmorgan-bullish-on-siemens-hitachi-12124031",
+    "type": "highways",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +66,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/stl-networks-shares-jump-5-after-emerging-as-l1-bidder-for-railtel-contract-worth-rs-250-crore/articleshow/134583391.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +76,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/stocks-to-watch-today-tata-steel-dixon-technologies-united-breweries-l-t-finance-sbi-funds-management-pidilite-britannia-more-12116715",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +86,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/stock-market-today-all-you-need-to-know-before-going-into-trade-on-sept-30-12116722",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.jurist.org/news/2026/09/nepal-dispatch-bhotekoshi-disaster-tests-the-limits-of-climate-adaptation/",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +106,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/vikram-solar-shares-rise-3-after-securing-400-mw-module-order-from-leading-epc-company/articleshow/134556657.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +116,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/extend-3-language-relaxation-to-class-6-supreme-court-to-cbse/articleshow/134548874.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/personal-finance/10-unexpected-consequences-economic-crisis-nobody-talking-about",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/video/unga-attacks-on-seafarers-unacceptable-call-for-maritime-safety-zero-tolerance-on-terrorism-ytvd-3003905-2026-09-27",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.news18.com/india/no-more-pick-choose-in-sealing-supreme-court-orders-nationwide-crackdown-on-commercial-misuse-in-residential-zones-ws-l-10354819.html",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/opinion/story/upits-yogi-government-report-card-growth-welfare-uttar-pradesh-utrith-3003584-2026-09-26",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.livemint.com/money/personal-finance/senior-citizen-wrongly-paid-tax-on-tax-free-bonds-what-the-9-91-lakh-itat-case-means-11790399591003.html",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +176,7 @@
     "time": "Recent",
     "link": "https://www.dnaindia.com/world/report-balen-shah-s-unga-address-what-nepal-pm-said-about-india-3221224",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +186,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/vascon-engineering-receives-order-worth-660-crore-from-qualcomm-india-126092500454_1.html",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +196,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/global-energy-demand-set-jump-60-2060-developing-nations-power",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -186,7 +206,7 @@
     "time": "Recent",
     "link": "https://www.eurasiareview.com/24092026-brics-has-grown-its-contradictions-have-grown-faster-oped/",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -196,37 +216,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/new-updates/school-holiday-september-25-where-schools-will-remain-closed-check-full-state-wise-list-and-latest-weather-advisory-for-friday/articleshow/134465802.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Futures Tumble As Yields Hit Multi-Decade Highs, Oil Surges",
-    "desc": "Futures Tumble As Yields Hit Multi-Decade Highs, Oil Surges Futures are lower with Tech underperforming as part of a global risk-off tone with few areas of safety, driven by a glob",
-    "src": "Tyler Durden",
-    "time": "Recent",
-    "link": "https://www.zerohedge.com/markets/futures-tumble-yields-hit-multi-decade-highs-oil-surges",
-    "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Rahul Gandhi alleges '100% rigging' in Indian elections, calls ECI and BJP 'destroyers of democracy'",
-    "desc": "Congress MP Rahul Gandhi criticized the Election Commission of India for its handling of electoral roll revisions. He stated that the enemies of the Constitution have been exposed,",
-    "src": "SECTIONS Rahul Gandhi alleges; Calls Eci; BJP ET Online",
-    "time": "Recent",
-    "link": "https://economictimes.indiatimes.com/news/india/rahul-gandhi-alleges-100-rigging-in-indian-elections-calls-ec-and-bjp-destroyers-of-democracy/articleshow/134458845.cms",
-    "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Woman dies after ‘routine’ tubectomy: Doctor, hospital told to pay family Rs 37 lakh",
-    "desc": "The Visakhapatnam district consumer commission found “sheer negligence” in a tubectomy procedure that caused internal injury and subsequent complications, leading to a woman’s deat",
-    "src": "Somya Tyagi; Somyatyagi",
-    "time": "Recent",
-    "link": "https://indianexpress.com/article/legal-news/woman-dies-routine-tubectomy-doctor-hospital-pay-family-rs-37-lakh-10892094/",
-    "type": "highways",
-    "fetchedAt": "2026-10-01T07:39:43.086316+00:00",
+    "fetchedAt": "2026-10-01T14:42:47.889544+00:00",
     "ageDays": 0
   },
   {
@@ -240,16 +230,6 @@
     "ageDays": 1
   },
   {
-    "title": "Komatsu Europe launches PW75MR-5 compact wheeled excavator - Industrial Vehicle Technology International",
-    "desc": "Komatsu Europe launches PW75MR-5 compact wheeled excavator    Industrial Vehicle Technology International",
-    "src": "Komatsu",
-    "time": "1d ago",
-    "link": "https://www.google.com/search?q=Komatsu%20Europe%20launches%20PW75MR5%20compact%20wheeled%20excavator%20%20Industrial%20Vehicle%20Technology%20I",
-    "type": "corporate",
-    "fetchedAt": "2026-09-29T13:27:46+00:00",
-    "ageDays": 1
-  },
-  {
     "title": "Ceigall India wins ₹521 Cr EPC order for Sarli-Huri section of NH-913, details here - Alice Blue",
     "desc": "Ceigall India wins ₹521 Cr EPC order for Sarli-Huri section of NH-913, details here    Alice Blue",
     "src": "Highway EPC",
@@ -257,6 +237,16 @@
     "link": "https://www.google.com/search?q=Ceigall%20India%20wins%20521%20Cr%20EPC%20order%20for%20SarliHuri%20section%20of%20NH913%20details%20here%20%20Alice%20Blu",
     "type": "highways",
     "fetchedAt": "2026-09-30T01:58:22+00:00",
+    "ageDays": 1
+  },
+  {
+    "title": "Cabinet Approves Rs 1.86 Lakh Crore Green Energy Corridor-III, Transmission Push To Evacuate 135 GW Of Renewable Power",
+    "desc": "Cabinet approves Rs 1.86 lakh crore Green Energy Corridor-III to transmit up to 135 GW of renewable power and build 50 GWh battery storage, with completion targeted for FY 2032-33.",
+    "src": "freepressjournal",
+    "time": "1d ago",
+    "link": "https://www.freepressjournal.in/business/cabinet-approves-rs-186-lakh-crore-green-energy-corridor-iii-transmission-push-to-evacuate-135-gw-of-renewable-power",
+    "type": "highways",
+    "fetchedAt": "2026-09-30T11:01:12+00:00",
     "ageDays": 1
   },
   {
@@ -310,33 +300,23 @@
     "ageDays": 1
   },
   {
-    "title": "Business News | Trishakti Industries Issues Rs. 105 Crore Purchase Order to XCMG for 60 Units of Heavy Machinery and AWP’s",
-    "desc": "Get latest articles and stories on Business at LatestLY. Kolkata (West Bengal) [India], September 29: Trishakti Industries Limited (BSE: 531279), one of India’s rapidly growing pur",
-    "src": "latestly",
+    "title": "Section 12(5) Ineligibility Cannot Retrospectively Invalidate Arbitrator Appointments Made Prior To 2015 Amendment: Delhi High Court",
+    "desc": "The Delhi High Court has held that the statutory ineligibility provisions introduced under Section 12(5) read with the Seventh Schedule of the Arbitration and Conciliation Act, 199",
+    "src": "lawtrend_in",
     "time": "1d ago",
-    "link": "https://www.latestly.com/agency-news/business-news-trishakti-industries-issues-rs-105-crore-purchase-order-to-xcmg-for-60-units-of-heavy-machinery-and-awps-7625408.html",
-    "type": "highways",
-    "fetchedAt": "2026-09-29T09:12:23+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "Pink Line Still Not Open, So Bengaluru Residents Hold Their Own 'Inauguration'",
-    "desc": "Pink balloons, a ribbon-cutting ceremony and no official dignitary, frustrated commuters in Bengaluru have found their way to draw attention to the wait for the city's Pink Line",
-    "src": "news18",
-    "time": "1d ago",
-    "link": "https://www.news18.com/cities/bengaluru-news/pink-line-still-not-open-so-bengaluru-residents-hold-their-own-inauguration-ws-l-10358965.html",
+    "link": "https://lawtrend.in/section-125-ineligibility-cannot-retrospectively-invalidate-arbitrator-appointments-made-prior-to-2015-amendment-delhi-high-court/",
     "type": "railways",
-    "fetchedAt": "2026-09-29T08:39:07+00:00",
+    "fetchedAt": "2026-09-30T11:00:24+00:00",
     "ageDays": 1
   },
   {
-    "title": "Ceigall Infra lands massive ₹2,160 Cr highway contract - Alice Blue",
-    "desc": "Ceigall Infra lands massive ₹2,160 Cr highway contract    Alice Blue",
-    "src": "NHAI EPC",
+    "title": "Komatsu Europe launches PW75MR-5 compact wheeled excavator - Industrial Vehicle Technology International",
+    "desc": "Komatsu Europe launches PW75MR-5 compact wheeled excavator    Industrial Vehicle Technology International",
+    "src": "Komatsu",
     "time": "2d ago",
-    "link": "https://www.google.com/search?q=Ceigall%20Infra%20lands%20massive%202160%20Cr%20highway%20contract%20%20Alice%20Blue",
-    "type": "highways",
-    "fetchedAt": "2026-09-28T09:04:20+00:00",
+    "link": "https://www.google.com/search?q=Komatsu%20Europe%20launches%20PW75MR5%20compact%20wheeled%20excavator%20%20Industrial%20Vehicle%20Technology%20I",
+    "type": "corporate",
+    "fetchedAt": "2026-09-29T13:27:46+00:00",
     "ageDays": 2
   },
   {
@@ -348,6 +328,16 @@
     "type": "corporate",
     "fetchedAt": "2026-09-28T17:24:00+00:00",
     "ageDays": 2
+  },
+  {
+    "title": "Ceigall Infra lands massive ₹2,160 Cr highway contract - Alice Blue",
+    "desc": "Ceigall Infra lands massive ₹2,160 Cr highway contract    Alice Blue",
+    "src": "NHAI EPC",
+    "time": "3d ago",
+    "link": "https://www.google.com/search?q=Ceigall%20Infra%20lands%20massive%202160%20Cr%20highway%20contract%20%20Alice%20Blue",
+    "type": "highways",
+    "fetchedAt": "2026-09-28T09:04:20+00:00",
+    "ageDays": 3
   },
   {
     "title": "Four Firms Bid to Develop Vadhavan Port Offshore Land - Construction World",
@@ -390,36 +380,6 @@
     "ageDays": 6
   },
   {
-    "title": "DP World, NMDC, Adani Ports, Vishwa Samudra vie for ₹22,323 crore Vadhvan Port HAM contract - infra.economictimes.indiatimes.com",
-    "desc": "DP World, NMDC, Adani Ports, Vishwa Samudra vie for ₹22,323 crore Vadhvan Port HAM contract    infra.economictimes.indiatimes.com",
-    "src": "Ports",
-    "time": "6d ago",
-    "link": "https://www.google.com/search?q=DP%20World%20NMDC%20Adani%20Ports%20Vishwa%20Samudra%20vie%20for%2022323%20crore%20Vadhvan%20Port%20HAM%20contract%20%20in",
-    "type": "ports",
-    "fetchedAt": "2026-09-24T11:25:30+00:00",
-    "ageDays": 6
-  },
-  {
-    "title": "RITES, NHIDCL Partner for North-East Highway Projects - Rediff MoneyWiz",
-    "desc": "RITES, NHIDCL Partner for North-East Highway Projects    Rediff MoneyWiz",
-    "src": "MoRTH",
-    "time": "7d ago",
-    "link": "https://www.google.com/search?q=RITES%20NHIDCL%20Partner%20for%20NorthEast%20Highway%20Projects%20%20Rediff%20MoneyWiz",
-    "type": "highways",
-    "fetchedAt": "2026-09-23T09:19:42+00:00",
-    "ageDays": 7
-  },
-  {
-    "title": "RITES, NHIDCL join hands to support highway and infrastructure projects - infra.economictimes.indiatimes.com",
-    "desc": "RITES, NHIDCL join hands to support highway and infrastructure projects    infra.economictimes.indiatimes.com",
-    "src": "NHIDCL",
-    "time": "7d ago",
-    "link": "https://www.google.com/search?q=RITES%20NHIDCL%20join%20hands%20to%20support%20highway%20and%20infrastructure%20projects%20%20infraeconomictimes",
-    "type": "highways",
-    "fetchedAt": "2026-09-23T11:04:14+00:00",
-    "ageDays": 7
-  },
-  {
     "title": "Eastern Railway Floats ₹531 Cr EPC Tender For Mahagama-Pirpainti New Rail Line - Metro Rail News",
     "desc": "Eastern Railway Floats ₹531 Cr EPC Tender For Mahagama-Pirpainti New Rail Line    Metro Rail News",
     "src": "IR",
@@ -430,41 +390,71 @@
     "ageDays": 7
   },
   {
-    "title": "Indore Metro Enters Underground Phase as TBM ‘Narmada’ Begins First Tunnel Drive - Metro Rail News",
-    "desc": "Indore Metro Enters Underground Phase as TBM ‘Narmada’ Begins First Tunnel Drive    Metro Rail News",
-    "src": "Metro",
+    "title": "DP World, NMDC, Adani Ports, Vishwa Samudra vie for ₹22,323 crore Vadhvan Port HAM contract - ET Infra",
+    "desc": "DP World, NMDC, Adani Ports, Vishwa Samudra vie for ₹22,323 crore Vadhvan Port HAM contract    ET Infra",
+    "src": "Ports",
     "time": "7d ago",
-    "link": "https://www.google.com/search?q=Indore%20Metro%20Enters%20Underground%20Phase%20as%20TBM%20Narmada%20Begins%20First%20Tunnel%20Drive%20%20Metro%20Rail",
-    "type": "metro",
-    "fetchedAt": "2026-09-23T11:17:53+00:00",
+    "link": "https://www.google.com/search?q=DP%20World%20NMDC%20Adani%20Ports%20Vishwa%20Samudra%20vie%20for%2022323%20crore%20Vadhvan%20Port%20HAM%20contract%20%20ET",
+    "type": "ports",
+    "fetchedAt": "2026-09-24T11:25:30+00:00",
     "ageDays": 7
   },
   {
-    "title": "Komatsu introduces the PW75MR-5 wheeled midi excavator - constructionbriefing.com",
-    "desc": "Komatsu introduces the PW75MR-5 wheeled midi excavator    constructionbriefing.com",
+    "title": "Komatsu introduces the PW75MR-5 wheeled midi excavator - Construction Briefing",
+    "desc": "Komatsu introduces the PW75MR-5 wheeled midi excavator    Construction Briefing",
     "src": "Komatsu",
     "time": "7d ago",
-    "link": "https://www.google.com/search?q=Komatsu%20introduces%20the%20PW75MR5%20wheeled%20midi%20excavator%20%20constructionbriefingcom",
+    "link": "https://www.google.com/search?q=Komatsu%20introduces%20the%20PW75MR5%20wheeled%20midi%20excavator%20%20Construction%20Briefing",
     "type": "corporate",
     "fetchedAt": "2026-09-23T15:31:52+00:00",
     "ageDays": 7
   },
   {
-    "title": "Van Oord and Boskalis awarded large dredging contract for the expansion of the Port of Luleå, Sweden - Van Oord",
-    "desc": "Van Oord and Boskalis awarded large dredging contract for the expansion of the Port of Luleå, Sweden    Van Oord",
-    "src": "Ports",
+    "title": "RITES, NHIDCL Partner for North-East Highway Projects - Rediff MoneyWiz",
+    "desc": "RITES, NHIDCL Partner for North-East Highway Projects    Rediff MoneyWiz",
+    "src": "MoRTH",
     "time": "8d ago",
-    "link": "https://www.google.com/search?q=Van%20Oord%20and%20Boskalis%20awarded%20large%20dredging%20contract%20for%20the%20expansion%20of%20the%20Port%20of%20Lul",
-    "type": "ports",
-    "fetchedAt": "2026-09-22T13:14:30+00:00",
+    "link": "https://www.google.com/search?q=RITES%20NHIDCL%20Partner%20for%20NorthEast%20Highway%20Projects%20%20Rediff%20MoneyWiz",
+    "type": "highways",
+    "fetchedAt": "2026-09-23T09:19:42+00:00",
     "ageDays": 8
   },
   {
-    "title": "HAM tender for Vadhvan port project extended after DP World, Boskalis-NMDC JV submit bids - infra.economictimes.indiatimes.com",
-    "desc": "HAM tender for Vadhvan port project extended after DP World, Boskalis-NMDC JV submit bids    infra.economictimes.indiatimes.com",
+    "title": "RITES, NHIDCL join hands to support highway and infrastructure projects - ET Infra",
+    "desc": "RITES, NHIDCL join hands to support highway and infrastructure projects    ET Infra",
+    "src": "NHIDCL",
+    "time": "8d ago",
+    "link": "https://www.google.com/search?q=RITES%20NHIDCL%20join%20hands%20to%20support%20highway%20and%20infrastructure%20projects%20%20ET%20Infra",
+    "type": "highways",
+    "fetchedAt": "2026-09-23T11:04:14+00:00",
+    "ageDays": 8
+  },
+  {
+    "title": "Indore Metro Underground Tunnel Work Begins With TBM Narmada - Metro Rail News",
+    "desc": "Indore Metro Underground Tunnel Work Begins With TBM Narmada    Metro Rail News",
+    "src": "Metro",
+    "time": "8d ago",
+    "link": "https://www.google.com/search?q=Indore%20Metro%20Underground%20Tunnel%20Work%20Begins%20With%20TBM%20Narmada%20%20Metro%20Rail%20News",
+    "type": "metro",
+    "fetchedAt": "2026-09-23T11:17:53+00:00",
+    "ageDays": 8
+  },
+  {
+    "title": "Van Oord and Boskalis awarded large dredging contract for the expansion of the Port of Luleå, Sweden - Van Oord",
+    "desc": "Van Oord and Boskalis awarded large dredging contract for the expansion of the Port of Luleå, Sweden    Van Oord",
+    "src": "Ports",
+    "time": "9d ago",
+    "link": "https://www.google.com/search?q=Van%20Oord%20and%20Boskalis%20awarded%20large%20dredging%20contract%20for%20the%20expansion%20of%20the%20Port%20of%20Lul",
+    "type": "ports",
+    "fetchedAt": "2026-09-22T13:14:30+00:00",
+    "ageDays": 9
+  },
+  {
+    "title": "HAM tender for Vadhvan port project extended after DP World, Boskalis-NMDC JV submit bids - ET Infra",
+    "desc": "HAM tender for Vadhvan port project extended after DP World, Boskalis-NMDC JV submit bids    ET Infra",
     "src": "Ports",
     "time": "11d ago",
-    "link": "https://www.google.com/search?q=HAM%20tender%20for%20Vadhvan%20port%20project%20extended%20after%20DP%20World%20BoskalisNMDC%20JV%20submit%20bids%20%20i",
+    "link": "https://www.google.com/search?q=HAM%20tender%20for%20Vadhvan%20port%20project%20extended%20after%20DP%20World%20BoskalisNMDC%20JV%20submit%20bids%20%20E",
     "type": "ports",
     "fetchedAt": "2026-09-20T07:00:00+00:00",
     "ageDays": 11
@@ -480,8 +470,8 @@
     "ageDays": 13
   },
   {
-    "title": "Ministry of Coal Successfully Launches 16th Round of Commercial Coal Mine Auctions; Executes CMDPAs for Six Coal Mines - pib.gov.in",
-    "desc": "Ministry of Coal Successfully Launches 16th Round of Commercial Coal Mine Auctions; Executes CMDPAs for Six Coal Mines    pib.gov.in",
+    "title": "Ministry of Coal Successfully Launches 16th Round of Commercial Coal Mine Auctions; Executes CMDPAs for Six Coal Mines - PIB",
+    "desc": "Ministry of Coal Successfully Launches 16th Round of Commercial Coal Mine Auctions; Executes CMDPAs for Six Coal Mines    PIB",
     "src": "Coal Block",
     "time": "14d ago",
     "link": "https://www.google.com/search?q=Ministry%20of%20Coal%20Successfully%20Launches%2016th%20Round%20of%20Commercial%20Coal%20Mine%20Auctions%20Execute",
@@ -493,10 +483,20 @@
     "title": "Volvo CE launches 65-tonne EC650 excavator at Bauma CONEXPO India 2026 - ET Manufacturing",
     "desc": "Volvo CE launches 65-tonne EC650 excavator at Bauma CONEXPO India 2026    ET Manufacturing",
     "src": "Mining",
-    "time": "15d ago",
+    "time": "16d ago",
     "link": "https://www.google.com/search?q=Volvo%20CE%20launches%2065tonne%20EC650%20excavator%20at%20Bauma%20CONEXPO%20India%202026%20%20ET%20Manufacturing",
     "type": "mining",
     "fetchedAt": "2026-09-15T11:55:25+00:00",
-    "ageDays": 15
+    "ageDays": 16
+  },
+  {
+    "title": "Commercial Coal Block Auctions to Generate ₹55,000 Crore Investment, 490,000 Jobs - rediff.com",
+    "desc": "Commercial Coal Block Auctions to Generate ₹55,000 Crore Investment, 490,000 Jobs    rediff.com",
+    "src": "Coal Block",
+    "time": "16d ago",
+    "link": "https://www.google.com/search?q=Commercial%20Coal%20Block%20Auctions%20to%20Generate%2055000%20Crore%20Investment%20490000%20Jobs%20%20rediffcom",
+    "type": "mining",
+    "fetchedAt": "2026-09-15T07:00:00+00:00",
+    "ageDays": 16
   }
 ]
