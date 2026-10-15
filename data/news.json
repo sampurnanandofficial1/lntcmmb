@@ -1,9 +1,19 @@
 [
   {
+    "title": "From ethanol to data centres: Can Praj Industries turn diversification into growth?",
+    "desc": "India’s ethanol-blending push helped Praj Industries scale up rapidly, but excess capacity and slowing orders have hit its margins and profits. As the company expands into data cen",
+    "src": "indianexpress",
+    "time": "15h ago",
+    "link": "https://indianexpress.com/article/smart-stocks/praj-industries-share-price-ethanol-slowdown-growth-outlook-10921827/",
+    "type": "highways",
+    "fetchedAt": "2026-10-15T02:00:22+00:00",
+    "ageDays": 0
+  },
+  {
     "title": "Rs 1.86 lakh cr grid push: 2 ‘under-the-radar’ transformer stocks with 40%+ ROCE",
     "desc": "With one transformer maker targeting 765 kV equipment and another planning a nearly 3.6X capacity expansion, can India’s power transmission boom translate into sustained earnings g",
     "src": "financialexpress",
-    "time": "13h ago",
+    "time": "18h ago",
     "link": "https://www.financialexpress.com/market/stock-insights/rs-1-86-lakh-cr-grid-push-2-under-the-radar-transformer-stocks-with-40-roce/4361508/",
     "type": "highways",
     "fetchedAt": "2026-10-14T23:35:00+00:00",
@@ -13,30 +23,10 @@
     "title": "CMA Harshad Deshpande, RP of Vivaan Multistructures Ltd. – NCLT, Mumbai Bench",
     "desc": "Login Access Default, Dispute, and Debt Resolution Laws Password Email OTP WhatsApp OTP Google Username or Email Password 👁 Remember this device Log In Forgot Password? Email Send ",
     "src": "ibclaw_in",
-    "time": "16h ago",
+    "time": "22h ago",
     "link": "https://ibclaw.in/cma-harshad-deshpande-rp-of-vivaan-multistructures-ltd-nclt-mumbai-bench/",
     "type": "highways",
     "fetchedAt": "2026-10-14T19:49:00+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Rajesh Power Services secures new order of Rs 69.004 Crore; Back-to-back Gujarat Power Distribution infrastructure orders total ₹540.92 Crore within a Week",
-    "desc": "Ahmedabad (Gujarat) [India], October 14: Rajesh Power Services Limited (RAJESH) BSE: 544291, ISIN: INE0VN801010, one of the leading specialized EPC Contractors in Power Transmissio",
-    "src": "newsx",
-    "time": "22h ago",
-    "link": "https://www.newsx.com/bl-news/rajesh-power-services-secures-new-order-of-rs-69-004-crore-back-to-back-gujarat-power-distribution-infrastructure-orders-total-%E2%82%B9540-92-crore-within-a-week-283412/",
-    "type": "highways",
-    "fetchedAt": "2026-10-14T14:12:13+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Mumbai Metro 4: First Driverless Trainset Unveiled, Built In Just 14 Months",
-    "desc": "Alstom Managing Director Champak Panda said the project had a substantial localisation component, aligning with the Centre’s Make in India initiative.",
-    "src": "news18",
-    "time": "21h ago",
-    "link": "https://www.news18.com/cities/mumbai-news/mumbai-metro-4-first-driverless-trainset-unveiled-built-in-just-14-months-10382182.html",
-    "type": "railways",
-    "fetchedAt": "2026-10-14T15:00:43+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +36,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/transportation/roadways/tug-of-war-states-asked-to-waive-stamp-duty-on-road-projects/articleshow/134950819.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +46,17 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/india/telangana/story/singareni-profit-share-permanent-staff-rs-1-54-lakh-dasara-3016775-2026-10-13",
     "type": "mining",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Futures Slide As AI Unwind Goes Global: Kospi Crashes Into Bear Market, Treasuries Soar",
+    "desc": "Futures Slide As AI Unwind Goes Global: Kospi Crashes Into Bear Market, Treasuries Soar US futures are lower as the AI unwind goes global - Korea's Kospi crashed into a bear market",
+    "src": "Tyler Durden",
+    "time": "Recent",
+    "link": "https://www.zerohedge.com/markets/futures-slide-ai-unwind-goes-global-kospi-crashes-bear-market-treasuries-soar",
+    "type": "highways",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +66,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/news-brief/kerala-plans-revised-land-acquisition-rules-to-secure-500-acres-for-vizhinjam-port-led-industrial-development-report",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +76,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/economy/infrastructure/rs-3350-crore-gift-to-ladakh-indias-1st-petroglyph-park-airport-terminal-for-35-lakh-passengers-298-km-himalayan-road-among-5-projects-launched-by-pm-modi/articleshow/134960729.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +86,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/india/india-to-starlink-comply-with-rules-before-entering-market/articleshow/134954424.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/story/saudi-arabia-aerial-attack-advisory-india-nationals-flight-suspensions-ptag-3017341-2026-10-14",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +106,7 @@
     "time": "Recent",
     "link": "https://www.livemint.com/market/stock-market-news/smallcap-stock-under-rs-50-retraced-after-rising-up-to-7-update-on-spacex-international-rs-147-cr-ai-order-in-focus-11791962310458.html",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +116,7 @@
     "time": "Recent",
     "link": "https://www.koreatimes.co.kr/world/20261014/indias-cockroach-movement-leaders-detained-in-jail-for-five-days-party-and-police-say",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +126,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/india/sjm-urges-centre-to-block-starlinks-rollout/articleshow/134935694.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +136,7 @@
     "time": "Recent",
     "link": "https://foreignpolicy.com/2026/10/13/india-cockroach-movement-protests-arrests-jantar-mantar-modi/",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +146,7 @@
     "time": "Recent",
     "link": "https://shubhamjain.co/2016/10/02/fallacy-of-hating-the-rich/",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.suasnews.com/2026/10/ideaforge-secures-orders-from-survey-of-india-for-q6-v2-uavs-to-support-mapping-and-geospatial-applications/",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/business/l-t-q2-results-check-date-time-earnings-schedule-share-price-history-and-more-l-t-12180264",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +176,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/nasdaq-futures-slide-ai-casino-hangover-crushes-kospi-sp-flat-after-jpm-ficc-miss",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -186,7 +186,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/kalpataru-projects-wins-rs-2-225-crore-orders-order-book-hits-record-high-12177683",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -196,7 +196,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/france-confers-highest-civilian-honour-on-bharti-enterprises-sunil-mittal-126101200299_1.html",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -206,7 +206,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/telecom/telecom-news/sunil-bharti-mittal-to-receive-frances-highest-civilian-honour-from-president-macron/articleshow/134884764.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -216,7 +216,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/business/india-business/sunil-bharti-mittal-gets-highest-french-civilian-award/articleshow/134884828.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
@@ -226,27 +226,17 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/india/indias-power-transmission-expansion-data-centre-demand-to-drive-capital-goods-growth-report/articleshow/134881207.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
+    "fetchedAt": "2026-10-15T17:49:12.752903+00:00",
     "ageDays": 0
   },
   {
-    "title": "Protesters seeking India election chief's ouster detained, as 'cockroach' leaders released",
-    "desc": "NEW DELHI — Police detained hundreds of protesters in Delhi for a second day on Sunday (Oct 11) as sporadic protests broke out demanding India's election chief quit, while a court ",
-    "src": "",
-    "time": "Recent",
-    "link": "https://www.asiaone.com/asia/india-protesters-seeking-election-chiefs-ouster-detained-cockroach-leaders-released",
-    "type": "highways",
-    "fetchedAt": "2026-10-15T12:48:03.370288+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Chennai Metro opens first section of the Yellow Line as Phase II expansion gathers pace - Railway Gazette International",
-    "desc": "Chennai Metro opens first section of the Yellow Line as Phase II expansion gathers pace    Railway Gazette International",
-    "src": "IR",
+    "title": "Rajesh Power Services secures new order of Rs 69.004 Crore; Back-to-back Gujarat Power Distribution infrastructure orders total ₹540.92 Crore within a Week",
+    "desc": "Ahmedabad (Gujarat) [India], October 14: Rajesh Power Services Limited (RAJESH) BSE: 544291, ISIN: INE0VN801010, one of the leading specialized EPC Contractors in Power Transmissio",
+    "src": "newsx",
     "time": "1d ago",
-    "link": "https://www.google.com/search?q=Chennai%20Metro%20opens%20first%20section%20of%20the%20Yellow%20Line%20as%20Phase%20II%20expansion%20gathers%20pace%20%20R",
-    "type": "railways",
-    "fetchedAt": "2026-10-13T13:00:04+00:00",
+    "link": "https://www.newsx.com/bl-news/rajesh-power-services-secures-new-order-of-rs-69-004-crore-back-to-back-gujarat-power-distribution-infrastructure-orders-total-%E2%82%B9540-92-crore-within-a-week-283412/",
+    "type": "highways",
+    "fetchedAt": "2026-10-14T14:12:13+00:00",
     "ageDays": 1
   },
   {
@@ -280,6 +270,16 @@
     "ageDays": 1
   },
   {
+    "title": "Mumbai Metro 4: First Driverless Trainset Unveiled, Built In Just 14 Months",
+    "desc": "Alstom Managing Director Champak Panda said the project had a substantial localisation component, aligning with the Centre’s Make in India initiative.",
+    "src": "news18",
+    "time": "1d ago",
+    "link": "https://www.news18.com/cities/mumbai-news/mumbai-metro-4-first-driverless-trainset-unveiled-built-in-just-14-months-10382182.html",
+    "type": "railways",
+    "fetchedAt": "2026-10-14T15:00:43+00:00",
+    "ageDays": 1
+  },
+  {
     "title": "Jyoti Structures wins OSH India Award 2026 for safety innovation in transmission project execution",
     "desc": "Mumbai (Maharashtra) [India], October 14: Jyoti Structures Limited (JSL), a listed power transmission engineering, procurement, and construction (EPC) company, has won the OSH Indi",
     "src": "The Tribune",
@@ -288,6 +288,16 @@
     "type": "highways",
     "fetchedAt": "2026-10-14T07:36:08+00:00",
     "ageDays": 1
+  },
+  {
+    "title": "Chennai Metro opens first section of the Yellow Line as Phase II expansion gathers pace - Railway Gazette International",
+    "desc": "Chennai Metro opens first section of the Yellow Line as Phase II expansion gathers pace    Railway Gazette International",
+    "src": "IR",
+    "time": "2d ago",
+    "link": "https://www.google.com/search?q=Chennai%20Metro%20opens%20first%20section%20of%20the%20Yellow%20Line%20as%20Phase%20II%20expansion%20gathers%20pace%20%20R",
+    "type": "railways",
+    "fetchedAt": "2026-10-13T13:00:04+00:00",
+    "ageDays": 2
   },
   {
     "title": "Deeper Channels: Dredging activity gains momentum across Indian ports - Indian Infrastructure Magazine",
@@ -333,31 +343,31 @@
     "title": "Highway Infrastructure Signs ₹24.46 Crore Toll Plaza Operations Deal at Velanchettiyur Plaza - Sahi",
     "desc": "Highway Infrastructure Signs ₹24.46 Crore Toll Plaza Operations Deal at Velanchettiyur Plaza    Sahi",
     "src": "NHAI",
-    "time": "6d ago",
+    "time": "7d ago",
     "link": "https://www.google.com/search?q=Highway%20Infrastructure%20Signs%202446%20Crore%20Toll%20Plaza%20Operations%20Deal%20at%20Velanchettiyur%20Plaza",
     "type": "highways",
     "fetchedAt": "2026-10-08T14:11:39+00:00",
-    "ageDays": 6
+    "ageDays": 7
   },
   {
     "title": "Coordination gap between Kumbh admin, UP irrigation dept disrupts ghat construction - The Times of India",
     "desc": "Coordination gap between Kumbh admin, UP irrigation dept disrupts ghat construction    The Times of India",
     "src": "Irrigation",
-    "time": "6d ago",
+    "time": "7d ago",
     "link": "https://www.google.com/search?q=Coordination%20gap%20between%20Kumbh%20admin%20UP%20irrigation%20dept%20disrupts%20ghat%20construction%20%20The%20Ti",
     "type": "irrigation",
     "fetchedAt": "2026-10-08T14:52:00+00:00",
-    "ageDays": 6
+    "ageDays": 7
   },
   {
     "title": "Major Relief for SEPC as Madras High Court Lifts Attachment on Rs 154 Crore Receivables Following Dispute Settlement",
     "desc": "Chennai (Tamil Nadu) [India], October 5: SEPC Limited (NSE: SEPC | BSE: 532945), a leading EPC company with established expertise in industrial infrastructure, process plants, wate",
     "src": "NewsX",
-    "time": "9d ago",
+    "time": "10d ago",
     "link": "https://www.newsx.com/bl-news/major-relief-for-sepc-as-madras-high-court-lifts-attachment-on-rs-154-crore-receivables-following-dispute-settlement-279858/",
     "type": "highways",
     "fetchedAt": "2026-10-05T14:32:08+00:00",
-    "ageDays": 9
+    "ageDays": 10
   },
   {
     "title": "MoRTH to host Chintan Shivir 2026 on highway infrastructure - The News Mill",
@@ -450,6 +460,16 @@
     "ageDays": 22
   },
   {
+    "title": "Indore Metro Enters Underground Phase as TBM ‘Narmada’ Begins First Tunnel Drive - Metro Rail News",
+    "desc": "Indore Metro Enters Underground Phase as TBM ‘Narmada’ Begins First Tunnel Drive    Metro Rail News",
+    "src": "Metro",
+    "time": "22d ago",
+    "link": "https://www.google.com/search?q=Indore%20Metro%20Enters%20Underground%20Phase%20as%20TBM%20Narmada%20Begins%20First%20Tunnel%20Drive%20%20Metro%20Rail",
+    "type": "metro",
+    "fetchedAt": "2026-09-23T07:00:00+00:00",
+    "ageDays": 22
+  },
+  {
     "title": "HMPL Wins Rs 200-Crore NHAI Project in Tamil Nadu - Kalkine India",
     "desc": "HMPL Wins Rs 200-Crore NHAI Project in Tamil Nadu    Kalkine India",
     "src": "NHAI",
@@ -478,25 +498,5 @@
     "type": "ports",
     "fetchedAt": "2026-09-20T07:00:00+00:00",
     "ageDays": 25
-  },
-  {
-    "title": "Indian Railways Approves ₹493 Cr Mukutban-Gadchandur New Rail Line in Maharashtra - Metro Rail News",
-    "desc": "Indian Railways Approves ₹493 Cr Mukutban-Gadchandur New Rail Line in Maharashtra    Metro Rail News",
-    "src": "IR",
-    "time": "26d ago",
-    "link": "https://www.google.com/search?q=Indian%20Railways%20Approves%20493%20Cr%20MukutbanGadchandur%20New%20Rail%20Line%20in%20Maharashtra%20%20Metro%20Rai",
-    "type": "railways",
-    "fetchedAt": "2026-09-19T07:00:00+00:00",
-    "ageDays": 26
-  },
-  {
-    "title": "Volvo CE launches EC650 mining excavator at bauma CONEXPO India - Construction World",
-    "desc": "Volvo CE launches EC650 mining excavator at bauma CONEXPO India    Construction World",
-    "src": "Mining",
-    "time": "27d ago",
-    "link": "https://www.google.com/search?q=Volvo%20CE%20launches%20EC650%20mining%20excavator%20at%20bauma%20CONEXPO%20India%20%20Construction%20World",
-    "type": "mining",
-    "fetchedAt": "2026-09-18T07:00:00+00:00",
-    "ageDays": 27
   }
 ]
