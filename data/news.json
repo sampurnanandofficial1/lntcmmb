@@ -3,20 +3,50 @@
     "title": "Cemindia wins contract for package 2C02 under Jaipur Metro Rail Phase II Project - Indian Infrastructure Magazine",
     "desc": "Cemindia wins contract for package 2C02 under Jaipur Metro Rail Phase II Project    Indian Infrastructure Magazine",
     "src": "Metro",
-    "time": "7h ago",
+    "time": "12h ago",
     "link": "https://www.google.com/search?q=Cemindia%20wins%20contract%20for%20package%202C02%20under%20Jaipur%20Metro%20Rail%20Phase%20II%20Project%20%20Indian%20I",
     "type": "metro",
     "fetchedAt": "2026-10-26T07:26:26+00:00",
     "ageDays": 0
   },
   {
+    "title": "KEC bags record Rs 2,872 cr largest-ever order from Power Grid for India T&D Business",
+    "desc": "KEC International secures Rs 2,872 crore orders from Power Grid Corporation for 765 kV transmission lines supporting 8.5 GW renewable energy evacuation in Gujarat, boosting its T&D",
+    "src": "financialexpress",
+    "time": "13h ago",
+    "link": "https://www.financialexpress.com/business/industry-kec-bags-record-rs-2872-cr-largest-ever-order-from-power-grid-for-india-tampd-business-4369505/",
+    "type": "highways",
+    "fetchedAt": "2026-10-26T05:54:22+00:00",
+    "ageDays": 0
+  },
+  {
     "title": "Stocks to watch, Oct 26: Raymond, RailTel, KEC Intl, Honasa, BL Kashyap, Lupin, Orchid Pharma, Gland Pharma among 15 stocks to remain in focus",
     "desc": "Markets in focus: a mix of M&A, contract wins, regulatory updates and new product launches across 15 stocks, from Raymond’s rebrand to Lupin’s FDA observation and Orchid Pharma’s L",
     "src": "thehindubusinessline",
-    "time": "13h ago",
+    "time": "18h ago",
     "link": "https://www.thehindubusinessline.com/markets/stocks-to-watch-oct-26-raymond-railtel-kec-intl-honasa-bl-kashyap-lupin-orchid-pharma-gland-pharma-among-15-stocks-to-remain-in-focus/article71624286.ece",
     "type": "highways",
     "fetchedAt": "2026-10-26T01:17:43+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Cloud foundations & IAM",
+    "desc": "Why do we go for AWS? Setting up your own physical servers means spending lakhs up front on hardware, electricity, cooling, and guessing how many servers you need. AWS lets you ren",
+    "src": "Rajesh",
+    "time": "Recent",
+    "link": "https://dev.to/rajdevx/cloud-foundations-iam-1dnk",
+    "type": "highways",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "India Needs $220 Billion To Hit 500 GW Clean Energy Goal By 2030; Keen To Attract FDI: MNRE Secretary",
+    "desc": "MNRE Secretary Santosh Kumar Sarangi told NDTV Profit that India needs domestic and foreign capital to bridge the funding gap, with grid integration and transmission infrastructure",
+    "src": "Rishabh Bhatnagar; Altaf Hussain",
+    "time": "Recent",
+    "link": "https://www.ndtvprofit.com/economy/india-needs-220-billion-to-hit-500-gw-clean-energy-goal-by-2030-keen-to-attract-fdi-mnre-secretary-exclusive-12239496",
+    "type": "highways",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +56,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/india/law-news/story/supreme-court-orders-judicial-retirement-electoral-rolls-bail-land-acquisition-ptag-3025495-2026-10-26",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +66,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/industry/telecom/telecom-news/lt-technology-services-signs-five-year-deal-with-nokia-for-rd-support-in-india/articleshow/135202158.cms",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +76,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/business/kec-international-secures-record-rs-2-872-crore-pgcil-orders-for-765-kv-transmission-lines-12229704",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +86,7 @@
     "time": "Recent",
     "link": "https://www.mining.com/web/welspun-bags-580-million-us-gas-pipeline-order-tied-to-data-centre-buildout/",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-wobble-after-ai-bloodbath-brent-hits-114-france-braces-moodys",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +106,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/india/ndtv-world-summit-2026-long-term-growth-opportunity-in-india-amid-global-uncertainty-says-prasanna-mohile-of-pernod-ricard-12225047",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +116,7 @@
     "time": "Recent",
     "link": "https://indianexpress.com/article/india/rss-affiliate-sjm-protest-delhi-elon-musk-starlink-national-security-10932334/",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +126,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/kalpataru-projects-bags-rs-2349-crore-orders-across-power-transmission-and-buildings-segments-in-india",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/kalpataru-projects-order-wins-rs-2349-crore-fy27-inflows-126102100194_1.html",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -116,17 +146,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/defence/iaf-strengthens-air-base-fire-safety-with-80-indigenous-robots-designed-to-tackle-fuel-and-ammunition-fires",
     "type": "highways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "DOTr courts India, France to fund stalled rail projects",
-    "desc": "INQUIRER FILE PHOTO MANILA, Philippines — The Department of Transportation (DOTr) is turning to government-to-government financing to revive several long-delayed railway projects, ",
-    "src": "Logan Kal-El M Zapanta",
-    "time": "Recent",
-    "link": "https://business.inquirer.net/616672/dotr-courts-india-france-to-fund-stalled-rail-projects",
-    "type": "railways",
-    "fetchedAt": "2026-10-26T14:30:01.177131+00:00",
+    "fetchedAt": "2026-10-26T19:27:34.526050+00:00",
     "ageDays": 0
   },
   {
@@ -140,6 +160,16 @@
     "ageDays": 1
   },
   {
+    "title": "India’s 2026–27 US$30.92bn rail plan may boost Thai exports - Nation Thailand",
+    "desc": "India’s 2026–27 US$30.92bn rail plan may boost Thai exports    Nation Thailand",
+    "src": "IR",
+    "time": "1d ago",
+    "link": "https://www.google.com/search?q=Indias%20202627%20US3092bn%20rail%20plan%20may%20boost%20Thai%20exports%20%20Nation%20Thailand",
+    "type": "railways",
+    "fetchedAt": "2026-10-25T05:31:00+00:00",
+    "ageDays": 1
+  },
+  {
     "title": "Govt steps up irrigation projects, expands coverage by 4,000 hectares - The Rising Nepal",
     "desc": "Govt steps up irrigation projects, expands coverage by 4,000 hectares    The Rising Nepal",
     "src": "Irrigation",
@@ -148,16 +178,6 @@
     "type": "irrigation",
     "fetchedAt": "2026-10-25T04:27:38+00:00",
     "ageDays": 1
-  },
-  {
-    "title": "Highway Infrastructure HILINFRA Rs 340 Crore NHAI Order - Kalkine India",
-    "desc": "Highway Infrastructure HILINFRA Rs 340 Crore NHAI Order    Kalkine India",
-    "src": "NHAI",
-    "time": "2d ago",
-    "link": "https://www.google.com/search?q=Highway%20Infrastructure%20HILINFRA%20Rs%20340%20Crore%20NHAI%20Order%20%20Kalkine%20India",
-    "type": "highways",
-    "fetchedAt": "2026-10-23T15:17:00+00:00",
-    "ageDays": 2
   },
   {
     "title": "CEM India Projects Wins ₹921.63 Cr. Jaipur Metro Phase 2 Underground Tunnel and Station Contract - Metro Rail News",
@@ -170,13 +190,13 @@
     "ageDays": 2
   },
   {
-    "title": "Innovision Limited Secures Rs 94.97 Crore Toll Collection and Maintenance Contract from NHAI in Chhattisgarh - EquityBulls",
-    "desc": "Innovision Limited Secures Rs 94.97 Crore Toll Collection and Maintenance Contract from NHAI in Chhattisgarh    EquityBulls",
+    "title": "Highway Infrastructure HILINFRA Rs 340 Crore NHAI Order - Kalkine India",
+    "desc": "Highway Infrastructure HILINFRA Rs 340 Crore NHAI Order    Kalkine India",
     "src": "NHAI",
     "time": "3d ago",
-    "link": "https://www.google.com/search?q=Innovision%20Limited%20Secures%20Rs%209497%20Crore%20Toll%20Collection%20and%20Maintenance%20Contract%20from%20NHA",
+    "link": "https://www.google.com/search?q=Highway%20Infrastructure%20HILINFRA%20Rs%20340%20Crore%20NHAI%20Order%20%20Kalkine%20India",
     "type": "highways",
-    "fetchedAt": "2026-10-22T16:04:42+00:00",
+    "fetchedAt": "2026-10-23T15:17:00+00:00",
     "ageDays": 3
   },
   {
@@ -238,6 +258,16 @@
     "type": "corporate",
     "fetchedAt": "2026-10-23T07:53:13+00:00",
     "ageDays": 3
+  },
+  {
+    "title": "Innovision Limited Secures Rs 94.97 Crore Toll Collection and Maintenance Contract from NHAI in Chhattisgarh - EquityBulls",
+    "desc": "Innovision Limited Secures Rs 94.97 Crore Toll Collection and Maintenance Contract from NHAI in Chhattisgarh    EquityBulls",
+    "src": "NHAI",
+    "time": "4d ago",
+    "link": "https://www.google.com/search?q=Innovision%20Limited%20Secures%20Rs%209497%20Crore%20Toll%20Collection%20and%20Maintenance%20Contract%20from%20NHA",
+    "type": "highways",
+    "fetchedAt": "2026-10-22T16:04:42+00:00",
+    "ageDays": 4
   },
   {
     "title": "REnergy Dynamics wins EPC contractor award in CBG sector - Construction Week India",
@@ -390,16 +420,6 @@
     "ageDays": 18
   },
   {
-    "title": "Major Relief for SEPC as Madras High Court Lifts Attachment on Rs 154 Crore Receivables Following Dispute Settlement",
-    "desc": "Chennai (Tamil Nadu) [India], October 5: SEPC Limited (NSE: SEPC | BSE: 532945), a leading EPC company with established expertise in industrial infrastructure, process plants, wate",
-    "src": "NewsX",
-    "time": "20d ago",
-    "link": "https://www.newsx.com/bl-news/major-relief-for-sepc-as-madras-high-court-lifts-attachment-on-rs-154-crore-receivables-following-dispute-settlement-279858/",
-    "type": "highways",
-    "fetchedAt": "2026-10-05T14:32:08+00:00",
-    "ageDays": 20
-  },
-  {
     "title": "Excavator Market Overview - Market Growth Reports",
     "desc": "Excavator Market Overview    Market Growth Reports",
     "src": "Mining",
@@ -407,6 +427,16 @@
     "link": "https://www.google.com/search?q=Excavator%20Market%20Overview%20%20Market%20Growth%20Reports",
     "type": "mining",
     "fetchedAt": "2026-10-05T07:00:00+00:00",
+    "ageDays": 21
+  },
+  {
+    "title": "Major Relief for SEPC as Madras High Court Lifts Attachment on Rs 154 Crore Receivables Following Dispute Settlement",
+    "desc": "Chennai (Tamil Nadu) [India], October 5: SEPC Limited (NSE: SEPC | BSE: 532945), a leading EPC company with established expertise in industrial infrastructure, process plants, wate",
+    "src": "NewsX",
+    "time": "21d ago",
+    "link": "https://www.newsx.com/bl-news/major-relief-for-sepc-as-madras-high-court-lifts-attachment-on-rs-154-crore-receivables-following-dispute-settlement-279858/",
+    "type": "highways",
+    "fetchedAt": "2026-10-05T14:32:08+00:00",
     "ageDays": 21
   },
   {
@@ -468,35 +498,5 @@
     "type": "highways",
     "fetchedAt": "2026-09-26T07:00:00+00:00",
     "ageDays": 30
-  },
-  {
-    "title": "Vascon Engineers shares gain 10% after Qualcomm India's Rs 661 crore order win - Moneycontrol.com",
-    "desc": "Vascon Engineers shares gain 10% after Qualcomm India's Rs 661 crore order win    Moneycontrol.com",
-    "src": "Infra Order",
-    "time": "31d ago",
-    "link": "https://www.google.com/search?q=Vascon%20Engineers%20shares%20gain%2010%20after%20Qualcomm%20Indias%20Rs%20661%20crore%20order%20win%20%20Moneycontrol",
-    "type": "corporate",
-    "fetchedAt": "2026-09-25T07:00:00+00:00",
-    "ageDays": 31
-  },
-  {
-    "title": "Eastern Railway Floats ₹531 Cr EPC Tender For Mahagama-Pirpainti New Rail Line - Metro Rail News",
-    "desc": "Eastern Railway Floats ₹531 Cr EPC Tender For Mahagama-Pirpainti New Rail Line    Metro Rail News",
-    "src": "IR",
-    "time": "32d ago",
-    "link": "https://www.google.com/search?q=Eastern%20Railway%20Floats%20531%20Cr%20EPC%20Tender%20For%20MahagamaPirpainti%20New%20Rail%20Line%20%20Metro%20Rail%20N",
-    "type": "railways",
-    "fetchedAt": "2026-09-24T07:00:00+00:00",
-    "ageDays": 32
-  },
-  {
-    "title": "DP World, NMDC, Adani Ports, Vishwa Samudra vie for ₹22,323 crore Vadhvan Port HAM contract - ET Infra",
-    "desc": "DP World, NMDC, Adani Ports, Vishwa Samudra vie for ₹22,323 crore Vadhvan Port HAM contract    ET Infra",
-    "src": "Ports",
-    "time": "32d ago",
-    "link": "https://www.google.com/search?q=DP%20World%20NMDC%20Adani%20Ports%20Vishwa%20Samudra%20vie%20for%2022323%20crore%20Vadhvan%20Port%20HAM%20contract%20%20ET",
-    "type": "ports",
-    "fetchedAt": "2026-09-24T07:00:00+00:00",
-    "ageDays": 32
   }
 ]
