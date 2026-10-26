@@ -1,12 +1,22 @@
 [
   {
-    "title": "Govt steps up irrigation projects, expands coverage by 4,000 hectares - The Rising Nepal",
-    "desc": "Govt steps up irrigation projects, expands coverage by 4,000 hectares    The Rising Nepal",
-    "src": "Irrigation",
-    "time": "12h ago",
-    "link": "https://www.google.com/search?q=Govt%20steps%20up%20irrigation%20projects%20expands%20coverage%20by%204000%20hectares%20%20The%20Rising%20Nepal",
-    "type": "irrigation",
-    "fetchedAt": "2026-10-25T04:27:38+00:00",
+    "title": "NMDC’s Critical Minerals Push: Strategy or Just a Pipeline? - Discovery Alert",
+    "desc": "NMDC’s Critical Minerals Push: Strategy or Just a Pipeline?    Discovery Alert",
+    "src": "NMDC",
+    "time": "23h ago",
+    "link": "https://www.google.com/search?q=NMDCs%20Critical%20Minerals%20Push%20Strategy%20or%20Just%20a%20Pipeline%20%20Discovery%20Alert",
+    "type": "mining",
+    "fetchedAt": "2026-10-25T06:52:55+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "L&T Technology Services signs five-year deal with Nokia for R&D support in India",
+    "desc": "L&T Technology Services (LTTS) on Monday announced a five-year contract with Nokia to support its engineering and research and development (R&D) activities in India, according to a",
+    "src": "SECTIONS L; T Technology Services signs five-year deal; D support",
+    "time": "Recent",
+    "link": "https://economictimes.indiatimes.com/industry/telecom/telecom-news/lt-technology-services-signs-five-year-deal-with-nokia-for-rd-support-in-india/articleshow/135202158.cms",
+    "type": "highways",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -16,7 +26,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/business/kec-international-secures-record-rs-2-872-crore-pgcil-orders-for-765-kv-transmission-lines-12229704",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +36,7 @@
     "time": "Recent",
     "link": "https://www.mining.com/web/welspun-bags-580-million-us-gas-pipeline-order-tied-to-data-centre-buildout/",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +46,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-wobble-after-ai-bloodbath-brent-hits-114-france-braces-moodys",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +56,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/india/ndtv-world-summit-2026-long-term-growth-opportunity-in-india-amid-global-uncertainty-says-prasanna-mohile-of-pernod-ricard-12225047",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +66,7 @@
     "time": "Recent",
     "link": "https://indianexpress.com/article/india/rss-affiliate-sjm-protest-delhi-elon-musk-starlink-national-security-10932334/",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +76,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/kalpataru-projects-bags-rs-2349-crore-orders-across-power-transmission-and-buildings-segments-in-india",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +86,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/news/kalpataru-projects-order-wins-rs-2349-crore-fy27-inflows-126102100194_1.html",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +96,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/defence/iaf-strengthens-air-base-fire-safety-with-80-indigenous-robots-designed-to-tackle-fuel-and-ammunition-fires",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -96,17 +106,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/industry/news/beyond-diwali-sales-sivakasi-eyes-global-fireworks-market-with-exports-126101900803_1.html",
     "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Wright calls Trump's diesel deal a peace incentive. Rubio says Russia would sell anyway.",
-    "desc": "President Trump's top aides offered sharply different explanations this weekend of his Russian diesel deal amid a barrage of bipartisan criticism calling the move a gift to Russia.",
-    "src": "Ben Geman",
-    "time": "Recent",
-    "link": "https://www.axios.com/2026/10/18/trump-russia-diesel-deal-rubio-wright-sanctions",
-    "type": "highways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
   },
   {
@@ -116,8 +116,18 @@
     "time": "Recent",
     "link": "https://business.inquirer.net/616672/dotr-courts-india-france-to-fund-stalled-rail-projects",
     "type": "railways",
-    "fetchedAt": "2026-10-25T17:07:17.238894+00:00",
+    "fetchedAt": "2026-10-26T06:50:28.057568+00:00",
     "ageDays": 0
+  },
+  {
+    "title": "India’s 2026–27 US$30.92bn rail plan may boost Thai exports - Nation Thailand",
+    "desc": "India’s 2026–27 US$30.92bn rail plan may boost Thai exports    Nation Thailand",
+    "src": "IR",
+    "time": "1d ago",
+    "link": "https://www.google.com/search?q=Indias%20202627%20US3092bn%20rail%20plan%20may%20boost%20Thai%20exports%20%20Nation%20Thailand",
+    "type": "railways",
+    "fetchedAt": "2026-10-25T05:31:00+00:00",
+    "ageDays": 1
   },
   {
     "title": "CEM India Projects Wins ₹921.63 Cr. Jaipur Metro Phase 2 Underground Tunnel and Station Contract - Metro Rail News",
@@ -127,6 +137,16 @@
     "link": "https://www.google.com/search?q=CEM%20India%20Projects%20Wins%2092163%20Cr%20Jaipur%20Metro%20Phase%202%20Underground%20Tunnel%20and%20Station%20Contr",
     "type": "metro",
     "fetchedAt": "2026-10-24T12:25:07+00:00",
+    "ageDays": 1
+  },
+  {
+    "title": "Govt steps up irrigation projects, expands coverage by 4,000 hectares - The Rising Nepal",
+    "desc": "Govt steps up irrigation projects, expands coverage by 4,000 hectares    The Rising Nepal",
+    "src": "Irrigation",
+    "time": "1d ago",
+    "link": "https://www.google.com/search?q=Govt%20steps%20up%20irrigation%20projects%20expands%20coverage%20by%204000%20hectares%20%20The%20Rising%20Nepal",
+    "type": "irrigation",
+    "fetchedAt": "2026-10-25T04:27:38+00:00",
     "ageDays": 1
   },
   {
@@ -180,16 +200,6 @@
     "ageDays": 2
   },
   {
-    "title": "Magellanic Cloud subsidiary bags ₹3.16 crore DFCCIL surveillance contract - Tech Observer Magazine",
-    "desc": "Magellanic Cloud subsidiary bags ₹3.16 crore DFCCIL surveillance contract    Tech Observer Magazine",
-    "src": "DFCCIL",
-    "time": "2d ago",
-    "link": "https://www.google.com/search?q=Magellanic%20Cloud%20subsidiary%20bags%20316%20crore%20DFCCIL%20surveillance%20contract%20%20Tech%20Observer%20Mag",
-    "type": "railways",
-    "fetchedAt": "2026-10-23T04:27:07+00:00",
-    "ageDays": 2
-  },
-  {
     "title": "Innovision Limited Secures Rs 94.97 Crore Toll Collection and Maintenance Contract from NHAI in Chhattisgarh - EquityBulls",
     "desc": "Innovision Limited Secures Rs 94.97 Crore Toll Collection and Maintenance Contract from NHAI in Chhattisgarh    EquityBulls",
     "src": "NHAI",
@@ -200,13 +210,33 @@
     "ageDays": 3
   },
   {
-    "title": "REnergy Dynamics wins EPC contractor award in CBG sector - Construction Week India",
-    "desc": "REnergy Dynamics wins EPC contractor award in CBG sector    Construction Week India",
-    "src": "Infra 2026",
+    "title": "Magellanic Cloud subsidiary bags ₹3.16 crore DFCCIL surveillance contract - Tech Observer Magazine",
+    "desc": "Magellanic Cloud subsidiary bags ₹3.16 crore DFCCIL surveillance contract    Tech Observer Magazine",
+    "src": "DFCCIL",
     "time": "3d ago",
-    "link": "https://www.google.com/search?q=REnergy%20Dynamics%20wins%20EPC%20contractor%20award%20in%20CBG%20sector%20%20Construction%20Week%20India",
-    "type": "highways",
-    "fetchedAt": "2026-10-22T04:00:00+00:00",
+    "link": "https://www.google.com/search?q=Magellanic%20Cloud%20subsidiary%20bags%20316%20crore%20DFCCIL%20surveillance%20contract%20%20Tech%20Observer%20Mag",
+    "type": "railways",
+    "fetchedAt": "2026-10-23T04:27:07+00:00",
+    "ageDays": 3
+  },
+  {
+    "title": "Magellanic Cloud MCLOUD DFCCIL CCTV Surveillance Contract - Kalkine India",
+    "desc": "Magellanic Cloud MCLOUD DFCCIL CCTV Surveillance Contract    Kalkine India",
+    "src": "DFCCIL",
+    "time": "3d ago",
+    "link": "https://www.google.com/search?q=Magellanic%20Cloud%20MCLOUD%20DFCCIL%20CCTV%20Surveillance%20Contract%20%20Kalkine%20India",
+    "type": "railways",
+    "fetchedAt": "2026-10-23T04:19:00+00:00",
+    "ageDays": 3
+  },
+  {
+    "title": "Magellanic Cloud's Subsidiary Secures Rs 3.16 Crore CCTV Surveillance Contract from DFCCIL - Kalkine Media",
+    "desc": "Magellanic Cloud's Subsidiary Secures Rs 3.16 Crore CCTV Surveillance Contract from DFCCIL    Kalkine Media",
+    "src": "DFCCIL",
+    "time": "3d ago",
+    "link": "https://www.google.com/search?q=Magellanic%20Clouds%20Subsidiary%20Secures%20Rs%20316%20Crore%20CCTV%20Surveillance%20Contract%20from%20DFCCIL",
+    "type": "railways",
+    "fetchedAt": "2026-10-23T04:19:00+00:00",
     "ageDays": 3
   },
   {
@@ -220,16 +250,6 @@
     "ageDays": 3
   },
   {
-    "title": "GHV Infra Projects Secures ₹213 Crore Infrastructure Contract in West Bengal - scanx.trade",
-    "desc": "GHV Infra Projects Secures ₹213 Crore Infrastructure Contract in West Bengal    scanx.trade",
-    "src": "Infra 2026",
-    "time": "3d ago",
-    "link": "https://www.google.com/search?q=GHV%20Infra%20Projects%20Secures%20213%20Crore%20Infrastructure%20Contract%20in%20West%20Bengal%20%20scanxtrade",
-    "type": "highways",
-    "fetchedAt": "2026-10-21T22:21:02+00:00",
-    "ageDays": 3
-  },
-  {
     "title": "L&T secures ₹2,500-5,000 crore orders for Delhi, Amaravati building projects - ET Infra",
     "desc": "L&T secures ₹2,500-5,000 crore orders for Delhi, Amaravati building projects    ET Infra",
     "src": "L&T",
@@ -237,6 +257,26 @@
     "link": "https://www.google.com/search?q=LT%20secures%2025005000%20crore%20orders%20for%20Delhi%20Amaravati%20building%20projects%20%20ET%20Infra",
     "type": "corporate",
     "fetchedAt": "2026-10-21T07:45:32+00:00",
+    "ageDays": 4
+  },
+  {
+    "title": "REnergy Dynamics wins EPC contractor award in CBG sector - Construction Week India",
+    "desc": "REnergy Dynamics wins EPC contractor award in CBG sector    Construction Week India",
+    "src": "Infra 2026",
+    "time": "4d ago",
+    "link": "https://www.google.com/search?q=REnergy%20Dynamics%20wins%20EPC%20contractor%20award%20in%20CBG%20sector%20%20Construction%20Week%20India",
+    "type": "highways",
+    "fetchedAt": "2026-10-22T04:00:00+00:00",
+    "ageDays": 4
+  },
+  {
+    "title": "GHV Infra Projects Secures ₹213 Crore Infrastructure Contract in West Bengal - scanx.trade",
+    "desc": "GHV Infra Projects Secures ₹213 Crore Infrastructure Contract in West Bengal    scanx.trade",
+    "src": "Infra 2026",
+    "time": "4d ago",
+    "link": "https://www.google.com/search?q=GHV%20Infra%20Projects%20Secures%20213%20Crore%20Infrastructure%20Contract%20in%20West%20Bengal%20%20scanxtrade",
+    "type": "highways",
+    "fetchedAt": "2026-10-21T22:21:02+00:00",
     "ageDays": 4
   },
   {
@@ -253,11 +293,11 @@
     "title": "REnergy Dynamics Wins EPC Award for CBG Projects - Construction World",
     "desc": "REnergy Dynamics Wins EPC Award for CBG Projects    Construction World",
     "src": "Infra 2026",
-    "time": "6d ago",
+    "time": "7d ago",
     "link": "https://www.google.com/search?q=REnergy%20Dynamics%20Wins%20EPC%20Award%20for%20CBG%20Projects%20%20Construction%20World",
     "type": "highways",
     "fetchedAt": "2026-10-19T06:10:39+00:00",
-    "ageDays": 6
+    "ageDays": 7
   },
   {
     "title": "Rajesh Power Services secures new order of Rs 69.004 Crore; Back-to-back Gujarat Power Distribution infrastructure orders total ₹540.92 Crore within a Week",
@@ -330,26 +370,6 @@
     "ageDays": 13
   },
   {
-    "title": "Current Infraprojects Limited Secures Rs 44.76 Cr Solar EPC & O&M Order from Jaipur Vidyut Vitran Nigam Limited",
-    "desc": "Jaipur (Rajasthan) [India], October 12: Current Infraprojects Limited (NSE: CURRENT), one of the leading solar power infrastructure companies, is pleased to announce that the compa",
-    "src": "NewsX",
-    "time": "13d ago",
-    "link": "https://www.newsx.com/bl-news/current-infraprojects-limited-secures-rs-44-76-cr-solar-epc-and-o-and-m-order-from-jaipur-vidyut-vitran-nigam-limited-282289/",
-    "type": "highways",
-    "fetchedAt": "2026-10-12T06:29:07+00:00",
-    "ageDays": 13
-  },
-  {
-    "title": "SEPC Limited MD Signs Rs 854.57 Crore Contract with SAIL-IISCO Steel Plant at Contract Signing Ceremony in Burnpur; Consolidated Order Book Crosses Rs 10,000 Crore",
-    "desc": "Chennai (Tamil Nadu) [India], October 12: SEPC Limited (NSE: SEPC | BSE: 532945), a leading EPC company with established expertise in industrial infrastructure, process plants, wat",
-    "src": "NewsX",
-    "time": "13d ago",
-    "link": "https://www.newsx.com/business/sepc-limited-md-signs-rs-854-57-crore-contract-with-sail-iisco-steel-plant-at-contract-signing-ceremony-in-burnpur-consolidated-order-book-crosses-rs-10000-crore-282264/",
-    "type": "highways",
-    "fetchedAt": "2026-10-12T05:55:09+00:00",
-    "ageDays": 13
-  },
-  {
     "title": "India’s expressway boom: How new corridors are cutting travel time across major cities - ET Infra",
     "desc": "India’s expressway boom: How new corridors are cutting travel time across major cities    ET Infra",
     "src": "MoRTH",
@@ -357,6 +377,26 @@
     "link": "https://www.google.com/search?q=Indias%20expressway%20boom%20How%20new%20corridors%20are%20cutting%20travel%20time%20across%20major%20cities%20%20ET%20I",
     "type": "highways",
     "fetchedAt": "2026-10-11T07:00:00+00:00",
+    "ageDays": 14
+  },
+  {
+    "title": "Current Infraprojects Limited Secures Rs 44.76 Cr Solar EPC & O&M Order from Jaipur Vidyut Vitran Nigam Limited",
+    "desc": "Jaipur (Rajasthan) [India], October 12: Current Infraprojects Limited (NSE: CURRENT), one of the leading solar power infrastructure companies, is pleased to announce that the compa",
+    "src": "NewsX",
+    "time": "14d ago",
+    "link": "https://www.newsx.com/bl-news/current-infraprojects-limited-secures-rs-44-76-cr-solar-epc-and-o-and-m-order-from-jaipur-vidyut-vitran-nigam-limited-282289/",
+    "type": "highways",
+    "fetchedAt": "2026-10-12T06:29:07+00:00",
+    "ageDays": 14
+  },
+  {
+    "title": "SEPC Limited MD Signs Rs 854.57 Crore Contract with SAIL-IISCO Steel Plant at Contract Signing Ceremony in Burnpur; Consolidated Order Book Crosses Rs 10,000 Crore",
+    "desc": "Chennai (Tamil Nadu) [India], October 12: SEPC Limited (NSE: SEPC | BSE: 532945), a leading EPC company with established expertise in industrial infrastructure, process plants, wat",
+    "src": "NewsX",
+    "time": "14d ago",
+    "link": "https://www.newsx.com/business/sepc-limited-md-signs-rs-854-57-crore-contract-with-sail-iisco-steel-plant-at-contract-signing-ceremony-in-burnpur-consolidated-order-book-crosses-rs-10000-crore-282264/",
+    "type": "highways",
+    "fetchedAt": "2026-10-12T05:55:09+00:00",
     "ageDays": 14
   },
   {
@@ -420,6 +460,16 @@
     "ageDays": 24
   },
   {
+    "title": "NHAI begins special quality inspections of 17 highway projects with abnormally low quoted bids - The New Indian Express",
+    "desc": "NHAI begins special quality inspections of 17 highway projects with abnormally low quoted bids    The New Indian Express",
+    "src": "MoRTH",
+    "time": "25d ago",
+    "link": "https://www.google.com/search?q=NHAI%20begins%20special%20quality%20inspections%20of%2017%20highway%20projects%20with%20abnormally%20low%20quoted",
+    "type": "highways",
+    "fetchedAt": "2026-09-30T07:00:00+00:00",
+    "ageDays": 25
+  },
+  {
     "title": "Dilip Buildcon wins Rs 688 crore elevated corridor project in Maharashtra - ProjectsMonitor",
     "desc": "Dilip Buildcon wins Rs 688 crore elevated corridor project in Maharashtra    ProjectsMonitor",
     "src": "NHAI",
@@ -448,55 +498,5 @@
     "type": "corporate",
     "fetchedAt": "2026-09-25T07:00:00+00:00",
     "ageDays": 30
-  },
-  {
-    "title": "RITES, NHIDCL join hands to support highway and infrastructure projects - ET Infra",
-    "desc": "RITES, NHIDCL join hands to support highway and infrastructure projects    ET Infra",
-    "src": "NHIDCL",
-    "time": "32d ago",
-    "link": "https://www.google.com/search?q=RITES%20NHIDCL%20join%20hands%20to%20support%20highway%20and%20infrastructure%20projects%20%20ET%20Infra",
-    "type": "highways",
-    "fetchedAt": "2026-09-23T07:00:00+00:00",
-    "ageDays": 32
-  },
-  {
-    "title": "Rites signs MoU with NHIDCL for highway consultancy services - scanx.trade",
-    "desc": "Rites signs MoU with NHIDCL for highway consultancy services    scanx.trade",
-    "src": "NHIDCL",
-    "time": "32d ago",
-    "link": "https://www.google.com/search?q=Rites%20signs%20MoU%20with%20NHIDCL%20for%20highway%20consultancy%20services%20%20scanxtrade",
-    "type": "highways",
-    "fetchedAt": "2026-09-23T07:00:00+00:00",
-    "ageDays": 32
-  },
-  {
-    "title": "BRO – Connecting the frontiers - BusinessLine",
-    "desc": "BRO – Connecting the frontiers    BusinessLine",
-    "src": "BRO",
-    "time": "32d ago",
-    "link": "https://www.google.com/search?q=BRO%20%20Connecting%20the%20frontiers%20%20BusinessLine",
-    "type": "highways",
-    "fetchedAt": "2026-09-23T07:00:00+00:00",
-    "ageDays": 32
-  },
-  {
-    "title": "Indore Metro Enters Underground Phase as TBM ‘Narmada’ Begins First Tunnel Drive - Metro Rail News",
-    "desc": "Indore Metro Enters Underground Phase as TBM ‘Narmada’ Begins First Tunnel Drive    Metro Rail News",
-    "src": "Metro",
-    "time": "32d ago",
-    "link": "https://www.google.com/search?q=Indore%20Metro%20Enters%20Underground%20Phase%20as%20TBM%20Narmada%20Begins%20First%20Tunnel%20Drive%20%20Metro%20Rail",
-    "type": "metro",
-    "fetchedAt": "2026-09-23T07:00:00+00:00",
-    "ageDays": 32
-  },
-  {
-    "title": "HAM tender for Vadhvan port project extended after DP World, Boskalis-NMDC JV submit bids - ET Infra",
-    "desc": "HAM tender for Vadhvan port project extended after DP World, Boskalis-NMDC JV submit bids    ET Infra",
-    "src": "Ports",
-    "time": "35d ago",
-    "link": "https://www.google.com/search?q=HAM%20tender%20for%20Vadhvan%20port%20project%20extended%20after%20DP%20World%20BoskalisNMDC%20JV%20submit%20bids%20%20E",
-    "type": "ports",
-    "fetchedAt": "2026-09-20T07:00:00+00:00",
-    "ageDays": 35
   }
 ]
