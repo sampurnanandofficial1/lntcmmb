@@ -1,39 +1,19 @@
 [
   {
-    "title": "Delhi Metro Sees 80.54 Lakh Passenger Boardings, Approaches Record High - Metro Rail News",
-    "desc": "Delhi Metro Sees 80.54 Lakh Passenger Boardings, Approaches Record High    Metro Rail News",
+    "title": "Delhi Metro Records 80.54 Lakh Passenger Boardings, Nears All Time High - Metro Rail News",
+    "desc": "Delhi Metro Records 80.54 Lakh Passenger Boardings, Nears All Time High    Metro Rail News",
     "src": "IR",
-    "time": "3h ago",
-    "link": "https://www.google.com/search?q=Delhi%20Metro%20Sees%208054%20Lakh%20Passenger%20Boardings%20Approaches%20Record%20High%20%20Metro%20Rail%20News",
+    "time": "8h ago",
+    "link": "https://www.google.com/search?q=Delhi%20Metro%20Records%208054%20Lakh%20Passenger%20Boardings%20Nears%20All%20Time%20High%20%20Metro%20Rail%20News",
     "type": "railways",
     "fetchedAt": "2026-11-04T11:52:12+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "IRCON Reports Q2 Revenue Of ₹22.7 Billion Against ₹19.77 Billion YoY - Sahi",
-    "desc": "IRCON Reports Q2 Revenue Of ₹22.7 Billion Against ₹19.77 Billion YoY    Sahi",
-    "src": "IR",
-    "time": "4h ago",
-    "link": "https://www.google.com/search?q=IRCON%20Reports%20Q2%20Revenue%20Of%20227%20Billion%20Against%201977%20Billion%20YoY%20%20Sahi",
-    "type": "railways",
-    "fetchedAt": "2026-11-04T11:13:23+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "What Are Abrasive, Grid Project and EPC Stocks? - Univest",
-    "desc": "What Are Abrasive, Grid Project and EPC Stocks?    Univest",
-    "src": "IR",
-    "time": "9h ago",
-    "link": "https://www.google.com/search?q=What%20Are%20Abrasive%20Grid%20Project%20and%20EPC%20Stocks%20%20Univest",
-    "type": "railways",
-    "fetchedAt": "2026-11-04T06:08:00+00:00",
     "ageDays": 0
   },
   {
     "title": "Highway Infrastructure shares jump 62% in a month. Here's why - India Today",
     "desc": "Highway Infrastructure shares jump 62% in a month. Here's why    India Today",
     "src": "Infra Order",
-    "time": "7h ago",
+    "time": "11h ago",
     "link": "https://www.google.com/search?q=Highway%20Infrastructure%20shares%20jump%2062%20in%20a%20month%20Heres%20why%20%20India%20Today",
     "type": "corporate",
     "fetchedAt": "2026-11-04T08:39:03+00:00",
@@ -43,37 +23,47 @@
     "title": "Highway Infrastructure HILINFRA Rs 198.31 Crore CPWD Order Win - Kalkine India",
     "desc": "Highway Infrastructure HILINFRA Rs 198.31 Crore CPWD Order Win    Kalkine India",
     "src": "Infra Order",
-    "time": "11h ago",
+    "time": "16h ago",
     "link": "https://www.google.com/search?q=Highway%20Infrastructure%20HILINFRA%20Rs%2019831%20Crore%20CPWD%20Order%20Win%20%20Kalkine%20India",
     "type": "corporate",
     "fetchedAt": "2026-11-04T03:52:00+00:00",
     "ageDays": 0
   },
   {
+    "title": "Highway Infrastructure Limited wins its biggest-ever civil construction contract worth Rs. 198.31 crore from CPWD; order book surges to Rs. 1,776.19 crore - ANI News",
+    "desc": "Highway Infrastructure Limited wins its biggest-ever civil construction contract worth Rs. 198.31 crore from CPWD; order book surges to Rs. 1,776.19 crore    ANI News",
+    "src": "Infra Order",
+    "time": "13h ago",
+    "link": "https://www.google.com/search?q=Highway%20Infrastructure%20Limited%20wins%20its%20biggestever%20civil%20construction%20contract%20worth%20Rs%201",
+    "type": "corporate",
+    "fetchedAt": "2026-11-04T07:19:00+00:00",
+    "ageDays": 0
+  },
+  {
     "title": "DLF awards ₹325-crore contract for flyover, four underpasses near Cyber City",
     "desc": "The proposed flyover will provide direct connectivity from the Ambience Mall end of the Delhi-Gurgaon Expressway to Cyber City, allowing commuters to bypass congestion points near ",
     "src": "hindustantimes",
-    "time": "13h ago",
+    "time": "18h ago",
     "link": "https://www.hindustantimes.com/cities/gurugram-news/dlf-awards-325-crore-contract-for-flyover-four-underpasses-near-cyber-city-101793732266203.html",
     "type": "highways",
     "fetchedAt": "2026-11-04T02:13:10+00:00",
     "ageDays": 0
   },
   {
-    "title": "Highway Infrastructure secures ₹198 crore CPWD order for CISF battalion infrastructure",
-    "desc": "Highway Infrastructure has received a ₹198.31 crore CPWD order for planning, designing and construction of residential and non-residential infrastructure for the CISF 12th Reserve ",
-    "src": "cnbctv18",
-    "time": "21h ago",
-    "link": "https://www.cnbctv18.com/market/stocks/highway-infrastructure-share-price-secures-rs-198-crore-cpwd-order-for-cisf-battalion-infrastructure-20026401.htm",
+    "title": "SPML Infra Wins Rs. 3,186 Cr Renewable Energy Transmission Order in Rajasthan",
+    "desc": "SPML Infra Limited has secured an order worth Rs. 3,186.41 crore from Power Grid Corporation of India Limited (POWERGRID), a Maharatna Central Public Sector Enterprise, for the ext",
+    "src": "saurenergy",
+    "time": "15h ago",
+    "link": "https://www.saurenergy.com/solar-energy-news/spml-infra-wins-rs-3186-cr-renewable-energy-transmission-order-in-rajasthan-12781731",
     "type": "highways",
-    "fetchedAt": "2026-11-03T17:54:33+00:00",
+    "fetchedAt": "2026-11-04T05:16:54+00:00",
     "ageDays": 0
   },
   {
     "title": "GIFT Nifty down 93 pts; NSE, Lupin, CleanMax, Cocord Biotech, MK Sons among top stocks in focus",
     "desc": "Stocks like NSE, Lupin, CleanMax, MCX, Concord Biotech, MK Sons, Medanta, IEX and more are among top stocks in focus on Wednesday, November 03.",
     "src": "businesstoday",
-    "time": "12h ago",
+    "time": "17h ago",
     "link": "https://www.businesstoday.in/markets/trending-stocks/story/gift-nifty-down-93-pts-nse-lupin-cleanmax-cocord-biotech-mk-sons-among-top-stocks-in-focus-565549-2026-11-04",
     "type": "highways",
     "fetchedAt": "2026-11-04T03:16:25+00:00",
@@ -83,27 +73,17 @@
     "title": "Stocks to Watch Today: NSE, Lupin, Metropolis, MK Jewels, Lloyds Metals, MCX India, Awfis Space, Aarti Drugs, Global Health, Vijaya Diagnostic in focus on 4 November",
     "desc": "Stocks to Watch, 4 Nov: Stocks like National Stock Exchange of India, Lupin, Metropolis Healthcare, Lloyds Metals and Energy, Multi Commodity Exchange of India, Awfis Space Solutio",
     "src": "moneycontrol",
-    "time": "14h ago",
+    "time": "18h ago",
     "link": "https://www.moneycontrol.com/news/business/markets/stocks-to-watch-today-nse-lupin-metropolis-mk-jewels-lloyds-metals-mcx-india-awfis-space-aarti-drugs-global-health-vijaya-diagnostic-in-focus-on-4-november-14068109.html",
     "type": "highways",
     "fetchedAt": "2026-11-04T01:30:07+00:00",
     "ageDays": 0
   },
   {
-    "title": "Highway Infrastructure Limited wins its biggest-ever civil construction contract worth Rs. 198.31 crore from CPWD; order book surges to Rs. 1,776.19 crore",
-    "desc": "Highway Infrastructure Limited has secured a significant domestic contract worth ₹198.31 crore (₹198,30,99,984) from the Central Public Works Department (CPWD) for the planning, de",
-    "src": "aninews",
-    "time": "15h ago",
-    "link": "https://www.aninews.in/news/business/highway-infrastructure-limited-wins-its-biggest-ever-civil-construction-contract-worth-rs-19831-crore-from-cpwd-order-book-surges-to-rs-177619-crore20261104124933/",
-    "type": "highways",
-    "fetchedAt": "2026-11-04T00:00:00+00:00",
-    "ageDays": 0
-  },
-  {
     "title": "B L Kashyap & Sons Ltd. secures a new order worth Rs 495.86 crore (excl. GST) from Signature Global (India) Limited in Gurugram, Haryana",
     "desc": "New Delhi [India], November 4: B L Kashyap & Sons Ltd. (BSE: 532719 | NSE: BLKASHYAP), one of India’s leading Engineering, Procurement, and Construction (EPC) companies, has secure",
     "src": "aninews",
-    "time": "15h ago",
+    "time": "20h ago",
     "link": "https://www.aninews.in/news/business/b-l-kashyap-amp-sons-ltd-secures-a-new-order-worth-rs-49586-crore-excl-gst-from-signature-global-india-limited-in-gurugram-haryana20261104174656/",
     "type": "highways",
     "fetchedAt": "2026-11-04T00:00:00+00:00",
@@ -113,10 +93,20 @@
     "title": "National Asset Reconstruction Company Ltd. Vs. West Haryana Highways Project Pvt. Ltd. – NCLT, New Delhi Bench",
     "desc": "Login Access Default, Dispute, and Debt Resolution Laws Password Email OTP WhatsApp OTP Google Username or Email Password 👁 Remember this device Log In Forgot Password? Email Send ",
     "src": "ibclaw_in",
-    "time": "18h ago",
+    "time": "23h ago",
     "link": "https://ibclaw.in/national-asset-reconstruction-company-ltd-vs-west-haryana-highways-project-pvt-ltd-nclt-new-delhi-bench/",
     "type": "highways",
     "fetchedAt": "2026-11-03T21:26:00+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Fire IT Consultancies: Regulated AI Demands Forward-Deployed Teams",
+    "desc": "Generic offshore developers lack the deep architectural discipline required to ship compliant autonomous agents into production environmentsLegacy IT consultancies rely on brittle ",
+    "src": "Mohit Sewak, Ph.D.",
+    "time": "Recent",
+    "link": "https://levelup.gitconnected.com/fire-it-consultancies-regulated-ai-demands-forward-deployed-teams-a46b1855f35e?source=rss----5517fd7b58a6---4",
+    "type": "highways",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +116,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/markets/stocks/news/sebi-levies-rs-40-lakh-penalty-on-four-entities-in-axis-mf-front-running-case/articleshow/135506148.cms",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +126,7 @@
     "time": "Recent",
     "link": "https://dev.to/playfulprogramming/github-universe-2026-my-recap-from-san-francisco-23hd",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -146,7 +136,7 @@
     "time": "Recent",
     "link": "https://economictimes.indiatimes.com/news/economy/indicators/india-will-become-the-worlds-largest-economy-by-end-of-the-century-predicts-top-economist-jeffrey-d-sachs/articleshow/135480470.cms",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -156,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.news18.com/india/situation-couldve-been-far-more-severe-pm-modi-says-india-handled-economic-crisis-effectively-ws-r-10409264.html",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -166,7 +156,7 @@
     "time": "Recent",
     "link": "https://medium.datadriveninvestor.com/agentic-ai-we-finally-opened-the-governance-puzzle-box-01ba551f350c?source=rss----32881626c9c9---4",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -176,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.news18.com/videos/india/delhi-ncr-s-15-day-construction-ban-what-stops-from-november-5-pollution-alert-delhi-ncr-10407277.html",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -186,7 +176,7 @@
     "time": "Recent",
     "link": "https://dev.to/anuj-sadani/when-software-hires-software-the-executive-playbook-for-the-agent-to-agent-economy-5176",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -196,7 +186,7 @@
     "time": "Recent",
     "link": "https://www.indiatoday.in/world/story/gilgit-baltistan-projects-shehbaz-sharif-orders-faster-work-india-opposes-cpec-ptag-3029200-2026-10-31",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -206,7 +196,7 @@
     "time": "Recent",
     "link": "https://www.livemint.com/industry/indias-renewable-energy-push-data-centre-growth-why-power-grid-wants-cable-and-wire-makers-to-ramp-up-production-11793366715763.html",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -216,27 +206,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/asian-paints-ambuja-cements-trent-paras-defence-among-nine-stocks-in-hdfc-securities-q2-review-check-target-prices-12256844",
     "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Power Grid asks cable and wire makers to scale up as transmission capex set to rise",
-    "desc": "Power Grid anticipates its capital expenditures will exceed ₹40,000 crore, focusing on transmission infrastructure. This increase is necessary due to growing electricity demand acr",
-    "src": "Nikita Periwal; Kalpana Pathak",
-    "time": "Recent",
-    "link": "https://economictimes.indiatimes.com/industry/energy/power/power-grid-asks-cable-and-wire-makers-to-scale-up-as-transmission-capex-set-to-rise/articleshow/135278399.cms",
-    "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Online liquor booking draws lukewarm response | Delhi News - The Times of India",
-    "desc": "Delhi’s DSIIDC online liquor booking app sees lukewarm response as buyers must pick up orders in-store; no home delivery under policy; low sales so far.",
-    "src": "AlokKNMishra",
-    "time": "Recent",
-    "link": "https://timesofindia.indiatimes.com/city/delhi/online-liquor-booking-draws-lukewarm-response/articleshow/135275974.cms",
-    "type": "highways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
   },
   {
@@ -246,18 +216,8 @@
     "time": "Recent",
     "link": "https://indianexpress.com/article/india/how-india-is-making-bullet-trains-ashwini-vaishnaw-mumbai-ahmedabad-video-10945894/",
     "type": "railways",
-    "fetchedAt": "2026-11-04T15:41:55.329025+00:00",
+    "fetchedAt": "2026-11-04T20:28:25.537564+00:00",
     "ageDays": 0
-  },
-  {
-    "title": "Captive and commercial coal mines record 42% production growth in October 2026 - PSU Watch",
-    "desc": "Captive and commercial coal mines record 42% production growth in October 2026    PSU Watch",
-    "src": "Coal Block",
-    "time": "1d ago",
-    "link": "https://www.google.com/search?q=Captive%20and%20commercial%20coal%20mines%20record%2042%20production%20growth%20in%20October%202026%20%20PSU%20Watch",
-    "type": "mining",
-    "fetchedAt": "2026-11-02T16:52:57+00:00",
-    "ageDays": 1
   },
   {
     "title": "Prime Minister inaugurates Pune Metro Line 3 - Railway Gazette International",
@@ -280,13 +240,13 @@
     "ageDays": 1
   },
   {
-    "title": "India’s race to the lowest bid: Why L1 is building roads into trouble",
-    "desc": "India’s race to the lowest bid: Why L1 is building roads into trouble",
-    "src": "toi",
+    "title": "Highway Infrastructure secures ₹198 crore CPWD order for CISF battalion infrastructure",
+    "desc": "Highway Infrastructure has received a ₹198.31 crore CPWD order for planning, designing and construction of residential and non-residential infrastructure for the CISF 12th Reserve ",
+    "src": "cnbctv18",
     "time": "1d ago",
-    "link": "https://timesofindia.indiatimes.com/toi-blogs/power-policy/indias-race-to-the-lowest-bid-why-l1-is-building-roads-into-trouble/articleshow/135467986.cms",
+    "link": "https://www.cnbctv18.com/market/stocks/highway-infrastructure-share-price-secures-rs-198-crore-cpwd-order-for-cisf-battalion-infrastructure-20026401.htm",
     "type": "highways",
-    "fetchedAt": "2026-11-02T16:46:59+00:00",
+    "fetchedAt": "2026-11-03T17:54:33+00:00",
     "ageDays": 1
   },
   {
@@ -380,6 +340,16 @@
     "ageDays": 2
   },
   {
+    "title": "Captive and commercial coal mines record 42% production growth in October 2026 - PSU Watch",
+    "desc": "Captive and commercial coal mines record 42% production growth in October 2026    PSU Watch",
+    "src": "Coal Block",
+    "time": "2d ago",
+    "link": "https://www.google.com/search?q=Captive%20and%20commercial%20coal%20mines%20record%2042%20production%20growth%20in%20October%202026%20%20PSU%20Watch",
+    "type": "mining",
+    "fetchedAt": "2026-11-02T16:52:57+00:00",
+    "ageDays": 2
+  },
+  {
     "title": "Srinibas Pradhan Constructions Limited Emerges as L1 Bidder for Rs 30.81 Cr Road Construction Project in Odisha",
     "desc": "Bhubaneswar (Odisha) [India], November 2: Srinibas Pradhan Constructions Limited (SPCON) (NSE: SPCON), one of the leading infrastructure-focused EPC company engaged in roads & high",
     "src": "NewsX",
@@ -450,26 +420,6 @@
     "ageDays": 8
   },
   {
-    "title": "Cemindia wins contract for package 2C02 under Jaipur Metro Rail Phase II Project - Indian Infrastructure Magazine",
-    "desc": "Cemindia wins contract for package 2C02 under Jaipur Metro Rail Phase II Project    Indian Infrastructure Magazine",
-    "src": "Metro",
-    "time": "9d ago",
-    "link": "https://www.google.com/search?q=Cemindia%20wins%20contract%20for%20package%202C02%20under%20Jaipur%20Metro%20Rail%20Phase%20II%20Project%20%20Indian%20I",
-    "type": "metro",
-    "fetchedAt": "2026-10-26T07:26:26+00:00",
-    "ageDays": 9
-  },
-  {
-    "title": "Govt steps up irrigation projects, expands coverage by 4,000 hectares - The Rising Nepal",
-    "desc": "Govt steps up irrigation projects, expands coverage by 4,000 hectares    The Rising Nepal",
-    "src": "Irrigation",
-    "time": "10d ago",
-    "link": "https://www.google.com/search?q=Govt%20steps%20up%20irrigation%20projects%20expands%20coverage%20by%204000%20hectares%20%20The%20Rising%20Nepal",
-    "type": "irrigation",
-    "fetchedAt": "2026-10-25T07:00:00+00:00",
-    "ageDays": 10
-  },
-  {
     "title": "CEM India Projects Wins ₹921.63 Cr. Jaipur Metro Phase 2 Underground Tunnel and Station Contract - Metro Rail News",
     "desc": "CEM India Projects Wins ₹921.63 Cr. Jaipur Metro Phase 2 Underground Tunnel and Station Contract    Metro Rail News",
     "src": "Metro",
@@ -498,5 +448,55 @@
     "type": "railways",
     "fetchedAt": "2026-10-23T07:00:00+00:00",
     "ageDays": 12
+  },
+  {
+    "title": "L&T secures ₹2,500-5,000 crore orders for Delhi, Amaravati building projects - ET Infra",
+    "desc": "L&T secures ₹2,500-5,000 crore orders for Delhi, Amaravati building projects    ET Infra",
+    "src": "L&T",
+    "time": "13d ago",
+    "link": "https://www.google.com/search?q=LT%20secures%2025005000%20crore%20orders%20for%20Delhi%20Amaravati%20building%20projects%20%20ET%20Infra",
+    "type": "corporate",
+    "fetchedAt": "2026-10-22T07:00:00+00:00",
+    "ageDays": 13
+  },
+  {
+    "title": "Rajesh Power Services secures new order of Rs 69.004 Crore; Back-to-back Gujarat Power Distribution infrastructure orders total ₹540.92 Crore within a Week",
+    "desc": "Ahmedabad (Gujarat) [India], October 14: Rajesh Power Services Limited (RAJESH) BSE: 544291, ISIN: INE0VN801010, one of the leading specialized EPC Contractors in Power Transmissio",
+    "src": "NewsX",
+    "time": "21d ago",
+    "link": "https://www.newsx.com/bl-news/rajesh-power-services-secures-new-order-of-rs-69-004-crore-back-to-back-gujarat-power-distribution-infrastructure-orders-total-%e2%82%b9540-92-crore-within-a-week-283412/",
+    "type": "highways",
+    "fetchedAt": "2026-10-14T14:12:07+00:00",
+    "ageDays": 21
+  },
+  {
+    "title": "Jyoti Structures wins OSH India Award 2026 for safety innovation in transmission project execution",
+    "desc": "Mumbai (Maharashtra) [India], October 14: Jyoti Structures Limited (JSL), a listed power transmission engineering, procurement, and construction (EPC) company, has won the OSH Indi",
+    "src": "The Tribune",
+    "time": "21d ago",
+    "link": "https://www.tribuneindia.com/news/business/jyoti-structures-wins-osh-india-award-2026-for-safety-innovation-in-transmission-project-execution/",
+    "type": "highways",
+    "fetchedAt": "2026-10-14T07:36:08+00:00",
+    "ageDays": 21
+  },
+  {
+    "title": "Deeper Channels: Dredging activity gains momentum across Indian ports - Indian Infrastructure",
+    "desc": "Deeper Channels: Dredging activity gains momentum across Indian ports    Indian Infrastructure",
+    "src": "Ports",
+    "time": "23d ago",
+    "link": "https://www.google.com/search?q=Deeper%20Channels%20Dredging%20activity%20gains%20momentum%20across%20Indian%20ports%20%20Indian%20Infrastructur",
+    "type": "ports",
+    "fetchedAt": "2026-10-12T07:00:00+00:00",
+    "ageDays": 23
+  },
+  {
+    "title": "Current Infraprojects Limited Secures Rs 44.76 Cr Solar EPC & O&M Order from Jaipur Vidyut Vitran Nigam Limited",
+    "desc": "Jaipur (Rajasthan) [India], October 12: Current Infraprojects Limited (NSE: CURRENT), one of the leading solar power infrastructure companies, is pleased to announce that the compa",
+    "src": "NewsX",
+    "time": "23d ago",
+    "link": "https://www.newsx.com/bl-news/current-infraprojects-limited-secures-rs-44-76-cr-solar-epc-and-o-and-m-order-from-jaipur-vidyut-vitran-nigam-limited-282289/",
+    "type": "highways",
+    "fetchedAt": "2026-10-12T06:29:07+00:00",
+    "ageDays": 23
   }
 ]
