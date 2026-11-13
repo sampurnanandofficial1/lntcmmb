@@ -1,9 +1,19 @@
 [
   {
+    "title": "Kochi Metro Phase 2: Rail Welding on Pink Line to Begin Next Week as Viaduct Work Reaches 70% - Metro Rail News",
+    "desc": "Kochi Metro Phase 2: Rail Welding on Pink Line to Begin Next Week as Viaduct Work Reaches 70%    Metro Rail News",
+    "src": "IR",
+    "time": "10h ago",
+    "link": "https://www.google.com/search?q=Kochi%20Metro%20Phase%202%20Rail%20Welding%20on%20Pink%20Line%20to%20Begin%20Next%20Week%20as%20Viaduct%20Work%20Reaches%207",
+    "type": "railways",
+    "fetchedAt": "2026-11-13T09:45:55+00:00",
+    "ageDays": 0
+  },
+  {
     "title": "Pune Metro: Public-Private Partnership partnership as a model for expanding urban rail transport in India - https://megaproject.com/",
     "desc": "Pune Metro: Public-Private Partnership partnership as a model for expanding urban rail transport in India    https://megaproject.com/",
     "src": "IR",
-    "time": "18h ago",
+    "time": "23h ago",
     "link": "https://www.google.com/search?q=Pune%20Metro%20PublicPrivate%20Partnership%20partnership%20as%20a%20model%20for%20expanding%20urban%20rail%20trans",
     "type": "railways",
     "fetchedAt": "2026-11-12T21:12:30+00:00",
@@ -11,12 +21,32 @@
   },
   {
     "title": "Apex Ecotech Limited reports 189% year-on-year revenue growth in H1 FY27; Revenue from operations rises to Rs 94.27 crore;EBITDA and PAT grow 75% and 55%, respectively",
-    "desc": "New Delhi [India], November 13: Apex Ecotech Limited (\"Apex\" or \"the Company\"), an engineering-driven EPC company specializing in turnkey water, wastewater and Zero Liquid Discharg",
-    "src": "aninews",
-    "time": "15h ago",
-    "link": "https://www.aninews.in/news/business/apex-ecotech-limited-reports-189-year-on-year-revenue-growth-in-h1-fy27-revenue-from-operations-rises-to-rs-9427-croreebitda-and-pat-grow-75-and-55-respectively20261113134412/",
+    "desc": "PNN New Delhi India November 13 Apex Ecotech Limited Apex or the Company an engineering-driven EPC company specializing in turnkey water wastewater and Zero Liquid Discharge ZLD so",
+    "src": "devdiscourse",
+    "time": "12h ago",
+    "link": "https://www.devdiscourse.com/article/business/4006415-apex-ecotech-limited-reports-189-year-on-year-revenue-growth-in-h1-fy27-revenue-from-operations-rises-to-rs-9427-croreebitda-and-pat-grow-75-a",
     "type": "highways",
-    "fetchedAt": "2026-11-13T00:00:00+00:00",
+    "fetchedAt": "2026-11-13T08:19:40+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Power index rises 1%: Siemens Energy, GE Vernova rally up to 5%; here's why",
+    "desc": "Power stocks were in demand on Friday amid reports that the National Committee on Transmission approved a first-of-its-kind 1,150 kV transmission project worth ₹68,816 crore.",
+    "src": "business-standard",
+    "time": "15h ago",
+    "link": "https://www.business-standard.com/markets/news/power-index-rises-1-siemens-energy-ge-vernova-rally-up-to-5-here-s-why-126111300489_1.html",
+    "type": "highways",
+    "fetchedAt": "2026-11-13T05:32:11+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Up 94% from 52-week low, Hitachi Energy shares jump 9% today after Q2 results: Should you buy power stock? Check targets",
+    "desc": "Hitachi Energy India shares rose as much as 9.2% after Q2 FY27 net profit grew 21% year on year and revenue jumped 63.5%. Orders surged 85.9% to ₹4,120.8 crore, lifting the record ",
+    "src": "livemint",
+    "time": "15h ago",
+    "link": "https://www.livemint.com/market/stock-market-news/up-94-from-52-week-low-hitachi-energy-shares-jump-9-today-after-q2-results-should-you-buy-power-stock-check-targets-11794543376253.html",
+    "type": "highways",
+    "fetchedAt": "2026-11-13T04:40:43+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +56,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/delhi-family-assaulted-by-toll-staff-at-gurgaons-bijwasan-plaza-nhai-penalises-agency-rs-15-lakh-bars-it-from-tenders-for-a-month-and-proposes-extending-ban-to-one-year-including-its-owners-and-directors/articleshow/135762085.cms",
     "type": "highways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
+    "fetchedAt": "2026-11-13T20:33:42.832661+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +66,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/nhai-debars-bijwasan-toll-collection-agency-for-one-month-imposes-rs-15-lakh-penalty-over-misbehaviour-with-road-users",
     "type": "highways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
+    "fetchedAt": "2026-11-13T20:33:42.832661+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +76,7 @@
     "time": "Recent",
     "link": "https://english.pravda.ru/news/world/172622-wisig-networks-indigenous-5g-radio-commercial-orders/",
     "type": "highways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
+    "fetchedAt": "2026-11-13T20:33:42.832661+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +86,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/quarterly-results/hitachi-energy-q2-net-profit-rises-21-to-319-cr-revenue-jumps-63-5-126111201283_1.html",
     "type": "highways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
+    "fetchedAt": "2026-11-13T20:33:42.832661+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.investing.com/news/stock-market-news/why-is-ashoka-buildcon-stock-surging-today-93CH-5017804",
     "type": "highways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
+    "fetchedAt": "2026-11-13T20:33:42.832661+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +106,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/ghazipur-wte-plant-gets-tariff-approval-from-derc-project-to-be-completed-within-18-months/articleshow/135717027.cms",
     "type": "highways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
+    "fetchedAt": "2026-11-13T20:33:42.832661+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +116,7 @@
     "time": "Recent",
     "link": "https://asian-power.com/in-focus/apac-transformer-demand-rises-china-and-india-upgrade-grids",
     "type": "highways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
+    "fetchedAt": "2026-11-13T20:33:42.832661+00:00",
     "ageDays": 0
   },
   {
@@ -96,17 +126,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/siemens-india-q2-review-strong-order-book-weak-margins-leave-brokerages-divided-check-target-price-potential-upside-12301715",
     "type": "highways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Gujarat: Ahmedabad Division awards 35-year contract for cargo terminal on railway land at Khakharechi",
-    "desc": "Digital Desk | Ahmedabad, Nov 6 (IANS) The Western Railway's Ahmedabad Division has awarded a 35-year contract to a private logistics company to develop a cargo terminal at Khakhar",
-    "src": "IANS News",
-    "time": "Recent",
-    "link": "https://bhaskarlive.in/others/gujarat-ahmedabad-division-awards-35-year-contract-for-cargo-terminal-on-railway-land-at-khakharechi-2162645",
-    "type": "railways",
-    "fetchedAt": "2026-11-13T15:38:10.643721+00:00",
+    "fetchedAt": "2026-11-13T20:33:42.832661+00:00",
     "ageDays": 0
   },
   {
@@ -160,44 +180,24 @@
     "ageDays": 1
   },
   {
-    "title": "Noida Metro Aqua Line Extension: L&T secures order from NMRC to build 15.1-km elevated viaduct – Inside the contract",
-    "desc": "Larsen & Toubro has won a ₹1,000–2,500 crore contract from Noida Metro Rail Corporation to design and build sections of the Aqua Line extension, including a 15.1-km elevated viaduc",
-    "src": "livemint",
-    "time": "1d ago",
-    "link": "https://www.livemint.com/companies/news/noida-metro-aqua-line-extension-l-t-secures-order-from-nmrc-to-build-15-1-km-elevated-viaduct-inside-the-contract-11794405082608.html",
-    "type": "highways",
-    "fetchedAt": "2026-11-11T15:52:11+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "Mumbai Metro: MMRDA Targets Year-End Opening of Four More Line 9 Stations and Next Line 2B Stretch - Metro Rail News",
-    "desc": "Mumbai Metro: MMRDA Targets Year-End Opening of Four More Line 9 Stations and Next Line 2B Stretch    Metro Rail News",
-    "src": "IR",
-    "time": "5d ago",
-    "link": "https://www.google.com/search?q=Mumbai%20Metro%20MMRDA%20Targets%20YearEnd%20Opening%20of%20Four%20More%20Line%209%20Stations%20and%20Next%20Line%202B%20S",
-    "type": "railways",
-    "fetchedAt": "2026-11-08T06:44:53+00:00",
-    "ageDays": 5
-  },
-  {
-    "title": "L&T Construction Gets Rs 2,048-Crore Job Orders - NDTV Profit",
-    "desc": "L&T Construction Gets Rs 2,048-Crore Job Orders    NDTV Profit",
-    "src": "L&T",
-    "time": "7d ago",
-    "link": "https://www.google.com/search?q=LT%20Construction%20Gets%20Rs%202048Crore%20Job%20Orders%20%20NDTV%20Profit",
-    "type": "corporate",
-    "fetchedAt": "2026-11-06T03:38:24+00:00",
-    "ageDays": 7
-  },
-  {
     "title": "MP Lays Foundation Stones for Upgradation of Two Rural Roads under PMGSY-III at Burmanalla and Guptapara - ANDAMAN SHEEKHA",
     "desc": "MP Lays Foundation Stones for Upgradation of Two Rural Roads under PMGSY-III at Burmanalla and Guptapara    ANDAMAN SHEEKHA",
     "src": "PMGSY",
-    "time": "8d ago",
+    "time": "9d ago",
     "link": "https://www.google.com/search?q=MP%20Lays%20Foundation%20Stones%20for%20Upgradation%20of%20Two%20Rural%20Roads%20under%20PMGSYIII%20at%20Burmanalla",
     "type": "highways",
     "fetchedAt": "2026-11-04T18:07:33+00:00",
-    "ageDays": 8
+    "ageDays": 9
+  },
+  {
+    "title": "Highway Infrastructure secures ₹198.31 crore CPWD order for CISF infrastructure in Madhya Pradesh - ET Infra",
+    "desc": "Highway Infrastructure secures ₹198.31 crore CPWD order for CISF infrastructure in Madhya Pradesh    ET Infra",
+    "src": "Highway EPC",
+    "time": "9d ago",
+    "link": "https://www.google.com/search?q=Highway%20Infrastructure%20secures%2019831%20crore%20CPWD%20order%20for%20CISF%20infrastructure%20in%20Madhya%20Pr",
+    "type": "highways",
+    "fetchedAt": "2026-11-04T16:03:35+00:00",
+    "ageDays": 9
   },
   {
     "title": "Five Singareni Mines Win National Five-Star Rating Awards - GK Today",
@@ -330,14 +330,14 @@
     "ageDays": 21
   },
   {
-    "title": "RPS Infrastructure awards ₹450-cr construction contract to KBE - Construction Week India",
-    "desc": "RPS Infrastructure awards ₹450-cr construction contract to KBE    Construction Week India",
-    "src": "Infra 2026",
-    "time": "21d ago",
-    "link": "https://www.google.com/search?q=RPS%20Infrastructure%20awards%20450cr%20construction%20contract%20to%20KBE%20%20Construction%20Week%20India",
-    "type": "highways",
-    "fetchedAt": "2026-10-23T07:00:00+00:00",
-    "ageDays": 21
+    "title": "L&T secures ₹2,500-5,000 crore orders for Delhi, Amaravati building projects - ET Infra",
+    "desc": "L&T secures ₹2,500-5,000 crore orders for Delhi, Amaravati building projects    ET Infra",
+    "src": "L&T",
+    "time": "22d ago",
+    "link": "https://www.google.com/search?q=LT%20secures%2025005000%20crore%20orders%20for%20Delhi%20Amaravati%20building%20projects%20%20ET%20Infra",
+    "type": "corporate",
+    "fetchedAt": "2026-10-22T07:00:00+00:00",
+    "ageDays": 22
   },
   {
     "title": "Rajesh Power Services secures new order of Rs 69.004 Crore; Back-to-back Gujarat Power Distribution infrastructure orders total ₹540.92 Crore within a Week",
@@ -358,6 +358,16 @@
     "type": "highways",
     "fetchedAt": "2026-10-14T07:36:08+00:00",
     "ageDays": 30
+  },
+  {
+    "title": "Deeper Channels: Dredging activity gains momentum across Indian ports - Indian Infrastructure Magazine",
+    "desc": "Deeper Channels: Dredging activity gains momentum across Indian ports    Indian Infrastructure Magazine",
+    "src": "Ports",
+    "time": "32d ago",
+    "link": "https://www.google.com/search?q=Deeper%20Channels%20Dredging%20activity%20gains%20momentum%20across%20Indian%20ports%20%20Indian%20Infrastructur",
+    "type": "ports",
+    "fetchedAt": "2026-10-12T07:00:00+00:00",
+    "ageDays": 32
   },
   {
     "title": "Excavator Market Overview - Market Growth Reports",
