@@ -1,1 +1,102 @@
-[]
+[
+  {
+    "site": "Korba CG",
+    "lat": 22.342,
+    "lon": 82.689,
+    "temp": "29.3°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "mining",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Nagpur MH",
+    "lat": 21.159,
+    "lon": 79.088,
+    "temp": "30.9°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "highways",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Dhanbad JH",
+    "lat": 23.795,
+    "lon": 86.439,
+    "temp": "27.6°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "mining",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Keonjhar OD",
+    "lat": 21.628,
+    "lon": 85.581,
+    "temp": "26.6°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "mining",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Vizag AP",
+    "lat": 17.686,
+    "lon": 83.218,
+    "temp": "30.0°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "ports",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Imphal MN",
+    "lat": 24.817,
+    "lon": 93.942,
+    "temp": "23.7°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "highways",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Dibrugarh AS",
+    "lat": 27.483,
+    "lon": 94.912,
+    "temp": "26.5°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 13.9,
+    "type": "railways",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Barmer RJ",
+    "lat": 25.745,
+    "lon": 71.388,
+    "temp": "31.8°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "highways",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Jharsuguda OD",
+    "lat": 21.856,
+    "lon": 84.007,
+    "temp": "28.9°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "mining",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  },
+  {
+    "site": "Hyderabad TS",
+    "lat": 17.385,
+    "lon": 78.486,
+    "temp": "29.9°C",
+    "condition": "☀️ Clear",
+    "precip_3d_mm": 0.0,
+    "type": "metro",
+    "updated": "2026-11-14T07:56:38.937814+00:00"
+  }
+]
