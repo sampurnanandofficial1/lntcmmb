@@ -1,30 +1,70 @@
 [
   {
     "title": "8-km stretch hangs fire: Look who all are responsible for stalling Mumbai-Goa highway",
-    "desc": "Firms linked to Congress ex-minister, RBI defaulter; officials say ready by next year, ‘showpiece example of what can go wrong’.",
-    "src": "indianexpress",
-    "time": "16h ago",
-    "link": "https://indianexpress.com/article/express-exclusive/mumbai-goa-highway-delay-contractors-cost-escalation-nitin-gadkari-10964525/",
+    "desc": "Mumbai-Goa highway NH-66 latest update: Defaulters, ED-probed firms, political links behind 5 delayed stretches and Rs 2,000 crore cost overrun.",
+    "src": "financialexpress",
+    "time": "17h ago",
+    "link": "https://www.financialexpress.com/business/roadways-8-km-stretch-hangs-fire-look-who-all-are-responsible-for-stalling-mumbai-goa-highway-4385580/",
     "type": "highways",
-    "fetchedAt": "2026-11-16T00:31:11+00:00",
+    "fetchedAt": "2026-11-16T05:15:32+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Hindustan Zinc Approves ₹80,000 Crore Expansion Plan To Nearly Double Metal Production Capacity To 2 MTPA In 3-5 Years",
+    "desc": "Hindustan Zinc has approved an Rs 80,000-crore expansion plan to nearly double its metal production capacity from 1.1 MTPA to 2 MTPA over 3-5 years. The investment will be funded t",
+    "src": "freepressjournal",
+    "time": "12h ago",
+    "link": "https://www.freepressjournal.in/business/hindustan-zinc-approves-80000-crore-expansion-plan-to-nearly-double-metal-production-capacity-to-2-mtpa-in-3-5-years",
+    "type": "highways",
+    "fetchedAt": "2026-11-16T10:48:34+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Tata Projects Gujarat Order Book Stands at ₹8,000-9,000 Crore; Nearly 17% of National Business",
+    "desc": "Ahmedabad: Tata Projects Limited (TPL), one of India’s leading technology-led engineering, procurement and construction (EPC) companies, today said here that Gujarat already accoun",
+    "src": "deshgujarat",
+    "time": "12h ago",
+    "link": "https://deshgujarat.com/2026/11/16/tata-projects-gujarat-order-book-stands-at-%E2%82%B98000-9000-crore-over-15-of-national-business/",
+    "type": "highways",
+    "fetchedAt": "2026-11-16T10:41:23+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Top 10 Best Construction Companies In India In 2027",
+    "desc": "Top 10 Best Construction Companies in India in 2027 India’s construction industry is undergoing a significant transformation, driven by large-scale infrastructure investments, urba",
+    "src": "inventiva",
+    "time": "13h ago",
+    "link": "https://www.inventiva.co.in/trends/top-10-best-construction-companies-in-india-in-2027/",
+    "type": "highways",
+    "fetchedAt": "2026-11-16T09:55:27+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Globe Civil Projects Limited Reports Q2 & H1 FY27 Results H1 FY27 Total Income at Rs 209 Crore",
+    "desc": "New Delhi [India], November 16: Globe Civil Projects Limited (NSE: GLOBECIVIL | BSE: 544424), an integrated Engineering, Procurement and Construction (EPC) company executing civil ",
+    "src": "business-standard",
+    "time": "13h ago",
+    "link": "https://www.business-standard.com/content/press-releases-ani/globe-civil-projects-limited-reports-q2-h1-fy27-results-h1-fy27-total-income-at-rs-209-crore-126111601197_1.html",
+    "type": "highways",
+    "fetchedAt": "2026-11-16T09:30:18+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Globe Civil Projects Records Strong Half-Year, Income Hits ₹209 Crore",
+    "desc": "Globe Civil Projects Records Strong Half-Year, Income Hits ₹209 Crore - New Delhi: Globe Civil Projects Limited (NSE: GLOBECIVIL | BSE: 544424), a prominent EPC firm specializing i",
+    "src": "lokmattimes",
+    "time": "14h ago",
+    "link": "https://www.lokmattimes.com/business/globe-civil-projects-records-strong-half-year-income-hits-rs209-crore-a001-w01/",
+    "type": "highways",
+    "fetchedAt": "2026-11-16T08:20:43+00:00",
     "ageDays": 0
   },
   {
     "title": "VVIP Infratech Ltd reports robust H1 FY27 results; Order Book swells to RS 988 crore",
     "desc": "Ghaziabad (Uttar Pradesh) [India], November 16: VVIP Infratech Limited is a Public Utility Infrastructure EPC contractor with over two decades of experience in executing water, was",
     "src": "aninews",
-    "time": "17h ago",
+    "time": "22h ago",
     "link": "https://www.aninews.in/news/business/vvip-infratech-ltd-reports-robust-h1-fy27-results-order-book-swells-to-rs-988-crore20261116185446/",
-    "type": "highways",
-    "fetchedAt": "2026-11-16T00:00:00+00:00",
-    "ageDays": 0
-  },
-  {
-    "title": "Globe Civil Projects Limited Reports Q2 & H1 FY27 Results H1 FY27 Total Income at Rs 209 Crore",
-    "desc": "New Delhi [India], November 16: Globe Civil Projects Limited (NSE: GLOBECIVIL | BSE: 544424), an integrated Engineering, Procurement and Construction (EPC) company executing civil ",
-    "src": "aninews",
-    "time": "17h ago",
-    "link": "https://www.aninews.in/news/business/globe-civil-projects-limited-reports-q2-amp-h1-fy27-results-h1-fy27-total-income-at-rs-209-crore20261116135012/",
     "type": "highways",
     "fetchedAt": "2026-11-16T00:00:00+00:00",
     "ageDays": 0
@@ -36,7 +76,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/delhi-family-assaulted-by-toll-staff-at-gurgaons-bijwasan-plaza-nhai-penalises-agency-rs-15-lakh-bars-it-from-tenders-for-a-month-and-proposes-extending-ban-to-one-year-including-its-owners-and-directors/articleshow/135762085.cms",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +86,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/nhai-debars-bijwasan-toll-collection-agency-for-one-month-imposes-rs-15-lakh-penalty-over-misbehaviour-with-road-users",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +96,17 @@
     "time": "Recent",
     "link": "https://spectrum.ieee.org/telesurgery-stroke",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Futures Slide As Asian Chip Carnage Greets Nvidia's First Post-Huang Earnings Week",
+    "desc": "Futures Slide As Asian Chip Carnage Greets Nvidia's First Post-Huang Earnings Week US futures are lower as the AI selloff resumes on a Monday packed with risk: Asian chipmakers wer",
+    "src": "Tyler Durden",
+    "time": "Recent",
+    "link": "https://www.zerohedge.com/markets/futures-slide-asian-chip-carnage-greets-nvidias-first-post-huang-earnings-week",
+    "type": "highways",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +116,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/abb-india-ticks-all-the-right-boxes-in-q3-motilal-oswal-upgrades-rating-raises-target-price-12332149",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.reddit.com/r/Cricket/comments/1xw4c3e/indias_women_cricketers_won_the_world_cup_in_2025/",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.telegraphindia.com/opinion/lessons-from-kuala-lumpur-what-kolkata-must-learn-from-malaysia-capital-prnt/cid/2189345",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +146,7 @@
     "time": "Recent",
     "link": "https://english.pravda.ru/news/world/172622-wisig-networks-indigenous-5g-radio-commercial-orders/",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/quarterly-results/hitachi-energy-q2-net-profit-rises-21-to-319-cr-revenue-jumps-63-5-126111201283_1.html",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -116,7 +166,7 @@
     "time": "Recent",
     "link": "https://www.investing.com/news/stock-market-news/why-is-ashoka-buildcon-stock-surging-today-93CH-5017804",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -126,7 +176,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/ghazipur-wte-plant-gets-tariff-approval-from-derc-project-to-be-completed-within-18-months/articleshow/135717027.cms",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
     "ageDays": 0
   },
   {
@@ -136,7 +186,17 @@
     "time": "Recent",
     "link": "https://asian-power.com/in-focus/apac-transformer-demand-rises-china-and-india-upgrade-grids",
     "type": "highways",
-    "fetchedAt": "2026-11-16T17:20:06.935355+00:00",
+    "fetchedAt": "2026-11-16T22:57:14.533795+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Srinibas Pradhan Constructions Limited Reports 17.18% Growth in EBITDA and 33.87% Growth in PAT",
+    "desc": "Bhubaneswar (Odisha) [India], November 16: Srinibas Pradhan Constructions Limited (SPCON) (NSE: SPCON), one of the leading infrastructure-focused EPC company engaged in roads & hig",
+    "src": "NewsX",
+    "time": "17h ago",
+    "link": "https://www.newsx.com/bl-news/srinibas-pradhan-constructions-limited-reports-17-18-growth-in-ebitda-and-33-87-growth-in-pat-292632/",
+    "type": "highways",
+    "fetchedAt": "2026-11-16T05:40:08+00:00",
     "ageDays": 0
   },
   {
@@ -230,6 +290,16 @@
     "ageDays": 15
   },
   {
+    "title": "Coal India Business Update: Production Up 19%, BCCL Output Nears 3 Million Tons YoY - NDTV Profit",
+    "desc": "Coal India Business Update: Production Up 19%, BCCL Output Nears 3 Million Tons YoY    NDTV Profit",
+    "src": "CIL Subs",
+    "time": "15d ago",
+    "link": "https://www.google.com/search?q=Coal%20India%20Business%20Update%20Production%20Up%2019%20BCCL%20Output%20Nears%203%20Million%20Tons%20YoY%20%20NDTV%20Pro",
+    "type": "mining",
+    "fetchedAt": "2026-11-01T07:00:00+00:00",
+    "ageDays": 15
+  },
+  {
     "title": "Badhkapath Irrigation Project 70% Complete - Ratopati",
     "desc": "Badhkapath Irrigation Project 70% Complete    Ratopati",
     "src": "Irrigation",
@@ -260,16 +330,6 @@
     "ageDays": 19
   },
   {
-    "title": "KNR Construction Faces Cancellation Of ₹157.55 Crore GHMC Hyderabad Project - Sahi",
-    "desc": "KNR Construction Faces Cancellation Of ₹157.55 Crore GHMC Hyderabad Project    Sahi",
-    "src": "HAM",
-    "time": "20d ago",
-    "link": "https://www.google.com/search?q=KNR%20Construction%20Faces%20Cancellation%20Of%2015755%20Crore%20GHMC%20Hyderabad%20Project%20%20Sahi",
-    "type": "highways",
-    "fetchedAt": "2026-10-27T07:00:00+00:00",
-    "ageDays": 20
-  },
-  {
     "title": "CEM India Projects Wins ₹921.63 Cr. Jaipur Metro Phase 2 Underground Tunnel and Station Contract - Metro Rail News",
     "desc": "CEM India Projects Wins ₹921.63 Cr. Jaipur Metro Phase 2 Underground Tunnel and Station Contract    Metro Rail News",
     "src": "Metro",
@@ -278,16 +338,6 @@
     "type": "metro",
     "fetchedAt": "2026-10-24T07:00:00+00:00",
     "ageDays": 23
-  },
-  {
-    "title": "MoRTH approves implementation of 32 road projects in Bihar - Indian Infrastructure Magazine",
-    "desc": "MoRTH approves implementation of 32 road projects in Bihar    Indian Infrastructure Magazine",
-    "src": "MoRTH",
-    "time": "24d ago",
-    "link": "https://www.google.com/search?q=MoRTH%20approves%20implementation%20of%2032%20road%20projects%20in%20Bihar%20%20Indian%20Infrastructure%20Magazine",
-    "type": "highways",
-    "fetchedAt": "2026-10-23T07:00:00+00:00",
-    "ageDays": 24
   },
   {
     "title": "Magellanic Cloud subsidiary bags ₹3.16 crore DFCCIL surveillance contract - Tech Observer Magazine",
@@ -300,6 +350,16 @@
     "ageDays": 24
   },
   {
+    "title": "Adani set to bag contract for Jaipur Metro tunnel - ET Infra",
+    "desc": "Adani set to bag contract for Jaipur Metro tunnel    ET Infra",
+    "src": "Metro",
+    "time": "30d ago",
+    "link": "https://www.google.com/search?q=Adani%20set%20to%20bag%20contract%20for%20Jaipur%20Metro%20tunnel%20%20ET%20Infra",
+    "type": "metro",
+    "fetchedAt": "2026-10-17T07:00:00+00:00",
+    "ageDays": 30
+  },
+  {
     "title": "Deeper Channels: Dredging activity gains momentum across Indian ports - Indian Infrastructure Magazine",
     "desc": "Deeper Channels: Dredging activity gains momentum across Indian ports    Indian Infrastructure Magazine",
     "src": "Ports",
@@ -308,15 +368,5 @@
     "type": "ports",
     "fetchedAt": "2026-10-12T07:00:00+00:00",
     "ageDays": 35
-  },
-  {
-    "title": "Excavator Market Overview - Market Growth Reports",
-    "desc": "Excavator Market Overview    Market Growth Reports",
-    "src": "Mining",
-    "time": "42d ago",
-    "link": "https://www.google.com/search?q=Excavator%20Market%20Overview%20%20Market%20Growth%20Reports",
-    "type": "mining",
-    "fetchedAt": "2026-10-05T07:00:00+00:00",
-    "ageDays": 42
   }
 ]
