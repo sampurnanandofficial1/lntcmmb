@@ -1,12 +1,62 @@
 [
   {
-    "title": "Ashoka Buildcon shares gain up to 10% after winning NHAI project worth ₹1,465 crore - CNBC TV18",
-    "desc": "Ashoka Buildcon shares gain up to 10% after winning NHAI project worth ₹1,465 crore    CNBC TV18",
-    "src": "Highway EPC",
-    "time": "4h ago",
-    "link": "https://www.google.com/search?q=Ashoka%20Buildcon%20shares%20gain%20up%20to%2010%20after%20winning%20NHAI%20project%20worth%201465%20crore%20%20CNBC%20TV1",
+    "title": "Brahmaputra Infra Wins ₹16.06 Cr NHAI Order; Shares Rise - HDFC Sky",
+    "desc": "Brahmaputra Infra Wins ₹16.06 Cr NHAI Order; Shares Rise    HDFC Sky",
+    "src": "Infra Order",
+    "time": "9h ago",
+    "link": "https://www.google.com/search?q=Brahmaputra%20Infra%20Wins%201606%20Cr%20NHAI%20Order%20Shares%20Rise%20%20HDFC%20Sky",
+    "type": "corporate",
+    "fetchedAt": "2026-11-18T07:25:05+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Stocks to watch today, Nov 18: Tata Group stocks, Ashoka Buildcon, Prestige Estates and more",
+    "desc": "Stocks to watch: Tata Group stocks, Ashoka Buildcon, Prestige Estates, Advait Energy and GK Energy are in focus on November 18. Check the latest company developments.",
+    "src": "financialexpress",
+    "time": "15h ago",
+    "link": "https://www.financialexpress.com/market/stocks-to-watch-today-nov-18-tata-group-stocks-ashoka-buildcon-prestige-estates-and-more-4387430/",
     "type": "highways",
-    "fetchedAt": "2026-11-18T04:03:55+00:00",
+    "fetchedAt": "2026-11-18T01:16:28+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Stocks to Watch Today: Ashoka Buildcon, Prestige Estates, Advait Energy, Glenmark, IIFL Finance, NDR Auto, RITES, Signature Global, HCL Tech in focus on 18 November",
+    "desc": "Stocks to watch, 18 Nov: Stocks like IIFL Finance, NDR Auto Components, Supreme Petrochem, RITES, Glenmark Pharma, Prestige Estates Projects, Advait Energy Transitions, Ashoka Buil",
+    "src": "moneycontrol",
+    "time": "14h ago",
+    "link": "https://www.moneycontrol.com/news/business/markets/stocks-to-watch-today-ashoka-buildcon-prestige-estates-advait-energy-glenmark-iifl-finance-ndr-auto-rites-signature-global-hcl-tech-in-focus-on-18-november-14082930.html",
+    "type": "highways",
+    "fetchedAt": "2026-11-18T01:53:14+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Ashoka Buildcon shares rise 9% after firm wins contract for NHAI project worth Rs 1465 crore",
+    "desc": "Ashoka Buildcon shares surged up to 9% after the company emerged as the lowest bidder for an Rs 1,465 crore NHAI project to complete an eight-lane stretch of the Vadodara-Mumbai Ex",
+    "src": "economictimes_indiatimes",
+    "time": "16h ago",
+    "link": "https://economictimes.indiatimes.com/markets/stocks/news/ashoka-buildcon-shares-rise-9-after-firm-wins-contract-for-nhai-project-worth-rs-1465-crore/articleshow/135950574.cms",
+    "type": "highways",
+    "fetchedAt": "2026-11-18T00:09:02+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "RMC Switchgears Reports Nearly Fourfold Rise in Q2 FY27 Net Profit",
+    "desc": "Jaipur (Rajasthan) [India], November 18: RMC Switchgears Limited (“RMC” or “the Company”), a Jaipur-based power infrastructure, engineering and EPC solutions company, has announced",
+    "src": "aninews",
+    "time": "16h ago",
+    "link": "https://www.aninews.in/news/business/rmc-switchgears-reports-nearly-fourfold-rise-in-q2-fy27-net-profit20261118165611/",
+    "type": "highways",
+    "fetchedAt": "2026-11-18T00:00:00+00:00",
+    "ageDays": 0
+  },
+  {
+    "title": "Stock Market Today: All You Need To Know Going Into Trade On Nov 18",
+    "desc": "Indian benchmark indices, the Sensex and Nifty 50, extended its positive run.",
+    "src": "ndtvprofit",
+    "time": "17h ago",
+    "link": "https://www.ndtvprofit.com/markets/stock-market-today-all-you-need-to-know-going-into-trade-on-nov-18-12340879",
+    "type": "highways",
+    "fetchedAt": "2026-11-17T23:30:01+00:00",
     "ageDays": 0
   },
   {
@@ -16,7 +66,7 @@
     "time": "Recent",
     "link": "https://timesofindia.indiatimes.com/city/delhi/delhi-family-assaulted-by-toll-staff-at-gurgaons-bijwasan-plaza-nhai-penalises-agency-rs-15-lakh-bars-it-from-tenders-for-a-month-and-proposes-extending-ban-to-one-year-including-its-owners-and-directors/articleshow/135762085.cms",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -26,7 +76,7 @@
     "time": "Recent",
     "link": "https://swarajyamag.com/infrastructure/nhai-debars-bijwasan-toll-collection-agency-for-one-month-imposes-rs-15-lakh-penalty-over-misbehaviour-with-road-users",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -36,7 +86,7 @@
     "time": "Recent",
     "link": "https://english.pravda.ru/news/world/172622-wisig-networks-indigenous-5g-radio-commercial-orders/",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -46,7 +96,7 @@
     "time": "Recent",
     "link": "https://www.reddit.com/r/Cricket/comments/1xw4c3e/indias_women_cricketers_won_the_world_cup_in_2025/",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -56,7 +106,7 @@
     "time": "Recent",
     "link": "https://spectrum.ieee.org/telesurgery-stroke",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -66,7 +116,7 @@
     "time": "Recent",
     "link": "https://www.zerohedge.com/markets/futures-slide-asian-chip-carnage-greets-nvidias-first-post-huang-earnings-week",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -76,7 +126,7 @@
     "time": "Recent",
     "link": "https://www.hindustantimes.com/business/indias-strategic-blueprint-challenging-ai-s-financial-sustainability-ai-views-from-htls-2026-101794893124453.html",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -86,7 +136,7 @@
     "time": "Recent",
     "link": "https://www.ndtvprofit.com/markets/abb-india-ticks-all-the-right-boxes-in-q3-motilal-oswal-upgrades-rating-raises-target-price-12332149",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -96,7 +146,7 @@
     "time": "Recent",
     "link": "https://www.business-standard.com/companies/quarterly-results/hitachi-energy-q2-net-profit-rises-21-to-319-cr-revenue-jumps-63-5-126111201283_1.html",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -106,7 +156,7 @@
     "time": "Recent",
     "link": "https://www.fairobserver.com/more/environment/damming-the-siang-asias-dam-race-and-the-cost-to-indigenous-lives/",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
   },
   {
@@ -116,8 +166,18 @@
     "time": "Recent",
     "link": "https://www.telegraphindia.com/opinion/lessons-from-kuala-lumpur-what-kolkata-must-learn-from-malaysia-capital-prnt/cid/2189345",
     "type": "highways",
-    "fetchedAt": "2026-11-18T08:59:52.939519+00:00",
+    "fetchedAt": "2026-11-18T16:40:43.563915+00:00",
     "ageDays": 0
+  },
+  {
+    "title": "Ashoka Buildcon Becomes Lowest Bidder For ₹1,465 Crore NHAI Project In Gujarat - Sahi",
+    "desc": "Ashoka Buildcon Becomes Lowest Bidder For ₹1,465 Crore NHAI Project In Gujarat    Sahi",
+    "src": "Highway EPC",
+    "time": "1d ago",
+    "link": "https://www.google.com/search?q=Ashoka%20Buildcon%20Becomes%20Lowest%20Bidder%20For%201465%20Crore%20NHAI%20Project%20In%20Gujarat%20%20Sahi",
+    "type": "highways",
+    "fetchedAt": "2026-11-17T13:55:35+00:00",
+    "ageDays": 1
   },
   {
     "title": "V.L. Infraprojects Reports H1 FY27 Total Income Of Rs 71.79 Crore, Up 14.14% YoY",
@@ -140,46 +200,6 @@
     "ageDays": 1
   },
   {
-    "title": "VVIP Infratech Ltd reports robust H1 FY27 results; Order Book swells to RS 988 crore",
-    "desc": "Ghaziabad (Uttar Pradesh) [India], November 16: VVIP Infratech Limited is a Public Utility Infrastructure EPC contractor with over two decades of experience in executing water, was",
-    "src": "business-standard",
-    "time": "1d ago",
-    "link": "https://www.business-standard.com/content/press-releases-ani/vvip-infratech-ltd-reports-robust-h1-fy27-results-order-book-swells-to-rs-988-crore-126111601793_1.html",
-    "type": "highways",
-    "fetchedAt": "2026-11-16T15:15:35+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "Tata Projects plans long term overseas push",
-    "desc": "Tata Projects plans long-term overseas expansion by building local partnerships and ecosystems, focusing on strategic growth, new-age sectors, and modular construction to improve p",
-    "src": "financialexpress",
-    "time": "1d ago",
-    "link": "https://www.financialexpress.com/business/industry-tata-projects-plans-long-term-overseas-push-4384133/",
-    "type": "highways",
-    "fetchedAt": "2026-11-16T11:55:59+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "Insolation Energy Delivers 100.56% H1 Revenue Growth, Targets Profitability and EBITDA Margin Recovery in H2 FY2027 – EQ",
-    "desc": "In Short : Insolation Energy Limited has reported strong financial growth in the first half of FY2027, with revenue increasing 100.56% year-on-year to ₹1,582.09 crore. EBITDA rose ",
-    "src": "eqmagpro",
-    "time": "1d ago",
-    "link": "https://www.eqmagpro.com/insolation-energy-delivers-100-56-h1-revenue-growth-targets-profitability-and-ebitda-margin-recovery-in-h2-fy2027-eq/",
-    "type": "highways",
-    "fetchedAt": "2026-11-16T11:16:12+00:00",
-    "ageDays": 1
-  },
-  {
-    "title": "Hindustan Zinc Approves ₹80,000 Crore Expansion Plan To Nearly Double Metal Production Capacity To 2 MTPA In 3-5 Years",
-    "desc": "Hindustan Zinc has approved an Rs 80,000-crore expansion plan to nearly double its metal production capacity from 1.1 MTPA to 2 MTPA over 3-5 years. The investment will be funded t",
-    "src": "freepressjournal",
-    "time": "1d ago",
-    "link": "https://www.freepressjournal.in/business/hindustan-zinc-approves-80000-crore-expansion-plan-to-nearly-double-metal-production-capacity-to-2-mtpa-in-3-5-years",
-    "type": "highways",
-    "fetchedAt": "2026-11-16T10:48:34+00:00",
-    "ageDays": 1
-  },
-  {
     "title": "Current Infraprojects Limited Reports Strong H1 FY27 Performance with Rs 53.60 Cr Total Income & Rs 5.01 Cr PAT",
     "desc": "Jaipur (Rajasthan) [India], November 17: Current Infraprojects Limited (NSE – CURRENT), one of the emerging players in the infrastructure sector, a Jaipur-based power infrastructur",
     "src": "NewsX",
@@ -188,6 +208,16 @@
     "type": "highways",
     "fetchedAt": "2026-11-17T08:30:08+00:00",
     "ageDays": 1
+  },
+  {
+    "title": "VVIP Infratech Ltd reports robust H1 FY27 results; Order Book swells to RS 988 crore",
+    "desc": "Ghaziabad (Uttar Pradesh) [India], November 16: VVIP Infratech Limited is a Public Utility Infrastructure EPC contractor with over two decades of experience in executing water, was",
+    "src": "The Tribune",
+    "time": "2d ago",
+    "link": "https://www.tribuneindia.com/news/business/vvip-infratech-ltd-reports-robust-h1-fy27-results-order-book-swells-to-rs-988-crore/",
+    "type": "highways",
+    "fetchedAt": "2026-11-16T13:27:30+00:00",
+    "ageDays": 2
   },
   {
     "title": "Globe Civil Projects Limited Reports Q2 & H1 FY27 Results H1 FY27 Total Income at Rs 209 Crore",
@@ -240,23 +270,13 @@
     "ageDays": 13
   },
   {
-    "title": "Highway Infrastructure Limited wins its biggest-ever civil construction contract worth Rs. 198.31 crore from CPWD; order book surges to Rs. 1,776.19 crore - ANI News",
-    "desc": "Highway Infrastructure Limited wins its biggest-ever civil construction contract worth Rs. 198.31 crore from CPWD; order book surges to Rs. 1,776.19 crore    ANI News",
-    "src": "Infra Order",
+    "title": "Man Infraconstruction secures ₹75 crore order for JNPA yard works - ET Infra",
+    "desc": "Man Infraconstruction secures ₹75 crore order for JNPA yard works    ET Infra",
+    "src": "Ports",
     "time": "14d ago",
-    "link": "https://www.google.com/search?q=Highway%20Infrastructure%20Limited%20wins%20its%20biggestever%20civil%20construction%20contract%20worth%20Rs%201",
-    "type": "corporate",
+    "link": "https://www.google.com/search?q=Man%20Infraconstruction%20secures%2075%20crore%20order%20for%20JNPA%20yard%20works%20%20ET%20Infra",
+    "type": "ports",
     "fetchedAt": "2026-11-04T08:00:00+00:00",
-    "ageDays": 14
-  },
-  {
-    "title": "Acre Sahakar Logistics Park in Bhiwandi under Exclusive EPC, Marketing and Leasing Mandate",
-    "desc": "The Grade-A+ project will offer 1.3 million sq. ft. of leasable area and is expected to become operational in March 2027 Mumbai, Maharashtra, India (NewsVoir) BuildSpace, a Navi Mu",
-    "src": "The Tribune",
-    "time": "14d ago",
-    "link": "https://www.tribuneindia.com/news/business/buildspace-launches-rs-265-crore-42-acre-sahakar-logistics-park-in-bhiwandi-under-exclusive-epc-marketing-and-leasing-mandate-2-2/",
-    "type": "highways",
-    "fetchedAt": "2026-11-03T11:35:34+00:00",
     "ageDays": 14
   },
   {
@@ -267,6 +287,16 @@
     "link": "https://www.google.com/search?q=Five%20Singareni%20Mines%20Win%20National%20FiveStar%20Rating%20Awards%20%20GK%20Today",
     "type": "mining",
     "fetchedAt": "2026-11-03T08:00:00+00:00",
+    "ageDays": 15
+  },
+  {
+    "title": "Acre Sahakar Logistics Park in Bhiwandi under Exclusive EPC, Marketing and Leasing Mandate",
+    "desc": "The Grade-A+ project will offer 1.3 million sq. ft. of leasable area and is expected to become operational in March 2027 Mumbai, Maharashtra, India (NewsVoir) BuildSpace, a Navi Mu",
+    "src": "The Tribune",
+    "time": "15d ago",
+    "link": "https://www.tribuneindia.com/news/business/buildspace-launches-rs-265-crore-42-acre-sahakar-logistics-park-in-bhiwandi-under-exclusive-epc-marketing-and-leasing-mandate-2-2/",
+    "type": "highways",
+    "fetchedAt": "2026-11-03T11:35:34+00:00",
     "ageDays": 15
   },
   {
